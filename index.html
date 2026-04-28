@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>영어학 개념 마스터 · 임용고시 대비</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;600;700&family=Caveat:wght@600;700&family=Nunito:wght@700;800;900&family=Jua&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%}
+body{font-family:'Noto Sans KR',sans-serif;background:#f0f0f7;color:#1a1a1a;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+/* ─── Hero (deep indigo) ─────────────────────────────── */
+.hero{background:linear-gradient(135deg,#1a1040 0%,#2d1b69 55%,#3d2480 100%);color:#f0ece0;padding:42px 0 56px;position:relative;overflow:hidden;margin-bottom:-40px}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 20% 30%,rgba(197,165,114,.12) 0,transparent 40%),radial-gradient(circle at 85% 75%,rgba(147,112,219,.15) 0,transparent 45%);pointer-events:none}
+.hero-top{display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;color:rgba(240,236,224,.55);margin-bottom:26px;text-transform:uppercase}
+.hero-top .dot{display:inline-block;width:8px;height:8px;background:#c5a572;border-radius:50%;margin-right:10px;vertical-align:middle;box-shadow:0 0 8px rgba(197,165,114,.5)}
+.hero-brand{font-family:'Nunito',sans-serif;font-style:normal;font-weight:900;font-size:clamp(40px,7.5vw,72px);line-height:1;letter-spacing:-2px;margin-bottom:12px;color:#fff}
+.hero-brand .accent{color:#c5a572}
+.hero-script{font-family:'Caveat',cursive;font-weight:700;font-size:clamp(28px,4vw,38px);color:#c5a572;margin-bottom:22px;transform:rotate(-1.5deg);display:inline-block;margin-left:4px}
+.hero-sub{font-size:15px;line-height:1.7;color:rgba(240,236,224,.82);max-width:580px;margin-bottom:24px}
+.hero-sub strong{color:#fff;font-weight:700;border-bottom:1.5px dashed rgba(197,165,114,.6);padding-bottom:1px}
+.hero-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#f0ece0;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;padding:6px 12px;border-radius:999px;letter-spacing:.5px;backdrop-filter:blur(4px)}
+.chip.gold{background:rgba(197,165,114,.15);border-color:rgba(197,165,114,.35);color:#e6cfa0}
+
+/* ─── Progress strip ─────────────────────────────────── */
+.progress-wrap{background:#fff;border-radius:20px;box-shadow:0 10px 40px rgba(26,16,64,.12),0 2px 8px rgba(26,16,64,.06);padding:26px 28px;margin-bottom:36px;position:relative;z-index:2}
+.progress-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;flex-wrap:wrap;gap:10px}
+.progress-title{font-size:13px;font-weight:700;color:#1a1040;letter-spacing:.3px;display:flex;align-items:center;gap:8px}
+.progress-title::before{content:"";width:4px;height:16px;background:#5b21b6;border-radius:2px}
+.progress-pct{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:#5b21b6}
+.progress-bar{height:10px;background:#e8e4f0;border-radius:999px;overflow:hidden;position:relative}
+.progress-fill{height:100%;background:linear-gradient(90deg,#5b21b6 0%,#8b5cf6 50%,#c5a572 100%);border-radius:999px;width:0%;position:relative;box-shadow:0 1px 3px rgba(91,33,182,.3)}
+.progress-fill::after{content:"";position:absolute;top:0;right:0;bottom:0;width:20px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6));animation:shimmer 2.5s infinite}
+@keyframes shimmer{0%{transform:translateX(-20px);opacity:0}50%{opacity:1}100%{transform:translateX(0);opacity:0}}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:22px;padding-top:22px;border-top:1px dashed #d5cfe8}
+.stat{text-align:center}
+.stat-n{font-family:'Nunito',sans-serif;font-style:normal;font-weight:900;font-size:36px;color:#1a1040;line-height:1;letter-spacing:-1px}
+.stat-n .small{font-size:18px;color:#8a8070}
+.stat-l{font-size:11px;color:#8a8070;margin-top:6px;letter-spacing:.5px;text-transform:uppercase;font-weight:500}
+
+/* ─── Section header ─────────────────────────────────── */
+.sec-h{display:flex;align-items:center;gap:14px;margin:44px 0 18px}
+.sec-h h2{font-family:'Nunito',sans-serif;font-style:normal;font-weight:900;font-size:26px;color:#1a1040;letter-spacing:-.5px}
+.sec-h .sec-ko{font-family:'Caveat',cursive;font-weight:600;font-size:20px;color:#8a8070}
+.sec-h .sec-line{flex:1;height:1px;background:#d5cfe8}
+.sec-h .sec-cnt{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:#8a8070;padding:4px 10px;background:#fff;border:1px solid #ddd8f0;border-radius:6px}
+
+/* ─── Chapter cards ──────────────────────────────────── */
+.chap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px}
+.chap{background:#fff;border-radius:16px;padding:22px 22px 20px 26px;position:relative;overflow:hidden;box-shadow:0 2px 10px rgba(26,16,64,.06);transition:all .25s cubic-bezier(.4,0,.2,1);border:1px solid #e8e4f4}
+.chap::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--accent,#5b21b6)}
+.chap:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(26,16,64,.12),0 2px 6px rgba(26,16,64,.04);border-color:var(--accent,#5b21b6)}
+.chap-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.chap-badge{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1px;color:var(--accent,#5b21b6);background:var(--accent-bg,rgba(91,33,182,.1));padding:4px 10px;border-radius:999px;border:1px solid var(--accent-border,rgba(91,33,182,.22))}
+.chap-status{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:1.2px;color:#8a8070;margin-left:auto}
+.chap-status.new{color:#d97706;background:rgba(217,119,6,.1);padding:3px 8px;border-radius:4px;border:1px solid rgba(217,119,6,.25)}
+.chap-title{font-family:'Nunito',sans-serif;font-style:normal;font-weight:800;font-size:21px;color:#1a1040;letter-spacing:-.3px;line-height:1.2;margin-bottom:4px}
+.chap-ko{font-family:'Jua','Noto Sans KR',sans-serif;font-size:16px;color:var(--accent,#5b21b6);margin-bottom:16px}
+.chap-meta{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#8a8070;margin-bottom:14px;letter-spacing:.3px;display:flex;gap:10px;flex-wrap:wrap}
+.chap-meta span{display:inline-flex;align-items:center;gap:4px}
+.chap-meta .sep{color:#ccc}
+.chap-btns{display:flex;gap:8px}
+.btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 12px;border-radius:10px;font-size:12.5px;font-weight:700;text-decoration:none;letter-spacing:.2px;transition:all .15s ease;font-family:'Noto Sans KR',sans-serif}
+.btn-q{background:var(--accent,#5b21b6);color:#fff}
+.btn-q:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 4px 10px rgba(0,0,0,.12)}
+.btn-s{background:#fff;color:#1a1040;border:1.5px solid #d5cfe8}
+.btn-s:hover{background:#f5f0ff;border-color:var(--accent,#5b21b6);color:var(--accent,#5b21b6)}
+
+/* ─── Upcoming list ───────────────────────────────────── */
+.upcoming-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.up{background:#f8f5ff;border:1px dashed #ccc8e0;border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;transition:all .2s ease}
+.up:hover{background:#fff;border-color:#b8aed8}
+.up-no{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;color:#8a8070;background:#fff;border:1px solid #d5cfe8;padding:4px 8px;border-radius:6px;min-width:44px;text-align:center}
+.up-titles{flex:1;min-width:0}
+.up-en{font-family:'Nunito',sans-serif;font-style:normal;font-weight:700;font-size:14px;color:#1a1040;letter-spacing:-.2px;line-height:1.1}
+.up-ko{font-family:'Jua','Noto Sans KR',sans-serif;font-size:13px;color:#8a8070;margin-top:2px}
+.up-soon{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:1px;color:#c5a572;border:1px solid rgba(197,165,114,.35);padding:3px 7px;border-radius:4px}
+
+/* ─── Study guide ─────────────────────────────────────── */
+.guide{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-bottom:40px}
+.guide-card{background:#fff;border-radius:14px;padding:20px 22px;border:1px solid #e8e4f4;position:relative}
+.guide-card h3{font-size:12px;font-weight:700;color:#1a1040;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:8px}
+.guide-card h3::before{content:"";width:6px;height:6px;background:#c5a572;border-radius:50%}
+.guide-card p{font-size:13px;color:#4a4a4a;line-height:1.7}
+.guide-card .kw-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.kw-tag{font-family:'JetBrains Mono',monospace;font-size:10.5px;padding:3px 8px;border-radius:5px;font-weight:600;letter-spacing:.3px}
+.kw-tag.kw1{background:rgba(91,33,182,.12);color:#3b0764;border:1px solid rgba(91,33,182,.25)}
+.kw-tag.kw2{color:#1d4ed8;border:1px solid rgba(29,78,216,.35);background:rgba(29,78,216,.05)}
+.kw-tag.kw3{background:rgba(230,119,0,.12);color:#bf6000;border:1px solid rgba(230,119,0,.28)}
+.kw-tag.kw4{background:rgba(183,28,28,.1);color:#b71c1c;border:1px solid rgba(183,28,28,.25)}
+
+/* ─── Footer ─────────────────────────────────────────── */
+.footer{margin-top:56px;padding:30px 0 40px;border-top:1px solid #d5cfe8;text-align:center}
+.footer-brand{font-family:'Nunito',sans-serif;font-style:normal;font-weight:900;font-size:22px;color:#1a1040;margin-bottom:4px}
+.footer-script{font-family:'Caveat',cursive;font-weight:600;font-size:18px;color:#c5a572;margin-bottom:12px}
+.footer p{font-size:11.5px;color:#8a8070;font-family:'JetBrains Mono',monospace;letter-spacing:.3px}
+
+/* ─── Mobile ─────────────────────────────────────────── */
+@media(max-width:640px){
+  .wrap{padding:0 16px}
+  .hero{padding:32px 0 46px}
+  .stats-row{grid-template-columns:repeat(2,1fr);gap:12px}
+  .chap-grid{grid-template-columns:1fr}
+  .hero-top{font-size:9.5px;letter-spacing:1px}
+  .progress-wrap{padding:20px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ Hero ═══ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <span><span class="dot"></span>Korean Secondary Teacher Exam</span>
+      <span>Vol. 02 · English Linguistics</span>
+    </div>
+    <h1 class="hero-brand">English <span class="accent">Linguistics</span><br>Concept Master</h1>
+    <div class="hero-script">영어학 개념 마스터</div>
+    <p class="hero-sub">중등 임용 영어 대비. <strong>서브노트 기반</strong>으로 6개 영역의 핵심 개념을 <strong>OX 퀴즈</strong>와 <strong>개념정리 노트</strong>로 정리한 학습 허브입니다.</p>
+    <div class="hero-meta">
+      <span class="chip gold">📚 서브노트 기반</span>
+      <span class="chip">🎯 기출 포인트</span>
+      <span class="chip">🔑 키텀 비교</span>
+      <span class="chip">✍️ 손글씨 노트 스타일</span>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <!-- ═══ Progress ═══ -->
+  <div class="progress-wrap">
+    <div class="progress-head">
+      <div class="progress-title">학습 진도 · Progress</div>
+      <div class="progress-pct">0% · 0 / 6</div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-n">0</div><div class="stat-l">완료 챕터</div></div>
+      <div class="stat"><div class="stat-n">0<span class="small">문</span></div><div class="stat-l">OX 퀴즈</div></div>
+      <div class="stat"><div class="stat-n">6</div><div class="stat-l">제작 예정</div></div>
+      <div class="stat"><div class="stat-n">6</div><div class="stat-l">전체 챕터</div></div>
+    </div>
+  </div>
+
+  <!-- ═══ Upcoming ═══ -->
+  <div class="sec-h">
+    <h2>Chapters</h2>
+    <span class="sec-ko">전체 챕터</span>
+    <span class="sec-line"></span>
+    <span class="sec-cnt">6 chapters</span>
+  </div>
+
+  <div class="upcoming-grid">
+    <div class="up"><span class="up-no">CH · 01</span><div class="up-titles"><div class="up-en">Phonetics &amp; Phonology</div><div class="up-ko">음성학 · 음운론</div></div><span class="up-soon">MIGRATING</span></div>
+    <div class="up"><span class="up-no">CH · 02</span><div class="up-titles"><div class="up-en">Morphology</div><div class="up-ko">형태론</div></div><span class="up-soon">SOON</span></div>
+    <div class="up"><span class="up-no">CH · 03</span><div class="up-titles"><div class="up-en">Syntax</div><div class="up-ko">통사론</div></div><span class="up-soon">SOON</span></div>
+    <div class="up"><span class="up-no">CH · 04</span><div class="up-titles"><div class="up-en">Semantics</div><div class="up-ko">의미론</div></div><span class="up-soon">SOON</span></div>
+    <div class="up"><span class="up-no">CH · 05</span><div class="up-titles"><div class="up-en">Pragmatics</div><div class="up-ko">화용론</div></div><span class="up-soon">SOON</span></div>
+    <div class="up"><span class="up-no">CH · 06</span><div class="up-titles"><div class="up-en">School Grammar</div><div class="up-ko">학교문법</div></div><span class="up-soon">SOON</span></div>
+  </div>
+
+  <!-- ═══ Study Guide ═══ -->
+  <div class="sec-h">
+    <h2>How to Study</h2>
+    <span class="sec-ko">학습 가이드</span>
+    <span class="sec-line"></span>
+  </div>
+
+  <div class="guide">
+    <div class="guide-card">
+      <h3>01 · Format</h3>
+      <p>각 챕터는 <strong>OX 퀴즈</strong>와 <strong>개념정리 노트</strong> 두 페이지로 구성됩니다. 영어 문장 기반 문제로 실전 감각을 기릅니다.</p>
+    </div>
+    <div class="guide-card">
+      <h3>02 · Explanation</h3>
+      <p>해설은 <strong>핵심정정 → 상세설명 → Source 원문 → 비교정리</strong> 순으로 제공됩니다. 기출 포인트와 헷갈리는 키텀을 시각화했습니다.</p>
+    </div>
+    <div class="guide-card">
+      <h3>03 · Keyword Levels</h3>
+      <p>중요도에 따라 4단계로 분류된 색상 키워드로 빈출도를 한눈에 파악합니다.</p>
+      <div class="kw-list">
+        <span class="kw-tag kw1">kw1 ★ 기본</span>
+        <span class="kw-tag kw2">kw2 부키워드</span>
+        <span class="kw-tag kw3">kw3 ★★ 빈출</span>
+        <span class="kw-tag kw4">kw4 ★★★ 최빈출</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Footer ═══ -->
+  <div class="footer">
+    <div class="footer-brand">English Linguistics · Concept Master</div>
+    <div class="footer-script">임용 합격 기원 🌿</div>
+    <p>중등 임용 영어 · 영어학 · 서브노트 기반 학습 허브</p>
+  </div>
+
+</div>
+
+</body>
+</html>
