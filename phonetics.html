@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>임용 음운론 완전정복</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pri:#1a5276; --pri-l:#e1ecf4;
+  --acc:#e8533a; --gold:#ffd166;
+  --grn:#1a6e42; --grn-bg:#eaf6f0;
+  --bdr:#dce9f0; --gray:#f4f8fb;
+  --txt:#1a1a2e; --mut:#888;
+  --serif:'Noto Serif KR',serif;
+  --sans:'Noto Sans KR',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);color:var(--txt);background:#f0f5f9;min-height:100vh}
+
+/* ── hero ── */
+.hero{
+  background:var(--pri);
+  padding:60px 24px 52px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 70% 40%, rgba(255,209,102,.08) 0%, transparent 60%),
+             radial-gradient(ellipse at 20% 80%, rgba(30,100,180,.14) 0%, transparent 50%);
+  pointer-events:none;
+}
+.hero-tag{
+  font-family:var(--mono);font-size:11px;
+  letter-spacing:3px;color:rgba(255,255,255,.45);
+  text-transform:uppercase;margin-bottom:16px;
+}
+.hero h1{
+  font-family:var(--serif);font-size:34px;color:#fff;
+  line-height:1.3;margin-bottom:14px;
+}
+.hero h1 em{color:var(--gold);font-style:normal}
+.hero p{
+  font-size:14px;color:rgba(255,255,255,.6);
+  max-width:500px;margin:0 auto 28px;line-height:1.8;
+}
+.hero-stats{
+  display:flex;justify-content:center;gap:36px;flex-wrap:wrap;
+}
+.stat{text-align:center}
+.stat-n{font-family:var(--mono);font-size:26px;font-weight:600;color:var(--gold)}
+.stat-l{font-size:11px;color:rgba(255,255,255,.4);margin-top:3px}
+
+/* ── 본문 ── */
+.wrap{max-width:840px;margin:0 auto;padding:40px 20px 60px}
+
+/* ── 페이즈 헤더 ── */
+.phase-header{
+  display:flex;align-items:center;gap:14px;
+  margin:40px 0 20px;
+  padding:14px 20px;
+  background:var(--pri);
+  border-radius:12px;
+  position:relative;
+  overflow:hidden;
+}
+.phase-header::before{
+  content:'';
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 90% 50%, rgba(255,209,102,.12) 0%, transparent 60%);
+  pointer-events:none;
+}
+.phase-badge{
+  font-family:var(--mono);font-size:10px;font-weight:600;
+  letter-spacing:2px;
+  background:var(--gold);color:#1a1a00;
+  padding:4px 10px;border-radius:8px;
+  white-space:nowrap;flex-shrink:0;
+  text-transform:uppercase;
+}
+.phase-info{}
+.phase-title{
+  font-family:var(--serif);font-size:17px;color:#fff;
+  line-height:1.3;
+}
+.phase-sub{
+  font-size:11px;color:rgba(255,255,255,.5);
+  margin-top:3px;font-family:var(--mono);
+}
+
+/* ── 챕터 카드 ── */
+.ch-block{margin-bottom:28px}
+.ch-header{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:14px;
+  padding-bottom:12px;
+  border-bottom:2px solid var(--bdr);
+}
+.ch-num{
+  width:42px;height:42px;border-radius:50%;
+  background:var(--pri);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:13px;font-weight:600;
+  flex-shrink:0;
+}
+.ch-num.done{background:var(--grn)}
+.ch-num.wip{background:#1a6090}
+.ch-title{
+  font-family:var(--serif);font-size:19px;color:var(--pri);
+}
+.ch-sub{font-size:12px;color:var(--mut);margin-top:3px}
+.ch-status{
+  margin-left:auto;font-size:11px;font-family:var(--mono);
+  padding:3px 10px;border-radius:10px;
+}
+.ch-status.done{background:var(--grn-bg);color:var(--grn)}
+.ch-status.wip{background:#e1ecf4;color:#1a5276}
+.ch-status.soon{background:var(--gray);color:var(--mut)}
+
+/* ── 포스팅 링크 카드 ── */
+.post-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:520px){.post-grid{grid-template-columns:1fr}}
+
+.post-card{
+  background:#fff;border:1.5px solid var(--bdr);
+  border-radius:12px;padding:16px 18px;
+  text-decoration:none;color:var(--txt);
+  display:flex;align-items:center;gap:14px;
+  transition:all .18s;
+  position:relative;overflow:hidden;
+}
+.post-card:hover{
+  border-color:var(--pri);
+  box-shadow:0 4px 16px rgba(26,82,118,.12);
+  transform:translateY(-2px);
+}
+.post-card.disabled{
+  opacity:.45;pointer-events:none;
+  filter:grayscale(1);
+}
+.post-icon{
+  width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.post-icon.concept{background:#e1ecf4}
+.post-icon.exercise{background:var(--grn-bg)}
+.post-icon.ox{background:#fff8e8}
+.post-icon.soon-ic{background:var(--gray)}
+.post-info{}
+.post-type{
+  font-family:var(--mono);font-size:10px;
+  letter-spacing:1px;color:var(--mut);
+  text-transform:uppercase;margin-bottom:3px;
+}
+.post-title{font-size:14px;font-weight:500;line-height:1.4}
+.post-desc{font-size:12px;color:var(--mut);margin-top:2px;line-height:1.5}
+
+/* ── 태그 ── */
+.topic-tags{
+  display:flex;flex-wrap:wrap;gap:6px;
+  margin-top:10px;
+}
+.tag{
+  font-size:11px;font-family:var(--mono);
+  padding:3px 9px;border-radius:8px;
+  background:var(--pri-l);color:var(--pri);
+}
+
+/* ── 진행 현황 ── */
+.progress-section{
+  background:#fff;border:1.5px solid var(--bdr);
+  border-radius:14px;padding:20px 22px;
+  margin-bottom:36px;
+}
+.progress-title{
+  font-size:13px;font-weight:500;color:var(--mut);
+  margin-bottom:14px;font-family:var(--mono);
+  letter-spacing:1px;text-transform:uppercase;
+}
+.prog-row{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:8px;
+}
+.prog-label{font-size:12px;color:var(--txt);min-width:140px}
+.prog-bar{
+  flex:1;height:6px;background:var(--bdr);
+  border-radius:3px;overflow:hidden;
+}
+.prog-fill{height:100%;border-radius:3px;transition:width .6s}
+.prog-fill.done{background:var(--grn)}
+.prog-fill.wip{background:#1a6090}
+.prog-fill.soon{background:var(--bdr)}
+.prog-pct{font-family:var(--mono);font-size:11px;color:var(--mut);min-width:36px;text-align:right}
+
+/* ── footer ── */
+.footer{
+  text-align:center;padding:28px 20px;
+  font-size:12px;color:var(--mut);
+  border-top:1px solid var(--bdr);
+  background:#fff;
+}
+</style>
+</head>
+<body>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="hero-tag">임용 음운론</div>
+  <h1><em>임용 음운론 완전정복</em></h1>
+  <p>임용 음운론 기반 · 임용고시 대비<br>챕터별 개념 정리 + 실전 연습문제 + OX 퀴즈</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-n">3</div><div class="stat-l">단계</div></div>
+    <div class="stat"><div class="stat-n">18</div><div class="stat-l">챕터</div></div>
+    <div class="stat"><div class="stat-n">50+</div><div class="stat-l">연습문제</div></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ── 진행 현황 ── -->
+  <div class="progress-section">
+    <div class="progress-title">업로드 현황</div>
+    <div class="prog-row">
+      <span class="prog-label">분류 6 — Stress (강세)</span>
+      <div class="prog-bar"><div class="prog-fill done" style="width:100%"></div></div>
+      <span class="prog-pct">✓ 완료</span>
+    </div>
+    <div class="prog-row">
+      <span class="prog-label">분류 4/5 — Phonological Rules</span>
+      <div class="prog-bar"><div class="prog-fill soon" style="width:0%"></div></div>
+      <span class="prog-pct">예정</span>
+    </div>
+    <div class="prog-row">
+      <span class="prog-label">분류 2/3 — Phoneme / Syllable</span>
+      <div class="prog-bar"><div class="prog-fill soon" style="width:0%"></div></div>
+      <span class="prog-pct">예정</span>
+    </div>
+    <div class="prog-row">
+      <span class="prog-label">분류 1 — Features</span>
+      <div class="prog-bar"><div class="prog-fill soon" style="width:0%"></div></div>
+      <span class="prog-pct">예정</span>
+    </div>
+  </div>
+
+  <!-- ════════════════════
+       분류 6 — STRESS
+  ════════════════════ -->
+  <div class="phase-header">
+    <div class="phase-badge">분류 6</div>
+    <div class="phase-info">
+      <div class="phase-title">Stress &amp; Intonation — 강세</div>
+      <div class="phase-sub">★★★★★ 매년 출제 · Heavy/Light · N/V/Compound · Suffix · Foot · NSR</div>
+    </div>
+  </div>
+
+  <!-- ── 강세 단원 ── -->
+  <div class="ch-block">
+    <div class="ch-header">
+      <div class="ch-num done">01</div>
+      <div>
+        <div class="ch-title">Stress — 강세 완성</div>
+        <div class="ch-sub">음절무게 · N/V/Adj 강세 규칙 · 접미사 · 합성어 · 파생어 체인 · NSR · Foot</div>
+      </div>
+      <span class="ch-status done">✓ 완료</span>
+    </div>
+    <div class="topic-tags">
+      <span class="tag">Heavy / Light Syllable</span>
+      <span class="tag">N/V 동형이의어</span>
+      <span class="tag">Stress-bearing / shifting / neutral</span>
+      <span class="tag">-ic 예외(Arabic·lunatic)</span>
+      <span class="tag">Compound vs NP Stress</span>
+      <span class="tag">photograph chain</span>
+      <span class="tag">NSR</span>
+      <span class="tag">Foot (Trochee / Iamb)</span>
+    </div>
+    <div class="post-grid" style="margin-top:14px">
+      <a class="post-card" href="stress_study.html">
+        <div class="post-icon concept">📖</div>
+        <div class="post-info">
+          <div class="post-type">개념 정리</div>
+          <div class="post-title">강세 개념 정리 노트</div>
+          <div class="post-desc">음절무게·규칙·접미사·합성어·체인·NSR·Foot — 11섹션 총정리</div>
+        </div>
+      </a>
+      <a class="post-card" href="stress.html">
+        <div class="post-icon ox">🔢</div>
+        <div class="post-info">
+          <div class="post-type">OX 퀴즈 · 28문항</div>
+          <div class="post-title">강세 개념 OX 퀴즈</div>
+          <div class="post-desc">Heavy/Light · suffix · NSR · foot · 문장강세 개념 검증</div>
+        </div>
+      </a>
+      <a class="post-card" href="stress_practice.html">
+        <div class="post-icon exercise">✏️</div>
+        <div class="post-info">
+          <div class="post-type">강세 드릴 Part 1 · 40문항</div>
+          <div class="post-title">강세 음절 클릭 (1)</div>
+          <div class="post-desc">2음절 첫음절·둘째음절 · N/V 쌍 · 3음절 · suffix 강세 · 복합어</div>
+        </div>
+      </a>
+      <a class="post-card" href="stress_practice2.html">
+        <div class="post-icon exercise">✏️</div>
+        <div class="post-info">
+          <div class="post-type">강세 드릴 Part 2 · 40문항</div>
+          <div class="post-title">강세 음절 클릭 (2)</div>
+          <div class="post-desc">복합어 · 지명 · 다음절 실전 드릴</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ════════════════════
+       PHASE 2 — PHONOLOGICAL RULES
+  ════════════════════ -->
+  <div class="phase-header">
+    <div class="phase-badge">Phase 2</div>
+    <div class="phase-info">
+      <div class="phase-title">Phonological Rules — 음운 규칙</div>
+      <div class="phase-sub">Ch. 3–5 · Assimilation · Flapping · Aspiration · Deletion · Nasalization</div>
+    </div>
+  </div>
+
+  <!-- ── Ch.7 Assimilation 총론 ── -->
+  <div class="ch-block">
+    <div class="ch-header">
+      <div class="ch-num">07</div>
+      <div>
+        <div class="ch-title">Assimilation 총론</div>
+        <div class="ch-sub">동화 현상의 유형과 방향</div>
+      </div>
+      <span class="ch-status soon">업로드 예정</span>
+    </div>
+    <div class="topic-tags">
+      <span class="tag">Progressive / Regressive</span>
+      <span class="tag">완전 동화 / 부분 동화</span>
+      <span class="tag">연속 / 비연속</span>
+    </div>
+    <div class="post-grid" style="margin-top:14px">
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">📖</div><div class="post-info"><div class="post-type">개념 정리</div><div class="post-title">Ch.7 개념 + 미니퀴즈</div><div class="post-desc">업로드 예정</div></div></a>
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">✏️</div><div class="post-info"><div class="post-type">실전 문제</div><div class="post-title">Ch.7 연습문제</div><div class="post-desc">업로드 예정</div></div></a>
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">🔢</div><div class="post-info"><div class="post-type">OX 퀴즈</div><div class="post-title">Ch.7 OX 퀴즈</div><div class="post-desc">업로드 예정</div></div></a>
+    </div>
+  </div>
+
+  <!-- ── Ch.8 Place Assimilation ── -->
+  <div class="ch-block">
+    <div class="ch-header">
+      <div class="ch-num">08</div>
+      <div>
+        <div class="ch-title">Place Assimilation</div>
+        <div class="ch-sub">조음 위치 동화</div>
+      </div>
+      <span class="ch-status soon">업로드 예정</span>
+    </div>
+    <div class="topic-tags">
+      <span class="tag">Labial / Alveolar / Velar</span>
+      <span class="tag">음운 규칙 표기</span>
+      <span class="tag">in- / im- / in-</span>
+    </div>
+    <div class="post-grid" style="margin-top:14px">
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">📖</div><div class="post-info"><div class="post-type">개념 정리</div><div class="post-title">Ch.8 개념 + 미니퀴즈</div><div class="post-desc">업로드 예정</div></div></a>
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">✏️</div><div class="post-info"><div class="post-type">실전 문제</div><div class="post-title">Ch.8 연습문제</div><div class="post-desc">업로드 예정</div></div></a>
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">🔢</div><div class="post-info"><div class="post-type">OX 퀴즈</div><div class="post-title">Ch.8 OX 퀴즈</div><div class="post-desc">업로드 예정</div></div></a>
+    </div>
+  </div>
+
+  <!-- ── Ch.9 Voice Assimilation ── -->
+  <div class="ch-block">
+    <div class="ch-header">
+      <div class="ch-num">09</div>
+      <div>
+        <div class="ch-title">Voice Assimilation</div>
+        <div class="ch-sub">유성성 동화</div>
+      </div>
+      <span class="ch-status soon">업로드 예정</span>
+    </div>
+    <div class="topic-tags">
+      <span class="tag">유성음화 / 무성음화</span>
+      <span class="tag">복수형 -s</span>
+      <span class="tag">과거형 -ed</span>
+    </div>
+    <div class="post-grid" style="margin-top:14px">
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">📖</div><div class="post-info"><div class="post-type">개념 정리</div><div class="post-title">Ch.9 개념 + 미니퀴즈</div><div class="post-desc">업로드 예정</div></div></a>
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">✏️</div><div class="post-info"><div class="post-type">실전 문제</div><div class="post-title">Ch.9 연습문제</div><div class="post-desc">업로드 예정</div></div></a>
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">🔢</div><div class="post-info"><div class="post-type">OX 퀴즈</div><div class="post-title">Ch.9 OX 퀴즈</div><div class="post-desc">업로드 예정</div></div></a>
+    </div>
+  </div>
+
+  <!-- ── Ch.10 Flapping ── -->
+  <div class="ch-block">
+    <div class="ch-header">
+      <div class="ch-num">10</div>
+      <div>
+        <div class="ch-title">Flapping</div>
+        <div class="ch-sub">/t, d/ → [ɾ] 탄음화 규칙</div>
+      </div>
+      <span class="ch-status soon">업로드 예정</span>
+    </div>
+    <div class="topic-tags">
+      <span class="tag">Intervocalic /t/</span>
+      <span class="tag">Flap [ɾ]</span>
+      <span class="tag">환경 조건</span>
+      <span class="tag">writer vs rider</span>
+    </div>
+    <div class="post-grid" style="margin-top:14px">
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">📖</div><div class="post-info"><div class="post-type">개념 정리</div><div class="post-title">Ch.10 개념 + 미니퀴즈</div><div class="post-desc">업로드 예정</div></div></a>
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">✏️</div><div class="post-info"><div class="post-type">실전 문제</div><div class="post-title">Ch.10 연습문제</div><div class="post-desc">업로드 예정</div></div></a>
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">🔢</div><div class="post-info"><div class="post-type">OX 퀴즈</div><div class="post-title">Ch.10 OX 퀴즈</div><div class="post-desc">업로드 예정</div></div></a>
+    </div>
+  </div>
+
+  <!-- ── Ch.11 Aspiration ── -->
+  <div class="ch-block">
+    <div class="ch-header">
+      <div class="ch-num">11</div>
+      <div>
+        <div class="ch-title">Aspiration</div>
+        <div class="ch-sub">기식음화 규칙</div>
+      </div>
+      <span class="ch-status soon">업로드 예정</span>
+    </div>
+    <div class="topic-tags">
+      <span class="tag">Word-initial /p t k/</span>
+      <span class="tag">유기음 [pʰ tʰ kʰ]</span>
+      <span class="tag">어두 강세 환경</span>
+    </div>
+    <div class="post-grid" style="margin-top:14px">
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">📖</div><div class="post-info"><div class="post-type">개념 정리</div><div class="post-title">Ch.11 개념 + 미니퀴즈</div><div class="post-desc">업로드 예정</div></div></a>
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">✏️</div><div class="post-info"><div class="post-type">실전 문제</div><div class="post-title">Ch.11 연습문제</div><div class="post-desc">업로드 예정</div></div></a>
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">🔢</div><div class="post-info"><div class="post-type">OX 퀴즈</div><div class="post-title">Ch.11 OX 퀴즈</div><div class="post-desc">업로드 예정</div></div></a>
+    </div>
+  </div>
+
+  <!-- ── Ch.12 Vowel Reduction & Schwa ── -->
+  <div class="ch-block">
+    <div class="ch-header">
+      <div class="ch-num">12</div>
+      <div>
+        <div class="ch-title">Vowel Reduction &amp; Schwa</div>
+        <div class="ch-sub">모음 약화와 슈와 [ə]</div>
+      </div>
+      <span class="ch-status soon">업로드 예정</span>
+    </div>
+    <div class="topic-tags">
+      <span class="tag">Schwa [ə]</span>
+      <span class="tag">강세 없는 모음 약화</span>
+      <span class="tag">Vowel Reduction Rule</span>
+    </div>
+    <div class="post-grid" style="margin-top:14px">
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">📖</div><div class="post-info"><div class="post-type">개념 정리</div><div class="post-title">Ch.12 개념 + 미니퀴즈</div><div class="post-desc">업로드 예정</div></div></a>
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">✏️</div><div class="post-info"><div class="post-type">실전 문제</div><div class="post-title">Ch.12 연습문제</div><div class="post-desc">업로드 예정</div></div></a>
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">🔢</div><div class="post-info"><div class="post-type">OX 퀴즈</div><div class="post-title">Ch.12 OX 퀴즈</div><div class="post-desc">업로드 예정</div></div></a>
+    </div>
+  </div>
+
+  <!-- ── Ch.13 Deletion ── -->
+  <div class="ch-block">
+    <div class="ch-header">
+      <div class="ch-num">13</div>
+      <div>
+        <div class="ch-title">Deletion</div>
+        <div class="ch-sub">음 탈락 현상</div>
+      </div>
+      <span class="ch-status soon">업로드 예정</span>
+    </div>
+    <div class="topic-tags">
+      <span class="tag">Schwa Deletion</span>
+      <span class="tag">Final Consonant Deletion</span>
+      <span class="tag">h-Deletion</span>
+      <span class="tag">환경 조건</span>
+    </div>
+    <div class="post-grid" style="margin-top:14px">
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">📖</div><div class="post-info"><div class="post-type">개념 정리</div><div class="post-title">Ch.13 개념 + 미니퀴즈</div><div class="post-desc">업로드 예정</div></div></a>
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">✏️</div><div class="post-info"><div class="post-type">실전 문제</div><div class="post-title">Ch.13 연습문제</div><div class="post-desc">업로드 예정</div></div></a>
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">🔢</div><div class="post-info"><div class="post-type">OX 퀴즈</div><div class="post-title">Ch.13 OX 퀴즈</div><div class="post-desc">업로드 예정</div></div></a>
+    </div>
+  </div>
+
+  <!-- ── Ch.14 Nasalization & Epenthesis ── -->
+  <div class="ch-block">
+    <div class="ch-header">
+      <div class="ch-num">14</div>
+      <div>
+        <div class="ch-title">Nasalization &amp; Epenthesis</div>
+        <div class="ch-sub">비음화 및 음 삽입</div>
+      </div>
+      <span class="ch-status soon">업로드 예정</span>
+    </div>
+    <div class="topic-tags">
+      <span class="tag">Vowel Nasalization</span>
+      <span class="tag">Nasal Assimilation</span>
+      <span class="tag">Epenthesis</span>
+      <span class="tag">Schwa Insertion</span>
+    </div>
+    <div class="post-grid" style="margin-top:14px">
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">📖</div><div class="post-info"><div class="post-type">개념 정리</div><div class="post-title">Ch.14 개념 + 미니퀴즈</div><div class="post-desc">업로드 예정</div></div></a>
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">✏️</div><div class="post-info"><div class="post-type">실전 문제</div><div class="post-title">Ch.14 연습문제</div><div class="post-desc">업로드 예정</div></div></a>
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">🔢</div><div class="post-info"><div class="post-type">OX 퀴즈</div><div class="post-title">Ch.14 OX 퀴즈</div><div class="post-desc">업로드 예정</div></div></a>
+    </div>
+  </div>
+
+  <!-- ════════════════════
+       PHASE 3 — 종합 연습
+  ════════════════════ -->
+  <div class="phase-header">
+    <div class="phase-badge">Phase 3</div>
+    <div class="phase-info">
+      <div class="phase-title">종합 연습 — 실전 대비</div>
+      <div class="phase-sub">Ch. 15–18 · IPA · 변별 자질 · 비교 분석 · 클리닉</div>
+    </div>
+  </div>
+
+  <!-- ── Ch.15 IPA 연습 ── -->
+  <div class="ch-block">
+    <div class="ch-header">
+      <div class="ch-num">15</div>
+      <div>
+        <div class="ch-title">IPA 전사 연습</div>
+        <div class="ch-sub">국제음성기호 읽기 · 쓰기 종합</div>
+      </div>
+      <span class="ch-status soon">업로드 예정</span>
+    </div>
+    <div class="post-grid" style="margin-top:14px">
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">✏️</div><div class="post-info"><div class="post-type">종합 연습</div><div class="post-title">IPA 전사 연습문제</div><div class="post-desc">업로드 예정</div></div></a>
+    </div>
+  </div>
+
+  <!-- ── Ch.16 변별 자질 ── -->
+  <div class="ch-block">
+    <div class="ch-header">
+      <div class="ch-num">16</div>
+      <div>
+        <div class="ch-title">변별 자질 (Distinctive Features)</div>
+        <div class="ch-sub">자질 행렬 분석 종합</div>
+      </div>
+      <span class="ch-status soon">업로드 예정</span>
+    </div>
+    <div class="post-grid" style="margin-top:14px">
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">✏️</div><div class="post-info"><div class="post-type">종합 연습</div><div class="post-title">변별 자질 연습문제</div><div class="post-desc">업로드 예정</div></div></a>
+    </div>
+  </div>
+
+  <!-- ── Ch.17 비교 분석 ── -->
+  <div class="ch-block">
+    <div class="ch-header">
+      <div class="ch-num">17</div>
+      <div>
+        <div class="ch-title">음운 체계 비교 분석</div>
+        <div class="ch-sub">한국어 ↔ 영어 음운 대조 분석</div>
+      </div>
+      <span class="ch-status soon">업로드 예정</span>
+    </div>
+    <div class="post-grid" style="margin-top:14px">
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">✏️</div><div class="post-info"><div class="post-type">종합 연습</div><div class="post-title">비교 분석 연습문제</div><div class="post-desc">업로드 예정</div></div></a>
+    </div>
+  </div>
+
+  <!-- ── Ch.18 최종 클리닉 ── -->
+  <div class="ch-block">
+    <div class="ch-header">
+      <div class="ch-num">18</div>
+      <div>
+        <div class="ch-title">최종 임용 클리닉</div>
+        <div class="ch-sub">기출 유형 분석 + 실전 모의 문제</div>
+      </div>
+      <span class="ch-status soon">업로드 예정</span>
+    </div>
+    <div class="post-grid" style="margin-top:14px">
+      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">✏️</div><div class="post-info"><div class="post-type">종합 연습</div><div class="post-title">최종 클리닉 연습문제</div><div class="post-desc">업로드 예정</div></div></a>
+    </div>
+  </div>
+
+</div><!-- .wrap -->
+
+<div class="footer">
+  임용 음운론 완전정복<br>
+  영어 임용고시 음운론 학습 자료
+</div>
+
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>강세 드릴 Part 1 — 음절 클릭</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:repeating-linear-gradient(transparent,transparent 27px,#ddddd0 28px);color:#1a1a1a;min-height:100vh;padding:16px}
+.header-wrap{max-width:720px;margin:0 auto;padding:20px 8px 0}
+.header-topbar{display:flex;justify-content:space-between;align-items:center;border-top:2px solid #1a1a1a;padding-top:8px;margin-bottom:10px}
+.header-no{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;border:2px solid #1a1a1a;padding:3px 10px;border-radius:2px;letter-spacing:.5px;display:flex;align-items:center;gap:6px}
+.header-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;letter-spacing:1px}
+.header-title{font-size:clamp(28px,6vw,42px);font-weight:900;color:#1a1a1a;line-height:1.1;margin-bottom:5px;letter-spacing:-1px}
+.title-hl{background:#1a5276;color:#fff;padding:1px 6px}
+.header-script{font-family:'Caveat',cursive;font-size:21px;color:#1a5276;margin-bottom:4px;font-weight:600}
+.header-sub{font-size:13px;color:#555;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#aaa;margin-bottom:14px}
+.header-divider{border:none;border-top:2.5px solid #1a1a1a;margin-bottom:20px}
+.prog-wrap{max-width:720px;margin:0 auto 10px;padding:0 8px}
+.prog-info{display:flex;justify-content:space-between;font-size:12px;color:#1a5276;font-family:'JetBrains Mono',monospace;margin-bottom:6px}
+.bar{height:4px;background:#aed6f1;border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,#1a5276,#2980b9);border-radius:2px;transition:width .5s ease}
+.wrap{max-width:720px;margin:0 auto}
+.card{background:#fff;border:1.5px solid #aed6f1;border-radius:14px;padding:26px;animation:up .35s ease;box-shadow:0 2px 8px rgba(26,82,118,.08)}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.q-meta{display:flex;align-items:center;gap:7px;margin-bottom:18px;flex-wrap:wrap}
+.q-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:#1a5276;background:rgba(26,82,118,.1);padding:3px 10px;border-radius:8px;font-weight:700}
+.q-cat{font-size:11px;color:#1a5276;background:rgba(41,128,185,.1);padding:3px 10px;border-radius:8px;margin-left:auto;font-weight:600}
+
+/* word display */
+.word-raw{font-family:'JetBrains Mono',monospace;font-size:clamp(22px,4vw,32px);font-weight:700;color:#1a2633;text-align:center;letter-spacing:2px;margin-bottom:6px}
+.word-ctx{font-size:13px;color:#4a6a8a;text-align:center;margin-bottom:20px;font-style:italic}
+.drill-prompt{font-size:13px;color:#4a6a8a;font-family:'JetBrains Mono',monospace;letter-spacing:.5px;text-align:center;margin-bottom:14px;font-weight:600;text-transform:uppercase}
+
+/* syllable buttons */
+.syls{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:24px;flex-wrap:wrap;gap:8px}
+.syl-btn{font-family:'JetBrains Mono',monospace;font-size:clamp(16px,3vw,22px);font-weight:700;padding:14px 20px;border:2px solid #aed6f1;border-radius:10px;background:#f4f9fe;color:#1a2633;cursor:pointer;transition:all .15s ease;letter-spacing:.5px;min-width:56px;text-align:center}
+.syl-btn:hover:not(:disabled){transform:translateY(-2px);border-color:#1a5276;background:rgba(26,82,118,.07)}
+.syl-btn:disabled{cursor:default}
+.syl-btn.correct{border-color:#1a5276!important;background:rgba(26,82,118,.12)!important;color:#1a5276}
+.syl-btn.wrong{border-color:#c62828!important;background:rgba(198,40,40,.08)!important;color:#c62828}
+.syl-btn.reveal{border-color:#1a5276!important;background:rgba(26,82,118,.06)!important;color:#1a5276}
+
+/* stress marker */
+.syl-btn.correct::before,.syl-btn.reveal::before{content:"ˈ";font-size:1.1em;margin-right:1px;color:#1a5276}
+
+/* feedback */
+.feedback{margin:0 0 18px;padding:10px 16px;border-radius:8px;font-size:14px;font-weight:700;font-family:'JetBrains Mono',monospace;display:none}
+.feedback.ok{display:block;background:rgba(26,82,118,.1);color:#1a5276;border:1.5px solid rgba(26,82,118,.3)}
+.feedback.ng{display:block;background:rgba(198,40,40,.08);color:#c62828;border:1.5px solid rgba(198,40,40,.25)}
+
+/* explanation */
+.exp{display:none;border-radius:12px;overflow:hidden;animation:fade .3s ease;margin-bottom:16px}
+.exp.show{display:block}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.exp-header{background:linear-gradient(135deg,rgba(26,82,118,.12),rgba(41,128,185,.06));border:1.5px solid rgba(26,82,118,.25);border-bottom:none;padding:11px 16px}
+.exp-header span{font-size:11px;font-family:'JetBrains Mono',monospace;color:#1a3a52;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.exp-body{background:rgba(26,82,118,.03);border:1.5px solid rgba(26,82,118,.2);padding:14px 16px}
+.exp-ipa{font-family:'JetBrains Mono',monospace;font-size:15px;color:#2e86c1;margin-bottom:8px;font-weight:600}
+.exp-why{font-size:14px;color:#1a3a52;line-height:1.8}
+.rule-tag{display:inline-block;background:rgba(26,82,118,.1);border:1px solid rgba(26,82,118,.3);border-radius:4px;padding:1px 7px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#1a3a52;font-weight:700;margin-bottom:8px}
+
+.next-btn{display:none;width:100%;padding:14px;background:linear-gradient(135deg,#1a5276,#2980b9);border:none;border-radius:10px;color:white;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:opacity .2s,transform .2s}
+.next-btn:hover{opacity:.88;transform:translateY(-1px)}
+.next-btn.show{display:block;animation:fade .3s ease}
+
+/* score */
+.score-card{display:none;text-align:center;padding:48px 24px}
+.score-card.show{display:block;animation:up .5s ease}
+.score-circle{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,#1a5276,#2980b9);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 0 40px rgba(26,82,118,.3)}
+.s-num{font-size:42px;font-weight:700;line-height:1;color:#fff}
+.s-total{font-size:14px;opacity:.85;color:#fff}
+.score-card h2{font-size:24px;margin-bottom:7px;color:#1a2633}
+.score-card p{color:#2e86c1;margin-bottom:24px;font-size:15px}
+.restart-btn{padding:13px 32px;background:#f4f9fe;border:2px solid #1a5276;border-radius:10px;color:#1a5276;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.restart-btn:hover{background:rgba(26,82,118,.1)}
+
+/* nav dots */
+.nd{width:28px;height:28px;border-radius:6px;border:1.5px solid #aed6f1;background:#f4f9fe;font-size:11px;font-family:'JetBrains Mono',monospace;cursor:pointer;color:#2e86c1;transition:all .15s;display:inline-flex;align-items:center;justify-content:center;font-weight:600}
+.nd.cur{border-color:#1a5276;background:#1a5276;color:white}
+.nd.ok{border-color:#1a5276;background:rgba(26,82,118,.15);color:#1a3a52}
+.nd.ng{border-color:#c62828;background:rgba(198,40,40,.1);color:#c62828}
+.nd:hover:not(.cur){opacity:.7}
+#nav{display:flex;flex-wrap:wrap;gap:5px;max-width:720px;margin:0 auto 16px;padding:0 8px}
+
+/* resume banner */
+#rb{display:none;max-width:720px;margin:0 auto 14px;padding:0 8px}
+</style>
+</head>
+<body>
+<div class="header-wrap">
+  <div class="header-topbar">
+    <span class="header-no">분류 6 <span>—</span> DRILL Part 1</span>
+    <span class="header-label">강세 음절 선택</span>
+  </div>
+  <h1 class="header-title"><span class="title-hl">강세</span> 드릴</h1>
+  <div class="header-script">Stress Placement · 음절 클릭</div>
+  <p class="header-sub">주어진 단어에서 <b>제1강세</b>가 오는 음절을 클릭하세요</p>
+  <div class="header-divider"></div>
+</div>
+<div class="prog-wrap">
+  <div class="prog-info"><span id="pt">1 / 40</span><span id="ps">정답 0개</span></div>
+  <div class="bar"><div class="bar-fill" id="bf" style="width:2.50%"></div></div>
+</div>
+<div id="rb">
+  <div style="background:rgba(26,82,118,.08);border:1.5px solid rgba(26,82,118,.3);border-radius:12px;padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <span id="rb-msg" style="font-size:13px;color:#1a2633;font-family:'JetBrains Mono',monospace;line-height:1.5"></span>
+    <button onclick="freshStart()" style="padding:10px 22px;background:#c62828;border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer;white-space:nowrap;flex-shrink:0">처음부터</button>
+  </div>
+</div>
+<div id="nav"></div>
+<div class="wrap">
+  <div id="qa"></div>
+  <div class="score-card" id="sc">
+    <div class="score-circle"><span class="s-num" id="fs">0</span><span class="s-total">/40</span></div>
+    <h2 id="rm"></h2><p id="rs"></p>
+    <button class="restart-btn" onclick="restart()">🔄 다시 풀기</button>
+  </div>
+</div>
+<script src="sounds.js"></script>
+<script src="score-popup.js"></script>
+<script>
+const SAVE_KEY='phono_stress_drill_p1';
+const TOTAL=40;
+let cur=0,answers=new Array(TOTAL).fill(null);
+
+// {cat, word, syls[], ans(0-based index), ctx?, ipa, why}
+const Q=[
+{cat:"2음절 강세",word:"frequent",syls:["fre","quent"],ans:0,ctx:"",
+ ipa:"/ˈfriːkwənt/",why:"2음절 형용사 → 첫 음절 강세."},
+
+{cat:"2음절 강세",word:"active",syls:["ac","tive"],ans:0,ctx:"",
+ ipa:"/ˈæktɪv/",why:"2음절 형용사 → 첫 음절 강세."},
+
+{cat:"2음절 강세",word:"solid",syls:["sol","id"],ans:0,ctx:"",
+ ipa:"/ˈsɒlɪd/",why:"2음절 형용사 → 첫 음절 강세."},
+
+{cat:"2음절 강세",word:"absent",syls:["ab","sent"],ans:0,ctx:"(Adj)",
+ ipa:"/ˈæbsənt/",why:"2음절 형용사 → 첫 음절 강세."},
+
+{cat:"2음절 강세",word:"complex",syls:["com","plex"],ans:0,ctx:"(N/Adj)",
+ ipa:"/ˈkɒmpleks/",why:"명사/형용사 → 첫 음절 강세."},
+
+/* ── N/V 강세 쌍 ── */
+{cat:"N/V 강세 쌍",word:"export",syls:["ex","port"],ans:0,ctx:"(N)",
+ ipa:"/ˈekspɔːrt/",why:"명사 → 첫 음절 강세. (V: exˈport)"},
+
+{cat:"N/V 강세 쌍",word:"export",syls:["ex","port"],ans:1,ctx:"(V)",
+ ipa:"/ɪkˈspɔːrt/",why:"동사 → 둘째 음절 강세. (N: ˈexport)"},
+
+{cat:"N/V 강세 쌍",word:"import",syls:["im","port"],ans:0,ctx:"(N)",
+ ipa:"/ˈɪmpɔːrt/",why:"명사 → 첫 음절 강세. (V: imˈport)"},
+
+{cat:"N/V 강세 쌍",word:"import",syls:["im","port"],ans:1,ctx:"(V)",
+ ipa:"/ɪmˈpɔːrt/",why:"동사 → 둘째 음절 강세. (N: ˈimport)"},
+
+{cat:"N/V 강세 쌍",word:"increase",syls:["in","crease"],ans:0,ctx:"(N)",
+ ipa:"/ˈɪŋkriːs/",why:"명사 → 첫 음절 강세. (V: inˈcrease)"},
+
+{cat:"N/V 강세 쌍",word:"increase",syls:["in","crease"],ans:1,ctx:"(V)",
+ ipa:"/ɪnˈkriːs/",why:"동사 → 둘째 음절 강세. (N: ˈincrease)"},
+
+{cat:"N/V 강세 쌍",word:"conflict",syls:["con","flict"],ans:0,ctx:"(N)",
+ ipa:"/ˈkɒnflɪkt/",why:"명사 → 첫 음절 강세. (V: conˈflict)"},
+
+{cat:"N/V 강세 쌍",word:"conflict",syls:["con","flict"],ans:1,ctx:"(V)",
+ ipa:"/kənˈflɪkt/",why:"동사 → 둘째 음절 강세. (N: ˈconflict)"},
+
+/* ── 3음절 — antepenult (penult light) ── */
+{cat:"3음절 강세",word:"cinema",syls:["cin","e","ma"],ans:0,ctx:"",
+ ipa:"/ˈsɪnɪmə/",why:"Penult -e- = light(CV) → antepenult -cin- 강세."},
+
+{cat:"3음절 강세",word:"origin",syls:["or","i","gin"],ans:0,ctx:"",
+ ipa:"/ˈɒrɪdʒɪn/",why:"Penult -i- = light → antepenult -or- 강세."},
+
+{cat:"3음절 강세",word:"popular",syls:["pop","u","lar"],ans:0,ctx:"",
+ ipa:"/ˈpɒpjʊlər/",why:"Penult -u- = light → antepenult -pop- 강세."},
+
+{cat:"3음절 강세",word:"victory",syls:["vic","to","ry"],ans:0,ctx:"",
+ ipa:"/ˈvɪktəri/",why:"Penult -to- = light → antepenult -vic- 강세."},
+
+{cat:"3음절 강세",word:"family",syls:["fam","i","ly"],ans:0,ctx:"",
+ ipa:"/ˈfæmɪli/",why:"Penult -i- = light → antepenult -fam- 강세."},
+
+/* ── 3음절 — penult heavy ── */
+{cat:"3음절 강세",word:"agenda",syls:["a","gen","da"],ans:1,ctx:"",
+ ipa:"/əˈdʒendə/",why:"Penult -gen- = heavy(단모음+coda /n/) → penult 강세."},
+
+{cat:"3음절 강세",word:"diploma",syls:["di","plo","ma"],ans:1,ctx:"",
+ ipa:"/dɪˈploʊmə/",why:"Penult -plo- = heavy(장모음 /oʊ/) → penult 강세."},
+
+{cat:"3음절 강세",word:"Alaska",syls:["A","las","ka"],ans:1,ctx:"",
+ ipa:"/əˈlæskə/",why:"Penult -las- = heavy(단모음+coda /s/) → penult 강세."},
+
+{cat:"3음절 강세",word:"Nevada",syls:["Ne","va","da"],ans:1,ctx:"",
+ ipa:"/nɪˈvædə/",why:"Penult -va- = heavy(장모음 /æ/) → penult 강세."},
+
+{cat:"3음절 강세",word:"Atlanta",syls:["At","lan","ta"],ans:1,ctx:"",
+ ipa:"/ətˈlæntə/",why:"Penult -lan- = heavy(단모음+coda /n/) → penult 강세."},
+
+/* ── -tion 강세 ── */
+{cat:"-tion 강세",word:"solution",syls:["so","lu","tion"],ans:1,ctx:"",
+ ipa:"/səˈluːʃən/",why:"-tion 직전 음절에 강세. -lu- = heavy(장모음)."},
+
+{cat:"-tion 강세",word:"narration",syls:["nar","ra","tion"],ans:1,ctx:"",
+ ipa:"/næˈreɪʃən/",why:"-tion 직전 음절에 강세. -ra- = heavy(장모음)."},
+
+{cat:"-tion 강세",word:"education",syls:["ed","u","ca","tion"],ans:2,ctx:"",
+ ipa:"/ˌedʒʊˈkeɪʃən/",why:"-tion 직전 음절(-ca-)에 강세."},
+
+{cat:"-tion 강세",word:"observation",syls:["ob","ser","va","tion"],ans:2,ctx:"",
+ ipa:"/ˌɒbzəˈveɪʃən/",why:"-tion 직전 음절(-va-)에 강세."},
+
+/* ── -ic 강세 ── */
+{cat:"-ic 강세",word:"elastic",syls:["e","las","tic"],ans:1,ctx:"",
+ ipa:"/ɪˈlæstɪk/",why:"-ic 직전 음절(-las-)에 강세. -las- = heavy."},
+
+{cat:"-ic 강세",word:"dramatic",syls:["dra","mat","ic"],ans:1,ctx:"",
+ ipa:"/drəˈmætɪk/",why:"-ic 직전 음절(-mat-)에 강세."},
+
+{cat:"-ic 강세",word:"academic",syls:["ac","a","dem","ic"],ans:2,ctx:"",
+ ipa:"/ˌækəˈdemɪk/",why:"-ic 직전 음절(-dem-)에 강세."},
+
+{cat:"-ic 예외",word:"rhetoric",syls:["rhet","o","ric"],ans:0,ctx:"",
+ ipa:"/ˈretərɪk/",why:"-ic 예외어: ˈrhetoric, ˈarabic, ˈcatholic 등 antepenult 강세 유지."},
+
+/* ── -ity 강세 ── */
+{cat:"-ity 강세",word:"ability",syls:["a","bil","i","ty"],ans:1,ctx:"",
+ ipa:"/əˈbɪlɪti/",why:"-ity 직전 음절(-bil-)에 강세."},
+
+{cat:"-ity 강세",word:"reality",syls:["re","al","i","ty"],ans:1,ctx:"",
+ ipa:"/riˈælɪti/",why:"-ity 직전 음절(-al-)에 강세."},
+
+{cat:"-ity 강세",word:"electricity",syls:["e","lec","tric","i","ty"],ans:2,ctx:"",
+ ipa:"/ɪˌlekˈtrɪsɪti/",why:"-ic+ity: -ic rule → -tric-에 먼저 강세. 결과: e-lec-ˈtric-i-ty."},
+
+/* ── 4음절 ── */
+{cat:"4음절 강세",word:"economy",syls:["e","con","o","my"],ans:1,ctx:"",
+ ipa:"/ɪˈkɒnəmi/",why:"Penult -o- = light → antepenult -con- 강세. /ɪˈkɒnəmi/"},
+
+{cat:"4음절 강세",word:"democracy",syls:["de","moc","ra","cy"],ans:1,ctx:"",
+ ipa:"/dɪˈmɒkrəsi/",why:"Penult -ra- = light → antepenult -moc- 강세."},
+
+{cat:"4음절 강세",word:"geography",syls:["ge","og","ra","phy"],ans:1,ctx:"",
+ ipa:"/dʒiˈɒgrəfi/",why:"Penult -ra- = light → antepenult -og- 강세."},
+
+/* ── Neutral suffix ── */
+{cat:"Neutral Suffix",word:"awareness",syls:["a","ware","ness"],ans:1,ctx:"",
+ ipa:"/əˈweənəs/",why:"-ness는 neutral suffix → 어기 aˈware 강세 유지."},
+
+{cat:"Neutral Suffix",word:"happiness",syls:["hap","pi","ness"],ans:0,ctx:"",
+ ipa:"/ˈhæpɪnəs/",why:"-ness는 neutral suffix → 어기 ˈhappy 강세 유지."},
+
+{cat:"Neutral Suffix",word:"achievement",syls:["a","chieve","ment"],ans:1,ctx:"",
+ ipa:"/əˈtʃiːvmənt/",why:"-ment는 neutral suffix → 어기 aˈchieve 강세 유지."},
+
+/* ── 복합어 ── */
+];
+function getScore(){return answers.filter(a=>a&&a.correct).length;}
+
+function renderNav(){
+  const n=document.getElementById('nav');
+  n.innerHTML='';
+  answers.forEach((_,i)=>{
+    const a=answers[i];
+    const cls=i===cur?'nd cur':a===null?'nd':a.correct?'nd ok':'nd ng';
+    n.innerHTML+=`<button class="${cls}" onclick="jumpTo(${i})">${i+1}</button>`;
+  });
+}
+
+function renderCard(){
+  const q=Q[cur];
+  const a=answers[cur];
+  const done=a!==null;
+
+  let sylsHtml='';
+  q.syls.forEach((s,i)=>{
+    let cls='syl-btn';
+    if(done){
+      if(i===q.ans) cls+=' reveal';
+      if(i===a.picked && a.picked!==q.ans) cls+=' wrong';
+    }
+    const dis=done?'disabled':'';
+    sylsHtml+=`<button class="${cls}" ${dis} onclick="pick(${i})">${s}</button>`;
+  });
+
+  let feedbackHtml='', expHtml='', nextHtml='';
+  if(done){
+    feedbackHtml=a.correct
+      ?`<div class="feedback ok">✅ 정답! ${q.syls[q.ans].toUpperCase()} 음절</div>`
+      :`<div class="feedback ng">❌ 오답 — 정답: <b>${q.syls[q.ans].toUpperCase()}</b> 음절 (${q.ans+1}번째)</div>`;
+    expHtml=`<div class="exp show">
+      <div class="exp-header"><span>Explanation</span></div>
+      <div class="exp-body">
+        <div class="rule-tag">${q.cat}</div>
+        <div class="exp-ipa">${q.ipa}</div>
+        <div class="exp-why">${q.why}</div>
+      </div>
+    </div>`;
+    nextHtml=`<button class="next-btn show" onclick="next()">${cur<TOTAL-1?'Next →':'결과 보기 →'}</button>`;
+  }
+
+  const ctxHtml=q.ctx?`<div class="word-ctx">${q.ctx}</div>`:'';
+
+  document.getElementById('qa').innerHTML=`
+  <div class="card">
+    <div class="q-meta">
+      <span class="q-num">Q${cur+1}</span>
+      <span class="q-cat">${q.cat}</span>
+    </div>
+    <div class="word-raw">${q.word}</div>
+    ${ctxHtml}
+    <div class="drill-prompt">▼ 제1강세 음절 클릭</div>
+    <div class="syls">${sylsHtml}</div>
+    ${feedbackHtml}
+    ${expHtml}
+    ${nextHtml}
+  </div>`;
+}
+
+function render(){
+  if(cur>=TOTAL){
+    document.getElementById('qa').style.display='none';
+    document.getElementById('sc').classList.add('show');
+    const s=getScore();
+    document.getElementById('fs').textContent=s;
+    const p=s/TOTAL;
+    document.getElementById('rm').textContent=p===1?'🎉 Perfect!':p>=.8?'👏 Great!':p>=.6?'😊 Good!':'💪 Keep going!';
+    document.getElementById('rs').textContent=`${TOTAL}문제 중 ${s}문제 정답 (${Math.round(p*100)}%)`;
+    setTimeout(()=>{window.showScorePopup&&window.showScorePopup(s,TOTAL);},400);
+    renderNav();return;
+  }
+  document.getElementById('sc').classList.remove('show');
+  document.getElementById('qa').style.display='block';
+  document.getElementById('bf').style.width=((cur+1)/TOTAL*100).toFixed(1)+'%';
+  document.getElementById('pt').textContent=`${cur+1} / ${TOTAL}`;
+  document.getElementById('ps').textContent=`정답 ${getScore()}개`;
+  renderNav();
+  renderCard();
+}
+
+function pick(idx){
+  const q=Q[cur];
+  const ok=idx===q.ans;
+  answers[cur]={picked:idx,correct:ok};
+  if(ok){if(typeof playOk==='function')playOk();}else{if(typeof playNg==='function')playNg();}
+  document.getElementById('ps').textContent=`정답 ${getScore()}개`;
+  renderNav();
+  renderCard();
+  saveProgress();
+}
+
+function next(){cur++;saveProgress();render();}
+function jumpTo(i){cur=i;render();document.getElementById('qa').scrollIntoView({behavior:'smooth',block:'start'});}
+function saveProgress(){localStorage.setItem(SAVE_KEY,JSON.stringify({cur,answers}));}
+function restart(){cur=0;answers=new Array(TOTAL).fill(null);localStorage.removeItem(SAVE_KEY);document.getElementById('sc').classList.remove('show');document.getElementById('qa').style.display='block';renderNav();render();}
+function freshStart(){localStorage.removeItem(SAVE_KEY);cur=0;answers=new Array(TOTAL).fill(null);document.getElementById('rb').style.display='none';document.getElementById('sc').classList.remove('show');document.getElementById('qa').style.display='block';renderNav();render();}
+
+(function(){
+  const saved=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');
+  if(saved&&saved.answers&&saved.cur>=0&&saved.cur<TOTAL){
+    cur=saved.cur;answers=saved.answers;
+    const done=answers.filter(a=>a!==null).length;
+    if(done>0){document.getElementById('rb-msg').textContent=`이어서 풀기 · ${done}/${TOTAL} 완료 (정답 ${getScore()}개)`;document.getElementById('rb').style.display='block';}
+  }
+  renderNav();render();
+})();
+</script>
+</body>
+</html>

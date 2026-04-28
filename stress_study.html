@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>강세 개념 정리 — Stress Study Note</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:repeating-linear-gradient(transparent,transparent 27px,#ddddd0 28px);color:#1a1a1a;min-height:100vh;padding:16px}
+.header-wrap{max-width:820px;margin:0 auto;padding:24px 8px 0}
+.header-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.header-sticker{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;background:#1a3a52;color:#e8f4fb;padding:5px 13px;border-radius:3px;letter-spacing:2px;text-transform:uppercase}
+.header-chapter{font-family:'JetBrains Mono',monospace;font-size:12px;color:#4a6a8a;letter-spacing:.5px}
+.header-title{font-size:clamp(30px,7vw,46px);font-weight:900;color:#1a1a1a;line-height:1.1;margin-bottom:5px;letter-spacing:-1px}
+.title-hl{background:#1a5276;color:#fff;padding:1px 6px}
+.header-script{font-family:'Caveat',cursive;font-size:21px;color:#1a5276;margin-bottom:4px;font-weight:600}
+.header-sub{font-size:13px;color:#555;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#aaa;margin-bottom:10px}
+.header-divider{border:none;border-top:2px dashed #888;margin-bottom:10px}
+.header-tip{font-size:12px;color:#1a3a52;font-family:'JetBrains Mono',monospace;margin-bottom:20px;background:rgba(26,82,118,.06);border:1px solid rgba(26,82,118,.2);border-radius:8px;padding:9px 14px;line-height:1.7}
+.wrap{max-width:820px;margin:0 auto}
+.sec{background:#fff;border:1.5px solid #aed6f1;border-radius:16px;margin-bottom:20px;overflow:clip;box-shadow:0 2px 8px rgba(26,82,118,.08)}
+.sec-header{background:linear-gradient(135deg,rgba(26,82,118,.08),rgba(41,128,185,.05));border-bottom:1.5px solid #aed6f1;padding:16px 22px;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.sec-icon{font-size:20px}
+.sec-title{font-size:16px;font-weight:700;color:#1a3a52;font-family:'JetBrains Mono',monospace}
+.sec-tag{font-size:11px;color:#1a5276;background:rgba(26,82,118,.1);padding:3px 10px;border-radius:6px;margin-left:auto;font-weight:600}
+.sec-tag.red{background:rgba(183,28,28,.12);color:#b71c1c;border:1px solid rgba(183,28,28,.2)}
+.sec-tag.orange{background:rgba(230,119,0,.12);color:#bf6000;border:1px solid rgba(230,119,0,.2)}
+.sec-arrow{font-size:13px;color:#4a6a8a;transition:transform .3s;margin-left:6px}
+.sec.open .sec-arrow{transform:rotate(180deg)}
+.sec-body{display:none;padding:22px}
+.sec.open .sec-body{display:block}
+.concept{margin-bottom:24px}
+.concept:last-child{margin-bottom:0}
+.c-title{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#1a3a52;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.badge-ex{font-size:10px;background:rgba(230,119,0,.12);color:#e67c00;border:1px solid rgba(230,119,0,.3);padding:2px 7px;border-radius:4px;letter-spacing:0;text-transform:none;font-weight:700}
+.def{background:rgba(26,82,118,.06);border-left:4px solid #1a5276;padding:14px 18px;border-radius:0 10px 10px 0;margin-bottom:12px;font-size:15px;line-height:1.95;color:#1a1a1a}
+.note{font-size:14.5px;color:#2a4a62;line-height:1.85;margin-bottom:8px;padding-left:8px}
+.note::before{content:"• ";color:#2e86c1;font-weight:700}
+.kw1{background:rgba(26,82,118,.15);color:#1a3a52;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(26,82,118,.25)}
+.kw2{color:#1a5276;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border-bottom:2px solid rgba(26,82,118,.45)}
+.kw3{background:rgba(230,119,0,.13);color:#bf6000;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(230,119,0,.3)}
+.kw4{background:rgba(183,28,28,.11);color:#b71c1c;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(183,28,28,.25)}
+.grid{display:grid;gap:10px;margin-top:12px}
+.grid.col2{grid-template-columns:1fr 1fr}
+.grid.col3{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:580px){.grid.col2,.grid.col3{grid-template-columns:1fr}}
+.grid-item{background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:10px;padding:14px 16px}
+.gi-title{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#1a5276;margin-bottom:8px}
+.gi-body{font-size:13.5px;color:#2a4a62;line-height:1.8}
+.gi-body span{display:block}
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+.flow-item{background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:8px;padding:10px 16px;font-size:13px;color:#1a1a1a;text-align:center;line-height:1.5}
+.flow-arrow{color:#2e86c1;font-size:20px;font-weight:700}
+.stage-wrap{margin-top:12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{background:rgba(26,82,118,.1);color:#1a3a52;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;padding:10px 14px;border:1.5px solid #aed6f1;text-align:left;font-weight:700}
+td{padding:10px 14px;border:1.5px solid #aed6f1;color:#2a4a62;vertical-align:top;line-height:1.7}
+tr:nth-child(even) td{background:rgba(26,82,118,.04)}
+.exam{background:rgba(230,119,0,.06);border:1.5px solid rgba(230,119,0,.25);border-radius:10px;padding:14px 18px;margin-top:14px}
+.exam-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#e67c00;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;font-weight:700}
+.exam p{font-size:13.5px;color:#6b4400;line-height:1.8;margin-bottom:5px}
+.div{height:1px;background:rgba(41,128,185,.2);margin:20px 0}
+.toc{max-width:820px;margin:0 auto 20px;background:#fff;border:1.5px solid #aed6f1;border-radius:12px;padding:16px 20px;box-shadow:0 2px 8px rgba(26,82,118,.06)}
+.toc-title{font-size:11px;font-family:'JetBrains Mono',monospace;color:#4a6a8a;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;font-weight:700}
+.toc-list{display:flex;flex-wrap:wrap;gap:7px}
+.toc-item{font-size:12px;color:#1a5276;background:rgba(26,82,118,.08);border:1.5px solid rgba(26,82,118,.2);padding:5px 12px;border-radius:8px;cursor:pointer;transition:all .15s;font-family:'JetBrains Mono',monospace;font-weight:600}
+.toc-item:hover{background:rgba(26,82,118,.18)}
+.legend{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 16px;padding:10px 14px;background:#fff;border:1.5px solid #aed6f1;border-radius:10px;align-items:center}
+.legend-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:#4a6a8a;font-weight:700;margin-right:4px}
+.ipa-block{font-family:'JetBrains Mono',monospace;background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:8px;padding:14px 18px;margin-top:10px;font-size:14px;line-height:2.4;color:#1a2633}
+.ipa-block .sp{color:#b71c1c;font-weight:700}
+.ipa-block .ss{color:#e67c00;font-weight:700}
+.chain{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin-top:10px;border:1.5px solid #aed6f1;border-radius:10px;overflow:hidden}
+.chain-item{flex:1;min-width:130px;padding:14px 14px;background:#f4f9fe;border-right:1.5px solid #aed6f1;text-align:center}
+.chain-item:last-child{border-right:none}
+.ci-word{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px;color:#1a2633;margin-bottom:5px}
+.ci-ipa{font-family:'JetBrains Mono',monospace;font-size:13px;color:#2e86c1;margin-bottom:5px}
+.ci-rule{font-size:12px;color:#4a6a8a;line-height:1.5}
+.foot-wrap{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px}
+.foot-box{background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:10px;padding:14px 18px;text-align:center;min-width:150px}
+.foot-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.foot-tree{font-family:'JetBrains Mono',monospace;font-size:13px;color:#1a2633;line-height:2.2;white-space:pre}
+.rule-box{background:rgba(26,82,118,.05);border:2px solid #1a5276;border-radius:10px;padding:16px 20px;margin-top:12px}
+.rule-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#1a5276;font-weight:700;margin-bottom:10px}
+.rule-text{font-size:15px;line-height:2;color:#1a2633}
+.caution{background:rgba(183,28,28,.05);border:1.5px solid rgba(183,28,28,.2);border-radius:8px;padding:12px 16px;margin-top:10px;font-size:13.5px;color:#8b0000;line-height:1.8}
+.caution-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;font-weight:700;color:#b71c1c;margin-bottom:6px}
+</style>
+</head>
+<body>
+
+<div class="header-wrap">
+  <div class="header-topbar">
+    <span class="header-sticker">STUDY NOTE</span>
+    <span class="header-chapter">분류 6 · Stress &amp; Intonation</span>
+  </div>
+  <h1 class="header-title"><span class="title-hl">강세</span> 개념 정리</h1>
+  <div class="header-script">Stress &amp; Intonation · Concept Notes</div>
+  <p class="header-sub">AEP Ch.7 기반 · 기출 포인트 · 파생어 체인 · IPA 전사</p>
+  <hr class="header-divider">
+  <p class="header-tip">📌 목차 버튼 → 해당 섹션으로 이동 &nbsp;·&nbsp; ▼ 섹션 제목 → 열고 닫기</p>
+</div>
+
+<div class="wrap">
+
+<div class="toc">
+  <div class="toc-title">📋 목차</div>
+  <div class="toc-list">
+    <div class="toc-item" onclick="openSec('s1')">① 음절 무게</div>
+    <div class="toc-item" onclick="openSec('s2')">② N/Adj 강세</div>
+    <div class="toc-item" onclick="openSec('s3')">③ V 강세</div>
+    <div class="toc-item" onclick="openSec('s4')">④ N/V 동형이의어</div>
+    <div class="toc-item" onclick="openSec('s5')">⑤ 이차 강세</div>
+    <div class="toc-item" onclick="openSec('s6')">⑥ 접미사 분류</div>
+    <div class="toc-item" onclick="openSec('s7')">⑦ 합성어 강세</div>
+    <div class="toc-item" onclick="openSec('s8')">⑧ 파생어 체인</div>
+    <div class="toc-item" onclick="openSec('s9')">⑨ Foot 구조</div>
+    <div class="toc-item" onclick="openSec('s10')">⑩ NSR</div>
+    <div class="toc-item" onclick="openSec('s11')">⑪ 억양 패턴</div>
+  </div>
+</div>
+
+<div class="legend">
+  <span class="legend-title">키워드</span>
+  <span><span class="kw4">★★★ 최빈출</span></span>
+  <span><span class="kw3">★★ 빈출</span></span>
+  <span><span class="kw1">★ 기본개념</span></span>
+  <span><span class="kw2">부키워드</span></span>
+</div>
+
+<div class="exam" style="margin-bottom:20px">
+  <div class="exam-label">📝 기출분석 포인트 (분류 6 Stress)</div>
+  <p>① <span class="kw4">Heavy vs Light syllable</span> — 강세 배정의 핵심 조건; schwa(ə)는 항상 weightless → 절대 primary stress 불가</p>
+  <p>② <span class="kw4">N/V homograph pairs</span> — 명사(penult)·동사(ult) 강세 패턴 + 모음 약화(vowel reduction) 세트로 출제</p>
+  <p>③ <span class="kw4">접미사 3분류</span> — -ic(shifting, 예외: ˈArabic·ˈlunatic), -ness/-ment(neutral), -ation(bearing) 구분 필수</p>
+  <p>④ <span class="kw3">파생어 체인</span> — photograph 패러다임(ˈphoto→phoˈtography→ˌphoˈtographic→phoˈtographer) 단골 출제</p>
+  <p>⑤ <span class="kw3">2025 B04</span> — 이름 단독 발화 시 첫 음절 일차 강세 조건 (Name Game prosody)</p>
+</div>
+
+<!-- ① 음절 무게 -->
+<div class="sec open" id="s1">
+  <div class="sec-header" onclick="toggleSec('s1')">
+    <span class="sec-icon">⚖️</span>
+    <span class="sec-title">① 음절 무게 (Syllable Weight)</span>
+    <span class="sec-tag red">★★★ 최빈출</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept">
+      <div class="c-title">1) 왜 음절 무게가 중요한가</div>
+      <div class="def">
+        영어 강세는 <b>음절의 무게(weight)</b>에 의해 결정된다. 무거운(heavy) 음절은 강세를 <b>끌어당기는</b> 성질이 있고, 가벼운(light) 음절은 자체적으로 강세를 받을 수 없다. 특히 schwa [ə]는 <b>"무게가 없는(weightless)" 모음</b>으로 취급되어 어떠한 경우에도 일차 강세를 받지 못한다.<br><br>
+        무게를 결정하는 것은 음절의 <span class="kw4">운(rhyme)</span> 구조다. 운이 branching(분지)하면 heavy, non-branching이면 light.
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">2) Heavy vs Light — 판별 기준</div>
+      <div class="grid col2">
+        <div class="grid-item" style="border-color:#b71c1c">
+          <div class="gi-title" style="color:#b71c1c">⚫ Heavy Syllable (중음절)</div>
+          <div class="gi-body">
+            <span>① 장모음 또는 이중모음 포함 (ex. [eɪ], [oʊ], [iː])</span>
+            <span>② 단모음 + 코다 자음 (CVC, CVCC)</span>
+            <span>→ 운이 branching = <b>강세를 받을 수 있음</b></span>
+            <span style="margin-top:8px;font-family:'JetBrains Mono',monospace;color:#b71c1c">
+              -<b>gráph</b>: [æ] + coda [f] → heavy ✓<br>
+              -<b>tóm</b>: [ɒ] + coda [m] → heavy ✓<br>
+              -<b>máːt</b>: long vowel → heavy ✓
+            </span>
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="gi-title">⚪ Light Syllable (경음절)</div>
+          <div class="gi-body">
+            <span>① 단모음 + 코다 없음 (CV 구조)</span>
+            <span>② schwa [ə] — 항상 weightless</span>
+            <span>→ 운이 non-branching = <b>강세 받을 수 없음</b></span>
+            <span style="margin-top:8px;font-family:'JetBrains Mono',monospace;color:#4a6a8a">
+              -<b>ta</b>-: [tə] → light (schwa)<br>
+              -<b>li</b>-: [lɪ] (짧은 단모음, 코다 없음) → light<br>
+              -<b>ty</b>: [ti] 마지막 개방음절 → light
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">3) 음절 위치 용어 — Ult · Penult · Antepenult</div>
+      <div class="def">
+        강세 규칙을 기술할 때 음절 위치를 뒤에서부터 센다.<br>
+        <span class="kw1">Ult</span> = 마지막 음절 (ultimate) &nbsp;|&nbsp;
+        <span class="kw1">Penult</span> = 끝에서 두 번째 (penultimate) &nbsp;|&nbsp;
+        <span class="kw1">Antepenult</span> = 끝에서 세 번째
+      </div>
+      <div class="ipa-block">
+        pro · ba · <span class="sp">ˈbi</span> · li · ty<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4a6a8a;font-size:12px">antepenult &nbsp; penult &nbsp; ult</span>
+      </div>
+      <p class="note" style="margin-top:12px">probability에서 penult는 /lɪ/ (단모음+코다 없음) → <b>light → antepenult인 /bɪ/로 강세 이동</b></p>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">4) Schwa의 Weightless 특성 — 핵심</div>
+      <div class="def">
+        Schwa [ə]는 완전히 약화된 모음으로 무게가 없다(weightless). Penult에 schwa가 오면 penult 강세가 불가능하므로 자동으로 <b>antepenult로 강세가 이동</b>한다. 이것이 영어에서 3음절 이상 단어의 강세를 결정하는 핵심 메커니즘이다.
+      </div>
+      <div class="grid col2" style="margin-top:12px">
+        <div class="grid-item">
+          <div class="gi-title">Penult heavy → penult 강세</div>
+          <div class="gi-body">
+            <span><span class="kw2">aˈgenda</span>: penult [dʒɛn] → heavy (closed) ✓</span>
+            <span><span class="kw2">toˈmato</span>: penult [meɪ] → heavy (diphthong) ✓</span>
+            <span><span class="kw2">diˈploma</span>: penult [loʊ] → heavy (diphthong) ✓</span>
+            <span><span class="kw2">comˈputer</span>: penult [pjuː] → heavy (long V) ✓</span>
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="gi-title">Penult = ə → antepenult 강세</div>
+          <div class="gi-body">
+            <span><span class="kw4">ˈcalendar</span>: penult [dər] → ə = weightless</span>
+            <span><span class="kw4">ˈanimal</span>: penult [məl] → ə = weightless</span>
+            <span><span class="kw4">aˈstronomy</span>: penult [nə] → ə = weightless</span>
+            <span><span class="kw4">ˈcatastrophe</span>: penult [trə] → ə = weightless</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exam" style="margin-top:14px">
+        <div class="exam-label">📝 출제 포인트</div>
+        <p>• "agenda는 왜 두 번째 음절에 강세가 오는가?" → penult [dʒɛn]이 heavy(closed syllable)이기 때문</p>
+        <p>• "calendar는 왜 첫 음절에 강세가 오는가?" → penult [dər]이 schwa = weightless이므로 antepenult로 이동</p>
+        <p>• schwa의 정의 + weightless 이유 논술 가능하게 준비</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ② N/Adj 강세 -->
+<div class="sec" id="s2">
+  <div class="sec-header" onclick="toggleSec('s2')">
+    <span class="sec-icon">📖</span>
+    <span class="sec-title">② 명사/형용사 강세 규칙 (N/Adj Stress)</span>
+    <span class="sec-tag red">★★★</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept">
+      <div class="c-title">1) 기본 규칙</div>
+      <div class="rule-box">
+        <div class="rule-label">N/Adj Stress Rule (AEP Ch.7)</div>
+        <div class="rule-text">
+          Step 1. <b>Penult가 heavy(stressable)</b>하면 → <span class="kw4">penult 강세</span><br>
+          Step 2. Penult가 <b>weightless [ə]</b>이면 → 왼쪽으로 이동해 <span class="kw3">다음 heavy 음절 강세</span><br>
+          Step 3. 2음절의 경우 기본값(default) = <span class="kw2">penult 강세</span> (실측 약 81%)
+        </div>
+      </div>
+      <p class="note" style="margin-top:12px">Hammond(1999)의 2만 단어 분석에서 2음절 N의 81.7%가 penult 강세. 이는 영어에서 "명사는 첫 음절 강세"라는 일반 인식의 근거다.</p>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">2) 2음절 N/Adj 예시</div>
+      <div class="grid col3">
+        <div class="grid-item">
+          <div class="gi-title">Noun (penult 강세)</div>
+          <div class="gi-body">
+            <span><span class="kw2">ˈagent</span> ˈbalance</span>
+            <span>ˈbottle ˈcarrot</span>
+            <span>ˈchicken ˈfather</span>
+            <span>ˈcountry ˈzeal</span>
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="gi-title">Adjective (penult 강세)</div>
+          <div class="gi-body">
+            <span><span class="kw2">ˈabsent</span> ˈcommon</span>
+            <span>ˈearly ˈperfect</span>
+            <span>ˈsolid ˈhonest</span>
+            <span>ˈbusy ˈready</span>
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="gi-title">예외: weightless penult → ult</div>
+          <div class="gi-body">
+            <span>apˈpeal / baˈloon</span>
+            <span>caˈnoe / Jaˈpan</span>
+            <span>maˈchine / giˈraffe</span>
+            <span>→ penult이 ə이므로 ult 강세</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">3) 3음절 이상 N — penult/antepenult 판별</div>
+      <div class="stage-wrap">
+        <table>
+          <tr><th>단어</th><th>penult 음절</th><th>무게</th><th>강세 위치</th><th>이유</th></tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace">toˈmato</td>
+            <td style="font-family:'JetBrains Mono',monospace">-ma- [meɪ]</td>
+            <td>heavy (diphthong)</td>
+            <td><span class="kw4">penult</span></td>
+            <td>이중모음 = heavy</td>
+          </tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace">aˈgenda</td>
+            <td style="font-family:'JetBrains Mono',monospace">-gen- [dʒɛn]</td>
+            <td>heavy (closed)</td>
+            <td><span class="kw4">penult</span></td>
+            <td>coda /n/ 있음</td>
+          </tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace">ˈcalendar</td>
+            <td style="font-family:'JetBrains Mono',monospace">-len- [lən]</td>
+            <td>weightless (ə)</td>
+            <td><span class="kw3">antepenult</span></td>
+            <td>penult이 ə → 이동</td>
+          </tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace">ˈanimal</td>
+            <td style="font-family:'JetBrains Mono',monospace">-ni- [nɪməl]</td>
+            <td>weightless (ə)</td>
+            <td><span class="kw3">antepenult</span></td>
+            <td>penult이 ə → 이동</td>
+          </tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace">baˈracuda</td>
+            <td style="font-family:'JetBrains Mono',monospace">-cu- [kjuː]</td>
+            <td>heavy (long V)</td>
+            <td><span class="kw4">penult</span></td>
+            <td>장모음 = heavy</td>
+          </tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace">aˈstronomy</td>
+            <td style="font-family:'JetBrains Mono',monospace">-no- [nə]</td>
+            <td>weightless (ə)</td>
+            <td><span class="kw3">antepenult</span></td>
+            <td>penult이 ə → 이동</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ③ V 강세 -->
+<div class="sec" id="s3">
+  <div class="sec-header" onclick="toggleSec('s3')">
+    <span class="sec-icon">🔤</span>
+    <span class="sec-title">③ 동사 강세 규칙 (Verb Stress)</span>
+    <span class="sec-tag orange">★★</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept">
+      <div class="c-title">1) 핵심 원칙 — N/Adj와의 차이</div>
+      <div class="def">
+        명사·형용사가 <b>penult</b>를 기준점으로 삼는 반면, 동사는 <b>ult(마지막 음절)</b>을 기준점으로 삼는다. 이 차이가 명사/동사 동형이의어 쌍(permit, record 등)에서 강세가 달라지는 원리다.
+      </div>
+      <div class="rule-box">
+        <div class="rule-label">Verb Stress Rule</div>
+        <div class="rule-text">
+          Step 1. <b>Ult가 heavy</b>하면 → <span class="kw4">ult 강세</span><br>
+          Step 2. Ult가 <b>unstressable</b>이면 → <span class="kw3">penult 강세</span><br>
+          Step 3. Ult·Penult 모두 unstressable → <span class="kw2">antepenult 강세</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">2) 예시</div>
+      <div class="grid col2">
+        <div class="grid-item">
+          <div class="gi-title">Heavy ult → ult 강세 (V)</div>
+          <div class="gi-body">
+            <span>aˈchieve [əˈtʃiːv] — ult [iːv] heavy ✓</span>
+            <span>adˈmit [ədˈmɪt] — ult [mɪt] closed ✓</span>
+            <span>aˈgree [əˈɡriː] — ult [iː] long V ✓</span>
+            <span>reˈply [rɪˈplaɪ] — ult [laɪ] diphthong ✓</span>
+            <span>anˈnounce — ult closed ✓</span>
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="gi-title">Unstressable ult → penult 강세 (V)</div>
+          <div class="gi-body">
+            <span>ˈbalance [ˈbæləns] — ult [əns] ə 포함</span>
+            <span>ˈblossom — ult [əm] ə 포함</span>
+            <span>ˈharvest — ult [vəst] ə 포함</span>
+            <span>ˈvisit — ult [ɪt] light (no coda)</span>
+            <span>ˈfurnish — ult [nɪʃ] 불안정</span>
+          </div>
+        </div>
+      </div>
+      <p class="note" style="margin-top:12px">Hammond 데이터: 2음절 동사의 47.6%가 heavy ult → ult 강세, 52.3%가 unstressable ult → penult 강세. 즉, <b>동사는 ult/penult 강세가 거의 반반</b>.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ④ N/V 동형이의어 -->
+<div class="sec" id="s4">
+  <div class="sec-header" onclick="toggleSec('s4')">
+    <span class="sec-icon">⇄</span>
+    <span class="sec-title">④ 명사/동사 동형이의어 쌍 (N–V Homograph Pairs)</span>
+    <span class="sec-tag red">★★★ 최빈출</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept">
+      <div class="c-title">1) 원리 요약</div>
+      <div class="def">
+        동일한 철자의 단어가 명사일 때와 동사일 때 강세 위치가 바뀐다.<br>
+        <b>명사(N)</b>: penult 강세 → 보통 <span class="kw4">첫 번째 음절 강세</span><br>
+        <b>동사(V)</b>: ult 강세 → 보통 <span class="kw4">두 번째 음절 강세</span><br><br>
+        중요: 강세만 바뀌는 게 아니라 <b>강세를 잃은 음절의 모음이 [ə]로 약화(vowel reduction)</b>되므로 발음이 상당히 달라진다.
+      </div>
+      <p class="note">예: ˈpermit [ˈpɜːrmɪt] → <b>첫 음절 [pɜːr]이 full vowel</b></p>
+      <p class="note">perˈmit [pərˈmɪt] → <b>첫 음절 [pər]이 schwa로 약화</b></p>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">2) 주요 N/V 쌍 — IPA 전사 포함</div>
+      <div class="stage-wrap">
+        <table>
+          <tr><th>단어</th><th>N (명사) 강세·IPA</th><th>V (동사) 강세·IPA</th><th>포인트</th></tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace;font-weight:700">permit</td>
+            <td><span class="kw4">ˈpermit</span> [ˈpɜːrmɪt]</td>
+            <td><span class="kw3">perˈmit</span> [pərˈmɪt]</td>
+            <td>N: pɜːr / V: pər (약화)</td>
+          </tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace;font-weight:700">record</td>
+            <td><span class="kw4">ˈrecord</span> [ˈrekərd]</td>
+            <td><span class="kw3">reˈcord</span> [rɪˈkɔːrd]</td>
+            <td>N: ˈre / V: rɪ (약화)</td>
+          </tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace;font-weight:700">conduct</td>
+            <td><span class="kw4">ˈconduct</span> [ˈkɒndʌkt]</td>
+            <td><span class="kw3">conˈduct</span> [kənˈdʌkt]</td>
+            <td>N: kɒn / V: kən (약화)</td>
+          </tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace;font-weight:700">protest</td>
+            <td><span class="kw4">ˈprotest</span> [ˈproʊtɛst]</td>
+            <td><span class="kw3">proˈtest</span> [prəˈtɛst]</td>
+            <td>N: proʊ / V: prə (약화)</td>
+          </tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace;font-weight:700">insult</td>
+            <td><span class="kw4">ˈinsult</span> [ˈɪnsʌlt]</td>
+            <td><span class="kw3">inˈsult</span> [ɪnˈsʌlt]</td>
+            <td>N: ˈɪn / V: ɪn (약화)</td>
+          </tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace;font-weight:700">refund</td>
+            <td><span class="kw4">ˈrefund</span> [ˈriːfʌnd]</td>
+            <td><span class="kw3">reˈfund</span> [rɪˈfʌnd]</td>
+            <td>N: riː / V: rɪ (약화)</td>
+          </tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace;font-weight:700">object</td>
+            <td><span class="kw4">ˈobject</span> [ˈɒbdʒɛkt]</td>
+            <td><span class="kw3">obˈject</span> [əbˈdʒɛkt]</td>
+            <td>N: ɒb / V: əb (약화)</td>
+          </tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace;font-weight:700">present</td>
+            <td><span class="kw4">ˈpresent</span> [ˈprɛzənt]</td>
+            <td><span class="kw3">preˈsent</span> [prɪˈzɛnt]</td>
+            <td>N: ˈprɛ / V: prɪ (약화)</td>
+          </tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace;font-weight:700">contest</td>
+            <td><span class="kw4">ˈcontest</span> [ˈkɒntɛst]</td>
+            <td><span class="kw3">conˈtest</span> [kənˈtɛst]</td>
+            <td>N: kɒn / V: kən (약화)</td>
+          </tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace;font-weight:700">export</td>
+            <td><span class="kw4">ˈexport</span> [ˈekspɔːrt]</td>
+            <td><span class="kw3">exˈport</span> [ɪkˈspɔːrt]</td>
+            <td>N: ˈek / V: ɪk (약화)</td>
+          </tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace;font-weight:700">import</td>
+            <td><span class="kw4">ˈimport</span> [ˈɪmpɔːrt]</td>
+            <td><span class="kw3">imˈport</span> [ɪmˈpɔːrt]</td>
+            <td>N: ˈɪm / V: ɪm (약화 없으나 강세 이동)</td>
+          </tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace;font-weight:700">increase</td>
+            <td><span class="kw4">ˈincrease</span> [ˈɪŋkriːs]</td>
+            <td><span class="kw3">inˈcrease</span> [ɪŋˈkriːs]</td>
+            <td>N: ˈɪŋ / V: ɪŋ (강세 이동)</td>
+          </tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace;font-weight:700">conflict</td>
+            <td><span class="kw4">ˈconflict</span> [ˈkɒnflɪkt]</td>
+            <td><span class="kw3">conˈflict</span> [kənˈflɪkt]</td>
+            <td>N: kɒn / V: kən (약화)</td>
+          </tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace;font-weight:700">suspect</td>
+            <td><span class="kw4">ˈsuspect</span> [ˈsʌspɛkt]</td>
+            <td><span class="kw3">susˈpect</span> [səˈspɛkt]</td>
+            <td>N: ˈsʌ / V: sə (약화)</td>
+          </tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace;font-weight:700">subject</td>
+            <td><span class="kw4">ˈsubject</span> [ˈsʌbdʒɛkt]</td>
+            <td><span class="kw3">subˈject</span> [səbˈdʒɛkt]</td>
+            <td>N: ˈsʌ / V: sə (약화)</td>
+          </tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace;font-weight:700">rebel</td>
+            <td><span class="kw4">ˈrebel</span> [ˈrɛbəl]</td>
+            <td><span class="kw3">reˈbel</span> [rɪˈbɛl]</td>
+            <td>N: ˈrɛ / V: rɪ (약화)</td>
+          </tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace;font-weight:700">contract</td>
+            <td><span class="kw4">ˈcontract</span> [ˈkɒntrækt]</td>
+            <td><span class="kw3">conˈtract</span> [kənˈtrækt]</td>
+            <td>N: kɒn / V: kən (약화)</td>
+          </tr>
+          <tr>
+            <td style="font-family:'JetBrains Mono',monospace;font-weight:700">transfer</td>
+            <td><span class="kw4">ˈtransfer</span> [ˈtrænsfər]</td>
+            <td><span class="kw3">transˈfer</span> [trænsˈfɜːr]</td>
+            <td>N: ˈtræns / V: træns (강세 이동, ult heavy)</td>
+          </tr>
+        </table>
+      </div>
+      <p class="note" style="margin-top:12px">총 19+ 주요 쌍. AEP Table 8.2에 더 많은 쌍 수록. 모두 penult N·ult V 패턴 + 비강세 음절 모음 약화(vowel reduction) 세트로 기억.</p>
+    </div>
+
+    <div class="exam" style="margin-top:14px">
+      <div class="exam-label">📝 출제 포인트</div>
+      <p>• 강세 <b>위치</b>만 묻는 게 아니라 <b>모음 변화</b>(vowel reduction)까지 세트로 묻는 경우 많음</p>
+      <p>• "명사는 penult, 동사는 ult" 규칙을 한 문장으로 쓸 수 있어야 함</p>
+      <p>• homograph이지만 homophone은 아니다(homograph but not homophonous) — 용어 정의 주의</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ⑤ 이차 강세 -->
+<div class="sec" id="s5">
+  <div class="sec-header" onclick="toggleSec('s5')">
+    <span class="sec-icon">2️⃣</span>
+    <span class="sec-title">⑤ 이차 강세 (Secondary Stress)</span>
+    <span class="sec-tag orange">★★</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept">
+      <div class="c-title">1) 강세 위계 체계 — 3가지 음절 유형</div>
+      <div class="def">
+        길고 복잡한 단어에서는 하나의 음절만 부각되는 게 아니라 <b>두 개 이상의 음절이 두드러지는(prominent)</b> 경우가 있다. 이때 <b>주요 음조 변화(major pitch change = tonic accent)</b>가 일어나는 음절이 일차 강세, 그렇지 않은 두드러진 음절이 이차 강세다.
+      </div>
+      <div class="stage-wrap">
+        <table>
+          <tr><th>음절 유형</th><th>+stress</th><th>+tonic accent</th><th>+full vowel</th><th>숫자 기호</th></tr>
+          <tr>
+            <td><span class="kw4">Primary stress (일차)</span></td>
+            <td style="text-align:center">✓</td><td style="text-align:center">✓</td><td style="text-align:center">✓</td>
+            <td style="text-align:center"><b>1</b></td>
+          </tr>
+          <tr>
+            <td><span class="kw3">Secondary stress (이차)</span></td>
+            <td style="text-align:center">✓</td><td style="text-align:center">✗</td><td style="text-align:center">✓</td>
+            <td style="text-align:center"><b>2</b></td>
+          </tr>
+          <tr>
+            <td><span class="kw1">Unstressed + full vowel</span></td>
+            <td style="text-align:center">✗</td><td style="text-align:center">✗</td><td style="text-align:center">✓</td>
+            <td style="text-align:center">3</td>
+          </tr>
+          <tr>
+            <td><span class="kw1">Reduced (schwa)</span></td>
+            <td style="text-align:center">✗</td><td style="text-align:center">✗</td><td style="text-align:center">✗</td>
+            <td style="text-align:center">4</td>
+          </tr>
+        </table>
+      </div>
+      <p class="note" style="margin-top:12px"><span class="kw2">Tonic accent</span>: 문장/단어 내에서 주요 음조(pitch) 변화가 일어나는 지점. 일차 강세 음절과 일치함.</p>
+      <p class="note">강세를 받는 음절은 반드시 <b>full vowel</b>(완전 모음, 즉 비 schwa)을 가진다 — 이것이 강세와 모음 약화의 연결고리.</p>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">2) photograph 패러다임 분석</div>
+      <div class="ipa-block">
+        <span class="sp">ˈ</span>pho·to·graph &nbsp;&nbsp; [<span class="sp">ˈ</span>foʊ.tə.ɡræf] &nbsp;&nbsp; Stress: <span class="sp">1</span> - 4 - 4<br>
+        pho·<span class="sp">ˈ</span>tog·ra·phy &nbsp;&nbsp; [fə.<span class="sp">ˈ</span>tɒɡ.rə.fi] &nbsp;&nbsp; Stress: 4 - <span class="sp">1</span> - 4 - 3<br>
+        <span class="ss">ˌ</span>pho·to·<span class="sp">ˈ</span>graph·ic &nbsp;&nbsp; [<span class="ss">ˌ</span>foʊ.tə.<span class="sp">ˈ</span>ɡræf.ɪk] &nbsp;&nbsp; Stress: <span class="ss">2</span> - 4 - <span class="sp">1</span> - 4<br>
+        pho·<span class="sp">ˈ</span>tog·ra·pher &nbsp;&nbsp; [fə.<span class="sp">ˈ</span>tɒɡ.rə.fər] &nbsp;&nbsp; Stress: 4 - <span class="sp">1</span> - 4 - 4
+      </div>
+      <p class="note" style="margin-top:12px">photography에서 일차 강세는 두 번째 음절 [tɒɡ], 마지막 음절 [fi]는 /i/로 full vowel이지만 강세는 없음(3번)</p>
+      <p class="note">photographic에서 첫 음절 [foʊ]가 이차 강세(2번)인 이유: full vowel이고 +stressed이지만 tonic accent는 세 번째 음절에 있음</p>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">3) 이차 강세 위치 원칙</div>
+      <p class="note">일반적으로 이차 강세는 <b>일차 강세 앞(pre-tonic)</b>에 위치함 — pitch는 마지막 강세 음절에서 주로 변화</p>
+      <p class="note">연속 unstressed 음절은 최대 2개 — 3개 이상 연속되면 그 중 하나는 이차 강세</p>
+      <p class="note">Full vowel(비 schwa)이 있으면 강세를 받는다 — 단, ① 마지막 개방 음절, ② 이미 강세 음절이 둘 이상인 경우, ③ /i,o,u/의 교체형([ə]와 번갈아 나타나는 경우) 제외</p>
+
+      <div class="exam" style="margin-top:12px">
+        <div class="exam-label">📝 출제 포인트</div>
+        <p>• photograph 패러다임 IPA 전사 + 강세 숫자 표기 직접 쓰기</p>
+        <p>• "secondary stress의 특징은?" → +stress +full vowel <b>-tonic accent</b> (이 부분 자주 오답)</p>
+        <p>• photographic에서 첫 음절이 이차 강세인 이유를 규칙으로 설명</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ⑥ 접미사 분류 -->
+<div class="sec" id="s6">
+  <div class="sec-header" onclick="toggleSec('s6')">
+    <span class="sec-icon">🔗</span>
+    <span class="sec-title">⑥ 접미사별 강세 분류 (Suffix Stress Types)</span>
+    <span class="sec-tag red">★★★ 최빈출</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept">
+      <div class="c-title">1) 3분류 개요</div>
+      <div class="grid col3">
+        <div class="grid-item" style="border-color:#b71c1c">
+          <div class="gi-title" style="color:#b71c1c">A. Stress-bearing (유인)</div>
+          <div class="gi-body">
+            <span>강세가 <b>접미사 자체에</b> 온다</span>
+            <span>→ 접미사가 항상 heavy syllable</span>
+            <span>대표: -ation, -ee, -eer, -ette</span>
+          </div>
+        </div>
+        <div class="grid-item" style="border-color:#bf6000">
+          <div class="gi-title" style="color:#bf6000">B. Stress-shifting (이동)</div>
+          <div class="gi-body">
+            <span>강세가 <b>접미사 바로 앞 음절</b>로 이동</span>
+            <span>→ 접미사 자체는 강세 없음</span>
+            <span>대표: -ic, -ify, -ity, -ical, -ious</span>
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="gi-title">C. Stress-neutral (중립)</div>
+          <div class="gi-body">
+            <span>강세 위치를 <b>전혀 바꾸지 않음</b></span>
+            <span>→ 기존 어근 강세 그대로 유지</span>
+            <span>대표: -ness, -ment, -ful, -less, -ly</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">2) A. Stress-bearing suffixes — 가장 강함</div>
+      <div class="def">
+        이 접미사들은 항상 <b>heavy syllable</b>을 형성하기 때문에 강세를 끌어당기는 것이 자연스럽다. 어근이 어디에 강세가 있었든 상관없이 강세가 접미사로 이동한다.
+      </div>
+      <div class="stage-wrap">
+        <table>
+          <tr><th>접미사</th><th>예</th><th>설명</th></tr>
+          <tr><td><span class="kw4">-ation / -tion</span></td><td>realize → realizˈation, produˈction</td><td>가장 빈출; -tion도 포함</td></tr>
+          <tr><td><span class="kw3">-ade</span></td><td>lemon → lemonˈade</td><td>diphthong → heavy</td></tr>
+          <tr><td><span class="kw3">-ee</span></td><td>absent → absentˈee</td><td>예외: ˈcommittee (접미사 자체가 강세 없음)</td></tr>
+          <tr><td><span class="kw3">-eer</span></td><td>mountain → mountainˈeer</td><td>closed → heavy</td></tr>
+          <tr><td><span class="kw3">-ese</span></td><td>Japan → JapanˈEse</td><td>diphthong+coda → heavy</td></tr>
+          <tr><td><span class="kw3">-ette</span></td><td>kitchen → kitchenˈette</td><td>closed → heavy</td></tr>
+          <tr><td><span class="kw3">-itis</span></td><td>larynx → laryngˈitis</td><td>long V → heavy</td></tr>
+          <tr><td><span class="kw1">-esque</span></td><td>picture → picturesˈque</td><td>closed → heavy</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">3) B. Stress-shifting suffixes — 접미사 앞으로 이동 <span class="badge-ex">★★★</span></div>
+      <div class="def">
+        이 접미사들은 강세를 자기 자신에게 끌어당기지는 않지만, 어근의 강세를 <b>접미사 바로 앞 음절(= 접미사 직전 음절)</b>로 "고정(fix)"시킨다. 그래서 stress-fixing suffix라고도 한다. 강세가 이 위치로 이동하면서 다른 음절의 모음은 약화된다.
+      </div>
+      <div class="stage-wrap">
+        <table>
+          <tr><th>접미사</th><th>예</th><th>주의사항</th></tr>
+          <tr>
+            <td><span class="kw4">-ic</span></td>
+            <td>ˈperiod → periˈodic &nbsp;/&nbsp; ˈphoto → phoˈtographic</td>
+            <td><span class="kw4">예외: ˈArabic, ˈlunatic, ˈheretic, ˈcatholic</span> (규칙대로면 aˈrabic이어야 하나 실제는 ˈArabic)</td>
+          </tr>
+          <tr>
+            <td><span class="kw4">-ify</span></td>
+            <td>ˈperson → perˈsonify &nbsp;/&nbsp; ˈident → iˈdentify</td>
+            <td>항상 접미사 바로 앞 음절에 강세</td>
+          </tr>
+          <tr>
+            <td><span class="kw4">-ity</span></td>
+            <td>ˈhumid → huˈmidity &nbsp;/&nbsp; aˈbsurd → abˈsurdity</td>
+            <td>어근 강세가 이미 마지막이면 위치 안 바뀜</td>
+          </tr>
+          <tr>
+            <td><span class="kw3">-ical</span></td>
+            <td>geˈometry → geˈometrical</td>
+            <td>-al은 neutral이지만 -ical은 shifting</td>
+          </tr>
+          <tr>
+            <td><span class="kw3">-ious</span></td>
+            <td>ˈlabor → laˈborioUs</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><span class="kw3">-ian</span></td>
+            <td>ˈlibrary → liˈbrarian</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><span class="kw3">-ial</span></td>
+            <td>ˈpartiAL → parˈtial (but: ˈpartial adj.)<br>ˈmanager → manaˈgerial &nbsp;/&nbsp; ˈdent → denˈtistry → denˈtial</td>
+            <td>예: preˈsidential, manˈagerial, reˈsidential<br>-ial은 접미사 앞 음절에 강세</td>
+          </tr>
+          <tr>
+            <td><span class="kw3">-ive</span></td>
+            <td>ˈproduce → proˈductive &nbsp;/&nbsp; ˈcreate → creˈative</td>
+            <td>단, 2음절 어근은 위치 변화 미미한 경우도 있음<br>예: proˈductive, creˈative, atˈtractive</td>
+          </tr>
+          <tr>
+            <td><span class="kw3">-y (명사형)</span></td>
+            <td>ˈhomophone → hoˈmophony &nbsp;/&nbsp; ˈphoto → phoˈtography</td>
+            <td>형용사형 -y (ˈsilky)는 neutral — <b>반드시 구분!</b></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="caution">
+        <div class="caution-label">⚠️ -ic 예외 암기 필수</div>
+        ˈArabic / ˈlunatic / ˈheretic / ˈcatholic / ˈpolitic<br>
+        이 단어들은 -ic가 붙어도 이전 규칙대로라면 강세가 이동해야 하지만 역사적 이유로 첫 음절 강세를 유지. 시험에서 "다음 중 -ic가 붙어도 첫 음절 강세인 단어는?" 형태로 출제됨.
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">4) C. Stress-neutral suffixes — 가장 많은 수 <span class="badge-ex">★★★</span></div>
+      <div class="def">
+        이 접미사들은 강세 위치를 <b>전혀 바꾸지 않는다.</b> 8개의 굴절 접미사(inflectional suffixes)는 모두 neutral이다. 파생 접미사 중에서도 -ness, -ment, -ful, -less, -ly, -dom, -ship 등 다수가 여기에 속한다.
+      </div>
+      <div class="grid col2">
+        <div class="grid-item">
+          <div class="gi-title">8개 굴절 접미사 — 전부 neutral</div>
+          <div class="gi-body">
+            <span>-s (복수) &nbsp; -s (3인칭 단수)</span>
+            <span>-s (소유격) &nbsp; -ed (과거)</span>
+            <span>-en/-ed (과거분사) &nbsp; -ing (진행)</span>
+            <span>-er (비교급) &nbsp; -est (최상급)</span>
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="gi-title">중요 파생 neutral 접미사</div>
+          <div class="gi-body">
+            <span><span class="kw3">-ness</span>: ˈhappy → ˈhappiness</span>
+            <span><span class="kw3">-ment</span>: aˈmend → aˈmendment</span>
+            <span><span class="kw3">-ful / -less</span>: ˈgrace → ˈgraceful</span>
+            <span><span class="kw3">-ly</span>: ˈfriend → ˈfriendly</span>
+            <span><span class="kw3">-er / -ism / -ist / -ize</span></span>
+            <span><span class="kw3">-al / -ant / -cy / -dom / -hood</span></span>
+            <span><span class="kw3">-able</span>: ˈcomfort → ˈcomfortable</span>
+            <span><span class="kw3">-ish / -ess / -ship</span>: ˈchild → ˈchildish</span>
+          </div>
+        </div>
+      </div>
+      <p class="note" style="margin-top:12px">-y가 <b>형용사</b>를 만들 때(silky, silky)는 neutral, <b>명사</b>를 만들 때(photography)는 shifting — 이 구분이 자주 출제됨!</p>
+      <p class="note">-able은 <b>반드시 neutral</b> — ˈcomfort→ˈcomfortable, ˈread→ˈreadable처럼 어근 강세 위치가 그대로 유지된다. -ful·-less와 함께 "neutral 3총사"로 묶어 기억.</p>
+      <p class="note">특수 사례: -al은 대부분 neutral이지만, 앞 음절이 heavy이면 그 음절에 강세가 오는 경우도 있음 (refusal, recital — ult가 heavy라 penult 강세)</p>
+
+      <div class="exam" style="margin-top:14px">
+        <div class="exam-label">📝 출제 포인트</div>
+        <p>• 접미사 주어지고 "이것이 bearing/shifting/neutral 중 무엇인가?" 판단</p>
+        <p>• -ness, -ment를 shifting이라고 착각하는 오류 주의 → 실제로는 neutral</p>
+        <p>• 형용사형 -y vs 명사형 -y 구분 (happy → happˈy [neutral] vs photograph → photography [shifting])</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ⑦ 합성어 강세 -->
+<div class="sec" id="s7">
+  <div class="sec-header" onclick="toggleSec('s7')">
+    <span class="sec-icon">🏗️</span>
+    <span class="sec-title">⑦ 합성어 강세 vs 명사구 강세 (Compound vs NP Stress)</span>
+    <span class="sec-tag red">★★★</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept">
+      <div class="c-title">1) 핵심 원리</div>
+      <div class="def">
+        두 단어가 결합할 때 <b>하나의 새로운 의미 단위(합성어)</b>를 형성하면 첫 번째 요소에 강세가 온다. 반면 <b>단순 수식 관계(명사구)</b>라면 핵어(head)인 두 번째 요소에 강세가 온다. 이 차이는 <b>의미(의미의 특수화 여부)</b>로 판별한다.
+      </div>
+      <div class="grid col2" style="margin-top:14px">
+        <div class="grid-item" style="border-left:4px solid #b71c1c">
+          <div class="gi-title" style="color:#b71c1c">합성어 — 첫 요소에 강세</div>
+          <div class="gi-body">
+            <span><span class="kw4">ˈblackbird</span>: 특정 종류의 새 (찌르레기)</span>
+            <span><span class="kw4">ˈgreenhouse</span>: 온실 (특수화된 의미)</span>
+            <span><span class="kw4">ˈWhite House</span>: 백악관 (고유명)</span>
+            <span><span class="kw4">ˈhotdog</span>: 핫도그 음식</span>
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="gi-title">명사구 — 두 번째 요소에 강세</div>
+          <div class="gi-body">
+            <span>black ˈbird: 검은색 새 (어떤 새든)</span>
+            <span>green ˈhouse: 초록색 집 (색만 묘사)</span>
+            <span>white ˈhouse: 흰색 집 (일반 집)</span>
+            <span>hot ˈdog: 더운 개 (문자 그대로)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">2) 합성어 유형별 강세 패턴</div>
+      <div class="stage-wrap">
+        <table>
+          <tr><th>유형</th><th>예</th><th>강세</th><th>비고</th></tr>
+          <tr>
+            <td>N + N (가장 일반적)</td>
+            <td>ˈphonecard, ˈmatchbox, ˈpostman, ˈteapot</td>
+            <td><span class="kw4">첫 요소</span></td>
+            <td>합성어의 90%가 명사 합성어</td>
+          </tr>
+          <tr>
+            <td>Adj + N</td>
+            <td>ˈwhiteboard, ˈblackout, ˈnationwide</td>
+            <td><span class="kw4">첫 요소</span></td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>V + N</td>
+            <td>ˈstopwatch, ˈpickpocket, ˈbabysit</td>
+            <td><span class="kw4">첫 요소</span></td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Particle + V</td>
+            <td>underˈtake, overˈsleep</td>
+            <td><span class="kw3">두 번째(V)</span></td>
+            <td>유일한 예외 패턴</td>
+          </tr>
+          <tr>
+            <td>Complex compound</td>
+            <td>ˈhigh school student, ˈassembly line worker</td>
+            <td><span class="kw4">맨 앞 요소</span></td>
+            <td>아무리 길어도 첫 요소에 강세</td>
+          </tr>
+        </table>
+      </div>
+      <p class="note" style="margin-top:12px">예외: Lake ˈErie, Mount ˈSinai — 이름(names)을 포함하는 합성어는 두 번째 요소에 강세</p>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">3) 합성어 vs 명사구 대조 쌍 — 더 많은 예 <span class="badge-ex">기출 응용</span></div>
+      <div class="stage-wrap">
+        <table>
+          <tr><th>합성어 (첫 요소 강세)</th><th>의미</th><th>명사구 (두 번째 강세)</th><th>의미</th></tr>
+          <tr>
+            <td><span class="kw4">ˈblackbird</span></td>
+            <td>찌르레기 (특정 새 종)</td>
+            <td>black ˈbird</td>
+            <td>검은색 새 (모든 종)</td>
+          </tr>
+          <tr>
+            <td><span class="kw4">ˈgreenhouse</span></td>
+            <td>온실 (식물 재배 시설)</td>
+            <td>green ˈhouse</td>
+            <td>초록색 집</td>
+          </tr>
+          <tr>
+            <td><span class="kw4">ˈEnglish teacher</span></td>
+            <td>영어 교사 (합성어: 직업 종류)</td>
+            <td>English ˈteacher</td>
+            <td>영국인 교사 (수식 관계)</td>
+          </tr>
+          <tr>
+            <td><span class="kw4">ˈdarkroom</span></td>
+            <td>암실 (사진 현상용)</td>
+            <td>dark ˈroom</td>
+            <td>어두운 방 (묘사)</td>
+          </tr>
+          <tr>
+            <td><span class="kw4">ˈdancing girl</span></td>
+            <td>무희 (직업·역할)</td>
+            <td>dancing ˈgirl</td>
+            <td>춤추고 있는 소녀 (현재 행위)</td>
+          </tr>
+          <tr>
+            <td><span class="kw4">ˈhot dog</span></td>
+            <td>핫도그 음식</td>
+            <td>hot ˈdog</td>
+            <td>더운 개 (묘사)</td>
+          </tr>
+          <tr>
+            <td><span class="kw4">ˈlooking glass</span></td>
+            <td>거울 (관용화된 합성어)</td>
+            <td>looking ˈglass</td>
+            <td>바라보는 유리 (행위 묘사)</td>
+          </tr>
+        </table>
+      </div>
+      <div class="caution">
+        <div class="caution-label">⚠️ 판별 기준 — 의미의 특수화 여부</div>
+        합성어: 두 단어가 결합해 <b>새로운 특수화된 의미</b>를 가짐 → 첫 요소 강세<br>
+        명사구: 수식어가 핵 명사를 <b>단순히 묘사</b>함 → 두 번째 요소(핵어) 강세<br>
+        <b>ˈEnglish teacher</b> = "영어를 가르치는 교사"라는 직업 개념(합성어)이지, "영국 출신 교사"라는 수식 관계(명사구)와 다름에 유의
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ⑧ 파생어 체인 -->
+<div class="sec" id="s8">
+  <div class="sec-header" onclick="toggleSec('s8')">
+    <span class="sec-icon">⛓️</span>
+    <span class="sec-title">⑧ 파생어 체인 (Derivation Chains)</span>
+    <span class="sec-tag red">★★★ 최빈출</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept">
+      <div class="c-title">1) photograph 체인 — 단골 출제</div>
+      <p class="note" style="margin-bottom:12px">각 파생 단계마다 어떤 접미사가 붙었고, 그것이 bearing/shifting/neutral인지를 추적해야 IPA 강세 위치를 정확히 쓸 수 있다.</p>
+      <div class="chain">
+        <div class="chain-item">
+          <div class="ci-word">photograph</div>
+          <div class="ci-ipa">ˈfoʊ.tə.ɡræf</div>
+          <div class="ci-rule">어근 강세 = antepenult<br>(penult가 ə → 이동)</div>
+        </div>
+        <div class="chain-item">
+          <div class="ci-word">photography</div>
+          <div class="ci-ipa">fə.ˈtɒɡ.rə.fi</div>
+          <div class="ci-rule">-y(명사형) = shifting<br>→ antepenult 강세<br>ˈphoto의 강세가 이동</div>
+        </div>
+        <div class="chain-item">
+          <div class="ci-word">photographic</div>
+          <div class="ci-ipa">ˌfoʊ.tə.ˈɡræf.ɪk</div>
+          <div class="ci-rule">-ic = shifting<br>→ 접미사 앞 음절 강세<br>ˌ이차 강세 첫 음절</div>
+        </div>
+        <div class="chain-item">
+          <div class="ci-word">photographer</div>
+          <div class="ci-ipa">fə.ˈtɒɡ.rə.fər</div>
+          <div class="ci-rule">-er = neutral<br>→ photography 강세 그대로</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">2) economy 체인</div>
+      <div class="chain">
+        <div class="chain-item">
+          <div class="ci-word">economy</div>
+          <div class="ci-ipa">ɪ.ˈkɒn.ə.mi</div>
+          <div class="ci-rule">-y(명사형) = shifting<br>penult [nə] = ə<br>→ antepenult 강세</div>
+        </div>
+        <div class="chain-item">
+          <div class="ci-word">economic</div>
+          <div class="ci-ipa">ˌiː.kə.ˈnɒm.ɪk</div>
+          <div class="ci-rule">-ic = shifting<br>→ 접미사 앞 음절 강세<br>ˌ이차 강세 발생</div>
+        </div>
+        <div class="chain-item">
+          <div class="ci-word">economical</div>
+          <div class="ci-ipa">ˌiː.kə.ˈnɒm.ɪ.kəl</div>
+          <div class="ci-rule">-al = neutral<br>→ economic 강세 그대로</div>
+        </div>
+        <div class="chain-item">
+          <div class="ci-word">economically</div>
+          <div class="ci-ipa">ˌiː.kə.ˈnɒm.ɪ.kli</div>
+          <div class="ci-rule">-ally = neutral<br>→ 강세 그대로 유지</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">3) democrat 체인</div>
+      <div class="chain">
+        <div class="chain-item">
+          <div class="ci-word">democrat</div>
+          <div class="ci-ipa">ˈdem.ə.kræt</div>
+          <div class="ci-rule">어근 강세 antepenult<br>(penult = ə)</div>
+        </div>
+        <div class="chain-item">
+          <div class="ci-word">democracy</div>
+          <div class="ci-ipa">dɪ.ˈmɒk.rə.si</div>
+          <div class="ci-rule">-y(명사형) = shifting<br>→ 강세 이동</div>
+        </div>
+        <div class="chain-item">
+          <div class="ci-word">democratic</div>
+          <div class="ci-ipa">ˌdem.ə.ˈkræt.ɪk</div>
+          <div class="ci-rule">-ic = shifting<br>→ 접미사 앞 음절<br>이차 강세 발생</div>
+        </div>
+        <div class="chain-item">
+          <div class="ci-word">democratically</div>
+          <div class="ci-ipa">ˌdem.ə.ˈkræt.ɪk.li</div>
+          <div class="ci-rule">-ally = neutral<br>→ 강세 그대로</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">4) -ify 체인 (personify / identify)</div>
+      <div class="chain">
+        <div class="chain-item">
+          <div class="ci-word">person</div>
+          <div class="ci-ipa">ˈpɜːr.sən</div>
+          <div class="ci-rule">2음절 N<br>penult 강세</div>
+        </div>
+        <div class="chain-item">
+          <div class="ci-word">personify</div>
+          <div class="ci-ipa">pər.ˈsɒn.ɪ.faɪ</div>
+          <div class="ci-rule">-ify = shifting<br>→ 접미사 앞 음절 강세<br>어근의 강세 이동</div>
+        </div>
+        <div class="chain-item">
+          <div class="ci-word">identify</div>
+          <div class="ci-ipa">aɪ.ˈden.tɪ.faɪ</div>
+          <div class="ci-rule">-ify = shifting<br>→ penult [dɛn] heavy<br>penult 강세</div>
+        </div>
+        <div class="chain-item">
+          <div class="ci-word">identification</div>
+          <div class="ci-ipa">aɪˌden.tɪ.fɪ.ˈkeɪ.ʃən</div>
+          <div class="ci-rule">-ation = bearing<br>→ 강세가 접미사로</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="exam" style="margin-top:14px">
+      <div class="exam-label">📝 출제 포인트</div>
+      <p>• 체인 문항은 반드시 <b>IPA 전사 + 강세 기호 포함</b>해서 쓰는 연습 필수</p>
+      <p>• 각 파생 단계마다 "어떤 접미사? → bearing/shifting/neutral? → 강세 위치는?" 논리 흐름을 빠르게 서술 가능하게</p>
+      <p>• -ic 예외 (ˈArabic, ˈlunatic, ˈheretic) 는 체인 문항에서 함정으로 출제 가능</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ⑨ Foot 구조 -->
+<div class="sec" id="s9">
+  <div class="sec-header" onclick="toggleSec('s9')">
+    <span class="sec-icon">🦶</span>
+    <span class="sec-title">⑨ Foot 구조 (Metrical Foot)</span>
+    <span class="sec-tag orange">★★</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept">
+      <div class="c-title">1) Foot란?</div>
+      <div class="def">
+        Foot(음보)는 강세 음절과 인접한 비강세 음절을 묶는 <b>운율적 단위(prosodic unit)</b>다. 영어의 리듬 패턴을 기술할 때 사용하며, 강세가 foot의 어느 쪽에 오는지에 따라 Trochee(강약)와 Iamb(약강)으로 구분한다.
+      </div>
+      <div class="foot-wrap">
+        <div class="foot-box">
+          <div class="foot-label">Trochee (Trochaic)</div>
+          <div class="foot-tree">     Ft
+    /    \
+   S      W
+  강      약</div>
+          <p style="font-size:13px;color:#2a4a62;margin-top:10px;line-height:1.6"><b>영어의 기본(default) foot</b><br>예: ˈHAP-py, ˈSIS-ter<br>S = strong, W = weak</p>
+        </div>
+        <div class="foot-box">
+          <div class="foot-label">Iamb (Iambic)</div>
+          <div class="foot-tree">     Ft
+    /    \
+   W      S
+  약      강</div>
+          <p style="font-size:13px;color:#2a4a62;margin-top:10px;line-height:1.6">일부 단어·동사에서<br>예: a-ˈWAY, be-ˈGIN<br>W = weak, S = strong</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">2) Rhythmic Stress Shift (리듬 충돌 방지)</div>
+      <div class="def">
+        두 강세 음절이 <b>인접(adjacent)</b>하면 "리듬 충돌(rhythmic clash)"이 발생한다. 이를 피하기 위해 앞 단어의 강세가 이동하는 현상을 <b>Stress Shift</b> 또는 <b>Iambic Reversal</b>이라 한다.
+      </div>
+      <div class="grid col2">
+        <div class="grid-item">
+          <div class="gi-title">단독 발화 (iambic 패턴)</div>
+          <div class="gi-body">
+            <span>ˌthirˈteen → [θɜːrˈtiːn]</span>
+            <span>ˌanˈtique → [ænˈtiːk]</span>
+            <span>ˌaˈcute → [əˈkjuːt]</span>
+            <span>두 번째 음절이 더 강함</span>
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="gi-title">연속 발화 (충돌 방지 → 첫 음절로 이동)</div>
+          <div class="gi-body">
+            <span><span class="kw4">ˈthirteen</span> ˈmen (vs ˌthirˈteen alone)</span>
+            <span><span class="kw4">ˈantique</span> ˈshop</span>
+            <span><span class="kw4">ˈacute</span> ˈpain</span>
+            <span>다음 단어의 강세와 충돌 방지</span>
+          </div>
+        </div>
+      </div>
+      <p class="note" style="margin-top:12px">이 현상은 영어가 <b>stress-timed language</b>임을 보여주는 증거 — 강세들이 대략 동일 간격으로 나타나려는 경향이 있음</p>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">3) Prosodic Condition — 단독 호칭 발화 <span class="badge-ex">2025 B04</span></div>
+      <div class="def">
+        이름이나 호칭을 <b>단독으로 발화(isolated utterance)</b>할 때는 일반 어휘 강세 규칙과 다른 운율 조건이 적용된다. 단독 발화는 하나의 완전한 <b>운율 구(prosodic phrase)</b>를 형성해야 하므로, 운율적으로 최소 하나의 foot(강세 음절)이 필요하다.<br><br>
+        영어의 기본 foot는 <b>Trochee(강약, S-W)</b>이므로, 단독 호칭 발화에서는 이 trochaic 구조를 만족시키는 방향으로 강세가 배정된다. 특히 다음 조건이 핵심이다.
+      </div>
+      <div class="rule-box">
+        <div class="rule-label">Prosodic Condition (단독 호칭)</div>
+        <div class="rule-text">
+          단독으로 발화되는 이름/호칭은 <b>독립적인 prosodic phrase</b>를 형성하며,<br>
+          이때 <span class="kw4">첫 번째 음절이 일차 강세(primary stress)</span>를 받아야 한다.<br>
+          → 이는 영어 기본 foot(Trochee)의 S-W 패턴을 따르고,<br>
+          &nbsp;&nbsp;&nbsp;prosodic phrase의 "edge prominence" (가장자리 부각) 조건을 충족시키기 위함이다.
+        </div>
+      </div>
+      <div class="grid col2" style="margin-top:14px">
+        <div class="grid-item">
+          <div class="gi-title">단독 호칭 — 첫 음절 강세</div>
+          <div class="gi-body">
+            <span><span class="kw4">ˈMary</span> (단독 호칭)</span>
+            <span><span class="kw4">ˈJohn</span> (단독 호칭)</span>
+            <span><span class="kw4">ˈAnna</span> (단독 호칭)</span>
+            <span>→ 모두 첫 음절 강세 = trochaic foot</span>
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="gi-title">연속 발화 — 문맥 강세 적용</div>
+          <div class="gi-body">
+            <span>Did you see <span class="kw3">maˈRY</span>? (중립 문맥)</span>
+            <span>I talked to <span class="kw3">ˈMary</span> (대조: not Ann)</span>
+            <span>Call <span class="kw3">ˈMary</span>, not John</span>
+            <span>→ 문맥에 따라 NSR·대조 강세 적용</span>
+          </div>
+        </div>
+      </div>
+      <div class="caution" style="margin-top:12px">
+        <div class="caution-label">⚠️ Name Game (2025 B04) 핵심 포인트</div>
+        단독 호칭 이름에서 "왜 첫 음절 강세인가?"의 답은:<br>
+        ① 영어의 기본 foot = <b>Trochee(S-W)</b>이므로 강세가 첫 음절에 온다<br>
+        ② 단독 발화는 독립 prosodic phrase → <b>phrase-initial prominence(구 시작 부각)</b> 충족 필요<br>
+        ③ 이름 단음절(John, Ann): 음절 하나로 된 foot = degenerate foot, 강세는 자동으로 그 음절에<br>
+        논술 답안에서는 "trochaic foot structure"와 "prosodic condition for isolated utterance"를 키워드로 사용할 것
+      </div>
+    </div>
+
+    <div class="exam" style="margin-top:14px">
+      <div class="exam-label">📝 출제 포인트 (2025 B04 연결)</div>
+      <p>• 2025 B04 "Name Game": 이름 단독 발화 → 첫 음절 일차 강세 조건 (prosodic / foot 구조)</p>
+      <p>• Trochee vs Iamb 정의 + 예시 서술</p>
+      <p>• Rhythmic clash가 왜 발생하고 어떻게 해소되는지 설명 가능해야 함</p>
+      <p>• 단독 발화 vs 연속 발화에서 강세가 달라지는 이유를 foot structure로 설명</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ⑩ NSR -->
+<div class="sec" id="s10">
+  <div class="sec-header" onclick="toggleSec('s10')">
+    <span class="sec-icon">🎯</span>
+    <span class="sec-title">⑩ 핵 강세 규칙 (Nuclear Stress Rule / NSR)</span>
+    <span class="sec-tag orange">★★</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept">
+      <div class="c-title">1) NSR 정의</div>
+      <div class="rule-box">
+        <div class="rule-label">Nuclear Stress Rule (NSR)</div>
+        <div class="rule-text">
+          <b>중립적 발화(neutral context)</b>에서, 문장의 <span class="kw4">가장 오른쪽에 위치한 내용어(content word)</span>의 강세 음절에 <b>핵 강세(nuclear stress = tonic accent)</b>가 온다.
+        </div>
+      </div>
+      <p class="note" style="margin-top:12px">핵 강세(nuclear syllable)는 문장 전체의 가장 중요한 정보를 담은 음절이다. 여기서 pitch가 크게 변화한다.</p>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">2) 내용어 vs 기능어</div>
+      <div class="grid col2">
+        <div class="grid-item" style="border-left:4px solid #1a5276">
+          <div class="gi-title">내용어 (Content Words) — 강세 O</div>
+          <div class="gi-body">
+            <span>명사 (Noun): dog, table, London</span>
+            <span>동사 (Main Verb): run, believe, make</span>
+            <span>형용사 (Adjective): happy, big, blue</span>
+            <span>부사 (Adverb): quickly, often, very</span>
+            <span style="margin-top:8px;color:#1a5276">→ 어휘적 의미를 가짐 = 강세 받음</span>
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="gi-title">기능어 (Function Words) — 보통 강세 X</div>
+          <div class="gi-body">
+            <span>관사: a, an, the</span>
+            <span>대명사: he, she, it, they</span>
+            <span>전치사: in, at, of, to</span>
+            <span>be 동사: is, are, was, were</span>
+            <span>조동사: can, will, do, have</span>
+            <span>접속사: and, but, or, because</span>
+            <span style="margin-top:8px;color:#4a6a8a">→ 문법적 기능만 담당 = 약형(weak form) 발음</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">3) NSR 예시 + 대조 강세(Contrastive Focus)</div>
+      <div class="ipa-block">
+        John ˈloves Mary.  → 중립 문맥: 가장 오른쪽 내용어 Mary에 핵 강세<br>
+        <span class="sp">ˈJohn</span> loves Mary.  → 대조: "Mary가 아닌 John이" (John에 포커스)<br>
+        John <span class="sp">ˈloves</span> Mary.  → 대조: "좋아한다는 감정 자체를" (loves에 포커스)<br>
+        The ˈcat sat on the <span class="sp">ˈmat</span>.  → NSR: mat (가장 오른쪽 내용어)
+      </div>
+      <p class="note" style="margin-top:12px">대조·포커스·새 정보 강조를 위해 핵 강세 위치가 왼쪽으로 이동할 수 있다. 이것이 문장 강세의 <b>유연성</b>이다.</p>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">4) Be 동사·조동사 취급</div>
+      <p class="note"><span class="kw3">Be 동사</span>: 기능어 취급 → 중립 문장에서는 강세 없이 약형으로 발음. 단, 대조/강조 시 강세 가능: "He <span class="kw4">IS</span> coming!" (의심에 반박)</p>
+      <p class="note"><span class="kw3">조동사</span>: 같은 원칙. 중립 = 약형 / 대조 강조 = 강형</p>
+      <p class="note"><span class="kw3">대명사</span>: 기능어이므로 보통 강세 없음. 단, 새로운 화제를 도입할 때는 강세 가능</p>
+
+      <div class="exam" style="margin-top:12px">
+        <div class="exam-label">📝 출제 포인트</div>
+        <p>• "중립 문장에서 핵 강세 위치는?" → 가장 오른쪽 내용어의 강세 음절</p>
+        <p>• "다음 문장에서 핵 강세가 이동한 이유는?" → 대조/포커스/새 정보 등 맥락으로 설명</p>
+        <p>• be 동사가 강세를 받는 경우 vs 받지 않는 경우 구분 (강조/대조 맥락)</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ⑪ 억양 패턴 -->
+<div class="sec" id="s11">
+  <div class="sec-header" onclick="toggleSec('s11')">
+    <span class="sec-icon">📈</span>
+    <span class="sec-title">⑪ 억양 패턴 (Intonation Patterns)</span>
+    <span class="sec-tag">★ 기본</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept">
+      <div class="c-title">1) 억양(Intonation)이란?</div>
+      <div class="def">
+        억양은 <b>어구나 문장 전체에 걸쳐 나타나는 음조(pitch) 변화 패턴</b>이다. 단어 구별(lexical)에 쓰이는 성조(tone)와 달리, 억양은 문장 전체의 의미·태도·정보 구조에 영향을 미친다. 억양 윤곽이 걸쳐지는 단위를 <span class="kw2">tone group(억양구)</span> 또는 <span class="kw2">intonational phrase</span>라 한다.
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">2) 주요 억양 패턴 5가지</div>
+      <div class="stage-wrap">
+        <table>
+          <tr><th>패턴</th><th>기호</th><th>사용 맥락</th><th>예</th></tr>
+          <tr>
+            <td><span class="kw4">Falling</span></td>
+            <td>↘</td>
+            <td>평서문, WH-의문문, 명령문<br>→ 완결·확신의 느낌</td>
+            <td>He's coming ↘<br>Where are you going ↘</td>
+          </tr>
+          <tr>
+            <td><span class="kw4">Rising</span></td>
+            <td>↗</td>
+            <td>Yes/No 의문문, 리스트 비마지막 항목<br>→ 미완결·요청의 느낌</td>
+            <td>Are you coming ↗<br>I want tea ↗, coffee ↗, and milk ↘</td>
+          </tr>
+          <tr>
+            <td><span class="kw3">Fall-Rise</span></td>
+            <td>↘↗</td>
+            <td>함의·망설임·유보·전환<br>→ "but there's something more"</td>
+            <td>I might ↘↗ be able to help.</td>
+          </tr>
+          <tr>
+            <td><span class="kw3">Rise-Fall</span></td>
+            <td>↗↘</td>
+            <td>강한 긍정·놀람·감탄<br>→ 극적 강조</td>
+            <td>That's ↗↘wonderful!</td>
+          </tr>
+          <tr>
+            <td><span class="kw1">Level</span></td>
+            <td>→</td>
+            <td>단조로운 낭독·지루함</td>
+            <td>기계적 읽기</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">3) Tone Group과 Tonic Syllable</div>
+      <p class="note"><span class="kw2">Tone group</span>: 억양 윤곽이 걸쳐지는 단위. 하나의 절·문장 = 보통 1개 tone group</p>
+      <p class="note"><span class="kw2">Tonic syllable(핵 음절)</span>: tone group 내에서 주요 음조 변화가 일어나는 음절 = 핵 강세 음절</p>
+      <p class="note">대조·포커스가 있으면 tone group이 분리되거나 tonic syllable 위치가 바뀜</p>
+      <p class="note">억양과 강세는 연동: tonic syllable은 핵 강세를 받는 음절이기도 하다</p>
+
+      <div class="exam" style="margin-top:12px">
+        <div class="exam-label">📝 출제 포인트</div>
+        <p>• Yes/No 의문문 → rising ↗ / WH-의문문 → falling ↘ 기본 구분</p>
+        <p>• Fall-Rise의 함의적 의미 ("망설임" "하지만..."): 시험에서 맥락 주어지고 억양 패턴 식별</p>
+        <p>• Tone group 정의 + tonic syllable 위치 서술</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+<script>
+function toggleSec(id){
+  const el=document.getElementById(id);
+  el.classList.toggle('open');
+}
+function openSec(id){
+  const el=document.getElementById(id);
+  el.classList.add('open');
+  el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+document.getElementById('s1').classList.add('open');
+
+/* deeplink #s5 등으로 진입했을 때 해당 섹션 자동 펼침 + 정확 스크롤 */
+(function(){
+  if (!location.hash) return;
+  var id = location.hash.slice(1);
+  var el = document.getElementById(id);
+  if (!el) return;
+  if (el.classList.contains('sec')) el.classList.add('open');
+  /* 페이지 안정화 후 스크롤 — closed 섹션 height=0 → 펼친 후 높이 잡혀야 함 */
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      el.scrollIntoView({block:'start'});
+    });
+  });
+})();
+</script>
+
+<!-- 기출 돌아가기 — testmaster concept.html에서 ?return=<ID>로 진입 시 노출 -->
+<style>
+#testmaster-return-btn{display:none;position:fixed;bottom:20px;right:20px;padding:11px 18px;background:#1a5276;color:#fff;border-radius:8px;text-decoration:none;font-weight:700;z-index:9999;box-shadow:0 4px 16px rgba(26,82,118,.35);font-family:'Noto Sans KR',sans-serif;font-size:13px;transition:opacity .15s}
+#testmaster-return-btn:hover{opacity:.85}
+</style>
+<a id="testmaster-return-btn" href="#"></a>
+<script>
+(function(){
+  var rid = new URLSearchParams(location.search).get('return');
+  if (!rid) return;
+  var btn = document.getElementById('testmaster-return-btn');
+  btn.href = 'https://namkicheol.github.io/testmaster/index.html?id=' + encodeURIComponent(rid);
+  btn.textContent = '← ' + rid + ' 로 돌아가기';
+  btn.style.display = 'block';
+})();
+</script>
+</body>
+</html>

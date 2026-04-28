@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schwa & Vowel Reduction — 실전 Exercise</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pri:#1a5276; --pri-l:#eaf2f8; --acc:#c62828;
+  --grn:#1a6e42; --grn-bg:#eaf6f0;
+  --red-bg:#fdf0ed; --bdr:#aed6f1; --gray:#f4f9fe;
+  --txt:#1a1a2e; --mut:#666;
+  --serif:'Noto Serif KR',serif;
+  --sans:'Noto Sans KR',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
+
+.hero{background:#1a5276;color:#fff;padding:48px 24px 40px;text-align:center}
+.hero-tag{font-size:11px;letter-spacing:3px;color:rgba(255,255,255,.5);margin-bottom:12px;font-family:var(--mono);text-transform:uppercase}
+.hero h1{font-family:var(--serif);font-size:26px;margin-bottom:10px;line-height:1.35}
+.hero h1 span{color:#aed6f1}
+.hero p{font-size:13px;color:rgba(255,255,255,.6);max-width:480px;margin:0 auto 20px}
+.hero-stats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
+.stat-n{font-family:var(--mono);font-size:22px;font-weight:600;color:#aed6f1}
+.stat-l{font-size:11px;color:rgba(255,255,255,.45);margin-top:2px}
+
+.sbar{position:sticky;top:0;z-index:99;background:#fff;border-bottom:1px solid var(--bdr);
+  padding:10px 20px;display:flex;align-items:center;gap:14px;
+  box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.sbar-lbl{font-size:12px;color:var(--mut)}
+.sbar-num{font-family:var(--mono);font-size:17px;font-weight:600;color:var(--pri)}
+.prog-wrap{flex:1;max-width:180px;height:5px;background:var(--bdr);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--pri);border-radius:3px;transition:width .4s}
+.rbtn{margin-left:auto;padding:5px 13px;border:1px solid var(--bdr);border-radius:6px;
+  font-size:12px;color:var(--mut);cursor:pointer;font-family:var(--sans);background:#fff;
+  transition:all .15s}
+.rbtn:hover{border-color:var(--pri);color:var(--pri)}
+
+.wrap{max-width:760px;margin:0 auto;padding:28px 20px 60px}
+
+.ex-sec{margin-top:44px;margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid var(--pri)}
+.ex-sec-tag{font-family:var(--mono);font-size:10px;color:var(--mut);letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
+.ex-sec-title{font-family:var(--serif);font-size:19px;color:var(--pri)}
+.ex-sec-desc{font-size:13px;color:var(--mut);margin-top:4px;line-height:1.6;font-style:italic}
+
+.qcard{background:#fff;border:1.5px solid var(--bdr);border-radius:12px;padding:20px 22px;
+  margin-bottom:14px;transition:border-color .2s,box-shadow .2s}
+.qcard:hover{box-shadow:0 2px 10px rgba(26,82,118,.08)}
+.qcard.ok{border-color:#6dbf9a;background:#f8fdf9}
+.qcard.ng{border-color:#e8a090;background:#fdf8f7}
+
+.qmeta{display:flex;align-items:center;gap:8px;margin-bottom:11px}
+.qnum{font-family:var(--mono);font-size:11px;color:var(--mut)}
+.qtag{font-size:11px;padding:3px 9px;border-radius:10px;font-family:var(--mono)}
+.qtag.ox{background:#eef5ff;color:var(--pri)}
+.qtag.mc{background:var(--grn-bg);color:var(--grn)}
+.qtag.fi{background:#fffbe0;color:#7a6000}
+
+.qtext{font-size:14px;line-height:1.9;color:var(--txt);margin-bottom:13px;white-space:pre-line}
+.qeng{font-family:var(--mono);font-size:13px;color:#2a2a3e;background:var(--gray);
+  border-left:3px solid var(--pri);padding:9px 13px;border-radius:0 7px 7px 0;
+  display:block;margin:6px 0 13px;line-height:1.75;white-space:pre-line}
+
+.ox-row{display:flex;gap:12px}
+.ox-btn{flex:1;padding:13px;font-size:24px;border:1.5px solid var(--bdr);border-radius:10px;
+  background:#fff;cursor:pointer;transition:all .15s;font-family:var(--sans)}
+.ox-btn:hover:not([disabled]){border-color:var(--pri);background:var(--pri-l)}
+.ox-btn.ok2{border-color:var(--grn)!important;background:var(--grn-bg)!important}
+.ox-btn.ng2{border-color:var(--acc)!important;background:var(--red-bg)!important}
+
+.mc-opts{display:flex;flex-direction:column;gap:8px}
+.mc-btn{text-align:left;padding:10px 14px;font-size:13.5px;border:1.5px solid var(--bdr);
+  border-radius:9px;background:#fff;cursor:pointer;font-family:var(--sans);
+  line-height:1.65;transition:all .15s;color:var(--txt);white-space:pre-line}
+.mc-btn:hover:not([disabled]){border-color:var(--pri);background:var(--pri-l)}
+.mc-btn.ok2{border-color:var(--grn)!important;background:var(--grn-bg)!important;color:var(--grn)!important}
+.mc-btn.ng2{border-color:var(--acc)!important;background:var(--red-bg)!important;color:var(--acc)!important}
+
+.fi-row{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.fi-lbl{font-size:13px;color:var(--mut);min-width:130px;font-family:var(--mono)}
+.fi-inp{flex:1;padding:8px 12px;border:1.5px solid var(--bdr);border-radius:7px;
+  font-size:13px;font-family:var(--mono);color:var(--txt);transition:border-color .15s}
+.fi-inp:focus{outline:none;border-color:var(--pri)}
+.fi-inp.ok2{border-color:var(--grn);background:var(--grn-bg)}
+.fi-inp.ng2{border-color:var(--acc);background:var(--red-bg)}
+.fi-cfm{padding:8px 17px;background:var(--pri);color:#fff;border:none;border-radius:7px;
+  font-size:13px;cursor:pointer;font-family:var(--sans);margin-top:6px;transition:opacity .15s}
+.fi-cfm:hover{opacity:.85}
+
+.fb{display:none;margin-top:12px;padding:13px 16px;border-radius:9px;
+  font-size:13.5px;line-height:1.85;white-space:pre-line}
+.fb.ok{background:var(--grn-bg);border:1px solid #90d0b0;color:#145535}
+.fb.ng{background:var(--red-bg);border:1px solid #e0a090;color:#8a2010}
+.fb-head{font-weight:700;margin-bottom:5px;font-size:14px}
+
+.rbox{display:none;margin-top:40px;padding:32px 24px;background:var(--pri-l);
+  border:1.5px solid #aed6f1;border-radius:16px;text-align:center}
+.r-icon{font-size:38px;margin-bottom:10px}
+.r-score{font-family:var(--serif);font-size:26px;color:var(--pri);font-weight:700;margin-bottom:6px}
+.r-msg{font-size:14px;color:var(--mut);margin-bottom:18px}
+.r-btn{padding:9px 26px;background:var(--pri);color:#fff;border:none;border-radius:8px;
+  font-size:14px;cursor:pointer;font-family:var(--sans)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">Phonetics & Phonology · Vowel Reduction</div>
+  <h1>Schwa & 모음 약화<br><span>실전 연습문제</span></h1>
+  <p>Vowel Reduction · Schwa /ə/ · Stress-timed · OX · 객관식 · 빈칸 채우기</p>
+  <div class="hero-stats">
+    <div><div class="stat-n">3</div><div class="stat-l">Section</div></div>
+    <div><div class="stat-n">15</div><div class="stat-l">문제</div></div>
+    <div><div class="stat-n">OX · MC · 빈칸</div><div class="stat-l">유형</div></div>
+  </div>
+</div>
+
+<div class="sbar">
+  <span class="sbar-lbl">맞은 문제</span>
+  <span class="sbar-num"><span id="sc">0</span>&thinsp;/&thinsp;<span id="st">15</span></span>
+  <div class="prog-wrap"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+  <button class="rbtn" onclick="reset()">↺ 다시 풀기</button>
+</div>
+
+<div class="wrap">
+  <div id="qw"></div>
+  <div class="rbox" id="rb">
+    <div class="r-icon" id="ri"></div>
+    <div class="r-score" id="rs"></div>
+    <div class="r-msg" id="rm"></div>
+    <button class="r-btn" onclick="reset()">↺ 다시 풀기</button>
+  </div>
+</div>
+
+<script>
+const DATA = [
+  // Section A: OX (5문항)
+  {s:'Section A',st:'OX 확인 문제',
+   sd:'다음 설명이 맞으면 O, 틀리면 X를 선택하시오.',
+   t:'ox', q:'비강세 음절에서 모음은 /ə/(schwa)로 약화될 수 있다.',
+   a:true,
+   e:'정확합니다. Vowel reduction은 비강세(-stress) 음절에서 full vowel이 /ə/로 약화되는 현상입니다.\n예: about /əˈbaʊt/의 첫째 음절 a-는 비강세 → /ə/로 약화됩니다.'},
+
+  {s:'Section A',st:'',sd:'',
+   t:'ox', q:'강세 음절의 모음도 /ə/로 약화될 수 있다.',
+   a:false,
+   e:'틀렸습니다. 강세 음절(+stress)은 반드시 full vowel을 유지합니다.\n/ə/는 오직 비강세(-stress) 음절에서만 나타납니다.\n핵심 원칙: +stress → full vowel 필수 / -stress → /ə/ 가능'},
+
+  {s:'Section A',st:'',sd:'',
+   t:'ox', q:'photograph /ˈfoʊtəgræf/에서 두 번째 음절 -to-의 모음은 /ə/다.',
+   a:true,
+   e:'정확합니다. photograph /ˈfoʊtəgræf/에서:\n1째 음절(pho-): primary stress → full vowel /oʊ/\n2째 음절(-to-): 비강세 → /ə/로 약화\n3째 음절(-graph): 비강세 → full vowel /æ/ (약화 없이 유지되기도 함)'},
+
+  {s:'Section A',st:'',sd:'',
+   t:'ox', q:'photography /fəˈtɑgrəfi/에서 첫째 음절 pho-는 강세 음절이므로 full vowel /oʊ/로 실현된다.',
+   a:false,
+   e:'틀렸습니다. photography에서 강세는 2번째 음절(-tog-)로 이동합니다.\n따라서 1번째 음절(pho-)이 비강세가 되어 /ə/로 약화됩니다.\n/fəˈtɑgrəfi/: 1째=/ə/(비강세), 2째=/ɑ/(강세, full vowel)'},
+
+  {s:'Section A',st:'',sd:'',
+   t:'ox', q:'/ə/(schwa)는 영어에서 출현 빈도가 가장 높은 모음이다.',
+   a:true,
+   e:'정확합니다. 영어는 stress-timed 언어로 비강세 음절이 많습니다.\n이 비강세 음절의 모음이 대부분 /ə/로 약화되므로 /ə/의 출현 빈도가 압도적으로 높습니다.'},
+
+  // Section B: 객관식 (5문항)
+  {s:'Section B',st:'객관식 문제',
+   sd:'각 문항에서 가장 적절한 답을 고르시오.',
+   t:'mc', q:'photography /fəˈtɑgrəfi/에서 첫 번째 음절의 모음은?',
+   o:['① /oʊ/',
+      '② /ə/',
+      '③ /ɑ/',
+      '④ /æ/'],
+   a:1,
+   e:'photography의 첫 번째 음절 pho-는 비강세이므로 /ə/로 약화됩니다.\n/fəˈtɑgrəfi/: pho-=/ə/(비강세), -tog-=/ɑ/(강세), -ra-=/ə/(비강세), -phy=/i/\ncompare: photograph에서는 pho-가 강세 음절이어서 /oʊ/였습니다.'},
+
+  {s:'Section B',st:'',sd:'',
+   t:'mc', q:'/ə/(schwa)가 출현하는 음운 환경은?',
+   o:['① 강세 음절',
+      '② 비강세 음절',
+      '③ 강세와 비강세 음절 모두',
+      '④ 음절 말(coda) 위치에만'],
+   a:1,
+   e:'/ə/는 비강세(-stress) 음절에서만 출현합니다.\n강세 음절(primary/secondary)은 반드시 full vowel을 갖습니다.\n이것이 stress와 vowel quality의 핵심 상관관계입니다.'},
+
+  {s:'Section B',st:'',sd:'',
+   t:'mc', q:'/ə/(schwa)와 /ʌ/(wedge)의 핵심적 차이는?',
+   o:['① 조음 위치 (혀 위치)',
+      '② 강세 여부 (stress vs no stress)',
+      '③ 입술 모양 (원순 vs 비원순)',
+      '④ 음절 위치 (onset vs coda)'],
+   a:1,
+   e:'/ə/와 /ʌ/의 가장 중요한 차이는 강세 여부입니다:\n/ə/: 비강세 음절에서만 출현 (mid central, 약화)\n/ʌ/: 강세 음절에서만 출현 (low mid back, full vowel)\n두 모음은 상보적 분포(complementary distribution)를 이룹니다.'},
+
+  {s:'Section B',st:'',sd:'',
+   t:'mc', q:'강세가 이동할 때 vowel reduction(/ə/)의 위치는?',
+   o:['① 항상 첫째 음절에 고정',
+      '② 항상 마지막 음절에 고정',
+      '③ 강세 이동에 따라 약화 위치도 함께 이동',
+      '④ 강세 이동과 무관하게 유지'],
+   a:2,
+   e:'강세가 이동하면 /ə/의 위치도 연동하여 이동합니다:\nˈphotograph /ˈfoʊtəgræf/: 2째=/ə/\nphoˈtography /fəˈtɑgrəfi/: 1째=/ə/\n강세가 이동하면 새로운 비강세 음절이 생기고 그 음절의 모음이 약화됩니다.'},
+
+  {s:'Section B',st:'',sd:'',
+   t:'mc', q:'"about"의 올바른 IPA 표기는?',
+   o:['① /ˈæbaʊt/',
+      '② /əˈbaʊt/',
+      '③ /ˈəbaʊt/',
+      '④ /æˈbaʊt/'],
+   a:1,
+   e:'"about"의 올바른 IPA: /əˈbaʊt/\n강세는 두 번째 음절(-bout)에 있습니다.\n첫째 음절 a-는 비강세 → /ə/로 약화됩니다.\n/ˈæbaʊt/는 강세 위치와 모음 모두 잘못된 표기입니다.'},
+
+  // Section C: 빈칸 채우기 (5문항)
+  {s:'Section C',st:'빈칸 채우기',
+   sd:'각 문항의 빈칸에 알맞은 내용을 입력하시오.',
+   t:'fi',
+   q:'비강세 음절에서 full vowel이 약화되어 실현되는 중설 중모음의 IPA 기호는 ( )이다.',
+   blanks:['ə'],
+   labels:['기호 →'],
+   e:'Schwa의 IPA 기호: /ə/ (또는 [ə])\n중설(central) 중모음(mid)으로 비강세 음절에서만 나타납니다.\n공식 명칭은 "schwa(슈와)"입니다.'},
+
+  {s:'Section C',st:'',sd:'',
+   t:'fi',
+   q:'비강세 음절의 full vowel은 /ə/로 ( ) 수 있다.',
+   blanks:['약화될'],
+   labels:['동사 →'],
+   e:'비강세 음절의 full vowel은 /ə/로 "약화될" 수 있습니다.\nVowel reduction(모음 약화): full vowel → /ə/\n이 현상은 비강세 음절에서만 발생합니다.'},
+
+  {s:'Section C',st:'',sd:'',
+   t:'fi',
+   q:'photography /fəˈtɑgrəfi/에서 첫째 음절의 모음은 ( )다.',
+   blanks:['/ə/'],
+   labels:['모음 →'],
+   e:'photography /fəˈtɑgrəfi/에서 첫째 음절 pho-의 모음은 /ə/입니다.\n강세가 2번째 음절로 이동하면서 1번째 음절이 비강세가 되었기 때문입니다.\ncompare: photograph에서는 1번째 음절이 강세 → /oʊ/'},
+
+  {s:'Section C',st:'',sd:'',
+   t:'fi',
+   q:'Secondary stress 음절도 +stress이므로 full vowel을 ( ) 유지해야 한다.',
+   blanks:['반드시'],
+   labels:['부사 →'],
+   e:'Secondary stress 음절도 +stress이므로 full vowel을 "반드시" 유지해야 합니다.\n/ə/는 오직 -stress 음절에서만 출현합니다.\n예: ˌphoˈtographic에서 1번째(secondary stress) 음절은 /oʊ/(full vowel)'},
+
+  {s:'Section C',st:'',sd:'',
+   t:'fi',
+   q:'Vowel reduction은 영어의 ( ) 리듬과 관련이 있다.',
+   blanks:['stress-timed'],
+   labels:['리듬 유형 →'],
+   e:'Vowel reduction은 영어의 "stress-timed" 리듬과 관련이 있습니다.\nStress-timed: 강세 음절이 등간격으로, 비강세 음절이 압축되어 실현됩니다.\n이 압축 과정에서 비강세 음절 모음이 /ə/로 약화됩니다.'}
+];
+
+let ANS, COR;
+
+function build() {
+  ANS = new Array(DATA.length).fill(false);
+  COR = 0;
+  document.getElementById('sc').textContent = 0;
+  document.getElementById('st').textContent = DATA.length;
+  document.getElementById('prog').style.width = '0%';
+  document.getElementById('rb').style.display = 'none';
+
+  const wrap = document.getElementById('qw');
+  wrap.innerHTML = '';
+  let lastSec = '', num = 0;
+
+  DATA.forEach((q, i) => {
+    num++;
+    if (q.s !== lastSec) {
+      lastSec = q.s;
+      const sh = document.createElement('div');
+      sh.className = 'ex-sec';
+      sh.innerHTML = `<div class="ex-sec-tag">${q.s}</div>
+        <div class="ex-sec-title">${q.st}</div>
+        ${q.sd ? `<div class="ex-sec-desc">${q.sd}</div>` : ''}`;
+      wrap.appendChild(sh);
+    }
+
+    const card = document.createElement('div');
+    card.className = 'qcard'; card.id = 'qc' + i;
+
+    const typeLabel = {ox:'OX', mc:'객관식', fi:'빈칸'};
+    let input = '';
+
+    if (q.t === 'ox') {
+      input = `<div class="ox-row">
+        <button class="ox-btn" id="bo${i}" onclick="doOX(${i},true)">O</button>
+        <button class="ox-btn" id="bx${i}" onclick="doOX(${i},false)">X</button>
+      </div>`;
+    } else if (q.t === 'mc') {
+      input = `<div class="mc-opts">${q.o.map((o,j) =>
+        `<button class="mc-btn" id="bm${i}_${j}" onclick="doMC(${i},${j})">${o}</button>`
+      ).join('')}</div>`;
+    } else {
+      input = `<div>${q.blanks.map((_,j) =>
+        `<div class="fi-row">
+          <span class="fi-lbl">${q.labels[j]}</span>
+          <input class="fi-inp" id="fi${i}_${j}" type="text" placeholder="답 입력..."
+            onkeydown="if(event.key==='Enter')doFI(${i})">
+        </div>`).join('')}
+        <button class="fi-cfm" onclick="doFI(${i})">확인</button>
+      </div>`;
+    }
+
+    card.innerHTML = `
+      <div class="qmeta">
+        <span class="qnum">Q${num}</span>
+        <span class="qtag ${q.t}">${typeLabel[q.t]}</span>
+      </div>
+      <div class="qtext">${q.q}</div>
+      ${input}
+      <div class="fb" id="fb${i}"></div>`;
+    wrap.appendChild(card);
+  });
+}
+
+function reveal(i, ok) {
+  if (ANS[i]) return;
+  ANS[i] = true;
+  if (ok) COR++;
+  const done = ANS.filter(Boolean).length;
+  document.getElementById('sc').textContent = COR;
+  document.getElementById('prog').style.width = (done / DATA.length * 100) + '%';
+
+  const fb = document.getElementById('fb' + i);
+  fb.style.display = 'block';
+  fb.className = 'fb ' + (ok ? 'ok' : 'ng');
+  fb.innerHTML = `<div class="fb-head">${ok ? '✓ 정답' : '✗ 오답'}</div>${DATA[i].e}`;
+  document.getElementById('qc' + i).classList.add(ok ? 'ok' : 'ng');
+
+  if (ANS.every(a => a)) showResult();
+}
+
+function doOX(i, v) {
+  if (ANS[i]) return;
+  const ok = v === DATA[i].a;
+  const ob = document.getElementById('bo' + i);
+  const xb = document.getElementById('bx' + i);
+  ob.disabled = xb.disabled = true;
+  if (v)  { ob.classList.add(ok ? 'ok2' : 'ng2'); if (!ok) xb.classList.add('ok2'); }
+  else    { xb.classList.add(ok ? 'ok2' : 'ng2'); if (!ok) ob.classList.add('ok2'); }
+  reveal(i, ok);
+}
+
+function doMC(i, j) {
+  if (ANS[i]) return;
+  const ok = j === DATA[i].a;
+  DATA[i].o.forEach((_, k) => {
+    const b = document.getElementById(`bm${i}_${k}`);
+    b.disabled = true;
+    if (k === DATA[i].a) b.classList.add('ok2');
+    else if (k === j && !ok) b.classList.add('ng2');
+  });
+  reveal(i, ok);
+}
+
+function doFI(i) {
+  if (ANS[i]) return;
+  let allOk = true;
+  DATA[i].blanks.forEach((ans, j) => {
+    const inp = document.getElementById(`fi${i}_${j}`);
+    const userVal = inp.value.trim().toLowerCase();
+    const correct = ans.toLowerCase();
+    const ok = userVal === correct || userVal.replace(/[\[\]\/]/g,'') === correct.replace(/[\[\]\/]/g,'');
+    if (!ok) allOk = false;
+    inp.disabled = true;
+    inp.classList.add(ok ? 'ok2' : 'ng2');
+  });
+  reveal(i, allOk);
+}
+
+function showResult() {
+  const pct = Math.round(COR / DATA.length * 100);
+  const tiers = [
+    {min:90, icon:'🎯', msg:'Schwa & Vowel Reduction 완전 정복!'},
+    {min:70, icon:'👏', msg:'틀린 문제 해설을 다시 한번 확인해보세요.'},
+    {min:50, icon:'📚', msg:'Schwa와 Vowel reduction 개념을 다시 복습하세요.'},
+    {min:0,  icon:'💪', msg:'강세와 모음 약화의 관계부터 다시 정리해보세요.'}
+  ];
+  const t = tiers.find(x => pct >= x.min);
+  const rb = document.getElementById('rb');
+  rb.style.display = 'block';
+  document.getElementById('ri').textContent = t.icon;
+  document.getElementById('rs').textContent = `${COR} / ${DATA.length}점 (${pct}%)`;
+  document.getElementById('rm').textContent = t.msg;
+  rb.scrollIntoView({behavior:'smooth'});
+}
+
+function reset() {
+  build();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+build();
+</script>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch.1 Stress — Primary &amp; Secondary Stress 실전 연습 | Phonology Study</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pri:#1a5276; --pri-l:#eef4f9; --acc:#e8533a;
+  --grn:#1a6e42; --grn-bg:#eaf6f0;
+  --red-bg:#fdf0ed; --bdr:#c5d9e8; --gray:#f4f8fb;
+  --txt:#1a1a2e; --mut:#666;
+  --serif:'Noto Serif KR',serif;
+  --sans:'Noto Sans KR',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
+
+.hero{background:#0d3349;color:#fff;padding:48px 24px 40px;text-align:center}
+.hero-tag{font-size:11px;letter-spacing:3px;color:rgba(255,255,255,.5);margin-bottom:12px;font-family:var(--mono);text-transform:uppercase}
+.hero h1{font-family:var(--serif);font-size:26px;margin-bottom:10px;line-height:1.35}
+.hero h1 span{color:#ffd166}
+.hero p{font-size:13px;color:rgba(255,255,255,.6);max-width:480px;margin:0 auto 20px}
+.hero-stats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
+.stat-n{font-family:var(--mono);font-size:22px;font-weight:600;color:#ffd166}
+.stat-l{font-size:11px;color:rgba(255,255,255,.45);margin-top:2px}
+
+.sbar{position:sticky;top:0;z-index:99;background:#fff;border-bottom:1px solid var(--bdr);
+  padding:10px 20px;display:flex;align-items:center;gap:14px;
+  box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.sbar-lbl{font-size:12px;color:var(--mut)}
+.sbar-num{font-family:var(--mono);font-size:17px;font-weight:600;color:var(--pri)}
+.prog-wrap{flex:1;max-width:180px;height:5px;background:var(--bdr);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--pri);border-radius:3px;transition:width .4s}
+.rbtn{margin-left:auto;padding:5px 13px;border:1px solid var(--bdr);border-radius:6px;
+  font-size:12px;color:var(--mut);cursor:pointer;font-family:var(--sans);background:#fff;
+  transition:all .15s}
+.rbtn:hover{border-color:var(--pri);color:var(--pri)}
+
+.wrap{max-width:760px;margin:0 auto;padding:28px 20px 60px}
+
+.ex-sec{margin-top:44px;margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid var(--pri)}
+.ex-sec-tag{font-family:var(--mono);font-size:10px;color:var(--mut);letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
+.ex-sec-title{font-family:var(--serif);font-size:19px;color:var(--pri)}
+.ex-sec-desc{font-size:13px;color:var(--mut);margin-top:4px;line-height:1.6;font-style:italic}
+
+.qcard{background:#fff;border:1.5px solid var(--bdr);border-radius:12px;padding:20px 22px;
+  margin-bottom:14px;transition:border-color .2s,box-shadow .2s}
+.qcard:hover{box-shadow:0 2px 10px rgba(26,82,118,.08)}
+.qcard.ok{border-color:#6dbf9a;background:#f8fdf9}
+.qcard.ng{border-color:#e8a090;background:#fdf8f7}
+
+.qmeta{display:flex;align-items:center;gap:8px;margin-bottom:11px}
+.qnum{font-family:var(--mono);font-size:11px;color:var(--mut)}
+.qtag{font-size:11px;padding:3px 9px;border-radius:10px;font-family:var(--mono)}
+.qtag.ox{background:#ddeeff;color:var(--pri)}
+.qtag.mc{background:var(--grn-bg);color:var(--grn)}
+.qtag.fi{background:#fffbe0;color:#7a6000}
+
+.qtext{font-size:14px;line-height:1.9;color:var(--txt);margin-bottom:13px;white-space:pre-line}
+.qeng{font-family:var(--mono);font-size:13px;color:#1a2e3e;background:var(--gray);
+  border-left:3px solid var(--pri);padding:9px 13px;border-radius:0 7px 7px 0;
+  display:block;margin:6px 0 13px;line-height:1.75;white-space:pre-line}
+
+.ox-row{display:flex;gap:12px}
+.ox-btn{flex:1;padding:13px;font-size:24px;border:1.5px solid var(--bdr);border-radius:10px;
+  background:#fff;cursor:pointer;transition:all .15s;font-family:var(--sans)}
+.ox-btn:hover:not([disabled]){border-color:var(--pri);background:var(--pri-l)}
+.ox-btn.ok2{border-color:var(--grn)!important;background:var(--grn-bg)!important}
+.ox-btn.ng2{border-color:var(--acc)!important;background:var(--red-bg)!important}
+
+.mc-opts{display:flex;flex-direction:column;gap:8px}
+.mc-btn{text-align:left;padding:10px 14px;font-size:13.5px;border:1.5px solid var(--bdr);
+  border-radius:9px;background:#fff;cursor:pointer;font-family:var(--sans);
+  line-height:1.65;transition:all .15s;color:var(--txt);white-space:pre-line}
+.mc-btn:hover:not([disabled]){border-color:var(--pri);background:var(--pri-l)}
+.mc-btn.ok2{border-color:var(--grn)!important;background:var(--grn-bg)!important;color:var(--grn)!important}
+.mc-btn.ng2{border-color:var(--acc)!important;background:var(--red-bg)!important;color:var(--acc)!important}
+
+.fi-row{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.fi-lbl{font-size:13px;color:var(--mut);min-width:120px;font-family:var(--mono)}
+.fi-inp{flex:1;padding:8px 12px;border:1.5px solid var(--bdr);border-radius:7px;
+  font-size:13px;font-family:var(--mono);color:var(--txt);transition:border-color .15s}
+.fi-inp:focus{outline:none;border-color:var(--pri)}
+.fi-inp.ok2{border-color:var(--grn);background:var(--grn-bg)}
+.fi-inp.ng2{border-color:var(--acc);background:var(--red-bg)}
+.fi-cfm{padding:8px 17px;background:var(--pri);color:#fff;border:none;border-radius:7px;
+  font-size:13px;cursor:pointer;font-family:var(--sans);margin-top:6px;transition:opacity .15s}
+.fi-cfm:hover{opacity:.85}
+
+.fb{display:none;margin-top:12px;padding:13px 16px;border-radius:9px;
+  font-size:13.5px;line-height:1.85;white-space:pre-line}
+.fb.ok{background:var(--grn-bg);border:1px solid #90d0b0;color:#145535}
+.fb.ng{background:var(--red-bg);border:1px solid #e0a090;color:#8a2010}
+.fb-head{font-weight:700;margin-bottom:5px;font-size:14px}
+
+.rbox{display:none;margin-top:40px;padding:32px 24px;background:var(--pri-l);
+  border:1.5px solid #a8c8de;border-radius:16px;text-align:center}
+.r-icon{font-size:38px;margin-bottom:10px}
+.r-score{font-family:var(--serif);font-size:26px;color:var(--pri);font-weight:700;margin-bottom:6px}
+.r-msg{font-size:14px;color:var(--mut);margin-bottom:18px}
+.r-btn{padding:9px 26px;background:var(--pri);color:#fff;border:none;border-radius:8px;
+  font-size:14px;cursor:pointer;font-family:var(--sans)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">음운론 · Yavaş AEP · Ch.1 Stress</div>
+  <h1>Primary &amp; Secondary Stress<br><span>실전 연습문제</span></h1>
+  <p>강세 개념 핵심 정리 · 정답 선택 후 해설 확인</p>
+  <div class="hero-stats">
+    <div><div class="stat-n">3</div><div class="stat-l">섹션</div></div>
+    <div><div class="stat-n">15</div><div class="stat-l">문제</div></div>
+    <div><div class="stat-n">OX · MC · 빈칸</div><div class="stat-l">유형</div></div>
+  </div>
+</div>
+
+<div class="sbar">
+  <span class="sbar-lbl">맞은 문제</span>
+  <span class="sbar-num"><span id="sc">0</span>&thinsp;/&thinsp;<span id="st">15</span></span>
+  <div class="prog-wrap"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+  <button class="rbtn" onclick="reset()">↺ 다시 풀기</button>
+</div>
+
+<div class="wrap">
+  <div id="qw"></div>
+  <div class="rbox" id="rb">
+    <div class="r-icon" id="ri"></div>
+    <div class="r-score" id="rs"></div>
+    <div class="r-msg" id="rm"></div>
+    <button class="r-btn" onclick="reset()">↺ 다시 풀기</button>
+  </div>
+</div>
+
+<script>
+const DATA = [
+  /* ── Section A: OX 퀴즈 ── */
+  {s:'Section A', st:'OX 퀴즈', sd:'다음 설명이 옳으면 O, 틀리면 X를 선택하시오.',
+   t:'ox', q:'IPA에서 ˈ(primary stress 기호)는 강세를 받는 음절 앞(before)에 온다.',
+   a:true,
+   e:'정답: O\n\nIPA에서 primary stress(ˈ)와 secondary stress(ˌ) 기호는 모두 해당 음절의 바로 앞에 표기합니다.\n예: /ˈfoʊ.tə.græf/ — ˈ가 pho- 음절 앞에 위치합니다.\n스페인어의 á처럼 음절 위에 쓰는 악센트 기호와 혼동하지 않도록 주의하세요.'},
+
+  {s:'Section A', st:'', sd:'', t:'ox',
+   q:'Secondary stress 음절은 tonic accent(주요 음조 변화)를 갖는다.',
+   a:false,
+   e:'정답: X\n\nTonic accent(주요 음조 변화)는 primary stress 음절에만 나타납니다.\nSecondary stress 음절은 +stress, +full vowel이지만 -tonic accent입니다.\n즉, 두드러지긴 하지만 음조 변화는 없습니다.\n\n비교:\n· Primary: +stress, +tonic accent, +full V\n· Secondary: +stress, -tonic accent, +full V\n· Unstressed: -stress, -tonic accent, +/-full V'},
+
+  {s:'Section A', st:'', sd:'', t:'ox',
+   q:'영어는 syllable-timed 언어이므로 모든 음절이 동일한 길이로 발음된다.',
+   a:false,
+   e:'정답: X\n\n영어는 stress-timed 언어입니다. 강세 음절이 대략 등간격으로 나타나고, 비강세 음절은 압축됩니다.\nSyllable-timed는 스페인어·프랑스어·한국어의 특성입니다.\n한국인 학습자의 영어 발음이 어색한 이유 중 하나가 바로 이 리듬 차이입니다.'},
+
+  {s:'Section A', st:'', sd:'', t:'ox',
+   q:'photographic /ˌfoʊtəˈgræfɪk/에서 primary stress는 -graph- 음절이다.',
+   a:true,
+   e:'정답: O\n\n/ˌfoʊtəˈgræfɪk/에서 ˈ 기호가 -graph- 앞에 위치하므로 primary stress는 세 번째 음절 -graph-입니다.\nYavaş 수치 표기: pho-(2) · to-(4) · graph-(1) · ic(4) → 2 4 1 4\nfirst 음절(pho-)에는 secondary stress(ˌ)가 있습니다.'},
+
+  {s:'Section A', st:'', sd:'', t:'ox',
+   q:'Secondary stress 음절도 반드시 full vowel을 갖는다.',
+   a:true,
+   e:'정답: O\n\n강세를 받는 음절(primary, secondary 모두)은 반드시 full vowel(전모음)을 가집니다.\n모음 약화(/ə/, schwa)는 오직 -stress 음절에서만 일어납니다.\n따라서 secondary stress 음절도 +full vowel이 보장됩니다.\n\nYavaş(2011): "A stressed syllable necessarily has a full vowel."'},
+
+  /* ── Section B: 객관식 ── */
+  {s:'Section B', st:'객관식', sd:'가장 적절한 답을 하나 고르시오.',
+   t:'mc', q:'영어에서 강세 지각의 가장 핵심적인 단서는?',
+   o:['① loudness (음량)', '② pitch (음높이)', '③ duration (길이)', '④ rhythm (리듬)'],
+   a:1,
+   e:'정답: ② pitch\n\nFry(1955, 1979)의 실험 연구에 따르면, 영어에서 강세 지각에 가장 큰 영향을 미치는 단서는 pitch(음높이)입니다.\nLoudness, duration도 관여하지만 보조적 역할에 그칩니다.\n\nYavaş(2011): "In English, higher pitch has been shown to be the most influential perceptual cue for stress."'},
+
+  {s:'Section B', st:'', sd:'', t:'mc',
+   q:'/ˌfoʊtəˈgræfɪk/의 Yavaş 수치 표기는?',
+   o:['① 1 4 4 4', '② 4 1 4 4', '③ 2 4 1 4', '④ 4 4 1 4'],
+   a:2,
+   e:'정답: ③ 2 4 1 4\n\nYavaş 수치 체계: 1=primary, 2=secondary, 3=full vowel unstressed, 4=약화(reduced)\n\n/ˌfoʊtəˈgræfɪk/ 분석:\n· pho- (ˌ = secondary) → 2\n· -to- (약화, schwa) → 4\n· -graph- (ˈ = primary) → 1\n· -ic (약화) → 4\n따라서 2 4 1 4'},
+
+  {s:'Section B', st:'', sd:'', t:'mc',
+   q:'다음 중 primary stress가 세 번째 음절에 오는 단어는?',
+   o:['① tomato', '② kangaroo', '③ article', '④ banana'],
+   a:1,
+   e:'정답: ② kangaroo\n\n각 단어의 primary stress 위치:\n· tomato /təˈmeɪtoʊ/ → 2번째 음절\n· kangaroo /ˌkæŋgəˈruː/ → 3번째 음절 ✓\n· article /ˈɑːrtɪkl/ → 1번째 음절\n· banana /bəˈnænə/ → 2번째 음절\n\nkangaroo는 영어 variable stress의 예시로 자주 인용됩니다.'},
+
+  {s:'Section B', st:'', sd:'', t:'mc',
+   q:'Secondary stress를 식별하는 원칙 중 틀린 것은?',
+   o:['① 연속 약화 음절은 주로 최대 2개까지다', '② Secondary stress는 일반적으로 primary stress 앞에 온다', '③ Full vowel을 가진 음절은 강세를 받는다', '④ Secondary stress는 항상 primary stress 뒤에 온다'],
+   a:3,
+   e:'정답: ④\n\nYavaş의 원칙:\n(a) 연속 약화 음절은 주로 최대 2개 → ①은 맞음\n(b) Full vowel이 있으면 강세 음절 → ③은 맞음\n(c) Secondary stress는 일반적으로 primary stress 앞에 온다 → ②는 맞음\n\n④는 틀린 설명입니다. Secondary는 primary 뒤가 아닌 앞에 오는 것이 일반적입니다.\n예: ˌpho·to·ˈgraph·ic — secondary(pho-)가 primary(graph-) 앞에 위치.'},
+
+  {s:'Section B', st:'', sd:'', t:'mc',
+   q:'photography /fəˈtɑgrəfi/의 Yavaş 수치 표기는?',
+   o:['① 4 1 4 3', '② 2 1 4 3', '③ 4 1 4 4', '④ 1 4 4 3'],
+   a:0,
+   e:'정답: ① 4 1 4 3\n\n/fəˈtɑgrəfi/ 분석:\n· pho- (약화, /fə/) → 4\n· -tog- (primary) → 1\n· -ra- (약화, /rə/) → 4\n· -phy (full vowel이나 unstressed) → 3\n따라서 4 1 4 3\n\n비교: photographic = 2 4 1 4 (secondary+primary 두 개)\nphotography = 4 1 4 3 (primary 하나뿐)'},
+
+  /* ── Section C: 빈칸 채우기 ── */
+  {s:'Section C', st:'빈칸 채우기', sd:'괄호 안에 알맞은 답을 입력하시오.',
+   t:'fi',
+   q:'강세(stress)는 ( ___ )의 두드러짐으로 정의된다.',
+   blanks:['syllable prominence'],
+   labels:['답:'],
+   e:'정답: syllable prominence\n\nYavaş(2011): "Stress can be defined as syllable prominence."\n강세 = 음절의 두드러짐. 화자 측면에서는 조음 노력의 증가, 청자 측면에서는 지각적 현저성으로 경험됩니다.\n\n두드러짐의 음향적 기반: loudness, duration, pitch'},
+
+  {s:'Section C', st:'', sd:'', t:'fi',
+   q:'Secondary stressed 음절의 특성:\n+stress, ( ___ ) tonic accent, +full V',
+   blanks:['-'],
+   labels:['빈칸:'],
+   e:'정답: -\n\nSecondary stress 음절은 +stress이지만 -tonic accent입니다.\nTonic accent(주요 음조 변화)는 primary stress 음절에만 부여됩니다.\n\n체계 요약:\n· Primary: +stress, +tonic accent, +full V\n· Secondary: +stress, -tonic accent, +full V\n· Unstressed: -stress, -tonic accent, +/-full V'},
+
+  {s:'Section C', st:'', sd:'', t:'fi',
+   q:'/ˌfoʊtəˈgræfɪk/에서 primary stress가 오는 음절은?',
+   blanks:['-graph-'],
+   labels:['음절:'],
+   e:'정답: -graph-\n\n/ˌfoʊtəˈgræfɪk/에서 ˈ 기호는 -graph- 앞에 위치합니다. 따라서 primary stress는 세 번째 음절 -graph-입니다.\n첫 음절 pho-는 ˌ로 secondary stress를 받습니다.\n수치 표기: 2 4 1 4'},
+
+  {s:'Section C', st:'', sd:'', t:'fi',
+   q:'영어에서 강세 지각의 핵심 단서는 ( ___ )이다.',
+   blanks:['pitch'],
+   labels:['답:'],
+   e:'정답: pitch\n\nFry(1955, 1979) 실험 연구: pitch(음높이)가 영어 강세 지각의 가장 중요한 단서.\n\n비교:\n· Loudness → 보조 단서\n· Duration → 보조 단서\n· Pitch → 핵심 단서 (영어)'},
+
+  {s:'Section C', st:'', sd:'', t:'fi',
+   q:'Yavaş 수치 체계에서 primary stress는 ( ___ )로 표기한다.',
+   blanks:['1'],
+   labels:['숫자:'],
+   e:'정답: 1\n\nYavaş 수치 체계:\n· 1 = primary stress (세 가지 +: +stress, +tonic accent, +full V)\n· 2 = secondary stress (+stress, -tonic accent, +full V)\n· 3 = full vowel이 있는 비강세 음절\n· 4 = 약화(reduced) 음절, schwa 포함\n\n예: photographic = 2 4 1 4'}
+];
+
+let ANS, COR;
+
+function build() {
+  ANS = new Array(DATA.length).fill(false);
+  COR = 0;
+  document.getElementById('sc').textContent = 0;
+  document.getElementById('st').textContent = DATA.length;
+  document.getElementById('prog').style.width = '0%';
+  document.getElementById('rb').style.display = 'none';
+
+  const wrap = document.getElementById('qw');
+  wrap.innerHTML = '';
+  let lastSec = '', num = 0;
+
+  DATA.forEach((q, i) => {
+    num++;
+    if (q.s !== lastSec) {
+      lastSec = q.s;
+      const sh = document.createElement('div');
+      sh.className = 'ex-sec';
+      sh.innerHTML = `<div class="ex-sec-tag">${q.s}</div>
+        <div class="ex-sec-title">${q.st}</div>
+        ${q.sd ? `<div class="ex-sec-desc">${q.sd}</div>` : ''}`;
+      wrap.appendChild(sh);
+    }
+
+    const card = document.createElement('div');
+    card.className = 'qcard'; card.id = 'qc' + i;
+
+    const typeLabel = {ox:'OX', mc:'객관식', fi:'빈칸'};
+    let input = '';
+
+    if (q.t === 'ox') {
+      input = `<div class="ox-row">
+        <button class="ox-btn" id="bo${i}" onclick="doOX(${i},true)">O</button>
+        <button class="ox-btn" id="bx${i}" onclick="doOX(${i},false)">X</button>
+      </div>`;
+    } else if (q.t === 'mc') {
+      input = `<div class="mc-opts">${q.o.map((o,j) =>
+        `<button class="mc-btn" id="bm${i}_${j}" onclick="doMC(${i},${j})">${o}</button>`
+      ).join('')}</div>`;
+    } else {
+      input = `<div>${q.blanks.map((_,j) =>
+        `<div class="fi-row">
+          <span class="fi-lbl">${q.labels[j]}</span>
+          <input class="fi-inp" id="fi${i}_${j}" type="text" placeholder="입력..."
+            onkeydown="if(event.key==='Enter')doFI(${i})">
+        </div>`).join('')}
+        <button class="fi-cfm" onclick="doFI(${i})">확인</button>
+      </div>`;
+    }
+
+    card.innerHTML = `
+      <div class="qmeta">
+        <span class="qnum">Q${num}</span>
+        <span class="qtag ${q.t}">${typeLabel[q.t]}</span>
+      </div>
+      <div class="qtext">${q.q}</div>
+      ${input}
+      <div class="fb" id="fb${i}"></div>`;
+    wrap.appendChild(card);
+  });
+}
+
+function reveal(i, ok) {
+  if (ANS[i]) return;
+  ANS[i] = true;
+  if (ok) COR++;
+  const done = ANS.filter(Boolean).length;
+  document.getElementById('sc').textContent = COR;
+  document.getElementById('prog').style.width = (done / DATA.length * 100) + '%';
+
+  const fb = document.getElementById('fb' + i);
+  fb.style.display = 'block';
+  fb.className = 'fb ' + (ok ? 'ok' : 'ng');
+  fb.innerHTML = `<div class="fb-head">${ok ? '✓ 정답' : '✗ 오답'}</div>${DATA[i].e}`;
+  document.getElementById('qc' + i).classList.add(ok ? 'ok' : 'ng');
+
+  if (ANS.every(a => a)) showResult();
+}
+
+function doOX(i, v) {
+  if (ANS[i]) return;
+  const ok = v === DATA[i].a;
+  const ob = document.getElementById('bo' + i);
+  const xb = document.getElementById('bx' + i);
+  ob.disabled = xb.disabled = true;
+  if (v)  { ob.classList.add(ok ? 'ok2' : 'ng2'); if (!ok) xb.classList.add('ok2'); }
+  else    { xb.classList.add(ok ? 'ok2' : 'ng2'); if (!ok) ob.classList.add('ok2'); }
+  reveal(i, ok);
+}
+
+function doMC(i, j) {
+  if (ANS[i]) return;
+  const ok = j === DATA[i].a;
+  DATA[i].o.forEach((_, k) => {
+    const b = document.getElementById(`bm${i}_${k}`);
+    b.disabled = true;
+    if (k === DATA[i].a) b.classList.add('ok2');
+    else if (k === j && !ok) b.classList.add('ng2');
+  });
+  reveal(i, ok);
+}
+
+function doFI(i) {
+  if (ANS[i]) return;
+  let allOk = true;
+  DATA[i].blanks.forEach((ans, j) => {
+    const inp = document.getElementById(`fi${i}_${j}`);
+    const userVal = inp.value.trim().toLowerCase();
+    const correctVal = ans.toLowerCase();
+    const ok = userVal === correctVal;
+    if (!ok) allOk = false;
+    inp.disabled = true;
+    inp.classList.add(ok ? 'ok2' : 'ng2');
+  });
+  reveal(i, allOk);
+}
+
+function showResult() {
+  const pct = Math.round(COR / DATA.length * 100);
+  const tiers = [
+    {min:90, icon:'🎯', msg:'Ch.1 강세 완전 정복! 임용 대비 완벽합니다.'},
+    {min:70, icon:'👏', msg:'훌륭합니다! 틀린 문제 해설을 다시 한번 확인해보세요.'},
+    {min:50, icon:'📚', msg:'Primary/Secondary 개념을 다시 복습하세요.'},
+    {min:0,  icon:'💪', msg:'강세 기초 개념 정리부터 다시 시작해보세요.'}
+  ];
+  const t = tiers.find(x => pct >= x.min);
+  const rb = document.getElementById('rb');
+  rb.style.display = 'block';
+  document.getElementById('ri').textContent = t.icon;
+  document.getElementById('rs').textContent = `${COR} / ${DATA.length}점 (${pct}%)`;
+  document.getElementById('rm').textContent = t.msg;
+  rb.scrollIntoView({behavior:'smooth'});
+}
+
+function reset() {
+  build();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+build();
+</script>
+</body>
+</html>

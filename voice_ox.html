@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voice Assimilation (plural -s, past -ed) — OX Quiz</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:repeating-linear-gradient(transparent,transparent 27px,#ddddd0 28px);color:#1a1a1a;min-height:100vh;padding:16px}
+.header-wrap{max-width:720px;margin:0 auto;padding:20px 8px 0}
+.header-topbar{display:flex;justify-content:space-between;align-items:center;border-top:2px solid #1a1a1a;padding-top:8px;margin-bottom:10px}
+.header-no{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;border:2px solid #1a1a1a;padding:3px 10px;border-radius:2px;letter-spacing:.5px;display:flex;align-items:center;gap:6px}
+.header-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;letter-spacing:1px}
+.header-title{font-size:clamp(30px,7vw,46px);font-weight:900;color:#1a1a1a;line-height:1.1;margin-bottom:5px;letter-spacing:-1px}
+.title-hl{background:#1a5276;color:#fff;padding:1px 6px}
+.header-script{font-family:'Caveat',cursive;font-size:21px;color:#1a5276;margin-bottom:4px;font-weight:600}
+.header-sub{font-size:13px;color:#555;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#aaa;margin-bottom:14px}
+.header-divider{border:none;border-top:2.5px solid #1a1a1a;margin-bottom:20px}
+.prog-wrap{max-width:720px;margin:0 auto 10px;padding:0 8px}
+.prog-info{display:flex;justify-content:space-between;font-size:12px;color:#1a5276;font-family:'JetBrains Mono',monospace;margin-bottom:6px}
+.bar{height:4px;background:#aed6f1;border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,#1a5276,#2980b9);border-radius:2px;transition:width .5s ease}
+.wrap{max-width:720px;margin:0 auto}
+.card{background:#fff;border:1.5px solid #aed6f1;border-radius:14px;padding:26px;animation:up .35s ease;box-shadow:0 2px 8px rgba(26,82,118,.08)}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.q-meta{display:flex;align-items:center;gap:7px;margin-bottom:14px;flex-wrap:wrap}
+.q-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:#1a5276;background:rgba(26,82,118,.1);padding:3px 10px;border-radius:8px;font-weight:700}
+.q-src{font-size:11px;color:#2e86c1;font-family:'JetBrains Mono',monospace}
+.q-cat{font-size:11px;color:#1a5276;background:rgba(41,128,185,.1);padding:3px 10px;border-radius:8px;margin-left:auto;font-weight:600}
+.kw1{background:rgba(26,82,118,.15);color:#1a3a52;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(26,82,118,.25)}
+.kw2{color:#117a8b;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border-bottom:2px solid rgba(17,122,139,.45)}
+.kw3{background:rgba(39,174,96,.13);color:#1e8449;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(39,174,96,.3)}
+.kw4{background:rgba(183,28,28,.11);color:#b71c1c;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(183,28,28,.25)}
+.q-text{font-size:clamp(15px,2.2vw,16.5px);line-height:1.9;margin-bottom:24px;color:#1a2633}
+.ox-btns{display:flex;gap:12px}
+.ox-btn{flex:1;padding:20px 10px;border-radius:12px;border:2px solid #aed6f1;background:#f4f9fe;color:#1a2633;font-size:30px;cursor:pointer;transition:all .18s ease;display:flex;flex-direction:column;align-items:center;gap:5px}
+.lb{font-size:11px;font-family:'JetBrains Mono',monospace;color:#2e86c1;letter-spacing:1px;font-weight:600}
+.ox-btn:hover:not(:disabled){transform:translateY(-2px)}
+.o-btn:hover:not(:disabled){border-color:#1a5276;background:rgba(26,82,118,.08)}
+.x-btn:hover:not(:disabled){border-color:#c62828;background:rgba(198,40,40,.06)}
+.co,.cx{border-color:#1a5276!important;background:rgba(26,82,118,.1)!important}
+.wp{border-color:#c62828!important;background:rgba(198,40,40,.08)!important}
+.ox-btn:disabled{cursor:default}
+.badge{display:none;margin-top:14px;padding:9px 16px;border-radius:8px;font-size:14px;font-weight:700;font-family:'JetBrains Mono',monospace}
+.badge.ok{display:inline-block;background:rgba(26,82,118,.1);color:#1a5276;border:1.5px solid rgba(26,82,118,.3)}
+.badge.ng{display:inline-block;background:rgba(198,40,40,.08);color:#c62828;border:1.5px solid rgba(198,40,40,.25)}
+.exp{display:none;margin-top:18px;border-radius:12px;overflow:hidden;animation:fade .3s ease}
+.exp.show{display:block}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.exp-header{background:linear-gradient(135deg,rgba(26,82,118,.12),rgba(41,128,185,.06));border:1.5px solid rgba(26,82,118,.25);border-bottom:none;padding:11px 16px}
+.exp-header span{font-size:11px;font-family:'JetBrains Mono',monospace;color:#1a3a52;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.exp-answer{background:rgba(26,82,118,.05);border:1.5px solid rgba(26,82,118,.2);border-top:none;border-bottom:none;padding:14px 16px}
+.ans-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#2e86c1;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-weight:700}
+.ans-text{font-size:15px;color:#1a2633;line-height:1.75;font-weight:500}
+.exp-body{background:rgba(26,82,118,.03);border:1.5px solid rgba(26,82,118,.15);border-top:1px solid rgba(26,82,118,.1);padding:14px 16px}
+.sec-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#117a8b;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;margin-top:13px;font-weight:700}
+.sec-label:first-child{margin-top:0}
+.exp-body p{font-size:14px;color:#1a3a52;line-height:1.8;margin-bottom:5px}
+.def-box{background:rgba(41,128,185,.06);border-left:4px solid #2980b9;padding:10px 14px;border-radius:0 8px 8px 0;margin:8px 0}
+.def-box p{color:#1a3a52;font-size:13.5px;font-style:italic;line-height:1.75}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.compare.three{grid-template-columns:1fr 1fr 1fr}
+.compare-item{background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:8px;padding:11px 14px}
+.ci-title{font-size:11px;font-family:'JetBrains Mono',monospace;color:#1a5276;font-weight:700;margin-bottom:5px}
+.compare-item p{font-size:13px;color:#2e4a5a;line-height:1.65}
+.next-btn{display:none;width:100%;margin-top:16px;padding:14px;background:linear-gradient(135deg,#1a5276,#2980b9);border:none;border-radius:10px;color:white;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:opacity .2s,transform .2s}
+.next-btn:hover{opacity:.88;transform:translateY(-1px)}
+.next-btn.show{display:block;animation:fade .3s ease}
+.score-card{display:none;text-align:center;padding:48px 24px}
+.score-card.show{display:block;animation:up .5s ease}
+.score-circle{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,#1a5276,#2980b9);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 0 40px rgba(26,82,118,.3)}
+.s-num{font-size:42px;font-weight:700;line-height:1;color:#fff}
+.s-total{font-size:14px;opacity:.85;color:#fff}
+.score-card h2{font-size:24px;margin-bottom:7px;color:#1a1a1a}
+.score-card p{color:#555;margin-bottom:24px;font-size:15px}
+.restart-btn{padding:13px 32px;background:#fff;border:2px solid #1a1a1a;border-radius:10px;color:#1a1a1a;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.restart-btn:hover{background:#f5f4ee}
+.nd{width:28px;height:28px;border-radius:6px;border:1.5px solid #aed6f1;background:#fff;font-size:10px;font-family:'JetBrains Mono',monospace;cursor:pointer;color:#2e86c1;transition:all .15s;display:inline-flex;align-items:center;justify-content:center;font-weight:600}
+.nd.cur{border-color:#1a5276;background:#1a5276;color:white}
+.nd.ok{border-color:#1a5276;background:rgba(26,82,118,.15);color:#1a3a52}
+.nd.ng{border-color:#c62828;background:rgba(198,40,40,.1);color:#c62828}
+.nd:hover:not(.cur){opacity:.7}
+#nav{display:flex;flex-wrap:wrap;gap:5px;max-width:720px;margin:0 auto 16px;padding:0 8px}
+</style>
+</head>
+<body>
+<div class="header-wrap">
+  <div class="header-topbar">
+    <span class="header-no">NO. 05 <span>—</span> Voice Assimilation</span>
+    <span class="header-label">Past-Exam Notebook</span>
+  </div>
+  <h1 class="header-title"><span class="title-hl">음운론</span> 개념 마스터</h1>
+  <div class="header-script">Phonology · Voice Assimilation</div>
+  <p class="header-sub">음운론 · 복수 -s / 과거 -ed 유성화 동화 · [s] [z] [ɪz] / [t] [d] [ɪd] · 임용고시 대비</p>
+  <div class="header-divider"></div>
+</div>
+<div class="prog-wrap">
+  <div class="prog-info"><span id="pt">1 / 15</span><span id="ps">정답 0개</span></div>
+  <div class="bar"><div class="bar-fill" id="bf" style="width:6.67%"></div></div>
+</div>
+<div id="rb" style="display:none;max-width:720px;margin:0 auto 14px;padding:0 8px">
+  <div style="background:rgba(26,82,118,.08);border:1.5px solid rgba(26,82,118,.3);border-radius:12px;padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <span id="rb-msg" style="font-size:13px;color:#1a2633;font-family:'JetBrains Mono',monospace;line-height:1.5"></span>
+    <button onclick="freshStart()" style="padding:10px 22px;background:#c62828;border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer">처음부터</button>
+  </div>
+</div>
+<div id="nav"></div>
+<div class="wrap">
+  <div id="qa"></div>
+  <div class="score-card" id="sc">
+    <div class="score-circle"><span class="s-num" id="fs">0</span><span class="s-total">/15</span></div>
+    <h2 id="rm"></h2><p id="rs"></p>
+    <button class="restart-btn" onclick="freshStart()">🔄 처음부터</button>
+  </div>
+</div>
+<script src="./score-popup.js"></script>
+<script src="./sounds.js"></script>
+<script>
+const SAVE_KEY='ox_phon_voice_v1';
+const TOTAL=15;
+let cur=0,answers=new Array(TOTAL).fill(null);
+function getScore(){return answers.filter(a=>a&&a.correct).length;}
+const Q=[
+  {src:"복수 -s",cat:"/s/ 실현",text:"<span class='kw1'>cats</span>의 복수 형태소 -s는 <span class='kw2'>/s/</span>로 실현된다.",ans:true,correct:"정확하다. <span class='kw1'>cats</span>에서 -s는 <span class='kw2'>/s/</span>로 실현된다 — 어간 마지막 /t/가 무성 자음이기 때문.",why:"복수 -s 실현 규칙: (1) 어간 마지막 음이 치찰음(sibilant: s, z, ʃ, ʒ, tʃ, dʒ)이면 /ɪz/; (2) 무성 자음이면 /s/; (3) 유성 자음/모음이면 /z/. cat의 마지막 음 /t/는 무성 자음 → /s/.",source:"\"Plural -s allomorphs: /ɪz/ after sibilants, /s/ after voiceless consonants, /z/ after voiced sounds. <span class='kw1'>cat+s</span> → <span class='kw2'>/kæts/</span>.\" (Yavaş 2011)",compare:[{title:"무성 자음 뒤 → /s/",desc:"cats /kæts/, caps /kæps/, socks /sɑks/"},{title:"유성 자음/모음 뒤 → /z/",desc:"dogs /dɔgz/, cars /kɑrz/, bees /biz/"}]},
+  {src:"복수 -s",cat:"/z/ 실현",text:"<span class='kw1'>dogs</span>의 복수 형태소 -s는 <span class='kw2'>/z/</span>로 실현된다.",ans:true,correct:"정확하다. <span class='kw1'>dogs</span>에서 -s는 <span class='kw2'>/z/</span>로 실현된다 — 어간 마지막 /g/가 유성 자음이기 때문.",why:"dog의 마지막 음 /g/는 유성 자음이다. Voice assimilation 원칙에 따라 뒤따르는 -s가 /z/로 유성화된다. 이것은 Regressive assimilation(역행 동화): 뒤의 환경이 앞의 분절음에 영향을 준다.",source:"\"<span class='kw1'>dog+s</span> → /dɔgz/: /g/ is voiced → -s becomes <span class='kw2'>/z/</span> (voice assimilation, regressive).\" (Yavaş 2011)",compare:[{title:"유성 자음 뒤 → /z/",desc:"dogs /dɔgz/, beds /bɛdz/, labs /læbz/"},{title:"무성 자음 뒤 → /s/",desc:"cats /kæts/, maps /mæps/, rocks /rɑks/"}]},
+  {src:"복수 -s",cat:"/ɪz/ 실현",text:"<span class='kw1'>buses</span>의 복수 형태소 -s는 <span class='kw2'>/s/</span>로 실현된다.",ans:false,correct:"틀렸다. <span class='kw1'>buses</span>의 -s는 <span class='kw4'>/ɪz/</span>로 실현된다 — 어간 마지막 /s/가 치찰음(sibilant)이기 때문.",why:"치찰음(sibilants: /s, z, ʃ, ʒ, tʃ, dʒ/) 뒤에는 epenthesis(음 삽입)가 일어나 /ɪz/가 삽입된다. 이는 동일한 치찰음이 연속되는 것을 방지하기 위한 규칙이다. bus /bʌs/ → buses /ˈbʌsɪz/.",source:"\"After sibilants (/s,z,ʃ,ʒ,tʃ,dʒ/), -s is realized as <span class='kw4'>/ɪz/</span> (epenthesis). <span class='kw1'>bus</span> → <span class='kw4'>/ˈbʌsɪz/</span>.\" (Yavaş 2011)",compare:[{title:"치찰음 뒤 → /ɪz/",desc:"buses, judges, churches, roses"},{title:"무성/유성 자음 뒤",desc:"/s/ 또는 /z/ (epenthesis 없음)"}]},
+  {src:"과거 -ed",cat:"/t/ 실현",text:"<span class='kw1'>stopped</span>의 과거 형태소 -ed는 <span class='kw2'>/d/</span>로 실현된다.",ans:false,correct:"틀렸다. <span class='kw1'>stopped</span>의 -ed는 <span class='kw4'>/t/</span>로 실현된다 — 어간 마지막 /p/가 무성 자음이기 때문.",why:"-ed 실현 규칙: (1) 어간 마지막 음이 /t,d/면 /ɪd/; (2) 무성 자음이면 /t/; (3) 유성 자음/모음이면 /d/. stop의 마지막 /p/는 무성 자음 → /t/. stopped = /stɑpt/.",source:"\"Past -ed allomorphs: /ɪd/ after /t,d/; /t/ after voiceless consonants; /d/ after voiced sounds. <span class='kw1'>stop+ed</span> → <span class='kw4'>/stɑpt/</span>.\" (Yavaş 2011)",compare:[{title:"무성 자음 뒤 → /t/",desc:"stopped, kissed, laughed, jumped"},{title:"유성 자음/모음 뒤 → /d/",desc:"called, loved, planned, played"}]},
+  {src:"과거 -ed",cat:"/d/ 실현",text:"<span class='kw1'>called</span>의 과거 형태소 -ed는 <span class='kw2'>/d/</span>로 실현된다.",ans:true,correct:"정확하다. <span class='kw1'>called</span>의 -ed는 <span class='kw2'>/d/</span>로 실현된다 — 어간 마지막 /l/이 유성 자음이기 때문.",why:"call의 마지막 음 /l/은 유성 자음이다. Voice assimilation에 따라 -ed가 /d/로 실현된다. called = /kɔld/. 마찬가지로: loved /lʌvd/, planned /plænd/, stayed /steɪd/.",source:"\"<span class='kw1'>call+ed</span> → /kɔld/: /l/ is voiced → -ed becomes <span class='kw2'>/d/</span> (voice assimilation).\" (Yavaş 2011)",compare:[{title:"유성 자음 뒤 → /d/",desc:"called /kɔld/, loved /lʌvd/, used /juːzd/"},{title:"무성 자음 뒤 → /t/",desc:"stopped /stɑpt/, missed /mɪst/"}]},
+  {src:"과거 -ed",cat:"/ɪd/ 실현",text:"<span class='kw1'>wanted</span>의 과거 형태소 -ed는 <span class='kw2'>/ɪd/</span>로 실현된다.",ans:true,correct:"정확하다. <span class='kw1'>wanted</span>의 -ed는 <span class='kw2'>/ɪd/</span>로 실현된다 — 어간 마지막 /t/ 뒤에 epenthesis가 일어나기 때문.",why:"-ed가 /t/ 또는 /d/ 뒤에 올 때, 동일하거나 유사한 자음이 연속되는 것을 방지하기 위해 /ɪ/가 삽입된다. wanted /ˈwɑntɪd/, needed /ˈniːdɪd/, started /ˈstɑrtɪd/.",source:"\"After /t/ and /d/, -ed is realized as <span class='kw2'>/ɪd/</span> (epenthesis). <span class='kw1'>want+ed</span> → <span class='kw2'>/ˈwɑntɪd/</span>.\" (Yavaş 2011)",compare:[{title:"/t,d/ 뒤 → /ɪd/",desc:"wanted, needed, started, added"},{title:"기타 무성 자음 뒤 → /t/",desc:"stopped, missed, kissed, jumped"}]},
+  {src:"Voice Assimilation",cat:"규칙 명칭",text:"-s/-ed 형태소의 세 가지 교체(allomorphy)는 <span class='kw1'>Voice assimilation</span>이다.",ans:true,correct:"정확하다. -s/-ed의 변이형은 앞 환경의 유성/무성 자질에 동화되는 <span class='kw1'>Voice assimilation</span>의 결과이다.",why:"Voice assimilation: 형태소의 유성성(voicing)이 앞 분절음의 유성성에 동화되는 현상. -s: 무성→/s/, 유성→/z/, 치찰음→/ɪz/. -ed: 무성→/t/, 유성→/d/, /t,d/→/ɪd/. Regressive assimilation 방향.",source:"\"The three-way allomorphy of plural -s and past -ed is a result of <span class='kw1'>voice assimilation</span> (regressive): the suffix assimilates to the voicing of the preceding segment.\" (Yavaş 2011)",compare:[{title:"복수 -s",desc:"/s/ : /z/ : /ɪz/ — 세 변이형"},{title:"과거 -ed",desc:"/t/ : /d/ : /ɪd/ — 세 변이형"}]},
+  {src:"복수 -s",cat:"/s/ 판별",text:"<span class='kw1'>cups</span>의 복수 형태소 -s는 <span class='kw2'>/z/</span>다.",ans:false,correct:"틀렸다. <span class='kw1'>cups</span>의 -s는 <span class='kw4'>/s/</span>다 — 어간 마지막 /p/가 무성 자음이기 때문.",why:"cup의 마지막 음 /p/는 무성 양순 파열음이다. 무성 자음 뒤에 오는 -s는 /s/로 실현된다. cups = /kʌps/. 유성 자음 뒤에만 /z/가 실현된다는 점을 기억해야 한다.",source:"\"<span class='kw1'>cup+s</span> → /kʌps/: /p/ is voiceless → -s = <span class='kw4'>/s/</span>, NOT /z/.\" (Yavaş 2011)",compare:[{title:"cups /kʌps/",desc:"무성 /p/ 뒤 → /s/"},{title:"labs /læbz/",desc:"유성 /b/ 뒤 → /z/"}]},
+  {src:"복수 -s",cat:"/ɪz/ 판별",text:"<span class='kw1'>judges</span>의 복수 형태소 -s는 <span class='kw2'>/ɪz/</span>다.",ans:true,correct:"정확하다. <span class='kw1'>judges</span>의 -s는 <span class='kw2'>/ɪz/</span>다 — 어간 마지막 /dʒ/가 치찰음(sibilant)이기 때문.",why:"judge의 마지막 음 /dʒ/는 치찰음이다. 치찰음 뒤에는 /ɪz/가 삽입된다. judges = /ˈdʒʌdʒɪz/. 치찰음 목록: /s, z, ʃ, ʒ, tʃ, dʒ/ — 모두 /ɪz/를 유발한다.",source:"\"<span class='kw1'>judge+s</span> → /ˈdʒʌdʒɪz/: /dʒ/ is a sibilant → -s = <span class='kw2'>/ɪz/</span>.\" (Yavaş 2011)",compare:[{title:"치찰음 뒤 → /ɪz/",desc:"judges /dʒʌdʒɪz/, roses /roʊzɪz/"},{title:"비치찰음 뒤",desc:"/s/ 또는 /z/ (epenthesis 없음)"}]},
+  {src:"과거 -ed",cat:"/d/ 판별",text:"<span class='kw1'>lived</span>의 과거 형태소 -ed는 <span class='kw2'>/t/</span>다.",ans:false,correct:"틀렸다. <span class='kw1'>lived</span>의 -ed는 <span class='kw4'>/d/</span>다 — 어간 마지막 /v/가 유성 자음이기 때문.",why:"live의 마지막 음 /v/는 유성 순치 마찰음이다. 유성 자음 뒤의 -ed는 /d/로 실현된다. lived = /lɪvd/. /t/는 무성 자음 뒤에만 나타난다.",source:"\"<span class='kw1'>live+d</span> → /lɪvd/: /v/ is voiced → -ed = <span class='kw4'>/d/</span>, NOT /t/.\" (Yavaş 2011)",compare:[{title:"lived /lɪvd/",desc:"유성 /v/ 뒤 → /d/"},{title:"stopped /stɑpt/",desc:"무성 /p/ 뒤 → /t/"}]},
+  {src:"Voice Assimilation",cat:"변이형 목록",text:"-s의 세 가지 변이형 실현: <span class='kw2'>[s], [z], [ɪz]</span>.",ans:true,correct:"정확하다. 복수 -s의 세 변이형: (1) <span class='kw1'>[s]</span> — 무성 자음 뒤; (2) <span class='kw1'>[z]</span> — 유성 자음/모음 뒤; (3) <span class='kw1'>[ɪz]</span> — 치찰음 뒤.",why:"-s 형태소는 음성 환경에 따라 세 가지 변이형(allomorphs)으로 실현된다. 이 세 변이형은 상보적 분포(complementary distribution)를 이룬다.",source:"\"Three allomorphs of plural -s: <span class='kw2'>[s]</span> after voiceless C, <span class='kw2'>[z]</span> after voiced C/V, <span class='kw2'>[ɪz]</span> after sibilants.\" (Yavaş 2011)",compare:[{title:"[s]: cats, maps, books",desc:"무성 자음 뒤"},{title:"[z]: dogs, cars / [ɪz]: buses",desc:"유성 뒤 / 치찰음 뒤"}]},
+  {src:"Voice Assimilation",cat:"유성 자음 뒤",text:"유성 자음 뒤의 복수 -s는 <span class='kw2'>/z/</span>로 실현된다.",ans:true,correct:"정확하다. 유성 자음 뒤의 복수 -s는 <span class='kw2'>/z/</span>로 실현된다 — voice assimilation(역행 동화)의 결과.",why:"유성 자음(/b, d, g, v, ð, z, ʒ, dʒ, m, n, ŋ, l, r, w, j/) 뒤에서 -s는 동일한 유성 자음 /z/로 실현된다. 이는 Regressive assimilation: 뒤에 오는 형태소가 앞 분절음의 자질에 동화된다.",source:"\"Voiced consonants trigger /z/ for plural -s: dogs /dɔgz/, beds /bɛdz/, labs /læbz/.\" (Yavaş 2011)",compare:[{title:"유성 자음 뒤 → /z/",desc:"dogs, beds, labs, loves, robs"},{title:"무성 자음 뒤 → /s/",desc:"cats, caps, rocks, cliffs, paths"}]},
+  {src:"과거 -ed",cat:"/ɪd/ 판별",text:"<span class='kw1'>needed</span>의 과거 형태소 -ed는 <span class='kw2'>/ɪd/</span>다.",ans:true,correct:"정확하다. <span class='kw1'>needed</span>의 -ed는 <span class='kw2'>/ɪd/</span>다 — 어간 마지막 /d/ 뒤에 epenthesis가 일어나기 때문.",why:"need의 마지막 음 /d/는 유성 치경 파열음이다. /d/ 뒤에는 /ɪ/가 삽입되어 /ɪd/가 된다. needed = /ˈniːdɪd/. 같은 이유로 wanted /ˈwɑntɪd/, started /ˈstɑrtɪd/ 등도 /ɪd/.",source:"\"<span class='kw1'>need+ed</span> → /ˈniːdɪd/: /d/ triggers epenthesis → -ed = <span class='kw2'>/ɪd/</span>.\" (Yavaş 2011)",compare:[{title:"/t,d/ 뒤 → /ɪd/",desc:"needed, wanted, added, ended"},{title:"기타 유성 자음 뒤 → /d/",desc:"called, loved, planned, used"}]},
+  {src:"Voice Assimilation",cat:"동화 방향",text:"-s/-ed 형태소 교체는 <span class='kw1'>Regressive assimilation</span> 방향이다.",ans:true,correct:"정확하다. 복수 -s와 과거 -ed의 voice assimilation은 <span class='kw2'>Regressive(역행)</span> 방향 — 앞의 분절음이 뒤에 오는 형태소에 영향을 준다.",why:"Regressive assimilation(역행 동화): 뒤에 오는 요소(형태소)가 앞에 오는 요소(어간 말자음)의 자질을 흡수한다. 즉 어간 말자음의 voicing 자질이 -s/-ed에 영향을 미친다. 반대인 Progressive assimilation은 앞 요소가 뒤를 동화시킨다.",source:"\"Voice assimilation in -s/-ed is <span class='kw2'>regressive</span>: the preceding segment's voicing determines the suffix's realization.\" (Yavaş 2011)",compare:[{title:"Regressive assimilation",desc:"앞 환경 → 뒤 형태소 영향 (← 방향)"},{title:"Progressive assimilation",desc:"앞 요소 → 뒤 요소 영향 (→ 방향)"}]},
+  {src:"복수 -s",cat:"모음 뒤",text:"모음 뒤의 복수 -s는 <span class='kw2'>/s/</span>로 실현된다.",ans:false,correct:"틀렸다. 모음 뒤의 복수 -s는 <span class='kw4'>/z/</span>로 실현된다 — 모음은 유성음이기 때문.",why:"모음은 유성음(voiced sound)이다. 따라서 모음으로 끝나는 단어에 복수 -s가 붙으면 /z/로 실현된다. 예: bees /biːz/, cows /kaʊz/, shoes /ʃuːz/, cars /kɑrz/. /s/는 무성 자음 뒤에만 나타난다.",source:"\"Vowels are voiced: plural -s after a vowel = <span class='kw4'>/z/</span>. e.g. bees /biːz/, cows /kaʊz/.\" (Yavaş 2011)",compare:[{title:"모음 뒤 → /z/",desc:"bees /biːz/, cows /kaʊz/, shoes /ʃuːz/"},{title:"무성 자음 뒤 → /s/",desc:"cats /kæts/, maps /mæps/"}]}
+];
+function renderExp(q,isCorrect){
+  const three=q.compare&&q.compare.length===3;
+  const cmp=q.compare?`<div class="sec-label">📊 비교 정리</div><div class="compare${three?' three':''}">${q.compare.map(c=>`<div class="compare-item"><div class="ci-title">${c.title}</div><p>${c.desc}</p></div>`).join('')}</div>`:'';
+  return `<div class="exp show"><div class="exp-header"><span>${isCorrect?'✅ 정답':'❌ 오답'} · 해설</span></div><div class="exp-answer"><div class="ans-label">핵심 정정</div><div class="ans-text">${q.correct}</div></div><div class="exp-body"><div class="sec-label">📖 상세 설명</div><p>${q.why}</p><div class="sec-label">📌 Source</div><div class="def-box"><p>${q.source}</p></div>${cmp}</div></div>`;
+}
+function renderNav(){
+  document.getElementById('nav').innerHTML=answers.map((a,i)=>{
+    let cls='nd';
+    if(i===cur)cls+=' cur';
+    else if(a!==null)cls+=a.correct?' ok':' ng';
+    return `<button class="${cls}" onclick="jumpTo(${i})">${i+1}</button>`;
+  }).join('');
+}
+function render(){
+  if(cur>=TOTAL){
+    document.getElementById('qa').style.display='none';
+    document.getElementById('sc').classList.add('show');
+    const s=getScore();
+    document.getElementById('fs').textContent=s;
+    const p=s/TOTAL;
+    document.getElementById('rm').textContent=p===1?'🎉 Perfect!':p>=.8?'👏 Great!':p>=.6?'😊 Good!':'💪 Keep going!';
+    document.getElementById('rs').textContent=`${TOTAL}문제 중 ${s}문제 정답 (${Math.round(p*100)}%)`;
+    setTimeout(function(){window.showScorePopup&&window.showScorePopup(s,TOTAL);},400);
+    renderNav();return;
+  }
+  document.getElementById('sc').classList.remove('show');
+  document.getElementById('qa').style.display='block';
+  renderNav();
+  const q=Q[cur];
+  document.getElementById('bf').style.width=((cur+1)/TOTAL*100).toFixed(1)+'%';
+  document.getElementById('pt').textContent=`${cur+1} / ${TOTAL}`;
+  document.getElementById('ps').textContent=`정답 ${getScore()}개`;
+  const a=answers[cur];
+  if(a!==null){
+    let oBtnCls='',xBtnCls='';
+    if(a.picked===true){oBtnCls=a.correct?'co':'wp';if(!a.correct)xBtnCls='cx';}
+    else{xBtnCls=a.correct?'cx':'wp';if(!a.correct)oBtnCls='co';}
+    document.getElementById('qa').innerHTML=`<div class="card"><div class="q-meta"><span class="q-num">Q${cur+1}</span><span class="q-src">${q.src}</span><span class="q-cat">${q.cat}</span></div><div class="q-text">${q.text}</div><div class="ox-btns"><button class="ox-btn o-btn ${oBtnCls}" disabled>⭕<span class="lb">CORRECT</span></button><button class="ox-btn x-btn ${xBtnCls}" disabled>❌<span class="lb">WRONG</span></button></div><div class="badge ${a.correct?'ok':'ng'}">${a.correct?'✅ 정답!':'❌ 오답! 정답은 '+(q.ans?'O':'X')}</div><div>${renderExp(q,a.correct)}</div><button class="next-btn show" onclick="next()">${cur<TOTAL-1?'Next →':'결과 보기 →'}</button></div>`;
+  }else{
+    document.getElementById('qa').innerHTML=`<div class="card"><div class="q-meta"><span class="q-num">Q${cur+1}</span><span class="q-src">${q.src}</span><span class="q-cat">${q.cat}</span></div><div class="q-text">${q.text}</div><div class="ox-btns"><button class="ox-btn o-btn" onclick="pick(true)" id="ob">⭕<span class="lb">CORRECT</span></button><button class="ox-btn x-btn" onclick="pick(false)" id="xb">❌<span class="lb">WRONG</span></button></div><div id="bd" class="badge"></div><div id="ep"></div><button class="next-btn" id="nb" onclick="next()">${cur<TOTAL-1?'Next →':'결과 보기 →'}</button></div>`;
+  }
+}
+function pick(val){
+  const q=Q[cur];
+  document.getElementById('ob').disabled=true;
+  document.getElementById('xb').disabled=true;
+  const ok=val===q.ans;
+  answers[cur]={picked:val,correct:ok};
+  if(ok){if(typeof playOk==='function')playOk();}else{if(typeof playNg==='function')playNg();}
+  const bd=document.getElementById('bd');
+  bd.textContent=ok?'✅ 정답!':`❌ 오답! 정답은 ${q.ans?'O':'X'}`;
+  bd.className='badge '+(ok?'ok':'ng');
+  document.getElementById(val?'ob':'xb').classList.add(ok?(val?'co':'cx'):'wp');
+  if(!ok)document.getElementById(q.ans?'ob':'xb').classList.add(q.ans?'co':'cx');
+  document.getElementById('ep').innerHTML=renderExp(q,ok);
+  document.getElementById('nb').classList.add('show');
+  document.getElementById('ps').textContent=`정답 ${getScore()}개`;
+  renderNav();saveProgress();
+}
+function next(){cur++;saveProgress();render();}
+function jumpTo(i){cur=i;render();document.getElementById('qa').scrollIntoView({behavior:'smooth',block:'start'});}
+function saveProgress(){localStorage.setItem(SAVE_KEY,JSON.stringify({cur,answers}));}
+function freshStart(){localStorage.removeItem(SAVE_KEY);cur=0;answers=new Array(TOTAL).fill(null);document.getElementById('rb').style.display='none';document.getElementById('sc').classList.remove('show');document.getElementById('qa').style.display='block';renderNav();render();}
+(function(){
+  const saved=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');
+  if(saved&&saved.answers&&saved.cur>=0&&saved.cur<TOTAL){
+    cur=saved.cur;answers=saved.answers;
+    const done=answers.filter(a=>a!==null).length;
+    if(done>0){document.getElementById('rb-msg').textContent=`이어서 풀기 중 · ${done}/${TOTAL} 문제 완료 (정답 ${getScore()}개)`;document.getElementById('rb').style.display='block';}
+  }
+  renderNav();render();
+})();
+</script>
+</body>
+</html>

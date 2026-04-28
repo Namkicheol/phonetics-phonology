@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flapping — OX Quiz | Phonology</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:repeating-linear-gradient(transparent,transparent 27px,#ddddd0 28px);color:#1a1a1a;min-height:100vh;padding:16px}
+.header-wrap{max-width:720px;margin:0 auto;padding:20px 8px 0}
+.header-topbar{display:flex;justify-content:space-between;align-items:center;border-top:2px solid #1a1a1a;padding-top:8px;margin-bottom:10px}
+.header-no{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;border:2px solid #1a1a1a;padding:3px 10px;border-radius:2px;letter-spacing:.5px;display:flex;align-items:center;gap:6px}
+.header-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;letter-spacing:1px}
+.header-title{font-size:clamp(30px,7vw,46px);font-weight:900;color:#1a1a1a;line-height:1.1;margin-bottom:5px;letter-spacing:-1px}
+.title-hl{background:#1a5276;color:#fff;padding:1px 6px}
+.header-script{font-family:'Caveat',cursive;font-size:21px;color:#1a5276;margin-bottom:4px;font-weight:600}
+.header-sub{font-size:13px;color:#555;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#aaa;margin-bottom:14px}
+.header-divider{border:none;border-top:2.5px solid #1a1a1a;margin-bottom:20px}
+.prog-wrap{max-width:720px;margin:0 auto 10px;padding:0 8px}
+.prog-info{display:flex;justify-content:space-between;font-size:12px;color:#1a5276;font-family:'JetBrains Mono',monospace;margin-bottom:6px}
+.bar{height:4px;background:#aed6f1;border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,#1a5276,#2980b9);border-radius:2px;transition:width .5s ease}
+.wrap{max-width:720px;margin:0 auto}
+.card{background:#fff;border:1.5px solid #aed6f1;border-radius:14px;padding:26px;animation:up .35s ease;box-shadow:0 2px 8px rgba(26,82,118,.08)}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.q-meta{display:flex;align-items:center;gap:7px;margin-bottom:14px;flex-wrap:wrap}
+.q-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:#1a5276;background:rgba(26,82,118,.1);padding:3px 10px;border-radius:8px;font-weight:700}
+.q-src{font-size:11px;color:#2e86c1;font-family:'JetBrains Mono',monospace}
+.q-cat{font-size:11px;color:#1a5276;background:rgba(41,128,185,.1);padding:3px 10px;border-radius:8px;margin-left:auto;font-weight:600}
+.kw1{background:rgba(26,82,118,.15);color:#1a3a52;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(26,82,118,.25)}
+.kw2{color:#117a8b;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border-bottom:2px solid rgba(17,122,139,.45)}
+.kw3{background:rgba(39,174,96,.13);color:#1e8449;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(39,174,96,.3)}
+.kw4{background:rgba(183,28,28,.11);color:#b71c1c;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(183,28,28,.25)}
+.q-text{font-size:clamp(15px,2.2vw,16.5px);line-height:1.9;margin-bottom:24px;color:#1a2633}
+.ox-btns{display:flex;gap:12px}
+.ox-btn{flex:1;padding:20px 10px;border-radius:12px;border:2px solid #aed6f1;background:#f4f9fe;color:#1a2633;font-size:30px;cursor:pointer;transition:all .18s ease;display:flex;flex-direction:column;align-items:center;gap:5px}
+.lb{font-size:11px;font-family:'JetBrains Mono',monospace;color:#2e86c1;letter-spacing:1px;font-weight:600}
+.ox-btn:hover:not(:disabled){transform:translateY(-2px)}
+.o-btn:hover:not(:disabled){border-color:#1a5276;background:rgba(26,82,118,.08)}
+.x-btn:hover:not(:disabled){border-color:#c62828;background:rgba(198,40,40,.06)}
+.co,.cx{border-color:#1a5276!important;background:rgba(26,82,118,.1)!important}
+.wp{border-color:#c62828!important;background:rgba(198,40,40,.08)!important}
+.ox-btn:disabled{cursor:default}
+.badge{display:none;margin-top:14px;padding:9px 16px;border-radius:8px;font-size:14px;font-weight:700;font-family:'JetBrains Mono',monospace}
+.badge.ok{display:inline-block;background:rgba(26,82,118,.1);color:#1a5276;border:1.5px solid rgba(26,82,118,.3)}
+.badge.ng{display:inline-block;background:rgba(198,40,40,.08);color:#c62828;border:1.5px solid rgba(198,40,40,.25)}
+.exp{display:none;margin-top:18px;border-radius:12px;overflow:hidden;animation:fade .3s ease}
+.exp.show{display:block}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.exp-header{background:linear-gradient(135deg,rgba(26,82,118,.12),rgba(41,128,185,.06));border:1.5px solid rgba(26,82,118,.25);border-bottom:none;padding:11px 16px}
+.exp-header span{font-size:11px;font-family:'JetBrains Mono',monospace;color:#1a3a52;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.exp-answer{background:rgba(26,82,118,.05);border:1.5px solid rgba(26,82,118,.2);border-top:none;border-bottom:none;padding:14px 16px}
+.ans-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#2e86c1;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-weight:700}
+.ans-text{font-size:15px;color:#1a2633;line-height:1.75;font-weight:500}
+.exp-body{background:rgba(26,82,118,.03);border:1.5px solid rgba(26,82,118,.15);border-top:1px solid rgba(26,82,118,.1);padding:14px 16px}
+.sec-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#117a8b;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;margin-top:13px;font-weight:700}
+.sec-label:first-child{margin-top:0}
+.exp-body p{font-size:14px;color:#1a3a52;line-height:1.8;margin-bottom:5px}
+.def-box{background:rgba(41,128,185,.06);border-left:4px solid #2980b9;padding:10px 14px;border-radius:0 8px 8px 0;margin:8px 0}
+.def-box p{color:#1a3a52;font-size:13.5px;font-style:italic;line-height:1.75}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.compare.three{grid-template-columns:1fr 1fr 1fr}
+.compare-item{background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:8px;padding:11px 14px}
+.ci-title{font-size:11px;font-family:'JetBrains Mono',monospace;color:#1a5276;font-weight:700;margin-bottom:5px}
+.compare-item p{font-size:13px;color:#2e4a5a;line-height:1.65}
+.next-btn{display:none;width:100%;margin-top:16px;padding:14px;background:linear-gradient(135deg,#1a5276,#2980b9);border:none;border-radius:10px;color:white;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:opacity .2s,transform .2s}
+.next-btn:hover{opacity:.88;transform:translateY(-1px)}
+.next-btn.show{display:block;animation:fade .3s ease}
+.score-card{display:none;text-align:center;padding:48px 24px}
+.score-card.show{display:block;animation:up .5s ease}
+.score-circle{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,#1a5276,#2980b9);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 0 40px rgba(26,82,118,.3)}
+.s-num{font-size:42px;font-weight:700;line-height:1;color:#fff}
+.s-total{font-size:14px;opacity:.85;color:#fff}
+.score-card h2{font-size:24px;margin-bottom:7px;color:#1a1a1a}
+.score-card p{color:#555;margin-bottom:24px;font-size:15px}
+.restart-btn{padding:13px 32px;background:#fff;border:2px solid #1a1a1a;border-radius:10px;color:#1a1a1a;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.restart-btn:hover{background:#f5f4ee}
+.nd{width:28px;height:28px;border-radius:6px;border:1.5px solid #aed6f1;background:#fff;font-size:10px;font-family:'JetBrains Mono',monospace;cursor:pointer;color:#2e86c1;transition:all .15s;display:inline-flex;align-items:center;justify-content:center;font-weight:600}
+.nd.cur{border-color:#1a5276;background:#1a5276;color:white}
+.nd.ok{border-color:#1a5276;background:rgba(26,82,118,.15);color:#1a3a52}
+.nd.ng{border-color:#c62828;background:rgba(198,40,40,.1);color:#c62828}
+.nd:hover:not(.cur){opacity:.7}
+#nav{display:flex;flex-wrap:wrap;gap:5px;max-width:720px;margin:0 auto 16px;padding:0 8px}
+</style>
+</head>
+<body>
+<div class="header-wrap">
+  <div class="header-topbar">
+    <span class="header-no">NO. 03 <span>—</span> Flapping</span>
+    <span class="header-label">Past-Exam Notebook</span>
+  </div>
+  <h1 class="header-title"><span class="title-hl">음운론</span> 개념 마스터</h1>
+  <div class="header-script">Phonology · Flapping</div>
+  <p class="header-sub">음운론 · Flapping 규칙 · 임용고시 대비</p>
+  <div class="header-divider"></div>
+</div>
+<div class="prog-wrap">
+  <div class="prog-info"><span id="pt">1 / 15</span><span id="ps">정답 0개</span></div>
+  <div class="bar"><div class="bar-fill" id="bf" style="width:6.67%"></div></div>
+</div>
+<div id="rb" style="display:none;max-width:720px;margin:0 auto 14px;padding:0 8px">
+  <div style="background:rgba(26,82,118,.08);border:1.5px solid rgba(26,82,118,.3);border-radius:12px;padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <span id="rb-msg" style="font-size:13px;color:#1a2633;font-family:'JetBrains Mono',monospace;line-height:1.5"></span>
+    <button onclick="freshStart()" style="padding:10px 22px;background:#c62828;border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer">처음부터</button>
+  </div>
+</div>
+<div id="nav"></div>
+<div class="wrap">
+  <div id="qa"></div>
+  <div class="score-card" id="sc">
+    <div class="score-circle"><span class="s-num" id="fs">0</span><span class="s-total">/15</span></div>
+    <h2 id="rm"></h2><p id="rs"></p>
+    <button class="restart-btn" onclick="freshStart()">🔄 처음부터</button>
+  </div>
+</div>
+<script src="./score-popup.js"></script>
+<script src="./sounds.js"></script>
+<script>
+const SAVE_KEY='ox_phon_flap_v1';
+const TOTAL=15;
+let cur=0,answers=new Array(TOTAL).fill(null);
+function getScore(){return answers.filter(a=>a&&a.correct).length;}
+const Q=[
+  {src:"Flapping",cat:"예시 — butter",text:"'butter'에서 <span class='kw1'>/t/</span>는 <span class='kw2'>[ɾ]</span>로 실현된다.",ans:true,correct:"정확하다. 미국 영어에서 'butter'의 /t/는 강세모음(bú) 뒤, 비강세모음 앞에 위치하므로 [ɾ]로 flapping된다.",why:"Flapping 규칙: /t, d/ → [ɾ] / V́ __ V (강세모음 뒤, 비강세모음 앞). 'butter'에서 /t/는 /ˈbʌ/(강세모음) 뒤, /ər/(비강세모음) 앞에 위치하므로 flapping 환경을 충족합니다. 발음: [ˈbʌɾər].",source:"\"Flapping: /t, d/ → [ɾ] / V́ __ V. 'butter' → [ˈbʌɾər] in American English.\" (Yavaş 2011)",compare:[{title:"butter → [ˈbʌɾər]",desc:"강세모음 뒤, 비강세모음 앞 → [ɾ]"},{title:"top → [tʰɑp]",desc:"어두 강세위치 → flapping 환경 아님"}]},
+  {src:"Flapping",cat:"적용 범위 — /t/ vs /d/",text:"Flapping은 <span class='kw4'>/t/에만</span> 적용되고 /d/에는 적용되지 않는다.",ans:false,correct:"틀렸다. Flapping은 <span class='kw1'>/t/</span>와 <span class='kw1'>/d/</span> 모두에 적용된다. 같은 환경(V́ __ V)에서 두 음 모두 [ɾ]로 실현된다.",why:"Flapping 규칙은 /t/와 /d/ 모두를 [ɾ]로 변환합니다. 이 때문에 미국 영어에서 'betting'과 'bedding', 'latter'와 'ladder'가 동일하게 발음될 수 있습니다. 두 단어가 [ɾ]로 중화(neutralization)됩니다.",source:"\"Flapping applies to both /t/ and /d/: /t, d/ → [ɾ] / V́ __ V. 'betting' = 'bedding' = [ˈbɛɾɪŋ] in American English.\" (Yavaş 2011)",compare:[{title:"betting [ˈbɛɾɪŋ]",desc:"/t/ → [ɾ] · flapping 적용"},{title:"bedding [ˈbɛɾɪŋ]",desc:"/d/ → [ɾ] · flapping 적용"}]},
+  {src:"Flapping",cat:"규칙 형식화",text:"Flapping 규칙: <span class='kw1'>/t,d/ → [ɾ]</span> / <span class='kw2'>강세 모음 뒤, 비강세 모음 앞</span>.",ans:true,correct:"정확하다. Flapping의 정확한 환경: 강세모음(V́) 뒤 + 비강세모음(V) 앞.",why:"Flapping 규칙의 핵심 두 조건: (1) 앞에 강세모음(V́)이 있어야 함, (2) 뒤에 비강세모음(V)이 있어야 함. 두 조건이 모두 충족될 때 /t, d/ → [ɾ]가 일어납니다. 어두(word-initial) /t/는 강세모음 앞이더라도 flapping되지 않습니다.",source:"\"Flapping rule: /t, d/ → [ɾ] / V́ __ V (after stressed vowel, before unstressed vowel).\" (Yavaş 2011)",compare:[{title:"환경 조건 1",desc:"앞: 강세모음 V́ · 필수"},{title:"환경 조건 2",desc:"뒤: 비강세모음 V · 필수"}]},
+  {src:"Flapping",cat:"환경 — 어두 /t/",text:"'top'의 어두 <span class='kw1'>/t/</span>는 flapping된다.",ans:false,correct:"틀렸다. 어두 /t/는 강세모음 <span class='kw2'>앞</span>에 위치하므로 flapping 환경이 아니다. 강세모음 <span class='kw2'>뒤</span>가 아니기 때문.",why:"'top'의 /t/는 어두(word-initial) 위치에 있습니다. Flapping은 강세모음 뒤(after V́)가 필수 조건이므로, 강세모음 앞에 오는 어두 /t/는 flapping 환경을 충족하지 않습니다. 'top'의 /t/는 오히려 aspiration([tʰ])이 일어납니다.",source:"\"Word-initial /t/ precedes V́, not follows — flapping environment not met. 'top' → [tʰɑp], not *[ɾɑp].\" (Yavaş 2011)",compare:[{title:"top [tʰɑp]",desc:"어두 /t/ → aspiration · flapping 없음"},{title:"butter [ˈbʌɾər]",desc:"V́ 뒤 /t/ → [ɾ] · flapping 적용"}]},
+  {src:"Flapping",cat:"[ɾ] 음성 정체",text:"<span class='kw1'>[ɾ]</span>은 <span class='kw2'>alveolar flap</span>이다.",ans:true,correct:"정확하다. [ɾ]은 alveolar flap(치경 탄음)으로, 혀끝이 치경을 빠르게 한 번 두드리는 소리다.",why:"[ɾ]는 IPA에서 alveolar flap(tap)을 나타냅니다. 혀끝(tongue tip)이 치경(alveolar ridge)을 빠르게 한 번 접촉하는 방식으로 조음됩니다. Flap과 tap은 거의 같은 의미로 사용되며, alveolar trill [r]과는 다릅니다.",source:"\"[ɾ] = alveolar flap/tap: tongue tip makes a single, rapid contact with the alveolar ridge.\" (IPA; Yavaş 2011)",compare:[{title:"[ɾ] alveolar flap",desc:"단일 접촉 · 빠른 두드림 · flapping 결과음"},{title:"[r] alveolar trill",desc:"반복 진동 · 스페인어 'perro' 등"}]},
+  {src:"Flapping",cat:"[ɾ]의 음소 지위",text:"영어에서 <span class='kw1'>[ɾ]</span>과 <span class='kw2'>/r/</span>은 같은 음소다.",ans:false,correct:"틀렸다. [ɾ]은 /r/의 변이음이 아니라 <span class='kw1'>/t/</span> 또는 <span class='kw1'>/d/</span>의 변이음이다.",why:"영어에서 [ɾ]은 flapping 환경(V́ __ V)에서 /t/ 또는 /d/가 실현되는 변이음(allophone)입니다. /r/의 변이음이 아닙니다. 따라서 [ɾ]은 /t,d/ 음소에 속하는 allophone이며, /r/은 별도의 음소입니다.",source:"\"[ɾ] is an allophone of /t/ and /d/ in American English, not of /r/.\" (Yavaş 2011)",compare:[{title:"[ɾ] = /t/ 또는 /d/의 allophone",desc:"flapping 환경에서 /t,d/ → [ɾ]"},{title:"/r/ = 별도의 음소",desc:"'red', 'run' 등 · [ɾ]과 무관"}]},
+  {src:"Flapping",cat:"예시 — water",text:"'water'는 미국 영어에서 <span class='kw1'>[ˈwɔɾər]</span>로 실현된다.",ans:true,correct:"정확하다. 미국 영어 구어에서 'water'의 /t/는 flapping 환경을 충족하여 [ɾ]로 실현된다.",why:"'water'에서 /t/는 /ˈwɔ/(강세모음) 뒤, /ər/(비강세모음) 앞에 위치합니다. Flapping 환경(V́ __ V)을 충족하므로 /t/ → [ɾ], 결과: [ˈwɔɾər]. 미국 영어의 전형적인 flapping 예시입니다.",source:"\"'water' → [ˈwɔɾər] in American English: /t/ after V́ /ɔ/, before unstressed /ər/.\" (Yavaş 2011)",compare:[{title:"water [ˈwɔɾər]",desc:"미국 영어 · /t/ → [ɾ]"},{title:"water [ˈwɔtər]",desc:"영국 영어 · flapping 없음"}]},
+  {src:"Flapping",cat:"예시 — body",text:"'body'에서 <span class='kw1'>/d/ → [ɾ]</span>이 일어난다.",ans:true,correct:"정확하다. 미국 영어에서 'body'의 /d/는 강세모음(bó) 뒤, 비강세모음 앞이므로 [ɾ]로 flapping된다.",why:"'body'[ˈbɑdi]에서 /d/는 /ˈbɑ/(강세모음) 뒤, /i/(비강세모음) 앞에 위치합니다. Flapping 환경을 충족하므로 /d/ → [ɾ], 결과: [ˈbɑɾi]. /d/에도 flapping이 적용됨을 보여주는 전형적인 예입니다.",source:"\"'body' → [ˈbɑɾi]: /d/ flaps to [ɾ] after stressed V, before unstressed V.\" (Yavaş 2011)",compare:[{title:"body [ˈbɑɾi]",desc:"/d/ → [ɾ] · flapping 적용"},{title:"butter [ˈbʌɾər]",desc:"/t/ → [ɾ] · flapping 적용"}]},
+  {src:"Flapping",cat:"방언 분포",text:"Flapping은 <span class='kw4'>British English</span>의 특징이다.",ans:false,correct:"틀렸다. Flapping은 <span class='kw1'>American English</span>(미국 영어)의 특징이다. 영국 영어에서는 /t,d/가 그대로 실현된다.",why:"Flapping([ɾ])은 미국 영어(및 캐나다 영어)의 대표적인 음운론적 특징입니다. 영국 영어(RP)에서는 'water', 'butter' 등에서 /t/가 flapping되지 않고 [t] 또는 성문음화([ʔ])로 실현됩니다.",source:"\"Flapping is characteristic of <span class='kw1'>American English</span>, not British English.\" (Yavaş 2011)",compare:[{title:"American English",desc:"flapping 적용 · water=[ˈwɔɾər]"},{title:"British English (RP)",desc:"flapping 없음 · water=[ˈwɔtə]"}]},
+  {src:"Flapping",cat:"예시 — city",text:"'city'는 <span class='kw1'>[ˈsɪɾi]</span>로 실현될 수 있다.",ans:true,correct:"정확하다. 'city'의 /t/는 /ˈsɪ/(강세모음) 뒤, /i/(비강세모음) 앞이므로 [ɾ]로 flapping된다.",why:"'city'[ˈsɪti]에서 /t/는 /ˈsɪ/(강세모음) 뒤, /i/(비강세모음) 앞에 위치합니다. Flapping 환경 충족 → [ˈsɪɾi]. 미국 영어 구어에서 매우 일반적인 발음입니다.",source:"\"'city' → [ˈsɪɾi] in American English: flapping of /t/ in V́ __ V environment.\" (Yavaş 2011)",compare:[{title:"city [ˈsɪɾi]",desc:"미국 영어 · /t/ → [ɾ]"},{title:"pity [ˈpɪɾi]",desc:"미국 영어 · /t/ → [ɾ]"}]},
+  {src:"Flapping",cat:"필수 조건",text:"Flapping 환경의 필수 조건 중 하나는 <span class='kw2'>강세 모음</span>이 앞에 오는 것이다.",ans:true,correct:"정확하다. Flapping의 두 필수 조건: (1) 앞에 강세모음(V́), (2) 뒤에 비강세모음(V). 둘 다 충족되어야 한다.",why:"강세모음(V́)이 앞에 오는 것은 flapping의 필수 조건입니다. 예: 'atom'[ˈæɾəm]에서 /æ/가 강세이므로 /t/ → [ɾ]. 반면 'atomic'[əˈtɑmɪk]에서 /t/ 앞의 /ə/는 비강세이므로 flapping이 일어나지 않습니다.",source:"\"Flapping requires: V́ before /t,d/. Compare 'atom' [ˈæɾəm] (flapping) vs. 'atomic' [əˈtɑmɪk] (no flapping).\" (Yavaş 2011)",compare:[{title:"atom [ˈæɾəm]",desc:"V́ /æ/ 앞에 → flapping 적용"},{title:"atomic [əˈtɑmɪk]",desc:"V /ə/ 앞에 → flapping 없음"}]},
+  {src:"Flapping",cat:"중화 — betting/bedding",text:"'betting'과 'bedding'은 미국 영어 구어에서 동일하게 발음될 수 있다.",ans:true,correct:"정확하다. flapping으로 두 단어 모두 [ˈbɛɾɪŋ]이 되어 음성적으로 중화(neutralization)된다.",why:"'betting'의 /t/와 'bedding'의 /d/ 모두 강세모음 /ɛ/ 뒤, 비강세모음 /ɪ/ 앞에 위치하므로 flapping 환경을 충족합니다. 두 음 모두 [ɾ]로 실현되어 [ˈbɛɾɪŋ]이 됩니다. 이처럼 flapping이 /t/와 /d/의 대립을 중화시킵니다.",source:"\"Flapping neutralizes /t/ vs. /d/ contrast: 'betting' = 'bedding' = [ˈbɛɾɪŋ] in casual American English.\" (Yavaş 2011)",compare:[{title:"betting → [ˈbɛɾɪŋ]",desc:"/t/ → [ɾ] · neutralization"},{title:"bedding → [ˈbɛɾɪŋ]",desc:"/d/ → [ɾ] · neutralization"}]},
+  {src:"Flapping",cat:"[ɾ] vs. [r] 구분",text:"<span class='kw1'>[ɾ]</span>는 IPA에서 <span class='kw4'>alveolar trill</span>과 같다.",ans:false,correct:"틀렸다. <span class='kw4'>alveolar trill</span>은 <span class='kw1'>[r]</span>이고, alveolar flap은 <span class='kw1'>[ɾ]</span>이다. 두 기호는 다른 소리다.",why:"IPA에서 [r]은 alveolar trill(치경 전동음): 혀가 여러 번 빠르게 진동하는 소리입니다. [ɾ]은 alveolar flap(치경 탄음): 혀가 한 번만 빠르게 접촉하는 소리입니다. 영어 flapping의 결과음은 [ɾ]이지 [r]이 아닙니다.",source:"\"IPA [r] = alveolar trill (multiple contacts); [ɾ] = alveolar flap (single rapid contact). English flapping → [ɾ].\" (IPA; Yavaş 2011)",compare:[{title:"[ɾ] alveolar flap",desc:"단일 접촉 · 영어 flapping 결과"},{title:"[r] alveolar trill",desc:"반복 진동 · 스페인어 'perro'"}]},
+  {src:"Flapping",cat:"중화 — later/ladder",text:"'later'와 'ladder'는 미국 영어에서 동일하게 발음될 수 있다.",ans:true,correct:"정확하다. flapping으로 'later'와 'ladder' 모두 [ˈleɪɾər]이 되어 음성적으로 구별되지 않는다.",why:"'later'의 /t/와 'ladder'의 /d/ 모두 강세모음 /eɪ/ 뒤, 비강세모음 /ər/ 앞에 위치합니다. Flapping 결과: later=[ˈleɪɾər], ladder=[ˈleɪɾər]로 동일하게 발음됩니다. 이것이 미국 영어에서 flapping으로 인한 phonemic neutralization의 전형적인 예입니다.",source:"\"'later' and 'ladder' merge as [ˈleɪɾər] through flapping in American English.\" (Yavaş 2011)",compare:[{title:"later → [ˈleɪɾər]",desc:"/t/ → [ɾ] · flapping"},{title:"ladder → [ˈleɪɾər]",desc:"/d/ → [ɾ] · flapping"}]},
+  {src:"Flapping",cat:"음소 대립",text:"Flapping은 음소 대립을 만들지 않는다.",ans:true,correct:"정확하다. Flapping은 <span class='kw1'>allophonic rule</span>로, /t/와 /d/ 사이의 음소 대립을 파괴하지 않고 변이음을 생성할 뿐이다.",why:"Flapping은 특정 환경(V́ __ V)에서 예측 가능하게 일어나는 allophonic rule입니다. [ɾ]는 /t/ 또는 /d/의 변이음이지 독립된 음소가 아닙니다. 따라서 [ɾ]이 나타나는 것만으로는 새로운 음소 대립이 형성되지 않습니다.",source:"\"Flapping is an allophonic rule: [ɾ] does not create new phonemic contrasts, it is a predictable variant of /t/ and /d/.\" (Yavaş 2011)",compare:[{title:"Allophonic rule",desc:"예측 가능 · 음소 대립 없음"},{title:"Phonemic contrast",desc:"/t/ vs /d/ 대립 · flapping과 무관"}]}
+];
+function renderExp(q,isCorrect){
+  const three=q.compare&&q.compare.length===3;
+  const cmp=q.compare?`<div class="sec-label">📊 비교 정리</div><div class="compare${three?' three':''}">${q.compare.map(c=>`<div class="compare-item"><div class="ci-title">${c.title}</div><p>${c.desc}</p></div>`).join('')}</div>`:'';
+  return `<div class="exp show"><div class="exp-header"><span>${isCorrect?'✅ 정답':'❌ 오답'} · 해설</span></div><div class="exp-answer"><div class="ans-label">핵심 정정</div><div class="ans-text">${q.correct}</div></div><div class="exp-body"><div class="sec-label">📖 상세 설명</div><p>${q.why}</p><div class="sec-label">📌 Source</div><div class="def-box"><p>${q.source}</p></div>${cmp}</div></div>`;
+}
+function renderNav(){
+  document.getElementById('nav').innerHTML=answers.map((a,i)=>{
+    let cls='nd';
+    if(i===cur)cls+=' cur';
+    else if(a!==null)cls+=a.correct?' ok':' ng';
+    return `<button class="${cls}" onclick="jumpTo(${i})">${i+1}</button>`;
+  }).join('');
+}
+function render(){
+  if(cur>=TOTAL){
+    document.getElementById('qa').style.display='none';
+    document.getElementById('sc').classList.add('show');
+    const s=getScore();
+    document.getElementById('fs').textContent=s;
+    const p=s/TOTAL;
+    document.getElementById('rm').textContent=p===1?'🎉 Perfect!':p>=.8?'👏 Great!':p>=.6?'😊 Good!':'💪 Keep going!';
+    document.getElementById('rs').textContent=`${TOTAL}문제 중 ${s}문제 정답 (${Math.round(p*100)}%)`;
+    setTimeout(function(){window.showScorePopup&&window.showScorePopup(s,TOTAL);},400);
+    renderNav();return;
+  }
+  document.getElementById('sc').classList.remove('show');
+  document.getElementById('qa').style.display='block';
+  renderNav();
+  const q=Q[cur];
+  document.getElementById('bf').style.width=((cur+1)/TOTAL*100).toFixed(1)+'%';
+  document.getElementById('pt').textContent=`${cur+1} / ${TOTAL}`;
+  document.getElementById('ps').textContent=`정답 ${getScore()}개`;
+  const a=answers[cur];
+  if(a!==null){
+    let oBtnCls='',xBtnCls='';
+    if(a.picked===true){oBtnCls=a.correct?'co':'wp';if(!a.correct)xBtnCls='cx';}
+    else{xBtnCls=a.correct?'cx':'wp';if(!a.correct)oBtnCls='co';}
+    document.getElementById('qa').innerHTML=`<div class="card"><div class="q-meta"><span class="q-num">Q${cur+1}</span><span class="q-src">${q.src}</span><span class="q-cat">${q.cat}</span></div><div class="q-text">${q.text}</div><div class="ox-btns"><button class="ox-btn o-btn ${oBtnCls}" disabled>⭕<span class="lb">CORRECT</span></button><button class="ox-btn x-btn ${xBtnCls}" disabled>❌<span class="lb">WRONG</span></button></div><div class="badge ${a.correct?'ok':'ng'}">${a.correct?'✅ 정답!':'❌ 오답! 정답은 '+(q.ans?'O':'X')}</div><div>${renderExp(q,a.correct)}</div><button class="next-btn show" onclick="next()">${cur<TOTAL-1?'Next →':'결과 보기 →'}</button></div>`;
+  }else{
+    document.getElementById('qa').innerHTML=`<div class="card"><div class="q-meta"><span class="q-num">Q${cur+1}</span><span class="q-src">${q.src}</span><span class="q-cat">${q.cat}</span></div><div class="q-text">${q.text}</div><div class="ox-btns"><button class="ox-btn o-btn" onclick="pick(true)" id="ob">⭕<span class="lb">CORRECT</span></button><button class="ox-btn x-btn" onclick="pick(false)" id="xb">❌<span class="lb">WRONG</span></button></div><div id="bd" class="badge"></div><div id="ep"></div><button class="next-btn" id="nb" onclick="next()">${cur<TOTAL-1?'Next →':'결과 보기 →'}</button></div>`;
+  }
+}
+function pick(val){
+  const q=Q[cur];
+  document.getElementById('ob').disabled=true;
+  document.getElementById('xb').disabled=true;
+  const ok=val===q.ans;
+  answers[cur]={picked:val,correct:ok};
+  if(ok){if(typeof playOk==='function')playOk();}else{if(typeof playNg==='function')playNg();}
+  const bd=document.getElementById('bd');
+  bd.textContent=ok?'✅ 정답!':`❌ 오답! 정답은 ${q.ans?'O':'X'}`;
+  bd.className='badge '+(ok?'ok':'ng');
+  document.getElementById(val?'ob':'xb').classList.add(ok?(val?'co':'cx'):'wp');
+  if(!ok)document.getElementById(q.ans?'ob':'xb').classList.add(q.ans?'co':'cx');
+  document.getElementById('ep').innerHTML=renderExp(q,ok);
+  document.getElementById('nb').classList.add('show');
+  document.getElementById('ps').textContent=`정답 ${getScore()}개`;
+  renderNav();saveProgress();
+}
+function next(){cur++;saveProgress();render();}
+function jumpTo(i){cur=i;render();document.getElementById('qa').scrollIntoView({behavior:'smooth',block:'start'});}
+function saveProgress(){localStorage.setItem(SAVE_KEY,JSON.stringify({cur,answers}));}
+function freshStart(){localStorage.removeItem(SAVE_KEY);cur=0;answers=new Array(TOTAL).fill(null);document.getElementById('rb').style.display='none';document.getElementById('sc').classList.remove('show');document.getElementById('qa').style.display='block';renderNav();render();}
+(function(){
+  const saved=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');
+  if(saved&&saved.answers&&saved.cur>=0&&saved.cur<TOTAL){
+    cur=saved.cur;answers=saved.answers;
+    const done=answers.filter(a=>a!==null).length;
+    if(done>0){document.getElementById('rb-msg').textContent=`이어서 풀기 중 · ${done}/${TOTAL} 문제 완료 (정답 ${getScore()}개)`;document.getElementById('rb').style.display='block';}
+  }
+  renderNav();render();
+})();
+</script>
+</body>
+</html>

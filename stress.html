@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stress & Intonation — OX Quiz</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:repeating-linear-gradient(transparent,transparent 27px,#ddddd0 28px);color:#1a1a1a;min-height:100vh;padding:16px}
+.header-wrap{max-width:720px;margin:0 auto;padding:20px 8px 0}
+.header-topbar{display:flex;justify-content:space-between;align-items:center;border-top:2px solid #1a1a1a;padding-top:8px;margin-bottom:10px}
+.header-no{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;border:2px solid #1a1a1a;padding:3px 10px;border-radius:2px;letter-spacing:.5px;display:flex;align-items:center;gap:6px}
+.header-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;letter-spacing:1px}
+.header-title{font-size:clamp(30px,7vw,46px);font-weight:900;color:#1a1a1a;line-height:1.1;margin-bottom:5px;letter-spacing:-1px}
+.title-hl{background:#1a5276;color:#fff;padding:1px 6px}
+.header-script{font-family:'Caveat',cursive;font-size:21px;color:#1a5276;margin-bottom:4px;font-weight:600}
+.header-sub{font-size:13px;color:#555;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#aaa;margin-bottom:14px}
+.header-divider{border:none;border-top:2.5px solid #1a1a1a;margin-bottom:20px}
+.prog-wrap{max-width:720px;margin:0 auto 10px;padding:0 8px}
+.prog-info{display:flex;justify-content:space-between;font-size:12px;color:#1a5276;font-family:'JetBrains Mono',monospace;margin-bottom:6px}
+.bar{height:4px;background:#aed6f1;border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,#1a5276,#2980b9);border-radius:2px;transition:width .5s ease}
+.wrap{max-width:720px;margin:0 auto}
+.card{background:#fff;border:1.5px solid #aed6f1;border-radius:14px;padding:26px;animation:up .35s ease;box-shadow:0 2px 8px rgba(26,82,118,.08)}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.q-meta{display:flex;align-items:center;gap:7px;margin-bottom:14px;flex-wrap:wrap}
+.q-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:#1a5276;background:rgba(26,82,118,.1);padding:3px 10px;border-radius:8px;font-weight:700}
+.q-src{font-size:11px;color:#2e86c1;font-family:'JetBrains Mono',monospace}
+.q-cat{font-size:11px;color:#1a5276;background:rgba(41,128,185,.1);padding:3px 10px;border-radius:8px;margin-left:auto;font-weight:600}
+.kw1{background:rgba(26,82,118,.15);color:#1a3a52;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(26,82,118,.25)}
+.kw2{color:#117a8b;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border-bottom:2px solid rgba(17,122,139,.45)}
+.kw3{background:rgba(39,174,96,.13);color:#1e8449;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(39,174,96,.3)}
+.kw4{background:rgba(183,28,28,.11);color:#b71c1c;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(183,28,28,.25)}
+.q-text{font-size:clamp(15px,2.2vw,16.5px);line-height:1.9;margin-bottom:24px;color:#1a2633}
+.ox-btns{display:flex;gap:12px}
+.ox-btn{flex:1;padding:20px 10px;border-radius:12px;border:2px solid #aed6f1;background:#f4f9fe;color:#1a2633;font-size:30px;cursor:pointer;transition:all .18s ease;display:flex;flex-direction:column;align-items:center;gap:5px}
+.lb{font-size:11px;font-family:'JetBrains Mono',monospace;color:#2e86c1;letter-spacing:1px;font-weight:600}
+.ox-btn:hover:not(:disabled){transform:translateY(-2px)}
+.o-btn:hover:not(:disabled){border-color:#1a5276;background:rgba(26,82,118,.08)}
+.x-btn:hover:not(:disabled){border-color:#c62828;background:rgba(198,40,40,.06)}
+.co,.cx{border-color:#1a5276!important;background:rgba(26,82,118,.1)!important}
+.wp{border-color:#c62828!important;background:rgba(198,40,40,.08)!important}
+.ox-btn:disabled{cursor:default}
+.badge{display:none;margin-top:14px;padding:9px 16px;border-radius:8px;font-size:14px;font-weight:700;font-family:'JetBrains Mono',monospace}
+.badge.ok{display:inline-block;background:rgba(26,82,118,.1);color:#1a5276;border:1.5px solid rgba(26,82,118,.3)}
+.badge.ng{display:inline-block;background:rgba(198,40,40,.08);color:#c62828;border:1.5px solid rgba(198,40,40,.25)}
+.exp{display:none;margin-top:18px;border-radius:12px;overflow:hidden;animation:fade .3s ease}
+.exp.show{display:block}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.exp-header{background:linear-gradient(135deg,rgba(26,82,118,.12),rgba(41,128,185,.06));border:1.5px solid rgba(26,82,118,.25);border-bottom:none;padding:11px 16px}
+.exp-header span{font-size:11px;font-family:'JetBrains Mono',monospace;color:#1a3a52;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.exp-answer{background:rgba(26,82,118,.05);border:1.5px solid rgba(26,82,118,.2);border-top:none;border-bottom:none;padding:14px 16px}
+.ans-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#2e86c1;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-weight:700}
+.ans-text{font-size:15px;color:#1a2633;line-height:1.75;font-weight:500}
+.exp-body{background:rgba(26,82,118,.03);border:1.5px solid rgba(26,82,118,.15);border-top:1px solid rgba(26,82,118,.1);padding:14px 16px}
+.sec-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#117a8b;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;margin-top:13px;font-weight:700}
+.sec-label:first-child{margin-top:0}
+.exp-body p{font-size:14px;color:#1a3a52;line-height:1.8;margin-bottom:5px}
+.def-box{background:rgba(41,128,185,.06);border-left:4px solid #2980b9;padding:10px 14px;border-radius:0 8px 8px 0;margin:8px 0}
+.def-box p{color:#1a3a52;font-size:13.5px;line-height:1.75}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.compare.three{grid-template-columns:1fr 1fr 1fr}
+.compare-item{background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:8px;padding:11px 14px}
+.ci-title{font-size:11px;font-family:'JetBrains Mono',monospace;color:#1a3a52;font-weight:700;margin-bottom:5px}
+.compare-item p{font-size:13px;color:#2e4a6b;line-height:1.65}
+.next-btn{display:none;width:100%;margin-top:16px;padding:14px;background:linear-gradient(135deg,#1a5276,#2980b9);border:none;border-radius:10px;color:white;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:opacity .2s,transform .2s}
+.next-btn:hover{opacity:.88;transform:translateY(-1px)}
+.next-btn.show{display:block;animation:fade .3s ease}
+.score-card{display:none;text-align:center;padding:48px 24px}
+.score-card.show{display:block;animation:up .5s ease}
+.score-circle{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,#1a5276,#2980b9);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 0 40px rgba(26,82,118,.3)}
+.s-num{font-size:42px;font-weight:700;line-height:1;color:#fff}
+.s-total{font-size:14px;opacity:.85;color:#fff}
+.score-card h2{font-size:24px;margin-bottom:7px;color:#1a2633}
+.score-card p{color:#2e86c1;margin-bottom:24px;font-size:15px}
+.restart-btn{padding:13px 32px;background:#f4f9fe;border:2px solid #1a5276;border-radius:10px;color:#1a5276;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.restart-btn:hover{background:rgba(26,82,118,.1)}
+.nd{width:28px;height:28px;border-radius:6px;border:1.5px solid #aed6f1;background:#f4f9fe;font-size:11px;font-family:'JetBrains Mono',monospace;cursor:pointer;color:#2e86c1;transition:all .15s;display:inline-flex;align-items:center;justify-content:center;font-weight:600}
+.nd.cur{border-color:#1a5276;background:#1a5276;color:white}
+.nd.ok{border-color:#1a5276;background:rgba(26,82,118,.15);color:#1a3a52}
+.nd.ng{border-color:#c62828;background:rgba(198,40,40,.1);color:#c62828}
+.nd:hover:not(.cur){opacity:.7}
+#nav{display:flex;flex-wrap:wrap;gap:5px;max-width:720px;margin:0 auto 16px;padding:0 8px}
+</style>
+</head>
+<body>
+<div class="header-wrap">
+  <div class="header-topbar">
+    <span class="header-no">분류 6 <span>—</span> Stress &amp; Intonation</span>
+    <span class="header-label">음운론 OX 퀴즈</span>
+  </div>
+  <h1 class="header-title"><span class="title-hl">강세·인토네이션</span> OX</h1>
+  <div class="header-script">Stress, Foot, Nuclear Stress · 임용고시 대비</div>
+  <p class="header-sub">Heavy/Light Syllable · Suffix Stress · Compound · Sentence Stress · Foot Structure</p>
+  <div class="header-divider"></div>
+</div>
+<div class="prog-wrap">
+  <div class="prog-info"><span id="pt">1 / 28</span><span id="ps">정답 0개</span></div>
+  <div class="bar"><div class="bar-fill" id="bf" style="width:3.6%"></div></div>
+</div>
+<div id="rb" style="display:none;max-width:720px;margin:0 auto 14px;padding:0 8px">
+  <div style="background:rgba(26,82,118,.08);border:1.5px solid rgba(26,82,118,.3);border-radius:12px;padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <span id="rb-msg" style="font-size:13px;color:#1a2633;font-family:'JetBrains Mono',monospace;line-height:1.5"></span>
+    <button onclick="freshStart()" style="padding:10px 22px;background:#c62828;border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer;white-space:nowrap;flex-shrink:0">처음부터</button>
+  </div>
+</div>
+<div id="nav"></div>
+<div class="wrap">
+  <div id="qa"></div>
+  <div class="score-card" id="sc">
+    <div class="score-circle"><span class="s-num" id="fs">0</span><span class="s-total">/28</span></div>
+    <h2 id="rm"></h2><p id="rs"></p>
+    <button class="restart-btn" onclick="restart()">🔄 다시 풀기</button>
+  </div>
+</div>
+<script src="sounds.js"></script>
+<script src="score-popup.js"></script>
+<script>
+const SAVE_KEY='phono_stress_q28';
+const TOTAL=28;
+let cur=0,answers=new Array(TOTAL).fill(null);
+
+const Q=[
+/* ── 기초 ── */
+{src:"IPA 표기법",cat:"Basics",
+ text:"IPA에서 강세 기호 <span class='kw1'>ˈ</span>(primary)와 <span class='kw1'>ˌ</span>(secondary)는 강세를 받는 음절의 <b>뒤</b>에 표기한다.",
+ ans:false,
+ correct:"강세 기호는 해당 음절의 <span class='kw2'>앞</span>에 온다. 예: <span class='kw1'>/ˈfoʊtəgræf/</span> — ˈ는 강세 받는 음절 <b>시작 앞</b>에 위치.",
+ why:"IPA 협약(IPA 1999): stress mark precedes the syllable it belongs to. 철자 <b>뒤</b>에 어포스트로피처럼 쓰는 것은 잘못된 표기. 예: fo'tograph (×) → /ˈfoʊtəgræf/ (○)"},
+
+{src:"강세 3단계",cat:"Basics",
+ text:"<span class='kw1'>Secondary stress(ˌ)</span>를 받는 음절과 <span class='kw2'>unstressed</span> 음절은 강세의 세기가 동일하다.",
+ ans:false,
+ correct:"세기 순서: <span class='kw1'>primary(ˈ)</span> > <span class='kw2'>secondary(ˌ)</span> > <span class='kw2'>unstressed</span>. Secondary ≠ unstressed.",
+ why:"Secondary stress는 unstressed보다 강하지만 primary보다 약한 중간 단계. 예: <span class='kw1'>ˌpho·to·ˈgraph·ic</span> — ˌpho는 secondary, ·to·는 unstressed.",
+ compare:[{title:"<span class='kw1'>Primary ˈ</span>",desc:"가장 강함 · 핵심 음절"},{title:"<span class='kw2'>Secondary ˌ</span>",desc:"중간 · primary보다 약함"},{title:"<span class='kw2'>Unstressed</span>",desc:"가장 약함 · 종종 schwa"}]},
+
+{src:"Primary stress 개수",cat:"Basics",
+ text:"영어 단어에서 <span class='kw1'>primary stress(ˈ)</span>는 항상 정확히 하나 존재하며, secondary stress(ˌ)는 없을 수도 있다.",
+ ans:true,
+ correct:"영어 단어는 primary stress 하나가 필수. Secondary stress는 장단어에서 추가될 수 있지만 없어도 됨.",
+ why:"예: <span class='kw1'>ˈdog</span>(primary 1개, secondary 없음) / <span class='kw1'>ˌpho·to·ˈgraph·ic</span>(primary 1개, secondary 1개). Primary가 두 개인 단어는 영어에 없음."},
+
+{src:"Schwa 실현 환경",cat:"Basics",
+ text:"<span class='kw1'>/ə/(schwa)</span>는 비강세(unstressed) 음절에서 실현되며, primary stress를 받는 음절에는 나타나지 않는다.",
+ ans:true,
+ correct:"Schwa는 비강세 환경에서만 출현. <span class='kw2'>강세 음절</span>에는 full vowel(/æ/, /eɪ/, /oʊ/ 등)이 유지됨.",
+ why:"예: <span class='kw1'>photograph /ˈfoʊtəgræf/</span> — 첫 음절 ˈfoʊ에는 /oʊ/, 비강세 두 번째 음절은 /ə/. 강세 이동 시 약화 위치도 이동: phoˈtography /fəˈtɒgrəfi/ — 이번엔 첫 음절 /fə/."},
+
+/* ── Heavy / Light Syllable ── */
+{src:"Heavy/Light Syllable 정의",cat:"Heavy/Light",
+ text:"<span class='kw1'>Heavy syllable</span>이란 (a) 장모음·이중모음을 포함하거나, (b) 단모음에 코다 자음이 하나 이상 있는 음절을 가리킨다.",
+ ans:true,
+ correct:"Heavy = 장모음/이중모음 OR 단모음 + 코다(closed syllable). Light = 단모음 + 개음절(no coda).",
+ why:"예: <span class='kw1'>beat</span> /biːt/ — 장모음 → heavy. <span class='kw1'>bit</span> /bɪt/ — 단모음 + coda /t/ → heavy. <span class='kw2'>bi</span> /bɪ/ — 단모음, coda 없음 → light.",
+ compare:[{title:"<span class='kw1'>Heavy (H)</span>",desc:"장모음·이중모음 OR 단모음+coda"},{title:"<span class='kw2'>Light (L)</span>",desc:"단모음 + coda 없음 (open syllable)"}]},
+
+{src:"Heavy/Light & Stress",cat:"Heavy/Light",
+ text:"<span class='kw1'>Heavy syllable</span>은 강세를 유인(attract)하고, <span class='kw2'>light syllable</span>은 강세를 회피(avoid)하는 경향이 있다.",
+ ans:true,
+ correct:"Heavy syllable의 강세 유인 성질은 영어 단어 강세 배정 규칙의 핵심.",
+ why:"Penultimate heavy → penultimate stress 규칙의 근거. 예: <span class='kw1'>aˈgenda</span> — gen이 heavy(단모음+/n/) → 두 번째 음절 강세. <span class='kw1'>ˈcalendar</span> — -en- light → 강세 앞으로 이동."},
+
+{src:"agenda 강세",cat:"Heavy/Light",
+ text:"'agenda'의 강세는 첫 번째 음절에 있다 — <span class='kw4'>/ˈæʤəndə/</span>.",
+ ans:false,
+ correct:"<span class='kw1'>/əˈʤendə/</span> — 두 번째 음절 <b>-gen-</b>이 heavy(단모음 /e/ + coda /n/)이므로 penultimate rule 적용 → 두 번째 음절 강세.",
+ why:"Penultimate(끝에서 두 번째) 음절 -gen- : closed syllable → heavy → 강세 유인. 첫 음절 a- : /ə/ → light, unstressed. 많이 틀리는 단어: agenda, arena, antenna 등.",
+ compare:[{title:"<span class='kw1'>agenda</span>",desc:"/əˈʤendə/ — gen heavy"},{title:"<span class='kw2'>panorama</span>",desc:"/ˌpænəˈrɑːmə/ — -ra- heavy"}]},
+
+{src:"calendar 강세",cat:"Heavy/Light",
+ text:"'calendar /ˈkælɪndər/'에서 penultimate 음절 '-en-'이 <span class='kw2'>light</span>하기 때문에 강세가 antepenultimate(첫 번째)으로 이동한다.",
+ ans:true,
+ correct:"Penultimate -en- : 단모음 /ɪ/ + coda /n/... wait — /kæl·ɪn·dər/ → pen= -in- 단모음 /ɪ/ + no coda between syllables. Actually -in- is light (short vowel, coda goes to next syllable) → antepenultimate <b>cal-</b> gets stress.",
+ why:"Latin-origin words: penult heavy → stress penult / penult light → stress antepenult. -cal-(-kæl-) is the antepenult that receives stress. Cf. aˈgenda (penult heavy)."},
+
+{src:"라틴 어원 명사 강세 규칙",cat:"Noun Stress",
+ text:"라틴어 어원 다음절 명사에서 penultimate(끝에서 두 번째) 음절이 <span class='kw1'>heavy</span>하면 그 음절에 primary stress가 온다.",
+ ans:true,
+ correct:"Penultimate Heavy Rule: 명사에서 penult heavy → penult stress. Penult light → antepenult stress.",
+ why:"기출 핵심 규칙. 예: <span class='kw1'>aˈgenda</span>(gen-H), <span class='kw1'>aˈrena</span>(re-H: 장모음), <span class='kw1'>ˈcalendar</span>(en-L → cal에 강세). 동사도 유사 규칙 적용.",
+ compare:[{title:"Penult <span class='kw1'>H</span> → Penult 강세",desc:"agenda, arena, diploma"},{title:"Penult <span class='kw2'>L</span> → Antepenult 강세",desc:"calendar, editor, industry"}]},
+
+{src:"photography 강세",cat:"Noun Stress",
+ text:"'phoˈtography /fəˈtɒgrəfi/'에서 두 번째 음절 <b>-tog-</b>에 강세가 오는 것은, penultimate 음절 <b>-ra-</b>가 light하여 antepenultimate인 -tog-으로 강세가 이동하기 때문이다.",
+ ans:true,
+ correct:"4음절: pho-<b>tog</b>-ra-phy. Penult = -ra- (/rə/, light). Antepenult = -tog- (/tɒg/, heavy: 단모음+/g/ coda) → 강세 antepenult.",
+ why:"Strong syllable 검증: -tog- 는 closed syllable(단모음 /ɒ/ + coda /g/) → heavy. 따라서 penult rule 불충족 → antepenult인 -tog- 강세. 파생어 체인: <span class='kw1'>ˈphotograph → phoˈtography → ˌphoˈtographic</span>"},
+
+/* ── Suffix Stress ── */
+{src:"-ic suffix",cat:"Suffix Stress",
+ text:"-ic suffix는 <span class='kw1'>예외 없이</span> 모든 단어에서 직전 음절에 강세를 이동시킨다.",
+ ans:false,
+ correct:"-ic는 일반적으로 직전 음절 강세 이동 suffix이지만, <span class='kw2'>ˈarabic, ˈcatholic, ˈlunar·tic</span> 등 예외가 존재한다.",
+ why:"일반 규칙: ecoˈnomic, photoˈgraphic, geˈographic. 예외: <span class='kw2'>ˈarabic</span>(ˈær-ə-bɪk), <span class='kw2'>ˈcatholic</span>, <span class='kw2'>ˈrhetoric</span> — 이들은 antepenultimate에 강세 유지.",
+ compare:[{title:"✅ 규칙 적용",desc:"ecoˈnomic / photoˈgraphic"},{title:"❌ 예외",desc:"ˈarabic / ˈcatholic / ˈrhetoric"}]},
+
+{src:"-ness / -ful / -less / -ment / -ly",cat:"Suffix Stress",
+ text:"-ness, -ful, -less, -ment, -ly는 모두 <span class='kw1'>stress-neutral suffix</span>로, 어기의 강세를 변화시키지 않는다.",
+ ans:true,
+ correct:"이 다섯 접미사는 stress-neutral: 어기의 강세 위치가 그대로 유지됨.",
+ why:"예: <span class='kw1'>ˈhappy → ˈhappiness</span>, <span class='kw1'>ˈuse → ˈuseful → ˈuseless</span>, <span class='kw1'>deˈvelop → deˈvelopment</span>, <span class='kw1'>ˈquick → ˈquickly</span>. Cf. stress-shifting: -tion, -ic, -ity, -ify."},
+
+{src:"-tion/-sion suffix",cat:"Suffix Stress",
+ text:"-tion / -sion은 <span class='kw1'>stress-shifting suffix</span>로, 직전 음절에 강세를 이동시킨다.",
+ ans:true,
+ correct:"-tion/-sion은 직전 음절 강세 유인. 예: proˈduction, naˈtion, diˈrection.",
+ why:"<span class='kw1'>-tion</span> 규칙: 강세 → -tion 직전 음절. 파생어 체인: <span class='kw1'>ˈproduce → proˈduction</span> (강세 이동 + 모음 약화). 기출 빈출 유형: IPA 전사에서 -tion 직전 음절 강세 확인.",
+ compare:[{title:"<span class='kw1'>Stress-shifting</span>",desc:"-tion, -ic, -ity, -ify → 강세 이동"},{title:"<span class='kw2'>Stress-neutral</span>",desc:"-ness, -ful, -less, -ment, -ly → 강세 유지"}]},
+
+{src:"-ify suffix",cat:"Suffix Stress",
+ text:"'iˈdentify /aɪˈdentɪfaɪ/'에서 두 번째 음절 <b>-den-</b>에 강세가 오는 것은 -ify suffix의 영향이다.",
+ ans:true,
+ correct:"-ify는 결과 단어의 antepenultimate에 강세를 배치. i-<b>DEN</b>-ti-fy → antepenultimate = -den-.",
+ why:"4음절 단어 i-den-ti-fy. Antepenultimate = den(3rd from end). -ify는 접미사 시작 2음절 앞에 강세. Cf. <span class='kw1'>ˈpure → ˈpurity</span>(-ity: 직전 음절), <span class='kw1'>ˈproduct → proˈduction</span>(-tion: 직전)."},
+
+/* ── Disyllabic N/V pairs ── */
+{src:"2음절 명사·동사 강세 규칙",cat:"N/V Stress",
+ text:"2음절 동형이의어(명사·동사)에서 <span class='kw2'>동사</span>는 일반적으로 <span class='kw1'>첫 번째</span> 음절에 primary stress를 받는다.",
+ ans:false,
+ correct:"동사 → <span class='kw1'>두 번째</span> 음절 강세 / 명사 → 첫 번째 음절 강세. 예: ˈpermit(N) vs perˈmit(V).",
+ why:"규칙: 명사 → 첫 음절(ˈ) / 동사 → 둘째 음절(ˈ). 예: <span class='kw1'>ˈrecord / reˈcord</span>, <span class='kw1'>ˈconduct / conˈduct</span>, <span class='kw1'>ˈprotest / proˈtest</span>.",
+ compare:[{title:"<span class='kw2'>명사(N)</span>",desc:"ˈpermit / ˈrecord / ˈconduct"},{title:"<span class='kw1'>동사(V)</span>",desc:"perˈmit / reˈcord / conˈduct"}]},
+
+{src:"permit N vs V",cat:"N/V Stress",
+ text:"'permit'이 명사일 때는 <span class='kw1'>/ˈpɜːrmɪt/</span>, 동사일 때는 <span class='kw2'>/pərˈmɪt/</span>으로 발음된다.",
+ ans:true,
+ correct:"<span class='kw1'>ˈpermit</span>(N) vs <span class='kw2'>perˈmit</span>(V) — 동일 철자, 품사에 따라 강세 위치 상이.",
+ why:"기출 빈출 단어 쌍. 문맥 속 품사 판단 → 강세 표기가 핵심 유형. 추가 예: <span class='kw1'>ˈinsult/inˈsult</span>, <span class='kw1'>ˈrefund/reˈfund</span>, <span class='kw1'>ˈprotest/proˈtest</span>."},
+
+{src:"present: N/Adj vs V",cat:"N/V Stress",
+ text:"'present'는 명사, 형용사, 동사 세 품사 모두에서 <span class='kw4'>동일하게</span> 첫 번째 음절에 강세가 온다.",
+ ans:false,
+ correct:"명사·형용사 = <span class='kw1'>ˈpresent</span>(첫 음절) / 동사 = <span class='kw2'>preˈsent</span>(둘째 음절).",
+ why:"'present'처럼 명사·형용사는 첫 음절, 동사는 둘째 음절 강세. 형용사 역시 명사와 같이 첫 음절. The ˈpresent situation(adj) vs. I'll preˈsent the findings(V).",
+ compare:[{title:"<span class='kw1'>ˈpresent</span> (N/Adj)",desc:"the ˈpresent / a ˈpresent(선물)"},{title:"<span class='kw2'>preˈsent</span> (V)",desc:"to preˈsent the results"}]},
+
+/* ── Compound vs Phrase ── */
+{src:"Compound Noun Stress",cat:"Compound Stress",
+ text:"<span class='kw1'>Compound noun</span>에서 primary stress는 첫 번째 요소에 온다.",
+ ans:true,
+ correct:"Compound noun: primary stress on the <span class='kw1'>first element</span>. Noun phrase: primary stress on the <span class='kw2'>head noun</span>(두 번째 요소).",
+ why:"예: <span class='kw1'>ˈblackboard</span>(compound: 칠판) vs <span class='kw2'>black ˈboard</span>(phrase: 검은 색 판). <span class='kw1'>ˈgreenhouse</span>(온실) vs <span class='kw2'>green ˈhouse</span>(초록 집). 의미 차이와 강세 차이 세트로 암기.",
+ compare:[{title:"<span class='kw1'>Compound N</span>",desc:"ˈblackbird · ˈgreenhouse · ˈwhite board"},{title:"<span class='kw2'>Noun Phrase</span>",desc:"black ˈbird · green ˈhouse · white ˈboard"}]},
+
+{src:"blackbird vs black bird",cat:"Compound Stress",
+ text:"<span class='kw1'>ˈblackbird</span>(찌르레기)와 <span class='kw2'>black ˈbird</span>(검은 새)는 의미가 다르고 강세 위치도 다르다.",
+ ans:true,
+ correct:"<span class='kw1'>ˈblackbird</span>: compound noun → 첫 요소 강세 · 특정 종(찌르레기). <span class='kw2'>black ˈbird</span>: noun phrase → head 강세 · 검은 색의 새.",
+ why:"기출 단골 예시. Compound는 형태적·의미적으로 단일 단위 → 첫 요소 강세. Phrase는 head(명사)에 강세 → Nuclear Stress Rule(NSR) 적용."},
+
+/* ── Sentence / Nuclear Stress ── */
+{src:"Content vs Function words",cat:"Sentence Stress",
+ text:"연속 발화에서 명사·동사·형용사·부사는 강세를 받고, 관사·전치사·접속사·대명사는 일반적으로 약화된다.",
+ ans:true,
+ correct:"<span class='kw1'>Content words</span>(명사·동사·형용사·부사·의문사) → 강세. <span class='kw2'>Function words</span>(관사·전치사·접속사·조동사·대명사) → 일반적으로 약화.",
+ why:"Function words는 약화 시 종종 schwa 실현 — 예: 'to' /tə/, 'for' /fər/, 'a' /ə/. 단, 강조·문장 끝 위치·대조 맥락에서는 강세 가능.",
+ compare:[{title:"<span class='kw1'>Content words</span>",desc:"N, V(main), Adj, Adv, Wh-"},{title:"<span class='kw2'>Function words</span>",desc:"관사, 전치사, 접속사, 조동사, 대명사"}]},
+
+{src:"be 동사 강세",cat:"Sentence Stress",
+ text:"기능어인 동사 'be'는 어떤 상황에서도 강세를 받지 않는다.",
+ ans:false,
+ correct:"'be'는 일반적으로 약화되지만, <span class='kw2'>강조·대조·문장 끝·짧은 대답</span>에서 강세를 받을 수 있다.",
+ why:"예: A: Are you sure? B: I <span class='kw1'>AM</span> sure.(강조) / A: Is he coming? B: He <span class='kw1'>is</span>.(문장 끝). Function word지만 맥락에 따라 stressed 가능 → 예외 암기 필요.",
+ compare:[{title:"일반 (약화)",desc:"'He is here' → He's here /hɪz/"},{title:"강조 시 (강세)",desc:"'He IS here' → emphatic /ɪz/"}]},
+
+{src:"Nuclear Stress Rule (NSR)",cat:"Sentence Stress",
+ text:"<span class='kw1'>Nuclear Stress Rule(NSR)</span>에 따르면, <span class='kw2'>broad focus</span> 발화에서 핵강세(nuclear stress)는 발화의 마지막 major constituent에 온다.",
+ ans:true,
+ correct:"NSR: broad focus → 마지막 content word(주요 성분)에 핵강세. Narrow/contrastive focus → 초점 요소로 이동.",
+ why:"예: 'John bought a <span class='kw1'>BOOK</span>.'(broad focus — 무슨 일 있었냐?) / '<span class='kw1'>JOHN</span> bought a book.'(narrow — 누가 샀냐? John이). 핵강세 위치 = 담화 정보 초점의 위치.",
+ compare:[{title:"<span class='kw2'>Broad focus</span>",desc:"마지막 content word에 핵강세"},{title:"<span class='kw1'>Narrow/Contrastive</span>",desc:"초점 요소(강조 대상)로 핵강세 이동"}]},
+
+{src:"Contrastive stress",cat:"Sentence Stress",
+ text:"'<span class='kw1'>JOHN</span> left.'에서 JOHN에 핵강세가 오면, 이는 John이 (다른 누군가가 아닌) 떠났음을 강조한다.",
+ ans:true,
+ correct:"Contrastive focus: <span class='kw1'>JOHN</span>에 강세 → '다른 사람(Mary 등)이 아닌 John이' 떠났다는 대조 함의.",
+ why:"핵강세 위치 = 새 정보 또는 대조 정보의 위치. 같은 문장도 핵강세 위치에 따라 다른 전제를 만들어냄. 기출: 핵강세 이동과 담화 맥락 연결 유형.",
+ compare:[{title:"<span class='kw1'>JOHN</span> left.",desc:"누가 떠났냐? → John (대조)"},{title:"John <span class='kw1'>LEFT</span>.",desc:"John이 어찌됐냐? → 떠났다 (broad)"}]},
+
+/* ── Prosody & Foot ── */
+{src:"Name Game — 2025 B04",cat:"Foot/Prosody",
+ text:"2025 임용 B4 Name Game 문제에서 'Jerome [ʤəɹóm]'을 게임에 사용할 수 없는 이유는 첫 음절이 <span class='kw2'>비강세 음절</span>이기 때문이다.",
+ ans:true,
+ correct:"Name Game 허용 조건: 이름의 <span class='kw1'>첫 음절에 primary stress</span>가 있어야 함. Jerome은 첫 음절 /ʤə/가 비강세 → 불가.",
+ why:"Name Game: Tony[ˈtóni], Kit[kít] 가능 → 첫 음절 강세. Jerome[ʤəˈróm], Michelle[mɪˈʃel], Olivia[əˈlíviə] 불가 → 첫 음절 비강세. 기출 핵심: prosodic condition 진술.",
+ compare:[{title:"✅ 가능",desc:"Tony / Lana / Kit — 첫 음절 primary stress"},{title:"❌ 불가",desc:"Jerome / Michelle / Olivia — 첫 음절 비강세"}]},
+
+{src:"Trochaic Foot",cat:"Foot Structure",
+ text:"영어는 기본적으로 <span class='kw1'>trochaic foot</span>(강-약, <b>S-W</b>) 패턴을 선호한다.",
+ ans:true,
+ correct:"영어는 trochaic(S-W) 기반 리듬 언어. 대부분의 native English words는 첫 음절 강세(S-W) 구조.",
+ why:"Foot = 하나의 의무적 strong syllable + 선택적 weak syllable. 영어의 기본 리듬: <span class='kw1'>ˈHAppy / ˈTAble / ˈCINema</span>(S-W, S-W-W). Iambic은 영어에서 less common.",
+ compare:[{title:"<span class='kw1'>Trochaic (S-W)</span>",desc:"HAppy / TAble / ˈENglish — 영어 기본"},{title:"<span class='kw2'>Iambic (W-S)</span>",desc:"toDAY / aLONE / beLIEVE"}]},
+
+{src:"Iambic Foot",cat:"Foot Structure",
+ text:"<span class='kw1'>Iambic foot</span>은 <b>W-S</b>(약-강) 패턴으로, 'toDAY', 'aLONE'이 예가 된다.",
+ ans:true,
+ correct:"Iambic = W-S. 영어에서 2음절 동사·전치사구 등에서 나타남.",
+ why:"기출(2025 B4 foot 관련): trochaic(S-W)와 iambic(W-S) 비교가 핵심. Foot boundary는 단어 경계와 반드시 일치하지 않음. 예: 'a-ˈLONE' = W-S(iambic foot).",
+ compare:[{title:"<span class='kw1'>Trochaic S-W</span>",desc:"ˈHAppy / ˈtable"},{title:"<span class='kw2'>Iambic W-S</span>",desc:"toˈDAY / aˈLONE"}]},
+
+{src:"Stress-shift와 Foot",cat:"Foot Structure",
+ text:"<span class='kw1'>Stress-shift</span>는 음절(syllable) 수준이 아닌 <span class='kw2'>foot</span> 수준에서 작동한다.",
+ ans:true,
+ correct:"Stress-shift operates at the foot level: target syllable must be the onset of a foot, not just any syllable.",
+ why:"기출 분석 자료 핵심: 'stress-shift requires a target foot-initial position.' 예: 'ˌthir·ˈteen'이 'ˌthir·teen ˈmen'으로 바뀌는 것은 foot-level clash 해소. 단순히 음절 앞으로 이동이 아님.",
+ compare:[{title:"❌ 음절 단위",desc:"단순히 인접 음절로 이동"},{title:"✅ Foot 단위",desc:"foot-initial position으로 이동 (clash 회피)"}]},
+
+{src:"강세 이동 → 모음 약화 이동",cat:"Vowel Reduction",
+ text:"강세가 이동하면 <span class='kw2'>모음 약화(vowel reduction)</span>의 위치도 함께 이동한다 — 예: <span class='kw1'>ˈphotograph</span>에서 /oʊ/가, <span class='kw2'>phoˈtography</span>에서는 /ə/로 약화 위치가 달라진다.",
+ ans:true,
+ correct:"강세 이동 시 약화 위치도 이동. <span class='kw1'>ˈpho-to-graph</span>: pho /oʊ/강세, to /ə/ 약화. <span class='kw2'>pho-ˈtog-ra-phy</span>: pho /fə/ 약화, tog /ɒ/ 강세.",
+ why:"기출 IPA 전사 문제 핵심: 파생어 체인에서 강세 이동을 알면 약화 위치도 자동으로 결정. <span class='kw1'>ˈphotograph /ˈfoʊtəgræf/</span> → <span class='kw2'>phoˈtography /fəˈtɒgrəfi/</span> → <span class='kw1'>ˌphoˈtographic /ˌfoʊtəˈgræfɪk/</span>."}
+];
+
+function renderExp(q,isCorrect){
+  let h=`<div class="exp show"><div class="exp-header"><span>Explanation</span></div><div class="exp-answer"><div class="ans-label">정답 — ${q.ans?'O (correct)':'X (wrong)'}</div><div class="ans-text">${q.correct}</div></div><div class="exp-body">`;
+  if(q.why){h+=`<div class="sec-label">Why</div><p>${q.why}</p>`;}
+  if(q.source){h+=`<div class="sec-label">Source</div><div class="def-box"><p>${q.source}</p></div>`;}
+  if(q.compare&&q.compare.length){
+    const cls=q.compare.length===3?'compare three':'compare';
+    h+=`<div class="sec-label">Compare</div><div class="${cls}">`;
+    q.compare.forEach(c=>{h+=`<div class="compare-item"><div class="ci-title">${c.title}</div><p>${c.desc}</p></div>`;});
+    h+=`</div>`;
+  }
+  h+=`</div></div>`;
+  return h;
+}
+function getScore(){return answers.filter(a=>a&&a.correct).length;}
+function renderNav(){
+  const n=document.getElementById('nav');
+  n.innerHTML='';
+  answers.forEach((_,i)=>{
+    const a=answers[i];
+    const cls=i===cur?'nd cur':a===null?'nd':a.correct?'nd ok':'nd ng';
+    n.innerHTML+=`<button class="${cls}" onclick="jumpTo(${i})">${i+1}</button>`;
+  });
+}
+function restart(){cur=0;answers=new Array(TOTAL).fill(null);localStorage.removeItem(SAVE_KEY);document.getElementById('sc').classList.remove('show');document.getElementById('qa').style.display='block';renderNav();render();}
+function render(){
+  if(cur>=TOTAL){
+    document.getElementById('qa').style.display='none';
+    document.getElementById('sc').classList.add('show');
+    const s=getScore();
+    document.getElementById('fs').textContent=s;
+    const p=s/TOTAL;
+    document.getElementById('rm').textContent=p===1?'🎉 Perfect!':p>=.8?'👏 Great!':p>=.6?'😊 Good!':'💪 Keep going!';
+    document.getElementById('rs').textContent=`${TOTAL}문제 중 ${s}문제 정답 (${Math.round(p*100)}%)`;
+    setTimeout(()=>{window.showScorePopup&&window.showScorePopup(s,TOTAL);},400);
+    renderNav();return;
+  }
+  document.getElementById('sc').classList.remove('show');
+  document.getElementById('qa').style.display='block';
+  renderNav();
+  const q=Q[cur];
+  document.getElementById('bf').style.width=((cur+1)/TOTAL*100).toFixed(1)+'%';
+  document.getElementById('pt').textContent=`${cur+1} / ${TOTAL}`;
+  document.getElementById('ps').textContent=`정답 ${getScore()}개`;
+  const a=answers[cur];
+  if(a!==null){
+    let oc='',xc='';
+    if(a.picked===true){oc=a.correct?'co':'wp';if(!a.correct)xc='cx';}
+    else{xc=a.correct?'cx':'wp';if(!a.correct)oc='co';}
+    document.getElementById('qa').innerHTML=`<div class="card"><div class="q-meta"><span class="q-num">Q${cur+1}</span><span class="q-src">${q.src}</span><span class="q-cat">${q.cat}</span></div><div class="q-text">${q.text}</div><div class="ox-btns"><button class="ox-btn o-btn ${oc}" disabled>⭕<span class="lb">CORRECT</span></button><button class="ox-btn x-btn ${xc}" disabled>❌<span class="lb">WRONG</span></button></div><div class="badge ${a.correct?'ok':'ng'}">${a.correct?'✅ 정답!':'❌ 오답! 정답은 '+(q.ans?'O':'X')}</div><div>${renderExp(q,a.correct)}</div><button class="next-btn show" onclick="next()">${cur<TOTAL-1?'Next →':'결과 보기 →'}</button></div>`;
+  }else{
+    document.getElementById('qa').innerHTML=`<div class="card"><div class="q-meta"><span class="q-num">Q${cur+1}</span><span class="q-src">${q.src}</span><span class="q-cat">${q.cat}</span></div><div class="q-text">${q.text}</div><div class="ox-btns"><button class="ox-btn o-btn" onclick="pick(true)" id="ob">⭕<span class="lb">CORRECT</span></button><button class="ox-btn x-btn" onclick="pick(false)" id="xb">❌<span class="lb">WRONG</span></button></div><div id="bd" class="badge"></div><div id="ep"></div><button class="next-btn" id="nb" onclick="next()">${cur<TOTAL-1?'Next →':'결과 보기 →'}</button></div>`;
+  }
+}
+function pick(val){
+  const q=Q[cur];
+  document.getElementById('ob').disabled=true;
+  document.getElementById('xb').disabled=true;
+  const ok=val===q.ans;
+  answers[cur]={picked:val,correct:ok};
+  if(ok){if(typeof playOk==='function')playOk();}else{if(typeof playNg==='function')playNg();}
+  const bd=document.getElementById('bd');
+  bd.textContent=ok?'✅ 정답!':`❌ 오답! 정답은 ${q.ans?'O':'X'}`;
+  bd.className='badge '+(ok?'ok':'ng');
+  document.getElementById(val?'ob':'xb').classList.add(ok?(val?'co':'cx'):'wp');
+  if(!ok)document.getElementById(q.ans?'ob':'xb').classList.add(q.ans?'co':'cx');
+  document.getElementById('ep').innerHTML=renderExp(q,ok);
+  document.getElementById('nb').classList.add('show');
+  document.getElementById('ps').textContent=`정답 ${getScore()}개`;
+  renderNav();saveProgress();
+}
+function next(){cur++;saveProgress();render();}
+function jumpTo(i){cur=i;render();document.getElementById('qa').scrollIntoView({behavior:'smooth',block:'start'});}
+function saveProgress(){localStorage.setItem(SAVE_KEY,JSON.stringify({cur,answers}));}
+function freshStart(){localStorage.removeItem(SAVE_KEY);cur=0;answers=new Array(TOTAL).fill(null);document.getElementById('rb').style.display='none';document.getElementById('sc').classList.remove('show');document.getElementById('qa').style.display='block';renderNav();render();}
+(function(){
+  const saved=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');
+  if(saved&&saved.answers&&saved.cur>=0&&saved.cur<TOTAL){
+    cur=saved.cur;answers=saved.answers;
+    const done=answers.filter(a=>a!==null).length;
+    if(done>0){document.getElementById('rb-msg').textContent=`이어서 풀기 중 · ${done}/${TOTAL} 문제 완료 (정답 ${getScore()}개)`;document.getElementById('rb').style.display='block';}
+  }
+  renderNav();render();
+})();
+</script>
+</body>
+</html>

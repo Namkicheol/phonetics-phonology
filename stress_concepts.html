@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch.1 Primary &amp; Secondary Stress — 개념 정리 | 임용 음운론</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #1a5276;
+  --primary-light: #e1ecf4;
+  --accent: #e8533a;
+  --green: #1a6e42;
+  --green-bg: #eaf6f0;
+  --red-bg: #fdf0ed;
+  --red-border: #e8b0a0;
+  --yellow-bg: #fffbee;
+  --yellow-border: #f0d060;
+  --gray: #f4f8fb;
+  --border: #dce9f0;
+  --text: #1a1a2e;
+  --muted: #666;
+  --serif: 'Noto Serif KR', serif;
+  --sans: 'Noto Sans KR', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--sans); color: var(--text); background: #fff; line-height: 1.9; }
+
+/* ── 헤더 ── */
+.hero {
+  background: var(--primary);
+  color: #fff;
+  padding: 48px 32px 40px;
+  text-align: center;
+}
+.hero-tag {
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 14px;
+  font-family: var(--mono);
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: 30px;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.hero h1 span { color: #ffd166; }
+.hero p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  max-width: 500px;
+  margin: 0 auto;
+}
+.hero-badges {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.badge {
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.85);
+  font-family: var(--mono);
+}
+
+/* ── 본문 ── */
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 20px 60px; }
+
+/* ── 섹션 헤더 ── */
+.sec-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 52px 0 20px;
+}
+.sec-num {
+  width: 36px; height: 36px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.sec-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--primary);
+}
+.sec-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ── 본문 텍스트 ── */
+.body-text {
+  font-size: 15px;
+  line-height: 1.9;
+  color: #2a2a3e;
+  margin-bottom: 18px;
+}
+.body-text strong { color: var(--primary); }
+
+/* ── 개념 카드 (정의 블록) ── */
+.concept-card {
+  background: var(--primary-light);
+  border: 1px solid #b8d4e8;
+  border-left: 5px solid var(--primary);
+  border-radius: 0 10px 10px 0;
+  padding: 18px 22px;
+  margin: 18px 0;
+}
+.concept-card .card-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  font-family: var(--mono);
+}
+.concept-card p {
+  font-size: 14px;
+  margin: 6px 0;
+  line-height: 1.8;
+}
+.concept-card strong { color: var(--primary); }
+.concept-card .indent { margin-left: 16px; color: var(--muted); font-size: 13px; }
+
+/* ── 임용 포인트 박스 (노란색) ── */
+.exam {
+  background: var(--yellow-bg);
+  border: 1px solid var(--yellow-border);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 18px 0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.exam-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #7a6000;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.exam strong { color: #7a6000; }
+
+/* ── 경고 박스 (빨간색, 오개념용) ── */
+.warn-box {
+  background: var(--red-bg);
+  border: 1px solid var(--red-border);
+  border-left: 5px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  padding: 18px 22px;
+  margin: 16px 0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.warn-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.warn-box strong { color: #b03020; }
+.warn-box .ok { color: var(--green); font-weight: 600; }
+.warn-box .bad { color: var(--accent); font-weight: 600; }
+
+/* ── 노트 블록 ── */
+.note {
+  font-size: 14px;
+  padding: 10px 16px;
+  background: var(--gray);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 10px 0;
+  line-height: 1.8;
+}
+.note ul { padding-left: 20px; margin: 6px 0; }
+.note li { margin: 4px 0; }
+
+/* ── 비교 테이블 ── */
+.cmp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  margin: 18px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+}
+.cmp-table th {
+  background: var(--primary);
+  color: #fff;
+  padding: 11px 16px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 13px;
+}
+.cmp-table th:first-child { text-align: left; }
+.cmp-table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+  line-height: 1.7;
+  text-align: center;
+}
+.cmp-table td:first-child { text-align: left; font-weight: 500; }
+.cmp-table tr:last-child td { border-bottom: none; }
+.cmp-table tr:nth-child(even) td { background: #f6fbff; }
+.cmp-table .o { color: var(--green); font-weight: 700; font-size: 15px; }
+.cmp-table .x { color: var(--accent); font-weight: 700; font-size: 15px; }
+.cmp-table .pm { color: #888; font-weight: 600; }
+
+/* ── IPA 디스플레이 ── */
+.ipa-display {
+  font-family: var(--mono);
+  font-size: 22px;
+  text-align: center;
+  padding: 18px 12px;
+  background: var(--gray);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin: 14px 0;
+  letter-spacing: 2px;
+  color: var(--primary);
+}
+.ipa-display .syllable { display: inline-block; position: relative; margin: 0 2px; }
+.ipa-display .num {
+  font-size: 11px;
+  color: #888;
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ── 예문 박스 ── */
+.eg-box {
+  background: var(--gray);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 14px 0;
+}
+.eg-box .eg-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--muted);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.eg-box .en {
+  font-family: var(--mono);
+  font-size: 13px;
+  display: block;
+  margin: 4px 0;
+  color: #2a2a3e;
+  line-height: 1.7;
+}
+
+/* ── 구분선 ── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 40px 0;
+}
+
+/* ── 내비게이션 ── */
+.ch-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0 8px;
+  border-top: 1px solid var(--border);
+  margin-top: 24px;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.nav-btn {
+  display: inline-block;
+  padding: 9px 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 13px;
+  color: var(--primary);
+  background: #fff;
+  transition: background 0.15s;
+  white-space: nowrap;
+  font-weight: 500;
+}
+.nav-btn:hover { background: var(--primary-light); }
+.nav-btn.prev { color: var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- ── 헤더 ── -->
+<div class="hero">
+  <div class="hero-tag">Applied English Phonology · Yavaş 2011 · Ch. 7</div>
+  <h1>Ch.1 <span>Primary &amp; Secondary Stress</span><br>개념 정리</h1>
+  <p>강세의 본질부터 1차·2차 강세의 구분까지 — 임용 음운론 핵심 기초</p>
+  <div class="hero-badges">
+    <span class="badge">Stress 정의</span>
+    <span class="badge">IPA 강세 기호</span>
+    <span class="badge">Tonic Accent</span>
+    <span class="badge">photograph chain</span>
+    <span class="badge">Secondary Stress 3원칙</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ════════════════════════════════════
+     §1. 강세(Stress)의 정의
+════════════════════════════════════ -->
+<div class="sec-header">
+  <div class="sec-num">1</div>
+  <div>
+    <div class="sec-title">강세(Stress)의 정의</div>
+    <div class="sec-sub">Yavaş §7.1 — Prosodic features of prominence</div>
+  </div>
+</div>
+
+<p class="body-text">
+  <strong>Stress(강세)</strong>는 <em>duration(지속시간)</em>, <em>intensity(강도)</em>, <em>pitch(음조)</em>를 아우르는 음운론적 통칭어입니다.
+  강세를 받은 음절은 그렇지 않은 음절에 비해 <strong>더 길고(longer), 더 크고(louder), 더 높은 음조(higher in pitch)</strong>를 갖습니다.
+  화자의 관점에서는 더 많은 근육 에너지 사용이고, 청자의 관점에서는 지각적 돌출성(perceptual prominence)입니다.
+</p>
+
+<div class="concept-card">
+  <div class="card-title">Stress의 3가지 음향 특성</div>
+  <p><strong>Duration (지속시간)</strong>: 강세 음절이 더 길다</p>
+  <p><strong>Intensity (강도/loudness)</strong>: 강세 음절이 더 크다</p>
+  <p><strong>Pitch (음조/F0)</strong>: 강세 음절이 더 높은 음조를 가진다</p>
+  <p style="margin-top:10px;font-size:13px;color:var(--muted)">
+    ※ Fry(1955): 영어에서 청자가 강세를 지각하는 데 가장 중요한 단서는 <strong>pitch(음조)</strong>이다.
+    다음은 intensity, 마지막이 duration 순서.
+  </p>
+</div>
+
+<p class="body-text">
+  영어는 <strong>Stress-timed 언어</strong>로, 강세 음절 사이의 간격이 대략 일정하게 유지되는 경향이 있습니다.
+  반면 스페인어·한국어 등은 <strong>Syllable-timed 언어</strong>로, 각 음절의 지속시간이 거의 동일합니다.
+</p>
+
+<div class="note">
+  <ul>
+    <li><strong>Stress-timed</strong> (강세 박자): 영어, 독일어, 러시아어 — 강세 음절 사이 간격이 일정</li>
+    <li><strong>Syllable-timed</strong> (음절 박자): 스페인어, 프랑스어, 한국어 — 음절마다 지속시간이 일정</li>
+    <li>이 구분은 절대적이 아닌 <em>경향(tendency)</em>이며, 실제로는 연속체(continuum)를 이룸</li>
+  </ul>
+</div>
+
+<p class="body-text">
+  영어 강세는 또한 <strong>variable(가변적)</strong>이며 <strong>mobile(이동 가능)</strong>합니다.
+  게르만어계 특성으로 어떤 음절도 강세를 받을 수 있고, 형태론적으로 관련된 단어 쌍에서 강세 위치가 이동합니다:
+  <em>ˈphoto·graph → phoˈtogra·phy → ˌphoto·ˈgraphic</em>.
+</p>
+
+<div class="exam">
+  <div class="exam-label">임용 포인트</div>
+  <strong>Stress-timed vs Syllable-timed 언어 구분</strong>은 임용 단골 개념입니다.<br>
+  영어(Stress-timed)와 한국어/스페인어(Syllable-timed)의 차이를 리듬 유형과 연결하여 설명할 수 있어야 합니다.
+  영어에서 pitch가 강세의 주요 지각 단서라는 Fry(1955)의 연구도 기억하세요.
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     §2. IPA 강세 기호
+════════════════════════════════════ -->
+<div class="sec-header">
+  <div class="sec-num">2</div>
+  <div>
+    <div class="sec-title">IPA 강세 기호</div>
+    <div class="sec-sub">Primary / Secondary / Numbered System</div>
+  </div>
+</div>
+
+<p class="body-text">
+  IPA에서 강세는 음절 <strong>앞에(before)</strong> 표기합니다. 위에 붙이는 것이 아닙니다.
+</p>
+
+<div class="concept-card">
+  <div class="card-title">IPA 강세 기호 2종</div>
+  <p><strong>ˈ</strong> (U+02C8) — 1차 강세(Primary Stress): 강세 음절 바로 앞에 배치</p>
+  <p class="indent">예: <em>ˈpho·to·graph</em>, <em>phoˈtog·ra·phy</em></p>
+  <p style="margin-top:10px"><strong>ˌ</strong> (U+02CC) — 2차 강세(Secondary Stress): 강세 음절 바로 앞에 배치</p>
+  <p class="indent">예: <em>ˌpho·toˈgraph·ic</em></p>
+</div>
+
+<p class="body-text">
+  Yavaş(2011)는 Ladefoged(2001)의 방식을 따라, 1차/2차 강세의 차이를 <strong>강세(stress)가 아니라 음조(pitch)</strong>의 차이로 봅니다.
+  두 음절 모두 '두드러짐(prominence)'을 가지지만, 오직 하나만 <strong>tonic accent(음조 강세)</strong>, 즉 주요 음조 변화를 가집니다.
+</p>
+
+<div class="concept-card">
+  <div class="card-title">숫자 강세 체계 (Numbered Stress System)</div>
+  <p>각 음절의 강세 수준을 숫자로 표기하는 방식. 특징(feature)의 '+' 개수에 따라 결정됩니다.</p>
+  <table class="cmp-table" style="margin-top:12px">
+    <tr>
+      <th>숫자</th>
+      <th>강세 유형</th>
+      <th>+stress</th>
+      <th>+tonic accent</th>
+      <th>+full V</th>
+    </tr>
+    <tr>
+      <td><strong>1</strong></td>
+      <td>1차 강세 (Primary)</td>
+      <td class="o">+</td>
+      <td class="o">+</td>
+      <td class="o">+</td>
+    </tr>
+    <tr>
+      <td><strong>2</strong></td>
+      <td>2차 강세 (Secondary)</td>
+      <td class="o">+</td>
+      <td class="x">−</td>
+      <td class="o">+</td>
+    </tr>
+    <tr>
+      <td><strong>3</strong></td>
+      <td>비강세 — 완전 모음</td>
+      <td class="x">−</td>
+      <td class="x">−</td>
+      <td class="o">+</td>
+    </tr>
+    <tr>
+      <td><strong>4</strong></td>
+      <td>비강세 — 약화 모음 [ə]</td>
+      <td class="x">−</td>
+      <td class="x">−</td>
+      <td class="x">−</td>
+    </tr>
+  </table>
+  <p style="font-size:13px;color:var(--muted);margin-top:6px">+가 3개 → 1등급, 2개 → 2등급, 1개 → 3등급, 0개 → 4등급</p>
+</div>
+
+<div class="exam">
+  <div class="exam-label">임용 포인트</div>
+  <strong>기호 위치</strong>: IPA 강세 표기는 반드시 음절 <em>앞</em>에 붙입니다 (ˈsyl·la·ble).<br>
+  숫자 체계는 세 가지 자질(+stress, +tonic accent, +full V)의 조합으로 결정되며,
+  이 체계를 이용해 photograph chain 분석 등을 기계적으로 수행할 수 있어야 합니다.
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     §3. Primary vs Secondary vs Unstressed 비교표
+════════════════════════════════════ -->
+<div class="sec-header">
+  <div class="sec-num">3</div>
+  <div>
+    <div class="sec-title">Primary vs Secondary vs Unstressed 비교</div>
+    <div class="sec-sub">Yavaş §7.4 — 세 가지 음절 유형의 자질 비교</div>
+  </div>
+</div>
+
+<p class="body-text">
+  영어 음절은 세 자질 <strong>(a) +stress / (b) +tonic accent / (c) +full vowel</strong>의 조합으로 분류됩니다.
+  Yavaş는 이 세 자질 사이에 다음과 같은 위계 관계(implicational hierarchy)가 있다고 설명합니다:
+</p>
+
+<div class="eg-box">
+  <div class="eg-label">Implicational Hierarchy (Yavaş §7.4)</div>
+  <span class="en">+tonic accent → +stress → (implies) +full vowel is possible</span>
+  <span class="en">+stress → +full vowel (강세 음절은 반드시 완전 모음)</span>
+  <span class="en">−stress → +full vowel OR −full vowel (비강세는 완전/약화 모음 모두 가능)</span>
+</div>
+
+<table class="cmp-table">
+  <tr>
+    <th>음절 유형</th>
+    <th>+stress</th>
+    <th>+tonic accent</th>
+    <th>+full vowel</th>
+    <th>숫자</th>
+  </tr>
+  <tr>
+    <td><strong>Primary Stressed</strong><br><small style="color:var(--muted)">1차 강세 음절</small></td>
+    <td class="o">✅</td>
+    <td class="o">✅</td>
+    <td class="o">✅</td>
+    <td><strong>1</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Secondary Stressed</strong><br><small style="color:var(--muted)">2차 강세 음절</small></td>
+    <td class="o">✅</td>
+    <td class="x">❌</td>
+    <td class="o">✅</td>
+    <td><strong>2</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Unstressed (full V)</strong><br><small style="color:var(--muted)">비강세 — 완전 모음</small></td>
+    <td class="x">❌</td>
+    <td class="x">❌</td>
+    <td class="o">✅</td>
+    <td><strong>3</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Unstressed (reduced)</strong><br><small style="color:var(--muted)">비강세 — [ə] 약화</small></td>
+    <td class="x">❌</td>
+    <td class="x">❌</td>
+    <td class="x">❌</td>
+    <td><strong>4</strong></td>
+  </tr>
+</table>
+
+<p class="body-text">
+  핵심: <strong>강세를 받는 음절(+stress)은 반드시 완전 모음(+full vowel)</strong>을 가집니다.
+  약화 모음 [ə]는 강세를 받을 수 없으며(weightless/unstressable), 이로 인해 강세가 다른 음절로 이동하는 경우가 많습니다.
+  반면 비강세 음절은 완전 모음을 유지할 수도 있고 약화될 수도 있습니다.
+</p>
+
+<div class="exam">
+  <div class="exam-label">임용 포인트</div>
+  <strong>Secondary ≠ Unstressed</strong>: 2차 강세 음절도 +stress이므로 완전 모음을 가집니다.<br>
+  Primary와 Secondary의 차이는 <em>tonic accent(음조 강세)</em> 유무에 있으며, 이는 강도(intensity)나 지속시간(duration)의 차이가 아닙니다.
+  서술형 문항에서 이 구분을 정확히 기술할 수 있어야 합니다.
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     §4. photograph chain 분석
+════════════════════════════════════ -->
+<div class="sec-header">
+  <div class="sec-num">4</div>
+  <div>
+    <div class="sec-title">photograph chain 분석</div>
+    <div class="sec-sub">Yavaş §7.4 — photography와 photographic의 자질 분석</div>
+  </div>
+</div>
+
+<p class="body-text">
+  Yavaş가 제시하는 대표적 예시인 <em>photography</em>와 <em>photographic</em> 쌍을 통해
+  1차 강세·2차 강세·비강세 음절을 자질 분석표로 확인해봅시다.
+</p>
+
+<!-- photography -->
+<h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:24px 0 10px;">
+  photography &nbsp;<span style="font-family:var(--mono);font-weight:400;font-size:14px;color:var(--muted)">/fəˈtɑɡrəfi/</span>
+</h3>
+
+<table class="cmp-table">
+  <tr>
+    <th>자질</th>
+    <th>pho- [fə]</th>
+    <th>-tog- [ˈtɑɡ]</th>
+    <th>-ra- [rə]</th>
+    <th>-phy [fi]</th>
+  </tr>
+  <tr>
+    <td>+stress</td>
+    <td class="x">−</td>
+    <td class="o">+</td>
+    <td class="x">−</td>
+    <td class="x">−</td>
+  </tr>
+  <tr>
+    <td>+tonic accent</td>
+    <td class="x">−</td>
+    <td class="o">+</td>
+    <td class="x">−</td>
+    <td class="x">−</td>
+  </tr>
+  <tr>
+    <td>+full vowel</td>
+    <td class="x">−</td>
+    <td class="o">+</td>
+    <td class="x">−</td>
+    <td class="o">+</td>
+  </tr>
+  <tr>
+    <td style="font-weight:700">숫자 등급</td>
+    <td style="font-weight:700;color:#888">4</td>
+    <td style="font-weight:700;color:var(--primary)">1</td>
+    <td style="font-weight:700;color:#888">4</td>
+    <td style="font-weight:700;color:#888">3</td>
+  </tr>
+</table>
+
+<div class="note">
+  photography는 강세 음절이 하나(2번째 음절, -tog-)뿐이므로, 그 음절이 필연적으로 tonic accent를 갖습니다.
+  나머지 3개는 모두 −stress이며, 마지막 음절 -phy만 완전 모음 /i/를 유지하고(등급 3), 나머지는 [ə]로 약화됩니다(등급 4).
+  숫자 표기: <strong>4 1 4 3</strong>
+</div>
+
+<!-- photographic -->
+<h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:32px 0 10px;">
+  photographic &nbsp;<span style="font-family:var(--mono);font-weight:400;font-size:14px;color:var(--muted)">/ˌfoʊtəˈɡræfɪk/</span>
+</h3>
+
+<table class="cmp-table">
+  <tr>
+    <th>자질</th>
+    <th>pho- [foʊ]</th>
+    <th>-to- [tə]</th>
+    <th>-graph- [ˈɡræf]</th>
+    <th>-ic [ɪk]</th>
+  </tr>
+  <tr>
+    <td>+stress</td>
+    <td class="o">+</td>
+    <td class="x">−</td>
+    <td class="o">+</td>
+    <td class="x">−</td>
+  </tr>
+  <tr>
+    <td>+tonic accent</td>
+    <td class="x">−</td>
+    <td class="x">−</td>
+    <td class="o">+</td>
+    <td class="x">−</td>
+  </tr>
+  <tr>
+    <td>+full vowel</td>
+    <td class="o">+</td>
+    <td class="x">−</td>
+    <td class="o">+</td>
+    <td class="x">−</td>
+  </tr>
+  <tr>
+    <td style="font-weight:700">숫자 등급</td>
+    <td style="font-weight:700;color:var(--primary)">2</td>
+    <td style="font-weight:700;color:#888">4</td>
+    <td style="font-weight:700;color:var(--primary)">1</td>
+    <td style="font-weight:700;color:#888">4</td>
+  </tr>
+</table>
+
+<div class="note">
+  photographic은 강세 음절이 둘입니다: 1번째 pho-(+stress, -tonic) → 2차 강세, 3번째 -graph-(+stress, +tonic) → 1차 강세.
+  2번째 음절 -to-는 [ə]로 약화(등급 4), 4번째 -ic도 [ɪ]이지만 비강세이므로 완전 모음이 없어 등급 4.
+  숫자 표기: <strong>2 4 1 4</strong>
+</div>
+
+<div class="exam">
+  <div class="exam-label">임용 포인트</div>
+  photograph chain 분석 3종 세트(<em>photograph → photography → photographic</em>)는 임용에서 자주 출제되는 서술형 유형입니다.<br>
+  각 단어를 음절별로 +stress / +tonic accent / +full vowel 표로 분석하고, 숫자 등급을 매길 수 있어야 합니다.<br>
+  <strong>photograph</strong> /ˈfoʊtəɡræf/ → <strong>1 4 2</strong> (3음절, 3번째 음절이 2차 강세)
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     §5. Secondary Stress 찾는 3원칙
+════════════════════════════════════ -->
+<div class="sec-header">
+  <div class="sec-num">5</div>
+  <div>
+    <div class="sec-title">Secondary Stress 찾는 3원칙</div>
+    <div class="sec-sub">Yavaş §7.4 — 2차 강세 위치 탐색 전략</div>
+  </div>
+</div>
+
+<p class="body-text">
+  Yavaş는 2차 강세를 찾기 어려워하는 학습자를 위해 다음 세 가지 일반화 원칙을 제시합니다.
+  이 원칙들은 <em>경향(tendency)</em>이며, 예외가 존재합니다.
+</p>
+
+<!-- 원칙 (a) -->
+<div class="concept-card">
+  <div class="card-title">원칙 (a) — 최대 연속 약화 음절 수: 2개</div>
+  <p>영어 단어에서 연속으로 나타날 수 있는 <strong>약화 모음([ə]) 음절의 최대 연속 수는 대개 2개</strong>입니다.</p>
+  <p style="margin-top:8px;font-size:13px;color:var(--muted)">
+    즉, 3개 이상의 [ə] 음절이 연속되면 그 중 하나는 2차 강세(완전 모음)를 받게 됩니다.
+    이를 통해 2차 강세가 있을 위치를 추론할 수 있습니다.
+  </p>
+  <p style="margin-top:8px;font-family:var(--mono);font-size:13px">
+    예: <em>gratification</em> [ˌɡrætəfəˈkeɪʃən] → 5음절 중 2차 강세가 1번째 음절에 배치
+  </p>
+</div>
+
+<!-- 원칙 (b) -->
+<div class="concept-card">
+  <div class="card-title">원칙 (b) — Full vowel → +stress, 단 3가지 예외</div>
+  <p><strong>완전 모음(full vowel)을 가진 음절은 강세(+stress)를 받습니다.</strong></p>
+  <p style="margin-top:10px">단, 다음 <strong>3가지 예외</strong>에 해당하면 완전 모음이어도 강세를 받지 않습니다:</p>
+  <p style="margin-top:8px"><strong>① 어말 개음절(final open syllable)</strong>에 있는 완전 모음</p>
+  <p class="indent">예: <em>photography</em>의 마지막 음절 -phy /fi/ → 비강세, 완전 모음 유지(등급 3)</p>
+  <p style="margin-top:8px"><strong>② 단어 내에 이미 두 개의 더 두드러진 음절이 존재하는 경우</strong></p>
+  <p class="indent">즉, 이미 1차+2차 강세 음절이 있으면, 세 번째 완전 모음은 강세를 받지 않음</p>
+  <p style="margin-top:8px"><strong>③ /i, o, u/가 [ə]와 교체 관계(alternating)에 있는 경우</strong></p>
+  <p class="indent">예: <em>pronunciation</em>의 1번째 음절 /oʊ/ — /o/↔[ə] 교체 대상이므로 2차 강세 자격 없음</p>
+</div>
+
+<!-- 원칙 (c) -->
+<div class="concept-card">
+  <div class="card-title">원칙 (c) — Secondary는 Primary 앞에 온다 (일반 경향)</div>
+  <p><em>In general</em>, secondary stress comes <strong>before</strong> the primary stress.</p>
+  <p style="margin-top:8px;font-size:13px;color:var(--muted)">주요 음조 변화(tonic accent)는 단어의 마지막 강세 음절에 오는 경향이 있으므로,
+  2차 강세 음절은 자연스럽게 1차 강세 음절 앞에 위치하게 됩니다.</p>
+  <p style="margin-top:8px"><strong>주의 사항</strong>:</p>
+  <p>— 1차 강세 바로 앞에 음절이 하나뿐이면, 보통 강세 없이(unstressed) 처리됩니다.
+  (두 강세 음절이 인접하지 않도록)</p>
+  <p class="indent" style="font-family:var(--mono);font-size:13px">
+    예: divinity [dəˈvɪnəti] → 1차 강세 앞 첫 음절 [də] = 비강세
+  </p>
+  <p>— 예외적으로 강세 음절이 인접하는 경우도 있습니다:</p>
+  <p class="indent" style="font-family:var(--mono);font-size:13px">
+    예: martini [mɑːrˈtiːni], cucumber [ˈkjuːkʌmbər]
+  </p>
+</div>
+
+<div class="note">
+  <ul>
+    <li>1차 강세 앞에 3개 이상의 음절이 있을 때: 2차 강세는 완전 모음이 있는 위치에 2~3음절 간격으로 배치됩니다.</li>
+    <li>일부 긴 단어에서는 2개의 2차 강세가 나타납니다:<br>
+      <span style="font-family:var(--mono);font-size:13px">Afghanistan [ˌæfˌɡænɪˈstæn], reconciliation [ˌrɛkənˌsɪliˈeɪʃən]</span></li>
+    <li>2음절 단어에서도 두 음절이 모두 강세를 받는 경우가 있습니다:<br>
+      <span style="font-family:var(--mono);font-size:13px">
+        Primary-Secondary: ˈcáshèw, ˈcráyòn, ˈpropàne<br>
+        Secondary-Primary: ˌbàmˈbóo, ˌhòˈtél, ˌtypˈhóon
+      </span>
+    </li>
+  </ul>
+</div>
+
+<div class="exam">
+  <div class="exam-label">임용 포인트</div>
+  원칙 (b)의 <strong>3가지 예외를 목록화</strong>할 수 있어야 합니다.
+  특히 "완전 모음 = 강세"라는 공식이 항상 성립하지 않는 이유를 ① 어말 개음절 ② 이미 두 개의 강세 ③ 교체 관계 /i,o,u/↔[ə]로 설명하세요.
+  원칙 (c)는 일반 경향이므로, 예외(martini, cucumber)도 함께 제시할 수 있어야 합니다.
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     §6. 수험생 오개념 3가지
+════════════════════════════════════ -->
+<div class="sec-header">
+  <div class="sec-num">6</div>
+  <div>
+    <div class="sec-title">수험생 오개념 3가지</div>
+    <div class="sec-sub">자주 틀리는 개념 — 주의 필요</div>
+  </div>
+</div>
+
+<p class="body-text">
+  음운론 학습에서 반복적으로 나타나는 오개념을 정리합니다. 아래 항목들을 확인하고 실수하지 않도록 주의하세요.
+</p>
+
+<!-- 오개념 1 -->
+<div class="warn-box">
+  <div class="warn-label">오개념 1 — IPA 강세 기호 위치 오류</div>
+  <p><span class="bad">틀린 표기</span>: 음절 <em>위</em>에 강세 기호 표시 → <code>pho´tography</code>, <code>pho'tography</code></p>
+  <p style="margin-top:8px"><span class="ok">바른 표기</span>: 강세 음절 <em>앞</em>에 기호 배치 → <code>phoˈtography</code></p>
+  <p style="margin-top:8px;font-size:13px">
+    IPA 규약(International Phonetic Association)에서 ˈ(U+02C8)와 ˌ(U+02CC)은 음절 경계 앞에 삽입합니다.
+    음절 위나 뒤에 붙이는 것은 비표준 표기이며, 임용 답안에서 감점 요인이 됩니다.
+  </p>
+</div>
+
+<!-- 오개념 2 -->
+<div class="warn-box">
+  <div class="warn-label">오개념 2 — Secondary Stress = Unstressed 착각</div>
+  <p><span class="bad">오개념</span>: "2차 강세 음절은 강세가 없는(unstressed) 음절과 같다."</p>
+  <p style="margin-top:8px"><span class="ok">정정</span>: 2차 강세 음절은 <strong>+stress, +full vowel</strong>을 가지며, 비강세 음절과 명백히 다릅니다.</p>
+  <p style="margin-top:8px;font-size:13px">
+    2차 강세 음절이 비강세와 다른 이유: 완전 모음(full vowel)을 유지합니다.
+    비강세-약화 음절은 [ə]로 약화되지만(등급 4), 2차 강세 음절은 완전 모음을 그대로 가집니다(등급 2).
+    <em>photographic</em>의 첫 음절 [foʊ]가 그 증거입니다 — 완전 이중모음을 유지합니다.
+  </p>
+</div>
+
+<!-- 오개념 3 -->
+<div class="warn-box">
+  <div class="warn-label">오개념 3 — "Primary Stress는 단어당 무조건 1개" 착각</div>
+  <p><span class="bad">오개념</span>: "한 단어에 Primary Stress(1차 강세)는 반드시 하나만 있다."</p>
+  <p style="margin-top:8px"><span class="ok">정정</span>: 단어 단위에서는 1차 강세가 하나이지만, <strong>발화 수준(utterance level)</strong>과 <strong>화합어(compound)</strong>에서는 여러 개의 1차 강세가 나타날 수 있습니다.</p>
+  <p style="margin-top:8px;font-size:13px">
+    또한 2음절 단어에서도 Primary-Secondary 또는 Secondary-Primary 형태(예: <em>ˈcáshèw</em>, <em>ˌbàmˈbóo</em>)가 나타나며,
+    이 경우 두 음절 모두 강세를 받습니다. 단어 수준에서 1차 강세 음절이 하나라는 것은 tonic accent 음절이 하나라는 의미이지,
+    다른 강세 음절이 없다는 의미가 아닙니다.
+  </p>
+</div>
+
+</div><!-- .wrap -->
+
+<div class="ch-nav">
+  <a href="index.html" class="nav-btn prev">← 목차로 돌아가기</a>
+  <a href="stress.html" class="nav-btn">Ch.1 OX 퀴즈 →</a>
+</div>
+
+</body>
+</html>

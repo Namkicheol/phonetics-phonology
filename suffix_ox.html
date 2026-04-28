@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suffix-conditioned Stress — OX Quiz</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:repeating-linear-gradient(transparent,transparent 27px,#ddddd0 28px);color:#1a1a1a;min-height:100vh;padding:16px}
+.header-wrap{max-width:720px;margin:0 auto;padding:20px 8px 0}
+.header-topbar{display:flex;justify-content:space-between;align-items:center;border-top:2px solid #1a1a1a;padding-top:8px;margin-bottom:10px}
+.header-no{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;border:2px solid #1a1a1a;padding:3px 10px;border-radius:2px;letter-spacing:.5px;display:flex;align-items:center;gap:6px}
+.header-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;letter-spacing:1px}
+.header-title{font-size:clamp(30px,7vw,46px);font-weight:900;color:#1a1a1a;line-height:1.1;margin-bottom:5px;letter-spacing:-1px}
+.title-hl{background:#1a5276;color:#fff;padding:1px 6px}
+.header-script{font-family:'Caveat',cursive;font-size:21px;color:#1a5276;margin-bottom:4px;font-weight:600}
+.header-sub{font-size:13px;color:#555;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#aaa;margin-bottom:14px}
+.header-divider{border:none;border-top:2.5px solid #1a1a1a;margin-bottom:20px}
+.prog-wrap{max-width:720px;margin:0 auto 10px;padding:0 8px}
+.prog-info{display:flex;justify-content:space-between;font-size:12px;color:#1a5276;font-family:'JetBrains Mono',monospace;margin-bottom:6px}
+.bar{height:4px;background:#aed6f1;border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,#1a5276,#2980b9);border-radius:2px;transition:width .5s ease}
+.wrap{max-width:720px;margin:0 auto}
+.card{background:#fff;border:1.5px solid #aed6f1;border-radius:14px;padding:26px;animation:up .35s ease;box-shadow:0 2px 8px rgba(26,82,118,.08)}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.q-meta{display:flex;align-items:center;gap:7px;margin-bottom:14px;flex-wrap:wrap}
+.q-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:#1a5276;background:rgba(26,82,118,.1);padding:3px 10px;border-radius:8px;font-weight:700}
+.q-src{font-size:11px;color:#2e86c1;font-family:'JetBrains Mono',monospace}
+.q-cat{font-size:11px;color:#1a5276;background:rgba(41,128,185,.1);padding:3px 10px;border-radius:8px;margin-left:auto;font-weight:600}
+.kw1{background:rgba(26,82,118,.15);color:#1a3a52;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(26,82,118,.25)}
+.kw2{color:#117a8b;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border-bottom:2px solid rgba(17,122,139,.45)}
+.kw3{background:rgba(39,174,96,.13);color:#1e8449;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(39,174,96,.3)}
+.kw4{background:rgba(183,28,28,.11);color:#b71c1c;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(183,28,28,.25)}
+.q-text{font-size:clamp(15px,2.2vw,16.5px);line-height:1.9;margin-bottom:24px;color:#1a2633}
+.ox-btns{display:flex;gap:12px}
+.ox-btn{flex:1;padding:20px 10px;border-radius:12px;border:2px solid #aed6f1;background:#f4f9fe;color:#1a2633;font-size:30px;cursor:pointer;transition:all .18s ease;display:flex;flex-direction:column;align-items:center;gap:5px}
+.lb{font-size:11px;font-family:'JetBrains Mono',monospace;color:#2e86c1;letter-spacing:1px;font-weight:600}
+.ox-btn:hover:not(:disabled){transform:translateY(-2px)}
+.o-btn:hover:not(:disabled){border-color:#1a5276;background:rgba(26,82,118,.08)}
+.x-btn:hover:not(:disabled){border-color:#c62828;background:rgba(198,40,40,.06)}
+.co,.cx{border-color:#1a5276!important;background:rgba(26,82,118,.1)!important}
+.wp{border-color:#c62828!important;background:rgba(198,40,40,.08)!important}
+.ox-btn:disabled{cursor:default}
+.badge{display:none;margin-top:14px;padding:9px 16px;border-radius:8px;font-size:14px;font-weight:700;font-family:'JetBrains Mono',monospace}
+.badge.ok{display:inline-block;background:rgba(26,82,118,.1);color:#1a5276;border:1.5px solid rgba(26,82,118,.3)}
+.badge.ng{display:inline-block;background:rgba(198,40,40,.08);color:#c62828;border:1.5px solid rgba(198,40,40,.25)}
+.exp{display:none;margin-top:18px;border-radius:12px;overflow:hidden;animation:fade .3s ease}
+.exp.show{display:block}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.exp-header{background:linear-gradient(135deg,rgba(26,82,118,.12),rgba(41,128,185,.06));border:1.5px solid rgba(26,82,118,.25);border-bottom:none;padding:11px 16px}
+.exp-header span{font-size:11px;font-family:'JetBrains Mono',monospace;color:#1a3a52;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.exp-answer{background:rgba(26,82,118,.05);border:1.5px solid rgba(26,82,118,.2);border-top:none;border-bottom:none;padding:14px 16px}
+.ans-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#2e86c1;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-weight:700}
+.ans-text{font-size:15px;color:#1a2633;line-height:1.75;font-weight:500}
+.exp-body{background:rgba(26,82,118,.03);border:1.5px solid rgba(26,82,118,.15);border-top:1px solid rgba(26,82,118,.1);padding:14px 16px}
+.sec-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#117a8b;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;margin-top:13px;font-weight:700}
+.sec-label:first-child{margin-top:0}
+.exp-body p{font-size:14px;color:#1a3a52;line-height:1.8;margin-bottom:5px}
+.def-box{background:rgba(41,128,185,.06);border-left:4px solid #2980b9;padding:10px 14px;border-radius:0 8px 8px 0;margin:8px 0}
+.def-box p{color:#1a3a52;font-size:13.5px;font-style:italic;line-height:1.75}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.compare.three{grid-template-columns:1fr 1fr 1fr}
+.compare-item{background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:8px;padding:11px 14px}
+.ci-title{font-size:11px;font-family:'JetBrains Mono',monospace;color:#1a5276;font-weight:700;margin-bottom:5px}
+.compare-item p{font-size:13px;color:#2e4a5a;line-height:1.65}
+.next-btn{display:none;width:100%;margin-top:16px;padding:14px;background:linear-gradient(135deg,#1a5276,#2980b9);border:none;border-radius:10px;color:white;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:opacity .2s,transform .2s}
+.next-btn:hover{opacity:.88;transform:translateY(-1px)}
+.next-btn.show{display:block;animation:fade .3s ease}
+.score-card{display:none;text-align:center;padding:48px 24px}
+.score-card.show{display:block;animation:up .5s ease}
+.score-circle{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,#1a5276,#2980b9);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 0 40px rgba(26,82,118,.3)}
+.s-num{font-size:42px;font-weight:700;line-height:1;color:#fff}
+.s-total{font-size:14px;opacity:.85;color:#fff}
+.score-card h2{font-size:24px;margin-bottom:7px;color:#1a1a1a}
+.score-card p{color:#555;margin-bottom:24px;font-size:15px}
+.restart-btn{padding:13px 32px;background:#fff;border:2px solid #1a1a1a;border-radius:10px;color:#1a1a1a;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.restart-btn:hover{background:#f5f4ee}
+.nd{width:28px;height:28px;border-radius:6px;border:1.5px solid #aed6f1;background:#fff;font-size:10px;font-family:'JetBrains Mono',monospace;cursor:pointer;color:#2e86c1;transition:all .15s;display:inline-flex;align-items:center;justify-content:center;font-weight:600}
+.nd.cur{border-color:#1a5276;background:#1a5276;color:white}
+.nd.ok{border-color:#1a5276;background:rgba(26,82,118,.15);color:#1a3a52}
+.nd.ng{border-color:#c62828;background:rgba(198,40,40,.1);color:#c62828}
+.nd:hover:not(.cur){opacity:.7}
+#nav{display:flex;flex-wrap:wrap;gap:5px;max-width:720px;margin:0 auto 16px;padding:0 8px}
+</style>
+</head>
+<body>
+<div class="header-wrap">
+  <div class="header-topbar">
+    <span class="header-no">NO. 04 <span>—</span> Suffix Stress</span>
+    <span class="header-label">Past-Exam Notebook</span>
+  </div>
+  <h1 class="header-title"><span class="title-hl">음운론</span> 개념 마스터</h1>
+  <div class="header-script">Phonology · Suffix-conditioned Stress</div>
+  <p class="header-sub">음운론 · Stress-neutral vs Stress-shifting Suffixes · -tion, -ic, -ity, -ness · 임용고시 대비</p>
+  <div class="header-divider"></div>
+</div>
+<div class="prog-wrap">
+  <div class="prog-info"><span id="pt">1 / 15</span><span id="ps">정답 0개</span></div>
+  <div class="bar"><div class="bar-fill" id="bf" style="width:6.67%"></div></div>
+</div>
+<div id="rb" style="display:none;max-width:720px;margin:0 auto 14px;padding:0 8px">
+  <div style="background:rgba(26,82,118,.08);border:1.5px solid rgba(26,82,118,.3);border-radius:12px;padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <span id="rb-msg" style="font-size:13px;color:#1a2633;font-family:'JetBrains Mono',monospace;line-height:1.5"></span>
+    <button onclick="freshStart()" style="padding:10px 22px;background:#c62828;border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer">처음부터</button>
+  </div>
+</div>
+<div id="nav"></div>
+<div class="wrap">
+  <div id="qa"></div>
+  <div class="score-card" id="sc">
+    <div class="score-circle"><span class="s-num" id="fs">0</span><span class="s-total">/15</span></div>
+    <h2 id="rm"></h2><p id="rs"></p>
+    <button class="restart-btn" onclick="freshStart()">🔄 처음부터</button>
+  </div>
+</div>
+<script src="./score-popup.js"></script>
+<script src="./sounds.js"></script>
+<script>
+const SAVE_KEY='ox_phon_suffix_v1';
+const TOTAL=15;
+let cur=0,answers=new Array(TOTAL).fill(null);
+function getScore(){return answers.filter(a=>a&&a.correct).length;}
+const Q=[
+  {src:"-ness",cat:"Stress-neutral",text:"접미사 <span class='kw1'>-ness</span>는 stress-neutral 접미사다 — <span class='kw3'>ˈhappy → ˈhappiness</span>에서 강세 위치가 유지된다.",ans:true,correct:"정확하다. <span class='kw1'>-ness</span>는 stress-neutral: <span class='kw3'>ˈhappy → ˈhappiness</span>에서 첫 번째 음절의 강세가 유지된다.",why:"-ness는 기본 단어의 강세 위치를 변경하지 않는 stress-neutral 접미사이다. 예: ˈhappy→ˈhappiness, ˈkind→ˈkindness, ˈdark→ˈdarkness. 기본 강세 위치가 그대로 유지된다.",source:"\"<span class='kw1'>-ness</span> is a <span class='kw2'>stress-neutral</span> suffix: <span class='kw3'>ˈhappy → ˈhappiness</span> (stress position preserved).\" (Yavaş 2011)",compare:[{title:"Stress-neutral (-ness)",desc:"ˈhappy → ˈhappiness · 강세 유지"},{title:"Stress-shifting (-tion)",desc:"ˈproduce → proˈduction · 강세 이동"}]},
+  {src:"-tion",cat:"Stress-shifting",text:"접미사 <span class='kw1'>-tion</span>은 직전 음절에 primary stress를 준다 — <span class='kw3'>proˈduction</span>.",ans:true,correct:"정확하다. <span class='kw1'>-tion</span>은 stress-shifting 접미사로 접미사 <span class='kw2'>직전 음절</span>에 강세가 온다: <span class='kw3'>proˈduction, ˌeduˈcation</span>.",why:"-tion은 대표적인 stress-shifting 접미사이다. 규칙: -tion 바로 앞 음절에 primary stress. 예: ˈproduce→proˈduction, ˈeducate→ˌeduˈcation, ˈoperate→ˌopeˈration. 기본 단어와 파생어의 강세 위치가 달라진다.",source:"\"<span class='kw1'>-tion</span> is a <span class='kw2'>stress-shifting</span> suffix: stress falls on the <span class='kw2'>syllable immediately preceding</span> -tion.\" (Yavaş 2011)",compare:[{title:"-tion (stress-shifting)",desc:"proˈduction, ˌeduˈcation · 직전 음절"},{title:"-ment (stress-neutral)",desc:"deˈvelopment · 기본 강세 유지"}]},
+  {src:"-ful",cat:"Stress-neutral",text:"접미사 <span class='kw1'>-ful</span>은 기본 단어의 강세를 이동시킨다.",ans:false,correct:"틀렸다. <span class='kw1'>-ful</span>은 <span class='kw2'>stress-neutral</span> 접미사로 강세 위치를 바꾸지 않는다 — <span class='kw3'>ˈbeautiful, ˈhelpful</span>.",why:"-ful은 stress-neutral 접미사이다. 예: ˈbeauty→ˈbeautiful, ˈhelp→ˈhelpful, ˈwonder→ˈwonderful. 기본 단어의 강세 위치가 그대로 유지된다.",source:"\"<span class='kw1'>-ful</span> is <span class='kw2'>stress-neutral</span>: <span class='kw3'>ˈbeauty → ˈbeautiful</span> (no stress shift).\" (Yavaş 2011)",compare:[{title:"Stress-neutral (-ful)",desc:"ˈbeautiful, ˈhelpful, ˈwonderful"},{title:"Stress-shifting (-ic)",desc:"eˈconomy → ecoˈnomic · 강세 이동"}]},
+  {src:"-ic",cat:"Stress-shifting",text:"접미사 <span class='kw1'>-ic</span>은 직전 음절에 primary stress를 준다 — <span class='kw3'>ecoˈnomic</span>.",ans:true,correct:"정확하다. <span class='kw1'>-ic</span>은 stress-shifting 접미사로 <span class='kw2'>직전 음절</span>에 강세: <span class='kw3'>eˈconomy→ecoˈnomic</span>.",why:"-ic은 주요 stress-shifting 접미사 중 하나이다. 규칙: -ic 바로 앞 음절에 primary stress. 예: eˈconomy→ecoˈnomic, ˈatom→aˈtomic, ˈdrama→draˈmatic. 단, arabic, catholic, lunatic 등 예외가 있다.",source:"\"<span class='kw1'>-ic</span> is <span class='kw2'>stress-shifting</span>: stress on the syllable <span class='kw2'>immediately before</span> -ic. eˈconomy → ecoˈnomic.\" (Yavaş 2011)",compare:[{title:"-ic 규칙 (직전 음절)",desc:"ecoˈnomic, aˈtomic, draˈmatic"},{title:"-ic 예외",desc:"ˈarabic, ˈcatholic, ˈlunatic"}]},
+  {src:"-ity",cat:"Stress-shifting",text:"접미사 <span class='kw1'>-ity</span>는 직전 음절에 primary stress를 준다 — <span class='kw3'>proˈductivity</span>.",ans:true,correct:"정확하다. <span class='kw1'>-ity</span>는 stress-shifting 접미사로 직전 음절에 강세: <span class='kw3'>naˈtional → naˈtionality</span>.",why:"-ity는 -ic과 유사하게 작동하는 stress-shifting 접미사이다. 규칙: -ity 바로 앞 음절에 primary stress. 예: ˈnational→naˈtionality, ˈequal→eˈquality, proˈductive→proˈductivity.",source:"\"<span class='kw1'>-ity</span> is <span class='kw2'>stress-shifting</span>: stress on the syllable <span class='kw2'>immediately before</span> -ity. naˈtionality.\" (Yavaş 2011)",compare:[{title:"-ity (stress-shifting)",desc:"naˈtionality, eˈquality · 직전 음절"},{title:"-ness (stress-neutral)",desc:"ˈhappiness · 기본 강세 유지"}]},
+  {src:"-ment",cat:"Stress-neutral",text:"접미사 <span class='kw1'>-ment</span>는 stress-neutral이다 — <span class='kw3'>deˈvelopment</span>에서 강세 위치 변화 없음.",ans:true,correct:"정확하다. <span class='kw1'>-ment</span>는 stress-neutral 접미사: <span class='kw3'>deˈvelop→deˈvelopment</span>에서 강세가 그대로 유지된다.",why:"-ment는 stress-neutral 접미사 그룹에 속한다. 예: deˈvelop→deˈvelopment, aˈmuse→aˈmusement, eˈstablish→eˈstablishment. 기본 동사의 강세 위치가 명사형에서도 그대로 유지된다.",source:"\"<span class='kw1'>-ment</span> is <span class='kw2'>stress-neutral</span>: <span class='kw3'>deˈvelop → deˈvelopment</span> (no change in stress position).\" (Yavaş 2011)",compare:[{title:"Stress-neutral (-ment)",desc:"deˈvelopment, aˈmusement · 강세 유지"},{title:"Stress-shifting (-tion)",desc:"ˌeduˈcation · 강세 이동"}]},
+  {src:"-ify",cat:"Stress 위치",text:"접미사 <span class='kw1'>-ify</span>는 접미사 직전 음절에 강세를 준다.",ans:false,correct:"틀렸다. <span class='kw1'>-ify</span>는 접미사에서 <span class='kw2'>2음절 앞</span>에 강세를 준다 — <span class='kw3'>iˈdentify</span>(den에 강세).",why:"-ify의 강세 규칙은 -ic/-ity와 다르다. -ify는 접미사 직전이 아닌 2음절 앞에 강세가 온다. 예: iˈdentify(/aɪˈdentɪfaɪ/), ˈclarify, ˈsimplify. 단어의 길이에 따라 패턴이 다양할 수 있다.",source:"\"<span class='kw1'>-ify</span>: stress falls <span class='kw2'>two syllables before</span> the suffix, not immediately before. e.g. iˈdentify.\" (Yavaş 2011)",compare:[{title:"-ic/-ity (직전 음절)",desc:"ecoˈnomic, naˈtionality"},{title:"-ify (2음절 앞)",desc:"iˈdentify, ˈclarify, ˈsimplify"}]},
+  {src:"-y (photography)",cat:"강세 이동 예시",text:"<span class='kw3'>ˈphotograph → phoˈtography</span>에서 <span class='kw1'>-y</span> 접미사로 강세가 이동한다.",ans:true,correct:"정확하다. <span class='kw3'>ˈphotograph→phoˈtography</span>에서 -y(-phy)의 영향으로 강세가 2번째 음절로 이동한다.",why:"photograph→photography에서 강세 이동은 -y의 영향으로 발생한다. -y(-phy)는 바로 앞의 3음절 어근에서 penultimate stress를 유발한다. 이어서 photography→photographic으로 -ic 적용 시 다시 강세가 이동한다.",source:"\"<span class='kw3'>ˈphotograph → phoˈtography</span>: -y suffix causes stress shift to the penultimate syllable of the stem.\" (Yavaş 2011)",compare:[{title:"ˈphotograph",desc:"첫 번째 음절 강세 · -y 첨가 전"},{title:"phoˈtography",desc:"두 번째 음절 강세 · -y 첨가 후"}]},
+  {src:"-er/-or",cat:"Stress-neutral",text:"접미사 <span class='kw1'>-er/-or</span>는 stress-shifting 접미사다.",ans:false,correct:"틀렸다. <span class='kw1'>-er/-or</span>는 <span class='kw2'>stress-neutral</span> 접미사로 강세 위치를 바꾸지 않는다 — <span class='kw3'>ˈteach→ˈteacher</span>.",why:"-er/-or는 stress-neutral 접미사 그룹에 속한다. 예: ˈteach→ˈteacher, ˈact→ˈactor, ˈwrite→ˈwriter. 기본 단어의 강세 위치가 -er/-or 첨가 후에도 그대로 유지된다.",source:"\"<span class='kw1'>-er/-or</span> are <span class='kw2'>stress-neutral</span>: <span class='kw3'>ˈteach → ˈteacher</span>, <span class='kw3'>ˈact → ˈactor</span> (no stress shift).\" (Yavaş 2011)",compare:[{title:"Stress-neutral (-er/-or)",desc:"ˈteacher, ˈactor, ˈwriter · 강세 유지"},{title:"Stress-shifting (-ic)",desc:"aˈtomic · 강세 이동"}]},
+  {src:"-tion",cat:"분류",text:"접미사 <span class='kw1'>-tion</span>은 stress-neutral이다.",ans:false,correct:"틀렸다. <span class='kw1'>-tion</span>은 <span class='kw2'>stress-shifting</span> 접미사로, 직전 음절에 강세를 유도한다 — <span class='kw3'>proˈduction</span>.",why:"-tion은 대표적인 stress-shifting 접미사이다. 기본 단어의 강세가 -tion 바로 앞 음절로 이동한다. ˈproduce→proˈduction, ˈeducate→ˌeduˈcation. -ness/-ment 같은 stress-neutral 접미사와 혼동하지 않도록 주의해야 한다.",source:"\"<span class='kw1'>-tion</span> is <span class='kw2'>stress-shifting</span> (NOT neutral): stress moves to the syllable <span class='kw2'>immediately before</span> -tion.\" (Yavaş 2011)",compare:[{title:"-tion (stress-shifting)",desc:"proˈduction, ˌeduˈcation"},{title:"-ment, -ness (stress-neutral)",desc:"deˈvelopment, ˈhappiness"}]},
+  {src:"-ic",cat:"강세 이동 예시",text:"<span class='kw3'>eˈconomy → ecoˈnomic</span>에서 강세 이동은 <span class='kw1'>-ic</span> 접미사 때문이다.",ans:true,correct:"정확하다. <span class='kw1'>-ic</span> 접미사가 적용되어 강세가 eˈconomy의 2번째 음절에서 ecoˈnomic의 3번째 음절(-nom-)로 이동한다.",why:"-ic은 항상 직전 음절에 강세를 유도한다. eˈconomy에서는 2번째 음절(con-)에 강세가 있지만, -ic이 붙으면 규칙에 따라 -ic 직전 음절(-nom-)에 강세가 온다. 이 패턴은 임용 기출 핵심 예시다.",source:"\"<span class='kw3'>eˈconomy → ecoˈnomic</span>: <span class='kw1'>-ic</span> shifts stress to the syllable immediately before it (-nom-).\" (Yavaş 2011)",compare:[{title:"eˈconomy",desc:"2번째 음절 강세 · -ic 첨가 전"},{title:"ecoˈnomic",desc:"3번째 음절 강세 · -ic 직전 음절"}]},
+  {src:"-ic",cat:"예외",text:"<span class='kw1'>-ic</span> 접미사에는 예외가 없다.",ans:false,correct:"틀렸다. <span class='kw1'>-ic</span>의 예외: <span class='kw4'>ˈarabic, ˈcatholic, ˈlunatic</span>은 -ic 직전 음절이 아닌 첫 번째 음절에 강세가 온다.",why:"-ic의 직전 음절 강세 규칙에는 예외가 존재한다. ˈarabic, ˈcatholic, ˈlunatic, ˈheretic 등은 -ic 앞이 아닌 초음절에 강세가 온다. 예외를 아는 것도 시험에서 중요하다.",source:"\"<span class='kw1'>-ic</span> exceptions: <span class='kw4'>ˈarabic, ˈcatholic, ˈlunatic</span> — stress NOT on the syllable immediately before -ic.\" (Yavaş 2011)",compare:[{title:"-ic 규칙 예시",desc:"ecoˈnomic, aˈtomic, draˈmatic"},{title:"-ic 예외",desc:"ˈarabic, ˈcatholic, ˈlunatic"}]},
+  {src:"-ity",cat:"강세 이동 예시",text:"<span class='kw3'>national → nationality</span>에서 <span class='kw1'>-ity</span>가 강세를 직전 음절로 이동시킨다.",ans:true,correct:"정확하다. <span class='kw3'>ˈnational→naˈtionality</span>에서 -ity가 -ity 직전 음절(-al-)에 강세를 배정한다.",why:"-ity 규칙: 접미사 직전 음절에 강세. ˈnational(첫째 강세)→naˈtionality(-al-에 강세). -ity가 붙으면서 강세가 -al- 음절로 이동한다. -ic/-ity/-tion 모두 직전 음절 강세 규칙을 따른다.",source:"\"<span class='kw3'>ˈnational → naˈtionality</span>: <span class='kw1'>-ity</span> shifts stress to the syllable immediately before it.\" (Yavaş 2011)",compare:[{title:"ˈnational",desc:"첫 번째 음절 강세 · -ity 이전"},{title:"naˈtionality",desc:"-al- 음절 강세 · -ity 직전 음절"}]},
+  {src:"Stress-neutral",cat:"정의",text:"<span class='kw1'>Stress-neutral</span> 접미사는 기본 단어의 강세 위치를 유지한다.",ans:true,correct:"정확하다. Stress-neutral 접미사(-ness, -ment, -ful, -er, -ly 등)는 기본 단어의 강세 위치를 변경하지 <span class='kw2'>않는다</span>.",why:"Stress-neutral 접미사의 정의: 기본 단어 강세 위치 불변. 반면 stress-shifting 접미사(-tion, -ic, -ity, -ify)는 파생어에서 강세 위치를 바꾼다. 두 그룹을 명확히 구분하는 것이 접미사 강세 학습의 핵심이다.",source:"\"<span class='kw1'>Stress-neutral suffixes</span> (-ness, -ment, -ful, -er, -ly) <span class='kw2'>preserve</span> the stress pattern of the base word.\" (Yavaş 2011)",compare:[{title:"Stress-neutral",desc:"-ness, -ment, -ful, -er, -ly · 강세 유지"},{title:"Stress-shifting",desc:"-tion, -ic, -ity, -ify · 강세 이동"}]},
+  {src:"-ic (photographic)",cat:"강세 이동 예시",text:"<span class='kw3'>photograph → photographic</span>에서 primary stress가 <span class='kw2'>3번째 음절</span>로 이동한다.",ans:true,correct:"정확하다. <span class='kw3'>ˈphotograph→ˌphoˈtographic</span>에서 -ic에 의해 강세가 -graph- 음절(3번째)로 이동하고, 첫째 음절은 secondary stress를 받는다.",why:"photographic은 -ic 직전 음절(-graph-)에 primary stress가 오는 전형적인 예이다. ˌpho-to-ˈgraph-ic: 첫째 음절=secondary(ˌ), 3번째 음절=primary(ˈ). 수치 표기로는 2-4-1-4이다. photograph(1-4-3)→photography(4-1-4-3)→photographic(2-4-1-4) 강세 이동 체인을 기억해야 한다.",source:"\"<span class='kw3'>ˌphoˈtographic</span>: -ic places primary stress on the 3rd syllable (-graph-); 1st syllable gets secondary stress.\" (Yavaş 2011)",compare:[{title:"ˈphotograph",desc:"첫째=primary · 수치: 1-4-3"},{title:"ˌphoˈtographic",desc:"첫째=secondary, 3째=primary · 2-4-1-4"}]}
+];
+function renderExp(q,isCorrect){
+  const three=q.compare&&q.compare.length===3;
+  const cmp=q.compare?`<div class="sec-label">📊 비교 정리</div><div class="compare${three?' three':''}">${q.compare.map(c=>`<div class="compare-item"><div class="ci-title">${c.title}</div><p>${c.desc}</p></div>`).join('')}</div>`:'';
+  return `<div class="exp show"><div class="exp-header"><span>${isCorrect?'✅ 정답':'❌ 오답'} · 해설</span></div><div class="exp-answer"><div class="ans-label">핵심 정정</div><div class="ans-text">${q.correct}</div></div><div class="exp-body"><div class="sec-label">📖 상세 설명</div><p>${q.why}</p><div class="sec-label">📌 Source</div><div class="def-box"><p>${q.source}</p></div>${cmp}</div></div>`;
+}
+function renderNav(){
+  document.getElementById('nav').innerHTML=answers.map((a,i)=>{
+    let cls='nd';
+    if(i===cur)cls+=' cur';
+    else if(a!==null)cls+=a.correct?' ok':' ng';
+    return `<button class="${cls}" onclick="jumpTo(${i})">${i+1}</button>`;
+  }).join('');
+}
+function render(){
+  if(cur>=TOTAL){
+    document.getElementById('qa').style.display='none';
+    document.getElementById('sc').classList.add('show');
+    const s=getScore();
+    document.getElementById('fs').textContent=s;
+    const p=s/TOTAL;
+    document.getElementById('rm').textContent=p===1?'🎉 Perfect!':p>=.8?'👏 Great!':p>=.6?'😊 Good!':'💪 Keep going!';
+    document.getElementById('rs').textContent=`${TOTAL}문제 중 ${s}문제 정답 (${Math.round(p*100)}%)`;
+    setTimeout(function(){window.showScorePopup&&window.showScorePopup(s,TOTAL);},400);
+    renderNav();return;
+  }
+  document.getElementById('sc').classList.remove('show');
+  document.getElementById('qa').style.display='block';
+  renderNav();
+  const q=Q[cur];
+  document.getElementById('bf').style.width=((cur+1)/TOTAL*100).toFixed(1)+'%';
+  document.getElementById('pt').textContent=`${cur+1} / ${TOTAL}`;
+  document.getElementById('ps').textContent=`정답 ${getScore()}개`;
+  const a=answers[cur];
+  if(a!==null){
+    let oBtnCls='',xBtnCls='';
+    if(a.picked===true){oBtnCls=a.correct?'co':'wp';if(!a.correct)xBtnCls='cx';}
+    else{xBtnCls=a.correct?'cx':'wp';if(!a.correct)oBtnCls='co';}
+    document.getElementById('qa').innerHTML=`<div class="card"><div class="q-meta"><span class="q-num">Q${cur+1}</span><span class="q-src">${q.src}</span><span class="q-cat">${q.cat}</span></div><div class="q-text">${q.text}</div><div class="ox-btns"><button class="ox-btn o-btn ${oBtnCls}" disabled>⭕<span class="lb">CORRECT</span></button><button class="ox-btn x-btn ${xBtnCls}" disabled>❌<span class="lb">WRONG</span></button></div><div class="badge ${a.correct?'ok':'ng'}">${a.correct?'✅ 정답!':'❌ 오답! 정답은 '+(q.ans?'O':'X')}</div><div>${renderExp(q,a.correct)}</div><button class="next-btn show" onclick="next()">${cur<TOTAL-1?'Next →':'결과 보기 →'}</button></div>`;
+  }else{
+    document.getElementById('qa').innerHTML=`<div class="card"><div class="q-meta"><span class="q-num">Q${cur+1}</span><span class="q-src">${q.src}</span><span class="q-cat">${q.cat}</span></div><div class="q-text">${q.text}</div><div class="ox-btns"><button class="ox-btn o-btn" onclick="pick(true)" id="ob">⭕<span class="lb">CORRECT</span></button><button class="ox-btn x-btn" onclick="pick(false)" id="xb">❌<span class="lb">WRONG</span></button></div><div id="bd" class="badge"></div><div id="ep"></div><button class="next-btn" id="nb" onclick="next()">${cur<TOTAL-1?'Next →':'결과 보기 →'}</button></div>`;
+  }
+}
+function pick(val){
+  const q=Q[cur];
+  document.getElementById('ob').disabled=true;
+  document.getElementById('xb').disabled=true;
+  const ok=val===q.ans;
+  answers[cur]={picked:val,correct:ok};
+  if(ok){if(typeof playOk==='function')playOk();}else{if(typeof playNg==='function')playNg();}
+  const bd=document.getElementById('bd');
+  bd.textContent=ok?'✅ 정답!':`❌ 오답! 정답은 ${q.ans?'O':'X'}`;
+  bd.className='badge '+(ok?'ok':'ng');
+  document.getElementById(val?'ob':'xb').classList.add(ok?(val?'co':'cx'):'wp');
+  if(!ok)document.getElementById(q.ans?'ob':'xb').classList.add(q.ans?'co':'cx');
+  document.getElementById('ep').innerHTML=renderExp(q,ok);
+  document.getElementById('nb').classList.add('show');
+  document.getElementById('ps').textContent=`정답 ${getScore()}개`;
+  renderNav();saveProgress();
+}
+function next(){cur++;saveProgress();render();}
+function jumpTo(i){cur=i;render();document.getElementById('qa').scrollIntoView({behavior:'smooth',block:'start'});}
+function saveProgress(){localStorage.setItem(SAVE_KEY,JSON.stringify({cur,answers}));}
+function freshStart(){localStorage.removeItem(SAVE_KEY);cur=0;answers=new Array(TOTAL).fill(null);document.getElementById('rb').style.display='none';document.getElementById('sc').classList.remove('show');document.getElementById('qa').style.display='block';renderNav();render();}
+(function(){
+  const saved=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');
+  if(saved&&saved.answers&&saved.cur>=0&&saved.cur<TOTAL){
+    cur=saved.cur;answers=saved.answers;
+    const done=answers.filter(a=>a!==null).length;
+    if(done>0){document.getElementById('rb-msg').textContent=`이어서 풀기 중 · ${done}/${TOTAL} 문제 완료 (정답 ${getScore()}개)`;document.getElementById('rb').style.display='block';}
+  }
+  renderNav();render();
+})();
+</script>
+</body>
+</html>

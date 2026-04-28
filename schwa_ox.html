@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vowel Reduction & Schwa — OX Quiz</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:repeating-linear-gradient(transparent,transparent 27px,#ddddd0 28px);color:#1a1a1a;min-height:100vh;padding:16px}
+.header-wrap{max-width:720px;margin:0 auto;padding:20px 8px 0}
+.header-topbar{display:flex;justify-content:space-between;align-items:center;border-top:2px solid #1a1a1a;padding-top:8px;margin-bottom:10px}
+.header-no{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;border:2px solid #1a1a1a;padding:3px 10px;border-radius:2px;letter-spacing:.5px;display:flex;align-items:center;gap:6px}
+.header-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;letter-spacing:1px}
+.header-title{font-size:clamp(30px,7vw,46px);font-weight:900;color:#1a1a1a;line-height:1.1;margin-bottom:5px;letter-spacing:-1px}
+.title-hl{background:#1a5276;color:#fff;padding:1px 6px}
+.header-script{font-family:'Caveat',cursive;font-size:21px;color:#1a5276;margin-bottom:4px;font-weight:600}
+.header-sub{font-size:13px;color:#555;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#aaa;margin-bottom:14px}
+.header-divider{border:none;border-top:2.5px solid #1a1a1a;margin-bottom:20px}
+.prog-wrap{max-width:720px;margin:0 auto 10px;padding:0 8px}
+.prog-info{display:flex;justify-content:space-between;font-size:12px;color:#1a5276;font-family:'JetBrains Mono',monospace;margin-bottom:6px}
+.bar{height:4px;background:#aed6f1;border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,#1a5276,#2980b9);border-radius:2px;transition:width .5s ease}
+.wrap{max-width:720px;margin:0 auto}
+.card{background:#fff;border:1.5px solid #aed6f1;border-radius:14px;padding:26px;animation:up .35s ease;box-shadow:0 2px 8px rgba(26,82,118,.08)}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.q-meta{display:flex;align-items:center;gap:7px;margin-bottom:14px;flex-wrap:wrap}
+.q-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:#1a5276;background:rgba(26,82,118,.1);padding:3px 10px;border-radius:8px;font-weight:700}
+.q-src{font-size:11px;color:#2e86c1;font-family:'JetBrains Mono',monospace}
+.q-cat{font-size:11px;color:#1a5276;background:rgba(41,128,185,.1);padding:3px 10px;border-radius:8px;margin-left:auto;font-weight:600}
+.kw1{background:rgba(26,82,118,.15);color:#1a3a52;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(26,82,118,.25)}
+.kw2{color:#117a8b;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border-bottom:2px solid rgba(17,122,139,.45)}
+.kw3{background:rgba(39,174,96,.13);color:#1e8449;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(39,174,96,.3)}
+.kw4{background:rgba(183,28,28,.11);color:#b71c1c;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(183,28,28,.25)}
+.q-text{font-size:clamp(15px,2.2vw,16.5px);line-height:1.9;margin-bottom:24px;color:#1a2633}
+.ox-btns{display:flex;gap:12px}
+.ox-btn{flex:1;padding:20px 10px;border-radius:12px;border:2px solid #aed6f1;background:#f4f9fe;color:#1a2633;font-size:30px;cursor:pointer;transition:all .18s ease;display:flex;flex-direction:column;align-items:center;gap:5px}
+.lb{font-size:11px;font-family:'JetBrains Mono',monospace;color:#2e86c1;letter-spacing:1px;font-weight:600}
+.ox-btn:hover:not(:disabled){transform:translateY(-2px)}
+.o-btn:hover:not(:disabled){border-color:#1a5276;background:rgba(26,82,118,.08)}
+.x-btn:hover:not(:disabled){border-color:#c62828;background:rgba(198,40,40,.06)}
+.co,.cx{border-color:#1a5276!important;background:rgba(26,82,118,.1)!important}
+.wp{border-color:#c62828!important;background:rgba(198,40,40,.08)!important}
+.ox-btn:disabled{cursor:default}
+.badge{display:none;margin-top:14px;padding:9px 16px;border-radius:8px;font-size:14px;font-weight:700;font-family:'JetBrains Mono',monospace}
+.badge.ok{display:inline-block;background:rgba(26,82,118,.1);color:#1a5276;border:1.5px solid rgba(26,82,118,.3)}
+.badge.ng{display:inline-block;background:rgba(198,40,40,.08);color:#c62828;border:1.5px solid rgba(198,40,40,.25)}
+.exp{display:none;margin-top:18px;border-radius:12px;overflow:hidden;animation:fade .3s ease}
+.exp.show{display:block}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.exp-header{background:linear-gradient(135deg,rgba(26,82,118,.12),rgba(41,128,185,.06));border:1.5px solid rgba(26,82,118,.25);border-bottom:none;padding:11px 16px}
+.exp-header span{font-size:11px;font-family:'JetBrains Mono',monospace;color:#1a3a52;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.exp-answer{background:rgba(26,82,118,.05);border:1.5px solid rgba(26,82,118,.2);border-top:none;border-bottom:none;padding:14px 16px}
+.ans-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#2e86c1;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-weight:700}
+.ans-text{font-size:15px;color:#1a2633;line-height:1.75;font-weight:500}
+.exp-body{background:rgba(26,82,118,.03);border:1.5px solid rgba(26,82,118,.15);border-top:1px solid rgba(26,82,118,.1);padding:14px 16px}
+.sec-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#117a8b;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;margin-top:13px;font-weight:700}
+.sec-label:first-child{margin-top:0}
+.exp-body p{font-size:14px;color:#1a3a52;line-height:1.8;margin-bottom:5px}
+.def-box{background:rgba(41,128,185,.06);border-left:4px solid #2980b9;padding:10px 14px;border-radius:0 8px 8px 0;margin:8px 0}
+.def-box p{color:#1a3a52;font-size:13.5px;font-style:italic;line-height:1.75}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.compare.three{grid-template-columns:1fr 1fr 1fr}
+.compare-item{background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:8px;padding:11px 14px}
+.ci-title{font-size:11px;font-family:'JetBrains Mono',monospace;color:#1a5276;font-weight:700;margin-bottom:5px}
+.compare-item p{font-size:13px;color:#2e4a5a;line-height:1.65}
+.next-btn{display:none;width:100%;margin-top:16px;padding:14px;background:linear-gradient(135deg,#1a5276,#2980b9);border:none;border-radius:10px;color:white;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:opacity .2s,transform .2s}
+.next-btn:hover{opacity:.88;transform:translateY(-1px)}
+.next-btn.show{display:block;animation:fade .3s ease}
+.score-card{display:none;text-align:center;padding:48px 24px}
+.score-card.show{display:block;animation:up .5s ease}
+.score-circle{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,#1a5276,#2980b9);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 0 40px rgba(26,82,118,.3)}
+.s-num{font-size:42px;font-weight:700;line-height:1;color:#fff}
+.s-total{font-size:14px;opacity:.85;color:#fff}
+.score-card h2{font-size:24px;margin-bottom:7px;color:#1a1a1a}
+.score-card p{color:#555;margin-bottom:24px;font-size:15px}
+.restart-btn{padding:13px 32px;background:#fff;border:2px solid #1a1a1a;border-radius:10px;color:#1a1a1a;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.restart-btn:hover{background:#f5f4ee}
+.nd{width:28px;height:28px;border-radius:6px;border:1.5px solid #aed6f1;background:#fff;font-size:10px;font-family:'JetBrains Mono',monospace;cursor:pointer;color:#2e86c1;transition:all .15s;display:inline-flex;align-items:center;justify-content:center;font-weight:600}
+.nd.cur{border-color:#1a5276;background:#1a5276;color:white}
+.nd.ok{border-color:#1a5276;background:rgba(26,82,118,.15);color:#1a3a52}
+.nd.ng{border-color:#c62828;background:rgba(198,40,40,.1);color:#c62828}
+.nd:hover:not(.cur){opacity:.7}
+#nav{display:flex;flex-wrap:wrap;gap:5px;max-width:720px;margin:0 auto 16px;padding:0 8px}
+</style>
+</head>
+<body>
+<div class="header-wrap">
+  <div class="header-topbar">
+    <span class="header-no">NO. 06 <span>—</span> Schwa & Reduction</span>
+    <span class="header-label">Past-Exam Notebook</span>
+  </div>
+  <h1 class="header-title"><span class="title-hl">음운론</span> 개념 마스터</h1>
+  <div class="header-script">Phonology · Vowel Reduction & Schwa /ə/</div>
+  <p class="header-sub">음운론 · 모음 약화 · Schwa /ə/ · 비강세 음절 · Stress-timed 리듬 · 임용고시 대비</p>
+  <div class="header-divider"></div>
+</div>
+<div class="prog-wrap">
+  <div class="prog-info"><span id="pt">1 / 15</span><span id="ps">정답 0개</span></div>
+  <div class="bar"><div class="bar-fill" id="bf" style="width:6.67%"></div></div>
+</div>
+<div id="rb" style="display:none;max-width:720px;margin:0 auto 14px;padding:0 8px">
+  <div style="background:rgba(26,82,118,.08);border:1.5px solid rgba(26,82,118,.3);border-radius:12px;padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <span id="rb-msg" style="font-size:13px;color:#1a2633;font-family:'JetBrains Mono',monospace;line-height:1.5"></span>
+    <button onclick="freshStart()" style="padding:10px 22px;background:#c62828;border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer">처음부터</button>
+  </div>
+</div>
+<div id="nav"></div>
+<div class="wrap">
+  <div id="qa"></div>
+  <div class="score-card" id="sc">
+    <div class="score-circle"><span class="s-num" id="fs">0</span><span class="s-total">/15</span></div>
+    <h2 id="rm"></h2><p id="rs"></p>
+    <button class="restart-btn" onclick="freshStart()">🔄 처음부터</button>
+  </div>
+</div>
+<script src="./score-popup.js"></script>
+<script src="./sounds.js"></script>
+<script>
+const SAVE_KEY='ox_phon_schwa_v1';
+const TOTAL=15;
+let cur=0,answers=new Array(TOTAL).fill(null);
+function getScore(){return answers.filter(a=>a&&a.correct).length;}
+const Q=[
+  {src:"Vowel Reduction",cat:"약화 조건",text:"비강세 음절의 모음은 <span class='kw1'>/ə/</span>로 약화될 수 있다.",ans:true,correct:"정확하다. 비강세(-stress) 음절에서 모음은 <span class='kw1'>/ə/(schwa)</span>로 약화될 수 있다.",why:"Vowel reduction은 비강세 음절에서 full vowel이 중립적인 /ə/로 약화되는 현상이다. 영어의 stress-timed 리듬에서 비강세 음절이 압축되어 나타나는 결과이다. 예: about /əˈbaʊt/의 첫째 음절 a=→/ə/.",source:"\"In unstressed syllables, vowels may be reduced to <span class='kw1'>/ə/</span> (schwa). This is <span class='kw2'>vowel reduction</span>.\" (Yavaş 2011)",compare:[{title:"+stress 음절",desc:"반드시 full vowel 유지 · 약화 불가"},{title:"-stress 음절",desc:"/ə/로 약화 가능 · 또는 full vowel 유지"}]},
+  {src:"Schwa /ə/",cat:"출현 빈도",text:"<span class='kw1'>/ə/</span>(schwa)는 영어에서 가장 흔한 모음이다.",ans:true,correct:"정확하다. <span class='kw1'>/ə/</span>는 영어에서 출현 빈도가 가장 높은 모음으로, stress-timed 리듬의 결과물이다.",why:"영어는 stress-timed 언어로 비강세 음절이 많이 나타나고 이 음절들의 모음이 /ə/로 약화된다. 따라서 /ə/의 출현 빈도가 매우 높다. 영어 텍스트에서 /ə/는 가장 많이 나타나는 모음이다.",source:"\"<span class='kw1'>/ə/(schwa)</span> is the <span class='kw2'>most frequent vowel</span> in English, owing to extensive vowel reduction in unstressed syllables.\" (Yavaş 2011)",compare:[{title:"/ə/ 출현 빈도",desc:"영어 모음 중 최다 · 비강세 음절 우세"},{title:"Stress-timed 리듬",desc:"비강세 음절 압축 → /ə/ 다발 출현"}]},
+  {src:"Schwa vs /ʌ/",cat:"환경 비교",text:"<span class='kw1'>/ə/</span>와 <span class='kw1'>/ʌ/</span>는 동일한 음성 환경에서 나타난다.",ans:false,correct:"틀렸다. <span class='kw1'>/ə/</span>는 <span class='kw2'>비강세</span> 음절에서, <span class='kw1'>/ʌ/</span>는 <span class='kw2'>강세</span> 음절에서 나타난다. 환경이 다르다.",why:"/ə/와 /ʌ/는 조음 위치가 비슷하지만 강세 환경이 다르다. /ə/: -stress 음절에만 출현(mid central, 비강세). /ʌ/: +stress 음절에만 출현(low mid back, 강세). 예: 'about'의 첫째 음절=/ə/(비강세) vs 'cut'의 모음=/ʌ/(강세).",source:"\"<span class='kw1'>/ə/</span>: appears only in <span class='kw2'>unstressed</span> syllables. <span class='kw1'>/ʌ/</span>: appears only in <span class='kw2'>stressed</span> syllables. They are in complementary distribution.\" (Yavaş 2011)",compare:[{title:"/ə/ — 비강세 음절",desc:"about /əˈbaʊt/ · sofa /ˈsoʊfə/"},{title:"/ʌ/ — 강세 음절",desc:"cut /kʌt/ · butter /ˈbʌtər/의 첫째"}]},
+  {src:"Vowel Reduction",cat:"photograph",text:"<span class='kw3'>photograph</span> /ˈfoʊtəgræf/에서 두 번째 음절 <span class='kw2'>-to-</span>는 /ə/다.",ans:true,correct:"정확하다. /ˈfoʊ<span class='kw2'>tə</span>græf/에서 두 번째 음절 -to-의 모음은 비강세로 <span class='kw2'>/ə/</span>로 약화된다.",why:"photograph의 IPA: /ˈfoʊtəgræf/. 첫째 음절(pho-)=primary stress+full vowel /oʊ/, 둘째 음절(-to-)=비강세+/ə/(약화), 셋째 음절(-graph)=비강세+full vowel /æ/. 강세 이동 시 약화 위치도 이동한다.",source:"\"<span class='kw3'>photograph</span> /ˈfoʊ<span class='kw2'>tə</span>græf/: 2nd syllable is unstressed → reduced to <span class='kw2'>/ə/</span>.\" (Yavaş 2011)",compare:[{title:"ˈphotograph",desc:"/ˈfoʊ<span class='kw2'>tə</span>græf/ · 2째=/ə/"},{title:"phoˈtography",desc:"/<span class='kw2'>fə</span>ˈtɑgrəfi/ · 1째=/ə/"}]},
+  {src:"Vowel Reduction",cat:"강세 이동과 약화",text:"강세가 이동하면 모음 약화(<span class='kw1'>/ə/</span>) 위치도 이동한다.",ans:true,correct:"정확하다. 강세 위치 변화에 따라 비강세 음절이 달라지므로 /ə/ 출현 위치도 이동한다 — photo→photography 예시.",why:"photograph→photography에서 강세가 이동(-tog-으로)하면 약화 위치도 달라진다. photograph: 2째 음절=/ə/. photography: 1째 음절=/ə/. 이 연동성이 접미사 강세 규칙의 핵심 의미이다.",source:"\"When stress shifts, the position of vowel reduction (/ə/) also shifts: <span class='kw3'>ˈphotograph</span> vs <span class='kw3'>phoˈtography</span>.\" (Yavaş 2011)",compare:[{title:"ˈphotograph",desc:"2째=/ə/ · 1째=full vowel /oʊ/"},{title:"phoˈtography",desc:"1째=/ə/ · 2째=full vowel /ɑ/"}]},
+  {src:"Vowel Reduction",cat:"photography",text:"<span class='kw3'>photography</span> /fəˈtɑgrəfi/에서 첫 번째 음절은 <span class='kw2'>/ə/</span>다.",ans:true,correct:"정확하다. /fəˈtɑgrəfi/에서 첫 번째 음절 pho-의 모음은 비강세로 <span class='kw2'>/ə/</span>로 약화된다.",why:"photography의 IPA: /fəˈtɑgrəfi/. 강세가 2번째 음절(-tog-)으로 이동했기 때문에 1번째 음절(pho-)이 비강세가 되어 /ə/로 약화된다. photograph에서는 pho-가 강세 음절이어서 /oʊ/였다.",source:"\"<span class='kw3'>photography</span> /<span class='kw2'>fə</span>ˈtɑgrəfi/: 1st syllable is now unstressed → <span class='kw2'>/ə/</span>.\" (Yavaş 2011)",compare:[{title:"ˈphotograph",desc:"pho-=/ˈoʊ/ · 강세 음절 · full vowel"},{title:"phoˈtography",desc:"pho-=<span class='kw2'>/ə/</span> · 비강세 · 약화"}]},
+  {src:"Schwa /ə/",cat:"강세 음절 약화",text:"Primary stress 음절의 모음은 <span class='kw1'>/ə/</span>로 약화될 수 있다.",ans:false,correct:"틀렸다. Primary stress(+stress) 음절은 반드시 <span class='kw2'>full vowel</span>을 유지한다. /ə/는 <span class='kw4'>-stress</span> 음절에서만 나타난다.",why:"핵심 원칙: +stress 음절 → 반드시 full vowel. /ə/는 -stress 음절의 표지이다. 따라서 primary stress와 secondary stress 음절 모두 full vowel을 갖는다. /ə/는 절대로 강세 음절에 나타나지 않는다.",source:"\"A stressed syllable necessarily has a <span class='kw2'>full vowel</span>. <span class='kw1'>/ə/</span> appears ONLY in unstressed syllables.\" (Yavaş 2011)",compare:[{title:"+stress 음절 → full vowel",desc:"반드시 /oʊ/, /æ/, /ɑ/ 등 full vowel"},{title:"-stress 음절 → /ə/ 가능",desc:"/ə/로 약화되거나 full vowel 유지"}]},
+  {src:"Schwa /ə/",cat:"IPA 오류",text:"'about'의 IPA는 <span class='kw4'>/ˈæbaʊt/</span>이다.",ans:false,correct:"틀렸다. 'about'의 올바른 IPA는 <span class='kw2'>/əˈbaʊt/</span>이다 — 첫째 음절이 비강세여서 /ə/로 약화된다.",why:"about에서 강세는 두 번째 음절(-bout)에 있다. 따라서 첫째 음절 a-는 비강세가 되어 /ə/로 약화된다. /ˈæbaʊt/는 강세 위치가 반대이고 첫째 음절의 모음도 잘못된 표기이다.",source:"\"'about' = <span class='kw2'>/əˈbaʊt/</span>: 1st syllable is unstressed → /ə/; stress is on 2nd syllable.\" (Yavaş 2011)",compare:[{title:"✅ 올바른 IPA",desc:"/əˈbaʊt/ · 1째=비강세 /ə/"},{title:"❌ 잘못된 표기",desc:"/ˈæbaʊt/ · 강세 위치 및 모음 오류"}]},
+  {src:"Vowel Reduction",cat:"약화 조건",text:"Vowel reduction은 비강세 음절에서만 일어난다.",ans:true,correct:"정확하다. Vowel reduction(모음 약화)은 오직 <span class='kw2'>비강세(-stress) 음절</span>에서만 일어난다.",why:"강세 음절(primary/secondary)은 full vowel을 반드시 유지한다. 오직 비강세 음절에서만 vowel reduction이 일어날 수 있다. 이 원칙은 stress와 vowel quality의 상관관계를 설명하는 핵심이다.",source:"\"Vowel reduction occurs <span class='kw2'>only in unstressed syllables</span>: stressed syllables always retain their full vowel.\" (Yavaş 2011)",compare:[{title:"강세 음절 (reduction 불가)",desc:"primary, secondary stress → full vowel"},{title:"비강세 음절 (reduction 가능)",desc:"/ə/ 또는 full vowel 유지"}]},
+  {src:"Schwa /ə/",cat:"공식 명칭",text:"<span class='kw1'>/ə/</span>의 공식 음성학적 명칭은 <span class='kw2'>schwa</span>이다.",ans:true,correct:"정확하다. 중설 중모음 <span class='kw1'>/ə/</span>의 공식 명칭은 <span class='kw2'>schwa</span>(슈와)다.",why:"Schwa(/ə/)는 히브리어 'shewa'에서 온 용어로, 중설(central) 중높이(mid) 약화 모음이다. 비강세 음절에서 나타나는 가장 흔한 영어 모음이다.",source:"\"The mid central reduced vowel <span class='kw1'>/ə/</span> is officially called <span class='kw2'>schwa</span>.\" (Yavaş 2011)",compare:[{title:"Schwa /ə/",desc:"중설 중모음 · 비강세 · 약화"},{title:"/ʌ/ (wedge)",desc:"중설 저중모음 · 강세 · full vowel"}]},
+  {src:"Vowel Reduction",cat:"economy → economic",text:"<span class='kw3'>economy → economic</span>에서 약화 위치가 변한다.",ans:true,correct:"정확하다. eˈconomy(/ɪˈkɑnəmi/)와 ecoˈnomic(/ˌiːkəˈnɑmɪk/)에서 강세 이동에 따라 약화 위치도 변한다.",why:"eˈconomy: 1째=/ɪ/(비강세), 2째=/ɑ/(강세), 3째=/ə/(비강세). ecoˈnomic: 1째=/iː/(secondary), 2째=/ə/(비강세), 3째=/ɑ/(primary). 강세가 3번째 음절로 이동하면서 2번째가 비강세→/ə/로 약화된다.",source:"\"<span class='kw3'>eˈconomy</span> vs <span class='kw3'>ecoˈnomic</span>: stress shift causes reallocation of /ə/ position.\" (Yavaş 2011)",compare:[{title:"eˈconomy",desc:"/ɪˈkɑnəmi/ · 3째=/ə/"},{title:"ecoˈnomic",desc:"/ˌiːkəˈnɑmɪk/ · 2째=/ə/"}]},
+  {src:"Schwa /ə/",cat:"Secondary stress & /ə/",text:"Secondary stress 음절도 <span class='kw1'>/ə/</span>로 약화될 수 있다.",ans:false,correct:"틀렸다. Secondary stress 음절은 <span class='kw2'>+stress</span>이므로 반드시 full vowel을 유지한다. /ə/는 오직 -stress 음절에서만 나타난다.",why:"Secondary stress도 +stress 자질을 가지므로 full vowel이 필수이다. /ə/는 -stress 음절의 표지이다. 예: photographic /ˌfoʊtəˈgræfɪk/에서 첫째 음절(secondary stress)은 /oʊ/(full vowel), 둘째 음절(비강세)은 /ə/.",source:"\"<span class='kw2'>Secondary stressed</span> syllables: +stress → <span class='kw2'>full vowel required</span>. /ə/ appears ONLY in -stress syllables.\" (Yavaş 2011)",compare:[{title:"Secondary stress (+stress)",desc:"full vowel 필수 · /ə/ 불가"},{title:"Unstressed (-stress)",desc:"/ə/ 가능 · full vowel 유지도 가능"}]},
+  {src:"Schwa /ə/",cat:"출현 빈도 통계",text:"영어 모음 중 schwa /ə/의 출현 빈도가 가장 높다.",ans:true,correct:"정확하다. 영어에서 <span class='kw1'>/ə/</span>(schwa)는 출현 빈도가 가장 높은 모음이다.",why:"영어는 stress-timed 언어로 비강세 음절이 많다. 비강세 음절의 모음이 대부분 /ə/로 약화되기 때문에 텍스트 내 /ə/ 출현 빈도가 다른 어떤 모음보다 높다.",source:"\"<span class='kw1'>/ə/</span> is statistically the <span class='kw2'>most frequent vowel</span> in English speech and text.\" (Yavaş 2011)",compare:[{title:"/ə/ 출현 빈도 1위",desc:"비강세 음절의 압도적 우세"},{title:"기타 모음",desc:"/ɪ/, /æ/ 등 · 강세 음절에 집중"}]},
+  {src:"Vowel Reduction",cat:"banana",text:"<span class='kw3'>banana</span>의 세 모음은 모두 <span class='kw1'>/ə/</span>다.",ans:false,correct:"틀렸다. banana /bəˈnænə/에서 두 번째 음절(-nan-)의 모음은 강세를 받아 <span class='kw2'>/æ/</span>로 실현된다. 모두 /ə/는 아니다.",why:"banana /bəˈnænə/: 1째=-ba-=/ə/(비강세), 2째=-na-=/æ/(강세, full vowel), 3째=-na=/ə/(비강세). 강세가 있는 2번째 음절은 full vowel /æ/를 유지한다. '모두 /ə/'라는 설명은 강세 음절에 /ə/ 불가 원칙에 위배된다.",source:"\"<span class='kw3'>banana</span> = /bəˈnænə/: 1st=/ə/, 2nd=/<span class='kw2'>æ</span>/(stressed!), 3rd=/ə/.\" (Yavaş 2011)",compare:[{title:"1째 ba- = /ə/",desc:"비강세 · 약화"},{title:"2째 nan- = /æ/",desc:"강세 · full vowel · /ə/ 불가"}]},
+  {src:"Vowel Reduction",cat:"Stress-timed 리듬",text:"Vowel reduction은 영어의 <span class='kw1'>stress-timed</span> 리듬과 관련이 있다.",ans:true,correct:"정확하다. Vowel reduction은 영어의 <span class='kw1'>stress-timed</span> 리듬에서 비강세 음절이 압축되는 현상으로부터 비롯된다.",why:"Stress-timed 언어(영어)에서는 강세 음절이 일정한 간격으로 나타나고 비강세 음절이 압축된다. 이 압축의 결과로 비강세 음절 모음이 /ə/로 약화된다. Syllable-timed 언어에서는 vowel reduction이 나타나지 않는다.",source:"\"Vowel reduction is closely linked to <span class='kw1'>stress-timing</span>: unstressed syllables are compressed, leading to /ə/ reduction.\" (Yavaş 2011)",compare:[{title:"Stress-timed (영어)",desc:"비강세 음절 압축 → vowel reduction"},{title:"Syllable-timed (한국어, 스페인어)",desc:"모든 음절 등간격 → vowel reduction 없음"}]}
+];
+function renderExp(q,isCorrect){
+  const three=q.compare&&q.compare.length===3;
+  const cmp=q.compare?`<div class="sec-label">📊 비교 정리</div><div class="compare${three?' three':''}">${q.compare.map(c=>`<div class="compare-item"><div class="ci-title">${c.title}</div><p>${c.desc}</p></div>`).join('')}</div>`:'';
+  return `<div class="exp show"><div class="exp-header"><span>${isCorrect?'✅ 정답':'❌ 오답'} · 해설</span></div><div class="exp-answer"><div class="ans-label">핵심 정정</div><div class="ans-text">${q.correct}</div></div><div class="exp-body"><div class="sec-label">📖 상세 설명</div><p>${q.why}</p><div class="sec-label">📌 Source</div><div class="def-box"><p>${q.source}</p></div>${cmp}</div></div>`;
+}
+function renderNav(){
+  document.getElementById('nav').innerHTML=answers.map((a,i)=>{
+    let cls='nd';
+    if(i===cur)cls+=' cur';
+    else if(a!==null)cls+=a.correct?' ok':' ng';
+    return `<button class="${cls}" onclick="jumpTo(${i})">${i+1}</button>`;
+  }).join('');
+}
+function render(){
+  if(cur>=TOTAL){
+    document.getElementById('qa').style.display='none';
+    document.getElementById('sc').classList.add('show');
+    const s=getScore();
+    document.getElementById('fs').textContent=s;
+    const p=s/TOTAL;
+    document.getElementById('rm').textContent=p===1?'🎉 Perfect!':p>=.8?'👏 Great!':p>=.6?'😊 Good!':'💪 Keep going!';
+    document.getElementById('rs').textContent=`${TOTAL}문제 중 ${s}문제 정답 (${Math.round(p*100)}%)`;
+    setTimeout(function(){window.showScorePopup&&window.showScorePopup(s,TOTAL);},400);
+    renderNav();return;
+  }
+  document.getElementById('sc').classList.remove('show');
+  document.getElementById('qa').style.display='block';
+  renderNav();
+  const q=Q[cur];
+  document.getElementById('bf').style.width=((cur+1)/TOTAL*100).toFixed(1)+'%';
+  document.getElementById('pt').textContent=`${cur+1} / ${TOTAL}`;
+  document.getElementById('ps').textContent=`정답 ${getScore()}개`;
+  const a=answers[cur];
+  if(a!==null){
+    let oBtnCls='',xBtnCls='';
+    if(a.picked===true){oBtnCls=a.correct?'co':'wp';if(!a.correct)xBtnCls='cx';}
+    else{xBtnCls=a.correct?'cx':'wp';if(!a.correct)oBtnCls='co';}
+    document.getElementById('qa').innerHTML=`<div class="card"><div class="q-meta"><span class="q-num">Q${cur+1}</span><span class="q-src">${q.src}</span><span class="q-cat">${q.cat}</span></div><div class="q-text">${q.text}</div><div class="ox-btns"><button class="ox-btn o-btn ${oBtnCls}" disabled>⭕<span class="lb">CORRECT</span></button><button class="ox-btn x-btn ${xBtnCls}" disabled>❌<span class="lb">WRONG</span></button></div><div class="badge ${a.correct?'ok':'ng'}">${a.correct?'✅ 정답!':'❌ 오답! 정답은 '+(q.ans?'O':'X')}</div><div>${renderExp(q,a.correct)}</div><button class="next-btn show" onclick="next()">${cur<TOTAL-1?'Next →':'결과 보기 →'}</button></div>`;
+  }else{
+    document.getElementById('qa').innerHTML=`<div class="card"><div class="q-meta"><span class="q-num">Q${cur+1}</span><span class="q-src">${q.src}</span><span class="q-cat">${q.cat}</span></div><div class="q-text">${q.text}</div><div class="ox-btns"><button class="ox-btn o-btn" onclick="pick(true)" id="ob">⭕<span class="lb">CORRECT</span></button><button class="ox-btn x-btn" onclick="pick(false)" id="xb">❌<span class="lb">WRONG</span></button></div><div id="bd" class="badge"></div><div id="ep"></div><button class="next-btn" id="nb" onclick="next()">${cur<TOTAL-1?'Next →':'결과 보기 →'}</button></div>`;
+  }
+}
+function pick(val){
+  const q=Q[cur];
+  document.getElementById('ob').disabled=true;
+  document.getElementById('xb').disabled=true;
+  const ok=val===q.ans;
+  answers[cur]={picked:val,correct:ok};
+  if(ok){if(typeof playOk==='function')playOk();}else{if(typeof playNg==='function')playNg();}
+  const bd=document.getElementById('bd');
+  bd.textContent=ok?'✅ 정답!':`❌ 오답! 정답은 ${q.ans?'O':'X'}`;
+  bd.className='badge '+(ok?'ok':'ng');
+  document.getElementById(val?'ob':'xb').classList.add(ok?(val?'co':'cx'):'wp');
+  if(!ok)document.getElementById(q.ans?'ob':'xb').classList.add(q.ans?'co':'cx');
+  document.getElementById('ep').innerHTML=renderExp(q,ok);
+  document.getElementById('nb').classList.add('show');
+  document.getElementById('ps').textContent=`정답 ${getScore()}개`;
+  renderNav();saveProgress();
+}
+function next(){cur++;saveProgress();render();}
+function jumpTo(i){cur=i;render();document.getElementById('qa').scrollIntoView({behavior:'smooth',block:'start'});}
+function saveProgress(){localStorage.setItem(SAVE_KEY,JSON.stringify({cur,answers}));}
+function freshStart(){localStorage.removeItem(SAVE_KEY);cur=0;answers=new Array(TOTAL).fill(null);document.getElementById('rb').style.display='none';document.getElementById('sc').classList.remove('show');document.getElementById('qa').style.display='block';renderNav();render();}
+(function(){
+  const saved=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');
+  if(saved&&saved.answers&&saved.cur>=0&&saved.cur<TOTAL){
+    cur=saved.cur;answers=saved.answers;
+    const done=answers.filter(a=>a!==null).length;
+    if(done>0){document.getElementById('rb-msg').textContent=`이어서 풀기 중 · ${done}/${TOTAL} 문제 완료 (정답 ${getScore()}개)`;document.getElementById('rb').style.display='block';}
+  }
+  renderNav();render();
+})();
+</script>
+</body>
+</html>

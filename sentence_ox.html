@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sentence Stress & Nuclear/Focus Stress — OX Quiz</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:repeating-linear-gradient(transparent,transparent 27px,#ddddd0 28px);color:#1a1a1a;min-height:100vh;padding:16px}
+.header-wrap{max-width:720px;margin:0 auto;padding:20px 8px 0}
+.header-topbar{display:flex;justify-content:space-between;align-items:center;border-top:2px solid #1a1a1a;padding-top:8px;margin-bottom:10px}
+.header-no{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;border:2px solid #1a1a1a;padding:3px 10px;border-radius:2px;letter-spacing:.5px;display:flex;align-items:center;gap:6px}
+.header-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;letter-spacing:1px}
+.header-title{font-size:clamp(30px,7vw,46px);font-weight:900;color:#1a1a1a;line-height:1.1;margin-bottom:5px;letter-spacing:-1px}
+.title-hl{background:#1a5276;color:#fff;padding:1px 6px}
+.header-script{font-family:'Caveat',cursive;font-size:21px;color:#1a5276;margin-bottom:4px;font-weight:600}
+.header-sub{font-size:13px;color:#555;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#aaa;margin-bottom:14px}
+.header-divider{border:none;border-top:2.5px solid #1a1a1a;margin-bottom:20px}
+.prog-wrap{max-width:720px;margin:0 auto 10px;padding:0 8px}
+.prog-info{display:flex;justify-content:space-between;font-size:12px;color:#1a5276;font-family:'JetBrains Mono',monospace;margin-bottom:6px}
+.bar{height:4px;background:#aed6f1;border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,#1a5276,#2980b9);border-radius:2px;transition:width .5s ease}
+.wrap{max-width:720px;margin:0 auto}
+.card{background:#fff;border:1.5px solid #aed6f1;border-radius:14px;padding:26px;animation:up .35s ease;box-shadow:0 2px 8px rgba(26,82,118,.08)}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.q-meta{display:flex;align-items:center;gap:7px;margin-bottom:14px;flex-wrap:wrap}
+.q-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:#1a5276;background:rgba(26,82,118,.1);padding:3px 10px;border-radius:8px;font-weight:700}
+.q-src{font-size:11px;color:#2e86c1;font-family:'JetBrains Mono',monospace}
+.q-cat{font-size:11px;color:#1a5276;background:rgba(41,128,185,.1);padding:3px 10px;border-radius:8px;margin-left:auto;font-weight:600}
+.kw1{background:rgba(26,82,118,.15);color:#1a3a52;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(26,82,118,.25)}
+.kw2{color:#117a8b;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border-bottom:2px solid rgba(17,122,139,.45)}
+.kw3{background:rgba(39,174,96,.13);color:#1e8449;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(39,174,96,.3)}
+.kw4{background:rgba(183,28,28,.11);color:#b71c1c;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(183,28,28,.25)}
+.q-text{font-size:clamp(15px,2.2vw,16.5px);line-height:1.9;margin-bottom:24px;color:#1a2633}
+.ox-btns{display:flex;gap:12px}
+.ox-btn{flex:1;padding:20px 10px;border-radius:12px;border:2px solid #aed6f1;background:#f4f9fe;color:#1a2633;font-size:30px;cursor:pointer;transition:all .18s ease;display:flex;flex-direction:column;align-items:center;gap:5px}
+.lb{font-size:11px;font-family:'JetBrains Mono',monospace;color:#2e86c1;letter-spacing:1px;font-weight:600}
+.ox-btn:hover:not(:disabled){transform:translateY(-2px)}
+.o-btn:hover:not(:disabled){border-color:#1a5276;background:rgba(26,82,118,.08)}
+.x-btn:hover:not(:disabled){border-color:#c62828;background:rgba(198,40,40,.06)}
+.co,.cx{border-color:#1a5276!important;background:rgba(26,82,118,.1)!important}
+.wp{border-color:#c62828!important;background:rgba(198,40,40,.08)!important}
+.ox-btn:disabled{cursor:default}
+.badge{display:none;margin-top:14px;padding:9px 16px;border-radius:8px;font-size:14px;font-weight:700;font-family:'JetBrains Mono',monospace}
+.badge.ok{display:inline-block;background:rgba(26,82,118,.1);color:#1a5276;border:1.5px solid rgba(26,82,118,.3)}
+.badge.ng{display:inline-block;background:rgba(198,40,40,.08);color:#c62828;border:1.5px solid rgba(198,40,40,.25)}
+.exp{display:none;margin-top:18px;border-radius:12px;overflow:hidden;animation:fade .3s ease}
+.exp.show{display:block}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.exp-header{background:linear-gradient(135deg,rgba(26,82,118,.12),rgba(41,128,185,.06));border:1.5px solid rgba(26,82,118,.25);border-bottom:none;padding:11px 16px}
+.exp-header span{font-size:11px;font-family:'JetBrains Mono',monospace;color:#1a3a52;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.exp-answer{background:rgba(26,82,118,.05);border:1.5px solid rgba(26,82,118,.2);border-top:none;border-bottom:none;padding:14px 16px}
+.ans-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#2e86c1;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-weight:700}
+.ans-text{font-size:15px;color:#1a2633;line-height:1.75;font-weight:500}
+.exp-body{background:rgba(26,82,118,.03);border:1.5px solid rgba(26,82,118,.15);border-top:1px solid rgba(26,82,118,.1);padding:14px 16px}
+.sec-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#117a8b;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;margin-top:13px;font-weight:700}
+.sec-label:first-child{margin-top:0}
+.exp-body p{font-size:14px;color:#1a3a52;line-height:1.8;margin-bottom:5px}
+.def-box{background:rgba(41,128,185,.06);border-left:4px solid #2980b9;padding:10px 14px;border-radius:0 8px 8px 0;margin:8px 0}
+.def-box p{color:#1a3a52;font-size:13.5px;font-style:italic;line-height:1.75}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.compare.three{grid-template-columns:1fr 1fr 1fr}
+.compare-item{background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:8px;padding:11px 14px}
+.ci-title{font-size:11px;font-family:'JetBrains Mono',monospace;color:#1a5276;font-weight:700;margin-bottom:5px}
+.compare-item p{font-size:13px;color:#2e4a5a;line-height:1.65}
+.next-btn{display:none;width:100%;margin-top:16px;padding:14px;background:linear-gradient(135deg,#1a5276,#2980b9);border:none;border-radius:10px;color:white;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:opacity .2s,transform .2s}
+.next-btn:hover{opacity:.88;transform:translateY(-1px)}
+.next-btn.show{display:block;animation:fade .3s ease}
+.score-card{display:none;text-align:center;padding:48px 24px}
+.score-card.show{display:block;animation:up .5s ease}
+.score-circle{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,#1a5276,#2980b9);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 0 40px rgba(26,82,118,.3)}
+.s-num{font-size:42px;font-weight:700;line-height:1;color:#fff}
+.s-total{font-size:14px;opacity:.85;color:#fff}
+.score-card h2{font-size:24px;margin-bottom:7px;color:#1a1a1a}
+.score-card p{color:#555;margin-bottom:24px;font-size:15px}
+.restart-btn{padding:13px 32px;background:#fff;border:2px solid #1a1a1a;border-radius:10px;color:#1a1a1a;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.restart-btn:hover{background:#f5f4ee}
+.nd{width:28px;height:28px;border-radius:6px;border:1.5px solid #aed6f1;background:#fff;font-size:10px;font-family:'JetBrains Mono',monospace;cursor:pointer;color:#2e86c1;transition:all .15s;display:inline-flex;align-items:center;justify-content:center;font-weight:600}
+.nd.cur{border-color:#1a5276;background:#1a5276;color:white}
+.nd.ok{border-color:#1a5276;background:rgba(26,82,118,.15);color:#1a3a52}
+.nd.ng{border-color:#c62828;background:rgba(198,40,40,.1);color:#c62828}
+.nd:hover:not(.cur){opacity:.7}
+#nav{display:flex;flex-wrap:wrap;gap:5px;max-width:720px;margin:0 auto 16px;padding:0 8px}
+</style>
+</head>
+<body>
+<div class="header-wrap">
+  <div class="header-topbar">
+    <span class="header-no">NO. 03 <span>—</span> Sentence Stress</span>
+    <span class="header-label">Past-Exam Notebook</span>
+  </div>
+  <h1 class="header-title"><span class="title-hl">음운론</span> 개념 마스터</h1>
+  <div class="header-script">Phonology · Sentence & Focus Stress</div>
+  <p class="header-sub">음운론 · 문장 강세 · Nuclear/Focus Stress · Content vs Function Word · 임용고시 대비</p>
+  <div class="header-divider"></div>
+</div>
+<div class="prog-wrap">
+  <div class="prog-info"><span id="pt">1 / 15</span><span id="ps">정답 0개</span></div>
+  <div class="bar"><div class="bar-fill" id="bf" style="width:6.67%"></div></div>
+</div>
+<div id="rb" style="display:none;max-width:720px;margin:0 auto 14px;padding:0 8px">
+  <div style="background:rgba(26,82,118,.08);border:1.5px solid rgba(26,82,118,.3);border-radius:12px;padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <span id="rb-msg" style="font-size:13px;color:#1a2633;font-family:'JetBrains Mono',monospace;line-height:1.5"></span>
+    <button onclick="freshStart()" style="padding:10px 22px;background:#c62828;border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer">처음부터</button>
+  </div>
+</div>
+<div id="nav"></div>
+<div class="wrap">
+  <div id="qa"></div>
+  <div class="score-card" id="sc">
+    <div class="score-circle"><span class="s-num" id="fs">0</span><span class="s-total">/15</span></div>
+    <h2 id="rm"></h2><p id="rs"></p>
+    <button class="restart-btn" onclick="freshStart()">🔄 처음부터</button>
+  </div>
+</div>
+<script src="./score-popup.js"></script>
+<script src="./sounds.js"></script>
+<script>
+const SAVE_KEY='ox_phon_sentence_v1';
+const TOTAL=15;
+let cur=0,answers=new Array(TOTAL).fill(null);
+function getScore(){return answers.filter(a=>a&&a.correct).length;}
+const Q=[
+  {src:"Content Word",cat:"강세 범주",text:"<span class='kw1'>Content word</span>(내용어: 명사, 동사, 형용사, 부사)는 일반적으로 강세를 받는다.",ans:true,correct:"정확하다. 명사, 동사, 형용사, 부사 등 <span class='kw1'>content word</span>는 lexical meaning을 가지며 일반적으로 <span class='kw2'>강세</span>를 받는다.",why:"Content word는 어휘적 의미(lexical meaning)를 지닌 단어들로, 발화의 정보 핵심을 담고 있다. 따라서 강세를 받아 청자에게 두드러지게 전달된다. 반면 function word는 문법적 기능만 하므로 일반적으로 비강세이다.",source:"\"<span class='kw1'>Content words</span> (N, V, Adj, Adv) generally receive stress; <span class='kw2'>function words</span> (articles, prepositions, conjunctions, pronouns) generally do not.\" (Yavaş 2011)",compare:[{title:"Content word (강세 ○)",desc:"명사·동사·형용사·부사 · 어휘적 의미 보유"},{title:"Function word (강세 ✗)",desc:"관사·전치사·접속사·대명사 · 문법적 기능"}]},
+  {src:"Function Word",cat:"관사 강세",text:"관사 <span class='kw1'>the, a</span>는 일반적으로 강세를 받지 않는다.",ans:true,correct:"정확하다. 관사는 <span class='kw1'>function word</span>이므로 일반적으로 비강세이다. 단, 강조 목적으로 쓰일 때는 강세를 받을 수 있다.",why:"관사(the, a/an)는 문법적 기능만 하는 function word이다. 일반 발화에서는 약화되어 /ðə/, /ə/로 실현된다. 단 'THE book'처럼 강조(contrastive) 목적으로 쓰이면 강세를 받을 수 있다.",source:"\"Articles (the, a) are <span class='kw1'>function words</span>: generally unstressed. Contrastive use allows stress: 'THE (not a) book.'\" (Yavaş 2011)",compare:[{title:"일반 사용 (비강세)",desc:"the /ðə/, a /ə/ · 약화 실현"},{title:"강조 사용 (강세 가능)",desc:"THE book (저 책이 아닌 바로 그 책)"}]},
+  {src:"Function Word",cat:"be 동사 강세",text:"동사 <span class='kw1'>be</span>는 항상 비강세다.",ans:false,correct:"틀렸다. 'be'는 일반적으로 비강세이지만, <span class='kw2'>강조(contrastive)</span> 상황에서는 강세를 받을 수 있다 — 예: 'She IS here!'",why:"Be 동사는 조동사/연결동사로서 일반적으로는 function word처럼 비강세로 실현된다. 그러나 'I know she was late, but she IS here now!'처럼 사실을 강조할 때 강세를 받는다. '항상'이라는 절대어에 주의해야 한다.",source:"\"'be' is typically unstressed, but can receive stress in <span class='kw2'>emphatic/contrastive contexts</span>: 'She IS here!' (emphasizing truth).\" (Yavaş 2011)",compare:[{title:"일반 발화 (비강세)",desc:"She is THERE. · is = 비강세"},{title:"강조 발화 (강세 가능)",desc:"She IS there! · 사실 강조"}]},
+  {src:"Focus Stress",cat:"Narrow Focus",text:"<span class='kw1'>Narrow focus</span>에서 핵강세는 <span class='kw2'>새로운 정보</span>를 가진 요소에 온다.",ans:true,correct:"정확하다. Narrow focus에서 핵강세는 화자가 전달하려는 <span class='kw2'>새 정보(new information)</span>를 담은 특정 요소에 배정된다.",why:"Narrow focus는 발화의 특정 요소만이 새 정보일 때 나타난다. 핵강세가 그 요소로 이동하여 청자에게 어디가 새 정보인지 신호한다. Broad focus(전체가 새 정보)와 대비된다.",source:"\"<span class='kw1'>Narrow focus</span>: nuclear stress marks the element carrying <span class='kw2'>new information</span>, contrasting with given information.\" (Yavaş 2011)",compare:[{title:"Broad focus",desc:"전체가 새 정보 · NSR 기본 적용"},{title:"Narrow focus",desc:"특정 요소만 새 정보 · 핵강세 이동"}]},
+  {src:"Focus Stress",cat:"Contrastive Focus",text:"'<span class='kw3'>ˈJohn</span> ate the pizza'에서 John이 강조되면 <span class='kw2'>다른 사람이 먹었다는 함의</span>와 대비된다.",ans:true,correct:"정확하다. 'ˈJohn ate the pizza'는 John에 contrastive focus — '(John이, 다른 사람이 아닌) John이 피자를 먹었다'는 함의를 가진다.",why:"Contrastive focus(대조 초점)는 narrow focus의 한 종류로, 다른 대안과 대조하여 특정 요소를 강조한다. John에 강세가 오면 '(Mary가 아닌) John이'라는 함의가 생긴다.",source:"\"<span class='kw1'>Contrastive focus</span>: 'ˈJohn ate the pizza' implies John (not someone else) ate it.\" (Yavaş 2011)",compare:[{title:"<span class='kw3'>ˈJOHN</span> ate the pizza",desc:"John에 초점 · 다른 사람과 대조"},{title:"John ate <span class='kw3'>the ˈPIZZA</span>",desc:"pizza에 초점 · 다른 음식과 대조"}]},
+  {src:"Focus Stress",cat:"Broad Focus",text:"<span class='kw1'>Broad focus</span>는 전체 발화가 새로운 정보일 때 사용된다.",ans:true,correct:"정확하다. Broad focus는 발화 전체가 새 정보일 때 나타나며, NSR에 따라 마지막 주요 요소에 핵강세가 온다.",why:"Broad focus(광범위 초점)는 'What happened?'에 대한 답변처럼 발화 전체가 새 정보인 경우다. 이때 NSR이 기본적으로 적용되어 마지막 주요 내용어에 핵강세가 온다.",source:"\"<span class='kw1'>Broad focus</span>: the entire utterance is new information. NSR assigns nuclear stress to the rightmost major element.\" (Yavaş 2011)",compare:[{title:"Broad focus 예",desc:"Q: What happened? A: John ate the PIZZA."},{title:"Narrow focus 예",desc:"Q: Who ate? A: JOHN ate the pizza."}]},
+  {src:"Function Word",cat:"전치사 강세",text:"전치사는 content word이므로 항상 강세를 받는다.",ans:false,correct:"틀렸다. 전치사는 대부분 <span class='kw1'>function word</span>로 분류되어 일반적으로 <span class='kw2'>비강세</span>다. 강조 시에만 강세를 받는다.",why:"전치사(in, on, at, to 등)는 문법적 관계를 나타내는 function word이다. 일반 발화에서는 비강세로 약화된다. 단 'Look AT me, not behind me!'처럼 강조할 때 강세를 받을 수 있다.",source:"\"Prepositions are <span class='kw1'>function words</span>: generally unstressed in normal speech. Stress possible in contrastive contexts.\" (Yavaş 2011)",compare:[{title:"일반 발화 (비강세)",desc:"He's in the ROOM. · in = 비강세"},{title:"강조 발화 (강세 가능)",desc:"He's IN the room, not outside."}]},
+  {src:"Nuclear Stress",cat:"Nuclear Stress 정의",text:"<span class='kw1'>Nuclear stress</span>는 발화에서 가장 두드러진(prominent) 강세다.",ans:true,correct:"정확하다. <span class='kw1'>Nuclear stress</span>는 하나의 억양 구(intonation phrase) 내에서 가장 두드러진 강세이며, 핵음조(nuclear tone)의 출발점이다.",why:"Nuclear stress = 발화에서 가장 현저한 강세. 이 음절에서 음조 변화(pitch movement)가 시작된다. Primary/secondary stress와 달리 nuclear stress는 문맥과 초점에 따라 이동할 수 있다.",source:"\"<span class='kw1'>Nuclear stress</span> is the most prominent stress in an intonation phrase, serving as the nucleus of the nuclear tone.\" (Yavaş 2011)",compare:[{title:"Word-level stress",desc:"단어 내 primary/secondary 강세"},{title:"<span class='kw1'>Nuclear stress</span>",desc:"발화 수준 · 가장 현저 · 문맥 의존"}]},
+  {src:"Function Word",cat:"대명사 강세",text:"대명사(<span class='kw1'>he, she, it, they</span>)는 일반적으로 강세를 받지 않는다.",ans:true,correct:"정확하다. 대명사는 <span class='kw1'>function word</span>로 분류되어 일반적으로 비강세이다. 단, 대조 강조 시 강세를 받는다.",why:"대명사는 앞서 언급된 명사구를 대체하는 문법 요소로 function word 범주에 속한다. 새 정보를 전달하지 않으므로 일반적으로 비강세이다. 'HE did it, not she!'처럼 대조할 때는 강세를 받는다.",source:"\"Pronouns (he, she, it, they) are <span class='kw1'>function words</span>: generally unstressed. Stressed in contrastive contexts.\" (Yavaş 2011)",compare:[{title:"일반 사용 (비강세)",desc:"HE'S here. · he = 약화"},{title:"대조 사용 (강세 가능)",desc:"HE came, not her!"}]},
+  {src:"Focus Stress",cat:"Contrastive Stress",text:"<span class='kw1'>Contrastive stress</span>는 narrow focus의 한 종류다.",ans:true,correct:"정확하다. Contrastive stress는 narrow focus의 하위 유형으로, 특정 요소를 다른 대안과 <span class='kw2'>대조</span>하여 강조할 때 나타난다.",why:"Narrow focus의 주요 유형 중 하나가 contrastive focus이다. 대조 강세는 '다른 것이 아닌 바로 이것'을 강조하는 기능을 한다. 예: 'I said CATS, not dogs.'",source:"\"<span class='kw1'>Contrastive stress</span> is a type of <span class='kw2'>narrow focus</span> that highlights an element by contrasting it with an alternative.\" (Yavaş 2011)",compare:[{title:"Narrow focus (일반)",desc:"새 정보 요소에 핵강세 이동"},{title:"Contrastive stress",desc:"대안과 대조 · 'A, not B' 함의"}]},
+  {src:"Focus Stress",cat:"Focus 해석",text:"'She <span class='kw3'>GAVE</span> me the book'에서 핵강세가 GAVE에 오면 <span class='kw2'>행위의 방식</span>을 강조하는 것이다.",ans:true,correct:"정확하다. GAVE에 핵강세가 오면 '(빌린 것이나 판 것이 아닌) 주었다'는 행위 자체를 강조하는 contrastive focus이다.",why:"핵강세 위치에 따라 발화의 초점이 달라진다: GAVE = 행위 방식 강조(주었음 vs 빌려줌/팜), me = 수혜자 강조(나에게), BOOK = 대상 강조(책을). 이 패턴은 임용 단골 문제 유형이다.",source:"\"'She <span class='kw3'>GAVE</span> me the book' — nuclear stress on GAVE: focus on the action (gave, not lent or sold).\" (Yavaş 2011)",compare:[{title:"She <span class='kw3'>GAVE</span> me the book",desc:"행위 강조 · 팔거나 빌린 게 아님"},{title:"She gave <span class='kw3'>ME</span> the book",desc:"수혜자 강조 · 다른 사람이 아닌 나에게"}]},
+  {src:"Content Word",cat:"의문사 강세",text:"의문사(<span class='kw4'>wh-words</span>: who, what, where)는 function word이므로 강세를 받지 않는다.",ans:false,correct:"틀렸다. 의문사(who, what, where, when, why, how)는 <span class='kw2'>content word</span>로 분류되어 강세를 받는다.",why:"의문사는 어휘적 의미(lexical meaning)를 가지는 content word이다. 'WHO took my book?'에서 who는 강세를 받아 두드러진다. Function word인 관사/접속사와 혼동하지 않도록 주의해야 한다.",source:"\"<span class='kw2'>Wh-words</span> (who, what, where, when, why, how) are <span class='kw1'>content words</span> and receive stress.\" (Yavaş 2011)",compare:[{title:"의문사 = Content word",desc:"who, what, where · 강세 ○"},{title:"관사/접속사 = Function word",desc:"the, a, and, but · 강세 ✗"}]},
+  {src:"Focus Stress",cat:"주어진 정보",text:"주어진 정보(<span class='kw1'>given information</span>)에 핵강세가 온다.",ans:false,correct:"틀렸다. 핵강세는 <span class='kw2'>새로운 정보(new information)</span>에 온다. 주어진 정보(given/old information)는 핵강세를 받지 않는다.",why:"핵강세는 청자가 아직 모르는 새 정보를 표시하는 기능을 한다. 이미 언급되었거나 맥락에서 알 수 있는 given information에는 핵강세가 오지 않으며 종종 약화·생략된다.",source:"\"Nuclear stress marks <span class='kw2'>new information</span>. Given/old information is deaccented (reduced or unstressed).\" (Yavaş 2011)",compare:[{title:"New information (핵강세 ○)",desc:"청자가 모르는 새 정보 · 두드러짐"},{title:"Given information (핵강세 ✗)",desc:"이미 알려진 정보 · 약화·탈강세"}]},
+  {src:"Nuclear Stress",cat:"억양구 단위",text:"영어 발화에서 핵강세(nuclear stress)는 하나의 억양구(intonation phrase)당 하나뿐이다.",ans:true,correct:"정확하다. 하나의 억양구(intonation phrase) 안에는 <span class='kw2'>하나의 핵강세</span>만 존재한다. 억양구가 여럿이면 각각 핵강세를 가진다.",why:"억양구는 하나의 핵강세(nuclear stress)와 함께 실현되는 운율 단위이다. 긴 발화는 여러 억양구로 나뉘어 각각 핵강세를 가질 수 있지만, 하나의 억양구 내에서는 핵강세가 단 하나다.",source:"\"Each <span class='kw2'>intonation phrase</span> contains exactly <span class='kw2'>one nuclear stress</span>, which serves as the nucleus of the nuclear tone.\" (Yavaş 2011)",compare:[{title:"억양구 1개",desc:"핵강세 1개 · 단일 운율 단위"},{title:"억양구 여럿",desc:"각 억양구마다 핵강세 1개씩"}]},
+  {src:"Function Word",cat:"접속사 강세",text:"접속사(<span class='kw1'>and, but, or, because</span>)는 일반적으로 비강세다.",ans:true,correct:"정확하다. 접속사는 <span class='kw1'>function word</span>로 일반적으로 비강세이며 약화 실현된다. 강조 목적으로만 강세를 받는다.",why:"접속사(and, but, or, because, although 등)는 절이나 어구를 연결하는 문법적 기능만 하는 function word이다. 발화에서 일반적으로 비강세로 실현되며 약화(/ən/, /bət/)된다.",source:"\"Conjunctions (and, but, or) are <span class='kw1'>function words</span>: generally unstressed and reduced (/ən/, /bət/).\" (Yavaş 2011)",compare:[{title:"일반 사용 (비강세/약화)",desc:"and /ən/, but /bət/ · 축약"},{title:"강조 사용",desc:"'AND another thing...' · 드물게 강세"}]}
+];
+function renderExp(q,isCorrect){
+  const three=q.compare&&q.compare.length===3;
+  const cmp=q.compare?`<div class="sec-label">📊 비교 정리</div><div class="compare${three?' three':''}">${q.compare.map(c=>`<div class="compare-item"><div class="ci-title">${c.title}</div><p>${c.desc}</p></div>`).join('')}</div>`:'';
+  return `<div class="exp show"><div class="exp-header"><span>${isCorrect?'✅ 정답':'❌ 오답'} · 해설</span></div><div class="exp-answer"><div class="ans-label">핵심 정정</div><div class="ans-text">${q.correct}</div></div><div class="exp-body"><div class="sec-label">📖 상세 설명</div><p>${q.why}</p><div class="sec-label">📌 Source</div><div class="def-box"><p>${q.source}</p></div>${cmp}</div></div>`;
+}
+function renderNav(){
+  document.getElementById('nav').innerHTML=answers.map((a,i)=>{
+    let cls='nd';
+    if(i===cur)cls+=' cur';
+    else if(a!==null)cls+=a.correct?' ok':' ng';
+    return `<button class="${cls}" onclick="jumpTo(${i})">${i+1}</button>`;
+  }).join('');
+}
+function render(){
+  if(cur>=TOTAL){
+    document.getElementById('qa').style.display='none';
+    document.getElementById('sc').classList.add('show');
+    const s=getScore();
+    document.getElementById('fs').textContent=s;
+    const p=s/TOTAL;
+    document.getElementById('rm').textContent=p===1?'🎉 Perfect!':p>=.8?'👏 Great!':p>=.6?'😊 Good!':'💪 Keep going!';
+    document.getElementById('rs').textContent=`${TOTAL}문제 중 ${s}문제 정답 (${Math.round(p*100)}%)`;
+    setTimeout(function(){window.showScorePopup&&window.showScorePopup(s,TOTAL);},400);
+    renderNav();return;
+  }
+  document.getElementById('sc').classList.remove('show');
+  document.getElementById('qa').style.display='block';
+  renderNav();
+  const q=Q[cur];
+  document.getElementById('bf').style.width=((cur+1)/TOTAL*100).toFixed(1)+'%';
+  document.getElementById('pt').textContent=`${cur+1} / ${TOTAL}`;
+  document.getElementById('ps').textContent=`정답 ${getScore()}개`;
+  const a=answers[cur];
+  if(a!==null){
+    let oBtnCls='',xBtnCls='';
+    if(a.picked===true){oBtnCls=a.correct?'co':'wp';if(!a.correct)xBtnCls='cx';}
+    else{xBtnCls=a.correct?'cx':'wp';if(!a.correct)oBtnCls='co';}
+    document.getElementById('qa').innerHTML=`<div class="card"><div class="q-meta"><span class="q-num">Q${cur+1}</span><span class="q-src">${q.src}</span><span class="q-cat">${q.cat}</span></div><div class="q-text">${q.text}</div><div class="ox-btns"><button class="ox-btn o-btn ${oBtnCls}" disabled>⭕<span class="lb">CORRECT</span></button><button class="ox-btn x-btn ${xBtnCls}" disabled>❌<span class="lb">WRONG</span></button></div><div class="badge ${a.correct?'ok':'ng'}">${a.correct?'✅ 정답!':'❌ 오답! 정답은 '+(q.ans?'O':'X')}</div><div>${renderExp(q,a.correct)}</div><button class="next-btn show" onclick="next()">${cur<TOTAL-1?'Next →':'결과 보기 →'}</button></div>`;
+  }else{
+    document.getElementById('qa').innerHTML=`<div class="card"><div class="q-meta"><span class="q-num">Q${cur+1}</span><span class="q-src">${q.src}</span><span class="q-cat">${q.cat}</span></div><div class="q-text">${q.text}</div><div class="ox-btns"><button class="ox-btn o-btn" onclick="pick(true)" id="ob">⭕<span class="lb">CORRECT</span></button><button class="ox-btn x-btn" onclick="pick(false)" id="xb">❌<span class="lb">WRONG</span></button></div><div id="bd" class="badge"></div><div id="ep"></div><button class="next-btn" id="nb" onclick="next()">${cur<TOTAL-1?'Next →':'결과 보기 →'}</button></div>`;
+  }
+}
+function pick(val){
+  const q=Q[cur];
+  document.getElementById('ob').disabled=true;
+  document.getElementById('xb').disabled=true;
+  const ok=val===q.ans;
+  answers[cur]={picked:val,correct:ok};
+  if(ok){if(typeof playOk==='function')playOk();}else{if(typeof playNg==='function')playNg();}
+  const bd=document.getElementById('bd');
+  bd.textContent=ok?'✅ 정답!':`❌ 오답! 정답은 ${q.ans?'O':'X'}`;
+  bd.className='badge '+(ok?'ok':'ng');
+  document.getElementById(val?'ob':'xb').classList.add(ok?(val?'co':'cx'):'wp');
+  if(!ok)document.getElementById(q.ans?'ob':'xb').classList.add(q.ans?'co':'cx');
+  document.getElementById('ep').innerHTML=renderExp(q,ok);
+  document.getElementById('nb').classList.add('show');
+  document.getElementById('ps').textContent=`정답 ${getScore()}개`;
+  renderNav();saveProgress();
+}
+function next(){cur++;saveProgress();render();}
+function jumpTo(i){cur=i;render();document.getElementById('qa').scrollIntoView({behavior:'smooth',block:'start'});}
+function saveProgress(){localStorage.setItem(SAVE_KEY,JSON.stringify({cur,answers}));}
+function freshStart(){localStorage.removeItem(SAVE_KEY);cur=0;answers=new Array(TOTAL).fill(null);document.getElementById('rb').style.display='none';document.getElementById('sc').classList.remove('show');document.getElementById('qa').style.display='block';renderNav();render();}
+(function(){
+  const saved=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');
+  if(saved&&saved.answers&&saved.cur>=0&&saved.cur<TOTAL){
+    cur=saved.cur;answers=saved.answers;
+    const done=answers.filter(a=>a!==null).length;
+    if(done>0){document.getElementById('rb-msg').textContent=`이어서 풀기 중 · ${done}/${TOTAL} 문제 완료 (정답 ${getScore()}개)`;document.getElementById('rb').style.display='block';}
+  }
+  renderNav();render();
+})();
+</script>
+</body>
+</html>

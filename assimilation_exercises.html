@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assimilation — 실전 Exercise | Phonology</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pri:#1a5276; --pri-l:#eaf3fb; --acc:#e8533a;
+  --grn:#1a6e42; --grn-bg:#eaf6f0;
+  --red-bg:#fdf0ed; --bdr:#aed6f1; --gray:#f4f9fe;
+  --txt:#1a1a2e; --mut:#666;
+  --serif:'Noto Serif KR',serif;
+  --sans:'Noto Sans KR',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
+
+.hero{background:#0e2f44;color:#fff;padding:48px 24px 40px;text-align:center}
+.hero-tag{font-size:11px;letter-spacing:3px;color:rgba(255,255,255,.5);margin-bottom:12px;font-family:var(--mono);text-transform:uppercase}
+.hero h1{font-family:var(--serif);font-size:26px;margin-bottom:10px;line-height:1.35}
+.hero h1 span{color:#ffd166}
+.hero p{font-size:13px;color:rgba(255,255,255,.6);max-width:480px;margin:0 auto 20px}
+.hero-stats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
+.stat-n{font-family:var(--mono);font-size:22px;font-weight:600;color:#ffd166}
+.stat-l{font-size:11px;color:rgba(255,255,255,.45);margin-top:2px}
+
+.sbar{position:sticky;top:0;z-index:99;background:#fff;border-bottom:1px solid var(--bdr);
+  padding:10px 20px;display:flex;align-items:center;gap:14px;
+  box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.sbar-lbl{font-size:12px;color:var(--mut)}
+.sbar-num{font-family:var(--mono);font-size:17px;font-weight:600;color:var(--pri)}
+.prog-wrap{flex:1;max-width:180px;height:5px;background:var(--bdr);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--pri);border-radius:3px;transition:width .4s}
+.rbtn{margin-left:auto;padding:5px 13px;border:1px solid var(--bdr);border-radius:6px;
+  font-size:12px;color:var(--mut);cursor:pointer;font-family:var(--sans);background:#fff;
+  transition:all .15s}
+.rbtn:hover{border-color:var(--pri);color:var(--pri)}
+
+.wrap{max-width:760px;margin:0 auto;padding:28px 20px 60px}
+
+.ex-sec{margin-top:44px;margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid var(--pri)}
+.ex-sec-tag{font-family:var(--mono);font-size:10px;color:var(--mut);letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
+.ex-sec-title{font-family:var(--serif);font-size:19px;color:var(--pri)}
+.ex-sec-desc{font-size:13px;color:var(--mut);margin-top:4px;line-height:1.6;font-style:italic}
+
+.qcard{background:#fff;border:1.5px solid var(--bdr);border-radius:12px;padding:20px 22px;
+  margin-bottom:14px;transition:border-color .2s,box-shadow .2s}
+.qcard:hover{box-shadow:0 2px 10px rgba(26,82,118,.08)}
+.qcard.ok{border-color:#6dbf9a;background:#f8fdf9}
+.qcard.ng{border-color:#e8a090;background:#fdf8f7}
+
+.qmeta{display:flex;align-items:center;gap:8px;margin-bottom:11px}
+.qnum{font-family:var(--mono);font-size:11px;color:var(--mut)}
+.qtag{font-size:11px;padding:3px 9px;border-radius:10px;font-family:var(--mono)}
+.qtag.ox{background:#eef0ff;color:var(--pri)}
+.qtag.mc{background:var(--grn-bg);color:var(--grn)}
+.qtag.fi{background:#fffbe0;color:#7a6000}
+
+.qtext{font-size:14px;line-height:1.9;color:var(--txt);margin-bottom:13px;white-space:pre-line}
+.qeng{font-family:var(--mono);font-size:13px;color:#2a2a3e;background:var(--gray);
+  border-left:3px solid var(--pri);padding:9px 13px;border-radius:0 7px 7px 0;
+  display:block;margin:6px 0 13px;line-height:1.75;white-space:pre-line}
+
+.ox-row{display:flex;gap:12px}
+.ox-btn{flex:1;padding:13px;font-size:24px;border:1.5px solid var(--bdr);border-radius:10px;
+  background:#fff;cursor:pointer;transition:all .15s;font-family:var(--sans)}
+.ox-btn:hover:not([disabled]){border-color:var(--pri);background:var(--pri-l)}
+.ox-btn.ok2{border-color:var(--grn)!important;background:var(--grn-bg)!important}
+.ox-btn.ng2{border-color:var(--acc)!important;background:var(--red-bg)!important}
+
+.mc-opts{display:flex;flex-direction:column;gap:8px}
+.mc-btn{text-align:left;padding:10px 14px;font-size:13.5px;border:1.5px solid var(--bdr);
+  border-radius:9px;background:#fff;cursor:pointer;font-family:var(--sans);
+  line-height:1.65;transition:all .15s;color:var(--txt);white-space:pre-line}
+.mc-btn:hover:not([disabled]){border-color:var(--pri);background:var(--pri-l)}
+.mc-btn.ok2{border-color:var(--grn)!important;background:var(--grn-bg)!important;color:var(--grn)!important}
+.mc-btn.ng2{border-color:var(--acc)!important;background:var(--red-bg)!important;color:var(--acc)!important}
+
+.fi-row{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.fi-lbl{font-size:13px;color:var(--mut);min-width:120px;font-family:var(--mono)}
+.fi-inp{flex:1;padding:8px 12px;border:1.5px solid var(--bdr);border-radius:7px;
+  font-size:13px;font-family:var(--mono);color:var(--txt);transition:border-color .15s}
+.fi-inp:focus{outline:none;border-color:var(--pri)}
+.fi-inp.ok2{border-color:var(--grn);background:var(--grn-bg)}
+.fi-inp.ng2{border-color:var(--acc);background:var(--red-bg)}
+.fi-cfm{padding:8px 17px;background:var(--pri);color:#fff;border:none;border-radius:7px;
+  font-size:13px;cursor:pointer;font-family:var(--sans);margin-top:6px;transition:opacity .15s}
+.fi-cfm:hover{opacity:.85}
+
+.fb{display:none;margin-top:12px;padding:13px 16px;border-radius:9px;
+  font-size:13.5px;line-height:1.85;white-space:pre-line}
+.fb.ok{background:var(--grn-bg);border:1px solid #90d0b0;color:#145535}
+.fb.ng{background:var(--red-bg);border:1px solid #e0a090;color:#8a2010}
+.fb-head{font-weight:700;margin-bottom:5px;font-size:14px}
+
+.rbox{display:none;margin-top:40px;padding:32px 24px;background:var(--pri-l);
+  border:1.5px solid #aed6f1;border-radius:16px;text-align:center}
+.r-icon{font-size:38px;margin-bottom:10px}
+.r-score{font-family:var(--serif);font-size:26px;color:var(--pri);font-weight:700;margin-bottom:6px}
+.r-msg{font-size:14px;color:var(--mut);margin-bottom:18px}
+.r-btn{padding:9px 26px;background:var(--pri);color:#fff;border:none;border-radius:8px;
+  font-size:14px;cursor:pointer;font-family:var(--sans)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">Phonology · Assimilation</div>
+  <h1>Assimilation<br><span>실전 연습문제</span></h1>
+  <p>동화(Assimilation) · OX / 객관식 / 빈칸 · 임용고시 대비</p>
+  <div class="hero-stats">
+    <div><div class="stat-n">3</div><div class="stat-l">섹션</div></div>
+    <div><div class="stat-n">15</div><div class="stat-l">문제</div></div>
+    <div><div class="stat-n">OX · MC · 빈칸</div><div class="stat-l">유형</div></div>
+  </div>
+</div>
+
+<div class="sbar">
+  <span class="sbar-lbl">맞은 문제</span>
+  <span class="sbar-num"><span id="sc">0</span>&thinsp;/&thinsp;<span id="st">15</span></span>
+  <div class="prog-wrap"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+  <button class="rbtn" onclick="reset()">↺ 다시 풀기</button>
+</div>
+
+<div class="wrap">
+  <div id="qw"></div>
+  <div class="rbox" id="rb">
+    <div class="r-icon" id="ri"></div>
+    <div class="r-score" id="rs"></div>
+    <div class="r-msg" id="rm"></div>
+    <button class="r-btn" onclick="reset()">↺ 다시 풀기</button>
+  </div>
+</div>
+
+<script>
+const DATA = [
+  {s:'Section A',st:'OX 확인 문제',
+   sd:'다음 진술이 맞으면 O, 틀리면 X를 선택하시오.',
+   t:'ox',
+   q:'Regressive assimilation에서 뒤 음이 앞 음에 영향을 준다.',
+   a:true,
+   e:'✓ 정답. Regressive assimilation(역행 동화)은 뒤에 오는 음이 앞에 오는 음에 영향을 줍니다. 앞 음이 뒤 음의 특성을 닮아가는 방향입니다. 예: ten boys에서 /b/(뒤)가 /n/(앞)을 [m]으로 동화시킵니다.'},
+
+  {s:'Section A',st:'',sd:'',
+   t:'ox',
+   q:'Place assimilation은 조음 위치(place of articulation) feature의 동화다.',
+   a:true,
+   e:'✓ 정답. Place assimilation은 한 음이 인접 음의 조음 위치 feature를 닮아가는 동화입니다. 영어 /n/ → [m]/[ŋ]은 뒤 자음의 조음 위치(bilabial/velar)에 동화되는 place assimilation의 전형적인 예입니다.'},
+
+  {s:'Section A',st:'',sd:'',
+   t:'ox',
+   q:'영어에서는 Progressive assimilation이 더 흔하다.',
+   a:false,
+   e:'✗ 오답. 영어에서는 Regressive assimilation(역행 동화)이 더 흔합니다. Place assimilation(ten boys, ten girls, ten keys)이 대표적이며, 이들은 모두 뒤의 자음이 앞의 /n/에 영향을 주는 regressive 방향입니다.'},
+
+  {s:'Section A',st:'',sd:'',
+   t:'ox',
+   q:'Total assimilation에서 두 음이 완전히 같아진다.',
+   a:true,
+   e:'✓ 정답. Total assimilation(완전 동화)은 동화의 결과로 두 음이 완전히 동일해지는 현상입니다. Partial assimilation은 일부 feature만 공유하는 것으로 이와 구별됩니다.'},
+
+  {s:'Section A',st:'',sd:'',
+   t:'ox',
+   q:'Place assimilation은 Progressive 방향이다.',
+   a:false,
+   e:'✗ 오답. 영어의 Place assimilation은 Regressive(역행) 방향입니다. 뒤 자음의 조음 위치가 앞의 /n/을 동화시킵니다. ten boys(/b/ → /n/ → [m]), ten girls(/g/ → /n/ → [ŋ]) 모두 뒤→앞 방향입니다.'},
+
+  {s:'Section B',st:'객관식 문제',
+   sd:'각 문항에서 올바른 답을 하나 선택하시오.',
+   t:'mc',
+   q:'"ten boys"에서 /n/이 [m]으로 바뀌는 이유는?',
+   o:['① /b/가 bilabial이라서',
+      '② /b/가 voiced라서',
+      '③ /n/이 nasal이라서',
+      '④ 음절 경계 때문'],
+   a:0,
+   e:'✓ 정답: ①. /b/는 bilabial(양순음) 자음입니다. /n/(alveolar nasal)이 뒤에 오는 /b/의 조음 위치(bilabial)에 동화되어 bilabial nasal [m]으로 바뀝니다. 이것이 regressive place assimilation입니다.'},
+
+  {s:'Section B',st:'',sd:'',
+   t:'mc',
+   q:'Progressive assimilation의 방향은?',
+   o:['① 뒤→앞',
+      '② 앞→뒤',
+      '③ 양방향',
+      '④ 없음'],
+   a:1,
+   e:'✓ 정답: ②. Progressive assimilation(순행 동화)은 앞에 오는 음이 뒤에 오는 음에 영향을 주는 방향입니다. 뒤 음이 앞 음의 특성을 닮아갑니다. 예: 복수형 -s의 [s]/[z] 교체는 progressive voice assimilation입니다.'},
+
+  {s:'Section B',st:'',sd:'',
+   t:'mc',
+   q:'영어에서 더 흔한 동화 방향은?',
+   o:['① Progressive',
+      '② Regressive',
+      '③ 동일',
+      '④ 없음'],
+   a:1,
+   e:'✓ 정답: ②. 영어에서는 Regressive assimilation(역행 동화)이 더 흔합니다. Place assimilation(ten boys, ten girls, ten keys, ten people)이 대표적이며 모두 뒤→앞 방향입니다.'},
+
+  {s:'Section B',st:'',sd:'',
+   t:'mc',
+   q:'Voice assimilation의 예는?',
+   o:['① "ten boys"',
+      '② cats/dogs의 -s 교체',
+      '③ "ten girls"',
+      '④ "ten men"'],
+   a:1,
+   e:'✓ 정답: ②. cats[kæts]의 -s는 무성 /t/ 뒤에서 무성 [s]로, dogs[dɑgz]의 -s는 유성 /g/ 뒤에서 유성 [z]로 실현됩니다. 앞 자음의 유성성을 뒤의 -s가 닮아가는 progressive voice assimilation입니다.'},
+
+  {s:'Section B',st:'',sd:'',
+   t:'mc',
+   q:'복수형 -s가 [z]로 실현되는 환경은?',
+   o:['① 무성 자음 뒤',
+      '② 유성 자음/모음 뒤',
+      '③ /t, d/ 뒤',
+      '④ 항상'],
+   a:1,
+   e:'✓ 정답: ②. 복수형 -s는 유성 자음(dogs, beds) 또는 모음(bees, trees) 뒤에서 유성 [z]로 실현됩니다. 무성 자음 뒤에서는 [s](cats, books), /s, z, ʃ, ʒ, tʃ, dʒ/ 뒤에서는 [ɪz]로 실현됩니다.'},
+
+  {s:'Section C',st:'빈칸 채우기',
+   sd:'동화(assimilation) 관련 핵심 용어를 입력하시오. (영어로, 대소문자 무시)',
+   t:'fi',
+   q:'"ten boys"에서 /n/ → [m]이 되는 동화 유형은?',
+   blanks:['place'],
+   labels:['동화 유형: __ assimilation'],
+   e:'정답: place (assimilation). /b/(bilabial)의 조음 위치에 앞의 /n/이 동화되는 place assimilation입니다. 영어에서 가장 흔한 동화 유형 중 하나입니다.'},
+
+  {s:'Section C',st:'',sd:'',
+   t:'fi',
+   q:'복수형 -s의 [s]/[z] 교체는 어떤 유형의 동화인가?',
+   blanks:['voice'],
+   labels:['동화 유형: __ assimilation'],
+   e:'정답: voice (assimilation). 앞 자음의 유성성(voiced/voiceless)이 뒤의 -s에 영향을 주는 progressive voice assimilation입니다.'},
+
+  {s:'Section C',st:'',sd:'',
+   t:'fi',
+   q:'영어 place assimilation의 방향: 뒤 음이 앞 음에 영향을 주는 것을 무엇이라고 하는가?',
+   blanks:['regressive'],
+   labels:['동화 방향:'],
+   e:'정답: regressive (assimilation). 뒤 음이 앞 음에 영향을 주는 방향을 regressive(역행)라고 합니다. 영어의 place assimilation은 모두 regressive 방향입니다.'},
+
+  {s:'Section C',st:'',sd:'',
+   t:'fi',
+   q:'두 음이 완전히 동일해지는 동화를 무엇이라고 하는가?',
+   blanks:['total'],
+   labels:['동화 정도: __ assimilation'],
+   e:'정답: total (assimilation). Total assimilation(완전 동화)에서는 동화의 결과로 두 음이 완전히 동일해집니다. Partial assimilation과 대조됩니다.'},
+
+  {s:'Section C',st:'',sd:'',
+   t:'fi',
+   q:'조음 방법(manner of articulation) feature의 동화를 무엇이라고 하는가?',
+   blanks:['manner'],
+   labels:['동화 유형: __ assimilation'],
+   e:'정답: manner (assimilation). Manner assimilation은 stop, nasal, fricative 등 조음 방법 feature가 동화되는 현상입니다. Place assimilation, Voice assimilation과 함께 동화의 주요 유형입니다.'}
+];
+
+let ANS, COR;
+
+function build() {
+  ANS = new Array(DATA.length).fill(false);
+  COR = 0;
+  document.getElementById('sc').textContent = 0;
+  document.getElementById('st').textContent = DATA.length;
+  document.getElementById('prog').style.width = '0%';
+  document.getElementById('rb').style.display = 'none';
+
+  const wrap = document.getElementById('qw');
+  wrap.innerHTML = '';
+  let lastSec = '', num = 0;
+
+  DATA.forEach((q, i) => {
+    num++;
+    if (q.s !== lastSec) {
+      lastSec = q.s;
+      const sh = document.createElement('div');
+      sh.className = 'ex-sec';
+      sh.innerHTML = `<div class="ex-sec-tag">${q.s}</div>
+        <div class="ex-sec-title">${q.st}</div>
+        ${q.sd ? `<div class="ex-sec-desc">${q.sd}</div>` : ''}`;
+      wrap.appendChild(sh);
+    }
+
+    const card = document.createElement('div');
+    card.className = 'qcard'; card.id = 'qc' + i;
+
+    const typeLabel = {ox:'OX', mc:'객관식', fi:'빈칸'};
+    let input = '';
+
+    if (q.t === 'ox') {
+      input = `<div class="ox-row">
+        <button class="ox-btn" id="bo${i}" onclick="doOX(${i},true)">O</button>
+        <button class="ox-btn" id="bx${i}" onclick="doOX(${i},false)">X</button>
+      </div>`;
+    } else if (q.t === 'mc') {
+      input = `<div class="mc-opts">${q.o.map((o,j) =>
+        `<button class="mc-btn" id="bm${i}_${j}" onclick="doMC(${i},${j})">${o}</button>`
+      ).join('')}</div>`;
+    } else {
+      input = `<div>${q.blanks.map((_,j) =>
+        `<div class="fi-row">
+          <span class="fi-lbl">${q.labels[j]}</span>
+          <input class="fi-inp" id="fi${i}_${j}" type="text" placeholder="영어로 입력..."
+            onkeydown="if(event.key==='Enter')doFI(${i})">
+        </div>`).join('')}
+        <button class="fi-cfm" onclick="doFI(${i})">확인</button>
+      </div>`;
+    }
+
+    card.innerHTML = `
+      <div class="qmeta">
+        <span class="qnum">Q${num}</span>
+        <span class="qtag ${q.t}">${typeLabel[q.t]}</span>
+      </div>
+      <div class="qtext">${q.q}</div>
+      ${input}
+      <div class="fb" id="fb${i}"></div>`;
+    wrap.appendChild(card);
+  });
+}
+
+function reveal(i, ok) {
+  if (ANS[i]) return;
+  ANS[i] = true;
+  if (ok) COR++;
+  const done = ANS.filter(Boolean).length;
+  document.getElementById('sc').textContent = COR;
+  document.getElementById('prog').style.width = (done / DATA.length * 100) + '%';
+
+  const fb = document.getElementById('fb' + i);
+  fb.style.display = 'block';
+  fb.className = 'fb ' + (ok ? 'ok' : 'ng');
+  fb.innerHTML = `<div class="fb-head">${ok ? '✓ 정답' : '✗ 오답'}</div>${DATA[i].e}`;
+  document.getElementById('qc' + i).classList.add(ok ? 'ok' : 'ng');
+
+  if (ANS.every(a => a)) showResult();
+}
+
+function doOX(i, v) {
+  if (ANS[i]) return;
+  const ok = v === DATA[i].a;
+  const ob = document.getElementById('bo' + i);
+  const xb = document.getElementById('bx' + i);
+  ob.disabled = xb.disabled = true;
+  if (v)  { ob.classList.add(ok ? 'ok2' : 'ng2'); if (!ok) xb.classList.add('ok2'); }
+  else    { xb.classList.add(ok ? 'ok2' : 'ng2'); if (!ok) ob.classList.add('ok2'); }
+  reveal(i, ok);
+}
+
+function doMC(i, j) {
+  if (ANS[i]) return;
+  const ok = j === DATA[i].a;
+  DATA[i].o.forEach((_, k) => {
+    const b = document.getElementById(`bm${i}_${k}`);
+    b.disabled = true;
+    if (k === DATA[i].a) b.classList.add('ok2');
+    else if (k === j && !ok) b.classList.add('ng2');
+  });
+  reveal(i, ok);
+}
+
+function doFI(i) {
+  if (ANS[i]) return;
+  let allOk = true;
+  DATA[i].blanks.forEach((ans, j) => {
+    const inp = document.getElementById(`fi${i}_${j}`);
+    const ok = inp.value.trim().toLowerCase() === ans.toLowerCase();
+    if (!ok) allOk = false;
+    inp.disabled = true;
+    inp.classList.add(ok ? 'ok2' : 'ng2');
+  });
+  reveal(i, allOk);
+}
+
+function showResult() {
+  const pct = Math.round(COR / DATA.length * 100);
+  const tiers = [
+    {min:90, icon:'🎯', msg:'Assimilation 완전 정복!'},
+    {min:70, icon:'👏', msg:'틀린 문제 해설을 다시 한번 확인해보세요.'},
+    {min:50, icon:'📚', msg:'Place/Voice/Manner 구분을 다시 복습하세요.'},
+    {min:0,  icon:'💪', msg:'Assimilation 개념부터 다시 정리해보세요.'}
+  ];
+  const t = tiers.find(x => pct >= x.min);
+  const rb = document.getElementById('rb');
+  rb.style.display = 'block';
+  document.getElementById('ri').textContent = t.icon;
+  document.getElementById('rs').textContent = `${COR} / ${DATA.length}점 (${pct}%)`;
+  document.getElementById('rm').textContent = t.msg;
+  rb.scrollIntoView({behavior:'smooth'});
+}
+
+function reset() {
+  build();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+build();
+</script>
+</body>
+</html>

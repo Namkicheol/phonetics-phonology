@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch.1-2 Noun/Verb Stress Shift 실전 연습 | Phonology Study</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pri:#1a5276; --pri-l:#eef4f9; --acc:#e8533a;
+  --grn:#1a6e42; --grn-bg:#eaf6f0;
+  --red-bg:#fdf0ed; --bdr:#c5d9e8; --gray:#f4f8fb;
+  --txt:#1a1a2e; --mut:#666;
+  --serif:'Noto Serif KR',serif;
+  --sans:'Noto Sans KR',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
+
+.hero{background:#0d3349;color:#fff;padding:48px 24px 40px;text-align:center}
+.hero-tag{font-size:11px;letter-spacing:3px;color:rgba(255,255,255,.5);margin-bottom:12px;font-family:var(--mono);text-transform:uppercase}
+.hero h1{font-family:var(--serif);font-size:26px;margin-bottom:10px;line-height:1.35}
+.hero h1 span{color:#ffd166}
+.hero p{font-size:13px;color:rgba(255,255,255,.6);max-width:480px;margin:0 auto 20px}
+.hero-stats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
+.stat-n{font-family:var(--mono);font-size:22px;font-weight:600;color:#ffd166}
+.stat-l{font-size:11px;color:rgba(255,255,255,.45);margin-top:2px}
+
+.sbar{position:sticky;top:0;z-index:99;background:#fff;border-bottom:1px solid var(--bdr);
+  padding:10px 20px;display:flex;align-items:center;gap:14px;
+  box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.sbar-lbl{font-size:12px;color:var(--mut)}
+.sbar-num{font-family:var(--mono);font-size:17px;font-weight:600;color:var(--pri)}
+.prog-wrap{flex:1;max-width:180px;height:5px;background:var(--bdr);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--pri);border-radius:3px;transition:width .4s}
+.rbtn{margin-left:auto;padding:5px 13px;border:1px solid var(--bdr);border-radius:6px;
+  font-size:12px;color:var(--mut);cursor:pointer;font-family:var(--sans);background:#fff;
+  transition:all .15s}
+.rbtn:hover{border-color:var(--pri);color:var(--pri)}
+
+.wrap{max-width:760px;margin:0 auto;padding:28px 20px 60px}
+
+.ex-sec{margin-top:44px;margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid var(--pri)}
+.ex-sec-tag{font-family:var(--mono);font-size:10px;color:var(--mut);letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
+.ex-sec-title{font-family:var(--serif);font-size:19px;color:var(--pri)}
+.ex-sec-desc{font-size:13px;color:var(--mut);margin-top:4px;line-height:1.6;font-style:italic}
+
+.qcard{background:#fff;border:1.5px solid var(--bdr);border-radius:12px;padding:20px 22px;
+  margin-bottom:14px;transition:border-color .2s,box-shadow .2s}
+.qcard:hover{box-shadow:0 2px 10px rgba(26,82,118,.08)}
+.qcard.ok{border-color:#6dbf9a;background:#f8fdf9}
+.qcard.ng{border-color:#e8a090;background:#fdf8f7}
+
+.qmeta{display:flex;align-items:center;gap:8px;margin-bottom:11px}
+.qnum{font-family:var(--mono);font-size:11px;color:var(--mut)}
+.qtag{font-size:11px;padding:3px 9px;border-radius:10px;font-family:var(--mono)}
+.qtag.ox{background:#ddeeff;color:var(--pri)}
+.qtag.mc{background:var(--grn-bg);color:var(--grn)}
+.qtag.fi{background:#fffbe0;color:#7a6000}
+
+.qtext{font-size:14px;line-height:1.9;color:var(--txt);margin-bottom:13px;white-space:pre-line}
+.qeng{font-family:var(--mono);font-size:13px;color:#1a2e3e;background:var(--gray);
+  border-left:3px solid var(--pri);padding:9px 13px;border-radius:0 7px 7px 0;
+  display:block;margin:6px 0 13px;line-height:1.75;white-space:pre-line}
+
+.ox-row{display:flex;gap:12px}
+.ox-btn{flex:1;padding:13px;font-size:24px;border:1.5px solid var(--bdr);border-radius:10px;
+  background:#fff;cursor:pointer;transition:all .15s;font-family:var(--sans)}
+.ox-btn:hover:not([disabled]){border-color:var(--pri);background:var(--pri-l)}
+.ox-btn.ok2{border-color:var(--grn)!important;background:var(--grn-bg)!important}
+.ox-btn.ng2{border-color:var(--acc)!important;background:var(--red-bg)!important}
+
+.mc-opts{display:flex;flex-direction:column;gap:8px}
+.mc-btn{text-align:left;padding:10px 14px;font-size:13.5px;border:1.5px solid var(--bdr);
+  border-radius:9px;background:#fff;cursor:pointer;font-family:var(--sans);
+  line-height:1.65;transition:all .15s;color:var(--txt);white-space:pre-line}
+.mc-btn:hover:not([disabled]){border-color:var(--pri);background:var(--pri-l)}
+.mc-btn.ok2{border-color:var(--grn)!important;background:var(--grn-bg)!important;color:var(--grn)!important}
+.mc-btn.ng2{border-color:var(--acc)!important;background:var(--red-bg)!important;color:var(--acc)!important}
+
+.fi-row{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.fi-lbl{font-size:13px;color:var(--mut);min-width:80px;font-family:var(--mono)}
+.fi-inp{flex:1;padding:8px 12px;border:1.5px solid var(--bdr);border-radius:7px;
+  font-size:13px;font-family:var(--mono);color:var(--txt);transition:border-color .15s}
+.fi-inp:focus{outline:none;border-color:var(--pri)}
+.fi-inp.ok2{border-color:var(--grn);background:var(--grn-bg)}
+.fi-inp.ng2{border-color:var(--acc);background:var(--red-bg)}
+.fi-cfm{padding:8px 17px;background:var(--pri);color:#fff;border:none;border-radius:7px;
+  font-size:13px;cursor:pointer;font-family:var(--sans);margin-top:6px;transition:opacity .15s}
+.fi-cfm:hover{opacity:.85}
+.fi-hint{font-size:11px;color:var(--mut);font-family:var(--mono);margin-bottom:8px}
+
+.fb{display:none;margin-top:12px;padding:13px 16px;border-radius:9px;
+  font-size:13.5px;line-height:1.85;white-space:pre-line}
+.fb.ok{background:var(--grn-bg);border:1px solid #90d0b0;color:#145535}
+.fb.ng{background:var(--red-bg);border:1px solid #e0a090;color:#8a2010}
+.fb-head{font-weight:700;margin-bottom:5px;font-size:14px}
+
+.rbox{display:none;margin-top:40px;padding:32px 24px;background:var(--pri-l);
+  border:1.5px solid #a8c8de;border-radius:16px;text-align:center}
+.r-icon{font-size:38px;margin-bottom:10px}
+.r-score{font-family:var(--serif);font-size:26px;color:var(--pri);font-weight:700;margin-bottom:6px}
+.r-msg{font-size:14px;color:var(--mut);margin-bottom:18px}
+.r-btn{padding:9px 26px;background:var(--pri);color:#fff;border:none;border-radius:8px;
+  font-size:14px;cursor:pointer;font-family:var(--sans)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">음운론 · Yavaş AEP · Ch.1-2 Stress Shift</div>
+  <h1>Noun/Verb Stress Shift<br><span>실전 연습문제</span></h1>
+  <p>명사/동사 강세 이동 핵심 정리 · 정답 선택 후 해설 확인</p>
+  <div class="hero-stats">
+    <div><div class="stat-n">3</div><div class="stat-l">섹션</div></div>
+    <div><div class="stat-n">15</div><div class="stat-l">문제</div></div>
+    <div><div class="stat-n">OX · MC · 빈칸</div><div class="stat-l">유형</div></div>
+  </div>
+</div>
+
+<div class="sbar">
+  <span class="sbar-lbl">맞은 문제</span>
+  <span class="sbar-num"><span id="sc">0</span>&thinsp;/&thinsp;<span id="st">15</span></span>
+  <div class="prog-wrap"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+  <button class="rbtn" onclick="reset()">↺ 다시 풀기</button>
+</div>
+
+<div class="wrap">
+  <div id="qw"></div>
+  <div class="rbox" id="rb">
+    <div class="r-icon" id="ri"></div>
+    <div class="r-score" id="rs"></div>
+    <div class="r-msg" id="rm"></div>
+    <button class="r-btn" onclick="reset()">↺ 다시 풀기</button>
+  </div>
+</div>
+
+<script>
+const DATA = [
+  /* ── Section A: OX 퀴즈 ── */
+  {s:'Section A', st:'OX 퀴즈', sd:'다음 설명이 옳으면 O, 틀리면 X를 선택하시오.',
+   t:'ox', q:'2음절 명사는 기본적으로 첫 번째 음절에 강세가 온다.',
+   a:true,
+   e:'정답: O\n\n2음절 명사의 penult(첫 음절) 강세가 약 81.7%로 압도적입니다.\n예: ˈrecord, ˈpermit, ˈconduct, ˈobject, ˈprotest\n\nYavaş(2011): "Disyllabic nouns: penult stress over 80%."'},
+
+  {s:'Section A', st:'', sd:'', t:'ox',
+   q:'2음절 동사는 모두 첫 번째 음절에 강세가 온다.',
+   a:false,
+   e:'정답: X\n\n2음절 동사의 60% 이상은 두 번째 음절(ult)에 강세가 옵니다.\n예: reˈcord, perˈmit, conˈduct, obˈject\n\n단, 예외도 있습니다 (love, show 등은 첫 음절 강세 유지).\n따라서 "모두"라는 표현은 틀렸습니다.'},
+
+  {s:'Section A', st:'', sd:'', t:'ox',
+   q:'permit이 동사일 때 IPA는 /pɜrˈmɪt/이다.',
+   a:true,
+   e:'정답: O\n\n동사 perˈmit = /pɜrˈmɪt/ — 두 번째 음절 강세.\n명사 ˈpermit = /ˈpɜrmɪt/ — 첫 번째 음절 강세.\n\n이 쌍은 임용 기출에 자주 등장하는 핵심 예시입니다.'},
+
+  {s:'Section A', st:'', sd:'', t:'ox',
+   q:'present가 동사일 때 강세는 첫 번째 음절이다.',
+   a:false,
+   e:'정답: X\n\n동사 preˈsent는 두 번째 음절에 강세가 옵니다.\n· 명사/형용사 ˈpresent → 1번째 음절 강세\n· 동사 preˈsent → 2번째 음절 강세\n\n예: "I will preˈsent my findings." (동사)'},
+
+  {s:'Section A', st:'', sd:'', t:'ox',
+   q:'명사 penult가 /ə/이면 마지막 음절에 강세가 온다.',
+   a:true,
+   e:'정답: O\n\n/ə/(schwa)는 강세를 받을 수 없는 약화 모음입니다.\nPenult에 /ə/가 오면 강세가 ult(마지막 음절)로 이동합니다.\n\n예: appeal /əˈpiːl/, balloon /bəˈluːn/\n이는 2음절 명사 penult 강세의 주요 예외입니다.'},
+
+  /* ── Section B: 객관식 ── */
+  {s:'Section B', st:'객관식', sd:'가장 적절한 답을 하나 고르시오.',
+   t:'mc', q:'다음 중 동사일 때 두 번째 음절에 강세가 오지 않는 단어는?',
+   o:['① record', '② permit', '③ love', '④ protest'],
+   a:2,
+   e:'정답: ③ love\n\nlove는 명사/동사 모두 첫 음절 강세를 유지합니다 (강세 이동 없음).\n\n비교:\n· reˈcord (v) — 2번째 강세 ✓\n· perˈmit (v) — 2번째 강세 ✓\n· ˈlove (v) — 1번째 강세 (예외!) ✗\n· proˈtest (v) — 2번째 강세 ✓'},
+
+  {s:'Section B', st:'', sd:'', t:'mc',
+   q:'ˈrecord의 품사는?',
+   o:['① 동사', '② 명사', '③ 형용사', '④ 부사'],
+   a:1,
+   e:'정답: ② 명사\n\nˈrecord (첫 음절 강세) = 명사 (기록, 음반, 최고 기록)\nreˈcord (두 번째 음절 강세) = 동사 (기록하다)\n\n강세 기호로 품사를 식별할 수 있는 것이 명사/동사 강세 이동 규칙의 핵심입니다.'},
+
+  {s:'Section B', st:'', sd:'', t:'mc',
+   q:'다음 단어 중 명사일 때 첫 음절, 동사일 때 두 번째 음절 강세가 오는 것은?',
+   o:['① love', '② conduct', '③ begin', '④ forget'],
+   a:1,
+   e:'정답: ② conduct\n\n· ˈconduct (n: 행동, 지휘) vs conˈduct (v: 행동하다, 지휘하다)\n\n비교:\n· love: 명사/동사 모두 1번째 강세 (이동 없음)\n· begin: 명사형 없음, 동사 biˈgin (2번째)\n· forget: 명사형 없음, 동사 forˈget (2번째)'},
+
+  {s:'Section B', st:'', sd:'', t:'mc',
+   q:'2음절 명사에서 penult 강세 비율은?',
+   o:['① 약 50%', '② 약 65%', '③ 약 82%', '④ 약 90%'],
+   a:2,
+   e:'정답: ③ 약 82%\n\nYavaş(2011) 코퍼스 분석:\n· 2음절 명사 penult(첫 음절) 강세: 약 81.7%\n· 2음절 형용사 penult 강세: 약 81%\n· 2음절 동사 ult(두 번째 음절) 강세: 약 60%+\n\n이 통계가 명사/동사 강세 이동 규칙의 실증적 근거입니다.'},
+
+  {s:'Section B', st:'', sd:'', t:'mc',
+   q:'appeal /əˈpiːl/의 강세가 두 번째 음절에 오는 이유는?',
+   o:['① 동사이기 때문', '② penult 모음이 /ə/라서', '③ 자음군이 있어서', '④ 접미사 때문'],
+   a:1,
+   e:'정답: ② penult 모음이 /ə/라서\n\nappeal에서 penult(첫 음절) 모음은 /ə/(schwa)입니다.\n/ə/는 강세를 받을 수 없는 약화 모음이므로, 강세가 ult(두 번째 음절)로 이동합니다.\n\n동일한 원리: balloon /bəˈluːn/, believe /bɪˈliːv/\n\n이는 2음절 명사 penult 강세의 주요 예외입니다.'},
+
+  /* ── Section C: 강세 이동 쌍 빈칸 채우기 ── */
+  {s:'Section C', st:'강세 이동 쌍 채우기', sd:'각 단어의 명사와 동사 강세 표기에서 강세가 오는 음절 번호(1 또는 2)를 입력하시오.',
+   t:'fi',
+   q:'record\n명사: ___ 번째 음절 강세 / 동사: ___ 번째 음절 강세',
+   blanks:['1', '2'],
+   labels:['명사:', '동사:'],
+   hint:'예: 첫 번째 음절 강세 → 1 입력',
+   e:'정답: 명사 1번째, 동사 2번째\n\n· ˈrecord (n) /ˈrekərd/ — 1번째 음절(rec-) 강세\n· reˈcord (v) /rɪˈkɔːrd/ — 2번째 음절(-cord) 강세\n\n기억법: 명사=앞, 동사=뒤'},
+
+  {s:'Section C', st:'', sd:'', t:'fi',
+   q:'permit\n명사: ___ 번째 음절 강세 / 동사: ___ 번째 음절 강세',
+   blanks:['1', '2'],
+   labels:['명사:', '동사:'],
+   hint:'예: 첫 번째 음절 강세 → 1 입력',
+   e:'정답: 명사 1번째, 동사 2번째\n\n· ˈpermit (n) /ˈpɜrmɪt/ — 1번째 음절(per-) 강세\n· perˈmit (v) /pɜrˈmɪt/ — 2번째 음절(-mit) 강세\n\n예문: "Show me your ˈpermit." vs. "I perˈmit you to go."'},
+
+  {s:'Section C', st:'', sd:'', t:'fi',
+   q:'conduct\n명사: ___ 번째 음절 강세 / 동사: ___ 번째 음절 강세',
+   blanks:['1', '2'],
+   labels:['명사:', '동사:'],
+   hint:'예: 첫 번째 음절 강세 → 1 입력',
+   e:'정답: 명사 1번째, 동사 2번째\n\n· ˈconduct (n) /ˈkɒndʌkt/ — 1번째 음절(con-) 강세\n· conˈduct (v) /kənˈdʌkt/ — 2번째 음절(-duct) 강세\n\n예문: "His ˈconduct was poor." vs. "She conˈducted the orchestra."'},
+
+  {s:'Section C', st:'', sd:'', t:'fi',
+   q:'object\n명사: ___ 번째 음절 강세 / 동사: ___ 번째 음절 강세',
+   blanks:['1', '2'],
+   labels:['명사:', '동사:'],
+   hint:'예: 첫 번째 음절 강세 → 1 입력',
+   e:'정답: 명사 1번째, 동사 2번째\n\n· ˈobject (n) /ˈɒbdʒɪkt/ — 1번째 음절(ob-) 강세\n· obˈject (v) /əbˈdʒekt/ — 2번째 음절(-ject) 강세\n\n예문: "This is a strange ˈobject." vs. "I obˈject to this plan."'},
+
+  {s:'Section C', st:'', sd:'', t:'fi',
+   q:'protest\n명사: ___ 번째 음절 강세 / 동사: ___ 번째 음절 강세',
+   blanks:['1', '2'],
+   labels:['명사:', '동사:'],
+   hint:'예: 첫 번째 음절 강세 → 1 입력',
+   e:'정답: 명사 1번째, 동사 2번째\n\n· ˈprotest (n) /ˈproʊtest/ — 1번째 음절(pro-) 강세\n· proˈtest (v) /prəˈtest/ — 2번째 음절(-test) 강세\n\n예문: "The ˈprotest was peaceful." vs. "They proˈtested against the law."'}
+];
+
+let ANS, COR;
+
+function build() {
+  ANS = new Array(DATA.length).fill(false);
+  COR = 0;
+  document.getElementById('sc').textContent = 0;
+  document.getElementById('st').textContent = DATA.length;
+  document.getElementById('prog').style.width = '0%';
+  document.getElementById('rb').style.display = 'none';
+
+  const wrap = document.getElementById('qw');
+  wrap.innerHTML = '';
+  let lastSec = '', num = 0;
+
+  DATA.forEach((q, i) => {
+    num++;
+    if (q.s !== lastSec) {
+      lastSec = q.s;
+      const sh = document.createElement('div');
+      sh.className = 'ex-sec';
+      sh.innerHTML = `<div class="ex-sec-tag">${q.s}</div>
+        <div class="ex-sec-title">${q.st}</div>
+        ${q.sd ? `<div class="ex-sec-desc">${q.sd}</div>` : ''}`;
+      wrap.appendChild(sh);
+    }
+
+    const card = document.createElement('div');
+    card.className = 'qcard'; card.id = 'qc' + i;
+
+    const typeLabel = {ox:'OX', mc:'객관식', fi:'빈칸'};
+    let input = '';
+
+    if (q.t === 'ox') {
+      input = `<div class="ox-row">
+        <button class="ox-btn" id="bo${i}" onclick="doOX(${i},true)">O</button>
+        <button class="ox-btn" id="bx${i}" onclick="doOX(${i},false)">X</button>
+      </div>`;
+    } else if (q.t === 'mc') {
+      input = `<div class="mc-opts">${q.o.map((o,j) =>
+        `<button class="mc-btn" id="bm${i}_${j}" onclick="doMC(${i},${j})">${o}</button>`
+      ).join('')}</div>`;
+    } else {
+      const hint = q.hint ? `<div class="fi-hint">${q.hint}</div>` : '';
+      input = `<div>${hint}${q.blanks.map((_,j) =>
+        `<div class="fi-row">
+          <span class="fi-lbl">${q.labels[j]}</span>
+          <input class="fi-inp" id="fi${i}_${j}" type="text" placeholder="1 또는 2"
+            onkeydown="if(event.key==='Enter')doFI(${i})">
+        </div>`).join('')}
+        <button class="fi-cfm" onclick="doFI(${i})">확인</button>
+      </div>`;
+    }
+
+    card.innerHTML = `
+      <div class="qmeta">
+        <span class="qnum">Q${num}</span>
+        <span class="qtag ${q.t}">${typeLabel[q.t]}</span>
+      </div>
+      <div class="qtext">${q.q}</div>
+      ${input}
+      <div class="fb" id="fb${i}"></div>`;
+    wrap.appendChild(card);
+  });
+}
+
+function reveal(i, ok) {
+  if (ANS[i]) return;
+  ANS[i] = true;
+  if (ok) COR++;
+  const done = ANS.filter(Boolean).length;
+  document.getElementById('sc').textContent = COR;
+  document.getElementById('prog').style.width = (done / DATA.length * 100) + '%';
+
+  const fb = document.getElementById('fb' + i);
+  fb.style.display = 'block';
+  fb.className = 'fb ' + (ok ? 'ok' : 'ng');
+  fb.innerHTML = `<div class="fb-head">${ok ? '✓ 정답' : '✗ 오답'}</div>${DATA[i].e}`;
+  document.getElementById('qc' + i).classList.add(ok ? 'ok' : 'ng');
+
+  if (ANS.every(a => a)) showResult();
+}
+
+function doOX(i, v) {
+  if (ANS[i]) return;
+  const ok = v === DATA[i].a;
+  const ob = document.getElementById('bo' + i);
+  const xb = document.getElementById('bx' + i);
+  ob.disabled = xb.disabled = true;
+  if (v)  { ob.classList.add(ok ? 'ok2' : 'ng2'); if (!ok) xb.classList.add('ok2'); }
+  else    { xb.classList.add(ok ? 'ok2' : 'ng2'); if (!ok) ob.classList.add('ok2'); }
+  reveal(i, ok);
+}
+
+function doMC(i, j) {
+  if (ANS[i]) return;
+  const ok = j === DATA[i].a;
+  DATA[i].o.forEach((_, k) => {
+    const b = document.getElementById(`bm${i}_${k}`);
+    b.disabled = true;
+    if (k === DATA[i].a) b.classList.add('ok2');
+    else if (k === j && !ok) b.classList.add('ng2');
+  });
+  reveal(i, ok);
+}
+
+function doFI(i) {
+  if (ANS[i]) return;
+  let allOk = true;
+  DATA[i].blanks.forEach((ans, j) => {
+    const inp = document.getElementById(`fi${i}_${j}`);
+    const userVal = inp.value.trim().toLowerCase();
+    const correctVal = ans.toLowerCase();
+    const ok = userVal === correctVal;
+    if (!ok) allOk = false;
+    inp.disabled = true;
+    inp.classList.add(ok ? 'ok2' : 'ng2');
+  });
+  reveal(i, allOk);
+}
+
+function showResult() {
+  const pct = Math.round(COR / DATA.length * 100);
+  const tiers = [
+    {min:90, icon:'🎯', msg:'Ch.1-2 명사/동사 강세 이동 완전 정복!'},
+    {min:70, icon:'👏', msg:'훌륭합니다! 틀린 문제 해설을 다시 확인해보세요.'},
+    {min:50, icon:'📚', msg:'명사/동사 강세 이동 원칙을 다시 복습하세요.'},
+    {min:0,  icon:'💪', msg:'강세 이동 기초 개념부터 다시 시작해보세요.'}
+  ];
+  const t = tiers.find(x => pct >= x.min);
+  const rb = document.getElementById('rb');
+  rb.style.display = 'block';
+  document.getElementById('ri').textContent = t.icon;
+  document.getElementById('rs').textContent = `${COR} / ${DATA.length}점 (${pct}%)`;
+  document.getElementById('rm').textContent = t.msg;
+  rb.scrollIntoView({behavior:'smooth'});
+}
+
+function reset() {
+  build();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+build();
+</script>
+</body>
+</html>

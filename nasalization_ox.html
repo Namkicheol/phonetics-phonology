@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nasalization & Epenthesis — OX Quiz</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:repeating-linear-gradient(transparent,transparent 27px,#ddddd0 28px);color:#1a1a1a;min-height:100vh;padding:16px}
+.header-wrap{max-width:720px;margin:0 auto;padding:20px 8px 0}
+.header-topbar{display:flex;justify-content:space-between;align-items:center;border-top:2px solid #1a1a1a;padding-top:8px;margin-bottom:10px}
+.header-no{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;border:2px solid #1a1a1a;padding:3px 10px;border-radius:2px;letter-spacing:.5px;display:flex;align-items:center;gap:6px}
+.header-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;letter-spacing:1px}
+.header-title{font-size:clamp(30px,7vw,46px);font-weight:900;color:#1a1a1a;line-height:1.1;margin-bottom:5px;letter-spacing:-1px}
+.title-hl{background:#1a5276;color:#fff;padding:1px 6px}
+.header-script{font-family:'Caveat',cursive;font-size:21px;color:#1a5276;margin-bottom:4px;font-weight:600}
+.header-sub{font-size:13px;color:#555;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#aaa;margin-bottom:14px}
+.header-divider{border:none;border-top:2.5px solid #1a1a1a;margin-bottom:20px}
+.prog-wrap{max-width:720px;margin:0 auto 10px;padding:0 8px}
+.prog-info{display:flex;justify-content:space-between;font-size:12px;color:#1a5276;font-family:'JetBrains Mono',monospace;margin-bottom:6px}
+.bar{height:4px;background:#aed6f1;border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,#1a5276,#2980b9);border-radius:2px;transition:width .5s ease}
+.wrap{max-width:720px;margin:0 auto}
+.card{background:#fff;border:1.5px solid #aed6f1;border-radius:14px;padding:26px;animation:up .35s ease;box-shadow:0 2px 8px rgba(26,82,118,.08)}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.q-meta{display:flex;align-items:center;gap:7px;margin-bottom:14px;flex-wrap:wrap}
+.q-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:#1a5276;background:rgba(26,82,118,.1);padding:3px 10px;border-radius:8px;font-weight:700}
+.q-src{font-size:11px;color:#2e86c1;font-family:'JetBrains Mono',monospace}
+.q-cat{font-size:11px;color:#1a5276;background:rgba(41,128,185,.1);padding:3px 10px;border-radius:8px;margin-left:auto;font-weight:600}
+.kw1{background:rgba(26,82,118,.15);color:#1a3a52;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(26,82,118,.25)}
+.kw2{color:#117a8b;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border-bottom:2px solid rgba(17,122,139,.45)}
+.kw3{background:rgba(39,174,96,.13);color:#1e8449;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(39,174,96,.3)}
+.kw4{background:rgba(183,28,28,.11);color:#b71c1c;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(183,28,28,.25)}
+.q-text{font-size:clamp(15px,2.2vw,16.5px);line-height:1.9;margin-bottom:24px;color:#1a2633}
+.ox-btns{display:flex;gap:12px}
+.ox-btn{flex:1;padding:20px 10px;border-radius:12px;border:2px solid #aed6f1;background:#f4f9fe;color:#1a2633;font-size:30px;cursor:pointer;transition:all .18s ease;display:flex;flex-direction:column;align-items:center;gap:5px}
+.lb{font-size:11px;font-family:'JetBrains Mono',monospace;color:#2e86c1;letter-spacing:1px;font-weight:600}
+.ox-btn:hover:not(:disabled){transform:translateY(-2px)}
+.o-btn:hover:not(:disabled){border-color:#1a5276;background:rgba(26,82,118,.08)}
+.x-btn:hover:not(:disabled){border-color:#c62828;background:rgba(198,40,40,.06)}
+.co,.cx{border-color:#1a5276!important;background:rgba(26,82,118,.1)!important}
+.wp{border-color:#c62828!important;background:rgba(198,40,40,.08)!important}
+.ox-btn:disabled{cursor:default}
+.badge{display:none;margin-top:14px;padding:9px 16px;border-radius:8px;font-size:14px;font-weight:700;font-family:'JetBrains Mono',monospace}
+.badge.ok{display:inline-block;background:rgba(26,82,118,.1);color:#1a5276;border:1.5px solid rgba(26,82,118,.3)}
+.badge.ng{display:inline-block;background:rgba(198,40,40,.08);color:#c62828;border:1.5px solid rgba(198,40,40,.25)}
+.exp{display:none;margin-top:18px;border-radius:12px;overflow:hidden;animation:fade .3s ease}
+.exp.show{display:block}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.exp-header{background:linear-gradient(135deg,rgba(26,82,118,.12),rgba(41,128,185,.06));border:1.5px solid rgba(26,82,118,.25);border-bottom:none;padding:11px 16px}
+.exp-header span{font-size:11px;font-family:'JetBrains Mono',monospace;color:#1a3a52;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.exp-answer{background:rgba(26,82,118,.05);border:1.5px solid rgba(26,82,118,.2);border-top:none;border-bottom:none;padding:14px 16px}
+.ans-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#2e86c1;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-weight:700}
+.ans-text{font-size:15px;color:#1a2633;line-height:1.75;font-weight:500}
+.exp-body{background:rgba(26,82,118,.03);border:1.5px solid rgba(26,82,118,.15);border-top:1px solid rgba(26,82,118,.1);padding:14px 16px}
+.sec-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#117a8b;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;margin-top:13px;font-weight:700}
+.sec-label:first-child{margin-top:0}
+.exp-body p{font-size:14px;color:#1a3a52;line-height:1.8;margin-bottom:5px}
+.def-box{background:rgba(41,128,185,.06);border-left:4px solid #2980b9;padding:10px 14px;border-radius:0 8px 8px 0;margin:8px 0}
+.def-box p{color:#1a3a52;font-size:13.5px;font-style:italic;line-height:1.75}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.compare.three{grid-template-columns:1fr 1fr 1fr}
+.compare-item{background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:8px;padding:11px 14px}
+.ci-title{font-size:11px;font-family:'JetBrains Mono',monospace;color:#1a5276;font-weight:700;margin-bottom:5px}
+.compare-item p{font-size:13px;color:#2e4a5a;line-height:1.65}
+.next-btn{display:none;width:100%;margin-top:16px;padding:14px;background:linear-gradient(135deg,#1a5276,#2980b9);border:none;border-radius:10px;color:white;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:opacity .2s,transform .2s}
+.next-btn:hover{opacity:.88;transform:translateY(-1px)}
+.next-btn.show{display:block;animation:fade .3s ease}
+.score-card{display:none;text-align:center;padding:48px 24px}
+.score-card.show{display:block;animation:up .5s ease}
+.score-circle{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,#1a5276,#2980b9);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 0 40px rgba(26,82,118,.3)}
+.s-num{font-size:42px;font-weight:700;line-height:1;color:#fff}
+.s-total{font-size:14px;opacity:.85;color:#fff}
+.score-card h2{font-size:24px;margin-bottom:7px;color:#1a1a1a}
+.score-card p{color:#555;margin-bottom:24px;font-size:15px}
+.restart-btn{padding:13px 32px;background:#fff;border:2px solid #1a1a1a;border-radius:10px;color:#1a1a1a;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.restart-btn:hover{background:#f5f4ee}
+.nd{width:28px;height:28px;border-radius:6px;border:1.5px solid #aed6f1;background:#fff;font-size:10px;font-family:'JetBrains Mono',monospace;cursor:pointer;color:#2e86c1;transition:all .15s;display:inline-flex;align-items:center;justify-content:center;font-weight:600}
+.nd.cur{border-color:#1a5276;background:#1a5276;color:white}
+.nd.ok{border-color:#1a5276;background:rgba(26,82,118,.15);color:#1a3a52}
+.nd.ng{border-color:#c62828;background:rgba(198,40,40,.1);color:#c62828}
+.nd:hover:not(.cur){opacity:.7}
+#nav{display:flex;flex-wrap:wrap;gap:5px;max-width:720px;margin:0 auto 16px;padding:0 8px}
+</style>
+</head>
+<body>
+<div class="header-wrap">
+  <div class="header-topbar">
+    <span class="header-no">NO. 07 <span>—</span> Nasalization & Epenthesis</span>
+    <span class="header-label">Past-Exam Notebook</span>
+  </div>
+  <h1 class="header-title"><span class="title-hl">음운론</span> 개념 마스터</h1>
+  <div class="header-script">Phonology · Nasalization & Epenthesis</div>
+  <p class="header-sub">음운론 · 모음 비음화 · 삽입 규칙 · 변이음 vs 음소 · 임용고시 대비</p>
+  <div class="header-divider"></div>
+</div>
+<div class="prog-wrap">
+  <div class="prog-info"><span id="pt">1 / 15</span><span id="ps">정답 0개</span></div>
+  <div class="bar"><div class="bar-fill" id="bf" style="width:6.67%"></div></div>
+</div>
+<div id="rb" style="display:none;max-width:720px;margin:0 auto 14px;padding:0 8px">
+  <div style="background:rgba(26,82,118,.08);border:1.5px solid rgba(26,82,118,.3);border-radius:12px;padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <span id="rb-msg" style="font-size:13px;color:#1a2633;font-family:'JetBrains Mono',monospace;line-height:1.5"></span>
+    <button onclick="freshStart()" style="padding:10px 22px;background:#c62828;border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer">처음부터</button>
+  </div>
+</div>
+<div id="nav"></div>
+<div class="wrap">
+  <div id="qa"></div>
+  <div class="score-card" id="sc">
+    <div class="score-circle"><span class="s-num" id="fs">0</span><span class="s-total">/15</span></div>
+    <h2 id="rm"></h2><p id="rs"></p>
+    <button class="restart-btn" onclick="freshStart()">🔄 처음부터</button>
+  </div>
+</div>
+<script src="./score-popup.js"></script>
+<script src="./sounds.js"></script>
+<script>
+const SAVE_KEY='ox_phon_nasal_v1';
+const TOTAL=15;
+let cur=0,answers=new Array(TOTAL).fill(null);
+function getScore(){return answers.filter(a=>a&&a.correct).length;}
+const Q=[
+  {src:"Nasalization",cat:"변이음 규칙",text:"영어에서 모음의 비음화(nasalization)는 <span class='kw1'>변이음(allophonic)</span> 규칙이다.",ans:true,correct:"정확하다. 영어에서 비음화된 모음과 비음화되지 않은 모음은 <span class='kw2'>의미 구별이 없으므로</span> 변이음 규칙(allophonic rule)이다.",why:"변이음 규칙(allophonic rule)은 의미 구별 없이 특정 환경에서 자동으로 적용되는 음운 규칙이다. 영어에서 구강 모음과 비강 모음은 의미를 구별하지 못하므로(최소 대립쌍 없음), 비음화는 음소 규칙이 아닌 변이음 규칙이다.",source:"\"Nasalization in English is an <span class='kw1'>allophonic rule</span>: oral and nasal vowels do not contrast (no minimal pairs).\" (Yavaş 2011)",compare:[{title:"변이음 규칙 (영어 비음화)",desc:"의미 구별 없음 · 환경 조건부 자동 적용"},{title:"음소 규칙",desc:"의미 구별 있음 · 불어 등의 비음화"}]},
+  {src:"Nasalization",cat:"비음화 환경",text:"비음화는 모음이 <span class='kw2'>비음(nasal) 앞</span>에서 일어난다.",ans:true,correct:"정확하다. 비음화 규칙: <span class='kw2'>V → [+nasal] / __ [+nasal]</span> — 모음이 비음 자음 앞에서 비음화된다.",why:"비음화의 음운 규칙: 모음은 후행하는 비음 자음(/m, n, ŋ/) 앞 환경에서 비음화된다. 이는 Regressive assimilation(역행 동화): 뒤의 비음 자음이 앞의 모음에 영향을 준다. 예: man /mæ̃n/에서 /æ/가 /n/ 앞에서 비음화된다.",source:"\"Nasalization rule: V → [+nasal] / __ [+nasal]: vowels are nasalized <span class='kw2'>before</span> a nasal consonant.\" (Yavaş 2011)",compare:[{title:"비음화 환경",desc:"V → [+nasal] / __ N · 비음 앞"},{title:"구강화 환경",desc:"비음 자음 없을 때 · 구강 모음 유지"}]},
+  {src:"Nasalization",cat:"IPA 표기",text:"비음화 기호는 모음 위에 <span class='kw2'>[~]</span>으로 표기한다 — 예: <span class='kw1'>[æ̃]</span>.",ans:true,correct:"정확하다. IPA에서 비음화된 모음은 해당 모음 기호 위에 <span class='kw2'>물결 기호(~, tilde)</span>를 붙여 표기한다 — 예: [æ̃], [ẽ], [ã].",why:"IPA 비음화 표기: 모음 기호 위에 diacritic tilde(~)를 붙인다. man의 /æ/가 비음화되면 [æ̃]로 표기한다. 이 표기법을 IPA 규정대로 정확히 알아야 한다.",source:"\"Nasalized vowels are transcribed with a <span class='kw2'>tilde</span> above the vowel symbol: <span class='kw1'>[æ̃]</span> (nasalized /æ/).\" (Yavaş 2011)",compare:[{title:"비음화 모음 표기",desc:"[æ̃] [ẽ] [ã] — 모음 위 tilde"},{title:"구강 모음 표기",desc:"[æ] [e] [a] — tilde 없음"}]},
+  {src:"Nasalization",cat:"예시: man",text:"'<span class='kw1'>man</span>'의 /æ/는 /n/ 앞에서 비음화된다.",ans:true,correct:"정확하다. 'man'에서 /æ/는 후행 비음 /n/ 앞 환경에서 <span class='kw2'>[æ̃]</span>로 비음화된다.",why:"man /mæn/: 모음 /æ/는 비음 /n/ 바로 앞에 위치하므로 비음화 규칙이 적용된다. 표면형: [mæ̃n]. 비음화 방향은 역행: 뒤의 /n/이 앞의 /æ/를 비음화시킨다.",source:"\"'man': /æ/ → <span class='kw2'>[æ̃]</span> before /n/ (nasalization rule applies).\" (Yavaş 2011)",compare:[{title:"'man' [mæ̃n]",desc:"/æ/ → [æ̃] · 비음 /n/ 앞"},{title:"'mat' [mæt]",desc:"/æ/ → [æ] · 비음 없음 · 비음화 없음"}]},
+  {src:"Nasalization",cat:"동화 방향",text:"비음화는 <span class='kw1'>Progressive(순행)</span> 방향이다.",ans:false,correct:"틀렸다. 비음화는 <span class='kw2'>Regressive(역행)</span> 동화 방향이다 — 뒤의 비음 자음이 앞의 모음에 영향을 준다.",why:"비음화 규칙: V → [+nasal] / __ [+nasal]. 규칙 환경에서 비음 자음(오른쪽)이 선행 모음(왼쪽)의 조음에 영향을 미친다. 이는 뒤에서 앞으로 영향이 미치는 Regressive assimilation(역행 동화)이다.",source:"\"Nasalization is <span class='kw2'>regressive assimilation</span>: the nasal consonant (right) affects the preceding vowel (left). ← direction.\" (Yavaş 2011)",compare:[{title:"Regressive assimilation (비음화)",desc:"뒤 자음 → 앞 모음 영향 (← 방향)"},{title:"Progressive assimilation",desc:"앞 요소 → 뒤 요소 영향 (→ 방향)"}]},
+  {src:"Nasalization",cat:"음소 vs 변이음",text:"영어에서 구강 모음과 비강 모음은 의미를 구별한다.",ans:false,correct:"틀렸다. 영어에서 구강 모음과 비강 모음은 의미를 구별하지 <span class='kw2'>않는다</span> — 최소 대립쌍이 없으므로 변이음 관계.",why:"불어에서는 beau /bo/(잘생긴)와 bon /bõ/(좋은)처럼 비음화가 의미를 구별한다. 그러나 영어에서는 구강 모음과 비강 모음이 의미 대립을 이루는 최소 대립쌍이 없다. 따라서 영어 비음화는 음소 규칙이 아닌 변이음 규칙이다.",source:"\"In English, oral and nasal vowels are <span class='kw2'>allophones</span> (no minimal pairs). In French, they are <span class='kw2'>phonemes</span> (beau vs bon).\" (Yavaş 2011)",compare:[{title:"영어 비음화 (변이음)",desc:"최소 대립쌍 없음 · 의미 구별 불가"},{title:"불어 비음화 (음소)",desc:"beau /bo/ vs bon /bõ/ · 의미 구별"}]},
+  {src:"Epenthesis",cat:"삽입 규칙 정의",text:"<span class='kw1'>Epenthesis</span>는 음 삽입(segment insertion) 규칙이다.",ans:true,correct:"정확하다. <span class='kw1'>Epenthesis</span>(삽입)는 기저형에 없는 새로운 분절음(segment)을 표면형에 삽입하는 음운 규칙이다.",why:"Epenthesis: 음소 연쇄에서 발음상 어려운 구조를 회피하기 위해 새 분절음을 삽입하는 규칙이다. 영어의 대표 예: 복수 형태소 /ɪz/ 삽입(buses), 과거 형태소 /ɪd/ 삽입(wanted).",source:"\"<span class='kw1'>Epenthesis</span> is a phonological rule that <span class='kw2'>inserts</span> a segment not present in the underlying representation.\" (Yavaş 2011)",compare:[{title:"Epenthesis (삽입)",desc:"∅ → /ɪ/ / 자음군 회피 목적"},{title:"Deletion (삭제)",desc:"분절음 → ∅ · 반대 방향 규칙"}]},
+  {src:"Epenthesis",cat:"복수 /ɪz/",text:"복수형 <span class='kw1'>/ɪz/</span>는 epenthesis의 예다.",ans:true,correct:"정확하다. 복수 -s가 치찰음 뒤에서 /ɪz/로 실현되는 것은 <span class='kw2'>/ɪ/</span>가 삽입되는 epenthesis의 결과이다.",why:"치찰음으로 끝나는 어간에 -s를 바로 붙이면 같은 유형의 자음이 연속된다(buses: *[bʌss]). 이를 방지하기 위해 /ɪ/가 삽입되어 [bʌsɪz]가 된다. 이것이 epenthesis이다.",source:"\"Plural /ɪz/ (buses, judges) is an instance of <span class='kw1'>epenthesis</span>: /ɪ/ is inserted to break up the sibilant cluster.\" (Yavaş 2011)",compare:[{title:"Epenthesis 적용",desc:"bus+s → [bʌsɪz] · /ɪ/ 삽입"},{title:"Epenthesis 미적용",desc:"cat+s → [kæts] · /ɪ/ 삽입 없음"}]},
+  {src:"Epenthesis",cat:"삭제와 대비",text:"<span class='kw1'>Epenthesis</span>와 <span class='kw1'>deletion</span>은 반대 방향의 규칙이다.",ans:true,correct:"정확하다. <span class='kw1'>Epenthesis</span>는 분절음 삽입(∅ → C/V), <span class='kw1'>deletion</span>은 분절음 삭제(C/V → ∅)로 반대 방향의 규칙이다.",why:"Epenthesis: ∅ → /ɪ/ (음 삽입). Deletion: /t/ → ∅ (음 삭제, 예: 'facts'의 /t/ 탈락). 두 규칙은 음운론에서 대칭적 관계에 있다. 둘 다 기저형과 표면형 간의 불일치를 만들어낸다.",source:"\"<span class='kw1'>Epenthesis</span>: ∅ → segment (insertion). <span class='kw1'>Deletion</span>: segment → ∅. They are opposite processes.\" (Yavaş 2011)",compare:[{title:"Epenthesis",desc:"∅ → /ɪ/ : buses, wanted"},{title:"Deletion",desc:"/t/ → ∅ : mus[t]ard, san[d]wich"}]},
+  {src:"Nasalization",cat:"형식 규칙",text:"비음화 규칙의 공식 표기: <span class='kw2'>V → [+nasal] / __ [+nasal]</span>.",ans:true,correct:"정확하다. 비음화 규칙의 음운 규칙 공식: <span class='kw2'>V → [+nasal] / __ [+nasal]</span> — 비음 앞에서 모음이 비음화된다.",why:"음운 규칙 표기 읽는 법: V(모음)는 [+nasal] 자질을 획득한다, __[+nasal] 환경에서(비음 직전에). 규칙의 세 구성 요소: (1) 입력(V), (2) 출력([+nasal]V), (3) 환경(비음 앞).",source:"\"Nasalization rule: V → [+nasal] / __ [+nasal]: a vowel becomes nasal before a nasal segment.\" (Yavaş 2011)",compare:[{title:"규칙 읽기",desc:"V → [+nasal] / __ [+nasal]"},{title:"예시",desc:"man: /æ/ → [æ̃] / __ /n/"}]},
+  {src:"Nasalization",cat:"규칙 지위",text:"영어 비음화는 <span class='kw4'>음소(phonemic)</span> 규칙이다.",ans:false,correct:"틀렸다. 영어 비음화는 <span class='kw2'>변이음(allophonic)</span> 규칙이다 — 비음화된 모음과 구강 모음이 의미를 구별하지 않는다.",why:"음소 규칙은 두 음이 의미를 구별할 때(불어 비음화 등). 변이음 규칙은 의미 구별 없이 환경에 따라 자동 적용될 때이다. 영어에서 구강모음과 비강모음은 최소 대립쌍을 이루지 않으므로 변이음 규칙이다.",source:"\"English nasalization is <span class='kw2'>allophonic</span>, not phonemic: [æ] and [æ̃] are allophones of the same phoneme /æ/.\" (Yavaş 2011)",compare:[{title:"Allophonic (영어)",desc:"[æ] / [æ̃] = 같은 음소의 변이음"},{title:"Phonemic (불어)",desc:"/o/ / /õ/ = 서로 다른 음소"}]},
+  {src:"Nasalization",cat:"예시: can",text:"'<span class='kw1'>can</span>'의 /æ/는 /n/ 앞에서 <span class='kw2'>[æ̃]</span>로 실현된다.",ans:true,correct:"정확하다. 'can'의 /æ/는 비음 /n/ 앞 환경에서 비음화 규칙 적용으로 <span class='kw2'>[æ̃]</span>로 실현된다.",why:"can /kæn/: /æ/는 후행 비음 /n/ 앞에서 비음화된다. 표면형: [kæ̃n]. man, ban, tan 등 비음으로 끝나는 CVC 구조에서 동일하게 비음화가 적용된다.",source:"\"'can' /kæn/ → [<span class='kw2'>kæ̃n</span>]: /æ/ nasalized before /n/.\" (Yavaş 2011)",compare:[{title:"'can' [kæ̃n]",desc:"/æ/ → [æ̃] · 비음 /n/ 앞"},{title:"'cat' [kæt]",desc:"/æ/ → [æ] · 비음 없음 · 구강 실현"}]},
+  {src:"Epenthesis",cat:"자음군 단순화",text:"<span class='kw1'>Epenthesis</span>는 자음군(consonant cluster)을 단순화하기 위해 모음을 삽입한다.",ans:true,correct:"정확하다. Epenthesis의 주요 기능 중 하나는 발음하기 어려운 자음군을 회피하기 위해 모음을 삽입하는 것이다.",why:"영어에서 치찰음+치찰음 연속(*[bʌss])은 발음상 어렵다. 이를 회피하기 위해 /ɪ/가 삽입된다([bʌsɪz]). 이것이 epenthesis의 핵심 기능이다. 마찬가지로 /t,d/+/t,d/ 연속에서도 /ɪ/가 삽입된다(wanted, needed).",source:"\"<span class='kw1'>Epenthesis</span> inserts a vowel to break up difficult consonant sequences: *[bʌss] → [bʌsɪz].\" (Yavaş 2011)",compare:[{title:"치찰음 연속 회피",desc:"bus+s: *[bʌss] → [bʌsɪz]"},{title:"/t,d/ 연속 회피",desc:"want+d: *[wɑntd] → [ˈwɑntɪd]"}]},
+  {src:"Nasalization",cat:"최소 대립쌍",text:"비음화된 모음과 비음화되지 않은 모음은 영어에서 최소 대립쌍을 이룬다.",ans:false,correct:"틀렸다. 영어에서 비음화 모음과 구강 모음은 <span class='kw2'>최소 대립쌍을 이루지 않는다</span> — 따라서 변이음 관계이다.",why:"최소 대립쌍(minimal pair): 하나의 분절음 차이만으로 의미가 구별되는 단어 쌍. 영어에서 [æ]/[æ̃] 차이로 의미가 달라지는 최소 대립쌍은 없다. 이것이 영어 비음화가 변이음 규칙인 이유이다.",source:"\"English nasal and oral vowels are NOT in minimal pairs: no English words differ <span class='kw2'>only</span> in vowel nasality with a meaning contrast.\" (Yavaş 2011)",compare:[{title:"영어: 최소 대립쌍 없음",desc:"[æ] / [æ̃] → 변이음 · 의미 동일"},{title:"불어: 최소 대립쌍 있음",desc:"/a/ / /ã/ → 음소 · 의미 다름"}]},
+  {src:"Nasalization",cat:"동화 분류",text:"비음화는 <span class='kw1'>Regressive assimilation</span>의 일종이다.",ans:true,correct:"정확하다. 비음화는 후행 비음 자음이 선행 모음에 영향을 주는 <span class='kw2'>Regressive(역행) assimilation</span>이다.",why:"비음화 방향: 후행 비음 자음(/n, m, ŋ/) → 선행 모음. 뒤에서 앞으로 영향이 미치므로 역행 동화이다. 규칙: V → [+nasal] / __ [+nasal]. /man/에서 /n/이 선행 /æ/를 비음화시킨다.",source:"\"Nasalization is a type of <span class='kw2'>regressive assimilation</span>: the following nasal consonant influences the preceding vowel.\" (Yavaş 2011)",compare:[{title:"Regressive assimilation",desc:"후행 요소 → 선행 요소 영향 (← 방향)"},{title:"비음화 예",desc:"[mæ̃n]: /n/ → /æ/ 비음화"}]}
+];
+function renderExp(q,isCorrect){
+  const three=q.compare&&q.compare.length===3;
+  const cmp=q.compare?`<div class="sec-label">📊 비교 정리</div><div class="compare${three?' three':''}">${q.compare.map(c=>`<div class="compare-item"><div class="ci-title">${c.title}</div><p>${c.desc}</p></div>`).join('')}</div>`:'';
+  return `<div class="exp show"><div class="exp-header"><span>${isCorrect?'✅ 정답':'❌ 오답'} · 해설</span></div><div class="exp-answer"><div class="ans-label">핵심 정정</div><div class="ans-text">${q.correct}</div></div><div class="exp-body"><div class="sec-label">📖 상세 설명</div><p>${q.why}</p><div class="sec-label">📌 Source</div><div class="def-box"><p>${q.source}</p></div>${cmp}</div></div>`;
+}
+function renderNav(){
+  document.getElementById('nav').innerHTML=answers.map((a,i)=>{
+    let cls='nd';
+    if(i===cur)cls+=' cur';
+    else if(a!==null)cls+=a.correct?' ok':' ng';
+    return `<button class="${cls}" onclick="jumpTo(${i})">${i+1}</button>`;
+  }).join('');
+}
+function render(){
+  if(cur>=TOTAL){
+    document.getElementById('qa').style.display='none';
+    document.getElementById('sc').classList.add('show');
+    const s=getScore();
+    document.getElementById('fs').textContent=s;
+    const p=s/TOTAL;
+    document.getElementById('rm').textContent=p===1?'🎉 Perfect!':p>=.8?'👏 Great!':p>=.6?'😊 Good!':'💪 Keep going!';
+    document.getElementById('rs').textContent=`${TOTAL}문제 중 ${s}문제 정답 (${Math.round(p*100)}%)`;
+    setTimeout(function(){window.showScorePopup&&window.showScorePopup(s,TOTAL);},400);
+    renderNav();return;
+  }
+  document.getElementById('sc').classList.remove('show');
+  document.getElementById('qa').style.display='block';
+  renderNav();
+  const q=Q[cur];
+  document.getElementById('bf').style.width=((cur+1)/TOTAL*100).toFixed(1)+'%';
+  document.getElementById('pt').textContent=`${cur+1} / ${TOTAL}`;
+  document.getElementById('ps').textContent=`정답 ${getScore()}개`;
+  const a=answers[cur];
+  if(a!==null){
+    let oBtnCls='',xBtnCls='';
+    if(a.picked===true){oBtnCls=a.correct?'co':'wp';if(!a.correct)xBtnCls='cx';}
+    else{xBtnCls=a.correct?'cx':'wp';if(!a.correct)oBtnCls='co';}
+    document.getElementById('qa').innerHTML=`<div class="card"><div class="q-meta"><span class="q-num">Q${cur+1}</span><span class="q-src">${q.src}</span><span class="q-cat">${q.cat}</span></div><div class="q-text">${q.text}</div><div class="ox-btns"><button class="ox-btn o-btn ${oBtnCls}" disabled>⭕<span class="lb">CORRECT</span></button><button class="ox-btn x-btn ${xBtnCls}" disabled>❌<span class="lb">WRONG</span></button></div><div class="badge ${a.correct?'ok':'ng'}">${a.correct?'✅ 정답!':'❌ 오답! 정답은 '+(q.ans?'O':'X')}</div><div>${renderExp(q,a.correct)}</div><button class="next-btn show" onclick="next()">${cur<TOTAL-1?'Next →':'결과 보기 →'}</button></div>`;
+  }else{
+    document.getElementById('qa').innerHTML=`<div class="card"><div class="q-meta"><span class="q-num">Q${cur+1}</span><span class="q-src">${q.src}</span><span class="q-cat">${q.cat}</span></div><div class="q-text">${q.text}</div><div class="ox-btns"><button class="ox-btn o-btn" onclick="pick(true)" id="ob">⭕<span class="lb">CORRECT</span></button><button class="ox-btn x-btn" onclick="pick(false)" id="xb">❌<span class="lb">WRONG</span></button></div><div id="bd" class="badge"></div><div id="ep"></div><button class="next-btn" id="nb" onclick="next()">${cur<TOTAL-1?'Next →':'결과 보기 →'}</button></div>`;
+  }
+}
+function pick(val){
+  const q=Q[cur];
+  document.getElementById('ob').disabled=true;
+  document.getElementById('xb').disabled=true;
+  const ok=val===q.ans;
+  answers[cur]={picked:val,correct:ok};
+  if(ok){if(typeof playOk==='function')playOk();}else{if(typeof playNg==='function')playNg();}
+  const bd=document.getElementById('bd');
+  bd.textContent=ok?'✅ 정답!':`❌ 오답! 정답은 ${q.ans?'O':'X'}`;
+  bd.className='badge '+(ok?'ok':'ng');
+  document.getElementById(val?'ob':'xb').classList.add(ok?(val?'co':'cx'):'wp');
+  if(!ok)document.getElementById(q.ans?'ob':'xb').classList.add(q.ans?'co':'cx');
+  document.getElementById('ep').innerHTML=renderExp(q,ok);
+  document.getElementById('nb').classList.add('show');
+  document.getElementById('ps').textContent=`정답 ${getScore()}개`;
+  renderNav();saveProgress();
+}
+function next(){cur++;saveProgress();render();}
+function jumpTo(i){cur=i;render();document.getElementById('qa').scrollIntoView({behavior:'smooth',block:'start'});}
+function saveProgress(){localStorage.setItem(SAVE_KEY,JSON.stringify({cur,answers}));}
+function freshStart(){localStorage.removeItem(SAVE_KEY);cur=0;answers=new Array(TOTAL).fill(null);document.getElementById('rb').style.display='none';document.getElementById('sc').classList.remove('show');document.getElementById('qa').style.display='block';renderNav();render();}
+(function(){
+  const saved=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');
+  if(saved&&saved.answers&&saved.cur>=0&&saved.cur<TOTAL){
+    cur=saved.cur;answers=saved.answers;
+    const done=answers.filter(a=>a!==null).length;
+    if(done>0){document.getElementById('rb-msg').textContent=`이어서 풀기 중 · ${done}/${TOTAL} 문제 완료 (정답 ${getScore()}개)`;document.getElementById('rb').style.display='block';}
+  }
+  renderNav();render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aspiration — OX Quiz | Phonology</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:repeating-linear-gradient(transparent,transparent 27px,#ddddd0 28px);color:#1a1a1a;min-height:100vh;padding:16px}
+.header-wrap{max-width:720px;margin:0 auto;padding:20px 8px 0}
+.header-topbar{display:flex;justify-content:space-between;align-items:center;border-top:2px solid #1a1a1a;padding-top:8px;margin-bottom:10px}
+.header-no{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;border:2px solid #1a1a1a;padding:3px 10px;border-radius:2px;letter-spacing:.5px;display:flex;align-items:center;gap:6px}
+.header-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;letter-spacing:1px}
+.header-title{font-size:clamp(30px,7vw,46px);font-weight:900;color:#1a1a1a;line-height:1.1;margin-bottom:5px;letter-spacing:-1px}
+.title-hl{background:#1a5276;color:#fff;padding:1px 6px}
+.header-script{font-family:'Caveat',cursive;font-size:21px;color:#1a5276;margin-bottom:4px;font-weight:600}
+.header-sub{font-size:13px;color:#555;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#aaa;margin-bottom:14px}
+.header-divider{border:none;border-top:2.5px solid #1a1a1a;margin-bottom:20px}
+.prog-wrap{max-width:720px;margin:0 auto 10px;padding:0 8px}
+.prog-info{display:flex;justify-content:space-between;font-size:12px;color:#1a5276;font-family:'JetBrains Mono',monospace;margin-bottom:6px}
+.bar{height:4px;background:#aed6f1;border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,#1a5276,#2980b9);border-radius:2px;transition:width .5s ease}
+.wrap{max-width:720px;margin:0 auto}
+.card{background:#fff;border:1.5px solid #aed6f1;border-radius:14px;padding:26px;animation:up .35s ease;box-shadow:0 2px 8px rgba(26,82,118,.08)}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.q-meta{display:flex;align-items:center;gap:7px;margin-bottom:14px;flex-wrap:wrap}
+.q-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:#1a5276;background:rgba(26,82,118,.1);padding:3px 10px;border-radius:8px;font-weight:700}
+.q-src{font-size:11px;color:#2e86c1;font-family:'JetBrains Mono',monospace}
+.q-cat{font-size:11px;color:#1a5276;background:rgba(41,128,185,.1);padding:3px 10px;border-radius:8px;margin-left:auto;font-weight:600}
+.kw1{background:rgba(26,82,118,.15);color:#1a3a52;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(26,82,118,.25)}
+.kw2{color:#117a8b;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border-bottom:2px solid rgba(17,122,139,.45)}
+.kw3{background:rgba(39,174,96,.13);color:#1e8449;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(39,174,96,.3)}
+.kw4{background:rgba(183,28,28,.11);color:#b71c1c;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(183,28,28,.25)}
+.q-text{font-size:clamp(15px,2.2vw,16.5px);line-height:1.9;margin-bottom:24px;color:#1a2633}
+.ox-btns{display:flex;gap:12px}
+.ox-btn{flex:1;padding:20px 10px;border-radius:12px;border:2px solid #aed6f1;background:#f4f9fe;color:#1a2633;font-size:30px;cursor:pointer;transition:all .18s ease;display:flex;flex-direction:column;align-items:center;gap:5px}
+.lb{font-size:11px;font-family:'JetBrains Mono',monospace;color:#2e86c1;letter-spacing:1px;font-weight:600}
+.ox-btn:hover:not(:disabled){transform:translateY(-2px)}
+.o-btn:hover:not(:disabled){border-color:#1a5276;background:rgba(26,82,118,.08)}
+.x-btn:hover:not(:disabled){border-color:#c62828;background:rgba(198,40,40,.06)}
+.co,.cx{border-color:#1a5276!important;background:rgba(26,82,118,.1)!important}
+.wp{border-color:#c62828!important;background:rgba(198,40,40,.08)!important}
+.ox-btn:disabled{cursor:default}
+.badge{display:none;margin-top:14px;padding:9px 16px;border-radius:8px;font-size:14px;font-weight:700;font-family:'JetBrains Mono',monospace}
+.badge.ok{display:inline-block;background:rgba(26,82,118,.1);color:#1a5276;border:1.5px solid rgba(26,82,118,.3)}
+.badge.ng{display:inline-block;background:rgba(198,40,40,.08);color:#c62828;border:1.5px solid rgba(198,40,40,.25)}
+.exp{display:none;margin-top:18px;border-radius:12px;overflow:hidden;animation:fade .3s ease}
+.exp.show{display:block}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.exp-header{background:linear-gradient(135deg,rgba(26,82,118,.12),rgba(41,128,185,.06));border:1.5px solid rgba(26,82,118,.25);border-bottom:none;padding:11px 16px}
+.exp-header span{font-size:11px;font-family:'JetBrains Mono',monospace;color:#1a3a52;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.exp-answer{background:rgba(26,82,118,.05);border:1.5px solid rgba(26,82,118,.2);border-top:none;border-bottom:none;padding:14px 16px}
+.ans-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#2e86c1;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-weight:700}
+.ans-text{font-size:15px;color:#1a2633;line-height:1.75;font-weight:500}
+.exp-body{background:rgba(26,82,118,.03);border:1.5px solid rgba(26,82,118,.15);border-top:1px solid rgba(26,82,118,.1);padding:14px 16px}
+.sec-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#117a8b;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;margin-top:13px;font-weight:700}
+.sec-label:first-child{margin-top:0}
+.exp-body p{font-size:14px;color:#1a3a52;line-height:1.8;margin-bottom:5px}
+.def-box{background:rgba(41,128,185,.06);border-left:4px solid #2980b9;padding:10px 14px;border-radius:0 8px 8px 0;margin:8px 0}
+.def-box p{color:#1a3a52;font-size:13.5px;font-style:italic;line-height:1.75}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.compare.three{grid-template-columns:1fr 1fr 1fr}
+.compare-item{background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:8px;padding:11px 14px}
+.ci-title{font-size:11px;font-family:'JetBrains Mono',monospace;color:#1a5276;font-weight:700;margin-bottom:5px}
+.compare-item p{font-size:13px;color:#2e4a5a;line-height:1.65}
+.next-btn{display:none;width:100%;margin-top:16px;padding:14px;background:linear-gradient(135deg,#1a5276,#2980b9);border:none;border-radius:10px;color:white;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:opacity .2s,transform .2s}
+.next-btn:hover{opacity:.88;transform:translateY(-1px)}
+.next-btn.show{display:block;animation:fade .3s ease}
+.score-card{display:none;text-align:center;padding:48px 24px}
+.score-card.show{display:block;animation:up .5s ease}
+.score-circle{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,#1a5276,#2980b9);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 0 40px rgba(26,82,118,.3)}
+.s-num{font-size:42px;font-weight:700;line-height:1;color:#fff}
+.s-total{font-size:14px;opacity:.85;color:#fff}
+.score-card h2{font-size:24px;margin-bottom:7px;color:#1a1a1a}
+.score-card p{color:#555;margin-bottom:24px;font-size:15px}
+.restart-btn{padding:13px 32px;background:#fff;border:2px solid #1a1a1a;border-radius:10px;color:#1a1a1a;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.restart-btn:hover{background:#f5f4ee}
+.nd{width:28px;height:28px;border-radius:6px;border:1.5px solid #aed6f1;background:#fff;font-size:10px;font-family:'JetBrains Mono',monospace;cursor:pointer;color:#2e86c1;transition:all .15s;display:inline-flex;align-items:center;justify-content:center;font-weight:600}
+.nd.cur{border-color:#1a5276;background:#1a5276;color:white}
+.nd.ok{border-color:#1a5276;background:rgba(26,82,118,.15);color:#1a3a52}
+.nd.ng{border-color:#c62828;background:rgba(198,40,40,.1);color:#c62828}
+.nd:hover:not(.cur){opacity:.7}
+#nav{display:flex;flex-wrap:wrap;gap:5px;max-width:720px;margin:0 auto 16px;padding:0 8px}
+</style>
+</head>
+<body>
+<div class="header-wrap">
+  <div class="header-topbar">
+    <span class="header-no">NO. 04 <span>—</span> Aspiration</span>
+    <span class="header-label">Past-Exam Notebook</span>
+  </div>
+  <h1 class="header-title"><span class="title-hl">음운론</span> 개념 마스터</h1>
+  <div class="header-script">Phonology · Aspiration</div>
+  <p class="header-sub">음운론 · 기식음화(Aspiration) · 임용고시 대비</p>
+  <div class="header-divider"></div>
+</div>
+<div class="prog-wrap">
+  <div class="prog-info"><span id="pt">1 / 15</span><span id="ps">정답 0개</span></div>
+  <div class="bar"><div class="bar-fill" id="bf" style="width:6.67%"></div></div>
+</div>
+<div id="rb" style="display:none;max-width:720px;margin:0 auto 14px;padding:0 8px">
+  <div style="background:rgba(26,82,118,.08);border:1.5px solid rgba(26,82,118,.3);border-radius:12px;padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <span id="rb-msg" style="font-size:13px;color:#1a2633;font-family:'JetBrains Mono',monospace;line-height:1.5"></span>
+    <button onclick="freshStart()" style="padding:10px 22px;background:#c62828;border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer">처음부터</button>
+  </div>
+</div>
+<div id="nav"></div>
+<div class="wrap">
+  <div id="qa"></div>
+  <div class="score-card" id="sc">
+    <div class="score-circle"><span class="s-num" id="fs">0</span><span class="s-total">/15</span></div>
+    <h2 id="rm"></h2><p id="rs"></p>
+    <button class="restart-btn" onclick="freshStart()">🔄 처음부터</button>
+  </div>
+</div>
+<script src="./score-popup.js"></script>
+<script src="./sounds.js"></script>
+<script>
+const SAVE_KEY='ox_phon_asp_v1';
+const TOTAL=15;
+let cur=0,answers=new Array(TOTAL).fill(null);
+function getScore(){return answers.filter(a=>a&&a.correct).length;}
+const Q=[
+  {src:"Aspiration",cat:"예시 — pin",text:"'pin'의 <span class='kw1'>/p/</span>는 <span class='kw2'>기식음(aspirated)</span>이다.",ans:true,correct:"정확하다. 'pin'의 /p/는 강세모음 앞 음절초(syllable-initial, before stressed vowel)에 위치하므로 [pʰ]로 기식음화된다.",why:"영어의 aspiration 규칙: 무성 폐쇄음 /p, t, k/는 강세모음 앞 음절초에서 기식음([pʰ, tʰ, kʰ])으로 실현됩니다. 'pin'[pʰɪn]에서 /p/는 강세모음 /ɪ/ 앞 어두에 위치하므로 aspiration이 일어납니다.",source:"\"Aspiration rule: /p, t, k/ → [pʰ, tʰ, kʰ] / __ V́ (before stressed vowel, syllable-initial).\" (Yavaş 2011)",compare:[{title:"pin [pʰɪn]",desc:"어두 + 강세모음 앞 → [pʰ] 기식음"},{title:"spin [spɪn]",desc:"/s/ 뒤 → [p] 비기식음"}]},
+  {src:"Aspiration",cat:"예시 — spin",text:"'spin'의 <span class='kw1'>/p/</span>는 <span class='kw2'>기식음</span>이다.",ans:false,correct:"틀렸다. 'spin'의 /p/는 /s/ 뒤에 위치하므로 기식이 억제되어 <span class='kw1'>[p]</span>(비기식음)으로 실현된다.",why:"/s/ 뒤에 오는 무성 폐쇄음은 aspiration이 억제됩니다. 이것이 'pin'[pʰɪn]과 'spin'[spɪn]의 차이입니다. /s/ 뒤 환경은 aspiration 규칙의 예외(blocking environment)입니다. 간단한 테스트: 손 앞에 종이를 두면 'pin'에서는 종이가 흔들리지만 'spin'에서는 거의 움직이지 않습니다.",source:"\"After /s/, aspiration is blocked: 'spin' → [spɪn], not *[spʰɪn].\" (Yavaş 2011)",compare:[{title:"pin [pʰɪn]",desc:"어두 강세 위치 → aspiration"},{title:"spin [spɪn]",desc:"/s/ 뒤 → aspiration 억제"}]},
+  {src:"Aspiration",cat:"음소 지위 — pin vs spin",text:"'pin'과 'spin'의 <span class='kw1'>/p/</span>는 서로 다른 <span class='kw4'>음소</span>다.",ans:false,correct:"틀렸다. [pʰ]와 [p]는 같은 음소 <span class='kw1'>/p/</span>의 변이음(allophone)이다. 두 음은 상보적 분포(complementary distribution)를 이룬다.",why:"[pʰ]는 강세모음 앞 음절초에, [p]는 /s/ 뒤에 나타납니다. 이 두 환경은 상호 배타적(complementary distribution)이므로 [pʰ]와 [p]는 동일한 음소 /p/의 allophone입니다. 영어에서 aspiration은 음소 대립을 이루지 않습니다.",source:"\"[pʰ] and [p] are allophones of the same phoneme /p/ in English, in complementary distribution.\" (Yavaş 2011)",compare:[{title:"[pʰ] — aspirated",desc:"강세모음 앞 음절초 · /p/의 변이음"},{title:"[p] — unaspirated",desc:"/s/ 뒤 / coda · /p/의 변이음"}]},
+  {src:"Aspiration",cat:"IPA 표기",text:"기식음 표기는 <span class='kw1'>[ʰ]</span> 기호를 해당 음 <span class='kw2'>뒤</span>에 붙인다.",ans:true,correct:"정확하다. IPA에서 기식을 나타내는 상첨자 [ʰ]는 기식음화된 자음 <span class='kw2'>뒤</span>에 붙인다. 예: [pʰ], [tʰ], [kʰ].",why:"IPA 표기 규칙에서 aspiration diacritic [ʰ]는 상첨자(superscript)로 기식음화된 자음 뒤에 표기합니다. 예: 'pin'[pʰɪn], 'top'[tʰɑp], 'cool'[kʰul]. 앞에 붙이는 것이 아니라 반드시 뒤에 위치합니다.",source:"\"IPA aspiration diacritic: superscript [ʰ] placed <span class='kw2'>after</span> the aspirated consonant: [pʰ], [tʰ], [kʰ].\" (IPA; Yavaş 2011)",compare:[{title:"올바른 표기",desc:"[pʰ], [tʰ], [kʰ] — 자음 뒤에 [ʰ]"},{title:"잘못된 표기",desc:"[ʰp], [ʰt] — 자음 앞에 두면 오류"}]},
+  {src:"Aspiration",cat:"환경 — 음절초 강세",text:"기식음화는 <span class='kw2'>강세 모음 앞 음절초(syllable-initial)</span>에서 일어난다.",ans:true,correct:"정확하다. Aspiration 환경: 음절초(onset) 위치 + 강세모음 앞. 두 조건이 모두 충족되어야 한다.",why:"Aspiration 규칙의 환경은 '강세모음 앞 음절초(before stressed vowel, in syllable-initial position)'입니다. 단순히 강세모음 앞이라도 /s/ 뒤라면 억제됩니다. 음절말(coda) 위치의 /p,t,k/도 aspiration되지 않습니다.",source:"\"Aspiration environment: syllable-initial position before a stressed vowel. /p, t, k/ → [pʰ, tʰ, kʰ].\" (Yavaş 2011)",compare:[{title:"환경 충족",desc:"어두 강세위치 · pin, top, cool"},{title:"환경 불충족",desc:"/s/ 뒤 · spin, stop, school"}]},
+  {src:"Aspiration",cat:"예시 — school",text:"'school'의 <span class='kw1'>/k/</span>는 <span class='kw2'>기식음</span>이다.",ans:false,correct:"틀렸다. 'school'의 /k/는 /s/ 뒤에 위치하므로 기식이 억제되어 <span class='kw1'>[k]</span>(비기식음)으로 실현된다.",why:"'school'[skul]에서 /k/는 /s/ 뒤에 위치합니다. /s/ 뒤 환경은 aspiration blocking environment이므로 /k/는 기식음화되지 않습니다. 'cool'[kʰul]과 'school'[skul]을 비교하면 /k/의 기식 유무 차이를 확인할 수 있습니다.",source:"\"'school' → [skul]: /k/ after /s/ — aspiration blocked.\" (Yavaş 2011)",compare:[{title:"cool [kʰul]",desc:"어두 강세위치 → [kʰ] 기식음"},{title:"school [skul]",desc:"/s/ 뒤 → [k] 비기식음"}]},
+  {src:"Aspiration",cat:"예시 — top",text:"'top'의 <span class='kw1'>/t/</span>는 <span class='kw2'>기식음</span>이다.",ans:true,correct:"정확하다. 'top'의 /t/는 강세모음 앞 어두에 위치하므로 [tʰ]로 기식음화된다.",why:"'top'[tʰɑp]에서 /t/는 강세모음 /ɑ/ 앞 어두에 위치합니다. Aspiration 환경(강세모음 앞 음절초)을 충족하므로 [tʰ]로 실현됩니다. 손 앞에 종이를 두고 'top'을 발음하면 기식으로 종이가 흔들립니다.",source:"\"'top' → [tʰɑp]: /t/ in syllable-initial position before stressed vowel → aspirated.\" (Yavaş 2011)",compare:[{title:"top [tʰɑp]",desc:"어두 강세위치 → aspiration"},{title:"stop [stɑp]",desc:"/s/ 뒤 → aspiration 억제"}]},
+  {src:"Aspiration",cat:"환경 — Coda",text:"<span class='kw4'>Coda(음절말)</span> 위치의 /p,t,k/는 <span class='kw2'>기식음</span>이다.",ans:false,correct:"틀렸다. Coda 위치의 /p,t,k/는 기식이 없다. Aspiration은 강세모음 앞 <span class='kw1'>음절초(onset)</span> 위치에서만 일어난다.",why:"Coda(음절말) 위치의 무성 폐쇄음은 aspiration되지 않습니다. 예: 'top'[tʰɑp]에서 어두 /t/는 [tʰ]이지만 말말 /p/는 [p]로 비기식음입니다. 영어에서는 음절말 /p,t,k/가 불파(unreleased) 또는 성문음화로 실현되기도 합니다.",source:"\"Aspiration is limited to syllable-initial (onset) position: coda /p, t, k/ are not aspirated.\" (Yavaş 2011)",compare:[{title:"Onset /t/ → [tʰ]",desc:"어두 강세위치 · top의 /t/"},{title:"Coda /p/ → [p]",desc:"음절말 · top의 /p/"}]},
+  {src:"Aspiration",cat:"음소 대립 — 영어",text:"영어에서 <span class='kw1'>[p]</span>와 <span class='kw1'>[pʰ]</span>는 변별적 대립(phonemic contrast)을 이룬다.",ans:false,correct:"틀렸다. 영어에서 [p]와 [pʰ]는 동일한 음소 /p/의 <span class='kw1'>allophone</span>이다. 상보적 분포를 이루므로 음소 대립이 없다.",why:"영어에서 [p]와 [pʰ]는 환경에 따라 예측 가능하게 분포합니다(상보적 분포). 따라서 이 두 음은 음소 대립을 이루지 않습니다. 반면 한국어, 태국어 등에서는 기식음과 비기식음이 별도의 음소로 변별적 기능을 합니다.",source:"\"In English, [p] and [pʰ] are in complementary distribution — allophones of /p/, not separate phonemes.\" (Yavaş 2011)",compare:[{title:"영어: [p]/[pʰ] = allophone",desc:"환경으로 예측 · 음소 대립 없음"},{title:"한국어: /ㅂ//ㅍ/ = phoneme",desc:"변별적 · 별개 음소"}]},
+  {src:"Aspiration",cat:"예시 — cool vs school",text:"'cool'의 <span class='kw1'>/k/</span>와 'school'의 <span class='kw1'>/k/</span>는 같은 음소 <span class='kw2'>/k/</span>의 변이음이다.",ans:true,correct:"정확하다. [kʰ](cool)와 [k](school)는 모두 음소 /k/의 allophone이다. 상보적 분포를 이룬다.",why:"'cool'[kʰul]의 /k/는 강세모음 앞 어두에서 [kʰ]로, 'school'[skul]의 /k/는 /s/ 뒤에서 [k]로 실현됩니다. 두 환경은 상호 배타적이므로 [kʰ]와 [k]는 같은 음소 /k/의 allophone입니다.",source:"\"[kʰ] in 'cool' and [k] in 'school' are allophones of /k/: complementary distribution.\" (Yavaş 2011)",compare:[{title:"cool [kʰul]",desc:"어두 강세위치 → [kʰ] · /k/의 allophone"},{title:"school [skul]",desc:"/s/ 뒤 → [k] · /k/의 allophone"}]},
+  {src:"Aspiration",cat:"적용 범위",text:"기식음화는 <span class='kw1'>/p, t, k/</span> 모두에 적용된다.",ans:true,correct:"정확하다. Aspiration 규칙은 영어의 세 무성 폐쇄음 /p, t, k/ 모두에 동일하게 적용된다.",why:"영어의 aspiration 규칙: /p, t, k/ → [pʰ, tʰ, kʰ] / __ V́ (강세모음 앞 음절초). pin[pʰɪn], top[tʰɑp], cool[kʰul]이 각각 /p/, /t/, /k/의 기식음화 예입니다.",source:"\"Aspiration applies to all three voiceless stops: /p/ → [pʰ], /t/ → [tʰ], /k/ → [kʰ] before stressed vowel.\" (Yavaş 2011)",compare:[{title:"/p/ → [pʰ]",desc:"pin, pool, park"},{title:"/t/ → [tʰ]",desc:"top, tell, take"},{title:"/k/ → [kʰ]",desc:"cool, car, come"}]},
+  {src:"Aspiration",cat:"대조 언어 — 한국어",text:"한국어에서 기식음은 <span class='kw2'>변별적(phonemic)</span>이다.",ans:true,correct:"정확하다. 한국어에서 ㅂ[p]/ㅍ[pʰ]는 별개의 음소다. '불[pul]' vs '풀[pʰul]'처럼 의미를 구별한다.",why:"한국어에서는 /ㅂ/[p](비기식), /ㅍ/[pʰ](기식), /ㅃ/[p'](경음)이 모두 별개의 음소로 변별적 기능을 합니다. 영어와 달리 기식 유무가 의미 구별에 사용됩니다. 이것이 영어와 한국어의 aspiration 체계가 다른 핵심 이유입니다.",source:"\"Korean has a three-way contrast: /p/ (lax), /pʰ/ (aspirated), /p'/ (tense) — all phonemically distinct.\" (Yavaş 2011)",compare:[{title:"영어: aspiration = allophonic",desc:"[p]/[pʰ] = 동일 음소의 변이음"},{title:"한국어: aspiration = phonemic",desc:"/ㅂ//ㅍ/ = 별개 음소 · 의미 구별"}]},
+  {src:"Aspiration",cat:"비강세 음절",text:"<span class='kw4'>비강세 음절</span>의 /p,t,k/도 강하게 기식음화된다.",ans:false,correct:"틀렸다. 비강세 음절의 /p,t,k/는 기식이 <span class='kw2'>약화</span>된다. Aspiration은 강세모음 앞에서 가장 강하다.",why:"Aspiration은 강세모음 앞에서 가장 강하게 나타납니다. 비강세 음절에서는 약한 기식(weak aspiration)이나 비기식음으로 실현됩니다. 예: 'potato'에서 어두 [pʰ]는 강하게 기식되지만, 두 번째 /t/(비강세)는 약하게 기식됩니다.",source:"\"Aspiration is strongest before stressed vowel; unreleased or weakly aspirated in unstressed syllables.\" (Yavaş 2011)",compare:[{title:"강세 앞 /p,t,k/",desc:"강한 aspiration · [pʰ, tʰ, kʰ]"},{title:"비강세 앞 /p,t,k/",desc:"약한 aspiration 또는 비기식"}]},
+  {src:"Aspiration",cat:"예시 — stop",text:"'stop'의 <span class='kw1'>/t/</span>는 aspiration이 억제된다.",ans:true,correct:"정확하다. 'stop'의 /t/는 /s/ 뒤에 위치하므로 aspiration이 억제되어 [t](비기식음)로 실현된다.",why:"'stop'[stɑp]에서 /t/는 /s/ 뒤에 위치합니다. /s/ 뒤 환경은 aspiration blocking environment이므로 /t/는 비기식음 [t]로 실현됩니다. 'top'[tʰɑp]과 대조됩니다.",source:"\"'stop' → [stɑp]: /t/ after /s/ — aspiration suppressed.\" (Yavaş 2011)",compare:[{title:"top [tʰɑp]",desc:"어두 강세위치 → aspiration"},{title:"stop [stɑp]",desc:"/s/ 뒤 → aspiration 억제"}]},
+  {src:"Aspiration",cat:"규칙 지위",text:"Aspiration은 <span class='kw1'>allophonic rule</span>이다.",ans:true,correct:"정확하다. Aspiration은 환경에 따라 예측 가능한 allophonic rule이다. [pʰ]와 [p]는 상보적 분포를 이루며 동일 음소 /p/의 변이음이다.",why:"Aspiration은 영어에서 음소 대립을 이루지 않고 환경에 따라 예측 가능하게 나타나는 allophonic rule입니다. [pʰ]는 강세모음 앞 음절초, [p]는 /s/ 뒤나 coda에서만 나타납니다. 이 상보적 분포가 allophonic rule임을 증명합니다.",source:"\"Aspiration in English is an allophonic rule: [pʰ] and [p] are predictable variants (allophones) of /p/.\" (Yavaş 2011)",compare:[{title:"Allophonic rule",desc:"환경으로 예측 · 음소 대립 없음"},{title:"Phonemic contrast",desc:"최소쌍 존재 · 의미 구별 · 한국어 등"}]}
+];
+function renderExp(q,isCorrect){
+  const three=q.compare&&q.compare.length===3;
+  const cmp=q.compare?`<div class="sec-label">📊 비교 정리</div><div class="compare${three?' three':''}">${q.compare.map(c=>`<div class="compare-item"><div class="ci-title">${c.title}</div><p>${c.desc}</p></div>`).join('')}</div>`:'';
+  return `<div class="exp show"><div class="exp-header"><span>${isCorrect?'✅ 정답':'❌ 오답'} · 해설</span></div><div class="exp-answer"><div class="ans-label">핵심 정정</div><div class="ans-text">${q.correct}</div></div><div class="exp-body"><div class="sec-label">📖 상세 설명</div><p>${q.why}</p><div class="sec-label">📌 Source</div><div class="def-box"><p>${q.source}</p></div>${cmp}</div></div>`;
+}
+function renderNav(){
+  document.getElementById('nav').innerHTML=answers.map((a,i)=>{
+    let cls='nd';
+    if(i===cur)cls+=' cur';
+    else if(a!==null)cls+=a.correct?' ok':' ng';
+    return `<button class="${cls}" onclick="jumpTo(${i})">${i+1}</button>`;
+  }).join('');
+}
+function render(){
+  if(cur>=TOTAL){
+    document.getElementById('qa').style.display='none';
+    document.getElementById('sc').classList.add('show');
+    const s=getScore();
+    document.getElementById('fs').textContent=s;
+    const p=s/TOTAL;
+    document.getElementById('rm').textContent=p===1?'🎉 Perfect!':p>=.8?'👏 Great!':p>=.6?'😊 Good!':'💪 Keep going!';
+    document.getElementById('rs').textContent=`${TOTAL}문제 중 ${s}문제 정답 (${Math.round(p*100)}%)`;
+    setTimeout(function(){window.showScorePopup&&window.showScorePopup(s,TOTAL);},400);
+    renderNav();return;
+  }
+  document.getElementById('sc').classList.remove('show');
+  document.getElementById('qa').style.display='block';
+  renderNav();
+  const q=Q[cur];
+  document.getElementById('bf').style.width=((cur+1)/TOTAL*100).toFixed(1)+'%';
+  document.getElementById('pt').textContent=`${cur+1} / ${TOTAL}`;
+  document.getElementById('ps').textContent=`정답 ${getScore()}개`;
+  const a=answers[cur];
+  if(a!==null){
+    let oBtnCls='',xBtnCls='';
+    if(a.picked===true){oBtnCls=a.correct?'co':'wp';if(!a.correct)xBtnCls='cx';}
+    else{xBtnCls=a.correct?'cx':'wp';if(!a.correct)oBtnCls='co';}
+    document.getElementById('qa').innerHTML=`<div class="card"><div class="q-meta"><span class="q-num">Q${cur+1}</span><span class="q-src">${q.src}</span><span class="q-cat">${q.cat}</span></div><div class="q-text">${q.text}</div><div class="ox-btns"><button class="ox-btn o-btn ${oBtnCls}" disabled>⭕<span class="lb">CORRECT</span></button><button class="ox-btn x-btn ${xBtnCls}" disabled>❌<span class="lb">WRONG</span></button></div><div class="badge ${a.correct?'ok':'ng'}">${a.correct?'✅ 정답!':'❌ 오답! 정답은 '+(q.ans?'O':'X')}</div><div>${renderExp(q,a.correct)}</div><button class="next-btn show" onclick="next()">${cur<TOTAL-1?'Next →':'결과 보기 →'}</button></div>`;
+  }else{
+    document.getElementById('qa').innerHTML=`<div class="card"><div class="q-meta"><span class="q-num">Q${cur+1}</span><span class="q-src">${q.src}</span><span class="q-cat">${q.cat}</span></div><div class="q-text">${q.text}</div><div class="ox-btns"><button class="ox-btn o-btn" onclick="pick(true)" id="ob">⭕<span class="lb">CORRECT</span></button><button class="ox-btn x-btn" onclick="pick(false)" id="xb">❌<span class="lb">WRONG</span></button></div><div id="bd" class="badge"></div><div id="ep"></div><button class="next-btn" id="nb" onclick="next()">${cur<TOTAL-1?'Next →':'결과 보기 →'}</button></div>`;
+  }
+}
+function pick(val){
+  const q=Q[cur];
+  document.getElementById('ob').disabled=true;
+  document.getElementById('xb').disabled=true;
+  const ok=val===q.ans;
+  answers[cur]={picked:val,correct:ok};
+  if(ok){if(typeof playOk==='function')playOk();}else{if(typeof playNg==='function')playNg();}
+  const bd=document.getElementById('bd');
+  bd.textContent=ok?'✅ 정답!':`❌ 오답! 정답은 ${q.ans?'O':'X'}`;
+  bd.className='badge '+(ok?'ok':'ng');
+  document.getElementById(val?'ob':'xb').classList.add(ok?(val?'co':'cx'):'wp');
+  if(!ok)document.getElementById(q.ans?'ob':'xb').classList.add(q.ans?'co':'cx');
+  document.getElementById('ep').innerHTML=renderExp(q,ok);
+  document.getElementById('nb').classList.add('show');
+  document.getElementById('ps').textContent=`정답 ${getScore()}개`;
+  renderNav();saveProgress();
+}
+function next(){cur++;saveProgress();render();}
+function jumpTo(i){cur=i;render();document.getElementById('qa').scrollIntoView({behavior:'smooth',block:'start'});}
+function saveProgress(){localStorage.setItem(SAVE_KEY,JSON.stringify({cur,answers}));}
+function freshStart(){localStorage.removeItem(SAVE_KEY);cur=0;answers=new Array(TOTAL).fill(null);document.getElementById('rb').style.display='none';document.getElementById('sc').classList.remove('show');document.getElementById('qa').style.display='block';renderNav();render();}
+(function(){
+  const saved=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');
+  if(saved&&saved.answers&&saved.cur>=0&&saved.cur<TOTAL){
+    cur=saved.cur;answers=saved.answers;
+    const done=answers.filter(a=>a!==null).length;
+    if(done>0){document.getElementById('rb-msg').textContent=`이어서 풀기 중 · ${done}/${TOTAL} 문제 완료 (정답 ${getScore()}개)`;document.getElementById('rb').style.display='block';}
+  }
+  renderNav();render();
+})();
+</script>
+</body>
+</html>

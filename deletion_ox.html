@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deletion — OX Quiz | Phonology</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:repeating-linear-gradient(transparent,transparent 27px,#ddddd0 28px);color:#1a1a1a;min-height:100vh;padding:16px}
+.header-wrap{max-width:720px;margin:0 auto;padding:20px 8px 0}
+.header-topbar{display:flex;justify-content:space-between;align-items:center;border-top:2px solid #1a1a1a;padding-top:8px;margin-bottom:10px}
+.header-no{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;border:2px solid #1a1a1a;padding:3px 10px;border-radius:2px;letter-spacing:.5px;display:flex;align-items:center;gap:6px}
+.header-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;letter-spacing:1px}
+.header-title{font-size:clamp(30px,7vw,46px);font-weight:900;color:#1a1a1a;line-height:1.1;margin-bottom:5px;letter-spacing:-1px}
+.title-hl{background:#1a5276;color:#fff;padding:1px 6px}
+.header-script{font-family:'Caveat',cursive;font-size:21px;color:#1a5276;margin-bottom:4px;font-weight:600}
+.header-sub{font-size:13px;color:#555;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#aaa;margin-bottom:14px}
+.header-divider{border:none;border-top:2.5px solid #1a1a1a;margin-bottom:20px}
+.prog-wrap{max-width:720px;margin:0 auto 10px;padding:0 8px}
+.prog-info{display:flex;justify-content:space-between;font-size:12px;color:#1a5276;font-family:'JetBrains Mono',monospace;margin-bottom:6px}
+.bar{height:4px;background:#aed6f1;border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,#1a5276,#2980b9);border-radius:2px;transition:width .5s ease}
+.wrap{max-width:720px;margin:0 auto}
+.card{background:#fff;border:1.5px solid #aed6f1;border-radius:14px;padding:26px;animation:up .35s ease;box-shadow:0 2px 8px rgba(26,82,118,.08)}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.q-meta{display:flex;align-items:center;gap:7px;margin-bottom:14px;flex-wrap:wrap}
+.q-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:#1a5276;background:rgba(26,82,118,.1);padding:3px 10px;border-radius:8px;font-weight:700}
+.q-src{font-size:11px;color:#2e86c1;font-family:'JetBrains Mono',monospace}
+.q-cat{font-size:11px;color:#1a5276;background:rgba(41,128,185,.1);padding:3px 10px;border-radius:8px;margin-left:auto;font-weight:600}
+.kw1{background:rgba(26,82,118,.15);color:#1a3a52;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(26,82,118,.25)}
+.kw2{color:#117a8b;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border-bottom:2px solid rgba(17,122,139,.45)}
+.kw3{background:rgba(39,174,96,.13);color:#1e8449;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(39,174,96,.3)}
+.kw4{background:rgba(183,28,28,.11);color:#b71c1c;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(183,28,28,.25)}
+.q-text{font-size:clamp(15px,2.2vw,16.5px);line-height:1.9;margin-bottom:24px;color:#1a2633}
+.ox-btns{display:flex;gap:12px}
+.ox-btn{flex:1;padding:20px 10px;border-radius:12px;border:2px solid #aed6f1;background:#f4f9fe;color:#1a2633;font-size:30px;cursor:pointer;transition:all .18s ease;display:flex;flex-direction:column;align-items:center;gap:5px}
+.lb{font-size:11px;font-family:'JetBrains Mono',monospace;color:#2e86c1;letter-spacing:1px;font-weight:600}
+.ox-btn:hover:not(:disabled){transform:translateY(-2px)}
+.o-btn:hover:not(:disabled){border-color:#1a5276;background:rgba(26,82,118,.08)}
+.x-btn:hover:not(:disabled){border-color:#c62828;background:rgba(198,40,40,.06)}
+.co,.cx{border-color:#1a5276!important;background:rgba(26,82,118,.1)!important}
+.wp{border-color:#c62828!important;background:rgba(198,40,40,.08)!important}
+.ox-btn:disabled{cursor:default}
+.badge{display:none;margin-top:14px;padding:9px 16px;border-radius:8px;font-size:14px;font-weight:700;font-family:'JetBrains Mono',monospace}
+.badge.ok{display:inline-block;background:rgba(26,82,118,.1);color:#1a5276;border:1.5px solid rgba(26,82,118,.3)}
+.badge.ng{display:inline-block;background:rgba(198,40,40,.08);color:#c62828;border:1.5px solid rgba(198,40,40,.25)}
+.exp{display:none;margin-top:18px;border-radius:12px;overflow:hidden;animation:fade .3s ease}
+.exp.show{display:block}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.exp-header{background:linear-gradient(135deg,rgba(26,82,118,.12),rgba(41,128,185,.06));border:1.5px solid rgba(26,82,118,.25);border-bottom:none;padding:11px 16px}
+.exp-header span{font-size:11px;font-family:'JetBrains Mono',monospace;color:#1a3a52;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.exp-answer{background:rgba(26,82,118,.05);border:1.5px solid rgba(26,82,118,.2);border-top:none;border-bottom:none;padding:14px 16px}
+.ans-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#2e86c1;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-weight:700}
+.ans-text{font-size:15px;color:#1a2633;line-height:1.75;font-weight:500}
+.exp-body{background:rgba(26,82,118,.03);border:1.5px solid rgba(26,82,118,.15);border-top:1px solid rgba(26,82,118,.1);padding:14px 16px}
+.sec-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#117a8b;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;margin-top:13px;font-weight:700}
+.sec-label:first-child{margin-top:0}
+.exp-body p{font-size:14px;color:#1a3a52;line-height:1.8;margin-bottom:5px}
+.def-box{background:rgba(41,128,185,.06);border-left:4px solid #2980b9;padding:10px 14px;border-radius:0 8px 8px 0;margin:8px 0}
+.def-box p{color:#1a3a52;font-size:13.5px;font-style:italic;line-height:1.75}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.compare.three{grid-template-columns:1fr 1fr 1fr}
+.compare-item{background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:8px;padding:11px 14px}
+.ci-title{font-size:11px;font-family:'JetBrains Mono',monospace;color:#1a5276;font-weight:700;margin-bottom:5px}
+.compare-item p{font-size:13px;color:#2e4a5a;line-height:1.65}
+.next-btn{display:none;width:100%;margin-top:16px;padding:14px;background:linear-gradient(135deg,#1a5276,#2980b9);border:none;border-radius:10px;color:white;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:opacity .2s,transform .2s}
+.next-btn:hover{opacity:.88;transform:translateY(-1px)}
+.next-btn.show{display:block;animation:fade .3s ease}
+.score-card{display:none;text-align:center;padding:48px 24px}
+.score-card.show{display:block;animation:up .5s ease}
+.score-circle{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,#1a5276,#2980b9);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 0 40px rgba(26,82,118,.3)}
+.s-num{font-size:42px;font-weight:700;line-height:1;color:#fff}
+.s-total{font-size:14px;opacity:.85;color:#fff}
+.score-card h2{font-size:24px;margin-bottom:7px;color:#1a1a1a}
+.score-card p{color:#555;margin-bottom:24px;font-size:15px}
+.restart-btn{padding:13px 32px;background:#fff;border:2px solid #1a1a1a;border-radius:10px;color:#1a1a1a;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.restart-btn:hover{background:#f5f4ee}
+.nd{width:28px;height:28px;border-radius:6px;border:1.5px solid #aed6f1;background:#fff;font-size:10px;font-family:'JetBrains Mono',monospace;cursor:pointer;color:#2e86c1;transition:all .15s;display:inline-flex;align-items:center;justify-content:center;font-weight:600}
+.nd.cur{border-color:#1a5276;background:#1a5276;color:white}
+.nd.ok{border-color:#1a5276;background:rgba(26,82,118,.15);color:#1a3a52}
+.nd.ng{border-color:#c62828;background:rgba(198,40,40,.1);color:#c62828}
+.nd:hover:not(.cur){opacity:.7}
+#nav{display:flex;flex-wrap:wrap;gap:5px;max-width:720px;margin:0 auto 16px;padding:0 8px}
+</style>
+</head>
+<body>
+<div class="header-wrap">
+  <div class="header-topbar">
+    <span class="header-no">NO. 05 <span>—</span> Deletion</span>
+    <span class="header-label">Past-Exam Notebook</span>
+  </div>
+  <h1 class="header-title"><span class="title-hl">음운론</span> 개념 마스터</h1>
+  <div class="header-script">Phonology · Deletion</div>
+  <p class="header-sub">음운론 · 탈락(Deletion) 규칙 · 임용고시 대비</p>
+  <div class="header-divider"></div>
+</div>
+<div class="prog-wrap">
+  <div class="prog-info"><span id="pt">1 / 15</span><span id="ps">정답 0개</span></div>
+  <div class="bar"><div class="bar-fill" id="bf" style="width:6.67%"></div></div>
+</div>
+<div id="rb" style="display:none;max-width:720px;margin:0 auto 14px;padding:0 8px">
+  <div style="background:rgba(26,82,118,.08);border:1.5px solid rgba(26,82,118,.3);border-radius:12px;padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <span id="rb-msg" style="font-size:13px;color:#1a2633;font-family:'JetBrains Mono',monospace;line-height:1.5"></span>
+    <button onclick="freshStart()" style="padding:10px 22px;background:#c62828;border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer">처음부터</button>
+  </div>
+</div>
+<div id="nav"></div>
+<div class="wrap">
+  <div id="qa"></div>
+  <div class="score-card" id="sc">
+    <div class="score-circle"><span class="s-num" id="fs">0</span><span class="s-total">/15</span></div>
+    <h2 id="rm"></h2><p id="rs"></p>
+    <button class="restart-btn" onclick="freshStart()">🔄 처음부터</button>
+  </div>
+</div>
+<script src="./score-popup.js"></script>
+<script src="./sounds.js"></script>
+<script>
+const SAVE_KEY='ox_phon_del_v1';
+const TOTAL=15;
+let cur=0,answers=new Array(TOTAL).fill(null);
+function getScore(){return answers.filter(a=>a&&a.correct).length;}
+const Q=[
+  {src:"Deletion",cat:"Coronal Stop — best man",text:"\"best man\"에서 /t/가 탈락하면 <span class='kw1'>[bes mæn]</span>이다.",ans:true,correct:"정확하다. 'best man'에서 /t/는 /s/와 /m/ 사이 자음군에 끼인 coronal stop으로 탈락하여 [bes mæn]이 된다.",why:"Coronal stop deletion은 /t, d/가 자음 사이에 끼었을 때(C __ C) 탈락하는 규칙입니다. 'best man'에서 /t/는 /s/ 뒤, /m/ 앞에 위치한 coronal stop이므로 탈락 환경을 충족합니다. 결과: [bes mæn].",source:"\"Coronal stop deletion: /t, d/ → ∅ / C __ C. 'best man' → [bes mæn].\" (Yavaş 2011)",compare:[{title:"best man → [bes mæn]",desc:"/t/ 탈락 · C __ C 환경"},{title:"old friend → [oʊl frɛnd]",desc:"/d/ 탈락 · C __ C 환경"}]},
+  {src:"Deletion",cat:"Coronal Stop — 환경",text:"<span class='kw1'>/t,d/ 탈락</span>은 두 자음 사이에서 일어난다.",ans:true,correct:"정확하다. Coronal stop deletion의 환경: C <span class='kw2'>__ C</span> (자음과 자음 사이).",why:"Coronal stop deletion 규칙: /t, d/ → ∅ / C __ C. 탈락하는 /t, d/는 왼쪽에 자음이, 오른쪽에도 자음이 와야 합니다. 어두(word-initial) /t,d/나 모음 사이의 /t,d/는 이 탈락 규칙의 적용을 받지 않습니다.",source:"\"Coronal stop deletion: /t, d/ → ∅ / C __ C (between consonants).\" (Yavaş 2011)",compare:[{title:"환경 충족",desc:"C__C · best man, old friend"},{title:"환경 불충족",desc:"어두 / 모음 사이 · 탈락 없음"}]},
+  {src:"Deletion",cat:"H-deletion — 적용 범위",text:"<span class='kw1'>/h/ 탈락</span>은 내용어(content word: hero, happy)에도 적용된다.",ans:false,correct:"틀렸다. /h/ 탈락은 <span class='kw2'>기능어(function word)</span>의 비강세 어두 /h/에만 적용된다. 내용어는 해당 없다.",why:"H-deletion(H 탈락)은 him, her, he, his, have, has, had 등 기능어(function word)의 비강세 어두 /h/에만 적용됩니다. 'hero', 'happy' 같은 내용어(content word)는 /h/가 강세를 받으므로 탈락하지 않습니다.",source:"\"H-deletion applies only to function words (him, her, he, his) with unstressed /h/, not to content words like 'hero'.\" (Yavaş 2011)",compare:[{title:"기능어 — /h/ 탈락",desc:"him → [ɪm], her → [ər] · 비강세 어두 /h/"},{title:"내용어 — /h/ 유지",desc:"hero, happy · 강세 /h/ 탈락 안 됨"}]},
+  {src:"Deletion",cat:"Coronal Stop — old friend",text:"\"old friend\"에서 <span class='kw1'>/d/</span>가 탈락할 수 있다.",ans:true,correct:"정확하다. 'old friend'에서 /d/는 /l/ 뒤, /f/ 앞에 위치하므로 coronal stop deletion 환경을 충족한다.",why:"'old friend'[oʊld frɛnd]에서 /d/는 /l/과 /f/ 사이에 위치한 coronal stop입니다. C __ C 환경을 충족하므로 탈락 가능: [oʊl frɛnd]. 이것은 optional(선택적) 탈락입니다.",source:"\"'old friend' → [oʊl frɛnd] (optional): /d/ deletion in C __ C context.\" (Yavaş 2011)",compare:[{title:"old friend → [oʊl frɛnd]",desc:"/d/ 탈락 · /l/__/f/ 환경"},{title:"old man → [oʊl mæn]",desc:"/d/ 탈락 · /l/__/m/ 환경"}]},
+  {src:"Deletion",cat:"Coronal Stop — 어두 /t/",text:"어두 <span class='kw4'>/t/</span>는 탈락 규칙의 적용을 받는다.",ans:false,correct:"틀렸다. 어두 /t/는 탈락 환경(C __ C)을 충족하지 못한다. 탈락 환경은 자음 사이이며, 어두는 <span class='kw2'>C __ 조건 불충족</span>이다.",why:"Coronal stop deletion의 환경은 C __ C (자음 사이)입니다. 어두(word-initial) /t/는 앞에 자음이 없으므로 왼쪽 조건(C __)을 충족하지 못합니다. 따라서 어두 /t/는 이 탈락 규칙의 적용을 받지 않습니다.",source:"\"Word-initial /t/ lacks the preceding consonant required for deletion: C __ C environment not met.\" (Yavaş 2011)",compare:[{title:"어두 /t/ → 탈락 없음",desc:"C __ 조건 불충족 · 'top', 'time'"},{title:"자음 사이 /t/ → 탈락 가능",desc:"best man, last night"}]},
+  {src:"Deletion",cat:"H-deletion — Tell him",text:"\"Tell him\"에서 /h/가 탈락하면 <span class='kw1'>[tel ɪm]</span>이다.",ans:true,correct:"정확하다. 'him'의 비강세 어두 /h/가 탈락하면 [ɪm]이 되고, 결합 발음은 [tel ɪm]이다.",why:"'him'은 기능어(function word)이며 구어에서 비강세로 발음됩니다. 비강세 어두 /h/는 h-deletion 환경을 충족하므로 탈락: him → [ɪm]. 결과: Tell him → [tel ɪm]. 연속 발화에서 매우 흔하게 일어납니다.",source:"\"Tell him: /h/ in unstressed function word 'him' deletes → [tel ɪm].\" (Yavaş 2011)",compare:[{title:"Tell him → [tel ɪm]",desc:"him의 /h/ 탈락 · 기능어"},{title:"Tell Henry → [tel hɛnri]",desc:"Henry의 /h/ 유지 · 내용어"}]},
+  {src:"Deletion",cat:"H-deletion — 강세 위치",text:"<span class='kw1'>/h/ 탈락</span>은 강세 위치에서도 일어난다.",ans:false,correct:"틀렸다. /h/ 탈락은 <span class='kw2'>비강세(unstressed)</span> 어두에서만 일어난다. 강세를 받는 /h/는 탈락하지 않는다.",why:"H-deletion의 핵심 조건: '비강세 어두 /h/'입니다. 기능어더라도 문장에서 강세를 받는 경우(예: 대조 강세)에는 /h/가 탈락하지 않습니다. 강세가 없는 비강세 위치의 /h/만 탈락 규칙의 적용을 받습니다.",source:"\"H-deletion applies only to <span class='kw2'>unstressed</span> word-initial /h/ in function words; stressed /h/ is retained.\" (Yavaş 2011)",compare:[{title:"비강세 /h/ → 탈락",desc:"him → [ɪm], her → [ər]"},{title:"강세 /h/ → 유지",desc:"HIM (대조 강세) → [hɪm]"}]},
+  {src:"Deletion",cat:"Coronal Stop — 정의",text:"<span class='kw1'>Coronal stop deletion</span>은 자음 사이에 낀 /t,d/를 삭제한다.",ans:true,correct:"정확하다. Coronal stop deletion: /t, d/ → ∅ / C __ C. 자음과 자음 사이에 끼인 coronal stop /t, d/가 탈락한다.",why:"Coronal stop deletion은 /t/와 /d/(coronal stop: 치경 폐쇄음)가 자음 사이에 끼었을 때 탈락하는 음운 규칙입니다. 규칙 형식: /t, d/ → ∅ / C __ C. 'best man', 'old friend', 'last night' 등이 전형적인 예입니다.",source:"\"Coronal stop deletion: /t, d/ → ∅ / C __ C. Coronal stops are deleted when sandwiched between consonants.\" (Yavaş 2011)",compare:[{title:"/t/ 탈락 예",desc:"best man, last night, west side"},{title:"/d/ 탈락 예",desc:"old friend, cold beer, bold move"}]},
+  {src:"Deletion",cat:"H-deletion — Give her",text:"\"Give her\"에서 /h/가 탈락하면 <span class='kw1'>[gɪv ər]</span>이다.",ans:true,correct:"정확하다. 'her'의 비강세 어두 /h/가 탈락하면 [ər]이 되고, 결합 발음은 [gɪv ər]이다.",why:"'her'는 기능어로 구어 연속 발화에서 비강세로 발음됩니다. 비강세 어두 /h/는 h-deletion 규칙을 충족하므로 탈락: her → [ər]. 결과: Give her → [gɪv ər]. 연속 발화에서 자연스러운 발음입니다.",source:"\"Give her: /h/ in unstressed 'her' deletes → [gɪv ər].\" (Yavaş 2011)",compare:[{title:"Give her → [gɪv ər]",desc:"her의 /h/ 탈락 · 기능어"},{title:"Give Helen → [gɪv hɛlən]",desc:"Helen의 /h/ 유지 · 내용어"}]},
+  {src:"Deletion",cat:"Coronal Stop — 탈락 후",text:"/t,d/ 탈락 후 남은 두 자음은 직접 연결된다.",ans:true,correct:"정확하다. /t,d/ 탈락 후 앞뒤 자음이 바로 인접하게 되어 자음군을 이룬다.",why:"Coronal stop deletion으로 중간의 /t/ 또는 /d/가 사라지면, 앞뒤 자음이 직접 연결됩니다. 예: 'best man'[bes mæn]에서 /s/와 /m/이 바로 인접. 'old friend'[oʊl frɛnd]에서 /l/과 /f/가 인접합니다.",source:"\"After coronal stop deletion, the flanking consonants become adjacent, forming a new consonant cluster.\" (Yavaş 2011)",compare:[{title:"before: [bɛst mæn]",desc:"s-t-m 연속 · /t/ 있음"},{title:"after: [bɛs mæn]",desc:"s-m 직접 연결 · /t/ 탈락"}]},
+  {src:"Deletion",cat:"H-deletion — 정의",text:"<span class='kw1'>/h/ 탈락</span>은 기능어의 비강세 어두 /h/에 적용된다.",ans:true,correct:"정확하다. H-deletion의 적용 조건: (1) 기능어(function word), (2) 비강세(unstressed), (3) 어두(word-initial) /h/.",why:"H-deletion의 세 가지 조건: 첫째 기능어(him, her, he, his, have, has, had 등), 둘째 해당 /h/가 비강세, 셋째 어두 위치. 이 세 조건을 모두 충족할 때만 /h/ 탈락이 적용됩니다.",source:"\"H-deletion: /h/ → ∅ in unstressed word-initial position in function words.\" (Yavaş 2011)",compare:[{title:"H-deletion 조건 1",desc:"기능어 · him, her, he, his"},{title:"H-deletion 조건 2",desc:"비강세 + 어두 · unstressed initial /h/"}]},
+  {src:"Deletion",cat:"Coronal Stop — last night",text:"\"last night\"에서 <span class='kw1'>/t/ 탈락</span>이 가능하다.",ans:true,correct:"정확하다. 'last night'에서 /t/는 /s/ 뒤, /n/ 앞에 위치하므로 coronal stop deletion 환경을 충족한다.",why:"'last night'[læst naɪt]에서 /t/는 /s/와 /n/ 사이에 끼인 coronal stop입니다. C __ C 환경 충족 → /t/ 탈락 가능: [læs naɪt]. 구어 연속 발화에서 매우 흔한 현상입니다.",source:"\"'last night' → [læs naɪt] (optional): /t/ deletion in C (/s/) __ C (/n/) context.\" (Yavaş 2011)",compare:[{title:"last night → [læs naɪt]",desc:"/t/ 탈락 · /s/__/n/ 환경"},{title:"best man → [bɛs mæn]",desc:"/t/ 탈락 · /s/__/m/ 환경"}]},
+  {src:"Deletion",cat:"의무성 — 방언 차이",text:"/t,d/ 탈락은 모든 영어 방언에서 <span class='kw4'>의무적으로</span> 일어난다.",ans:false,correct:"틀렸다. /t,d/ 탈락은 <span class='kw2'>선택적(optional)</span> 규칙이다. 방언과 발화 속도, 격식도에 따라 적용 여부가 다르다.",why:"Coronal stop deletion은 obligatory(의무적) 규칙이 아니라 optional(선택적) 규칙입니다. 발화 속도가 빠를수록, 비격식적일수록 더 자주 일어납니다. 또한 방언마다 탈락 빈도가 다릅니다. 천천히 격식 있게 말할 때는 /t,d/를 발음합니다.",source:"\"Coronal stop deletion is an optional (not obligatory) rule, varying by speech rate, formality, and dialect.\" (Yavaş 2011)",compare:[{title:"Optional rule",desc:"선택적 · 속도/격식도에 따라 달라짐"},{title:"Obligatory rule",desc:"의무적 · 항상 적용 · 환경만 충족하면"}]},
+  {src:"Deletion",cat:"규칙 지위",text:"탈락 규칙(deletion rule)은 <span class='kw1'>phonological rule</span>이다.",ans:true,correct:"정확하다. Coronal stop deletion과 H-deletion 모두 phonological rule(음운 규칙)이다.",why:"탈락 규칙들은 음소 수준에서 예측 가능한 환경에 따라 적용되는 phonological rule입니다. 이 규칙들은 음운 체계의 일부로 화자의 음운 지식에 내재화되어 있습니다. 단순한 발음 실수가 아니라 체계적인 음운 과정입니다.",source:"\"Deletion rules (coronal stop deletion, h-deletion) are phonological rules: systematic, environmentally conditioned processes.\" (Yavaş 2011)",compare:[{title:"Phonological rule",desc:"체계적 · 환경 조건부 · 예측 가능"},{title:"Random error",desc:"비체계적 · 예측 불가 · 음운 규칙 아님"}]},
+  {src:"Deletion",cat:"H-deletion — Ask him",text:"\"Ask him\"에서 /h/ 탈락 가능: <span class='kw1'>[æsk ɪm]</span>.",ans:true,correct:"정확하다. 'him'의 비강세 어두 /h/가 탈락하면 [ɪm]이 되고, 결합 발음은 [æsk ɪm]이다.",why:"'him'은 기능어로 비강세 어두 /h/를 가집니다. H-deletion 환경을 충족하므로 탈락: him → [ɪm]. 결과: Ask him → [æsk ɪm]. 구어 연속 발화에서 자연스러운 발음입니다.",source:"\"Ask him: h-deletion in unstressed function word 'him' → [æsk ɪm].\" (Yavaş 2011)",compare:[{title:"Ask him → [æsk ɪm]",desc:"him의 /h/ 탈락"},{title:"Tell him → [tɛl ɪm]",desc:"him의 /h/ 탈락"}]}
+];
+function renderExp(q,isCorrect){
+  const three=q.compare&&q.compare.length===3;
+  const cmp=q.compare?`<div class="sec-label">📊 비교 정리</div><div class="compare${three?' three':''}">${q.compare.map(c=>`<div class="compare-item"><div class="ci-title">${c.title}</div><p>${c.desc}</p></div>`).join('')}</div>`:'';
+  return `<div class="exp show"><div class="exp-header"><span>${isCorrect?'✅ 정답':'❌ 오답'} · 해설</span></div><div class="exp-answer"><div class="ans-label">핵심 정정</div><div class="ans-text">${q.correct}</div></div><div class="exp-body"><div class="sec-label">📖 상세 설명</div><p>${q.why}</p><div class="sec-label">📌 Source</div><div class="def-box"><p>${q.source}</p></div>${cmp}</div></div>`;
+}
+function renderNav(){
+  document.getElementById('nav').innerHTML=answers.map((a,i)=>{
+    let cls='nd';
+    if(i===cur)cls+=' cur';
+    else if(a!==null)cls+=a.correct?' ok':' ng';
+    return `<button class="${cls}" onclick="jumpTo(${i})">${i+1}</button>`;
+  }).join('');
+}
+function render(){
+  if(cur>=TOTAL){
+    document.getElementById('qa').style.display='none';
+    document.getElementById('sc').classList.add('show');
+    const s=getScore();
+    document.getElementById('fs').textContent=s;
+    const p=s/TOTAL;
+    document.getElementById('rm').textContent=p===1?'🎉 Perfect!':p>=.8?'👏 Great!':p>=.6?'😊 Good!':'💪 Keep going!';
+    document.getElementById('rs').textContent=`${TOTAL}문제 중 ${s}문제 정답 (${Math.round(p*100)}%)`;
+    setTimeout(function(){window.showScorePopup&&window.showScorePopup(s,TOTAL);},400);
+    renderNav();return;
+  }
+  document.getElementById('sc').classList.remove('show');
+  document.getElementById('qa').style.display='block';
+  renderNav();
+  const q=Q[cur];
+  document.getElementById('bf').style.width=((cur+1)/TOTAL*100).toFixed(1)+'%';
+  document.getElementById('pt').textContent=`${cur+1} / ${TOTAL}`;
+  document.getElementById('ps').textContent=`정답 ${getScore()}개`;
+  const a=answers[cur];
+  if(a!==null){
+    let oBtnCls='',xBtnCls='';
+    if(a.picked===true){oBtnCls=a.correct?'co':'wp';if(!a.correct)xBtnCls='cx';}
+    else{xBtnCls=a.correct?'cx':'wp';if(!a.correct)oBtnCls='co';}
+    document.getElementById('qa').innerHTML=`<div class="card"><div class="q-meta"><span class="q-num">Q${cur+1}</span><span class="q-src">${q.src}</span><span class="q-cat">${q.cat}</span></div><div class="q-text">${q.text}</div><div class="ox-btns"><button class="ox-btn o-btn ${oBtnCls}" disabled>⭕<span class="lb">CORRECT</span></button><button class="ox-btn x-btn ${xBtnCls}" disabled>❌<span class="lb">WRONG</span></button></div><div class="badge ${a.correct?'ok':'ng'}">${a.correct?'✅ 정답!':'❌ 오답! 정답은 '+(q.ans?'O':'X')}</div><div>${renderExp(q,a.correct)}</div><button class="next-btn show" onclick="next()">${cur<TOTAL-1?'Next →':'결과 보기 →'}</button></div>`;
+  }else{
+    document.getElementById('qa').innerHTML=`<div class="card"><div class="q-meta"><span class="q-num">Q${cur+1}</span><span class="q-src">${q.src}</span><span class="q-cat">${q.cat}</span></div><div class="q-text">${q.text}</div><div class="ox-btns"><button class="ox-btn o-btn" onclick="pick(true)" id="ob">⭕<span class="lb">CORRECT</span></button><button class="ox-btn x-btn" onclick="pick(false)" id="xb">❌<span class="lb">WRONG</span></button></div><div id="bd" class="badge"></div><div id="ep"></div><button class="next-btn" id="nb" onclick="next()">${cur<TOTAL-1?'Next →':'결과 보기 →'}</button></div>`;
+  }
+}
+function pick(val){
+  const q=Q[cur];
+  document.getElementById('ob').disabled=true;
+  document.getElementById('xb').disabled=true;
+  const ok=val===q.ans;
+  answers[cur]={picked:val,correct:ok};
+  if(ok){if(typeof playOk==='function')playOk();}else{if(typeof playNg==='function')playNg();}
+  const bd=document.getElementById('bd');
+  bd.textContent=ok?'✅ 정답!':`❌ 오답! 정답은 ${q.ans?'O':'X'}`;
+  bd.className='badge '+(ok?'ok':'ng');
+  document.getElementById(val?'ob':'xb').classList.add(ok?(val?'co':'cx'):'wp');
+  if(!ok)document.getElementById(q.ans?'ob':'xb').classList.add(q.ans?'co':'cx');
+  document.getElementById('ep').innerHTML=renderExp(q,ok);
+  document.getElementById('nb').classList.add('show');
+  document.getElementById('ps').textContent=`정답 ${getScore()}개`;
+  renderNav();saveProgress();
+}
+function next(){cur++;saveProgress();render();}
+function jumpTo(i){cur=i;render();document.getElementById('qa').scrollIntoView({behavior:'smooth',block:'start'});}
+function saveProgress(){localStorage.setItem(SAVE_KEY,JSON.stringify({cur,answers}));}
+function freshStart(){localStorage.removeItem(SAVE_KEY);cur=0;answers=new Array(TOTAL).fill(null);document.getElementById('rb').style.display='none';document.getElementById('sc').classList.remove('show');document.getElementById('qa').style.display='block';renderNav();render();}
+(function(){
+  const saved=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');
+  if(saved&&saved.answers&&saved.cur>=0&&saved.cur<TOTAL){
+    cur=saved.cur;answers=saved.answers;
+    const done=answers.filter(a=>a!==null).length;
+    if(done>0){document.getElementById('rb-msg').textContent=`이어서 풀기 중 · ${done}/${TOTAL} 문제 완료 (정답 ${getScore()}개)`;document.getElementById('rb').style.display='block';}
+  }
+  renderNav();render();
+})();
+</script>
+</body>
+</html>
