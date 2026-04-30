@@ -170,6 +170,33 @@ GitHub: `https://github.com/Namkicheol/testmaster`
 - **⚠️ "루이스" 글자 사용 금지** (블로그·UI 텍스트) — `5판`·`기출`·`해설` 등으로만 표기
 - 기존 phonetics-phonology 레포 콘텐츠가 그대로 흡수됨 — 추가 리팩터링 시 영어교육론 레포의 quiz/study 구조 참조
 
+### 모바일 테이블 수평 스크롤 패턴
+
+**문제**: 전역 `table { width:100% }` 가 `overflow-x:auto` 컨테이너 안에서도 테이블을 강제로 컨테이너 너비로 축소 → 수평 스크롤 안 됨, 우측 잘림
+
+**파일별 해결책 (두 가지 패턴)**
+
+#### 패턴 A — `_study.html` 스타일 (`.stage-wrap` 래퍼 이미 있음)
+```css
+/* stage-wrap 안의 table만 width 해제 */
+.stage-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.stage-wrap table { width:auto; }  /* 이 한 줄 추가 */
+```
+
+#### 패턴 B — `_concepts.html` 스타일 (래퍼 없음)
+```css
+/* 새 스크롤 래퍼 클래스 */
+.table-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; margin:18px 0; }
+/* 테이블에 min-width 설정 — 모바일에서 뷰포트 초과 → 스크롤 발생 */
+.cmp-table { width:100%; min-width:480px; ... }
+```
+```html
+<!-- 각 테이블을 래퍼로 감쌈 -->
+<div class="table-scroll"><table class="cmp-table">...</table></div>
+```
+
+> **min-width 기준**: 컬럼 수 × 평균 컬럼 폭. 4~5컬럼 데이터 테이블은 480px 이상 권장.
+
 ---
 
 ## 방향 원칙

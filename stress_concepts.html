@@ -197,11 +197,12 @@ body { font-family: var(--sans); color: var(--text); background: #fff; line-heig
 .note li { margin: 4px 0; }
 
 /* ── 비교 테이블 ── */
+.table-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; margin:18px 0; }
 .cmp-table {
   width: 100%;
+  min-width: 480px;
   border-collapse: collapse;
   font-size: 13.5px;
-  margin: 18px 0;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 1px 4px rgba(0,0,0,0.07);
@@ -419,7 +420,7 @@ body { font-family: var(--sans); color: var(--text); background: #fff; line-heig
 <div class="concept-card">
   <div class="card-title">숫자 강세 체계 (Numbered Stress System)</div>
   <p>각 음절의 강세 수준을 숫자로 표기하는 방식. 특징(feature)의 '+' 개수에 따라 결정됩니다.</p>
-  <table class="cmp-table" style="margin-top:12px">
+  <div class="table-scroll" style="margin-top:12px"><table class="cmp-table">
     <tr>
       <th>숫자</th>
       <th>강세 유형</th>
@@ -455,7 +456,7 @@ body { font-family: var(--sans); color: var(--text); background: #fff; line-heig
       <td class="x">−</td>
       <td class="x">−</td>
     </tr>
-  </table>
+  </table></div>
   <p style="font-size:13px;color:var(--muted);margin-top:6px">+가 3개 → 1등급, 2개 → 2등급, 1개 → 3등급, 0개 → 4등급</p>
 </div>
 
@@ -491,7 +492,7 @@ body { font-family: var(--sans); color: var(--text); background: #fff; line-heig
   <span class="en">−stress → +full vowel OR −full vowel (비강세는 완전/약화 모음 모두 가능)</span>
 </div>
 
-<table class="cmp-table">
+<div class="table-scroll"><table class="cmp-table">
   <tr>
     <th>음절 유형</th>
     <th>+stress</th>
@@ -527,7 +528,7 @@ body { font-family: var(--sans); color: var(--text); background: #fff; line-heig
     <td class="x">❌</td>
     <td><strong>4</strong></td>
   </tr>
-</table>
+</table></div>
 
 <p class="body-text">
   핵심: <strong>강세를 받는 음절(+stress)은 반드시 완전 모음(+full vowel)</strong>을 가집니다.
@@ -565,7 +566,7 @@ body { font-family: var(--sans); color: var(--text); background: #fff; line-heig
   photography &nbsp;<span style="font-family:var(--mono);font-weight:400;font-size:14px;color:var(--muted)">/fəˈtɑɡrəfi/</span>
 </h3>
 
-<table class="cmp-table">
+<div class="table-scroll"><table class="cmp-table">
   <tr>
     <th>자질</th>
     <th>pho- [fə]</th>
@@ -601,7 +602,7 @@ body { font-family: var(--sans); color: var(--text); background: #fff; line-heig
     <td style="font-weight:700;color:#888">4</td>
     <td style="font-weight:700;color:#888">3</td>
   </tr>
-</table>
+</table></div>
 
 <div class="note">
   photography는 강세 음절이 하나(2번째 음절, -tog-)뿐이므로, 그 음절이 필연적으로 tonic accent를 갖습니다.
@@ -614,7 +615,7 @@ body { font-family: var(--sans); color: var(--text); background: #fff; line-heig
   photographic &nbsp;<span style="font-family:var(--mono);font-weight:400;font-size:14px;color:var(--muted)">/ˌfoʊtəˈɡræfɪk/</span>
 </h3>
 
-<table class="cmp-table">
+<div class="table-scroll"><table class="cmp-table">
   <tr>
     <th>자질</th>
     <th>pho- [foʊ]</th>
@@ -650,7 +651,7 @@ body { font-family: var(--sans); color: var(--text); background: #fff; line-heig
     <td style="font-weight:700;color:var(--primary)">1</td>
     <td style="font-weight:700;color:#888">4</td>
   </tr>
-</table>
+</table></div>
 
 <div class="note">
   photographic은 강세 음절이 둘입니다: 1번째 pho-(+stress, -tonic) → 2차 강세, 3번째 -graph-(+stress, +tonic) → 1차 강세.
