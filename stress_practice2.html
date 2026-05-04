@@ -127,60 +127,61 @@ let cur=0,answers=new Array(TOTAL).fill(null);
 
 // {cat, word, syls[], ans(0-based index), ctx?, ipa, why}
 const Q=[
-{cat:"복합어 강세",word:"greenhouse",syls:["green","house"],ans:0,ctx:"",
- ipa:"/ˈɡriːnhaʊs/",why:"복합어 → 첫 요소에 주강세."},
+/* ── 복합어 vs 구 — 뜻으로 판단 ── */
+{cat:"복합어 vs 구",word:"greenhouse",syls:["green","house"],ans:0,ctx:"온실 (식물 재배 유리 건물)",
+ ipa:"/ˈɡriːnhaʊs/",why:"compound (N+N). 단일 합성 개념(온실) → primary stress가 첫 요소에."},
 
-{cat:"복합어 강세",word:"blackbird",syls:["black","bird"],ans:0,ctx:"",
- ipa:"/ˈblækbɜːrd/",why:"복합어 → 첫 요소에 주강세."},
+{cat:"복합어 vs 구",word:"green house",syls:["green","house"],ans:1,ctx:"초록색 집 (색이 초록인 집)",
+ ipa:"/ˌɡriːn ˈhaʊs/",why:"phrase (Adj+N). 색깔로 수식하는 일반 구 → primary stress가 head noun(둘째 요소)에."},
 
-{cat:"복합어 강세",word:"birthday",syls:["birth","day"],ans:0,ctx:"",
- ipa:"/ˈbɜːrθdeɪ/",why:"복합어 → 첫 요소에 주강세."},
+{cat:"복합어 vs 구",word:"blackbird",syls:["black","bird"],ans:0,ctx:"흑조 (개똥지빠귀과 새)",
+ ipa:"/ˈblækbɜːrd/",why:"compound (N+N). 특정 species를 가리키는 합성 개념 → primary stress가 첫 요소에."},
 
-/* ── 2음절 강세(첫음절) — trochaic ── */
-{cat:"2음절 강세(첫음절)",word:"agent",syls:["a","gent"],ans:0,ctx:"",
- ipa:"/ˈeɪdʒənt/",why:"첫음절 강세. 영어 기본 trochaic 패턴."},
+{cat:"복합어 vs 구",word:"black bird",syls:["black","bird"],ans:1,ctx:"검은색 새 (색이 검정인 새)",
+ ipa:"/ˌblæk ˈbɜːrd/",why:"phrase (Adj+N). 색깔로 수식하는 일반 구 → primary stress가 head noun(둘째 요소)에."},
 
-{cat:"2음절 강세(첫음절)",word:"country",syls:["coun","try"],ans:0,ctx:"",
- ipa:"/ˈkʌntri/",why:"첫음절 강세. 영어 기본 trochaic 패턴."},
+{cat:"복합어 vs 구",word:"darkroom",syls:["dark","room"],ans:0,ctx:"암실 (사진 현상실)",
+ ipa:"/ˈdɑːrkruːm/",why:"compound (N+N). 사진 현상이라는 단일 기능 공간 → primary stress가 첫 요소에."},
 
-{cat:"2음절 강세(첫음절)",word:"empire",syls:["em","pire"],ans:0,ctx:"",
- ipa:"/ˈempaɪər/",why:"첫음절 강세. 영어 기본 trochaic 패턴."},
+{cat:"복합어 vs 구",word:"dark room",syls:["dark","room"],ans:1,ctx:"어두운 방 (조명이 어두운 방)",
+ ipa:"/ˌdɑːrk ˈruːm/",why:"phrase (Adj+N). 상태로 수식하는 일반 구 → primary stress가 head noun(둘째 요소)에."},
 
-{cat:"2음절 강세(첫음절)",word:"husband",syls:["hus","band"],ans:0,ctx:"",
- ipa:"/ˈhʌzbənd/",why:"첫음절 강세. 영어 기본 trochaic 패턴."},
+/* ── 2음절 강세 — 첫음절 vs 둘째음절 ── */
+{cat:"2음절 강세",word:"agent",syls:["a","gent"],ans:0,ctx:"",
+ ipa:"/ˈeɪdʒənt/",why:"첫음절 강세. 영어 native 2음절 N/Adj 기본 trochaic 패턴."},
 
-{cat:"2음절 강세(첫음절)",word:"proper",syls:["prop","er"],ans:0,ctx:"",
- ipa:"/ˈprɒpər/",why:"첫음절 강세. 영어 기본 trochaic 패턴."},
+{cat:"2음절 강세",word:"country",syls:["coun","try"],ans:0,ctx:"",
+ ipa:"/ˈkʌntri/",why:"첫음절 강세. 영어 native 2음절 N/Adj 기본 trochaic 패턴."},
 
-{cat:"2음절 강세(첫음절)",word:"perfect",syls:["per","fect"],ans:0,ctx:"(Adj/N)",
- ipa:"/ˈpɜːrfɪkt/",why:"첫음절 강세. 영어 기본 trochaic 패턴."},
+{cat:"2음절 강세",word:"empire",syls:["em","pire"],ans:0,ctx:"",
+ ipa:"/ˈempaɪər/",why:"첫음절 강세. 영어 native 2음절 N/Adj 기본 trochaic 패턴."},
 
-{cat:"2음절 강세(첫음절)",word:"ready",syls:["read","y"],ans:0,ctx:"",
- ipa:"/ˈredi/",why:"첫음절 강세. 영어 기본 trochaic 패턴."},
+{cat:"2음절 강세",word:"husband",syls:["hus","band"],ans:0,ctx:"",
+ ipa:"/ˈhʌzbənd/",why:"첫음절 강세. 영어 native 2음절 N/Adj 기본 trochaic 패턴."},
 
-{cat:"2음절 강세(첫음절)",word:"sudden",syls:["sud","den"],ans:0,ctx:"",
- ipa:"/ˈsʌdən/",why:"첫음절 강세. 영어 기본 trochaic 패턴."},
+{cat:"2음절 강세",word:"perfect",syls:["per","fect"],ans:0,ctx:"(Adj/N)",
+ ipa:"/ˈpɜːrfɪkt/",why:"첫음절 강세. Adj/N → trochaic. (V로 쓰면 perˈfect — 둘째음절 강세)"},
 
-{cat:"2음절 강세(첫음절)",word:"yellow",syls:["yel","low"],ans:0,ctx:"",
- ipa:"/ˈjeloʊ/",why:"첫음절 강세. 영어 기본 trochaic 패턴."},
+{cat:"2음절 강세",word:"ready",syls:["read","y"],ans:0,ctx:"",
+ ipa:"/ˈredi/",why:"첫음절 강세. 영어 native 2음절 N/Adj 기본 trochaic 패턴."},
 
-{cat:"2음절 강세(첫음절)",word:"vulgar",syls:["vul","gar"],ans:0,ctx:"",
- ipa:"/ˈvʌlɡər/",why:"첫음절 강세. 영어 기본 trochaic 패턴."},
+{cat:"2음절 강세",word:"yellow",syls:["yel","low"],ans:0,ctx:"",
+ ipa:"/ˈjeloʊ/",why:"첫음절 강세. 영어 native 2음절 N/Adj 기본 trochaic 패턴."},
 
-/* ── 2음절 강세(둘째음절) — iambic ── */
-{cat:"2음절 강세(둘째음절)",word:"appeal",syls:["ap","peal"],ans:1,ctx:"",
+/* ── 2음절 강세 — iambic ── */
+{cat:"2음절 강세",word:"appeal",syls:["ap","peal"],ans:1,ctx:"",
  ipa:"/əˈpiːl/",why:"둘째음절 강세. penult -peal- heavy(장모음) → iambic 패턴."},
 
-{cat:"2음절 강세(둘째음절)",word:"balloon",syls:["bal","loon"],ans:1,ctx:"",
+{cat:"2음절 강세",word:"balloon",syls:["bal","loon"],ans:1,ctx:"",
  ipa:"/bəˈluːn/",why:"둘째음절 강세. penult -loon- heavy(장모음) → iambic 패턴."},
 
 {cat:"지명",word:"Brazil",syls:["Bra","zil"],ans:1,ctx:"",
  ipa:"/brəˈzɪl/",why:"둘째음절 강세. penult -zil- heavy(단모음+coda /l/) → iambic 패턴."},
 
-{cat:"2음절 강세(둘째음절)",word:"canal",syls:["ca","nal"],ans:1,ctx:"",
+{cat:"2음절 강세",word:"canal",syls:["ca","nal"],ans:1,ctx:"",
  ipa:"/kəˈnæl/",why:"둘째음절 강세. penult -nal- heavy(단모음+coda /l/) → iambic 패턴."},
 
-{cat:"2음절 강세(둘째음절)",word:"giraffe",syls:["gi","raffe"],ans:1,ctx:"",
+{cat:"2음절 강세",word:"giraffe",syls:["gi","raffe"],ans:1,ctx:"",
  ipa:"/dʒɪˈrɑːf/",why:"둘째음절 강세. penult -raffe- heavy(장모음) → iambic 패턴."},
 
 {cat:"지명",word:"Japan",syls:["Ja","pan"],ans:1,ctx:"",
@@ -189,25 +190,25 @@ const Q=[
 {cat:"지명",word:"Tibet",syls:["Ti","bet"],ans:1,ctx:"",
  ipa:"/tɪˈbet/",why:"둘째음절 강세. penult -bet- heavy(단모음+coda /t/) → iambic 패턴."},
 
-{cat:"2음절 강세(둘째음절)",word:"machine",syls:["ma","chine"],ans:1,ctx:"",
+{cat:"2음절 강세",word:"machine",syls:["ma","chine"],ans:1,ctx:"",
  ipa:"/məˈʃiːn/",why:"둘째음절 강세. penult -chine- heavy(장모음) → iambic 패턴."},
 
-{cat:"2음절 강세(둘째음절)",word:"parade",syls:["pa","rade"],ans:1,ctx:"",
+{cat:"2음절 강세",word:"parade",syls:["pa","rade"],ans:1,ctx:"",
  ipa:"/pəˈreɪd/",why:"둘째음절 강세. penult -rade- heavy(장모음) → iambic 패턴."},
 
-{cat:"2음절 강세(둘째음절)",word:"correct",syls:["cor","rect"],ans:1,ctx:"",
+{cat:"2음절 강세",word:"correct",syls:["cor","rect"],ans:1,ctx:"",
  ipa:"/kəˈrekt/",why:"둘째음절 강세. penult -rect- heavy(단모음+coda /kt/) → iambic 패턴."},
 
-{cat:"2음절 강세(둘째음절)",word:"intense",syls:["in","tense"],ans:1,ctx:"",
+{cat:"2음절 강세",word:"intense",syls:["in","tense"],ans:1,ctx:"",
  ipa:"/ɪnˈtens/",why:"둘째음절 강세. penult -tense- heavy(단모음+coda /ns/) → iambic 패턴."},
 
-{cat:"2음절 강세(둘째음절)",word:"typhoon",syls:["ty","phoon"],ans:1,ctx:"",
+{cat:"2음절 강세",word:"typhoon",syls:["ty","phoon"],ans:1,ctx:"",
  ipa:"/taɪˈfuːn/",why:"둘째음절 강세. penult -phoon- heavy(장모음) → iambic 패턴."},
 
-{cat:"2음절 강세(둘째음절)",word:"shampoo",syls:["sham","poo"],ans:1,ctx:"",
+{cat:"2음절 강세",word:"shampoo",syls:["sham","poo"],ans:1,ctx:"",
  ipa:"/ʃæmˈpuː/",why:"둘째음절 강세. penult -poo- heavy(장모음) → iambic 패턴."},
 
-{cat:"2음절 강세(둘째음절)",word:"mundane",syls:["mun","dane"],ans:1,ctx:"",
+{cat:"2음절 강세",word:"mundane",syls:["mun","dane"],ans:1,ctx:"",
  ipa:"/mʌnˈdeɪn/",why:"둘째음절 강세. penult -dane- heavy(장모음) → iambic 패턴."},
 
 /* ── 3음절 강세 ── */
