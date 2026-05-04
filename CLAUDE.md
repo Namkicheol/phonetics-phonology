@@ -195,6 +195,36 @@ GitHub: `https://github.com/Namkicheol/testmaster`
 
 > **min-width 기준**: 컬럼 수 × 평균 컬럼 폭. 4~5컬럼 데이터 테이블은 480px 이상 권장.
 
+### 🚨 CSS Grid 1fr 우측 잘림 패턴 (반복 실수 주의)
+
+**문제**: `grid-template-columns: 1fr 1fr 1fr` 에서 `1fr` = `minmax(auto, 1fr)`. `auto` 최솟값은 `min-content`이므로 좁은 화면에서 JetBrains Mono 텍스트(예: "Unstressed", "Secondary")가 `min-content` 폭을 주장해 컬럼이 viewport 밖으로 밀림 → 페이지 우측 잘림.
+
+**필수 수정**: 멀티컬럼 그리드 항상 `minmax(0, 1fr)` 사용
+```css
+/* ❌ 틀림 */
+.compare.three { grid-template-columns: 1fr 1fr 1fr }
+.grid.col3     { grid-template-columns: 1fr 1fr 1fr }
+
+/* ✅ 올바름 */
+.compare.three { grid-template-columns: repeat(3, minmax(0, 1fr)) }
+.grid.col3     { grid-template-columns: repeat(3, minmax(0, 1fr)) }
+```
+
+**추가 보완**: 카드 내부 텍스트에 `word-break:break-word; overflow-wrap:break-word` 필수
+```css
+.compare-item { word-break: break-word; overflow-wrap: break-word }
+```
+
+**`white-space:pre` 패턴**: `.foot-tree`, 코드 블록 등에 `white-space:pre` 사용 시 부모에 `overflow-x:auto` 필수
+```css
+.foot-box { overflow-x: auto; -webkit-overflow-scrolling: touch }
+```
+
+**영향 파일 체크리스트** (새 파일 만들 때 확인):
+- OX 퀴즈: `.compare.three` 그리드 → `repeat(3,minmax(0,1fr))`
+- Study 노트: `.grid.col3` → `repeat(3,minmax(0,1fr))` + 미디어 쿼리 768px
+- `white-space:pre` 요소 → 부모에 `overflow-x:auto`
+
 ---
 
 ## 방향 원칙
