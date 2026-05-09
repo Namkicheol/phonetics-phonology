@@ -109,7 +109,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:r
 <div class="wrap">
   <div id="qa"></div>
   <div class="score-card" id="sc">
-    <div class="score-circle"><span class="s-num" id="fs">0</span><span class="s-total">/15</span></div>
+    <div class="score-circle"><span class="s-num" id="fs">0</span><span class="s-total">/17</span></div>
     <h2 id="rm"></h2><p id="rs"></p>
     <button class="restart-btn" onclick="freshStart()">🔄 처음부터</button>
   </div>
@@ -118,7 +118,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:r
 <script src="./sounds.js"></script>
 <script>
 const SAVE_KEY='ox_phon_flap_v1';
-const TOTAL=15;
+const TOTAL=17;
 let cur=0,answers=new Array(TOTAL).fill(null);
 function getScore(){return answers.filter(a=>a&&a.correct).length;}
 const Q=[
@@ -136,7 +136,9 @@ const Q=[
   {src:"Flapping",cat:"중화 — betting/bedding",text:"'betting'과 'bedding'은 미국 영어 구어에서 동일하게 발음될 수 있다.",ans:true,correct:"정확하다. flapping으로 두 단어 모두 [ˈbɛɾɪŋ]이 되어 음성적으로 중화(neutralization)된다.",why:"'betting'의 /t/와 'bedding'의 /d/ 모두 강세모음 /ɛ/ 뒤, 비강세모음 /ɪ/ 앞에 위치하므로 flapping 환경을 충족합니다. 두 음 모두 [ɾ]로 실현되어 [ˈbɛɾɪŋ]이 됩니다. 이처럼 flapping이 /t/와 /d/의 대립을 중화시킵니다.",source:"\"Flapping neutralizes /t/ vs. /d/ contrast: 'betting' = 'bedding' = [ˈbɛɾɪŋ] in casual American English.\" (Yavaş 2011)",compare:[{title:"betting → [ˈbɛɾɪŋ]",desc:"/t/ → [ɾ] · neutralization"},{title:"bedding → [ˈbɛɾɪŋ]",desc:"/d/ → [ɾ] · neutralization"}]},
   {src:"Flapping",cat:"[ɾ] vs. [r] 구분",text:"<span class='kw1'>[ɾ]</span>는 IPA에서 <span class='kw4'>alveolar trill</span>과 같다.",ans:false,correct:"틀렸다. <span class='kw4'>alveolar trill</span>은 <span class='kw1'>[r]</span>이고, alveolar flap은 <span class='kw1'>[ɾ]</span>이다. 두 기호는 다른 소리다.",why:"IPA에서 [r]은 alveolar trill(치경 전동음): 혀가 여러 번 빠르게 진동하는 소리입니다. [ɾ]은 alveolar flap(치경 탄음): 혀가 한 번만 빠르게 접촉하는 소리입니다. 영어 flapping의 결과음은 [ɾ]이지 [r]이 아닙니다.",source:"\"IPA [r] = alveolar trill (multiple contacts); [ɾ] = alveolar flap (single rapid contact). English flapping → [ɾ].\" (IPA; Yavaş 2011)",compare:[{title:"[ɾ] alveolar flap",desc:"단일 접촉 · 영어 flapping 결과"},{title:"[r] alveolar trill",desc:"반복 진동 · 스페인어 'perro'"}]},
   {src:"Flapping",cat:"중화 — later/ladder",text:"'later'와 'ladder'는 미국 영어에서 동일하게 발음될 수 있다.",ans:true,correct:"정확하다. flapping으로 'later'와 'ladder' 모두 [ˈleɪɾər]이 되어 음성적으로 구별되지 않는다.",why:"'later'의 /t/와 'ladder'의 /d/ 모두 강세모음 /eɪ/ 뒤, 비강세모음 /ər/ 앞에 위치합니다. Flapping 결과: later=[ˈleɪɾər], ladder=[ˈleɪɾər]로 동일하게 발음됩니다. 이것이 미국 영어에서 flapping으로 인한 phonemic neutralization의 전형적인 예입니다.",source:"\"'later' and 'ladder' merge as [ˈleɪɾər] through flapping in American English.\" (Yavaş 2011)",compare:[{title:"later → [ˈleɪɾər]",desc:"/t/ → [ɾ] · flapping"},{title:"ladder → [ˈleɪɾər]",desc:"/d/ → [ɾ] · flapping"}]},
-  {src:"Flapping",cat:"음소 대립",text:"Flapping은 음소 대립을 만들지 않는다.",ans:true,correct:"정확하다. Flapping은 <span class='kw1'>allophonic rule</span>로, /t/와 /d/ 사이의 음소 대립을 파괴하지 않고 변이음을 생성할 뿐이다.",why:"Flapping은 특정 환경(V́ __ V)에서 예측 가능하게 일어나는 allophonic rule입니다. [ɾ]는 /t/ 또는 /d/의 변이음이지 독립된 음소가 아닙니다. 따라서 [ɾ]이 나타나는 것만으로는 새로운 음소 대립이 형성되지 않습니다.",source:"\"Flapping is an allophonic rule: [ɾ] does not create new phonemic contrasts, it is a predictable variant of /t/ and /d/.\" (Yavaş 2011)",compare:[{title:"Allophonic rule",desc:"예측 가능 · 음소 대립 없음"},{title:"Phonemic contrast",desc:"/t/ vs /d/ 대립 · flapping과 무관"}]}
+  {src:"Flapping",cat:"음소 대립",text:"Flapping은 음소 대립을 만들지 않는다.",ans:true,correct:"정확하다. Flapping은 <span class='kw1'>allophonic rule</span>로, /t/와 /d/ 사이의 음소 대립을 파괴하지 않고 변이음을 생성할 뿐이다.",why:"Flapping은 특정 환경(V́ __ V)에서 예측 가능하게 일어나는 allophonic rule입니다. [ɾ]는 /t/ 또는 /d/의 변이음이지 독립된 음소가 아닙니다. 따라서 [ɾ]이 나타나는 것만으로는 새로운 음소 대립이 형성되지 않습니다.",source:"\"Flapping is an allophonic rule: [ɾ] does not create new phonemic contrasts, it is a predictable variant of /t/ and /d/.\" (Yavaş 2011)",compare:[{title:"Allophonic rule",desc:"예측 가능 · 음소 대립 없음"},{title:"Phonemic contrast",desc:"/t/ vs /d/ 대립 · flapping과 무관"}]},
+  {src:"Flapping",cat:"기출 — 2012 Q31",text:"flapping이 일어나면 /t/와 /d/의 대립이 <span class='kw2'>중화(neutralization)</span>된다.",ans:true,correct:"정확하다. flapping 환경에서 /t/와 /d/ 모두 [ɾ]로 실현되어 음소 대립이 중화된다 — alveolar stop의 neutralization.",why:"2012 1차 Q31: flapping과 음소 중화(neutralization)가 출제 핵심. 'writer'[ˈraɪɾər]와 'rider'[ˈraɪɾər]처럼 flapping 환경(강세모음 뒤, 비강세모음 앞)에서 /t/와 /d/ 모두 [ɾ]이 되어 alveolar 장애음 대립이 중화됩니다. 출처: 기출맥락_2010_2026.md (2012 Q31)",source:"기출맥락_2010_2026.md",compare:[{title:"writer → [ˈraɪɾər]",desc:"/t/ → [ɾ] · flapping + neutralization"},{title:"rider → [ˈraɪɾər]",desc:"/d/ → [ɾ] · flapping + neutralization"}]},
+  {src:"Flapping",cat:"기출 — 2016 A-기입1",text:"'writer'에서 강세 모음 /aɪ/는 'rider'보다 <span class='kw2'>짧게</span> 발음된다.",ans:true,correct:"정확하다. 2016 A-기입1 출제 각도: flapping 이후에도 모음 길이 차이가 남아 있다. /t/ 앞 모음은 /d/ 앞 모음보다 짧다 — vowel lengthening 규칙.",why:"2016 1차 A-기입1: flapping과 vowel lengthening 환경이 출제 핵심. 영어에서 유성 자음(/d/) 앞 모음이 무성 자음(/t/) 앞 모음보다 길게 실현됩니다(vowel lengthening). flapping 후 [ɾ]로 동일해져도, 모음 길이 차이([aɪ] vs [aɪː])가 남아 'writer'와 'rider'를 구별하는 단서가 됩니다. 출처: 기출맥락_2010_2026.md (2016 A-기입1)",source:"기출맥락_2010_2026.md",compare:[{title:"writer [ˈraɪɾər]",desc:"/t/ 앞 → 짧은 모음 [aɪ]"},{title:"rider [ˈraɪːɾər]",desc:"/d/ 앞 → 긴 모음 [aɪː] (vowel lengthening)"}]}
 ];
 function renderExp(q,isCorrect){
   const three=q.compare&&q.compare.length===3;
