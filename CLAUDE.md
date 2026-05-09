@@ -335,3 +335,16 @@ GitHub: `https://github.com/Namkicheol/testmaster`
 - Elements: IPA symbols, articulation diagram, sound wave
 - Text: English only (e.g. `Ch.1 Stress Rules`, `English Phonology`)
 - Ratio: 16:9 (1280×720)
+
+
+---
+
+## 📋 기출 맥락 참조 (블로그·서브노트·OX 공통)
+
+**`docs/기출맥락_2010_2026.md`** — 2010~2026 전 연도 기출 문항별 핵심 용어·맥락 인덱스 (testmaster에서 동기화).
+
+| 작업 | 참조 방법 |
+|------|----------|
+| **블로그 글 작성** | 연도·문항 확인 → 해당 챕터 개념이 어느 해 어떤 맥락으로 출제됐는지 인용 |
+| **서브노트 개념 정리** (`_study.html`) | 해당 챕터 용어의 출제 연도·문항 번호를 "기출 이력" 란에 표기 |
+| **OX 문제 작성** | 기출 맥락 근거로 실제 출제 각도·선지 함정 설정; 해설에 연도 인용 |
