@@ -1,6 +1,36 @@
 # 임용 음운론 서브노트 마스터
 
-> **Codex 1차 진입 문서**: 이 파일이 현재 레포의 에이전트 지침 원본이다. `CLAUDE.md`는 호환용 포인터이며, 작업 규칙을 확인할 때 `CLAUDE.md`를 먼저 읽지 않는다. Claude에서 넘어온 인수인계는 `docs/codex-handoff.md`를 참고하되, 규칙 충돌 시 이 `AGENTS.md`가 우선한다.
+## Codex 1차 진입 문서
+
+이 파일이 현재 레포의 에이전트 지침 원본이다. Codex는 작업 시작 시 `AGENTS.md`를 먼저 읽고, `CLAUDE.md`를 우선 지침으로 삼지 않는다.
+
+- `CLAUDE.md`: Claude Code 시절의 legacy 참고 문서. 현재는 호환용 포인터이며, 규칙 원본이 아니다.
+- `docs/codex-handoff.md`: Claude에서 Codex로 넘어온 인수인계와 잔여 작업 목록.
+- 규칙 충돌 시 우선순위: `AGENTS.md` → `docs/한글용어.md` / `docs/기출맥락_2010_2026.md` → `docs/codex-handoff.md` → `CLAUDE.md`.
+
+## Codex 작업 흐름
+
+1. 작업 전 `git status --short --branch`로 사용자 변경과 미추적 자료를 확인한다.
+2. 콘텐츠 작업은 `docs/한글용어.md`와 `docs/기출맥락_2010_2026.md`를 먼저 대조한다.
+3. `_study.html` / `*_concepts.html` 생성·anchor 변경 시 testmaster `concept_anchors.json` 연동과 `wire_concept_links.py` 검증을 함께 수행한다.
+4. OX 문항·해설·블로그 본문에서 기출 연도·출제 의도·답안 패턴은 검증된 refs에 있을 때만 쓴다.
+5. 작업 후 변경 파일 diff를 확인하고, 필요한 검증 명령을 실행한 뒤 결과를 요약한다.
+
+## 검증 기준
+
+- 문서/지침 변경: 관련 markdown diff 확인.
+- HTML/CSS 변경: 모바일 우측 잘림 방지(`minmax(0,1fr)`, table scroll, `overflow-wrap`) 확인.
+- 퀴즈 변경: `TOTAL` / `/N문제` / 정답 index / `sounds.js` → `score-popup.js` → 퀴즈 JS 로드 순서 확인.
+- concept_link 변경: testmaster에서 `python3 scripts/wire_concept_links.py` 실행 후 `깨진링크: 0건` 확인.
+- code-review-graph hook이 실행되면 결과를 확인하되, `.code-review-graph/` 산출물은 커밋하지 않는다.
+
+## Git 처리 기준
+
+- 사용자가 "푸쉬", "알아서 올려", "커밋해" 등으로 요청하면 관련 변경만 stage → commit → push까지 처리한다.
+- 사용자가 만들었거나 출처가 불명확한 미추적 refs/자료 폴더는 명시 요청 없이는 stage하지 않는다.
+- push 전 가능하면 `git fetch origin` 후 `HEAD...origin/main` 차이를 확인한다.
+- 커밋 메시지는 변경 목적이 드러나게 짧게 쓴다.
+- destructive 명령(`reset --hard`, `checkout --`, `rm`)은 명시 요청 없이는 실행하지 않는다.
 
 임용고시 대비 **음성학·음운론** OX 퀴즈 + 개념 정리 + 블로그 원서 정리 웹 애플리케이션.
 순수 HTML/CSS/JS (백엔드 없음). **서브노트 개념** — 책 통째 정리가 아니라 기출 분류 구조 중심.
