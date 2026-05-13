@@ -290,6 +290,20 @@ GitHub: `https://github.com/Namkicheol/testmaster`
 
 본 레포 유형: **A형 (음운론 서브노트)** — 블로그 작성 대상.
 
+### 블로그 품질 기준 (englisheducation 수준)
+
+블로그 글은 단순 요약·문항 나열·AI식 일반론으로 끝내지 않는다. `englisheducation` 블로그처럼 **수험생이 바로 복습하고 문제 풀이에 연결할 수 있는 글**이어야 한다.
+
+- 첫 화면에서 다룰 주제와 연결 앱이 바로 보여야 한다. 첫 줄에는 해당 GitHub Pages iframe을 넣고, 도입은 3~5문장 안에서 이 글이 어떤 개념·문항을 정리하는지 말한다.
+- 본문은 `개념 설명 → 임용식 판단 포인트 → 예시/derivation → 함정 정리 → 복습 포인트` 흐름을 기본으로 한다.
+- 개념정리 글은 최소 4개 이상의 소제목을 둔다. 각 소제목 아래에는 짧은 정의만 쓰지 말고 IPA, rule notation, minimal pair, derivation, stress pattern 중 해당 단원에 맞는 구체 예시를 포함한다.
+- OX·Drill 해설 글은 정답표만 만들지 않는다. 각 문항마다 `판단 근거`, `왜 오답이 되는지`, `수험생이 헷갈리는 지점`을 적는다.
+- 기출 맥락은 확인된 경우에만 넣는다. `docs/기출맥락_2010_2026.md`, refs, study page 어디에서도 확인되지 않으면 연도·출제 의도·답안 패턴을 쓰지 않는다.
+- refs 근거가 약한 부분은 글을 부풀리지 않는다. 대신 "시험장에서 이렇게 구분"하는 방식의 실전 판단 기준으로 정리한다.
+- 한글 설명은 자연스럽게 쓰되, 학술 키워드와 개념 용어는 `docs/한글용어.md` 또는 refs에 있는 표현만 쓴다. 없으면 영어 원어로 둔다.
+- 문단은 모바일에서 읽기 쉽게 2~4문장 단위로 끊고, 표는 폭이 넓어지면 마크다운 표 대신 짧은 bullet 묶음으로 바꾼다.
+- 발행 전 글만 따로 읽어보고 "이 글 하나로 해당 앱을 다시 풀 수 있는가?"에 답이 아니면 보강한다.
+
 ### 파일명 규칙 (현행 표준)
 
 `blog/` 폴더에 단원당 4파일 구조로 작성:
@@ -363,8 +377,8 @@ GitHub: `https://github.com/Namkicheol/testmaster`
 | 3순위 | Pollinations.ai | HF 실패 시 fallback — `~/.pollinations_token` |
 
 **Canva style guide (phonetics)**:
-- Background: dark + yellow/golden accent
-- Elements: IPA symbols, articulation diagram, sound wave
+- Background: bright, clean educational look. Avoid dark cinematic thumbnails unless the user explicitly asks.
+- Elements: IPA symbols, articulation diagram, sound wave, clean notebook/classroom motifs
 - Text: English only (e.g. `Ch.1 Stress Rules`, `English Phonology`)
 - Ratio: 16:9 (1280×720)
 
@@ -439,6 +453,8 @@ Codex 실행 원칙:
 
 - 블로그 글은 `blog/` 아래에 작성하고, 첫 줄에 해당 GitHub Pages 앱 iframe을 넣는다.
 - 개념정리 글과 OX 해설 글을 구분한다. 파일명은 기존 `ChNN-Topic.md`, `ChNN-Topic-OX.md` 패턴을 우선 따른다.
+- 글 품질은 `englisheducation` 블로그를 기준으로 한다. 짧은 스텁, 문항 나열, 근거 없는 일반론, refs 없이 만든 기출 추정은 완료로 보지 않는다.
+- 개념정리 글은 `개념 설명 → 임용식 판단 포인트 → 예시/derivation → 함정 정리 → 복습 포인트` 흐름을 기본으로 하고, OX·Drill 글은 문항마다 판단 근거와 오답 함정을 적는다.
 - 블로그 본문에서도 한글 설명은 유지하되, 학술 키워드와 개념 용어는 영어 원어를 기본으로 쓴다. `docs/한글용어.md` 또는 refs에 없는 한국어 번역 조어를 만들지 않는다.
 - 기출 연도, 출제 의도, 답안 패턴은 `docs/기출맥락_2010_2026.md`, refs, 또는 해당 study page에 이미 확인된 경우에만 표기한다. 확인되지 않으면 생략한다.
 - 썸네일은 `blog/thumbnails/`에 저장한다. 로컬 도형 합성으로 급조하지 말고, 사용자가 요구한 경우 ChatGPT/image model 또는 Canva급 결과물을 기준으로 만든다.
