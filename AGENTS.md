@@ -1,10 +1,10 @@
-# 임용 음운론 서브노트 마스터
+# 임용 음운론 서브노트 마스터 — AGENTS.md (Codex)
 
 ## Codex 1차 진입 문서
 
-이 파일이 현재 레포의 에이전트 지침 원본이다. Codex는 작업 시작 시 `AGENTS.md`를 먼저 읽고, `CLAUDE.md`를 우선 지침으로 삼지 않는다.
+Codex는 이 `AGENTS.md`를 진입 문서로 사용한다. Claude Code는 `CLAUDE.md`를 사용한다. 두 파일은 도구 framing만 다르고 섹션·순서·규칙은 동일하다. 새 규칙은 양쪽 모두 갱신한다.
 
-- `CLAUDE.md`: Claude Code 시절의 legacy 참고 문서. 현재는 호환용 포인터이며, 규칙 원본이 아니다.
+- `CLAUDE.md`: Claude Code용 parallel 진입 문서. 같은 규칙·순서를 유지한다.
 - `docs/codex-handoff.md`: Claude에서 Codex로 넘어온 인수인계와 잔여 작업 목록.
 - 규칙 충돌 시 우선순위: `AGENTS.md` → `docs/한글용어.md` / `docs/기출맥락_2010_2026.md` → `docs/codex-handoff.md` → `CLAUDE.md`.
 
