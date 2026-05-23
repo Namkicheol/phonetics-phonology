@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assimilation 개념 정리 — Phonological Rules Study Note</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:repeating-linear-gradient(transparent,transparent 27px,#ddddd0 28px);color:#1a1a1a;min-height:100vh;padding:16px}
+.header-wrap{max-width:820px;margin:0 auto;padding:24px 8px 0}
+.header-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.header-sticker{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;background:#1a3a52;color:#e8f4fb;padding:5px 13px;border-radius:3px;letter-spacing:2px;text-transform:uppercase}
+.header-chapter{font-family:'JetBrains Mono',monospace;font-size:12px;color:#4a6a8a;letter-spacing:.5px}
+.header-title{font-size:clamp(30px,7vw,46px);font-weight:900;color:#1a1a1a;line-height:1.1;margin-bottom:5px;letter-spacing:-1px}
+.title-hl{background:#1a5276;color:#fff;padding:1px 6px}
+.header-script{font-family:'Caveat',cursive;font-size:21px;color:#1a5276;margin-bottom:4px;font-weight:600}
+.header-sub{font-size:13px;color:#555;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#aaa;margin-bottom:10px}
+.header-divider{border:none;border-top:2px dashed #888;margin-bottom:10px}
+.header-tip{font-size:12px;color:#1a3a52;font-family:'JetBrains Mono',monospace;margin-bottom:20px;background:rgba(26,82,118,.06);border:1px solid rgba(26,82,118,.2);border-radius:8px;padding:9px 14px;line-height:1.7}
+.wrap{max-width:820px;margin:0 auto}
+.sec{background:#fff;border:1.5px solid #aed6f1;border-radius:16px;margin-bottom:20px;overflow:clip;box-shadow:0 2px 8px rgba(26,82,118,.08)}
+.sec-header{background:linear-gradient(135deg,rgba(26,82,118,.08),rgba(41,128,185,.05));border-bottom:1.5px solid #aed6f1;padding:16px 22px;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.sec-icon{font-size:20px}
+.sec-title{font-size:16px;font-weight:700;color:#1a3a52;font-family:'JetBrains Mono',monospace}
+.sec-tag{font-size:11px;color:#1a5276;background:rgba(26,82,118,.1);padding:3px 10px;border-radius:6px;margin-left:auto;font-weight:600}
+.sec-tag.red{background:rgba(183,28,28,.12);color:#b71c1c;border:1px solid rgba(183,28,28,.2)}
+.sec-tag.orange{background:rgba(230,119,0,.12);color:#bf6000;border:1px solid rgba(230,119,0,.2)}
+.sec-arrow{font-size:13px;color:#4a6a8a;transition:transform .3s;margin-left:6px}
+.sec.open .sec-arrow{transform:rotate(180deg)}
+.sec-body{display:none;padding:22px}
+.sec.open .sec-body{display:block}
+.concept{margin-bottom:24px}
+.concept:last-child{margin-bottom:0}
+.c-title{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#1a3a52;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.def{background:rgba(26,82,118,.06);border-left:4px solid #1a5276;padding:14px 18px;border-radius:0 10px 10px 0;margin-bottom:12px;font-size:15px;line-height:1.95;color:#1a1a1a}
+.note{font-size:14.5px;color:#2a4a62;line-height:1.85;margin-bottom:8px;padding-left:8px}
+.note::before{content:"• ";color:#2e86c1;font-weight:700}
+.kw1{background:rgba(26,82,118,.15);color:#1a3a52;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(26,82,118,.25)}
+.kw2{color:#1a5276;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border-bottom:2px solid rgba(26,82,118,.45)}
+.kw3{background:rgba(230,119,0,.13);color:#bf6000;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(230,119,0,.3)}
+.kw4{background:rgba(183,28,28,.11);color:#b71c1c;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(183,28,28,.25)}
+.grid{display:grid;gap:10px;margin-top:12px}
+.grid.col2{grid-template-columns:1fr 1fr}
+.grid.col3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:768px){.grid.col3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:580px){.grid.col2,.grid.col3{grid-template-columns:1fr}}
+.grid-item{background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:10px;padding:14px 16px}
+.gi-title{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#1a5276;margin-bottom:8px}
+.gi-body{font-size:13.5px;color:#2a4a62;line-height:1.8}
+.gi-body span{display:block}
+.stage-wrap{margin-top:12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.stage-wrap table{width:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{background:rgba(26,82,118,.1);color:#1a3a52;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;padding:10px 14px;border:1.5px solid #aed6f1;text-align:left;font-weight:700}
+td{padding:10px 14px;border:1.5px solid #aed6f1;color:#2a4a62;vertical-align:top;line-height:1.7}
+tr:nth-child(even) td{background:rgba(26,82,118,.04)}
+.exam{background:rgba(230,119,0,.06);border:1.5px solid rgba(230,119,0,.25);border-radius:10px;padding:14px 18px;margin-top:14px}
+.exam-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#e67c00;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;font-weight:700}
+.exam p{font-size:13.5px;color:#6b4400;line-height:1.8;margin-bottom:5px}
+.div{height:1px;background:rgba(41,128,185,.2);margin:20px 0}
+.toc{max-width:820px;margin:0 auto 20px;background:#fff;border:1.5px solid #aed6f1;border-radius:12px;padding:16px 20px;box-shadow:0 2px 8px rgba(26,82,118,.06)}
+.toc-title{font-size:11px;font-family:'JetBrains Mono',monospace;color:#4a6a8a;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;font-weight:700}
+.toc-list{display:flex;flex-wrap:wrap;gap:7px}
+.toc-item{font-size:12px;color:#1a5276;background:rgba(26,82,118,.08);border:1.5px solid rgba(26,82,118,.2);padding:5px 12px;border-radius:8px;cursor:pointer;transition:all .15s;font-family:'JetBrains Mono',monospace;font-weight:600}
+.toc-item:hover{background:rgba(26,82,118,.18)}
+.legend{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 16px;padding:10px 14px;background:#fff;border:1.5px solid #aed6f1;border-radius:10px;align-items:center}
+.legend-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:#4a6a8a;font-weight:700;margin-right:4px}
+.rule-box{background:rgba(26,82,118,.05);border:2px solid #1a5276;border-radius:10px;padding:16px 20px;margin-top:12px}
+.rule-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#1a5276;font-weight:700;margin-bottom:10px}
+.rule-text{font-size:15px;line-height:2.2;color:#1a2633;font-family:'JetBrains Mono',monospace}
+.caution{background:rgba(183,28,28,.05);border:1.5px solid rgba(183,28,28,.2);border-radius:8px;padding:12px 16px;margin-top:10px;font-size:13.5px;color:#8b0000;line-height:1.8}
+.caution-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;font-weight:700;color:#b71c1c;margin-bottom:6px}
+.ipa-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.ipa-chip{font-family:'JetBrains Mono',monospace;background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:8px;padding:10px 16px;font-size:13.5px;color:#1a2633;line-height:1.6}
+.ipa-chip .w{font-weight:700;color:#1a3a52}
+.ipa-chip .ph{color:#1a5276}
+.ipa-chip .sp{color:#b71c1c;font-weight:700}
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px}
+.flow-item{background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:8px;padding:10px 16px;font-size:13px;color:#1a1a1a;text-align:center;line-height:1.5}
+.flow-arrow{color:#2e86c1;font-size:20px;font-weight:700}
+</style>
+</head>
+<body>
+
+<div class="header-wrap">
+  <div class="header-topbar">
+    <span class="header-sticker">STUDY NOTE</span>
+    <span class="header-chapter">분류 4/5 · Phonological Rules</span>
+  </div>
+  <h1 class="header-title"><span class="title-hl">Assimilation</span> 개념 정리</h1>
+  <div class="header-script">동화 · Phonological Rules Ch.07–09</div>
+  <p class="header-sub">AEP 기반 · 기출 포인트 · Place / Voice / Manner assimilation</p>
+  <hr class="header-divider">
+  <p class="header-tip">📌 목차 버튼 → 해당 섹션으로 이동 &nbsp;·&nbsp; ▼ 섹션 제목 → 열고 닫기</p>
+</div>
+
+<div class="wrap">
+
+<div class="toc">
+  <div class="toc-title">📋 목차</div>
+  <div class="toc-list">
+    <div class="toc-item" onclick="openSec('s1')">① 정의 &amp; 동기</div>
+    <div class="toc-item" onclick="openSec('s2')">② 방향 — Progressive vs Regressive</div>
+    <div class="toc-item" onclick="openSec('s3')">③ 정도 — Total vs Partial</div>
+    <div class="toc-item" onclick="openSec('s4')">④ Place Assimilation</div>
+    <div class="toc-item" onclick="openSec('s5')">⑤ Voice Assimilation</div>
+    <div class="toc-item" onclick="openSec('s6')">⑥ Manner Assimilation</div>
+  </div>
+</div>
+
+<div class="legend">
+  <span class="legend-title">키워드</span>
+  <span><span class="kw4">★★★ 최빈출</span></span>
+  <span><span class="kw3">★★ 빈출</span></span>
+  <span><span class="kw1">★ 기본개념</span></span>
+  <span><span class="kw2">부키워드</span></span>
+</div>
+
+<div class="exam" style="margin-bottom:20px" id="exam-overview">
+  <div class="exam-label">📝 기출분석 포인트 (Assimilation)</div>
+  <p>① <span class="kw4">Place assimilation</span> — /n/ → [m]/[ŋ] 환경 판별 + Regressive 방향 확인 · <strong>2010 Q31, 2017 기입1</strong></p>
+  <p>② <span class="kw4">Voice assimilation</span> — 복수 -s, 과거 -ed의 [s]/[z], [t]/[d] 교체 조건 · <strong>2015 기입1</strong></p>
+  <p>③ <span class="kw3">Manner assimilation</span> — il-/ir- 배분(liquid), vowel nasalization · <strong>2011 Q30, 2020 B-3</strong></p>
+  <p>④ <span class="kw3">iN- prefix</span> — in-/im-/iŋ- 형태 결정 규칙: 뒤 자음의 place에 동화 (regressive)</p>
+</div>
+
+<!-- ① 정의 & 동기 -->
+<div class="sec open" id="s1">
+  <div class="sec-header" onclick="toggleSec('s1')">
+    <span class="sec-icon">🔤</span>
+    <span class="sec-title">① Assimilation 정의 &amp; 동기</span>
+    <span class="sec-tag">★ 기본개념</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept">
+      <div class="c-title">1) 정의</div>
+      <div class="def">
+        <span class="kw1">Assimilation</span>은 인접한 음들이 서로를 닮아 <b>더 유사해지는(become more similar)</b> 음운 현상이다. 동화를 통해 조음 위치·유성성·조음 방법 중 하나 이상의 feature가 공유된다.<br><br>
+        동화가 일어나는 근본 동기는 <span class="kw2">ease of articulation(조음 편의)</span>이다 — 인접 음의 특성을 미리 준비하거나 유지하는 방향으로 조음이 효율화된다.
+      </div>
+      <p class="note">동화는 영어에서 매우 일상적이며, 연음(connected speech)에서 특히 두드러진다.</p>
+      <p class="note"><span class="kw2">Dissimilation</span>은 반대 방향 — 인접 음들이 서로 달라지는 현상. 동화와 반드시 구별할 것.</p>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">2) 분류 체계</div>
+      <div class="grid col3">
+        <div class="grid-item">
+          <div class="gi-title">방향 (Direction)</div>
+          <div class="gi-body">
+            <span>Progressive</span>
+            <span>Regressive</span>
+            <span style="margin-top:6px;font-size:12px;color:#888">앞→뒤 / 뒤→앞</span>
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="gi-title">정도 (Degree)</div>
+          <div class="gi-body">
+            <span>Total (완전 동화)</span>
+            <span>Partial (부분 동화)</span>
+            <span style="margin-top:6px;font-size:12px;color:#888">동일 / 일부 feature 공유</span>
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="gi-title">인접성 (Adjacency)</div>
+          <div class="gi-body">
+            <span>Adjacent (인접 동화)</span>
+            <span>Non-adjacent (비인접)</span>
+            <span style="margin-top:6px;font-size:12px;color:#888">바로 옆 / 건너뛰기</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ② 방향 -->
+<div class="sec" id="s2">
+  <div class="sec-header" onclick="toggleSec('s2')">
+    <span class="sec-icon">↔️</span>
+    <span class="sec-title">② 방향 — Progressive vs Regressive</span>
+    <span class="sec-tag red">★★★ 최빈출</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept">
+      <div class="c-title">핵심 구분</div>
+      <div class="grid col2">
+        <div class="grid-item">
+          <div class="gi-title" style="color:#1e8449">Progressive Assimilation (순행 동화)</div>
+          <div class="gi-body">
+            <span><b>앞 음</b>이 뒤 음에 영향을 줌</span>
+            <span>방향: 조건음 → 피동화음 (앞→뒤)</span>
+            <span style="margin-top:6px">Conditioning sound <b>precedes</b></span>
+            <span>영어에서 <b>상대적으로 드묾</b></span>
+            <span style="margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#1e8449">
+              cats [kæts]: /t/ (voiceless) → -s [s]<br>
+              dogs [dɔɡz]: /ɡ/ (voiced) → -s [z]
+            </span>
+          </div>
+        </div>
+        <div class="grid-item" style="border-color:#1a5276">
+          <div class="gi-title" style="color:#1a5276">Regressive Assimilation (역행 동화)</div>
+          <div class="gi-body">
+            <span><b>뒤 음</b>이 앞 음에 영향을 줌</span>
+            <span>방향: 피동화음 ← 조건음 (뒤→앞)</span>
+            <span style="margin-top:6px">Conditioning sound <b>follows</b></span>
+            <span>영어에서 <b>더 흔함</b></span>
+            <span style="margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a5276">
+              ten boys [tɛm bɔɪz]: /b/ → /n/→[m]<br>
+              in+possible → impossible: /p/ → /n/→[m]
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="caution" style="margin-top:14px">
+        <div class="caution-label">⚠️ 시험장 확인 포인트</div>
+        <b>영어의 Place assimilation은 Regressive.</b> "뒤 자음의 조음 위치가 앞의 /n/을 동화시킨다"는 방향이 핵심 출제 포인트 (2010 Q31 직접 출제). Progressive와 혼동하면 오답.
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">역할 용어 — Trigger vs Target</div>
+      <p class="note"><span class="kw1">Trigger</span> (조건음, conditioning sound): 동화를 유발하는 음</p>
+      <p class="note"><span class="kw1">Target</span> (피동화음, assimilated sound): 동화되는 음</p>
+      <p class="note">Regressive에서: Trigger = 뒤 음, Target = 앞 음</p>
+      <p class="note">Progressive에서: Trigger = 앞 음, Target = 뒤 음</p>
+    </div>
+
+    <div class="exam">
+      <div class="exam-label">📋 기출 이력</div>
+      <p><strong>2010 Q31</strong> — Place assimilation의 방향이 regressive임을 확인하는 문항. /n/ → [m]/[ŋ] 환경에서 trigger(뒤 자음)와 target(앞 /n/) 구별.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ③ 정도 -->
+<div class="sec" id="s3">
+  <div class="sec-header" onclick="toggleSec('s3')">
+    <span class="sec-icon">📊</span>
+    <span class="sec-title">③ 정도 — Total vs Partial + 인접성</span>
+    <span class="sec-tag">★ 기본개념</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept">
+      <div class="c-title">정도(Degree)에 따른 분류</div>
+      <div class="grid col2">
+        <div class="grid-item">
+          <div class="gi-title">Total Assimilation (완전 동화)</div>
+          <div class="gi-body">
+            <span>동화 결과 두 음이 <b>완전히 동일</b>해짐</span>
+            <span>→ gemination (겹자음화)이라고도 함</span>
+            <span style="margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a5276">
+              give me → [ɡɪmmi]<br>
+              let me → [lɛmmi]<br>
+              good boy → [ɡʊbbɔɪ]<br>
+              pet cat → [pɛkkæt]
+            </span>
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="gi-title">Partial Assimilation (부분 동화)</div>
+          <div class="gi-body">
+            <span>인접 음의 <b>일부 feature</b>만 공유</span>
+            <span>→ 동화 실패가 아니라 정상적 결과</span>
+            <span style="margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a5276">
+              ten boys → [tɛm bɔɪz]<br>
+              /n/ → [m]: nasal 유지 + place만 bilabial로 변화<br>
+              (→ 두 음은 여전히 다름: [m] ≠ [b])
+            </span>
+          </div>
+        </div>
+      </div>
+      <p class="note" style="margin-top:12px"><span class="kw2">방향(Progressive/Regressive)</span>과 <span class="kw2">정도(Total/Partial)</span>는 독립적인 분류 차원이다 — 동시에 적용됨.</p>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">인접성(Adjacency)에 따른 분류</div>
+      <p class="note"><span class="kw1">Adjacent assimilation</span>: 조건음과 피동화음이 바로 인접. 성인 영어의 일반적인 형태.</p>
+      <p class="note"><span class="kw1">Non-adjacent assimilation</span>: 사이에 다른 음이 끼어 있는 경우 (consonant harmony). 어린이 발화에서 흔함.</p>
+      <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:13px;background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:8px;padding:12px 16px;color:#1a2633;line-height:2">
+        dog → [ɡɔɡ] &nbsp;(d → g, initial assimilates to final — children)<br>
+        sun → [nʌn] &nbsp;(s → n, initial assimilates to final — children)
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ④ Place Assimilation -->
+<div class="sec" id="s4">
+  <div class="sec-header" onclick="toggleSec('s4')">
+    <span class="sec-icon">📍</span>
+    <span class="sec-title">④ Place Assimilation — 조음 위치 동화</span>
+    <span class="sec-tag red">★★★ 최빈출</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept">
+      <div class="c-title">1) 정의 &amp; 핵심 원리</div>
+      <div class="def">
+        <span class="kw4">Place assimilation</span>: 한 음이 인접 음의 <b>조음 위치(place of articulation) feature</b>를 닮아가는 동화.<br><br>
+        영어에서는 대부분 <span class="kw1">Regressive</span> — 뒤에 오는 자음의 조음 위치가 앞에 오는 음(주로 /n/)을 동화시킨다.
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">2) Nasal Place Assimilation — /n/ 의 세 가지 실현</div>
+      <div class="rule-box">
+        <div class="rule-label">Phonological Rule</div>
+        <div class="rule-text">
+          /n/ → [m] / ___ {bilabial: p, b}<br>
+          /n/ → [ŋ] / ___ {velar: k, g}<br>
+          /n/ → [n] / elsewhere (alveolar 앞 또는 기타 환경)
+        </div>
+      </div>
+      <div class="ipa-row" style="margin-top:14px">
+        <div class="ipa-chip"><span class="w">ten boys</span><br><span class="ph">/n/ → </span><span class="sp">[m]</span><br><span style="font-size:11px;color:#888">/b/ bilabial</span></div>
+        <div class="ipa-chip"><span class="w">ten people</span><br><span class="ph">/n/ → </span><span class="sp">[m]</span><br><span style="font-size:11px;color:#888">/p/ bilabial</span></div>
+        <div class="ipa-chip"><span class="w">ten girls</span><br><span class="ph">/n/ → </span><span class="sp">[ŋ]</span><br><span style="font-size:11px;color:#888">/g/ velar</span></div>
+        <div class="ipa-chip"><span class="w">ten keys</span><br><span class="ph">/n/ → </span><span class="sp">[ŋ]</span><br><span style="font-size:11px;color:#888">/k/ velar</span></div>
+        <div class="ipa-chip"><span class="w">ten cups</span><br><span class="ph">/n/ → </span><span class="sp">[ŋ]</span><br><span style="font-size:11px;color:#888">/k/ velar</span></div>
+      </div>
+      <p class="note" style="margin-top:12px">방향: <b>Regressive</b> — 뒤의 /b,p/ 또는 /g,k/가 앞의 /n/을 동화시킴.</p>
+      <p class="note">정도: <b>Partial</b> — /n/ → [m]: nasal manner 유지 + place만 bilabial로 변화.</p>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">3) iN- prefix — Morphophonemic Rule</div>
+      <div class="def">
+        부정 접두사 <span class="kw4">iN-</span>의 /N/은 뒤에 붙는 어근의 <b>첫 자음의 조음 위치에 동화</b>된다.
+      </div>
+      <div class="stage-wrap">
+        <table>
+          <thead><tr><th>접두사 형태</th><th>환경 (뒤 자음)</th><th>예시</th></tr></thead>
+          <tbody>
+            <tr><td><span class="kw1">im-</span> [ɪm]</td><td>bilabial /p, b, m/ 앞</td><td>impossible, imbalance, immature</td></tr>
+            <tr><td><span class="kw1">in-</span> [ɪn]</td><td>alveolar /t, d, n, s, l/ 앞 (기본형)</td><td>indirect, indirect, intolerant</td></tr>
+            <tr><td><span class="kw1">iŋ-</span> [ɪŋ]</td><td>velar /k, g/ 앞</td><td>inconclusive [ɪŋ-], ingratitude [ɪŋ-]</td></tr>
+            <tr><td><span class="kw1">il-</span> [ɪl]</td><td>/l/ 앞 (Manner assimilation)</td><td>illegal, illogical, illiterate</td></tr>
+            <tr><td><span class="kw1">ir-</span> [ɪɹ]</td><td>/r/ 앞 (Manner assimilation)</td><td>irregular, irrational, irrecoverable</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note" style="margin-top:10px">il-/ir-는 place assimilation이 아니라 <b>manner assimilation</b> (→ 섹션 ⑥ 참조).</p>
+      <div class="caution">
+        <div class="caution-label">⚠️ 주의</div>
+        iN+velar 동화 조건: <b>stress가 걸린 /n/</b> 음절 바로 앞에서만 적용됨 (e.g., <em>inˈconclusive</em>에서 /n/이 강세 받는 위치). 강세 없는 환경에서는 적용 안 될 수 있음.
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">4) Stop 자음 Place Assimilation (문장 경계)</div>
+      <div class="def">
+        단어 경계에서 alveolar stops /t, d/가 뒤에 오는 bilabial 또는 velar stop의 조음 위치에 동화된다.
+      </div>
+      <div class="ipa-row">
+        <div class="ipa-chip"><span class="w">good boy</span><br><span class="ph">/d/→</span><span class="sp">[b]</span><br><span style="font-size:11px;color:#888">[ɡʊbbɔɪ]</span></div>
+        <div class="ipa-chip"><span class="w">night cap</span><br><span class="ph">/t/→</span><span class="sp">[k]</span><br><span style="font-size:11px;color:#888">[naɪkkæp]</span></div>
+        <div class="ipa-chip"><span class="w">white paper</span><br><span class="ph">/t/→</span><span class="sp">[p]</span><br><span style="font-size:11px;color:#888">[waɪppɛɪpɚ]</span></div>
+        <div class="ipa-chip"><span class="w">red badge</span><br><span class="ph">/d/→</span><span class="sp">[b]</span><br><span style="font-size:11px;color:#888">[rɛbbædʒ]</span></div>
+      </div>
+      <p class="note" style="margin-top:10px">voicing은 유지된 채 place만 바뀜 → <b>partial assimilation</b>.</p>
+    </div>
+
+    <div class="exam">
+      <div class="exam-label">📋 기출 이력</div>
+      <p><strong>2010 Q31</strong> — 조음 위치 동화 규칙 적용: /n/의 place assimilation 방향(regressive) 판별.</p>
+      <p><strong>2017 기입1</strong> — nasal assimilation 규칙 환경 파악: in+possible → impossible. /n/ → [m] / __ [p] (bilabial).</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ⑤ Voice Assimilation -->
+<div class="sec" id="s5">
+  <div class="sec-header" onclick="toggleSec('s5')">
+    <span class="sec-icon">🔊</span>
+    <span class="sec-title">⑤ Voice (Laryngeal) Assimilation — 유성성 동화</span>
+    <span class="sec-tag orange">★★ 빈출</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept">
+      <div class="c-title">1) 정의</div>
+      <div class="def">
+        <span class="kw3">Voice assimilation</span> (= Laryngeal assimilation): 한 음이 인접 음의 <b>유성성(voicing) feature</b>를 닮아가는 동화.<br><br>
+        영어에서 대부분 <span class="kw2">Progressive</span> — 앞에 오는 자음의 유성성이 뒤의 굴절 형태소에 영향을 미침.
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">2) 복수 형태소 -s: [s] / [z] / [əz]</div>
+      <div class="rule-box">
+        <div class="rule-label">Rule — Progressive Voice Assimilation</div>
+        <div class="rule-text">
+          -s → [s]  / voiceless segment ___  (무성음 뒤)<br>
+          -s → [z]  / voiced segment ___     (유성음 뒤)<br>
+          -s → [əz] / sibilant ___           (sibilant 뒤 — schwa insertion)
+        </div>
+      </div>
+      <div class="ipa-row" style="margin-top:12px">
+        <div class="ipa-chip"><span class="w">cats</span> <span class="sp">[s]</span><br><span style="font-size:11px;color:#888">/t/ voiceless</span></div>
+        <div class="ipa-chip"><span class="w">taps</span> <span class="sp">[s]</span><br><span style="font-size:11px;color:#888">/p/ voiceless</span></div>
+        <div class="ipa-chip"><span class="w">dogs</span> <span class="sp">[z]</span><br><span style="font-size:11px;color:#888">/g/ voiced</span></div>
+        <div class="ipa-chip"><span class="w">cabs</span> <span class="sp">[z]</span><br><span style="font-size:11px;color:#888">/b/ voiced</span></div>
+        <div class="ipa-chip"><span class="w">buses</span> <span class="sp">[əz]</span><br><span style="font-size:11px;color:#888">/s/ sibilant</span></div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">3) 과거 형태소 -ed: [t] / [d] / [əd]</div>
+      <div class="rule-box">
+        <div class="rule-label">Rule — Progressive Voice Assimilation</div>
+        <div class="rule-text">
+          -ed → [t]  / voiceless segment ___  (무성음 뒤)<br>
+          -ed → [d]  / voiced segment ___     (유성음 뒤)<br>
+          -ed → [əd] / alveolar stop /t,d/ ___ (alveolar stop 뒤)
+        </div>
+      </div>
+      <div class="ipa-row" style="margin-top:12px">
+        <div class="ipa-chip"><span class="w">walked</span> <span class="sp">[t]</span><br><span style="font-size:11px;color:#888">/k/ voiceless</span></div>
+        <div class="ipa-chip"><span class="w">pushed</span> <span class="sp">[t]</span><br><span style="font-size:11px;color:#888">/ʃ/ voiceless</span></div>
+        <div class="ipa-chip"><span class="w">robbed</span> <span class="sp">[d]</span><br><span style="font-size:11px;color:#888">/b/ voiced</span></div>
+        <div class="ipa-chip"><span class="w">seemed</span> <span class="sp">[d]</span><br><span style="font-size:11px;color:#888">/m/ voiced</span></div>
+        <div class="ipa-chip"><span class="w">tested</span> <span class="sp">[əd]</span><br><span style="font-size:11px;color:#888">/t/ alveolar</span></div>
+        <div class="ipa-chip"><span class="w">blended</span> <span class="sp">[əd]</span><br><span style="font-size:11px;color:#888">/d/ alveolar</span></div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">4) 어휘 내 Voice Assimilation — have to / has to / used to</div>
+      <p class="note">어휘 내에서도 유성성 동화 적용: 뒤에 오는 /t/(voiceless)가 앞 음을 무성화.</p>
+      <div class="ipa-row">
+        <div class="ipa-chip"><span class="w">have to</span><br><span class="ph">/v/ → </span><span class="sp">[f]</span> before /t/<br><span style="font-size:11px;color:#888">[hæftə]</span></div>
+        <div class="ipa-chip"><span class="w">has to</span><br><span class="ph">/z/ → </span><span class="sp">[s]</span> before /t/<br><span style="font-size:11px;color:#888">[hæstə]</span></div>
+        <div class="ipa-chip"><span class="w">used to</span><br><span class="ph">/zd/ → </span><span class="sp">[st]</span><br><span style="font-size:11px;color:#888">[juːstə]</span></div>
+      </div>
+      <p class="note" style="margin-top:10px">이 경우는 <b>Regressive</b> voice assimilation — 뒤의 /t/(voiceless)가 앞 음을 무성화.</p>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">5) Sonorant Devoicing</div>
+      <p class="note">초성 자리의 sonorant(/l, r, w, j/)는 어두 무성 stop (/p, t, k/) 뒤에서 <b>부분 무성화</b>된다 (progressive voice assimilation).</p>
+      <div class="ipa-row">
+        <div class="ipa-chip"><span class="w">play</span> <span class="sp">[pl̥eɪ]</span></div>
+        <div class="ipa-chip"><span class="w">try</span> <span class="sp">[tɹ̥ɑɪ]</span></div>
+        <div class="ipa-chip"><span class="w">twin</span> <span class="sp">[tw̥ɪn]</span></div>
+      </div>
+    </div>
+
+    <div class="exam">
+      <div class="exam-label">📋 기출 이력</div>
+      <p><strong>2015 기입1</strong> — 유성음화 동화 규칙 적용: 복수 -s, 과거 -ed의 [s]/[z], [t]/[d] 교체 조건 판별.</p>
+      <p><strong>2011 Q30</strong> — 음운 규칙과 동화 현상: voice assimilation 포함 전반 음운 규칙 적용.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ⑥ Manner Assimilation -->
+<div class="sec" id="s6">
+  <div class="sec-header" onclick="toggleSec('s6')">
+    <span class="sec-icon">🌊</span>
+    <span class="sec-title">⑥ Manner Assimilation — 조음 방법 동화</span>
+    <span class="sec-tag orange">★★ 빈출</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept">
+      <div class="c-title">1) 정의</div>
+      <div class="def">
+        <span class="kw3">Manner assimilation</span>: 한 음이 인접 음의 <b>조음 방법(manner of articulation) feature</b>를 닮아가는 동화.
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">2) Vowel Nasalization (모음 비음화)</div>
+      <p class="note">모음이 뒤에 오는 비음 /m, n, ŋ/ 앞에서 <b>비음화</b>된다 — manner(nasal) feature가 모음에 전파.</p>
+      <p class="note">방향: <b>Regressive</b> — 뒤의 nasal이 앞 모음에 영향.</p>
+      <div class="ipa-row">
+        <div class="ipa-chip"><span class="w">band</span> [bæ̃nd]<br><span style="font-size:11px;color:#888">/æ/ → [æ̃] before /n/</span></div>
+        <div class="ipa-chip"><span class="w">farm</span> [fɑ̃ːrm]<br><span style="font-size:11px;color:#888">/ɑ/ → [ɑ̃] before /m/</span></div>
+        <div class="ipa-chip"><span class="w">can</span> [kæ̃n]<br><span style="font-size:11px;color:#888">/æ/ → [æ̃] before /n/</span></div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">3) Liquid Manner Assimilation — iN- prefix il- / ir-</div>
+      <div class="def">
+        부정 접두사 iN-에서 /N/이 어근 첫 자음이 liquid(/l/ 또는 /r/)일 때 <b>해당 liquid에 동화</b>된다.
+      </div>
+      <div class="rule-box">
+        <div class="rule-label">Rule</div>
+        <div class="rule-text">
+          /N/ → [l] / ___ [l]  →  il-: illegal, illogical, illiterate<br>
+          /N/ → [r] / ___ [r]  →  ir-: irregular, irrational, irrecoverable
+        </div>
+      </div>
+      <div class="flow" style="margin-top:14px">
+        <div class="flow-item">/in + legal/</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-item">/n/ → [l] (liquid assimilation)</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-item">[ɪlliːɡəl]</div>
+      </div>
+      <div class="flow">
+        <div class="flow-item">/in + regular/</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-item">/n/ → [r] (liquid assimilation)</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-item">[ɪrreɡjələr]</div>
+      </div>
+      <p class="note" style="margin-top:10px">이것은 place가 아니라 <b>manner</b> 동화 — /n/(nasal stop) → [l]/[r](liquid)으로 조음 방법 자체가 바뀜.</p>
+      <div class="caution">
+        <div class="caution-label">⚠️ 구별 포인트</div>
+        <b>im-/iŋ-는 Place assimilation (조음 위치)</b>, <b>il-/ir-는 Manner assimilation (조음 방법)</b>. 같은 iN- prefix에서 서로 다른 동화 유형이 작동한다.
+      </div>
+
+      <div class="exam" style="margin-top:14px">
+        <div class="exam-label">📋 기출 이력</div>
+        <p><strong>2020 B-3</strong> — il-/ir- 분포 조건: 어근의 첫 자음이 /l/이면 il-, /r/이면 ir- 선택. Liquid manner assimilation 원리 적용.</p>
+        <p><strong>2011 Q30</strong> — 음운 규칙과 동화 현상 전반 (liquid assimilation 포함).</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+function toggleSec(id){
+  const s=document.getElementById(id);
+  s.classList.toggle('open');
+}
+function openSec(id){
+  const s=document.getElementById(id);
+  s.classList.add('open');
+  s.scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</body>
+</html>
