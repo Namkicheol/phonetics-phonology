@@ -1,14 +1,13 @@
-# 임용 음운론 서브노트 마스터 — AGENTS.md (Codex)
+# 임용 음운론 서브노트 마스터
 
-## Codex 1차 진입 문서
+> 이 파일이 canonical 작업 지침이다. `CLAUDE.md`(Claude Code)와 `AGENTS.md`(Codex)는 같은 파일이다(symlink). Claude Code·Codex 공통.
 
-Codex는 이 `AGENTS.md`를 진입 문서로 사용한다. Claude Code는 `CLAUDE.md`를 사용한다. 두 파일은 도구 framing만 다르고 섹션·순서·규칙은 동일하다. 새 규칙은 양쪽 모두 갱신한다.
+## 1차 진입 문서
 
-- `CLAUDE.md`: Claude Code용 parallel 진입 문서. 같은 규칙·순서를 유지한다.
-- `docs/codex-handoff.md`: Claude에서 Codex로 넘어온 인수인계와 잔여 작업 목록.
-- 규칙 충돌 시 우선순위: `AGENTS.md` → `docs/한글용어.md` / `docs/기출맥락_2010_2026.md` → `docs/codex-handoff.md` → `CLAUDE.md`.
+- `docs/codex-handoff.md`: 인수인계와 잔여 작업 목록.
+- 규칙 충돌 시 우선순위: 이 파일(`AGENTS.md` / `CLAUDE.md`) → `docs/한글용어.md` / `docs/기출맥락_2010_2026.md` → `docs/codex-handoff.md`.
 
-## Codex 작업 흐름
+## 작업 흐름
 
 1. 작업 전 `git status --short --branch`로 사용자 변경과 미추적 자료를 확인한다.
 2. 콘텐츠 작업은 `docs/한글용어.md`와 `docs/기출맥락_2010_2026.md`를 먼저 대조한다.
@@ -31,6 +30,8 @@ Codex는 이 `AGENTS.md`를 진입 문서로 사용한다. Claude Code는 `CLAUD
 - push 전 가능하면 `git fetch origin` 후 `HEAD...origin/main` 차이를 확인한다.
 - 커밋 메시지는 변경 목적이 드러나게 짧게 쓴다.
 - destructive 명령(`reset --hard`, `checkout --`, `rm`)은 명시 요청 없이는 실행하지 않는다.
+- 브랜치 prefix는 사용하는 도구 관례를 따른다 (Claude Code `claude/`, Codex `codex/`).
+- 커밋 트레일러(`Co-Authored-By: Claude…`)는 도구 기본 동작을 따르되 강제하지 않는다. Codex 커밋에는 넣지 않는다.
 
 임용고시 대비 **음성학·음운론** OX 퀴즈 + 개념 정리 + 블로그 원서 정리 웹 애플리케이션.
 순수 HTML/CSS/JS (백엔드 없음). **서브노트 개념** — 책 통째 정리가 아니라 기출 분류 구조 중심.
@@ -44,7 +45,7 @@ Codex는 이 `AGENTS.md`를 진입 문서로 사용한다. Claude Code는 `CLAUD
 
 `_study.html` 개념 본문 / OX 퀴즈 `why` / 규칙 페이지 / 블로그 본문 등 **한글이 등장하는 모든 텍스트**에서 학술 키워드는 영어 원어로 통일한다(예: `장자음` → `geminate`, `관상 자음` → `coronal consonant`, `의무대조원리` → `Obligatory Contour Principle (OCP)`). 한글 설명 블록 자체는 유지. distinctive feature는 항상 `[+coronal]` 등 영어 표준 표기.
 
-> 상세 매핑표·예시·위반 트리거는 **`docs/한글용어.md`** 참조. 정책 원본은 Codex 전역 지침의 "임용 관련 작업: 한국어 용어 규칙" 및 testmaster `docs/한글용어.md`.
+> 상세 매핑표·예시·위반 트리거는 **`docs/한글용어.md`** 참조. 정책 원본은 전역 지침(`~/.claude/CLAUDE.md` / `~/.codex/AGENTS.md`)의 "임용 관련 작업: 한국어 용어 규칙" 및 testmaster `docs/한글용어.md`.
 
 ---
 
@@ -73,7 +74,7 @@ Codex는 이 `AGENTS.md`를 진입 문서로 사용한다. Claude Code는 `CLAUD
    ```
 4. 출력에서 `깨진링크: 0건` 확인. 깨졌으면 anchor 이름 수정.
 
-### 트리거 (Codex 자동 실행)
+### 트리거 (자동 실행)
 
 다음 상황에서 별도 지시 없이 위 절차를 실행한다:
 - 새 `_study.html` / `*_concepts.html` 챕터 생성/완성 직후
@@ -114,7 +115,7 @@ GitHub: `https://github.com/Namkicheol/testmaster`
 | (허브) | — | `phonetics.html` (전체 인덱스) |
 | 강세 | `stress.html` (개념 OX) / `stress_practice.html` / `stress_practice2.html` / `stress_exercises.html` | `stress_study.html` / `stress_concepts.html` |
 | Aspiration | `aspiration_ox.html` / `aspiration_exercises.html` | (예정) |
-| Assimilation | `assimilation_ox.html` / `assimilation_exercises.html` | (예정) |
+| Assimilation | `assimilation_ox.html` / `assimilation_exercises.html` | `assimilation_study.html` |
 | Flapping | `flapping_ox.html` / `flapping_exercises.html` | (예정) |
 | Schwa | `schwa_ox.html` / `schwa_exercises.html` | (예정) |
 | Nasalization | `nasalization_ox.html` | (예정) |
@@ -372,7 +373,7 @@ GitHub: `https://github.com/Namkicheol/testmaster`
 
 | 순위 | 방법 | 비고 |
 |------|------|------|
-| 1순위 | **Canva** (권장) | 텍스트·레이아웃 품질 최고. 사용자가 직접 제작 후 저장 |
+| 1순위 | **Canva / Pencil** (권장) | 텍스트·레이아웃 품질 최고. 사용자가 직접 제작 후 저장 |
 | 2순위 | HuggingFace Flux | `~/scripts/gen_thumb.py --style phonetics` |
 | 3순위 | Pollinations.ai | HF 실패 시 fallback — `~/.pollinations_token` |
 
@@ -397,13 +398,13 @@ GitHub: `https://github.com/Namkicheol/testmaster`
 
 ---
 
-## 🤖 신규 페이지 작성 시 Codex 보조 작업 규칙
+## 🤖 신규 페이지 작성 시 보조 작업 규칙
 
 `_study.html` 또는 OX 파일을 **신규 작성하거나 대폭 수정**할 때 아래 검증 작업을 반드시 함께 수행한다.
 
-Codex 실행 원칙:
-- 사용자가 명시적으로 "백그라운드 에이전트", "subagent", "병렬 에이전트"를 요청한 경우에만 Codex subagent를 띄운다.
-- 사용자가 요청하지 않은 경우에는 메인 Codex가 같은 검증을 직접 수행한다.
+실행 원칙:
+- 사용자가 명시적으로 "백그라운드 에이전트", "subagent", "병렬 에이전트"를 요청한 경우에만 subagent를 띄운다.
+- 사용자가 요청하지 않은 경우에는 메인 세션에서 같은 검증을 직접 수행한다.
 - 보조 에이전트를 쓰더라도 `git add` / commit / push는 사용자가 별도 요청했을 때만 수행한다.
 - 기출 이력과 기출 각도는 `docs/기출맥락_2010_2026.md`에서 확인된 항목만 반영한다. 매칭 0건이면 생략한다.
 
@@ -440,7 +441,7 @@ Codex 실행 원칙:
 3. `TOTAL` 변수 및 `/N문제` 표시 업데이트
 4. 변경 후 해당 파일만 diff로 검토
 
-### Codex subagent 호출 예시
+### subagent 호출 예시
 
 사용자가 명시적으로 병렬 에이전트를 요청한 경우에만:
 ```
@@ -457,7 +458,7 @@ Codex 실행 원칙:
 - 개념정리 글은 `개념 설명 → 임용식 판단 포인트 → 예시/derivation → 함정 정리 → 복습 포인트` 흐름을 기본으로 하고, OX·Drill 글은 문항마다 판단 근거와 오답 함정을 적는다.
 - 블로그 본문에서도 한글 설명은 유지하되, 학술 키워드와 개념 용어는 영어 원어를 기본으로 쓴다. `docs/한글용어.md` 또는 refs에 없는 한국어 번역 조어를 만들지 않는다.
 - 기출 연도, 출제 의도, 답안 패턴은 `docs/기출맥락_2010_2026.md`, refs, 또는 해당 study page에 이미 확인된 경우에만 표기한다. 확인되지 않으면 생략한다.
-- 썸네일은 `blog/thumbnails/`에 저장한다. 로컬 도형 합성으로 급조하지 말고, 사용자가 요구한 경우 ChatGPT/image model 또는 Canva급 결과물을 기준으로 만든다.
+- 썸네일은 `blog/thumbnails/`에 저장한다. 로컬 도형 합성으로 급조하지 말고, 사용자가 요구한 경우 Canva / Pencil / image model급 결과물을 기준으로 만든다.
 - 썸네일 파일은 16:9 비율, 기본 `1280x720` PNG를 우선 사용한다. 개념정리와 OX 썸네일은 한눈에 구분되게 한다.
 - 작업 완료 전 블로그 파일 대상으로 금지/주의 용어 검색, iframe URL 확인, `git diff --check`를 실행한다.
 - 커밋할 때는 이번 블로그 작업 파일과 썸네일만 선별 stage한다. 기존 dirty/untracked 자료는 명시 요청 없이는 포함하지 않는다.
