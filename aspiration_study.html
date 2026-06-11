@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aspiration 개념 정리 — Phonological Rules Study Note</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:repeating-linear-gradient(transparent,transparent 27px,#ddddd0 28px);color:#1a1a1a;min-height:100vh;padding:16px}
+.header-wrap{max-width:820px;margin:0 auto;padding:24px 8px 0}
+.header-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.header-sticker{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;background:#1a3a52;color:#e8f4fb;padding:5px 13px;border-radius:3px;letter-spacing:2px;text-transform:uppercase}
+.header-chapter{font-family:'JetBrains Mono',monospace;font-size:12px;color:#4a6a8a;letter-spacing:.5px}
+.header-title{font-size:clamp(30px,7vw,46px);font-weight:900;color:#1a1a1a;line-height:1.1;margin-bottom:5px;letter-spacing:-1px}
+.title-hl{background:#1a5276;color:#fff;padding:1px 6px}
+.header-script{font-family:'Caveat',cursive;font-size:21px;color:#1a5276;margin-bottom:4px;font-weight:600}
+.header-sub{font-size:13px;color:#555;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#aaa;margin-bottom:10px}
+.header-divider{border:none;border-top:2px dashed #888;margin-bottom:10px}
+.header-tip{font-size:12px;color:#1a3a52;font-family:'JetBrains Mono',monospace;margin-bottom:20px;background:rgba(26,82,118,.06);border:1px solid rgba(26,82,118,.2);border-radius:8px;padding:9px 14px;line-height:1.7}
+.wrap{max-width:820px;margin:0 auto}
+.sec{background:#fff;border:1.5px solid #aed6f1;border-radius:16px;margin-bottom:20px;overflow:clip;box-shadow:0 2px 8px rgba(26,82,118,.08)}
+.sec-header{background:linear-gradient(135deg,rgba(26,82,118,.08),rgba(41,128,185,.05));border-bottom:1.5px solid #aed6f1;padding:16px 22px;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.sec-icon{font-size:20px}
+.sec-title{font-size:16px;font-weight:700;color:#1a3a52;font-family:'JetBrains Mono',monospace}
+.sec-tag{font-size:11px;color:#1a5276;background:rgba(26,82,118,.1);padding:3px 10px;border-radius:6px;margin-left:auto;font-weight:600}
+.sec-tag.red{background:rgba(183,28,28,.12);color:#b71c1c;border:1px solid rgba(183,28,28,.2)}
+.sec-tag.orange{background:rgba(230,119,0,.12);color:#bf6000;border:1px solid rgba(230,119,0,.2)}
+.sec-arrow{font-size:13px;color:#4a6a8a;transition:transform .3s;margin-left:6px}
+.sec.open .sec-arrow{transform:rotate(180deg)}
+.sec-body{display:none;padding:22px}
+.sec.open .sec-body{display:block}
+.concept{margin-bottom:24px}
+.concept:last-child{margin-bottom:0}
+.c-title{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#1a3a52;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.def{background:rgba(26,82,118,.06);border-left:4px solid #1a5276;padding:14px 18px;border-radius:0 10px 10px 0;margin-bottom:12px;font-size:15px;line-height:1.95;color:#1a1a1a}
+.note{font-size:14.5px;color:#2a4a62;line-height:1.85;margin-bottom:8px;padding-left:8px}
+.note::before{content:"• ";color:#2e86c1;font-weight:700}
+.kw1{background:rgba(26,82,118,.15);color:#1a3a52;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(26,82,118,.25)}
+.kw2{color:#1a5276;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border-bottom:2px solid rgba(26,82,118,.45)}
+.kw3{background:rgba(230,119,0,.13);color:#bf6000;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(230,119,0,.3)}
+.kw4{background:rgba(183,28,28,.11);color:#b71c1c;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(183,28,28,.25)}
+.grid{display:grid;gap:10px;margin-top:12px}
+.grid.col2{grid-template-columns:1fr 1fr}
+.grid.col3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:768px){.grid.col3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:580px){.grid.col2,.grid.col3{grid-template-columns:1fr}}
+.grid-item{background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:10px;padding:14px 16px}
+.gi-title{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#1a5276;margin-bottom:8px}
+.gi-body{font-size:13.5px;color:#2a4a62;line-height:1.8}
+.gi-body span{display:block}
+.stage-wrap{margin-top:12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.stage-wrap table{width:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{background:rgba(26,82,118,.1);color:#1a3a52;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;padding:10px 14px;border:1.5px solid #aed6f1;text-align:left;font-weight:700}
+td{padding:10px 14px;border:1.5px solid #aed6f1;color:#2a4a62;vertical-align:top;line-height:1.7}
+tr:nth-child(even) td{background:rgba(26,82,118,.04)}
+.exam{background:rgba(230,119,0,.06);border:1.5px solid rgba(230,119,0,.25);border-radius:10px;padding:14px 18px;margin-top:14px}
+.exam-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#e67c00;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;font-weight:700}
+.exam p{font-size:13.5px;color:#6b4400;line-height:1.8;margin-bottom:5px}
+.div{height:1px;background:rgba(41,128,185,.2);margin:20px 0}
+.toc{max-width:820px;margin:0 auto 20px;background:#fff;border:1.5px solid #aed6f1;border-radius:12px;padding:16px 20px;box-shadow:0 2px 8px rgba(26,82,118,.06)}
+.toc-title{font-size:11px;font-family:'JetBrains Mono',monospace;color:#4a6a8a;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;font-weight:700}
+.toc-list{display:flex;flex-wrap:wrap;gap:7px}
+.toc-item{font-size:12px;color:#1a5276;background:rgba(26,82,118,.08);border:1.5px solid rgba(26,82,118,.2);padding:5px 12px;border-radius:8px;cursor:pointer;transition:all .15s;font-family:'JetBrains Mono',monospace;font-weight:600}
+.toc-item:hover{background:rgba(26,82,118,.18)}
+.legend{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 16px;padding:10px 14px;background:#fff;border:1.5px solid #aed6f1;border-radius:10px;align-items:center}
+.legend-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:#4a6a8a;font-weight:700;margin-right:4px}
+.rule-box{background:rgba(26,82,118,.05);border:2px solid #1a5276;border-radius:10px;padding:16px 20px;margin-top:12px}
+.rule-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#1a5276;font-weight:700;margin-bottom:10px}
+.rule-text{font-size:15px;line-height:2.2;color:#1a2633;font-family:'JetBrains Mono',monospace}
+.caution{background:rgba(183,28,28,.05);border:1.5px solid rgba(183,28,28,.2);border-radius:8px;padding:12px 16px;margin-top:10px;font-size:13.5px;color:#8b0000;line-height:1.8}
+.caution-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;font-weight:700;color:#b71c1c;margin-bottom:6px}
+.ipa-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.ipa-chip{font-family:'JetBrains Mono',monospace;background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:8px;padding:10px 16px;font-size:13.5px;color:#1a2633;line-height:1.6}
+.ipa-chip .w{font-weight:700;color:#1a3a52}
+.ipa-chip .ph{color:#1a5276}
+.ipa-chip .sp{color:#b71c1c;font-weight:700}
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px}
+.flow-item{background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:8px;padding:10px 16px;font-size:13px;color:#1a1a1a;text-align:center;line-height:1.5}
+.flow-arrow{color:#2e86c1;font-size:20px;font-weight:700}
+</style>
+</head>
+<body>
+
+<div class="header-wrap">
+  <div class="header-topbar">
+    <span class="header-sticker">STUDY NOTE</span>
+    <span class="header-chapter">분류 4/5 · Phonological Rules</span>
+  </div>
+  <h1 class="header-title"><span class="title-hl">Aspiration</span> 개념 정리</h1>
+  <div class="header-script">기식 · Phonological Rules Ch.02</div>
+  <p class="header-sub">AEP 기반 · 기출 포인트 · VOT / allophone / /s/ cluster / foot-initial</p>
+  <hr class="header-divider">
+  <p class="header-tip">📌 목차 버튼 → 해당 섹션으로 이동 &nbsp;·&nbsp; ▼ 섹션 제목 → 열고 닫기</p>
+</div>
+
+<div class="wrap">
+
+<div class="toc">
+  <div class="toc-title">📋 목차</div>
+  <div class="toc-list">
+    <div class="toc-item" onclick="openSec('s1')">① 정의 &amp; Rule</div>
+    <div class="toc-item" onclick="openSec('s2')">② VOT — 3원 구분</div>
+    <div class="toc-item" onclick="openSec('s3')">③ 적용 환경 — foot-initial</div>
+    <div class="toc-item" onclick="openSec('s4')">④ /s/ cluster — 억제</div>
+    <div class="toc-item" onclick="openSec('s5')">⑤ Allophone vs Phoneme</div>
+    <div class="toc-item" onclick="openSec('s6')">⑥ 약기식·함정·기출</div>
+  </div>
+</div>
+
+<div class="legend">
+  <span class="legend-title">키워드</span>
+  <span><span class="kw4">★★★ 최빈출</span></span>
+  <span><span class="kw3">★★ 빈출</span></span>
+  <span><span class="kw1">★ 기본개념</span></span>
+  <span><span class="kw2">부키워드</span></span>
+</div>
+
+<div class="exam" style="margin-bottom:20px" id="exam-overview">
+  <div class="exam-label">📝 기출분석 포인트 (Aspiration)</div>
+  <p>① <span class="kw4">voiceless stop aspiration</span> — /p, t, k/가 강세 음절 onset(foot-initial position)에서 [pʰ, tʰ, kʰ]로 실현 · <strong>2022 A-6</strong></p>
+  <p>② <span class="kw3">foot-initial position</span> — trochaic foot의 첫 음절 onset이 곧 aspiration 환경임을 연결 · <strong>2022 A-6</strong> (disentangle [tʰ], accountability [kʰ])</p>
+  <p>③ <span class="kw1">/s/ cluster blocking</span> — spy / sty / sky에서 aspiration 억제 (pin vs spin)</p>
+  <p>④ <span class="kw1">allophone</span> — 영어에서 [pʰ]/[p]는 음소 /p/의 변이음(complementary distribution), 한국어는 phonemic</p>
+</div>
+
+<!-- ① 정의 & Rule -->
+<div class="sec open" id="s1">
+  <div class="sec-header" onclick="toggleSec('s1')">
+    <span class="sec-icon">🌬️</span>
+    <span class="sec-title">① Aspiration 정의 &amp; Rule</span>
+    <span class="sec-tag">★ 기본개념</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept" id="aspiration">
+      <div class="c-title">1) 정의</div>
+      <div class="def">
+        <span class="kw1">Aspiration</span>은 무성 폐쇄음 /p, t, k/가 조음 개방(release) 직후에 짧은 기식(숨 터짐)을 동반해 <b>[pʰ, tʰ, kʰ]</b>로 실현되는 현상이다.<br><br>
+        규칙으로 기술하면: <b>a voiceless noncontinuant has [+aspirated] added to its feature matrix at the beginning of a syllable when followed by a stressed vowel</b> (with an optional intervening consonant).
+      </div>
+      <p class="note">즉 음절 onset 자리 + 강세모음 앞이라는 두 조건이 충족될 때 적용된다.</p>
+      <p class="note">중간에 자음이 끼어도(optional intervening consonant) 적용: <span class="kw2">creep [kʰrip]</span>에서 /k/와 강세모음 사이에 /r/이 있어도 /k/는 기식음화된다.</p>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">2) Rule 표기</div>
+      <div class="rule-box">
+        <div class="rule-label">Aspiration Rule</div>
+        <div class="rule-text">
+          /p, t, k/ → [pʰ, tʰ, kʰ] / σ[ ___ (C) V́<br>
+          <span style="font-size:12px;color:#4a6a8a">( 음절초 + (선택적 개재 자음) + 강세모음 앞 )</span>
+        </div>
+      </div>
+      <div class="ipa-row" style="margin-top:14px">
+        <div class="ipa-chip"><span class="w">pit</span> <span class="sp">[pʰɪt]</span></div>
+        <div class="ipa-chip"><span class="w">pill</span> <span class="sp">[pʰɪl]</span></div>
+        <div class="ipa-chip"><span class="w">repeat</span> <span class="sp">[rɪpʰit]</span></div>
+        <div class="ipa-chip"><span class="w">apart</span> <span class="sp">[əpʰaɹt]</span></div>
+        <div class="ipa-chip"><span class="w">creep</span> <span class="sp">[kʰrip]</span></div>
+        <div class="ipa-chip"><span class="w">clip</span> <span class="sp">[kʰlɪp]</span></div>
+      </div>
+      <p class="note" style="margin-top:10px">Aspiration은 음소 대립을 만들지 않고 환경으로 예측되는 <b>nondistinctive feature</b>를 더하는 규칙이다.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ② VOT -->
+<div class="sec" id="s2">
+  <div class="sec-header" onclick="toggleSec('s2')">
+    <span class="sec-icon">📈</span>
+    <span class="sec-title">② VOT — 폐쇄음 3원 구분</span>
+    <span class="sec-tag orange">★★ 빈출</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept">
+      <div class="c-title">1) Voice Onset Time</div>
+      <div class="def">
+        <span class="kw1">VOT (Voice Onset Time)</span>: 폐쇄음의 개방(release) 시점과 뒤따르는 성대 진동(voicing) 시작 시점 사이의 시간 간격.<br><br>
+        이 간격(lag)이 약 <b>30 ms</b>를 넘으면 long lag = <span class="kw4">aspirated</span>, 짧거나 개방과 동시면 short lag = <span class="kw1">unaspirated</span>로 구분된다.
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">2) VOT continuum — 세 유형</div>
+      <div class="grid col3">
+        <div class="grid-item">
+          <div class="gi-title">Voiced</div>
+          <div class="gi-body">
+            <span>voice lead (negative VOT)</span>
+            <span>폐쇄 구간 내내 성대 진동</span>
+            <span style="margin-top:6px;font-size:12px;color:#888">Romance /b, d, ɡ/</span>
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="gi-title">Voiceless unaspirated</div>
+          <div class="gi-body">
+            <span>VOT ≈ 0 (short lag)</span>
+            <span>개방과 거의 동시에 voicing</span>
+            <span style="margin-top:6px;font-size:12px;color:#888">/s/ 뒤 영어 stop · Romance 무성음</span>
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="gi-title">Voiceless aspirated</div>
+          <div class="gi-body">
+            <span>VOT &gt; 30 ms (long lag)</span>
+            <span>개방 후 기식 뒤 voicing</span>
+            <span style="margin-top:6px;font-size:12px;color:#888">영어 어두 강세 /p, t, k/</span>
+          </div>
+        </div>
+      </div>
+      <p class="note" style="margin-top:12px">기식 정도는 언어마다 다르다 — 영어는 약하게 기식되는 편이고, Mandarin·Thai·Scots Gaelic 등은 강하게 기식된다.</p>
+      <div class="caution">
+        <div class="caution-label">⚠️ 표기 포인트</div>
+        Aspiration diacritic은 상첨자 <b>[ʰ]</b>이며, 기식음화된 자음 <b>뒤</b>에 붙인다: [pʰ], [tʰ], [kʰ]. 자음 앞([ʰp])에 두면 오류.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ③ 적용 환경 -->
+<div class="sec" id="s3">
+  <div class="sec-header" onclick="toggleSec('s3')">
+    <span class="sec-icon">📍</span>
+    <span class="sec-title">③ 적용 환경 — 강세 음절 onset / foot-initial</span>
+    <span class="sec-tag red">★★★ 최빈출</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept" id="aspiration-environment">
+      <div class="c-title">1) word-initial에 국한되지 않음</div>
+      <div class="def">
+        Aspiration은 단어의 첫머리뿐 아니라 <b>강세 음절의 onset</b>이면 단어 내부에서도 일어난다.
+      </div>
+      <div class="ipa-row">
+        <div class="ipa-chip"><span class="w">pay</span> <span class="sp">[pʰeɪ]</span></div>
+        <div class="ipa-chip"><span class="w">take</span> <span class="sp">[tʰeɪk]</span></div>
+        <div class="ipa-chip"><span class="w">apart</span> <span class="sp">[əˈpʰaɹt]</span></div>
+        <div class="ipa-chip"><span class="w">attack</span> <span class="sp">[əˈtʰæk]</span></div>
+        <div class="ipa-chip"><span class="w">occur</span> <span class="sp">[əˈkʰɝ]</span></div>
+      </div>
+      <p class="note" style="margin-top:10px">apart·attack·occur의 /p, t, k/는 단어 첫소리가 아니지만 <b>강세 음절의 onset</b>이므로 기식음화된다.</p>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">2) foot-initial position (2022 A-6)</div>
+      <div class="def">
+        강세 음절의 onset은 운율 단위로 보면 <span class="kw4">foot-initial position</span>에 해당한다. <span class="kw2">trochaic foot</span>(강−약)의 첫 음절 onset에서 무성 폐쇄음이 기식음화된다.
+      </div>
+      <div class="flow">
+        <div class="flow-item">disentangle<br>[ˌdɪsənˈtʰæŋɡəl]</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-item">/t/ = 강세 음절 [tæŋ]의 onset<br>(foot-initial)</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-item"><span style="color:#b71c1c;font-weight:700">[tʰ]</span></div>
+      </div>
+      <div class="flow">
+        <div class="flow-item">accountability<br>[əˌkaʊntəˈbɪlɪti]</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-item">/k/ = 강세 음절 [kaʊn]의 onset<br>(foot-initial)</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-item"><span style="color:#b71c1c;font-weight:700">[kʰ]</span></div>
+      </div>
+      <div class="exam">
+        <div class="exam-label">📋 기출 이력</div>
+        <p><strong>2022 A-6</strong> — voiceless stop aspiration이 foot-initial position에서 일어남을 분석. disentangle의 /t/, accountability의 /k/가 강세 음절 onset(foot-initial)이라 기식음화됨.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ④ /s/ cluster -->
+<div class="sec" id="s4">
+  <div class="sec-header" onclick="toggleSec('s4')">
+    <span class="sec-icon">🚫</span>
+    <span class="sec-title">④ /s/ cluster — Aspiration 억제</span>
+    <span class="sec-tag red">★★★ 최빈출</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept" id="aspiration-scluster">
+      <div class="c-title">1) /s/ 뒤에서는 기식이 막힌다</div>
+      <div class="def">
+        강세모음 앞 음절초라도 무성 폐쇄음이 <span class="kw4">/s/ 뒤</span>에 오면 aspiration이 <b>억제(blocking)</b>되어 unaspirated [p, t, k]로 실현된다.
+      </div>
+      <div class="grid col3">
+        <div class="grid-item">
+          <div class="gi-title">/p/ — pin vs spin</div>
+          <div class="gi-body">
+            <span>pin <span style="color:#b71c1c">[pʰɪn]</span></span>
+            <span>spin <span style="color:#1a5276">[spɪn]</span></span>
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="gi-title">/t/ — top vs stop</div>
+          <div class="gi-body">
+            <span>top <span style="color:#b71c1c">[tʰɑp]</span></span>
+            <span>stop <span style="color:#1a5276">[stɑp]</span></span>
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="gi-title">/k/ — cool vs school</div>
+          <div class="gi-body">
+            <span>cool <span style="color:#b71c1c">[kʰul]</span></span>
+            <span>school <span style="color:#1a5276">[skul]</span></span>
+          </div>
+        </div>
+      </div>
+      <p class="note" style="margin-top:12px">간단한 확인법: 입 앞에 종이를 대고 발음하면 pin에서는 종이가 흔들리지만 spin에서는 거의 움직이지 않는다.</p>
+      <div class="caution">
+        <div class="caution-label">⚠️ 시험장 확인 포인트</div>
+        spy / sty / sky 같은 /s/+stop도 같은 원리로 모두 unaspirated. "강세모음 앞이니 무조건 기식"이 아니라 <b>/s/ 뒤 예외</b>를 반드시 함께 본다.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ⑤ Allophone vs Phoneme -->
+<div class="sec" id="s5">
+  <div class="sec-header" onclick="toggleSec('s5')">
+    <span class="sec-icon">🔁</span>
+    <span class="sec-title">⑤ Allophone vs Phoneme — 영어 vs 한국어</span>
+    <span class="sec-tag orange">★★ 빈출</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept" id="aspiration-allophone">
+      <div class="c-title">1) 영어 — complementary distribution</div>
+      <div class="def">
+        영어에서 [pʰ]와 [p]는 별개 음소가 아니라 같은 음소 <span class="kw1">/p/</span>의 <span class="kw2">allophone</span>이다. 두 음은 서로 겹치지 않는 환경에 나타나 <b>complementary distribution</b>을 이룬다.
+      </div>
+      <div class="grid col2">
+        <div class="grid-item">
+          <div class="gi-title">[pʰ] — aspirated</div>
+          <div class="gi-body">
+            <span>강세 음절 onset</span>
+            <span>pin, top, cool</span>
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="gi-title">[p] — unaspirated</div>
+          <div class="gi-body">
+            <span>/s/ 뒤 · coda · 비강세</span>
+            <span>spin, stop, school</span>
+          </div>
+        </div>
+      </div>
+      <p class="note" style="margin-top:10px">두 음의 분포가 환경으로 예측되므로 의미를 구별하지 못한다 → 음소 대립 없음(allophonic rule).</p>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">2) 한국어 — phonemic</div>
+      <div class="def">
+        한국어에서는 기식 유무가 <b>의미를 구별</b>한다. /ㅂ/[p](lax)·/ㅍ/[pʰ](aspirated)·/ㅃ/[p'](tense)이 모두 별개 음소다.
+      </div>
+      <div class="ipa-row">
+        <div class="ipa-chip"><span class="w">불</span> [pul]</div>
+        <div class="ipa-chip"><span class="w">풀</span> [pʰul]</div>
+        <div class="ipa-chip"><span class="w">뿔</span> [p'ul]</div>
+      </div>
+      <p class="note" style="margin-top:10px">'불 / 풀 / 뿔'은 기식·긴장만으로 뜻이 갈리는 minimal set → 한국어에서 aspiration은 phonemic.</p>
+      <div class="caution">
+        <div class="caution-label">⚠️ 대조 포인트</div>
+        같은 [pʰ]/[p] 차이가 <b>영어에서는 allophonic</b>, <b>한국어에서는 phonemic</b>. 음소 지위는 음 자체가 아니라 그 언어의 분포·대립으로 결정된다.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ⑥ 약기식·함정·기출 -->
+<div class="sec" id="s6">
+  <div class="sec-header" onclick="toggleSec('s6')">
+    <span class="sec-icon">🧭</span>
+    <span class="sec-title">⑥ 약기식 위치 · 함정 정리</span>
+    <span class="sec-tag">★ 기본개념</span>
+    <span class="sec-arrow">▼</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="concept">
+      <div class="c-title">1) 약기식(weak aspiration)·비기식 위치</div>
+      <p class="note">무성 폐쇄음은 다음 위치에서 약하게 기식되거나 기식되지 않는다.</p>
+      <div class="stage-wrap">
+        <table>
+          <thead><tr><th>위치</th><th>실현</th><th>예시</th></tr></thead>
+          <tbody>
+            <tr><td>비강세 음절 onset</td><td>약기식 / 비기식</td><td>polite [pəˈlaɪt], vacuum [ˈvækjum]</td></tr>
+            <tr><td>syllabic consonant 앞</td><td>약기식</td><td>pickle [ˈpɪkl̩]</td></tr>
+            <tr><td>coda (음절말)</td><td>비기식 / 불파</td><td>top의 /p/, bake [beɪk̚]</td></tr>
+            <tr><td>/s/ 뒤</td><td>비기식</td><td>spin, stop, school</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note" style="margin-top:10px">aspiration은 <b>강세모음 앞 음절 onset</b>에서 가장 강하고, 위 환경에서는 약화·억제된다.</p>
+    </div>
+
+    <div class="div"></div>
+
+    <div class="concept">
+      <div class="c-title">2) 함정 정리</div>
+      <div class="caution">
+        <div class="caution-label">⚠️ TRAP 1 — /s/ 뒤</div>
+        "강세모음 앞이면 무조건 기식"이 아니다. <b>/s/ 뒤(spin, stop, school)</b>는 unaspirated.
+      </div>
+      <div class="caution">
+        <div class="caution-label">⚠️ TRAP 2 — coda</div>
+        음절말 /p, t, k/(top의 /p/)는 기식되지 않는다. aspiration은 <b>onset 전용</b>.
+      </div>
+      <div class="caution">
+        <div class="caution-label">⚠️ TRAP 3 — 음소 지위 혼동</div>
+        영어 [pʰ]/[p] = allophone(complementary distribution), 한국어 /ㅂ//ㅍ/ = phoneme. 언어별로 다르다.
+      </div>
+      <div class="caution">
+        <div class="caution-label">⚠️ TRAP 4 — 비강세 onset</div>
+        강세 음절 onset이라야 강한 기식. 비강세 음절 onset은 약기식. (foot-initial = 강세 음절 onset)
+      </div>
+    </div>
+
+    <div class="exam">
+      <div class="exam-label">📋 기출 이력</div>
+      <p><strong>2022 A-6</strong> — voiceless stop aspiration · foot-initial position · trochaic foot. disentangle [tʰ], accountability [kʰ]가 foot-initial onset이라 기식음화됨.</p>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+function toggleSec(id){
+  const s=document.getElementById(id);
+  s.classList.toggle('open');
+}
+function openSec(id){
+  const s=document.getElementById(id);
+  s.classList.add('open');
+  s.scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</body>
+</html>
