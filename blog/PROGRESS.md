@@ -10,7 +10,7 @@
 |---|---|---|
 | **Ch.1 Stress** | ✅ 완성 | ✅ 발행 — 개념 /76, OX /77, 드릴1 /78, 드릴2 /79 |
 | **Ch.2 Aspiration** | ❌ **미작성** (OX/드릴 스텁 ~900byte만) | ❌ 미발행 |
-| **Ch.3 Noun-Verb Stress** | ✅ 완성 (개념정리 Ch03-Noun-Verb-Stress.md) | ✅ 발행 — /143 (2026-06-14, setContent plain·iframe/표 O). ⚠️ /142 빈 글(md-editor 실패) 앱 수동삭제 필요 |
+| **Ch.3 Noun-Verb Stress** | ✅ 완성 (개념정리 Ch03-Noun-Verb-Stress.md) | ✅ 발행 — /143 (2026-06-14, setContent plain·iframe/표 O). /142 빈 글(md-editor 실패)은 삭제 완료 |
 | **Ch.4 Suffix Stress** | ✅ 완성 | ✅ 발행 — 개념 /106, OX /104, 드릴 /107 |
 | **Ch.5 Compound Stress** | ✅ 완성 | ✅ 발행 — 개념 /108, OX /105, 드릴 /109 |
 | **Ch.6 Sentence Stress** | ❌ **미작성** (OX 스텁만) | ❌ 미발행 |
