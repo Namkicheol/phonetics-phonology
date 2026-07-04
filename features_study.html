@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Distinctive Features & Natural Class 개념 정리</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Segoe UI",sans-serif;background:#f5f4ee;color:#1b2530;line-height:1.85;padding:18px}
+.wrap{max-width:960px;margin:0 auto}.hero{background:#123d5a;color:#fff;border-radius:22px;padding:42px 30px;margin-bottom:22px;box-shadow:0 12px 30px rgba(18,61,90,.18)}
+.hero .kicker{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:2px;color:#b9d7ea;text-transform:uppercase;margin-bottom:8px}h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin-bottom:12px;letter-spacing:-.04em}.hero p{color:#eaf3fa;max-width:780px;font-size:15px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:18px 0}.card{background:#fff;border:1px solid #cfe0eb;border-radius:16px;padding:18px}.card h3{color:#123d5a;font-size:17px;margin-bottom:8px}.tagrow{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.tag{font-family:"JetBrains Mono",monospace;font-size:12px;background:#eaf3fa;color:#123d5a;border:1px solid #cfe0eb;border-radius:999px;padding:4px 9px}
+.section{background:#fff;border:1px solid #cfe0eb;border-radius:18px;padding:24px;margin:16px 0}.section h2{font-size:22px;color:#123d5a;margin-bottom:10px}.section h2:before{content:"#";color:#4b8bb5;margin-right:8px}.note{border-left:5px solid #4b8bb5;background:#eef7fc;padding:14px 16px;border-radius:0 12px 12px 0;margin:14px 0}.warn{border-left-color:#b94a48;background:#fff3f1}.ok{border-left-color:#2f855a;background:#effaf4}.kw{font-family:"JetBrains Mono",monospace;font-weight:700;color:#0f4f76;background:#edf7ff;border-radius:5px;padding:1px 5px}.ex{font-family:"JetBrains Mono",monospace;background:#f6f8fa;border:1px solid #dde7ef;border-radius:10px;padding:12px;margin:10px 0;overflow-x:auto}.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}.exam{background:#fffaf0;border:1px solid #ead7a8;border-radius:14px;padding:14px 16px;margin-top:12px}.exam b{color:#8a5a00}.footer{color:#667;text-align:center;font-size:12px;margin:30px 0}a{color:#0f6090}.return{display:none;position:fixed;right:18px;bottom:18px;background:#123d5a;color:#fff;text-decoration:none;border-radius:999px;padding:10px 14px;box-shadow:0 8px 24px rgba(18,61,90,.25);font-size:13px;font-weight:700}@media(max-width:560px){body{padding:10px}.hero{padding:30px 20px}.section{padding:18px}.return{left:12px;right:12px;text-align:center}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">임용 음운론 · Exam Wiki</div>
+    <h1>Distinctive Features & Natural Class</h1>
+    <p>전공기출에서 feature 값, natural class, /j/-dropping 환경을 판별할 때 쓰는 최소 기준을 정리한다.</p>
+    <div class="tagrow"><span class="tag">distinctive feature</span><span class="tag">natural class</span><span class="tag">[−sonorant]</span><span class="tag">coronal</span><span class="tag">anterior</span><span class="tag">Yod-dropping</span></div>
+  </div>
+
+  <div class="grid">
+    <a class="card" href="phonetics.html"><h3>Phonetics Hub</h3><p>전체 음성음운론 단원으로 돌아간다.</p></a>
+    <a class="card" href="aspiration_study.html"><h3>Aspiration</h3><p>feature가 실제 rule environment에 들어가는 예시를 함께 확인한다.</p></a>
+    <a class="card" href="assimilation_study.html"><h3>Assimilation</h3><p>feature sharing과 natural class 판별을 동화 단원과 연결한다.</p></a>
+  </div>
+
+  <section class="section" id="distinctive-feature">
+    <h2>Distinctive Feature 판별</h2>
+    <p><span class="kw">distinctive feature</span>는 segment를 더 작은 대비 단위로 나누어 natural class를 찾게 해 준다. 답안에서는 feature name과 feature value를 함께 써야 하는지 먼저 확인한다.</p>
+    <div class="ex">[+sonorant] / [−sonorant] · [+anterior] / [−anterior] · [+continuant] / [−continuant]</div>
+    <div class="note">발문이 “feature value must be specified”라고 하면 <span class="kw">[−sonorant]</span>처럼 값까지 포함해야 한다.</div>
+    <div class="exam"><b>기출 연결</b> · 2023 A-2: verb-forming suffix -en의 결합 조건을 [−sonorant]로 판별.</div>
+  </section>
+
+  <section class="section" id="sonorant-obstruent">
+    <h2>[−sonorant]와 Obstruent</h2>
+    <p><span class="kw">obstruent</span>는 일반적으로 <span class="kw">[−sonorant]</span>로 묶인다. stop, fricative, affricate가 여기에 들어가며, natural class를 묻는 문제에서 자주 쓰인다.</p>
+    <div class="two"><div class="note ok">가능 패턴: stem-final obstruent + -en</div><div class="note warn">차단 패턴: stem-final vowel / nasal / liquid + -en</div></div>
+    <div class="exam"><b>기출 연결</b> · 2018 A-5: sonorant vs obstruent 구분. · 2023 A-2: [−sonorant] 답안.</div>
+  </section>
+
+  <section class="section" id="yod-dropping">
+    <h2>Yod-dropping과 anterior</h2>
+    <p><span class="kw">Yod-dropping</span>은 /j/가 특정 segment 뒤에서 사라지는 분포를 feature로 일반화하는 유형이다. 최신 기출에서는 <span class="kw">coronal</span> 내부를 다시 <span class="kw">anterior</span> 값으로 가르는 방식이 핵심이었다.</p>
+    <div class="ex">[−anterior] vs [+anterior] · /j/-dropping · cluster environment</div>
+    <div class="note">답안 순서: 데이터 분포 → feature 표 대조 → [±anterior] 값 확정 → cluster 환경 일반화.</div>
+    <div class="exam"><b>기출 연결</b> · 2026 A-6: coronal, anterior, Yod-dropping.</div>
+  </section>
+
+  <section class="section" id="place-feature">
+    <h2>Place Feature와 Phonotactics</h2>
+    <p><span class="kw">coronal</span>, <span class="kw">labial</span>, <span class="kw">dorsal</span> 같은 place feature는 cluster 허용 여부를 설명할 때 쓰인다. 예시의 허용/불허 목록을 natural class별로 재배열하는 것이 먼저다.</p>
+    <div class="ex">coronal obstruent + /r/ 가능 · coronal obstruent + /l/ 차단</div>
+    <div class="exam"><b>기출 연결</b> · 2022 A-4: coronal 환경에서 liquid contrast neutralization.</div>
+  </section>
+
+  <div class="footer">phonetics-phonology · distinctive features exam wiki</div>
+</div>
+<a id="testmaster-return-btn" class="return" href="#">전공기출 문제로 돌아가기</a>
+<script>
+(function(){
+  const rid = new URLSearchParams(location.search).get('rid');
+  if(!rid) return;
+  const btn = document.getElementById('testmaster-return-btn');
+  btn.href = 'https://namkicheol.github.io/testmaster/index.html?id=' + encodeURIComponent(rid);
+  btn.style.display = 'block';
+})();
+</script>
+<script src="sounds.js"></script>
+<script src="score-popup.js"></script>
+</body>
+</html>

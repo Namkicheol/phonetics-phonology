@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Syllable, Sonority & Phonotactics 개념 정리</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Segoe UI",sans-serif;background:#f5f4ee;color:#1b2530;line-height:1.85;padding:18px}.wrap{max-width:960px;margin:0 auto}.hero{background:#123d5a;color:#fff;border-radius:22px;padding:42px 30px;margin-bottom:22px;box-shadow:0 12px 30px rgba(18,61,90,.18)}.hero .kicker{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:2px;color:#b9d7ea;text-transform:uppercase;margin-bottom:8px}h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin-bottom:12px;letter-spacing:-.04em}.hero p{color:#eaf3fa;max-width:780px;font-size:15px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:18px 0}.card{background:#fff;border:1px solid #cfe0eb;border-radius:16px;padding:18px}.card h3{color:#123d5a;font-size:17px;margin-bottom:8px}.tagrow{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.tag{font-family:"JetBrains Mono",monospace;font-size:12px;background:#eaf3fa;color:#123d5a;border:1px solid #cfe0eb;border-radius:999px;padding:4px 9px}.section{background:#fff;border:1px solid #cfe0eb;border-radius:18px;padding:24px;margin:16px 0}.section h2{font-size:22px;color:#123d5a;margin-bottom:10px}.section h2:before{content:"#";color:#4b8bb5;margin-right:8px}.note{border-left:5px solid #4b8bb5;background:#eef7fc;padding:14px 16px;border-radius:0 12px 12px 0;margin:14px 0}.warn{border-left-color:#b94a48;background:#fff3f1}.ok{border-left-color:#2f855a;background:#effaf4}.kw{font-family:"JetBrains Mono",monospace;font-weight:700;color:#0f4f76;background:#edf7ff;border-radius:5px;padding:1px 5px}.ex{font-family:"JetBrains Mono",monospace;background:#f6f8fa;border:1px solid #dde7ef;border-radius:10px;padding:12px;margin:10px 0;overflow-x:auto}.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}.exam{background:#fffaf0;border:1px solid #ead7a8;border-radius:14px;padding:14px 16px;margin-top:12px}.exam b{color:#8a5a00}.footer{color:#667;text-align:center;font-size:12px;margin:30px 0}a{color:#0f6090}.return{display:none;position:fixed;right:18px;bottom:18px;background:#123d5a;color:#fff;text-decoration:none;border-radius:999px;padding:10px 14px;box-shadow:0 8px 24px rgba(18,61,90,.25);font-size:13px;font-weight:700}@media(max-width:560px){body{padding:10px}.hero{padding:30px 20px}.section{padding:18px}.return{left:12px;right:12px;text-align:center}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">임용 음운론 · Exam Wiki</div>
+    <h1>Syllable, Sonority & Phonotactics</h1>
+    <p>syllable structure, sonority sequencing, affricate, geminate/OCP를 기출 답안 단위로 정리한다.</p>
+    <div class="tagrow"><span class="tag">syllable</span><span class="tag">rhyme</span><span class="tag">onset cluster</span><span class="tag">sonority</span><span class="tag">affricate</span><span class="tag">geminate</span></div>
+  </div>
+
+  <div class="grid">
+    <a class="card" href="stress_study.html#s1"><h3>Syllable Weight</h3><p>heavy/light syllable과 rhyme 구조는 stress 문제와 연결된다.</p></a>
+    <a class="card" href="schwa_study.html#syllabic"><h3>Syllabic Consonant</h3><p>unstressed syllable과 syllabic consonant를 함께 확인한다.</p></a>
+    <a class="card" href="features_study.html"><h3>Distinctive Features</h3><p>natural class 판별과 feature 값 문제로 이동한다.</p></a>
+  </div>
+
+  <section class="section" id="syllable-structure">
+    <h2>Syllable Structure</h2>
+    <p><span class="kw">syllable</span>은 onset과 rhyme으로 나누고, rhyme은 nucleus와 coda로 다시 나눈다. 답안에서는 어느 위치가 문제의 contrast를 설명하는지 표시한다.</p>
+    <div class="ex">syllable → onset + rhyme · rhyme → nucleus + coda</div>
+    <div class="exam"><b>기출 연결</b> · 2014 A-11: rhyme, nucleus, coda, syllable.</div>
+  </section>
+
+  <section class="section" id="sonority">
+    <h2>Sonority Sequencing Principle</h2>
+    <p><span class="kw">Sonority Sequencing Principle</span>은 onset cluster가 nucleus를 향해 sonority가 상승해야 한다는 일반화다. 무의미 단어 평점 문제에서는 cluster 내부 순서를 비교한다.</p>
+    <div class="two"><div class="note ok">가능성 높음: stop/fricative → liquid</div><div class="note warn">가능성 낮음: nasal/liquid → obstruent</div></div>
+    <div class="exam"><b>기출 연결</b> · 2023 A-6: sonority, sonority hierarchy, phonotactics, onset cluster.</div>
+  </section>
+
+  <section class="section" id="affricate">
+    <h2>Affricate와 Resyllabification</h2>
+    <p><span class="kw">affricate</span>는 두 기호로 적혀도 하나의 segment처럼 행동한다. 그래서 consonant cluster와 달리 resyllabification에서 분리되지 않는다.</p>
+    <div class="ex">match [tʃ] · badge [dʒ] · affricate ≠ two-consonant cluster</div>
+    <div class="exam"><b>기출 연결</b> · 2020 A-4: affricate, resyllabification, syllable boundary.</div>
+  </section>
+
+  <section class="section" id="geminate-ocp">
+    <h2>Geminate와 OCP</h2>
+    <p><span class="kw">geminate</span>는 긴 자음처럼 실현되는 인접 동일 consonant다. 영어에서는 monomorphemic word 내부의 geminate가 제한되지만, morpheme boundary에서는 만들어질 수 있다.</p>
+    <div class="ex">belly *[bɛlːi] · milkcrate [mɪlkːɹeɪt] · unknown [ʌnːoʊn]</div>
+    <div class="note">OCP를 쓸 때도 한글 번역 조어를 만들지 말고 <span class="kw">Obligatory Contour Principle (OCP)</span>로 쓴다.</div>
+    <div class="exam"><b>기출 연결</b> · 2026 A-4: Geminate, OCP.</div>
+  </section>
+
+  <section class="section" id="glide-insertion">
+    <h2>Glide Insertion</h2>
+    <p><span class="kw">glide insertion</span>은 vowel hiatus를 피하기 위해 /j/ 또는 /w/가 들어가는 유형이다. 앞 모음의 high/front 또는 high/back 성질을 보고 /j/와 /w/를 나눈다.</p>
+    <div class="ex">high front vowel → /j/ · high back vowel → /w/ · intervocalic position</div>
+    <div class="exam"><b>기출 연결</b> · 2018 B-1: glide insertion, high vowel.</div>
+  </section>
+
+  <div class="footer">phonetics-phonology · syllable and phonotactics exam wiki</div>
+</div>
+<a id="testmaster-return-btn" class="return" href="#">전공기출 문제로 돌아가기</a>
+<script>
+(function(){
+  const rid = new URLSearchParams(location.search).get('rid');
+  if(!rid) return;
+  const btn = document.getElementById('testmaster-return-btn');
+  btn.href = 'https://namkicheol.github.io/testmaster/index.html?id=' + encodeURIComponent(rid);
+  btn.style.display = 'block';
+})();
+</script>
+<script src="sounds.js"></script>
+<script src="score-popup.js"></script>
+</body>
+</html>
