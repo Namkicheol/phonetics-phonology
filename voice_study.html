@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voice Assimilation 개념 정리</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Segoe UI",sans-serif;background:#f5f4ee;color:#1b2530;line-height:1.85;padding:18px}
+.wrap{max-width:920px;margin:0 auto}
+.hero{background:#123d5a;color:#fff;border-radius:22px;padding:42px 30px;margin-bottom:22px;box-shadow:0 12px 30px rgba(18,61,90,.18)}
+.hero .kicker{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:2px;color:#b9d7ea;text-transform:uppercase;margin-bottom:8px}
+h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin-bottom:12px;letter-spacing:-.04em}
+.hero p{color:#eaf3fa;max-width:760px;font-size:15px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:18px 0}.card{background:#fff;border:1px solid #cfe0eb;border-radius:16px;padding:18px}.card h3{color:#123d5a;font-size:17px;margin-bottom:8px}.tagrow{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.tag{font-family:"JetBrains Mono",monospace;font-size:12px;background:#eaf3fa;color:#123d5a;border:1px solid #cfe0eb;border-radius:999px;padding:4px 9px}.section{background:#fff;border:1px solid #cfe0eb;border-radius:18px;padding:24px;margin:16px 0}.section h2{font-size:22px;color:#123d5a;margin-bottom:10px}.section h2:before{content:"#";color:#4b8bb5;margin-right:8px}.note{border-left:5px solid #4b8bb5;background:#eef7fc;padding:14px 16px;border-radius:0 12px 12px 0;margin:14px 0}.warn{border-left-color:#b94a48;background:#fff3f1}.ok{border-left-color:#2f855a;background:#effaf4}.kw{font-family:"JetBrains Mono",monospace;font-weight:700;color:#0f4f76;background:#edf7ff;border-radius:5px;padding:1px 5px}.ex{font-family:"JetBrains Mono",monospace;background:#f6f8fa;border:1px solid #dde7ef;border-radius:10px;padding:12px;margin:10px 0;overflow-x:auto}.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}.miniq{border-top:1px dashed #cbd8e1;margin-top:14px;padding-top:14px}.miniq b{color:#123d5a}.footer{color:#667;text-align:center;font-size:12px;margin:30px 0}a{color:#0f6090}@media(max-width:560px){body{padding:10px}.hero{padding:30px 20px}.section{padding:18px}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">임용 음운론 · Study Note</div>
+    <h1>Voice Assimilation 개념 정리</h1>
+    <p>plural -s와 past -ed allomorphy를 voice assimilation 관점에서 정리한다.</p>
+    <div class="tagrow"><span class="tag">voice assimilation</span><span class="tag">plural -s</span><span class="tag">past -ed</span><span class="tag">sibilant</span></div>
+  </div>
+  <div class="grid"><a class="card" href="voice_ox.html"><h3>OX Quiz</h3><p>핵심 판별 문항을 바로 풀면서 rule environment를 확인한다.</p></a></div>
+  <section class="section" id="plural"><h2>Plural -s</h2>
+<p>plural -s는 stem-final segment의 voice와 sibilant 여부에 따라 /s, z, ɪz/로 실현된다.</p><div class="ex">cat+s → /kæts/<br>dog+s → /dɔgz/<br>bus+es → /ˈbʌsɪz/</div>
+</section><section class="section" id="past"><h2>Past -ed</h2>
+<p>past -ed는 stem-final segment에 따라 /t, d, ɪd/로 실현된다.</p><div class="ex">walk+ed → /wɔkt/<br>play+ed → /pleɪd/<br>want+ed → /ˈwɑntɪd/</div>
+</section><section class="section" id="diagnosis"><h2>판별 순서</h2>
+<ol><li>stem 마지막 sound가 sibilant인지 확인한다.</li><li>그렇지 않으면 voiced/voiceless를 확인한다.</li><li>/t,d/ 뒤 past -ed는 /ɪd/로 처리한다.</li></ol><div class="miniq"><b>Mini Check</b> dogs의 -s는? → /z/</div>
+</section>
+  <div class="footer">phonetics-phonology · 임용 음운론 학습 페이지</div>
+</div>
+<script src="sounds.js"></script>
+<script src="score-popup.js"></script>
+</body>
+</html>

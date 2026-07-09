@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vowel Reduction & Schwa 개념 정리</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Segoe UI",sans-serif;background:#f5f4ee;color:#1b2530;line-height:1.85;padding:18px}
+.wrap{max-width:920px;margin:0 auto}
+.hero{background:#123d5a;color:#fff;border-radius:22px;padding:42px 30px;margin-bottom:22px;box-shadow:0 12px 30px rgba(18,61,90,.18)}
+.hero .kicker{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:2px;color:#b9d7ea;text-transform:uppercase;margin-bottom:8px}
+h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin-bottom:12px;letter-spacing:-.04em}
+.hero p{color:#eaf3fa;max-width:760px;font-size:15px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:18px 0}.card{background:#fff;border:1px solid #cfe0eb;border-radius:16px;padding:18px}.card h3{color:#123d5a;font-size:17px;margin-bottom:8px}.tagrow{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.tag{font-family:"JetBrains Mono",monospace;font-size:12px;background:#eaf3fa;color:#123d5a;border:1px solid #cfe0eb;border-radius:999px;padding:4px 9px}.section{background:#fff;border:1px solid #cfe0eb;border-radius:18px;padding:24px;margin:16px 0}.section h2{font-size:22px;color:#123d5a;margin-bottom:10px}.section h2:before{content:"#";color:#4b8bb5;margin-right:8px}.note{border-left:5px solid #4b8bb5;background:#eef7fc;padding:14px 16px;border-radius:0 12px 12px 0;margin:14px 0}.warn{border-left-color:#b94a48;background:#fff3f1}.ok{border-left-color:#2f855a;background:#effaf4}.kw{font-family:"JetBrains Mono",monospace;font-weight:700;color:#0f4f76;background:#edf7ff;border-radius:5px;padding:1px 5px}.ex{font-family:"JetBrains Mono",monospace;background:#f6f8fa;border:1px solid #dde7ef;border-radius:10px;padding:12px;margin:10px 0;overflow-x:auto}.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}.miniq{border-top:1px dashed #cbd8e1;margin-top:14px;padding-top:14px}.miniq b{color:#123d5a}.footer{color:#667;text-align:center;font-size:12px;margin:30px 0}a{color:#0f6090}@media(max-width:560px){body{padding:10px}.hero{padding:30px 20px}.section{padding:18px}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">임용 음운론 · Study Note</div>
+    <h1>Vowel Reduction & Schwa 개념 정리</h1>
+    <p>unstressed syllable에서 full vowel이 /ə/로 약화되는 패턴과 schwa의 분포를 정리한다.</p>
+    <div class="tagrow"><span class="tag">schwa /ə/</span><span class="tag">vowel reduction</span><span class="tag">unstressed syllable</span><span class="tag">syllabic consonant</span></div>
+  </div>
+  <div class="grid"><a class="card" href="schwa_ox.html"><h3>OX Quiz</h3><p>핵심 판별 문항을 바로 풀면서 rule environment를 확인한다.</p></a><a class="card" href="schwa_exercises.html"><h3>Practice</h3><p>IPA·rule application·environment 판별을 실전형으로 연습한다.</p></a></div>
+  <section class="section" id="schwa"><h2>Schwa의 위치</h2>
+<p><span class="kw">/ə/</span>는 unstressed syllable에서 가장 흔히 나타나는 중앙 모음이다. 영어 rhythm에서 약한 음절이 압축되며 자주 생긴다.</p><div class="ex">about /əˈbaʊt/ · support /səˈpɔrt/</div>
+</section><section class="section" id="stress"><h2>Stress와 full vowel</h2>
+<p>stressed syllable은 full vowel을 유지한다. 반대로 unstressed syllable에서는 vowel reduction이 가능하다.</p><div class="two"><div class="note ok">+stress: full vowel 유지</div><div class="note">-stress: /ə/로 약화 가능</div></div>
+</section><section class="section" id="syllabic"><h2>Syllabic Consonant</h2>
+<p>빠른 발화에서는 /ən, əl/ 등이 syllabic consonant로 실현될 수 있다. 단, 답안에서는 문제에서 요구한 transcription 수준에 맞춘다.</p><div class="ex">button [bʌtn̩] · little [lɪtl̩]</div>
+</section>
+  <div class="footer">phonetics-phonology · 임용 음운론 학습 페이지</div>
+</div>
+<script src="sounds.js"></script>
+<script src="score-popup.js"></script>
+</body>
+</html>
