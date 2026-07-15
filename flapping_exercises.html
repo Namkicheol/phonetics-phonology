@@ -81,7 +81,7 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 
 .fi-row{display:flex;align-items:center;gap:9px;margin-bottom:8px}
 .fi-lbl{font-size:13px;color:var(--mut);min-width:120px;font-family:var(--mono)}
-.fi-inp{flex:1;padding:8px 12px;border:1.5px solid var(--bdr);border-radius:7px;
+.fi-inp{flex:1;min-width:0;padding:8px 12px;border:1.5px solid var(--bdr);border-radius:7px;
   font-size:13px;font-family:var(--mono);color:var(--txt);transition:border-color .15s}
 .fi-inp:focus{outline:none;border-color:var(--pri)}
 .fi-inp.ok2{border-color:var(--grn);background:var(--grn-bg)}
@@ -106,6 +106,21 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 </style>
 </head>
 <body>
+<style>
+.study-nav{position:relative;z-index:30;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:10px 12px;background:#fff;border-bottom:1px solid #dce9f0}
+.study-nav a{min-height:36px;display:inline-flex;align-items:center;justify-content:center;padding:7px 11px;border:1px solid #dce9f0;border-radius:18px;background:#f4f8fb;color:#31566b;font:600 12px/1.2 'Noto Sans KR',sans-serif;text-decoration:none;white-space:nowrap}
+.study-nav a.local{background:#e1ecf4;border-color:#9bb9ca;color:#1a5276}
+.nd{min-width:36px;min-height:36px}
+@media(max-width:520px){.study-nav{padding:8px;gap:5px}.study-nav a{padding:6px 9px;font-size:11px}.compare,.compare.three{grid-template-columns:minmax(0,1fr)}.compare-item{min-width:0;overflow-wrap:anywhere}}
+</style>
+<nav class="study-nav" aria-label="전공영어 학습 내비게이션">
+  <a class="local" href="./phonetics.html">음성·음운론 허브</a>
+  <a class="local" href="./flapping_study.html">Flapping 개념</a>
+  <a href="https://testmaster-pi.vercel.app/">기출 WIKI</a>
+  <a href="https://namkicheol.github.io/englisheducation/">영어교육론</a>
+  <a href="https://namkicheol.github.io/linguistics/">영어학</a>
+  <a href="https://testmaster-pi.vercel.app/keyterm-quiz.html">영교론 키텀</a>
+</nav>
 
 <div class="hero">
   <div class="hero-tag">Phonology · Flapping</div>

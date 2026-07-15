@@ -19,6 +19,34 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--sans);color:var(--txt);background:#f0f5f9;min-height:100vh}
 
+/* ── 학습 허브 내비게이션 ── */
+.hub-nav{
+  background:#fff;
+  border-bottom:1px solid #dce9f0;
+}
+.hub-nav-inner{
+  max-width:840px;margin:0 auto;padding:10px 20px;
+  display:flex;gap:7px;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.hub-nav-inner::-webkit-scrollbar{display:none}
+.hub-nav a{
+  flex:0 0 auto;
+  padding:7px 12px;border:1px solid #dce9f0;border-radius:16px;
+  color:#456170;background:#f4f8fb;
+  font-size:12px;font-weight:500;text-decoration:none;
+  white-space:nowrap;
+  transition:background .15s,border-color .15s,color .15s;
+}
+.hub-nav a:hover{background:#e1ecf4;border-color:#9bb9ca;color:#1a5276}
+.hub-nav a:focus-visible{outline:3px solid rgba(232,83,58,.25);outline-offset:2px}
+.hub-nav a[aria-current="page"]{background:#1a5276;border-color:#1a5276;color:#fff}
+@media(max-width:520px){
+  .hub-nav-inner{justify-content:center;flex-wrap:wrap;overflow-x:visible;padding:9px 12px;gap:6px}
+  .hub-nav a{padding:6px 10px;font-size:11px}
+}
+
 /* ── hero ── */
 .hero{
   background:var(--pri);
@@ -108,7 +136,6 @@ body{font-family:var(--sans);color:var(--txt);background:#f0f5f9;min-height:100v
   flex-shrink:0;
 }
 .ch-num.done{background:var(--grn)}
-.ch-num.wip{background:#1a6090}
 .ch-title{
   font-family:var(--serif);font-size:19px;color:var(--pri);
 }
@@ -118,11 +145,9 @@ body{font-family:var(--sans);color:var(--txt);background:#f0f5f9;min-height:100v
   padding:3px 10px;border-radius:10px;
 }
 .ch-status.done{background:var(--grn-bg);color:var(--grn)}
-.ch-status.wip{background:#e1ecf4;color:#1a5276}
-.ch-status.soon{background:var(--gray);color:var(--mut)}
 
 /* ── 포스팅 링크 카드 ── */
-.post-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.post-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 @media(max-width:520px){.post-grid{grid-template-columns:1fr}}
 
 .post-card{
@@ -138,10 +163,6 @@ body{font-family:var(--sans);color:var(--txt);background:#f0f5f9;min-height:100v
   box-shadow:0 4px 16px rgba(26,82,118,.12);
   transform:translateY(-2px);
 }
-.post-card.disabled{
-  opacity:.45;pointer-events:none;
-  filter:grayscale(1);
-}
 .post-icon{
   width:40px;height:40px;border-radius:10px;
   display:flex;align-items:center;justify-content:center;
@@ -150,7 +171,6 @@ body{font-family:var(--sans);color:var(--txt);background:#f0f5f9;min-height:100v
 .post-icon.concept{background:#e1ecf4}
 .post-icon.exercise{background:var(--grn-bg)}
 .post-icon.ox{background:#fff8e8}
-.post-icon.soon-ic{background:var(--gray)}
 .post-info{}
 .post-type{
   font-family:var(--mono);font-size:10px;
@@ -193,8 +213,6 @@ body{font-family:var(--sans);color:var(--txt);background:#f0f5f9;min-height:100v
 }
 .prog-fill{height:100%;border-radius:3px;transition:width .6s}
 .prog-fill.done{background:var(--grn)}
-.prog-fill.wip{background:#1a6090}
-.prog-fill.soon{background:var(--bdr)}
 .prog-pct{font-family:var(--mono);font-size:11px;color:var(--mut);min-width:36px;text-align:right}
 
 /* ── footer ── */
@@ -208,6 +226,16 @@ body{font-family:var(--sans);color:var(--txt);background:#f0f5f9;min-height:100v
 </head>
 <body>
 
+<nav class="hub-nav" aria-label="전공영어 학습 허브">
+  <div class="hub-nav-inner">
+    <a href="https://testmaster-pi.vercel.app/">기출 WIKI</a>
+    <a href="https://namkicheol.github.io/englisheducation/">영어교육론</a>
+    <a href="https://namkicheol.github.io/linguistics/">영어학</a>
+    <a href="./phonetics.html" aria-current="page">음성·음운론</a>
+    <a href="https://testmaster-pi.vercel.app/keyterm-quiz.html">영어교육론 키텀 퀴즈</a>
+  </div>
+</nav>
+
 <!-- ── Hero ── -->
 <div class="hero">
   <div class="hero-tag">임용 음운론</div>
@@ -215,7 +243,7 @@ body{font-family:var(--sans);color:var(--txt);background:#f0f5f9;min-height:100v
   <p>임용 음운론 기반 · 임용고시 대비<br>챕터별 개념 정리 + 실전 연습문제 + OX 퀴즈</p>
   <div class="hero-stats">
     <div class="stat"><div class="stat-n">3</div><div class="stat-l">단계</div></div>
-    <div class="stat"><div class="stat-n">18</div><div class="stat-l">챕터</div></div>
+    <div class="stat"><div class="stat-n">14</div><div class="stat-l">챕터</div></div>
     <div class="stat"><div class="stat-n">50+</div><div class="stat-l">연습문제</div></div>
   </div>
 </div>
@@ -232,18 +260,18 @@ body{font-family:var(--sans);color:var(--txt);background:#f0f5f9;min-height:100v
     </div>
     <div class="prog-row">
       <span class="prog-label">분류 4/5 — Phonological Rules</span>
-      <div class="prog-bar"><div class="prog-fill done" style="width:14%"></div></div>
-      <span class="prog-pct">진행 중</span>
+      <div class="prog-bar"><div class="prog-fill done" style="width:100%"></div></div>
+      <span class="prog-pct">✓ 완료</span>
     </div>
     <div class="prog-row">
       <span class="prog-label">분류 2/3 — Phoneme / Syllable</span>
-      <div class="prog-bar"><div class="prog-fill soon" style="width:0%"></div></div>
-      <span class="prog-pct">예정</span>
+      <div class="prog-bar"><div class="prog-fill done" style="width:100%"></div></div>
+      <span class="prog-pct">✓ 완료</span>
     </div>
     <div class="prog-row">
       <span class="prog-label">분류 1 — Features</span>
-      <div class="prog-bar"><div class="prog-fill soon" style="width:0%"></div></div>
-      <span class="prog-pct">예정</span>
+      <div class="prog-bar"><div class="prog-fill done" style="width:100%"></div></div>
+      <span class="prog-pct">✓ 완료</span>
     </div>
   </div>
 
@@ -293,6 +321,14 @@ body{font-family:var(--sans);color:var(--txt);background:#f0f5f9;min-height:100v
           <div class="post-type">OX 퀴즈 · 28문항</div>
           <div class="post-title">강세 개념 OX 퀴즈</div>
           <div class="post-desc">Heavy/Light · suffix · NSR · foot · 문장강세 개념 검증</div>
+        </div>
+      </a>
+      <a class="post-card" href="stress_exercises.html">
+        <div class="post-icon exercise">✏️</div>
+        <div class="post-info">
+          <div class="post-type">실전 연습 · 15문항</div>
+          <div class="post-title">강세 실전 연습문제</div>
+          <div class="post-desc">OX·객관식·빈칸으로 stress 규칙 적용</div>
         </div>
       </a>
       <a class="post-card" href="stress_practice.html">
@@ -489,7 +525,7 @@ body{font-family:var(--sans);color:var(--txt);background:#f0f5f9;min-height:100v
       <a class="post-card" href="assimilation_ox.html">
         <div class="post-icon ox">🔢</div>
         <div class="post-info">
-          <div class="post-type">OX 퀴즈</div>
+          <div class="post-type">OX 퀴즈 · 17문항</div>
           <div class="post-title">Assimilation OX 퀴즈</div>
           <div class="post-desc">방향·정도·Place·Voice·Manner 개념 검증</div>
         </div>
@@ -497,7 +533,7 @@ body{font-family:var(--sans);color:var(--txt);background:#f0f5f9;min-height:100v
       <a class="post-card" href="assimilation_exercises.html">
         <div class="post-icon exercise">✏️</div>
         <div class="post-info">
-          <div class="post-type">실전 연습문제</div>
+          <div class="post-type">실전 연습문제 · 15문항</div>
           <div class="post-title">Assimilation 연습문제</div>
           <div class="post-desc">iN- prefix · ten+N · -s/-ed 규칙 적용 드릴</div>
         </div>
@@ -646,7 +682,7 @@ body{font-family:var(--sans);color:var(--txt);background:#f0f5f9;min-height:100v
       <a class="post-card" href="aspiration_exercises.html">
         <div class="post-icon exercise">✏️</div>
         <div class="post-info">
-          <div class="post-type">실전 연습문제</div>
+          <div class="post-type">실전 연습문제 · 15문항</div>
           <div class="post-title">Aspiration 연습문제</div>
           <div class="post-desc">강세 onset·/s/ cluster 환경 적용 드릴</div>
         </div>
@@ -654,7 +690,7 @@ body{font-family:var(--sans);color:var(--txt);background:#f0f5f9;min-height:100v
       <a class="post-card" href="aspiration_ox.html">
         <div class="post-icon ox">🔢</div>
         <div class="post-info">
-          <div class="post-type">OX 퀴즈</div>
+          <div class="post-type">OX 퀴즈 · 16문항</div>
           <div class="post-title">Aspiration OX 퀴즈</div>
           <div class="post-desc">aspirated/unaspirated·복수쌍·음소 지위 검증</div>
         </div>
@@ -747,23 +783,8 @@ body{font-family:var(--sans);color:var(--txt);background:#f0f5f9;min-height:100v
   <div class="phase-header">
     <div class="phase-badge">Phase 3</div>
     <div class="phase-info">
-      <div class="phase-title">종합 연습 — 실전 대비</div>
-      <div class="phase-sub">Ch. 15–18 · IPA · 변별 자질 · 비교 분석 · 클리닉</div>
-    </div>
-  </div>
-
-  <!-- ── Ch.15 IPA 연습 ── -->
-  <div class="ch-block">
-    <div class="ch-header">
-      <div class="ch-num">15</div>
-      <div>
-        <div class="ch-title">IPA 전사 연습</div>
-        <div class="ch-sub">국제음성기호 읽기 · 쓰기 종합</div>
-      </div>
-      <span class="ch-status soon">업로드 예정</span>
-    </div>
-    <div class="post-grid" style="margin-top:14px">
-      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">✏️</div><div class="post-info"><div class="post-type">종합 연습</div><div class="post-title">IPA 전사 연습문제</div><div class="post-desc">업로드 예정</div></div></a>
+      <div class="phase-title">영어학 연결 — 실전 대비</div>
+      <div class="phase-sub">Ch. 16–17 · 변별 자질 · Syllable &amp; Phonotactics</div>
     </div>
   </div>
 
@@ -820,21 +841,6 @@ body{font-family:var(--sans);color:var(--txt);background:#f0f5f9;min-height:100v
           <div class="post-desc">2014 A-11 · 2020 A-4 · 2023 A-6 · 2026 A-4 연결 노트</div>
         </div>
       </a>
-    </div>
-  </div>
-
-  <!-- ── Ch.18 최종 클리닉 ── -->
-  <div class="ch-block">
-    <div class="ch-header">
-      <div class="ch-num">18</div>
-      <div>
-        <div class="ch-title">최종 임용 클리닉</div>
-        <div class="ch-sub">기출 유형 분석 + 실전 모의 문제</div>
-      </div>
-      <span class="ch-status soon">업로드 예정</span>
-    </div>
-    <div class="post-grid" style="margin-top:14px">
-      <a class="post-card disabled" href="#"><div class="post-icon soon-ic">✏️</div><div class="post-info"><div class="post-type">종합 연습</div><div class="post-title">최종 클리닉 연습문제</div><div class="post-desc">업로드 예정</div></div></a>
     </div>
   </div>
 

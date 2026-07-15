@@ -35,7 +35,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f0f0f7;color:#1a1a1a;line
 .progress-fill{height:100%;background:linear-gradient(90deg,#5b21b6 0%,#8b5cf6 50%,#c5a572 100%);border-radius:999px;width:0%;position:relative;box-shadow:0 1px 3px rgba(91,33,182,.3)}
 .progress-fill::after{content:"";position:absolute;top:0;right:0;bottom:0;width:20px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6));animation:shimmer 2.5s infinite}
 @keyframes shimmer{0%{transform:translateX(-20px);opacity:0}50%{opacity:1}100%{transform:translateX(0);opacity:0}}
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:22px;padding-top:22px;border-top:1px dashed #d5cfe8}
+.stats-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:22px;padding-top:22px;border-top:1px dashed #d5cfe8}
 .stat{text-align:center}
 .stat-n{font-family:'Nunito',sans-serif;font-style:normal;font-weight:900;font-size:36px;color:#1a1040;line-height:1;letter-spacing:-1px}
 .stat-n .small{font-size:18px;color:#8a8070}
@@ -69,16 +69,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f0f0f7;color:#1a1a1a;line
 .btn-s{background:#fff;color:#1a1040;border:1.5px solid #d5cfe8}
 .btn-s:hover{background:#f5f0ff;border-color:var(--accent,#5b21b6);color:var(--accent,#5b21b6)}
 
-/* ─── Upcoming list ───────────────────────────────────── */
-.upcoming-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
-.up{background:#f8f5ff;border:1px dashed #ccc8e0;border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;transition:all .2s ease}
-.up:hover{background:#fff;border-color:#b8aed8}
-.up-no{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;color:#8a8070;background:#fff;border:1px solid #d5cfe8;padding:4px 8px;border-radius:6px;min-width:44px;text-align:center}
-.up-titles{flex:1;min-width:0}
-.up-en{font-family:'Nunito',sans-serif;font-style:normal;font-weight:700;font-size:14px;color:#1a1040;letter-spacing:-.2px;line-height:1.1}
-.up-ko{font-family:'Jua','Noto Sans KR',sans-serif;font-size:13px;color:#8a8070;margin-top:2px}
-.up-soon{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:1px;color:#c5a572;border:1px solid rgba(197,165,114,.35);padding:3px 7px;border-radius:4px}
-
 /* ─── Study guide ─────────────────────────────────────── */
 .guide{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-bottom:40px}
 .guide-card{background:#fff;border-radius:14px;padding:20px 22px;border:1px solid #e8e4f4;position:relative}
@@ -102,7 +92,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f0f0f7;color:#1a1a1a;line
 @media(max-width:640px){
   .wrap{padding:0 16px}
   .hero{padding:32px 0 46px}
-  .stats-row{grid-template-columns:repeat(2,1fr);gap:12px}
+  .stats-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .chap-grid{grid-template-columns:1fr}
   .hero-top{font-size:9.5px;letter-spacing:1px}
   .progress-wrap{padding:20px}
@@ -120,7 +110,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f0f0f7;color:#1a1a1a;line
     </div>
     <h1 class="hero-brand">English <span class="accent">Linguistics</span><br>Concept Master</h1>
     <div class="hero-script">영어학 개념 마스터</div>
-    <p class="hero-sub">중등 임용 영어 대비. <strong>서브노트 기반</strong>으로 6개 영역의 핵심 개념을 <strong>OX 퀴즈</strong>와 <strong>개념정리 노트</strong>로 정리한 학습 허브입니다.</p>
+    <p class="hero-sub">중등 임용 영어 대비. <strong>서브노트 기반</strong>으로 음성학·음운론의 핵심 개념을 <strong>OX 퀴즈</strong>와 <strong>개념정리 노트</strong>로 정리한 학습 허브입니다.</p>
     <div class="hero-meta">
       <span class="chip gold">📚 서브노트 기반</span>
       <span class="chip">🎯 기출 포인트</span>
@@ -136,14 +126,13 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f0f0f7;color:#1a1a1a;line
   <div class="progress-wrap">
     <div class="progress-head">
       <div class="progress-title">학습 진도 · Progress</div>
-      <div class="progress-pct">16.7% · 1 / 6</div>
+      <div class="progress-pct">100% · 1 / 1</div>
     </div>
-    <div class="progress-bar"><div class="progress-fill" style="width:16.7%"></div></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
     <div class="stats-row">
       <div class="stat"><div class="stat-n">1</div><div class="stat-l">완료 챕터</div></div>
       <div class="stat"><div class="stat-n">220<span class="small">+문</span></div><div class="stat-l">OX 퀴즈</div></div>
-      <div class="stat"><div class="stat-n">5</div><div class="stat-l">제작 예정</div></div>
-      <div class="stat"><div class="stat-n">6</div><div class="stat-l">전체 챕터</div></div>
+      <div class="stat"><div class="stat-n">1</div><div class="stat-l">전체 챕터</div></div>
     </div>
   </div>
 
@@ -168,22 +157,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f0f0f7;color:#1a1a1a;line
         <a class="btn btn-q" href="./phonetics.html" style="background:#1a5276">챕터 허브</a>
       </div>
     </div>
-  </div>
-
-  <!-- ═══ Upcoming ═══ -->
-  <div class="sec-h">
-    <h2>Upcoming</h2>
-    <span class="sec-ko">제작 예정</span>
-    <span class="sec-line"></span>
-    <span class="sec-cnt">5 chapters</span>
-  </div>
-
-  <div class="upcoming-grid">
-    <div class="up"><span class="up-no">CH · 02</span><div class="up-titles"><div class="up-en">Morphology</div><div class="up-ko">형태론</div></div><span class="up-soon">SOON</span></div>
-    <div class="up"><span class="up-no">CH · 03</span><div class="up-titles"><div class="up-en">Syntax</div><div class="up-ko">통사론</div></div><span class="up-soon">SOON</span></div>
-    <div class="up"><span class="up-no">CH · 04</span><div class="up-titles"><div class="up-en">Semantics</div><div class="up-ko">의미론</div></div><span class="up-soon">SOON</span></div>
-    <div class="up"><span class="up-no">CH · 05</span><div class="up-titles"><div class="up-en">Pragmatics</div><div class="up-ko">화용론</div></div><span class="up-soon">SOON</span></div>
-    <div class="up"><span class="up-no">CH · 06</span><div class="up-titles"><div class="up-en">School Grammar</div><div class="up-ko">학교문법</div></div><span class="up-soon">SOON</span></div>
   </div>
 
   <!-- ═══ Study Guide ═══ -->
