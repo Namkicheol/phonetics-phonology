@@ -162,12 +162,12 @@ const DATA = [
   {s:'Section A', st:'', sd:'', t:'ox',
    q:'2음절 동사는 모두 첫 번째 음절에 강세가 온다.',
    a:false,
-   e:'정답: X\n\n2음절 동사의 60% 이상은 두 번째 음절(ult)에 강세가 옵니다.\n예: reˈcord, perˈmit, conˈduct, obˈject\n\n단, 예외도 있습니다 (love, show 등은 첫 음절 강세 유지).\n따라서 "모두"라는 표현은 틀렸습니다.'},
+   e:'정답: X\n\nAEP에 인용된 자료에서 2음절 동사는 ult 강세 47.6%, penult 강세 52.3%입니다.\n예: reˈcord, perˈmit, conˈduct는 ult 강세이고, ˈbalance, ˈblossom, ˈvisit은 penult 강세입니다.\n따라서 "모두"라는 표현은 틀렸습니다.'},
 
   {s:'Section A', st:'', sd:'', t:'ox',
-   q:'permit이 동사일 때 IPA는 /pɜrˈmɪt/이다.',
+   q:'permit이 동사일 때 IPA는 /pərˈmɪt/이다.',
    a:true,
-   e:'정답: O\n\n동사 perˈmit = /pɜrˈmɪt/ — 두 번째 음절 강세.\n명사 ˈpermit = /ˈpɜrmɪt/ — 첫 번째 음절 강세.\n\n이 쌍은 임용 기출에 자주 등장하는 핵심 예시입니다.'},
+   e:'정답: O\n\n동사 perˈmit = /pərˈmɪt/ — 두 번째 음절 강세.\n명사 ˈpermit = /ˈpɜrmɪt/ — 첫 번째 음절 강세.\n\n동사형의 첫 음절은 비강세이므로 schwa로 약화됩니다.'},
 
   {s:'Section A', st:'', sd:'', t:'ox',
    q:'present가 동사일 때 강세는 첫 번째 음절이다.',
@@ -182,9 +182,9 @@ const DATA = [
   /* ── Section B: 객관식 ── */
   {s:'Section B', st:'객관식', sd:'가장 적절한 답을 하나 고르시오.',
    t:'mc', q:'다음 중 동사일 때 두 번째 음절에 강세가 오지 않는 단어는?',
-   o:['① record', '② permit', '③ love', '④ protest'],
+   o:['① record', '② permit', '③ balance', '④ protest'],
    a:2,
-   e:'정답: ③ love\n\nlove는 명사/동사 모두 첫 음절 강세를 유지합니다 (강세 이동 없음).\n\n비교:\n· reˈcord (v) — 2번째 강세 ✓\n· perˈmit (v) — 2번째 강세 ✓\n· ˈlove (v) — 1번째 강세 (예외!) ✗\n· proˈtest (v) — 2번째 강세 ✓'},
+   e:'정답: ③ balance\n\nbalance는 2음절 동사이지만 penult(첫 음절)에 강세가 옵니다.\n\n비교:\n· reˈcord (v) — 2번째 강세 ✓\n· perˈmit (v) — 2번째 강세 ✓\n· ˈbalance (v) — 1번째 강세 ✗\n· proˈtest (v) — 2번째 강세 ✓'},
 
   {s:'Section B', st:'', sd:'', t:'mc',
    q:'ˈrecord의 품사는?',
@@ -202,7 +202,7 @@ const DATA = [
    q:'2음절 명사에서 penult 강세 비율은?',
    o:['① 약 50%', '② 약 65%', '③ 약 82%', '④ 약 90%'],
    a:2,
-   e:'정답: ③ 약 82%\n\nYavaş(2011) 코퍼스 분석:\n· 2음절 명사 penult(첫 음절) 강세: 약 81.7%\n· 2음절 형용사 penult 강세: 약 81%\n· 2음절 동사 ult(두 번째 음절) 강세: 약 60%+\n\n이 통계가 명사/동사 강세 이동 규칙의 실증적 근거입니다.'},
+   e:'정답: ③ 약 82%\n\nHammond(1999), as reported in Yavaş:\n· 2음절 명사 penult(첫 음절) 강세: 약 81.7%\n· 2음절 형용사 penult 강세: 약 81%\n· 2음절 동사: ult 47.6%, penult 52.3%\n\n품사별 경향과 동사 내부의 weight rule을 구분해야 합니다.'},
 
   {s:'Section B', st:'', sd:'', t:'mc',
    q:'appeal /əˈpiːl/의 강세가 두 번째 음절에 오는 이유는?',
@@ -224,7 +224,7 @@ const DATA = [
    blanks:['1', '2'],
    labels:['명사:', '동사:'],
    hint:'예: 첫 번째 음절 강세 → 1 입력',
-   e:'정답: 명사 1번째, 동사 2번째\n\n· ˈpermit (n) /ˈpɜrmɪt/ — 1번째 음절(per-) 강세\n· perˈmit (v) /pɜrˈmɪt/ — 2번째 음절(-mit) 강세\n\n예문: "Show me your ˈpermit." vs. "I perˈmit you to go."'},
+   e:'정답: 명사 1번째, 동사 2번째\n\n· ˈpermit (n) /ˈpɜrmɪt/ — 1번째 음절(per-) 강세\n· perˈmit (v) /pərˈmɪt/ — 2번째 음절(-mit) 강세\n\n예문: "Show me your ˈpermit." vs. "I perˈmit you to go."'},
 
   {s:'Section C', st:'', sd:'', t:'fi',
    q:'conduct\n명사: ___ 번째 음절 강세 / 동사: ___ 번째 음절 강세',

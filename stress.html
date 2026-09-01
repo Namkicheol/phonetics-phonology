@@ -176,7 +176,7 @@ const Q=[
  text:"<span class='kw1'>Heavy syllable</span>은 강세를 유인(attract)하고, <span class='kw2'>light syllable</span>은 강세를 회피(avoid)하는 경향이 있다.",
  ans:true,
  correct:"Heavy syllable의 강세 유인 성질은 영어 단어 강세 배정 규칙의 핵심.",
- why:"Penultimate heavy → penultimate stress 규칙의 근거. 예: <span class='kw1'>aˈgenda</span> — gen이 heavy(단모음+/n/) → 두 번째 음절 강세. <span class='kw1'>ˈcalendar</span> — -en- light → 강세 앞으로 이동."},
+ why:"Penultimate heavy → penultimate stress 규칙의 근거. 예: <span class='kw1'>aˈgenda</span> — gen이 heavy(단모음+/n/) → 두 번째 음절 강세. <span class='kw1'>calendar /ˈkæl.ən.dɚ/</span> — 이 발음 variant에서는 penult nucleus가 schwa [ə]라 weightless → 강세가 왼쪽으로 이동."},
 
 {src:"agenda 강세",cat:"Heavy/Light",
  text:"'agenda'의 강세는 첫 번째 음절에 있다 — <span class='kw4'>/ˈæʤəndə/</span>.",
@@ -186,23 +186,23 @@ const Q=[
  compare:[{title:"<span class='kw1'>agenda</span>",desc:"/əˈʤendə/ — gen heavy"},{title:"<span class='kw2'>panorama</span>",desc:"/ˌpænəˈrɑːmə/ — -ra- heavy"}]},
 
 {src:"calendar 강세",cat:"Heavy/Light",
- text:"'calendar /ˈkælɪndər/'에서 penultimate 음절 '-en-'이 <span class='kw2'>light</span>하기 때문에 강세가 antepenultimate(첫 번째)으로 이동한다.",
+ text:"'calendar'는 발음 variant에 따라 분석을 구분해야 한다. <span class='kw1'>/ˈkæl.ən.dɚ/</span>에서는 penultimate nucleus [ə]가 <span class='kw2'>weightless</span>이므로 antepenultimate(첫 번째)에 강세가 오지만, <span class='kw1'>/ˈkælɪndər/</span>를 같은 분석으로 단정할 수 없다.",
  ans:true,
- correct:"Penultimate -en- : 단모음 /ɪ/ + coda /n/... wait — /kæl·ɪn·dər/ → pen= -in- 단모음 /ɪ/ + no coda between syllables. Actually -in- is light (short vowel, coda goes to next syllable) → antepenultimate <b>cal-</b> gets stress.",
- why:"Latin-origin words: penult heavy → stress penult / penult light → stress antepenult. -cal-(-kæl-) is the antepenult that receives stress. Cf. aˈgenda (penult heavy)."},
+ correct:"<span class='kw1'>/ˈkæl.ən.dɚ/</span> 분석에서는 penult nucleus [ə]가 weightless/unstressable하여 antepenult <b>cal-</b>에 강세가 온다. <span class='kw1'>/ˈkælɪndər/</span>는 다른 vowel/syllabification variant이므로 별도로 확인한다.",
+ why:"calendar의 stress 설명은 특정 transcription에 한정한다. 두 발음을 일반화하지 말고, 해당 variant의 syllabification과 penult weight를 먼저 확인한다. Cf. aˈgenda (penult heavy)."},
 
 {src:"라틴 어원 명사 강세 규칙",cat:"Noun Stress",
  text:"라틴어 어원 다음절 명사에서 penultimate(끝에서 두 번째) 음절이 <span class='kw1'>heavy</span>하면 그 음절에 primary stress가 온다.",
  ans:true,
  correct:"Penultimate Heavy Rule: 명사에서 penult heavy → penult stress. Penult light → antepenult stress.",
- why:"기출 핵심 규칙. 예: <span class='kw1'>aˈgenda</span>(gen-H), <span class='kw1'>aˈrena</span>(re-H: 장모음), <span class='kw1'>ˈcalendar</span>(en-L → cal에 강세). 동사도 유사 규칙 적용.",
- compare:[{title:"Penult <span class='kw1'>H</span> → Penult 강세",desc:"agenda, arena, diploma"},{title:"Penult <span class='kw2'>L</span> → Antepenult 강세",desc:"calendar, editor, industry"}]},
+ why:"기출 핵심 규칙. 예: <span class='kw1'>aˈgenda</span>(gen-H), <span class='kw1'>aˈrena</span>(re-H: 장모음), <span class='kw1'>calendar /ˈkæl.ən.dɚ/</span>(이 variant에서 penult nucleus [ə] → cal에 강세). 두 발음을 동일하게 일반화하지 않는다. 동사도 유사 규칙 적용.",
+ compare:[{title:"Penult <span class='kw1'>H</span> → Penult 강세",desc:"agenda, arena, diploma"},{title:"Penult <span class='kw2'>L</span> → Antepenult 강세",desc:"/ˈkæl.ən.dɚ/ calendar, editor, industry"}]},
 
 {src:"photography 강세",cat:"Noun Stress",
  text:"'phoˈtography /fəˈtɒgrəfi/'에서 두 번째 음절 <b>-tog-</b>에 강세가 오는 것은, penultimate 음절 <b>-ra-</b>가 light하여 antepenultimate인 -tog-으로 강세가 이동하기 때문이다.",
  ans:true,
  correct:"4음절: pho-<b>tog</b>-ra-phy. Penult = -ra- (/rə/, light). Antepenult = -tog- (/tɒg/, heavy: 단모음+/g/ coda) → 강세 antepenult.",
- why:"Strong syllable 검증: -tog- 는 closed syllable(단모음 /ɒ/ + coda /g/) → heavy. 따라서 penult rule 불충족 → antepenult인 -tog- 강세. 파생어 체인: <span class='kw1'>ˈphotograph → phoˈtography → ˌphoˈtographic</span>"},
+ why:"Strong syllable 검증: -tog- 는 closed syllable(단모음 /ɒ/ + coda /g/) → heavy. 따라서 penult rule 불충족 → antepenult인 -tog- 강세. 파생어 체인: <span class='kw1'>ˈphotograph → phoˈtography → ˌphotoˈgraphic</span>"},
 
 /* ── Suffix Stress ── */
 {src:"-ic suffix",cat:"Suffix Stress",
@@ -229,7 +229,7 @@ const Q=[
  text:"'iˈdentify /aɪˈdentɪfaɪ/'에서 두 번째 음절 <b>-den-</b>에 강세가 오는 것은 -ify suffix의 영향이다.",
  ans:true,
  correct:"-ify는 결과 단어의 antepenultimate에 강세를 배치. i-<b>DEN</b>-ti-fy → antepenultimate = -den-.",
- why:"4음절 단어 i-den-ti-fy. Antepenultimate = den(3rd from end). -ify는 접미사 시작 2음절 앞에 강세. Cf. <span class='kw1'>ˈpure → ˈpurity</span>(-ity: 직전 음절), <span class='kw1'>ˈproduct → proˈduction</span>(-tion: 직전)."},
+ why:"4음절 단어 i-den-ti-fy. Antepenultimate = den(3rd from end). -ify는 suffix 바로 앞 stem-final syllable에 강세. Cf. <span class='kw1'>ˈpure → ˈpurity</span>(-ity: 직전 음절), <span class='kw1'>ˈproduct → proˈduction</span>(-tion: 직전)."},
 
 /* ── Disyllabic N/V pairs ── */
 {src:"2음절 명사·동사 강세 규칙",cat:"N/V Stress",

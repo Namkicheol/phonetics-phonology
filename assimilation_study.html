@@ -342,7 +342,7 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
       <div class="rule-box">
         <div class="rule-label">Phonological Rule</div>
         <div class="rule-text">
-          /n/ → [m] / ___ {bilabial: p, b}<br>
+          /n/ → [m] / ___ {bilabial: p, b, m}<br>
           /n/ → [ŋ] / ___ {velar: k, g}<br>
           /n/ → [n] / elsewhere (alveolar 앞 또는 기타 환경)
         </div>
@@ -370,7 +370,7 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
           <thead><tr><th>접두사 형태</th><th>환경 (뒤 자음)</th><th>예시</th></tr></thead>
           <tbody>
             <tr><td><span class="kw1">im-</span> [ɪm]</td><td>bilabial /p, b, m/ 앞</td><td>impossible, imbalance, immature</td></tr>
-            <tr><td><span class="kw1">in-</span> [ɪn]</td><td>alveolar /t, d, n, s, l/ 앞 (기본형)</td><td>indirect, indirect, intolerant</td></tr>
+            <tr><td><span class="kw1">in-</span> [ɪn]</td><td>alveolar /t, d, n, s/ 앞 (기본형)</td><td>indirect, intolerant</td></tr>
             <tr><td><span class="kw1">iŋ-</span> [ɪŋ]</td><td>velar /k, g/ 앞</td><td>inconclusive [ɪŋ-], ingratitude [ɪŋ-]</td></tr>
             <tr><td><span class="kw1">il-</span> [ɪl]</td><td>/l/ 앞 (Manner assimilation)</td><td>illegal, illogical, illiterate</td></tr>
             <tr><td><span class="kw1">ir-</span> [ɪɹ]</td><td>/r/ 앞 (Manner assimilation)</td><td>irregular, irrational, irrecoverable</td></tr>
@@ -378,10 +378,6 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
         </table>
       </div>
       <p class="note" style="margin-top:10px">il-/ir-는 place assimilation이 아니라 <b>manner assimilation</b> (→ 섹션 ⑥ 참조).</p>
-      <div class="caution">
-        <div class="caution-label">⚠️ 주의</div>
-        iN+velar 동화 조건: <b>stress가 걸린 /n/</b> 음절 바로 앞에서만 적용됨 (e.g., <em>inˈconclusive</em>에서 /n/이 강세 받는 위치). 강세 없는 환경에서는 적용 안 될 수 있음.
-      </div>
     </div>
 
     <div class="div"></div>
@@ -397,7 +393,7 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
         <div class="ipa-chip"><span class="w">white paper</span><br><span class="ph">/t/→</span><span class="sp">[p]</span><br><span style="font-size:11px;color:#888">[waɪppɛɪpɚ]</span></div>
         <div class="ipa-chip"><span class="w">red badge</span><br><span class="ph">/d/→</span><span class="sp">[b]</span><br><span style="font-size:11px;color:#888">[rɛbbædʒ]</span></div>
       </div>
-      <p class="note" style="margin-top:10px">voicing은 유지된 채 place만 바뀜 → <b>partial assimilation</b>.</p>
+      <p class="note" style="margin-top:10px">place assimilation 결과가 [bb], [kk]처럼 인접한 동일 자음이 되면 <b>total assimilation</b>이다. [n] → [m]처럼 뒤 자음과 동일해지지 않는 경우는 partial assimilation이다.</p>
     </div>
 
     <div class="exam">
@@ -434,8 +430,8 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
       <div class="rule-box">
         <div class="rule-label">Rule — Progressive Voice Assimilation</div>
         <div class="rule-text">
-          -s → [s]  / voiceless segment ___  (무성음 뒤)<br>
-          -s → [z]  / voiced segment ___     (유성음 뒤)<br>
+          -s → [s]  / non-sibilant voiceless segment ___  (non-sibilant 무성음 뒤)<br>
+          -s → [z]  / non-sibilant voiced segment ___     (non-sibilant 유성음 뒤)<br>
           -s → [əz] / sibilant ___           (sibilant 뒤 — schwa insertion)
         </div>
       </div>
@@ -455,8 +451,8 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
       <div class="rule-box">
         <div class="rule-label">Rule — Progressive Voice Assimilation</div>
         <div class="rule-text">
-          -ed → [t]  / voiceless segment ___  (무성음 뒤)<br>
-          -ed → [d]  / voiced segment ___     (유성음 뒤)<br>
+          -ed → [t]  / non-/t,d/ voiceless segment ___  (non-/t,d/ 무성음 뒤)<br>
+          -ed → [d]  / non-/t,d/ voiced segment ___     (non-/t,d/ 유성음 뒤)<br>
           -ed → [əd] / alveolar stop /t,d/ ___ (alveolar stop 뒤)
         </div>
       </div>
@@ -473,12 +469,11 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
     <div class="div"></div>
 
     <div class="concept">
-      <div class="c-title">4) 어휘 내 Voice Assimilation — have to / has to / used to</div>
-      <p class="note">어휘 내에서도 유성성 동화 적용: 뒤에 오는 /t/(voiceless)가 앞 음을 무성화.</p>
+      <div class="c-title">4) Word-boundary Voice Assimilation — have to / has to</div>
+      <p class="note">단어 경계에서도 유성성 동화가 적용될 수 있다. 뒤에 오는 /t/(voiceless)가 앞 음을 무성화한다.</p>
       <div class="ipa-row">
         <div class="ipa-chip"><span class="w">have to</span><br><span class="ph">/v/ → </span><span class="sp">[f]</span> before /t/<br><span style="font-size:11px;color:#888">[hæftə]</span></div>
         <div class="ipa-chip"><span class="w">has to</span><br><span class="ph">/z/ → </span><span class="sp">[s]</span> before /t/<br><span style="font-size:11px;color:#888">[hæstə]</span></div>
-        <div class="ipa-chip"><span class="w">used to</span><br><span class="ph">/zd/ → </span><span class="sp">[st]</span><br><span style="font-size:11px;color:#888">[juːstə]</span></div>
       </div>
       <p class="note" style="margin-top:10px">이 경우는 <b>Regressive</b> voice assimilation — 뒤의 /t/(voiceless)가 앞 음을 무성화.</p>
     </div>
@@ -525,7 +520,7 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
 
     <div class="concept">
       <div class="c-title">2) Vowel Nasalization (모음 비음화)</div>
-      <p class="note">모음이 뒤에 오는 비음 /m, n, ŋ/ 앞에서 <b>비음화</b>된다 — manner(nasal) feature가 모음에 전파.</p>
+      <p class="note">모음이 <b>same syllable 안의</b> 뒤 비음 /m, n, ŋ/ 앞에서 비음화된다 — manner(nasal) feature가 모음에 전파.</p>
       <p class="note">방향: <b>Regressive</b> — 뒤의 nasal이 앞 모음에 영향.</p>
       <div class="ipa-row">
         <div class="ipa-chip"><span class="w">band</span> [bæ̃nd]<br><span style="font-size:11px;color:#888">/æ/ → [æ̃] before /n/</span></div>
