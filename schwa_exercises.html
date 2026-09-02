@@ -150,6 +150,8 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
   </div>
 </div>
 
+<script src="./sounds.js"></script>
+<script src="./score-popup.js"></script>
 <script>
 const DATA = [
   // Section A: OX (5문항)
@@ -175,9 +177,9 @@ const DATA = [
    e:'틀렸습니다. photography에서 강세는 2번째 음절(-tog-)로 이동합니다.\n따라서 1번째 음절(pho-)이 비강세가 되어 /ə/로 약화됩니다.\n/fəˈtɑgrəfi/: 1째=/ə/(비강세), 2째=/ɑ/(강세, full vowel)'},
 
   {s:'Section A',st:'',sd:'',
-   t:'ox', q:'/ə/(schwa)는 영어에서 출현 빈도가 가장 높은 모음이다.',
+   t:'ox', q:'/ə/(schwa)는 English의 unstressed syllable에서 널리 나타나는 reduced vowel이다.',
    a:true,
-   e:'정확합니다. 영어는 stress-timed 언어로 비강세 음절이 많습니다.\n이 비강세 음절의 모음이 대부분 /ə/로 약화되므로 /ə/의 출현 빈도가 압도적으로 높습니다.'},
+   e:'정확합니다. /ə/(schwa)는 English의 unstressed syllable에서 나타나는 reduced vowel입니다.\nUnstressed vowel은 schwa 또는 다른 weak form으로 약화될 수 있습니다.'},
 
   // Section B: 객관식 (5문항)
   {s:'Section B',st:'객관식 문제',
@@ -206,7 +208,7 @@ const DATA = [
       '③ 입술 모양 (원순 vs 비원순)',
       '④ 음절 위치 (onset vs coda)'],
    a:1,
-   e:'/ə/와 /ʌ/의 가장 중요한 차이는 강세 여부입니다:\n/ə/: 비강세 음절에서만 출현 (mid central, 약화)\n/ʌ/: 강세 음절에서만 출현 (low mid back, full vowel)\n두 모음은 상보적 분포(complementary distribution)를 이룹니다.'},
+   e:'/ə/와 /ʌ/의 가장 중요한 차이는 강세 여부입니다:\n/ə/: 비강세 음절에서만 출현 (mid central, 약화)\n/ʌ/: 강세 음절에서만 출현 (low-mid central, full vowel)\n두 모음은 상보적 분포(complementary distribution)를 이룹니다.'},
 
   {s:'Section B',st:'',sd:'',
    t:'mc', q:'강세가 이동할 때 vowel reduction(/ə/)의 위치는?',
@@ -230,10 +232,10 @@ const DATA = [
   {s:'Section C',st:'빈칸 채우기',
    sd:'각 문항의 빈칸에 알맞은 내용을 입력하시오.',
    t:'fi',
-   q:'비강세 음절에서 full vowel이 약화되어 실현되는 중설 중모음의 IPA 기호는 ( )이다.',
+   q:'비강세 음절에서 full vowel이 약화되어 실현되는 mid central vowel의 IPA 기호는 ( )이다.',
    blanks:['ə'],
    labels:['기호 →'],
-   e:'Schwa의 IPA 기호: /ə/ (또는 [ə])\n중설(central) 중모음(mid)으로 비강세 음절에서만 나타납니다.\n공식 명칭은 "schwa(슈와)"입니다.'},
+   e:'Schwa의 IPA 기호: /ə/ (또는 [ə])\nmid central vowel로 비강세 음절에서만 나타납니다.\n공식 명칭은 "schwa(슈와)"입니다.'},
 
   {s:'Section C',st:'',sd:'',
    t:'fi',

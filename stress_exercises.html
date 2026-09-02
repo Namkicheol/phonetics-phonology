@@ -151,6 +151,8 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
   </div>
 </div>
 
+<script src="./sounds.js"></script>
+<script src="./score-popup.js"></script>
 <script>
 const DATA = [
   /* ── Section A: OX 퀴즈 ── */
@@ -177,14 +179,14 @@ const DATA = [
   {s:'Section A', st:'', sd:'', t:'ox',
    q:'Secondary stress 음절도 반드시 full vowel을 갖는다.',
    a:true,
-   e:'정답: O\n\n강세를 받는 음절(primary, secondary 모두)은 반드시 full vowel(전모음)을 가집니다.\n모음 약화(/ə/, schwa)는 오직 -stress 음절에서만 일어납니다.\n따라서 secondary stress 음절도 +full vowel이 보장됩니다.\n\nYavaş(2011): "A stressed syllable necessarily has a full vowel."'},
+   e:'정답: O\n\n강세를 받는 음절(primary, secondary 모두)은 반드시 full vowel(전모음)을 가집니다.\n모음 약화(/ə/, schwa)는 오직 -stress 음절에서만 일어납니다.\n따라서 secondary stress 음절도 +full vowel이 보장됩니다.\n\nYavaş(2011) 요지: stressed syllable은 full vowel을 가집니다.'},
 
   /* ── Section B: 객관식 ── */
   {s:'Section B', st:'객관식', sd:'가장 적절한 답을 하나 고르시오.',
    t:'mc', q:'영어에서 강세 지각의 가장 핵심적인 단서는?',
    o:['① loudness (음량)', '② pitch (음높이)', '③ duration (길이)', '④ rhythm (리듬)'],
    a:1,
-   e:'정답: ② pitch\n\nFry(1955, 1979)의 실험 연구에 따르면, 영어에서 강세 지각에 가장 큰 영향을 미치는 단서는 pitch(음높이)입니다.\nLoudness, duration도 관여하지만 보조적 역할에 그칩니다.\n\nYavaş(2011): "In English, higher pitch has been shown to be the most influential perceptual cue for stress."'},
+   e:'정답: ② pitch\n\nFry(1955, 1979)의 실험 연구에 따르면, 영어에서 강세 지각에 가장 큰 영향을 미치는 단서는 pitch(음높이)입니다.\nLoudness, duration도 관여하지만 보조적 역할에 그칩니다.\n\nYavaş(2011) 요지: English에서는 higher pitch가 stress의 가장 influential perceptual cue입니다.'},
 
   {s:'Section B', st:'', sd:'', t:'mc',
    q:'/ˌfoʊtəˈgræfɪk/의 Yavaş 수치 표기는?',
@@ -216,7 +218,7 @@ const DATA = [
    q:'강세(stress)는 ( ___ )의 두드러짐으로 정의된다.',
    blanks:['syllable prominence'],
    labels:['답:'],
-   e:'정답: syllable prominence\n\nYavaş(2011): "Stress can be defined as syllable prominence."\n강세 = 음절의 두드러짐. 화자 측면에서는 조음 노력의 증가, 청자 측면에서는 지각적 현저성으로 경험됩니다.\n\n두드러짐의 음향적 기반: loudness, duration, pitch'},
+   e:'정답: syllable prominence\n\nYavaş(2011) 요지: stress는 syllable prominence로 정의할 수 있습니다.\n강세 = 음절의 두드러짐. 화자 측면에서는 조음 노력의 증가, 청자 측면에서는 지각적 현저성으로 경험됩니다.\n\n두드러짐의 음향적 기반: loudness, duration, pitch'},
 
   {s:'Section C', st:'', sd:'', t:'fi',
    q:'Secondary stressed 음절의 특성:\n+stress, ( ___ ) tonic accent, +full V',

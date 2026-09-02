@@ -150,14 +150,16 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
   </div>
 </div>
 
+<script src="./sounds.js"></script>
+<script src="./score-popup.js"></script>
 <script>
 const DATA = [
   // Section A: OX (5문항)
   {s:'Section A',st:'OX 확인 문제',
    sd:'다음 설명이 맞으면 O, 틀리면 X를 선택하시오.',
-   t:'ox', q:'기식음(aspirated stop)은 강세 모음 앞 음절초(word-initial, stressed syllable onset) 위치에서 나타난다.',
+   t:'ox', q:'기식음(aspirated stop)은 강세 모음 앞 음절초(stressed syllable onset; word-initial에 한정되지 않음) 위치에서 나타난다.',
    a:true,
-   e:'정확합니다. 기식음화 규칙의 핵심 환경: 무성 파열음(/p, t, k/)이 강세 모음 앞 음절초 위치에 올 때 기식음([pʰ, tʰ, kʰ])으로 실현됩니다.\n예: pin [pʰɪn], top [tʰɑp], cool [kʰuːl]'},
+   e:'정확합니다. 기식음화 규칙의 핵심 환경: 무성 파열음(/p, t, k/)이 강세 모음 앞 음절초 위치에 올 때 기식음([pʰ, tʰ, kʰ])으로 실현됩니다. 이는 word-initial에 한정되지 않습니다.\n예: pin [pʰɪn], top [tʰɑp], cool [kʰuːl], apart [əˈpʰɑrt]'},
 
   {s:'Section A',st:'',sd:'',
    t:'ox', q:'/s/ 뒤에 오는 무성 파열음은 기식음으로 실현된다.',

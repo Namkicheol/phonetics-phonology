@@ -65,7 +65,7 @@ OX 퀴즈를 풀었다면 이 드릴에서 suffix 유형 분류와 IPA 강세 �
 
 - mountainéer: /ˌmaʊn.tɪˈnɪr/
 - kitchenétte: /ˌkɪtʃ.əˈnet/
-- realizátion: /ˌriː.ə.lɪˈzeɪ.ʃən/
+- realizátion: /ˌriː.ə.ləˈzeɪ.ʃən/
 
 </details>
 
@@ -73,17 +73,17 @@ OX 퀴즈를 풀었다면 이 드릴에서 suffix 유형 분류와 IPA 강세 �
 
 | 기본형 | suffix | 파생어 강세 (suffix 바로 앞 음절) |
 |--------|--------|---------------------------------|
-| périod /ˈpɪər.i.əd/ | -ic | peri**ó**dic: ? |
+| périod /ˈpɪə.ri.əd/ | -ic | peri**ó**dic: ? |
 | húmid /ˈhjuː.mɪd/ | -ity | hum**í**dity: ? |
-| géometry /dʒiˈɒm.ɪ.tri/ | -ical | geom**é**trical: ? |
+| geómetry /dʒiˈɒm.ə.tri/ | -ical | geom**é**trical: ? |
 | pérson /ˈpɜː.sən/ | -ify | pers**ó**nify: ? |
 
 <details>
 <summary>정답 확인</summary>
 
-- periódic: /ˌper.iˈɒd.ɪk/
-- humídity: /hjuːˈmɪd.ɪ.ti/
-- geométrical: /dʒiˈɒm.ɪ.trɪ.kəl/
+- periódic: /ˌpɪə.riˈɒd.ɪk/
+- humídity: /hjuːˈmɪd.ə.ti/
+- geométrical: /ˌdʒiː.əˈmet.rɪ.kəl/
 - persónify: /pəˈsɒn.ɪ.faɪ/
 
 </details>
@@ -97,7 +97,7 @@ OX 퀴즈를 풀었다면 이 드릴에서 suffix 유형 분류와 IPA 강세 �
 1. The word **Árabic** follows the regular -ic stress-shifting rule. ( )
 2. The suffix **-ness** in *happiness* shifts stress one syllable to the right. ( )
 3. In *persónify*, the stress falls on the syllable immediately before -ify. ( )
-4. The word **brúnette** contains the stress-bearing suffix -ette. ( )
+4. The word **brunétte** contains the stress-bearing suffix -ette. ( )
 5. The suffix **-y** in *photógraphy* behaves as a stress-shifting suffix. ( )
 
 <details>
@@ -106,7 +106,7 @@ OX 퀴즈를 풀었다면 이 드릴에서 suffix 유형 분류와 IPA 강세 �
 1. **X** — Arabic은 -ic의 예외어. stress-shifting 규칙이 적용되지 않고 첫 음절 Árabic에 강세.
 2. **X** — -ness는 stress-neutral suffix. 강세를 전혀 움직이지 않는다.
 3. **O** — persónify: -ify 바로 앞 음절 -son-에 강세. stress-shifting 규칙 정상 적용.
-4. **X** — brunétte는 단일 형태소(monomorphemic)이므로 suffix가 붙은 파생어가 아님.
+4. **X** — brunétte는 monomorphemic word이므로 suffix가 붙은 파생어가 아님.
 5. **O** — 명사 파생 -y (photography, homophony 등)는 stress-shifting suffix로 antepenult에 강세를 놓는다.
 
 </details>
@@ -122,7 +122,7 @@ OX 퀴즈를 풀었다면 이 드릴에서 suffix 유형 분류와 IPA 강세 �
 | húman → húmanist | -ist (neutral) | 강세 유지: húmanist |
 | húmid → humídity | -ity (shifting) | 강세 이동: humídity |
 | Japán → Japanése | -ese (bearing) | suffix로 이동: Japanése |
-| géometry → geométrical | -ical (shifting) | suffix 앞으로: geométrical |
+| geómetry → geométrical | -ical (shifting) | suffix 앞으로: geométrical |
 
 <span style="color:#319795;">**포인트**</span> — 같은 기본형에 서로 다른 suffix를 붙이면 강세가 달라질 수 있다. 이것이 바로 시험 출제 각도다.
 

@@ -150,6 +150,8 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
   </div>
 </div>
 
+<script src="./sounds.js"></script>
+<script src="./score-popup.js"></script>
 <script>
 const DATA = [
   {s:'Section A',st:'OX 확인 문제',
@@ -169,7 +171,7 @@ const DATA = [
    t:'ox',
    q:"'top'의 어두 /t/는 flapping된다.",
    a:false,
-   e:"✗ 오답. 어두 /t/는 강세모음 앞(not after)에 위치하므로 flapping 환경이 아닙니다. Flapping의 필수 조건은 강세모음 '뒤'입니다. 'top'의 /t/는 오히려 aspiration([tʰ])이 일어납니다."},
+   e:"✗ 오답. 어두 /t/는 강세모음 앞(not after)의 강세 음절 onset에 위치하므로 flapping 환경이 아닙니다. Flapping에서 앞 모음의 강세는 흔하지만 필수 조건은 아니며, target /t,d/가 stressed syllable에 있지 않아야 합니다. 'top'의 /t/는 aspiration([tʰ]) 환경입니다."},
 
   {s:'Section A',st:'',sd:'',
    t:'ox',

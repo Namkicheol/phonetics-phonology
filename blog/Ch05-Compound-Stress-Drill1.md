@@ -12,7 +12,7 @@ OX 퀴즈를 풀었다면 이 드릴에서 compound 강세 표기와 NP/compound
 
 ## 드릴 1 — compound vs NP 구별
 
-다음 표현이 compound이면 C, noun phrase이면 NP로 표시하고, 강세 위치를 ˈ로 표기하시오.
+다음 표현이 compound이면 C, noun phrase이면 NP로 표시하고, 강세 위치를 표기하시오.
 
 | 표현 | 의미 | C/NP | 강세 표기 |
 |------|------|------|----------|
@@ -45,13 +45,13 @@ OX 퀴즈를 풀었다면 이 드릴에서 compound 강세 표기와 NP/compound
 
 ## 드릴 2 — NSR 적용 연습
 
-다음 NP/문장에서 NSR에 따라 핵 강세를 받는 단어를 고르고, 강세 표기를 하시오.
+다음 NP/문장에서 NSR에 따라 nuclear stress를 받는 단어를 고르고, 강세 표기를 하시오.
 
-1. a tall **?** → beautiful woman
-2. She read a **?** → interesting book
-3. The cat sat on the **?** → mat
-4. He bought a red **?** → sports car
-5. university **?** → graduate student
+1. a beautiful **?**
+2. She read an interesting **?**
+3. The cat sat on the **?**
+4. He bought a red sports **?**
+5. university graduate **?**
 
 <details>
 <summary>정답 및 해설</summary>
@@ -66,13 +66,13 @@ OX 퀴즈를 풀었다면 이 드릴에서 compound 강세 표기와 NP/compound
 
 ---
 
-## 드릴 3 — complex compound 강세
+## 드릴 3 — 세 요소 이상 compound와 complex compound 강세
 
 다음 complex compound의 강세 위치를 표기하시오.
 
-| Complex compound | 강세 (첫 요소에 ˈ) |
-|-----------------|-------------------|
-| assembly line worker | **ássémbly** line worker |
+| 표현 | 강세 위치 |
+|------|-------------------|
+| assembly line worker | **assémbly** line worker |
 | high school student | ? |
 | pick up truck | ? |
 | high school student essay | ? |
@@ -85,7 +85,7 @@ OX 퀴즈를 풀었다면 이 드릴에서 compound 강세 표기와 NP/compound
 - **hígh** school student
 - **píck** up truck
 - **hígh** school student essay
-- **fórget**-me-not (첫 요소)
+- **forgét**-me-not (첫 요소)
 - **móther**-in-law (첫 요소)
 
 </details>
@@ -94,7 +94,7 @@ OX 퀴즈를 풀었다면 이 드릴에서 compound 강세 표기와 NP/compound
 
 ## 드릴 4 — 함정 판단 (O/X)
 
-1. *Whitehouse* (백악관)에서 강세는 두 번째 요소 *house*에 온다. ( )
+1. *White House* (백악관)에서 강세는 두 번째 요소 *House*에 온다. ( )
 2. compound verb *undertake*는 두 번째 요소 *take*에 강세가 온다. ( )
 3. NP *a green house* (녹색 집)에서 NSR에 따라 *house*에 강세가 온다. ( )
 4. complex compound *high school student*는 *student*에 주강세가 온다. ( )
@@ -103,11 +103,11 @@ OX 퀴즈를 풀었다면 이 드릴에서 compound 강세 표기와 NP/compound
 <details>
 <summary>정답 및 해설</summary>
 
-1. **X** — Whitehouse는 compound이므로 첫 요소 **Whíte**house
+1. **X** — White House는 compound이므로 첫 요소 **Whíte** House
 2. **O** — particle/adverb + V 구조(under + take)는 예외적으로 두 번째 요소에 강세
 3. **O** — NP에는 NSR 적용 → 가장 오른쪽 내용어 **hóuse**
 4. **X** — complex compound는 첫 요소에 강세 → **hígh** school student
-5. **O** — compound는 의미론적으로 구성 요소의 단순 합 이상의 의미(semantic specialization)를 가진다
+5. **X** — semantic specialization은 유용한 단서일 수 있으나 compound 판정의 단독 기준은 아니다.
 
 </details>
 
@@ -132,7 +132,7 @@ OX 퀴즈를 풀었다면 이 드릴에서 compound 강세 표기와 NP/compound
 
 ---
 
-<span style="color:#dd6b20;">**쌤 팁**</span> — 드릴을 마친 후 이 한 줄만 기억하자: **compound → 첫 요소 강세 / NP → NSR (마지막 내용어)**. 예외는 particle+V compound (두 번째 요소)와 고유명사 기반 compound 정도만 챙기면 된다.
+<span style="color:#dd6b20;">**쌤 팁**</span> — 이 드릴에서 다룬 기본 패턴은 **compound → 첫 요소 강세 / NP → NSR (마지막 내용어)**이다. 대표 예외로 particle+V compound는 두 번째 요소에 강세가 온다.
 
 ---
 

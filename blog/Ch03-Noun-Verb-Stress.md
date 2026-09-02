@@ -1,4 +1,4 @@
-<iframe src="https://namkicheol.github.io/phonetics-phonology/noun_verb_ox.html" width="100%" height="1000px" style="border: none; border-radius: 10px;"></iframe>
+<iframe src="https://namkicheol.github.io/phonetics-phonology/noun_verb_study.html" width="100%" height="1000px" style="border: none; border-radius: 10px;"></iframe>
 
 # 임용 음운론 Ch.3 Noun-Verb Stress 완전 정리: 품사로 갈리는 강세 이동·penult 규칙·vowel reduction
 
@@ -38,20 +38,20 @@
 
 - 2음절 **명사**: 약 <span style="color:#3182ce;">**81.7%**</span>가 penult(첫 음절) 강세.
 - 2음절 **형용사**: 약 <span style="color:#3182ce;">**81%**</span>가 penult 강세. (e.g. ˈactive, ˈcommon, ˈready)
-- 2음절 **동사**: 약 <span style="color:#3182ce;">**60% 이상**</span>이 ult(마지막 음절) 강세.
+- 2음절 **동사**: 약 <span style="color:#3182ce;">**47.6%**</span>가 ult, <span style="color:#3182ce;">**52.3%**</span>가 penult 강세.
 
-여기서 두 가지가 보인다. 첫째, 명사·형용사의 penult 경향(80%대)이 동사의 ult 경향(60%대)보다 더 강하다. 둘째, 동사의 40% 가까이는 이 경향을 따르지 않는다 — 즉 <span style="color:#c53030;">**동사라고 무조건 뒤 음절 강세는 아니다**</span>. 그래서 "예외"가 출제 포인트가 된다(④ 참조).
+여기서 두 가지가 보인다. 첫째, 명사·형용사는 penult 강세가 80%대로 뚜렷하다. 둘째, 동사는 ult와 penult 강세가 거의 반반이다 — 즉 <span style="color:#c53030;">**동사라고 무조건 뒤 음절 강세는 아니다**</span>. 개별 동사는 ult의 weight와 lexical pattern을 함께 확인해야 한다.
 
 ---
 
 ## ③ 판단 포인트 — penult 무게와 vowel reduction
 
-### penult이 가벼우면 강세가 뒤로 간다
+### penult가 가벼우면 강세가 뒤로 간다
 
 강세 위치를 단순히 "품사"로만 외우면 한 단계가 빠진다. 실제 영어 강세는 <span style="color:#3182ce;">**penult syllable weight(음절 무게)**</span>에 민감하다. 핵심 원리는 이렇다.
 
-- penult이 <span style="color:#3182ce;">**heavy**</span>(장모음·이중모음 또는 폐음절)면 → penult이 강세를 끈다.
-- penult 모음이 <span style="color:#3182ce;">**/ə/**</span>처럼 weightless면 → penult이 강세를 못 끌고 → 강세가 <span style="color:#3182ce;">**ult로 이동**</span>한다.
+- penult가 <span style="color:#3182ce;">**heavy**</span>(장모음·이중모음 또는 폐음절)면 → penult가 강세를 끈다.
+- penult 모음이 <span style="color:#3182ce;">**/ə/**</span>처럼 weightless면 → penult가 강세를 못 끌고 → 2음절어에서는 강세가 <span style="color:#3182ce;">**ult로 이동**</span>하며, 3음절 이상에서는 next left heavy로 간다.
 
 그래서 명사인데도 둘째 음절에 강세가 오는 경우가 생긴다.
 
@@ -84,7 +84,7 @@ object (V): /əbˈdʒekt/   — 강세가 2음절로, 1음절이 /ə/로 약화
 
 <span style="color:#c53030;">**⚠️ noun-verb 강세 이동은 tendency다.**</span> 동사인데도 첫 음절 강세를 유지하는 단어가 있다.
 
-- <span style="color:#c53030;">**love, show, call**</span> 등은 명사·동사 모두 첫 음절 강세 — 이동 없음.
+- <span style="color:#c53030;">**balance, visit**</span> 등은 2음절 동사이지만 penult 강세를 유지한다.
 
 "동사 = 무조건 뒤 음절"로 일반화한 선지는 이런 단어에서 깨진다.
 
@@ -102,7 +102,7 @@ object (V): /əbˈdʒekt/   — 강세가 2음절로, 1음절이 /ə/로 약화
 
 ### 복습 포인트
 
-<span style="color:#dd6b20;">**현직쌤 팁**</span> — noun-verb 강세 문항은 세 단계로 정리하면 안 틀린다. ① 품사를 확정(명사·형용사 → penult / 동사 → ult 경향), ② penult이 가벼운지(/ə/ 등) 확인해 강세가 뒤로 갈 가능성 점검, ③ 강세 이동에 따른 vowel reduction을 IPA에 반영. 마지막으로 love·show 같은 예외와 increase·protest 같은 "이동 있는" 짝을 한 번 더 떠올린다. 강세는 위치이자 모음 질이라는 점을 답안에 같이 적으면 분석이 완성된다.
+<span style="color:#dd6b20;">**현직쌤 팁**</span> — noun-verb 강세 문항은 세 단계로 정리하면 안 틀린다. ① 품사를 확정하고, ② N/Adj는 penult, V는 ult부터 weight를 확인하되 stressable하지 않으면 다음 왼쪽 heavy syllable을 찾으며, ③ 강세 이동에 따른 vowel reduction을 IPA에 반영한다. 마지막으로 balance·visit 같은 penult-stressed verbs와 increase·protest 같은 "이동 있는" 짝을 한 번 더 떠올린다. 강세는 위치이자 모음 질이라는 점을 답안에 같이 적으면 분석이 완성된다.
 
 ---
 

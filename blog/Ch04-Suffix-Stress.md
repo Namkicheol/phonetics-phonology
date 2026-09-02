@@ -18,12 +18,12 @@ suffix가 붙을 때 강세가 어디로 가는지가 임용 시험에서 핵심
 
 | 유형 | 강세 위치 | 대표 suffix | 예시 |
 |------|-----------|-------------|------|
-| stress-bearing | suffix 자체 | -ade, -eer, -ette, -ation, -ese, -ique | lémon → lemonáde / móuntain → mountainéer |
+| stress-bearing | suffix 자체 | -ade, -eer, -ette, -ation, -ese, -esque | lémon → lemonáde / móuntain → mountainéer |
 | stress-shifting | suffix 바로 앞 음절 | -ic, -ity, -ical, -ious, -ify, -ian | périod → periódic / húmid → humídity |
 | stress-neutral | 변화 없음 | -ness, -ful, -less, -ment, -ly, -er | fránk → fránkness / gráce → gráceful |
 
 <span style="color:#c53030;">**⚠️ 함정 1 — -ic 예외**</span>: stress-shifting suffix인 -ic에는 예외 단어가 있다.
-- <span style="color:#c53030;">**Árabic, lúnatic, ársenic**</span> → -ic임에도 앞 음절로 안 옮겨감. 임용에서 단골 함정!
+- <span style="color:#c53030;">**Árabic, lúnatic**</span> → -ic임에도 앞 음절로 안 옮겨감. 임용에서 단골 함정!
 
 <span style="color:#dd6b20;">**쌤 팁**</span> — 판단 순서: suffix를 먼저 찾고 → 어느 유형인지 분류 → 해당 규칙 적용. suffix 분류만 맞히면 강세는 기계적으로 따라온다.
 
@@ -31,20 +31,20 @@ suffix가 붙을 때 강세가 어디로 가는지가 임용 시험에서 핵심
 
 ## 2. stress-bearing suffix — suffix가 heavy syllable
 
-<span style="color:#319795;">**포인트**</span> — stress-bearing suffix는 항상 **heavy syllable** (장모음·이중모음 또는 폐음절)을 구성한다. 그래서 강세를 가질 수 있다.
+<span style="color:#319795;">**포인트**</span> — stress-bearing suffix는 항상 **heavy syllable** (long vowel/diphthong 또는 non-schwa short vowel + coda)를 구성한다. 그래서 강세를 가질 수 있다.
 
 | suffix | 기본형 → 파생어 | IPA (강세 위치) |
 |--------|----------------|----------------|
 | -ade | lémon → lemonáde | /ˌlem.ənˈeɪd/ |
 | -eer | móuntain → mountainéer | /ˌmaʊn.tɪˈnɪr/ |
 | -ette | kítchen → kitchenétte | /ˌkɪtʃ.əˈnet/ |
-| -ation | réalize → realizátion | /ˌriː.ə.lɪˈzeɪ.ʃən/ |
+| -ation | réalize → realizátion | /ˌriː.ə.ləˈzeɪ.ʃən/ |
 | -ese | Japán → Japanése | /ˌdʒæp.əˈniːz/ |
 | -esque | pícture → picturésque | /ˌpɪk.tʃəˈresk/ |
 
-<span style="color:#c53030;">**⚠️ 함정 2**</span> — 같은 형태의 monomorphemic 단어와 혼동 주의!
-- **kitchenétte** (suffix -ette가 붙은 파생어) vs. **brunétte** (단일 형태소 — suffix 아님)
-- **lemonáde** (파생어) vs. **brigáde** (단일 형태소)
+<span style="color:#c53030;">**⚠️ 함정 2**</span> — 같은 형태의 **monomorphemic word**와 혼동 주의!
+- **kitchenétte** (suffix -ette가 붙은 파생어) vs. **brunétte** (**monomorphemic word** — suffix 아님)
+- **lemonáde** (파생어) vs. **brigáde** (**monomorphemic word**)
 
 ---
 
@@ -54,9 +54,9 @@ suffix가 붙을 때 강세가 어디로 가는지가 임용 시험에서 핵심
 
 | suffix | 기본형 → 파생어 | 강세 이동 확인 |
 |--------|----------------|---------------|
-| -ic | périod → periódic | /ˈpɪə.ri.əd/ → /ˌper.iˈɒd.ɪk/ |
-| -ity | húmid → humídity | /ˈhjuː.mɪd/ → /hjuːˈmɪd.ɪ.ti/ |
-| -ical | geómetry → geométrical | /dʒiˈɒm.ɪ.tri/ → /dʒiˈɒm.ɪ.trɪ.kəl/ |
+| -ic | périod → periódic | /ˈpɪə.ri.əd/ → /ˌpɪə.riˈɒd.ɪk/ |
+| -ity | húmid → humídity | /ˈhjuː.mɪd/ → /hjuːˈmɪd.ə.ti/ |
+| -ical | geómetry → geométrical | /dʒiˈɒm.ə.tri/ → /ˌdʒiː.əˈmet.rɪ.kəl/ |
 | -ious | lábor → labórious | /ˈleɪ.bər/ → /ləˈbɔː.ri.əs/ |
 | -ian | líbrary → librárian | /ˈlaɪ.brər.i/ → /laɪˈbreər.i.ən/ |
 | -ify | pérson → persónify | /ˈpɜː.sən/ → /pəˈsɒn.ɪ.faɪ/ |
@@ -70,7 +70,7 @@ suffix가 붙을 때 강세가 어디로 가는지가 임용 시험에서 핵심
 
 8개의 **inflectional suffix**는 모두 stress-neutral이다. 또한 다수의 **derivational suffix**도 neutral이다.
 
-**inflectional suffix (전부 neutral)**: -s (plural/3인칭), -'s (소유격), -ed (과거), -en (과거분사), -ing (진행), -er (비교급), -est (최상급)
+**inflectional suffix (전부 neutral)**: -s (plural), -'s (possessive), -s (3rd-person singular present), -ing (progressive), -ed (past), -en/-ed (past participle), -er (comparative), -est (superlative)
 
 **neutral derivational suffix 주요 목록**:
 
@@ -89,8 +89,8 @@ suffix가 붙을 때 강세가 어디로 가는지가 임용 시험에서 핵심
 | -ship | fríendship |
 
 <span style="color:#c53030;">**⚠️ 함정 3 — -y의 두 가지 얼굴**</span>
-- 형용사 파생 **-y** (silky, milky) → stress-**neutral**
-- 명사 파생 **-y** (photography, homophony) → stress-**shifting** (antepenult으로)
+- **adjective-forming -y** (silky, milky) → stress-**neutral**
+- **noun-forming -y** (photography, homophony) → stress-**shifting** (antepenult으로)
 
 ---
 
@@ -102,7 +102,7 @@ suffix 확인
 stress-bearing? → suffix 자체에 강세
     ↓ No
 stress-shifting? → suffix 바로 앞 음절에 강세
-    (-ic 예외: Arabic, lunatic, arsenic)
+    (-ic 예외: Arabic, lunatic)
     ↓ No
 stress-neutral → 기본형 강세 그대로 유지
 ```
