@@ -170,7 +170,7 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
       <div class="c-title">1) 왜 음절 무게가 중요한가</div>
       <div class="def">
         영어 강세 배정에서 <b>음절의 무게(weight)</b>는 중요한 조건이다. 무거운(heavy) 음절은 강세를 <b>끌어당기는</b> 경향이 있고, 가벼운(light) 음절은 이 규칙에서 강세를 유인하지 못한다. 특히 schwa [ə]는 <b>"무게가 없는(weightless)" 모음</b>으로 취급되어 일차 강세를 받지 못한다.<br><br>
-        무게를 결정하는 것은 음절의 <span class="kw4">운(rhyme)</span> 구조다. 운이 branching(분지)하면 heavy, non-branching이면 light.
+        무게를 결정하는 것은 음절의 <span class="kw4">운(rhyme)</span> 구조다. 운이 branching(분지)하면 heavy, non-branching이면 일반적으로 light다. 단, schwa [ə]는 non-branching 구조여도 light가 아니라 weightless 예외로 처리한다.
       </div>
     </div>
 
@@ -183,7 +183,7 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
           <div class="gi-title" style="color:#b71c1c">⚫ Heavy Syllable (중음절)</div>
           <div class="gi-body">
             <span>① 장모음 또는 이중모음 포함 (ex. [eɪ], [oʊ], [iː])</span>
-            <span>② 단모음 + 코다 자음 (CVC, CVCC)</span>
+            <span>② schwa가 아닌 단모음 + 코다 자음 (CVC, CVCC)</span>
             <span>→ 운이 branching = <b>강세를 받을 수 있음</b></span>
             <span style="margin-top:8px;font-family:'JetBrains Mono',monospace;color:#b71c1c">
               -<b>gráph</b>: [æ] + coda [f] → heavy ✓<br>
@@ -196,10 +196,10 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
           <div class="gi-title">⚪ Light Syllable (경음절)</div>
           <div class="gi-body">
             <span>① 단모음 + 코다 없음 (CV 구조)</span>
-            <span>② schwa [ə] — 항상 weightless</span>
-            <span>→ 운이 non-branching = <b>light</b></span>
+            <span>② schwa [ə] — light와 구별해 weightless로 처리</span>
+            <span>→ non-schwa CV는 non-branching = <b>light</b></span>
             <span style="margin-top:8px;font-family:'JetBrains Mono',monospace;color:#4a6a8a">
-              -<b>ta</b>-: [tə] → light (schwa)<br>
+              -<b>ta</b>-: [tə] → weightless (schwa)<br>
               -<b>li</b>-: [lɪ] (짧은 단모음, 코다 없음) → light<br>
               -<b>ty</b>: [ti] 마지막 개방음절 → light
             </span>
@@ -230,7 +230,7 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
     <div class="concept">
       <div class="c-title">4) Schwa의 Weightless 특성 — 핵심</div>
       <div class="def">
-        Schwa [ə]는 완전히 약화된 모음으로 무게가 없다(weightless). 3음절 이상 N/Adj에서 penult가 stressable하지 않으면 왼쪽의 다음 heavy 음절에 강세를 배정한다. 아래 3음절 예시에서는 그 위치가 <b>antepenult</b>다.
+        Schwa [ə]는 완전히 약화된 모음으로 무게가 없다(weightless). 2음절 N/Adj에서 penult가 schwa이면 ult에 강세가 오며, 3음절 이상 N/Adj에서 penult가 stressable하지 않으면 왼쪽의 다음 heavy 음절에 강세를 배정한다. 아래 3음절 예시에서는 그 위치가 <b>antepenult</b>다.
       </div>
       <div class="grid col2" style="margin-top:12px">
         <div class="grid-item">
@@ -243,10 +243,10 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
           </div>
         </div>
         <div class="grid-item">
-          <div class="gi-title">Penult unstressable/light → antepenult 강세</div>
+          <div class="gi-title">3음절 이상: penult unstressable → 다음 left heavy 강세</div>
           <div class="gi-body">
             <span><span class="kw4">ˈcalendar /ˈkæl.ən.dɚ/ variant</span>: penult nucleus [ə] → weightless</span>
-            <span><span class="kw4">ˈanimal</span>: penult [ɪ] → light (open syllable)</span>
+            <span><span class="kw4">ˈanimal</span>: penult realization [ə] or [ɪ] — [ə] = weightless; [ɪ] = light (short-vowel open syllable); either way → antepenult stress</span>
             <span><span class="kw4">aˈstronomy</span>: penult [nə] → ə = weightless</span>
             <span><span class="kw4">caˈtastrophe</span>: penult [trə] → ə = weightless</span>
           </div>
@@ -285,9 +285,9 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
       <div class="rule-box">
         <div class="rule-label">N/Adj Stress Rule (AEP Ch.7)</div>
         <div class="rule-text">
-          Step 1. <b>Penult가 heavy(stressable)</b>하면 → <span class="kw4">penult 강세</span><br>
-          Step 2. Penult가 <b>weightless [ə]</b>이면 → 왼쪽으로 이동해 <span class="kw3">다음 heavy 음절 강세</span><br>
-          Step 3. 2음절의 경우 기본값(default) = <span class="kw2">penult 강세</span> (실측 약 81%)
+          Step 1. <b>2음절 N/Adj</b>: penult가 weightless [ə]이면 → <span class="kw3">ult 강세</span>; 그 밖에는 penult 강세가 기본값(default)이다.<br>
+          Step 2. <b>3음절 이상 N/Adj</b>: penult가 heavy(stressable)하면 → <span class="kw4">penult 강세</span><br>
+          Step 3. penult가 <b>stressable하지 않으면</b> → 왼쪽으로 이동해 <span class="kw3">다음 heavy 음절 강세</span>
         </div>
       </div>
       <p class="note" style="margin-top:12px">Hammond(1999)의 2만 단어 분석에서 2음절 N의 81.7%가 penult 강세. 이는 영어에서 "명사는 첫 음절 강세"라는 일반 인식의 근거다.</p>
@@ -322,7 +322,7 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
             <span>apˈpeal / baˈloon</span>
             <span>caˈnoe / Jaˈpan</span>
             <span>maˈchine / giˈraffe</span>
-            <span>→ penult이 ə이므로 ult 강세</span>
+            <span>→ 2음절에서 penult [ə]가 weightless이므로 ult 강세</span>
           </div>
         </div>
       </div>
@@ -358,10 +358,10 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
           </tr>
           <tr>
             <td style="font-family:'JetBrains Mono',monospace">ˈanimal</td>
-            <td style="font-family:'JetBrains Mono',monospace">-i- [ɪ]</td>
-            <td>light (open)</td>
+            <td style="font-family:'JetBrains Mono',monospace">-i- [ə] or [ɪ] (pronunciation variant)</td>
+            <td>[ə] = weightless / [ɪ] = light (short-vowel open)</td>
             <td><span class="kw3">antepenult</span></td>
-            <td>short vowel + coda 없음</td>
+            <td>두 분석 모두 penult가 stress 조건을 충족하지 않아 antepenult 강세</td>
           </tr>
           <tr>
             <td style="font-family:'JetBrains Mono',monospace">barraˈcuda</td>
@@ -611,7 +611,7 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
     <div class="concept">
       <div class="c-title">1) 강세 위계 체계 — 3가지 음절 유형</div>
       <div class="def">
-        길고 복잡한 단어에서는 하나의 음절만 부각되는 게 아니라 <b>두 개 이상의 음절이 두드러지는(prominent)</b> 경우가 있다. 이때 <b>주요 음조 변화(major pitch change = tonic accent)</b>가 일어나는 음절이 일차 강세, 그렇지 않은 두드러진 음절이 이차 강세다.
+        길고 복잡한 단어에서는 하나의 음절만 부각되는 게 아니라 <b>두 개 이상의 음절이 두드러지는(prominent)</b> 경우가 있다. 단어 안에서는 primary stress가 하나이고, 추가로 두드러진 음절은 secondary stress다. 이 단어 단위의 primary stress가 <b>주요 음조 변화(major pitch change = tonic accent)</b>와 연결된다.
       </div>
       <div class="stage-wrap">
         <table>
@@ -638,7 +638,7 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
           </tr>
         </table>
       </div>
-      <p class="note" style="margin-top:12px"><span class="kw2">Tonic accent</span>: 문장/단어 내에서 주요 음조(pitch) 변화가 일어나는 지점. 일차 강세 음절과 일치함.</p>
+      <p class="note" style="margin-top:12px"><span class="kw2">Tonic accent</span>: tone group 안에서 주요 음조(pitch) 변화가 일어나는 지점. 단어 내부에서는 primary stress와 연결되며, 여러 tone group이 있는 발화에서는 tonic accent가 여럿일 수 있다.</p>
       <p class="note">강세를 받는 음절은 반드시 <b>full vowel</b>(완전 모음, 즉 비 schwa)을 가진다 — 이것이 강세와 모음 약화의 연결고리.</p>
     </div>
 
@@ -759,7 +759,7 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
           <tr>
             <td><span class="kw4">-ic</span></td>
             <td>ˈperiod → periˈodic &nbsp;/&nbsp; ˈphoto → photoˈgraphic</td>
-            <td><span class="kw4">예외: ˈArabic, ˈlunatic, ˈheretic, ˈcatholic</span> (규칙대로면 aˈrabic이어야 하나 실제는 ˈArabic)</td>
+            <td><span class="kw4">AEP 예외: ˈArabic, ˈlunatic</span></td>
           </tr>
           <tr>
             <td><span class="kw4">-ify</span></td>
@@ -805,9 +805,9 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
       </div>
 
       <div class="caution">
-        <div class="caution-label">⚠️ -ic 예외 암기 필수</div>
-        ˈArabic / ˈlunatic / ˈheretic / ˈcatholic / ˈpolitic<br>
-        이 단어들은 -ic가 붙어도 이전 규칙대로라면 강세가 이동해야 하지만 역사적 이유로 첫 음절 강세를 유지. 시험에서 "다음 중 -ic가 붙어도 첫 음절 강세인 단어는?" 형태로 출제됨.
+        <div class="caution-label">⚠️ AEP -ic 예외</div>
+        ˈArabic / ˈlunatic<br>
+        AEP는 이 두 단어를 -ic의 일반적인 직전 음절 강세 규칙의 예외로 제시한다.
       </div>
     </div>
 
@@ -870,7 +870,7 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
     <div class="concept">
       <div class="c-title">1) 핵심 원리</div>
       <div class="def">
-        두 단어가 결합할 때 <b>하나의 새로운 의미 단위(합성어)</b>를 형성하면 첫 번째 요소에 강세가 온다. 반면 <b>단순 수식 관계(명사구)</b>라면 핵어(head)인 두 번째 요소에 강세가 온다. 이 차이는 <b>의미(의미의 특수화 여부)</b>로 판별한다.
+        두 단어가 결합해 <b>하나의 새로운 의미 단위(합성어)</b>를 형성하면 단어 전체의 primary stress는 첫 번째 요소에 온다. 다른 prominence가 있으면 secondary stress로 표기한다. 반면 <b>단순 수식 관계(명사구)</b>라면 핵어(head)인 두 번째 요소에 강세가 온다. 이 차이는 <b>의미(의미의 특수화 여부)</b>로 판별한다.
       </div>
       <div class="grid col2" style="margin-top:14px">
         <div class="grid-item" style="border-left:4px solid #b71c1c">
@@ -1123,7 +1123,7 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
       <div class="exam-label">📝 출제 포인트</div>
       <p>• 체인 문항은 반드시 <b>IPA 전사 + 강세 기호 포함</b>해서 쓰는 연습 필수</p>
       <p>• 각 파생 단계마다 "어떤 접미사? → bearing/shifting/neutral? → 강세 위치는?" 논리 흐름을 빠르게 서술 가능하게</p>
-      <p>• -ic 예외 (ˈArabic, ˈlunatic, ˈheretic) 는 체인 문항에서 함정으로 출제 가능</p>
+      <p>• AEP가 제시한 -ic 예외는 ˈArabic, ˈlunatic</p>
     </div>
 
   </div>
