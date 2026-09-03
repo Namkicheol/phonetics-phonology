@@ -58,7 +58,7 @@ Aspiration은 단어 첫소리에만 국한되지 않는다. <span style="color:
 - attack [əˈtʰæk] — /t/ 가 강세 음절 onset
 - occur [əˈkʰɝ] — /k/ 가 강세 음절 onset
 
-2022 A-6의 분석에서는 이 강세 음절 onset을 <span style="color:#3182ce;">**foot-initial position**</span> 으로 다룬다. <span style="color:#3182ce;">**trochaic foot**</span> 의 strong syllable onset이 해당 환경이며, 이 연결이 2022학년도 시험에 직접 출제됐다(③ 기출 맥락 참조).
+2022 A-6의 제시 자료에서는 이 강세 음절 onset을 <span style="color:#3182ce;">**foot-initial position**</span> 으로 다룬다. 이 연결은 해당 기출 자료의 분석 기준이며, foot-initial이라는 표현만으로 모든 영어 자료·방언의 aspiration degree를 일반화하지 않는다.
 
 ---
 
@@ -80,7 +80,7 @@ spy / sty / sky 도 같은 원리로 모두 unaspirated. 입 앞에 종이를 �
 
 ## ② 기출 맥락
 
-<span style="color:#c53030;">**2022 A-6**</span> — <span style="color:#3182ce;">**voiceless stop aspiration**</span> 이 <span style="color:#3182ce;">**foot-initial position**</span> 에서 일어남을 분석하는 문항. 핵심 음운 규칙은 강세 음절 onset = foot-initial = aspiration 환경이라는 연결이다.
+<span style="color:#c53030;">**2022 A-6**</span> — 제시 자료에서 <span style="color:#3182ce;">**voiceless stop aspiration**</span> 을 <span style="color:#3182ce;">**foot-initial position**</span> 으로 분석하는 문항.
 
 - **disentangle** — target /t/가 stressed syllable onset, 즉 foot-initial position에 있어 <span style="color:#319795;">**[tʰ]**</span> 로 실현.
 - **accountability** — /k/가 secondary-stressed syllable onset, 즉 foot-initial position에 있어 <span style="color:#319795;">**[kʰ]**</span> 로 실현.
@@ -96,7 +96,7 @@ spy / sty / sky 도 같은 원리로 모두 unaspirated. 입 앞에 종이를 �
 | | Aspirated [pʰ, tʰ, kʰ] | Unaspirated [p, t, k] |
 |---|---|---|
 | **VOT** | long lag (> 30 ms) | short lag (≈ 0) |
-| **환경** | foot-initial position에서 strongest | /s/ 뒤 · coda · foot-initial이 아닌 position |
+| **환경** | strong aspiration의 핵심 환경: stressed-syllable onset | /s/ 뒤 · coda; 다른 onset은 degree를 일률적으로 단정하지 않음 |
 | **예** | pin, top, cool, apart | spin, stop, school |
 
 ### 영어 allophone vs 한국어 phoneme
@@ -139,11 +139,11 @@ spy / sty / sky 도 같은 원리로 모두 unaspirated. 입 앞에 종이를 �
 
 <span style="color:#c53030;">**⚠️ 음소 지위는 언어별**</span>: 영어 [pʰ]/[p] = allophone, 한국어 /ㅍ//ㅂ/ = phoneme. "기식음은 별개 음소"라고 일반화하면 영어에서 오답.
 
-<span style="color:#c53030;">**⚠️ 기식의 정도를 구별**</span>: foot-initial position에서 aspiration이 가장 강하다. 다른 onset position에서도 기식의 정도가 나타날 수 있으므로, 기출의 rule environment는 strong aspiration이 나타나는 foot 구조로 판별한다.
+<span style="color:#c53030;">**⚠️ 기식의 정도를 구별**</span>: strong aspiration의 기본 환경은 stressed-syllable onset이다. 다른 onset의 약한 aspiration degree는 방언·발화 조건에 따라 달라질 수 있으므로, broad transcription의 [ʰ] 표기와 구분한다.
 
 ### 복습 포인트
 
-<span style="color:#dd6b20;">**현직쌤 팁**</span>: Aspiration 문항은 결국 **세 환경 판별**로 압축된다 — ① foot-initial position인가(→ strongest aspiration), ② /s/ 뒤인가(→ unaspirated), ③ coda인가(→ strong aspiration 환경이 아님). 단어를 보면 강세 위치부터 찍고, /s/ cluster 여부를 확인한 뒤 onset/coda를 가른다. 음소 지위를 묻는 문항이면 영어 complementary distribution vs 한국어 minimal pair 대조를 반드시 함께 적는다.
+<span style="color:#dd6b20;">**현직쌤 팁**</span>: Aspiration 문항은 세 환경을 구분한다 — ① 기출 자료에서 foot-initial/stressed-syllable onset인가, ② /s/ 뒤인가, ③ coda인가. 단어를 보면 강세 위치부터 찍고, /s/ cluster 여부를 확인한 뒤 onset/coda를 가른다. 음소 지위를 묻는 문항이면 영어 complementary distribution vs 한국어 minimal pair 대조를 반드시 함께 적는다.
 
 ---
 

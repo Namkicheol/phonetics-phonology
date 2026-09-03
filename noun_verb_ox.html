@@ -138,9 +138,9 @@ let cur=0,answers=new Array(TOTAL).fill(null);
 function getScore(){return answers.filter(a=>a&&a.correct).length;}
 const Q=[
   {src:"Noun Stress",cat:"2음절 명사 강세",
-   text:"2음절 단어에서 명사는 일반적으로 <span class='kw1'>첫 번째 음절</span>에 강세가 온다.",
+   text:"AEP가 다루는 2음절 명사는 일반적으로 <span class='kw1'>첫 번째 음절</span>에 강세가 온다.",
    ans:true,
-   correct:"정확하다. 2음절 명사의 기본 강세 위치는 penult(2음절어에서는 첫 음절)다. e.g. <span class='kw2'>ˈrecord, ˈpermit, ˈconduct</span>",
+   correct:"정확하다. AEP의 2음절 명사 강세 일반화에서 기본 강세 위치는 penult(2음절어에서는 첫 음절)다. e.g. <span class='kw2'>ˈrecord, ˈpermit, ˈconduct</span>",
    why:"Yavaş(2011): 2음절 명사에서 penult(첫 음절) 강세가 약 81.7%로 압도적으로 우세합니다. 이 원칙이 명사/동사 강세 이동의 기반이 됩니다.",
    source:"Disyllabic nouns: penult stress over 80% (81.7%). e.g. <span class='kw2'>ˈrecord, ˈpermit, ˈobject</span>. (Yavaş 2011)",
    compare:[{title:"2음절 명사",desc:"<span class='kw2'>penult</span> 강세 · 81.7%"},{title:"2음절 동사",desc:"ult 47.6% · penult 52.3%"}]},
@@ -237,9 +237,9 @@ const Q=[
    text:"<span class='kw3'>insult</span>이 명사일 때와 동사일 때 강세 위치가 다르다.",
    ans:true,
    correct:"정확하다. <span class='kw2'>ˈinsult</span> (n) vs <span class='kw2'>inˈsult</span> (v).",
-   why:"insult은 record, permit, conduct와 함께 명사/동사 강세 이동의 핵심 예시입니다. 명사는 첫 음절, 동사는 두 번째 음절에 강세가 옵니다.",
+   why:"insult은 명사/동사 강세 이동을 보이는 예시입니다. 명사는 첫 음절, 동사는 두 번째 음절에 강세가 오지만, 두 형태의 첫 음절 모음은 모두 [ɪ]로 유지되어 vowel reduction의 예는 아닙니다.",
    source:"<span class='kw2'>ˈinsult</span> (n: 모욕) vs. <span class='kw2'>inˈsult</span> (v: 모욕하다). (Yavaş 2011)",
-   compare:[{title:"명사 ˈinsult",desc:"/ˈɪnsʌlt/ — 1번째 강세"},{title:"동사 inˈsult",desc:"/ɪnˈsʌlt/ — 2번째 강세"}]},
+   compare:[{title:"명사 ˈinsult",desc:"/ˈɪnsʌlt/ — 1번째 강세"},{title:"동사 inˈsult",desc:"/ɪnˈsʌlt/ — 2번째 강세 · 첫 모음 [ɪ] 유지"}]},
 
   {src:"Stress Shift",cat:"3음절 이상",
    text:"명사/동사 강세 이동 규칙은 <span class='kw2'>3음절 이상</span> 단어에도 동일하게 적용된다.",

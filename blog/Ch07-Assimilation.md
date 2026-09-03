@@ -106,15 +106,11 @@ English inflectional suffixes -s와 -ed의 voicing은 preceding stem-final segme
 
 ## ② 기출 맥락
 
-<span style="color:#c53030;">**2010 Q31**</span> — Place assimilation rule 적용: /n/ → [m]/[ŋ] 환경에서 regressive 방향, trigger(뒤 consonant), target(앞 /n/)을 판별.
+<span style="color:#c53030;">**2010.30**</span> — Assimilation 기출 연결점.
 
-<span style="color:#c53030;">**2011 Q30**</span> — 음운 규칙과 Assimilation 현상 적용.
+<span style="color:#c53030;">**2019 A-4**</span> — velar nasal assimilation의 obligatory pattern을 /n/ 앞 stressed vowel·뒤 unstressed vowel이라는 prosodic condition으로 판별.
 
-<span style="color:#c53030;">**2015 기입1**</span> — Voice assimilation rule 적용: 복수 -s, 과거 -ed의 [s]/[z], [t]/[d] 교체 조건. Progressive voice assimilation.
-
-<span style="color:#c53030;">**2017 기입1**</span> — nasal assimilation 규칙 환경 파악: in+possible → impossible. /n/ → [m] / ___ [p] (bilabial). Regressive place assimilation 확인.
-
-<span style="color:#c53030;">**2020 B-3**</span> — il-/ir- 배분 조건: 어근 첫 자음이 /l/이면 il-, /r/이면 ir- 선택. Liquid manner assimilation 원리 적용.
+<span style="color:#c53030;">**2020 B-3**</span> — il-/ir-는 assimilation, -al/-ar는 dissimilation. 두 allomorph pattern을 [lateral] value로 구별.
 
 ---
 
