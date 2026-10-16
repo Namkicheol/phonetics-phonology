@@ -152,7 +152,8 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 </div>
 
 <script src="./sounds.js"></script>
-<script src="./score-popup.js"></script>
+<script src="./score-popup.js?v=20261016-random1"></script>
+<script src="./quiz-order.js?v=20261016-random1"></script>
 <script>
 const DATA = [
   /* ── Section A: OX 퀴즈 ── */
@@ -244,6 +245,8 @@ const DATA = [
    labels:['숫자:'],
    e:'정답: 1\n\nYavaş 수치 체계:\n· 1 = primary stress (세 가지 +: +stress, +tonic accent, +full V)\n· 2 = secondary stress (+stress, -tonic accent, +full V)\n· 3 = full vowel이 있는 비강세 음절\n· 4 = 약화(reduced) 음절, schwa 포함\n\n예: photographic = 2 4 1 4'}
 ];
+
+const quizOrder = QuizOrder.create(DATA, {restart: reset});
 
 let ANS, COR;
 
@@ -382,6 +385,7 @@ function showResult() {
 }
 
 function reset() {
+  quizOrder.reset();
   build();
   window.scrollTo({top: 0, behavior: 'smooth'});
 }

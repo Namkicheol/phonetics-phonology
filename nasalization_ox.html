@@ -83,6 +83,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:r
 .nd:hover:not(.cur){opacity:.7}
 #nav{display:flex;flex-wrap:wrap;gap:5px;max-width:720px;margin:0 auto 16px;padding:0 8px}
 </style>
+<link rel="stylesheet" href="./quiz-study-figures.css?v=20261016">
 </head>
 <body>
 <style>
@@ -130,7 +131,9 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:r
   </div>
 </div>
 <script src="./sounds.js"></script>
-<script src="./score-popup.js"></script>
+<script src="./score-popup.js?v=20261016-random1"></script>
+<script src="./quiz-order.js?v=20261016-random1"></script>
+<script src="./quiz-study-figures.js?v=20261016"></script>
 <script>
 const SAVE_KEY='ox_phon_nasal_v1';
 const TOTAL=15;
@@ -156,7 +159,7 @@ const Q=[
 function renderExp(q,isCorrect){
   const three=q.compare&&q.compare.length===3;
   const cmp=q.compare?`<div class="sec-label">📊 비교 정리</div><div class="compare${three?' three':''}">${q.compare.map(c=>`<div class="compare-item"><div class="ci-title">${c.title}</div><p>${c.desc}</p></div>`).join('')}</div>`:'';
-  return `<div class="exp show"><div class="exp-header"><span>${isCorrect?'✅ 정답':'❌ 오답'} · 해설</span></div><div class="exp-answer"><div class="ans-label">핵심 정정</div><div class="ans-text">${q.correct}</div></div><div class="exp-body"><div class="sec-label">📖 상세 설명</div><p>${q.why}</p><div class="sec-label">📌 Source</div><div class="def-box"><p>${q.source}</p></div>${cmp}</div></div>`;
+  return `<div class="exp show"><div class="exp-header"><span>${isCorrect?'✅ 정답':'❌ 오답'} · 해설</span></div><div class="exp-answer"><div class="ans-label">핵심 정정</div><div class="ans-text">${q.correct}</div></div><div class="exp-body"><div class="sec-label">📖 상세 설명</div><p>${q.why}</p><div class="sec-label">📌 Source</div><div class="def-box"><p>${q.source}</p></div>${cmp}</div></div>${window.QuizStudyFigures ? window.QuizStudyFigures.render(q) : ''}`;
 }
 function renderNav(){
   document.getElementById('nav').innerHTML=answers.map((a,i)=>{
@@ -175,7 +178,7 @@ function render(){
     const p=s/TOTAL;
     document.getElementById('rm').textContent=p===1?'🎉 Perfect!':p>=.8?'👏 Great!':p>=.6?'😊 Good!':'💪 Keep going!';
     document.getElementById('rs').textContent=`${TOTAL}문제 중 ${s}문제 정답 (${Math.round(p*100)}%)`;
-    setTimeout(function(){window.showScorePopup&&window.showScorePopup(s,TOTAL);},400);
+    quizOrder.resultLater(function(){if(cur>=TOTAL)window.showScorePopup&&window.showScorePopup(s,TOTAL);});
     renderNav();return;
   }
   document.getElementById('sc').classList.remove('show');
@@ -214,16 +217,17 @@ function pick(val){
 }
 function next(){cur++;saveProgress();render();}
 function jumpTo(i){cur=i;render();document.getElementById('qa').scrollIntoView({behavior:'smooth',block:'start'});}
-function saveProgress(){localStorage.setItem(SAVE_KEY,JSON.stringify({cur,answers}));}
-function freshStart(){localStorage.removeItem(SAVE_KEY);cur=0;answers=new Array(TOTAL).fill(null);document.getElementById('rb').style.display='none';document.getElementById('sc').classList.remove('show');document.getElementById('qa').style.display='block';renderNav();render();}
+function saveProgress(){quizOrder.save({cur,answers});}
+function freshStart(){quizOrder.reset();cur=0;answers=new Array(TOTAL).fill(null);document.getElementById('rb').style.display='none';document.getElementById('sc').classList.remove('show');document.getElementById('qa').style.display='block';renderNav();render();saveProgress();}
+const quizOrder=QuizOrder.create(Q,{saveKey:SAVE_KEY,restart:freshStart});
 (function(){
-  const saved=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');
+  const saved=quizOrder.progress;
   if(saved&&saved.answers&&saved.cur>=0&&saved.cur<TOTAL){
     cur=saved.cur;answers=saved.answers;
     const done=answers.filter(a=>a!==null).length;
     if(done>0){document.getElementById('rb-msg').textContent=`이어서 풀기 중 · ${done}/${TOTAL} 문제 완료 (정답 ${getScore()}개)`;document.getElementById('rb').style.display='block';}
   }
-  renderNav();render();
+  renderNav();render();saveProgress();
 })();
 </script>
 <script src="./study-return.js" data-hub-label="음성·음운론 허브"></script>

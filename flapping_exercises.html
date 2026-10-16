@@ -151,7 +151,8 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 </div>
 
 <script src="./sounds.js"></script>
-<script src="./score-popup.js"></script>
+<script src="./score-popup.js?v=20261016-random1"></script>
+<script src="./quiz-order.js?v=20261016-random1"></script>
 <script>
 const DATA = [
   {s:'Section A',st:'OX 확인 문제',
@@ -272,6 +273,8 @@ const DATA = [
    labels:['target syllable:'],
    e:'정답: unstressed. Flapping target /t,d/는 intervocalic unstressed syllable에 있어야 합니다. 앞 모음의 stress는 필수 조건이 아닙니다.'}
 ];
+
+const quizOrder = QuizOrder.create(DATA, {restart: reset});
 
 let ANS, COR;
 
@@ -408,6 +411,7 @@ function showResult() {
 }
 
 function reset() {
+  quizOrder.reset();
   build();
   window.scrollTo({top: 0, behavior: 'smooth'});
 }

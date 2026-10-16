@@ -130,7 +130,8 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:r
   </div>
 </div>
 <script src="./sounds.js"></script>
-<script src="./score-popup.js"></script>
+<script src="./score-popup.js?v=20261016-random1"></script>
+<script src="./quiz-order.js?v=20261016-random1"></script>
 <script>
 const SAVE_KEY='ox_phon_schwa_v1';
 const TOTAL=15;
@@ -175,7 +176,7 @@ function render(){
     const p=s/TOTAL;
     document.getElementById('rm').textContent=p===1?'🎉 Perfect!':p>=.8?'👏 Great!':p>=.6?'😊 Good!':'💪 Keep going!';
     document.getElementById('rs').textContent=`${TOTAL}문제 중 ${s}문제 정답 (${Math.round(p*100)}%)`;
-    setTimeout(function(){window.showScorePopup&&window.showScorePopup(s,TOTAL);},400);
+    quizOrder.resultLater(function(){if(cur>=TOTAL)window.showScorePopup&&window.showScorePopup(s,TOTAL);});
     renderNav();return;
   }
   document.getElementById('sc').classList.remove('show');
@@ -214,16 +215,17 @@ function pick(val){
 }
 function next(){cur++;saveProgress();render();}
 function jumpTo(i){cur=i;render();document.getElementById('qa').scrollIntoView({behavior:'smooth',block:'start'});}
-function saveProgress(){localStorage.setItem(SAVE_KEY,JSON.stringify({cur,answers}));}
-function freshStart(){localStorage.removeItem(SAVE_KEY);cur=0;answers=new Array(TOTAL).fill(null);document.getElementById('rb').style.display='none';document.getElementById('sc').classList.remove('show');document.getElementById('qa').style.display='block';renderNav();render();}
+function saveProgress(){quizOrder.save({cur,answers});}
+function freshStart(){quizOrder.reset();cur=0;answers=new Array(TOTAL).fill(null);document.getElementById('rb').style.display='none';document.getElementById('sc').classList.remove('show');document.getElementById('qa').style.display='block';renderNav();render();saveProgress();}
+const quizOrder=QuizOrder.create(Q,{saveKey:SAVE_KEY,restart:freshStart});
 (function(){
-  const saved=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');
+  const saved=quizOrder.progress;
   if(saved&&saved.answers&&saved.cur>=0&&saved.cur<TOTAL){
     cur=saved.cur;answers=saved.answers;
     const done=answers.filter(a=>a!==null).length;
     if(done>0){document.getElementById('rb-msg').textContent=`이어서 풀기 중 · ${done}/${TOTAL} 문제 완료 (정답 ${getScore()}개)`;document.getElementById('rb').style.display='block';}
   }
-  renderNav();render();
+  renderNav();render();saveProgress();
 })();
 </script>
 <script src="./study-return.js" data-hub-label="음성·음운론 허브"></script>

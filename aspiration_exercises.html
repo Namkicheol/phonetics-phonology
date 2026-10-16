@@ -151,7 +151,8 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 </div>
 
 <script src="./sounds.js"></script>
-<script src="./score-popup.js"></script>
+<script src="./score-popup.js?v=20261016-random1"></script>
+<script src="./quiz-order.js?v=20261016-random1"></script>
 <script>
 const DATA = [
   // Section A: OX (5문항)
@@ -265,6 +266,8 @@ const DATA = [
    labels:['규칙 지위 →'],
    e:'기식음화는 allophonic rule(변이음 규칙)입니다.\n[pʰ]와 [p]가 상보적 분포를 이루고 의미를 구별하지 않으므로 변이음 규칙입니다.\n음소 규칙이었다면 [pʰ]와 [p]의 차이로 의미가 달라지는 최소 대립쌍이 있어야 합니다.'}
 ];
+
+const quizOrder = QuizOrder.create(DATA, {restart: reset});
 
 let ANS, COR;
 
@@ -403,6 +406,7 @@ function showResult() {
 }
 
 function reset() {
+  quizOrder.reset();
   build();
   window.scrollTo({top: 0, behavior: 'smooth'});
 }

@@ -151,7 +151,8 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 </div>
 
 <script src="./sounds.js"></script>
-<script src="./score-popup.js"></script>
+<script src="./score-popup.js?v=20261016-random1"></script>
+<script src="./quiz-order.js?v=20261016-random1"></script>
 <script>
 const DATA = [
   // Section A: OX (5문항)
@@ -265,6 +266,8 @@ const DATA = [
    labels:['리듬 유형 →'],
    e:'Vowel reduction은 영어의 "stress-timed" 리듬과 관련이 있습니다.\nStress-timed: 강세 음절이 등간격으로, 비강세 음절이 압축되어 실현됩니다.\n이 압축 과정에서 비강세 음절 모음이 /ə/로 약화됩니다.'}
 ];
+
+const quizOrder = QuizOrder.create(DATA, {restart: reset});
 
 let ANS, COR;
 
@@ -403,6 +406,7 @@ function showResult() {
 }
 
 function reset() {
+  quizOrder.reset();
   build();
   window.scrollTo({top: 0, behavior: 'smooth'});
 }

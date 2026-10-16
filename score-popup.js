@@ -87,6 +87,7 @@
     }
     var end = Date.now() + duration;
     function draw() {
+      if (!canvas.isConnected) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       var now = Date.now();
       var remaining = Math.max(0, end - now);
@@ -106,7 +107,7 @@
           ctx.fillRect(p.x + tilt, p.y, p.r, p.r * .5);
         }
       });
-      if (now < end) requestAnimationFrame(draw);
+      if (now < end) canvas._frame = requestAnimationFrame(draw);
       else canvas.remove();
     }
     draw();
@@ -181,7 +182,13 @@
     if (opts.nextText) {
       document.getElementById('sp-next').onclick = opts.onNextClick || function () {};
     }
-    document.getElementById('sp-retry').onclick = function () { location.reload(); };
+    document.getElementById('sp-retry').onclick = function () {
+      overlay.remove();
+      var canvas = document.getElementById('sp-canvas');
+      if (canvas) { cancelAnimationFrame(canvas._frame); canvas.remove(); }
+      if (typeof opts.onRetry === 'function') opts.onRetry();
+      else location.reload();
+    };
 
     if (sc >= 50) launchConfetti(sc >= 70 ? 4000 : 2500);
   };

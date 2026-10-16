@@ -151,7 +151,8 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 </div>
 
 <script src="./sounds.js"></script>
-<script src="./score-popup.js"></script>
+<script src="./score-popup.js?v=20261016-random1"></script>
+<script src="./quiz-order.js?v=20261016-random1"></script>
 <script>
 const DATA = [
   {s:'Section A',st:'OX 확인 문제',
@@ -272,6 +273,8 @@ const DATA = [
    labels:['동화 유형: __ assimilation'],
    e:'정답: manner (assimilation). Manner assimilation은 stop, nasal, fricative 등 조음 방법 feature가 동화되는 현상입니다. Place assimilation, Voice assimilation과 함께 동화의 주요 유형입니다.'}
 ];
+
+const quizOrder = QuizOrder.create(DATA, {restart: reset});
 
 let ANS, COR;
 
@@ -408,6 +411,7 @@ function showResult() {
 }
 
 function reset() {
+  quizOrder.reset();
   build();
   window.scrollTo({top: 0, behavior: 'smooth'});
 }

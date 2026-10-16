@@ -152,7 +152,8 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 </div>
 
 <script src="./sounds.js"></script>
-<script src="./score-popup.js"></script>
+<script src="./score-popup.js?v=20261016-random1"></script>
+<script src="./quiz-order.js?v=20261016-random1"></script>
 <script>
 const DATA = [
   /* ── Section A: OX 퀴즈 ── */
@@ -249,6 +250,8 @@ const DATA = [
    hint:'예: 첫 번째 음절 강세 → 1 입력',
    e:'정답: 명사 1번째, 동사 2번째\n\n· ˈprotest (n) /ˈproʊtest/ — 1번째 음절(pro-) 강세\n· proˈtest (v) /prəˈtest/ — 2번째 음절(-test) 강세\n\n예문: "The ˈprotest was peaceful." vs. "They proˈtested against the law."'}
 ];
+
+const quizOrder = QuizOrder.create(DATA, {restart: reset});
 
 let ANS, COR;
 
@@ -388,6 +391,7 @@ function showResult() {
 }
 
 function reset() {
+  quizOrder.reset();
   build();
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
