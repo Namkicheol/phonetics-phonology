@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 1015" role="img" aria-labelledby="aspiration-scope-title aspiration-scope-desc" style="width:100%;height:auto;max-width:560px;display:block" lang="ko">
+<title id="aspiration-scope-title">Aspiration: strong과 weak의 범위</title><desc id="aspiration-scope-desc">미국 영어에서 무성 폐쇄음 p, t, k가 강세 음절의 시작에 올 때 strong aspiration이 나타난다. 같은 음절의 시작 부분에서 s 뒤에 오는 폐쇄음은 aspiration이 억제된다. AEP는 강세가 없는 음절, 음절을 이루는 자음 앞, 말끝에서 폐쇄음을 터뜨려 발음할 때에도 weak aspiration이 가능하다고 기술한다. 이는 가능한 환경이며 매번 발생한다는 규칙이 아니다.</desc>
+<style>text{font-family:'Noto Sans CJK KR','Noto Sans',sans-serif;fill:#172b42;font-size:21px}.h{font-size:30px;font-weight:700}.sub{font-size:20px;fill:#42566b}.label{font-size:22px;font-weight:700}.blue{fill:#15569b}.teal{fill:#08685e}</style>
+<rect width="560" height="1015" rx="22" fill="#f5f7fb"/>
+<text x="28" y="48" class="h">Aspiration: 범위를 나눠 보기</text>
+<text x="28" y="81" class="sub">American English · /p, t, k/</text>
+<rect x="22" y="110" width="516" height="260" rx="12" fill="#fff" stroke="#d4deea" stroke-width="2"/>
+<text x="42" y="150" class="label blue">01  Strong aspiration</text>
+<text x="42" y="186" class="label">강세가 있는 음절의 시작</text>
+<rect x="42" y="207" width="180" height="54" rx="12" fill="#eaf3ff" stroke="#15569b" stroke-width="2"/>
+<rect x="235" y="207" width="280" height="54" rx="12" fill="#fff" stroke="#5c7185" stroke-width="2"/>
+<text x="56" y="242" class="" style="font-size:26px">/p, t, k/</text>
+<text x="253" y="242" class="" style="font-size:24px">stressed vowel</text>
+<path d="M222 233 H235" stroke="#15569b" stroke-width="3"/>
+<text x="42" y="294" class="sub">폐쇄음과 강세 모음 사이에</text>
+<text x="42" y="320" class="sub">다른 자음이 올 수도 있다.</text>
+<text x="42" y="348" class="sub">단어 첫머리에만 한정되지 않는다.</text>
+<rect x="22" y="392" width="516" height="158" rx="12" fill="#fff" stroke="#d4deea" stroke-width="2"/>
+<text x="42" y="432" class="label">02  /s/-cluster에서는 억제</text>
+<rect x="42" y="451" width="180" height="55" rx="12" fill="#fff4e6" stroke="#925b11" stroke-width="2"/>
+<text x="57" y="488" class="" style="font-size:25px">/s/ + stop</text>
+<text x="246" y="476" class="sub">같은 음절의 onset에서</text>
+<text x="246" y="509" class="sub">/s/ 뒤 · 예: spit의 /p/</text>
+<rect x="22" y="572" width="516" height="282" rx="12" fill="#fff" stroke="#d4deea" stroke-width="2"/>
+<text x="42" y="613" class="label teal">03  Weak aspiration도 가능</text>
+<text x="42" y="654" class="label">• 강세가 없는 음절에서</text>
+<text x="65" y="684" class="sub">unstressed syllable · polite의 첫 /p/</text>
+<text x="42" y="721" class="label">• 음절을 이루는 자음 앞에서</text>
+<text x="65" y="751" class="sub">syllabic consonant · pickle의 /k/</text>
+<text x="42" y="788" class="label">• 말끝의 폐쇄음을 터뜨려 발음할 때</text>
+<text x="65" y="818" class="sub">word-final release · sit의 마지막 /t/</text>
+<text x="28" y="898" class="label">가능한 환경 ≠ 언제나 일어나는 규칙</text>
+<text x="28" y="933" class="sub">Strong aspiration의 기본 환경을</text>
+<text x="28" y="962" class="sub">aspiration 전체가 일어날 수 있는</text>
+<text x="28" y="991" class="sub">유일한 환경으로 읽지 않는다.</text>
+</svg>
