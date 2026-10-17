@@ -180,7 +180,7 @@ const DATA = [
    t:'ox',
    q:"[ɾ]은 alveolar flap이다.",
    a:true,
-   e:'✓ 정답. [ɾ]는 IPA에서 alveolar flap(치경 탄음)으로, 혀끝이 치경을 빠르게 한 번 두드리는 소리입니다. alveolar trill [r](반복 진동)과 구별해야 합니다.'},
+   e:'✓ 정답. [ɾ]는 IPA에서 alveolar flap으로, 혀끝이 치경을 빠르게 한 번 두드리는 소리입니다. alveolar trill [r](반복 진동)과 구별해야 합니다.'},
 
   {s:'Section A',st:'',sd:'',
    t:'ox',
@@ -191,13 +191,13 @@ const DATA = [
   {s:'Section B',st:'객관식 문제',
    sd:'각 문항에서 올바른 답을 하나 선택하시오.',
    t:'mc',
-   q:'Flapping 적용 환경은?',
+   q:'American English의 기본적인 intervocalic flapping 환경은?',
    o:['① 어두 강세 모음 앞',
       '② 모음 사이의 비강세 음절',
       '③ 어말',
       '④ /s/ 뒤'],
    a:1,
-   e:'✓ 정답: ②. Flapping target /t,d/는 모음 사이의 비강세 음절에 있어야 합니다. 앞 모음이 강세인 경우가 많지만 필수는 아닙니다.'},
+   e:'✓ 정답: ②. 이 문항의 기본 intervocalic 패턴에서는 /t,d/가 비강세 음절에 있습니다. 앞 모음의 강세는 필수 조건이 아닙니다. AEP는 이 밖에도 r-colored vowel 뒤와 syllabic liquid 앞의 환경을 설명합니다.'},
 
   {s:'Section B',st:'',sd:'',
    t:'mc',
@@ -245,7 +245,7 @@ const DATA = [
    q:'Flapping의 결과로 나타나는 음성 기호 [ɾ]의 조음 명칭은? (영어: "alveolar ___")',
    blanks:['flap'],
    labels:['alveolar ___:'],
-   e:'정답: flap. [ɾ]은 alveolar flap(치경 탄음)입니다. alveolar trill [r]과 구별해야 합니다.'},
+   e:'정답: flap. [ɾ]은 alveolar flap입니다. alveolar trill [r]과 구별해야 합니다.'},
 
   {s:'Section C',st:'',sd:'',
    t:'fi',
@@ -270,10 +270,10 @@ const DATA = [
 
   {s:'Section C',st:'',sd:'',
    t:'fi',
-   q:"Flapping 환경에서 /t,d/가 속해야 하는 syllable은? (stressed / unstressed)",
+   q:"기본적인 intervocalic flapping에서 /t,d/가 속하는 syllable은? (stressed / unstressed)",
    blanks:['unstressed'],
    labels:['target syllable:'],
-   e:'정답: unstressed. Flapping target /t,d/는 intervocalic unstressed syllable에 있어야 합니다. 앞 모음의 stress는 필수 조건이 아닙니다.'}
+   e:'정답: unstressed. 이 문항은 기본적인 intervocalic 패턴을 묻습니다. Target /t,d/는 unstressed syllable에 있으며, 앞 모음의 stress는 필수 조건이 아닙니다. 모든 flapping 환경이 모음 사이에만 한정되는 것은 아닙니다.'}
 ];
 
 const quizOrder = QuizOrder.create(DATA, {restart: reset});
