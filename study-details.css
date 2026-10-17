@@ -1,0 +1,54 @@
+/* Explanatory disclosures only. Native details state and font sizes are unchanged. */
+.etwiki-learning details.ew-study-detail,
+.etwiki-learning #feedback-depth.ew-study-detail {
+  min-width: 0;
+  border: 1px solid #52866d;
+  border-radius: 10px;
+  background: #f0faf4;
+  overflow-wrap: anywhere;
+}
+.etwiki-learning details.ew-study-detail > summary,
+.etwiki-learning #feedback-depth.ew-study-detail > summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 4px 12px;
+  box-sizing: border-box;
+  min-height: 44px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: #e2f3e9;
+  color: #1b5439;
+  cursor: pointer;
+  list-style: none;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.etwiki-learning details.ew-study-detail > summary::-webkit-details-marker { display: none; }
+.etwiki-learning details.ew-study-detail > summary::marker { content: ''; }
+.etwiki-learning details.ew-study-detail > summary:focus-visible,
+.etwiki-learning #feedback-depth.ew-study-detail > summary:focus-visible {
+  outline: 3px solid #1b5439;
+  outline-offset: 3px;
+}
+.etwiki-learning details.ew-study-detail > summary:hover,
+.etwiki-learning #feedback-depth.ew-study-detail > summary:hover { background: #d5ecdf; }
+.etwiki-learning .ew-detail-label { grid-column: 1; font-weight: 700; }
+.etwiki-learning .ew-detail-title { grid-column: 1; min-width: 0; }
+.etwiki-learning .ew-detail-indicator {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  width: 1.5em;
+  text-align: center;
+  font-weight: 700;
+}
+.etwiki-learning .ew-detail-indicator::before { content: '+'; }
+.etwiki-learning details.ew-study-detail[open] > summary,
+.etwiki-learning #feedback-depth.ew-study-detail[open] > summary { background: #d5ecdf; }
+.etwiki-learning details.ew-study-detail[open] > summary > .ew-detail-indicator::before { content: '−'; }
+@media (forced-colors: active) {
+  .etwiki-learning details.ew-study-detail,
+  .etwiki-learning #feedback-depth.ew-study-detail { border-color: CanvasText; }
+  .etwiki-learning details.ew-study-detail > summary:focus-visible,
+  .etwiki-learning #feedback-depth.ew-study-detail > summary:focus-visible { outline-color: Highlight; }
+}
