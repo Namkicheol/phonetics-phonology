@@ -140,13 +140,13 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:r
 <script src="score-popup.js?v=20261016-random1"></script>
 <script src="quiz-order.js?v=20261016-random1"></script>
 <script>
-const SAVE_KEY='phono_stress_drill_p1';
+const SAVE_KEY='phono_stress_drill_p1_v2';
 const TOTAL=40;
 let cur=0,answers=new Array(TOTAL).fill(null);
 
 // {cat, word, syls[], ans(0-based index), ctx?, ipa, why}
 const Q=[
-{cat:"2음절 강세",word:"frequent",syls:["fre","quent"],ans:0,ctx:"",
+{cat:"2음절 강세",word:"frequent",syls:["fre","quent"],ans:0,ctx:"(Adj)",
  ipa:"/ˈfriːkwənt/",why:"2음절 형용사 → 첫 음절 강세."},
 
 {cat:"2음절 강세",word:"active",syls:["ac","tive"],ans:0,ctx:"",
@@ -252,7 +252,7 @@ const Q=[
  ipa:"/riˈælɪti/",why:"-ity 직전 음절(-al-)에 강세."},
 
 {cat:"-ity 강세",word:"electricity",syls:["e","lec","tric","i","ty"],ans:2,ctx:"",
- ipa:"/ɪˌlekˈtrɪsɪti/",why:"-ic+ity: -ic rule → -tric-에 먼저 강세. 결과: e-lec-ˈtric-i-ty."},
+ ipa:"/ɪˌlekˈtrɪsɪti/",why:"eˈlectric에 -ity가 붙으면 -ity 직전 음절에 primary stress가 배정되어 elecˈtricity가 됩니다. 따라서 세 번째 음절(-tric-)을 고릅니다. -ic이 자기 자신에게 강세를 주는 규칙으로 설명하지 않습니다."},
 
 /* ── 4음절 ── */
 {cat:"4음절 강세",word:"economy",syls:["e","con","o","my"],ans:1,ctx:"",
