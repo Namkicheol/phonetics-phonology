@@ -94,3 +94,19 @@
 .etwiki-learning .hero .hero-stats{justify-content:flex-start;gap:24px}
 .etwiki-learning .hero .stat-n{font-family:inherit;color:var(--ew-accent)}
 .etwiki-learning .hero .stat-l{font-family:inherit;color:var(--ew-muted);font-size:13px}
+
+/* Keep return links in document flow on narrow/zoomed layouts.
+   Important declarations override the legacy inline return-link positioning. */
+@media (max-width:640px){
+  .etwiki-learning #back-btn,.etwiki-learning #testmaster-return-btn{
+    position:static!important;
+    transform:none!important;
+    display:flex!important;
+    width:fit-content;
+    max-width:calc(100% - 32px)!important;
+    margin:24px auto 12px!important;
+    z-index:auto!important;
+    white-space:normal;
+    overflow-wrap:anywhere;
+  }
+}
