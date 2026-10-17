@@ -80,8 +80,10 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
 .flow-item{background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:8px;padding:10px 16px;font-size:13px;color:#1a1a1a;text-align:center;line-height:1.5}
 .flow-arrow{color:#2e86c1;font-size:20px;font-weight:700}
 </style>
+<link rel="stylesheet" href="./mint-learning.css">
 </head>
-<body>
+<body class="etwiki-learning">
+<header class="ew-header"><div class="ew-brand-row"><a class="ew-brand" href="https://etwiki.net/index.html">기출 WIKI</a><span class="ew-header-label">학습자료</span><a class="ew-back" href="https://etwiki.net/study.html">전체 자료 ↗</a></div><nav class="ew-subjects" aria-label="학습 영역"><a href="https://namkicheol.github.io/englisheducation/">영어교육론</a><a href="https://namkicheol.github.io/linguistics/">영어학</a><a href="https://namkicheol.github.io/phonetics-phonology/phonetics.html" aria-current="location">음성·음운론</a></nav></header>
 <style>
 .study-nav{position:relative;z-index:30;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:10px 12px;background:#fff;border-bottom:1px solid #dce9f0}
 .study-nav a{min-height:36px;display:inline-flex;align-items:center;justify-content:center;padding:7px 11px;border:1px solid #dce9f0;border-radius:18px;background:#f4f8fb;color:#31566b;font:600 12px/1.2 'Noto Sans KR',sans-serif;text-decoration:none;white-space:nowrap}
@@ -360,25 +362,25 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
     <div class="concept" id="aspiration-allophone">
       <div class="c-title">1) 영어 — complementary distribution</div>
       <div class="def">
-        영어에서 [pʰ]와 [p]는 별개 음소가 아니라 같은 음소 <span class="kw1">/p/</span>의 <span class="kw2">allophone</span>이다. 두 음은 서로 겹치지 않는 환경에 나타나 <b>complementary distribution</b>을 이룬다.
+        영어에서 [pʰ]와 [p]는 별개 음소가 아니라 같은 음소 <span class="kw1">/p/</span>의 <span class="kw2">allophone</span>이다. 아래의 pin과 spin은 환경에 따른 <b>complementary distribution</b>을 보여 주는 대표적인 비교이다.
       </div>
       <div class="grid col2">
         <div class="grid-item">
           <div class="gi-title">[pʰ] — aspirated</div>
           <div class="gi-body">
-            <span>강세 음절 onset</span>
-            <span>pin, top, cool</span>
+            <span>strong aspiration의 기본 환경: 강세 음절 onset</span>
+            <span>pin의 /p/</span>
           </div>
         </div>
         <div class="grid-item">
           <div class="gi-title">[p] — unaspirated</div>
           <div class="gi-body">
-            <span>/s/ 뒤 · coda · 비강세</span>
-            <span>spin, stop, school</span>
+            <span>같은 onset 안에서 /s/ 뒤</span>
+            <span>spin의 /p/</span>
           </div>
         </div>
       </div>
-      <p class="note" style="margin-top:10px">두 음의 분포가 환경으로 예측되므로 의미를 구별하지 못한다 → 음소 대립 없음(allophonic rule).</p>
+      <p class="note" style="margin-top:10px">이 비교는 aspiration 유무가 영어에서 별개의 음소 대립을 이루지 않음을 보여 준다. Aspiration의 전체 분포를 나열한 표는 아니다. 비강세 음절과 release되는 word-final stop 등에서 가능한 weak aspiration은 ⑥에서 구분한다.</p>
     </div>
 
     <div class="div"></div>
@@ -415,19 +417,11 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
 
     <div class="concept">
       <div class="c-title">1) 약기식(weak aspiration)과 비기식 환경</div>
-      <p class="note">강세 음절 onset은 strong aspiration의 핵심 환경이다. 다른 onset에서의 aspiration degree는 방언·발화 조건에 따라 달라질 수 있으므로, 아래 표는 broad transcription에서 [ʰ]를 일반적으로 쓰지 않는 환경을 정리한 것이다.</p>
-      <div class="stage-wrap">
-        <table>
-          <thead><tr><th>위치</th><th>실현</th><th>예시</th></tr></thead>
-          <tbody>
-            <tr><td>비강세 음절 onset</td><td>strong aspiration으로 일반화하지 않음</td><td>potato의 첫 /p/ 등</td></tr>
-            <tr><td>syllabic consonant 앞</td><td>비기식</td><td>pickle [ˈpɪkl̩]</td></tr>
-            <tr><td>coda (음절말)</td><td>비기식 / 불파</td><td>top의 /p/, bake [beɪk̚]</td></tr>
-            <tr><td>/s/ 뒤</td><td>비기식</td><td>spin, stop, school</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="note" style="margin-top:10px">AEP의 기본 allophonic rule은 <b>강세모음 앞 음절 onset</b>을 다룬다. 다른 onset의 약한 aspiration 가능성은 그 규칙의 categorical application과 구분한다.</p>
+      <p class="note">AEP는 strong aspiration의 기본 환경과 weak aspiration이 가능한 환경을 구분한다. 비강세 음절, syllabic consonant 앞, release되는 word-final stop에서도 weak aspiration이 나타날 수 있다.</p>
+      <figure style="margin:20px 0;max-width:560px">
+        <a href="assets/aspiration-scope.svg" aria-label="Aspiration 도식 크게 보기"><img src="assets/aspiration-scope.svg" alt="Strong aspiration의 기본 환경, 같은 onset의 /s/ 뒤 억제, weak aspiration이 가능한 세 환경을 구분한 도식" width="560" height="1015" style="display:block;width:100%;height:auto" loading="lazy"></a>
+<figcaption style="font-size:16px;line-height:1.7;color:#172b42;margin-top:12px;overflow-wrap:anywhere">AEP가 설명하는 미국 영어(American English)의 일반적 분포다. Strong aspiration의 기본 환경과 weak aspiration이 가능한 환경을 구분해야 한다. Weak aspiration이 가능한 환경이라고 해서 언제나 나타나는 것은 아니며, 말끝의 폐쇄음을 터뜨리지 않고 발음할 수도 있다. 2022 A06의 제시 자료는 해당 문항의 이분법을 적용하므로, 이 일반 설명으로 그 문항의 판단 기준이나 공식 답안을 바꾸지 않는다.</figcaption>
+      </figure>
     </div>
 
     <div class="div"></div>
@@ -440,7 +434,7 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
       </div>
       <div class="caution">
         <div class="caution-label">⚠️ TRAP 2 — coda</div>
-        음절말 /p, t, k/(top의 /p/)는 기식되지 않는다. aspiration은 <b>onset 전용</b>.
+        강세 음절 onset의 <b>strong aspiration</b>과 말끝에서 가능한 <b>weak aspiration</b>을 구분한다. 말끝의 stop에는 no audible release도 가능하다.
       </div>
       <div class="caution">
         <div class="caution-label">⚠️ TRAP 3 — 음소 지위 혼동</div>

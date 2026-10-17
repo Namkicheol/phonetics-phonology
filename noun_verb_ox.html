@@ -83,8 +83,10 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:r
 .nd:hover:not(.cur){opacity:.7}
 #nav{display:flex;flex-wrap:wrap;gap:5px;max-width:720px;margin:0 auto 16px;padding:0 8px}
 </style>
+<link rel="stylesheet" href="./mint-learning.css">
 </head>
-<body>
+<body class="etwiki-learning">
+<header class="ew-header"><div class="ew-brand-row"><a class="ew-brand" href="https://etwiki.net/index.html">기출 WIKI</a><span class="ew-header-label">학습자료</span><a class="ew-back" href="https://etwiki.net/study.html">전체 자료 ↗</a></div><nav class="ew-subjects" aria-label="학습 영역"><a href="https://namkicheol.github.io/englisheducation/">영어교육론</a><a href="https://namkicheol.github.io/linguistics/">영어학</a><a href="https://namkicheol.github.io/phonetics-phonology/phonetics.html" aria-current="location">음성·음운론</a></nav></header>
 <style>
 .study-nav{position:relative;z-index:30;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:10px 12px;background:#fff;border-bottom:1px solid #dce9f0}
 .study-nav a{min-height:36px;display:inline-flex;align-items:center;justify-content:center;padding:7px 11px;border:1px solid #dce9f0;border-radius:18px;background:#f4f8fb;color:#31566b;font:600 12px/1.2 'Noto Sans KR',sans-serif;text-decoration:none;white-space:nowrap}
@@ -245,16 +247,16 @@ const Q=[
   {src:"Stress Shift",cat:"3음절 이상",
    text:"명사/동사 강세 이동 규칙은 <span class='kw2'>3음절 이상</span> 단어에도 동일하게 적용된다.",
    ans:false,
-   correct:"3음절 이상 단어는 별도 규칙 적용 — penult 음절의 <span class='kw2'>음절 무게(syllable weight)</span> 기반.",
-   why:"3음절 이상 단어에서는 단순한 명사/동사 강세 이동이 아닌, 음절 무게(heavy vs. light penult)에 기반한 다른 강세 규칙이 적용됩니다. 이는 2음절어의 품사별 강세 이동과 다른 원리입니다.",
-   source:"For trisyllabic+ words, stress is determined by penult syllable weight, not simply N/V distinction. (Yavaş 2011)",
-   compare:[{title:"2음절어",desc:"품사(N/V)에 따른 강세 이동"},{title:"3음절+ 단어",desc:"penult 무게 기반 강세 규칙"}]},
+   correct:"틀렸다. 다음절 단어에는 해당 품사의 stress rule을 적용한다. AEP에서 noun/adjective는 penult를, verb는 ult를 기준으로 stressable syllable을 찾는다.",
+   why:"2음절 N/V 쌍의 강세 이동을 모든 다음절 단어에 그대로 적용할 수 없다. 품사별 기준 위치와 syllable weight를 함께 확인해야 한다.",
+   source:"Yavaş, Applied English Phonology, Ch. 7: noun/adjective and verb stress rules",
+   compare:[{title:"2음절어",desc:"품사(N/V)에 따른 강세 이동"},{title:"3음절+ 단어",desc:"품사별 기준 위치와 syllable weight 확인"}]},
 
   {src:"Noun Stress",cat:"Penult /ə/ 규칙",
-   text:"명사에서 penult 모음이 <span class='kw4'>/ə/</span>일 경우 <span class='kw2'>마지막 음절</span>에 강세가 온다.",
+   text:"AEP가 설명하는 2음절 명사에서 penult 모음이 /ə/이면 마지막 음절에 강세가 온다.",
    ans:true,
-   correct:"정확하다. /ə/ = weightless → 강세 유인 불가 → ult로 강세 이동. e.g. <span class='kw2'>appéal, ballóon</span>.",
-   why:"/ə/(schwa)는 강세를 받을 수 없는 약화 모음입니다. Penult 위치에 /ə/가 오면 해당 음절이 강세를 유인하지 못하므로 강세가 ult(마지막 음절)로 이동합니다. 이는 2음절 명사의 81.7% penult 강세 경향에 대한 주요 예외입니다.",
+   correct:"정확하다. 이 2음절 명사 규칙에서 schwa는 강세를 받을 수 없으므로 ult에 강세가 온다. 예: appéal, ballóon.",
+   why:"이 설명의 범위는 AEP의 2음절 명사이다. Penult의 schwa는 강세를 받을 수 없으므로 마지막 음절에 강세가 온다. 3음절 이상의 명사에는 같은 결론을 그대로 적용하지 않는다.",
    source:"When penult is /ə/ (weightless), stress shifts to ult: <span class='kw2'>appéal /əˈpiːl/, ballóon /bəˈluːn/</span>. (Yavaş 2011)",
    compare:[{title:"Penult = full vowel",desc:"ˈrecord — 1번째 강세"},{title:"Penult = /ə/ (schwa)",desc:"appéal — 2번째 강세"}]}
 ];

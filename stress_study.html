@@ -89,8 +89,10 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
 .caution{background:rgba(183,28,28,.05);border:1.5px solid rgba(183,28,28,.2);border-radius:8px;padding:12px 16px;margin-top:10px;font-size:13.5px;color:#8b0000;line-height:1.8}
 .caution-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;font-weight:700;color:#b71c1c;margin-bottom:6px}
 </style>
+<link rel="stylesheet" href="./mint-learning.css">
 </head>
-<body>
+<body class="etwiki-learning">
+<header class="ew-header"><div class="ew-brand-row"><a class="ew-brand" href="https://etwiki.net/index.html">기출 WIKI</a><span class="ew-header-label">학습자료</span><a class="ew-back" href="https://etwiki.net/study.html">전체 자료 ↗</a></div><nav class="ew-subjects" aria-label="학습 영역"><a href="https://namkicheol.github.io/englisheducation/">영어교육론</a><a href="https://namkicheol.github.io/linguistics/">영어학</a><a href="https://namkicheol.github.io/phonetics-phonology/phonetics.html" aria-current="location">음성·음운론</a></nav></header>
 <style>
 .study-nav{position:relative;z-index:30;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:10px 12px;background:#fff;border-bottom:1px solid #dce9f0}
 .study-nav a{min-height:36px;display:inline-flex;align-items:center;justify-content:center;padding:7px 11px;border:1px solid #dce9f0;border-radius:18px;background:#f4f8fb;color:#31566b;font:600 12px/1.2 'Noto Sans KR',sans-serif;text-decoration:none;white-space:nowrap}
@@ -261,8 +263,7 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
       </div>
       <div class="exam" style="margin-top:14px">
         <div class="exam-label">📋 기출 이력</div>
-        <p><strong>2010 1차 Q32</strong> — syllable structure, onset, coda 분석 출제</p>
-        <p><strong>2014 1차 A-기입2</strong> — stress assignment 규칙과 syllable structure 출제</p>
+        <p><strong>2010 1차 Q33</strong> — syllable weight와 stress-shifting suffix의 관계를 판단하는 문항</p>
         <p><strong>2025 1차 A-6</strong> — 비교급 -er 결합 조건으로 coda, open syllable, closed syllable 출제</p>
       </div>
     </div>
@@ -383,7 +384,7 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
 
     <div class="exam" style="margin-top:14px">
       <div class="exam-label">📋 기출 이력</div>
-      <p><strong>2023 2차 B-4</strong> — trochaic foot, penultimate stress, ultimate stress 출제 (N/Adj stress assignment 규칙 적용)</p>
+      <p><strong>2023 1차 B-4</strong> — -al의 noun/adjective 형성과 verb stem의 penultimate stress·trochaic 조건을 구분하는 문항</p>
     </div>
 
   </div>
@@ -670,10 +671,7 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
         <p>• "secondary stress의 특징은?" → +stress +full vowel <b>-tonic accent</b> (이 부분 자주 오답)</p>
         <p>• photographic에서 첫 음절이 이차 강세인 이유를 규칙으로 설명</p>
       </div>
-      <div class="exam" style="margin-top:12px">
-        <div class="exam-label">📋 기출 이력</div>
-        <p><strong>2020 1차 A-기입3</strong> — primary stress, secondary stress 배정 규칙 출제</p>
-      </div>
+
     </div>
 
   </div>
@@ -731,7 +729,7 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
           <tr><th>접미사</th><th>예</th><th>설명</th></tr>
           <tr><td><span class="kw4">-ation</span></td><td>realize → realizˈation</td><td>stress-bearing: 접미사 자체에 강세</td></tr>
           <tr><td><span class="kw3">-ade</span></td><td>lemon → lemonˈade</td><td>diphthong → heavy</td></tr>
-          <tr><td><span class="kw3">-ee</span></td><td>absent → absentˈee</td><td>예외: ˈcommittee (접미사 자체가 강세 없음)</td></tr>
+          <tr><td><span class="kw3">-ee</span></td><td>absent → absentˈee</td><td>예외: comˈmittee (접미사 자체가 강세 없음)</td></tr>
           <tr><td><span class="kw3">-eer</span></td><td>mountain → mountainˈeer</td><td>suffix vowel /ɪə(r)/가 heavy → stress-bearing</td></tr>
           <tr><td><span class="kw3">-ese</span></td><td>Japan → JapanˈEse</td><td>long V + coda → heavy</td></tr>
           <tr><td><span class="kw3">-ette</span></td><td>kitchen → kitchenˈette</td><td>closed → heavy</td></tr>
@@ -773,7 +771,7 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
           </tr>
           <tr>
             <td><span class="kw3">-ical</span></td>
-            <td>geˈometry → geˈometrical</td>
+            <td>geˈometry → geoˈmetrical</td>
             <td>-al은 neutral이지만 -ical은 shifting</td>
           </tr>
           <tr>
@@ -909,16 +907,18 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
           </tr>
           <tr>
             <td>Adj + N</td>
-            <td>ˈwhiteboard, ˈblackout, ˈnationwide</td>
+            <td>ˈwhiteboard</td>
             <td><span class="kw4">첫 요소</span></td>
             <td>—</td>
           </tr>
           <tr>
             <td>V + N</td>
-            <td>ˈstopwatch, ˈpickpocket, ˈbabysit</td>
+            <td>ˈstopwatch, ˈpickpocket</td>
             <td><span class="kw4">첫 요소</span></td>
             <td>—</td>
           </tr>
+          <tr><td>N + Adj</td><td>ˈnationwide</td><td><span class="kw4">첫 요소</span></td><td>Adjective compound</td></tr>
+          <tr><td>N + V</td><td>ˈbabysit</td><td><span class="kw4">첫 요소</span></td><td>Verb compound</td></tr>
           <tr>
             <td>Particle + V</td>
             <td>underˈtake, overˈsleep</td>
@@ -1169,7 +1169,6 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
           <div class="gi-body">
             <span>ˌthirˈteen → [θɜːrˈtiːn]</span>
             <span>ˌanˈtique → [ænˈtiːk]</span>
-            <span>ˌaˈcute → [əˈkjuːt]</span>
             <span>두 번째 음절이 더 강함</span>
           </div>
         </div>
@@ -1178,7 +1177,6 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
           <div class="gi-body">
             <span><span class="kw4">ˈthirteen</span> ˈmen (vs ˌthirˈteen alone)</span>
             <span><span class="kw4">ˈantique</span> ˈshop</span>
-            <span><span class="kw4">ˈacute</span> ˈpain</span>
             <span>다음 단어의 강세와 충돌 방지</span>
           </div>
         </div>
@@ -1238,7 +1236,6 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
     </div>
     <div class="exam" style="margin-top:14px">
       <div class="exam-label">📋 기출 이력</div>
-      <p><strong>2017 2차 B-서술4</strong> — stress 배정과 metrical theory 출제</p>
       <p><strong>2021 1차 A-Q6</strong> — schwa deletion 조건과 foot structure 출제</p>
       <p><strong>2022 1차 A-6</strong> — voiceless stop aspiration, foot-initial position, trochaic foot 출제</p>
       <p><strong>2024 1차 A-6</strong> — metrical phonology, stress-shift, foot 출제</p>
@@ -1303,8 +1300,8 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
     <div class="concept">
       <div class="c-title">3) NSR 예시 + 대조 강세(Contrastive Focus)</div>
       <div class="ipa-block">
-        John ˈloves Mary.  → 중립 문맥: 가장 오른쪽 내용어 Mary에 핵 강세<br>
-        <span class="sp">ˈJohn</span> loves Mary.  → 대조: "Mary가 아닌 John이" (John에 포커스)<br>
+        John loves ˈMary.  → 중립 문맥: 가장 오른쪽 내용어 Mary에 핵 강세<br>
+        <span class="sp">ˈJohn</span> loves Mary.  → 대조: "다른 사람이 아닌 John이" (John에 포커스)<br>
         John <span class="sp">ˈloves</span> Mary.  → 대조: "좋아한다는 감정 자체를" (loves에 포커스)<br>
         The ˈcat sat on the <span class="sp">ˈmat</span>.  → NSR: mat (가장 오른쪽 내용어)
       </div>

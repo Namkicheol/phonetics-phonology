@@ -84,8 +84,10 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:r
 #nav{display:flex;flex-wrap:wrap;gap:5px;max-width:720px;margin:0 auto 16px;padding:0 8px}
 </style>
 <link rel="stylesheet" href="./quiz-study-figures.css?v=20261016">
+<link rel="stylesheet" href="./mint-learning.css">
 </head>
-<body>
+<body class="etwiki-learning">
+<header class="ew-header"><div class="ew-brand-row"><a class="ew-brand" href="https://etwiki.net/index.html">기출 WIKI</a><span class="ew-header-label">학습자료</span><a class="ew-back" href="https://etwiki.net/study.html">전체 자료 ↗</a></div><nav class="ew-subjects" aria-label="학습 영역"><a href="https://namkicheol.github.io/englisheducation/">영어교육론</a><a href="https://namkicheol.github.io/linguistics/">영어학</a><a href="https://namkicheol.github.io/phonetics-phonology/phonetics.html" aria-current="location">음성·음운론</a></nav></header>
 <style>
 .study-nav{position:relative;z-index:30;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:10px 12px;background:#fff;border-bottom:1px solid #dce9f0}
 .study-nav a{min-height:36px;display:inline-flex;align-items:center;justify-content:center;padding:7px 11px;border:1px solid #dce9f0;border-radius:18px;background:#f4f8fb;color:#31566b;font:600 12px/1.2 'Noto Sans KR',sans-serif;text-decoration:none;white-space:nowrap}
@@ -314,10 +316,10 @@ const Q=[
  compare:[{title:"<span class='kw1'>Trochaic (S-W)</span>",desc:"HAppy / TAble / ˈENglish — 기본 패턴"},{title:"<span class='kw2'>W-S sequence</span>",desc:"toDAY / aLONE / beLIEVE — 표면 배열"}]},
 
 {src:"W-S sequence",cat:"Foot Structure",
- text:"<span class='kw1'>Iambic foot</span>은 <b>W-S</b>(약-강) 패턴으로, 'toDAY', 'aLONE'이 예가 된다.",
+ text:"Iambic foot은 weak syllable 뒤에 strong syllable이 오는 W–S 구조이다.",
  ans:true,
- correct:"toDAY와 aLONE은 W-S 배열을 보인다. 그러나 이 배열을 영어의 기본 foot인 trochee의 반대인 iambic foot으로 일반화하지 않는다.",
- why:"Carr의 foot 분석에서는 단어 첫 W가 별도 foot에 포함되지 않는 stray unstressed syllable일 수 있다. 따라서 W-S 표면 배열과 iambic foot을 구별하고, 영어의 기본 foot은 stress로 시작하는 trochaic임을 유지한다.",
+ correct:"정확하다. Iambic foot의 일반적인 정의는 W–S 구조이다.",
+ why:"이 일반 정의와 영어의 표면 W–S 단어를 어떤 foot으로 분석할지는 별개이다. Carr의 분석에서는 단어 첫 비강세 음절을 foot 밖에 두기도 한다. 따라서 표면 W–S 배열만으로 iambic foot이라고 단정하지 않는다.",
  compare:[{title:"<span class='kw1'>Trochaic S-W</span>",desc:"ˈHAppy / ˈtable"},{title:"<span class='kw2'>W-S sequence</span>",desc:"toˈDAY / aˈLONE — 표면 배열"}]},
 
 {src:"Stress-shift와 Foot",cat:"Foot Structure",
@@ -331,7 +333,7 @@ const Q=[
  text:"강세가 이동하면 <span class='kw2'>모음 약화(vowel reduction)</span>의 위치도 함께 이동한다 — 예: <span class='kw1'>ˈphotograph</span>에서 /oʊ/가, <span class='kw2'>phoˈtography</span>에서는 /ə/로 약화 위치가 달라진다.",
  ans:true,
  correct:"강세 이동 시 약화 위치도 이동. <span class='kw1'>ˈpho-to-graph</span>: pho /oʊ/강세, to /ə/ 약화. <span class='kw2'>pho-ˈtog-ra-phy</span>: pho /fə/ 약화, tog /ɒ/ 강세.",
- why:"기출 IPA 전사 문제 핵심: 파생어 체인에서 강세 이동을 알면 약화 위치도 자동으로 결정. <span class='kw1'>ˈphotograph /ˈfoʊtəgræf/</span> → <span class='kw2'>phoˈtography /fəˈtɒgrəfi/</span> → <span class='kw1'>ˌphoˈtographic /ˌfoʊtəˈgræfɪk/</span>."}
+ why:"기출 IPA 전사 문제 핵심: 파생어 체인에서 강세 이동을 알면 약화 위치도 자동으로 결정. <span class='kw1'>ˈphotograph /ˈfoʊtəgræf/</span> → <span class='kw2'>phoˈtography /fəˈtɒgrəfi/</span> → <span class='kw1'>ˌphotoˈgraphic /ˌfoʊtəˈgræfɪk/</span>."}
 ];
 
 function renderExp(q,isCorrect){

@@ -105,8 +105,10 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 .r-btn{padding:9px 26px;background:var(--pri);color:#fff;border:none;border-radius:8px;
   font-size:14px;cursor:pointer;font-family:var(--sans)}
 </style>
+<link rel="stylesheet" href="./mint-learning.css">
 </head>
-<body>
+<body class="etwiki-learning">
+<header class="ew-header"><div class="ew-brand-row"><a class="ew-brand" href="https://etwiki.net/index.html">기출 WIKI</a><span class="ew-header-label">학습자료</span><a class="ew-back" href="https://etwiki.net/study.html">전체 자료 ↗</a></div><nav class="ew-subjects" aria-label="학습 영역"><a href="https://namkicheol.github.io/englisheducation/">영어교육론</a><a href="https://namkicheol.github.io/linguistics/">영어학</a><a href="https://namkicheol.github.io/phonetics-phonology/phonetics.html" aria-current="location">음성·음운론</a></nav></header>
 <style>
 .study-nav{position:relative;z-index:30;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:10px 12px;background:#fff;border-bottom:1px solid #dce9f0}
 .study-nav a{min-height:36px;display:inline-flex;align-items:center;justify-content:center;padding:7px 11px;border:1px solid #dce9f0;border-radius:18px;background:#f4f8fb;color:#31566b;font:600 12px/1.2 'Noto Sans KR',sans-serif;text-decoration:none;white-space:nowrap}
@@ -178,9 +180,9 @@ const DATA = [
    e:'정답: X\n\n동사 preˈsent는 두 번째 음절에 강세가 옵니다.\n· 명사/형용사 ˈpresent → 1번째 음절 강세\n· 동사 preˈsent → 2번째 음절 강세\n\n예: "I will preˈsent my findings." (동사)'},
 
   {s:'Section A', st:'', sd:'', t:'ox',
-   q:'명사 penult가 /ə/이면 마지막 음절에 강세가 온다.',
+   q:"AEP가 설명하는 2음절 명사에서 penult 모음이 /ə/이면 마지막 음절에 강세가 온다.",
    a:true,
-   e:'정답: O\n\n/ə/(schwa)는 강세를 받을 수 없는 약화 모음입니다.\nPenult에 /ə/가 오면 강세가 ult(마지막 음절)로 이동합니다.\n\n예: appeal /əˈpiːl/, balloon /bəˈluːn/\n이는 2음절 명사 penult 강세의 주요 예외입니다.'},
+   e:"정확합니다. 이 2음절 명사 규칙에서 schwa는 강세를 받을 수 없으므로 마지막 음절에 강세가 옵니다. 예: appeal, balloon. 3음절 이상의 명사에는 같은 결론을 그대로 적용하지 않습니다."},
 
   /* ── Section B: 객관식 ── */
   {s:'Section B', st:'객관식', sd:'가장 적절한 답을 하나 고르시오.',

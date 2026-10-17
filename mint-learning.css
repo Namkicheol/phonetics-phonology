@@ -1,0 +1,96 @@
+/* ETWiki shared learning UI. Tokens match testmaster/study.html.
+   Scoped to .etwiki-learning; content, answer-state classes and SVG are preserved. */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+.etwiki-learning{--ew-bg:#f0faf4;--ew-surface:#fff;--ew-soft:#f5fdf8;--ew-tint:#eaf7f0;--ew-border:#b2dfcc;--ew-border-soft:#c8ead8;--ew-accent:#2e7d52;--ew-text:#1a3326;--ew-muted:#4a7a62;background:var(--ew-bg);background-image:none;color:var(--ew-text);font-family:Pretendard,'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;font-size:16px;line-height:1.7;margin:0;padding:0 0 110px;overflow-x:visible}
+.etwiki-learning .ew-header{background:#dff3e8;border-top:4px solid var(--ew-accent);border-bottom:1px solid var(--ew-border);margin:0 0 22px;padding:0}
+.etwiki-learning .ew-brand-row{max-width:1040px;margin:auto;padding:13px 20px;display:flex;align-items:center;gap:14px}
+.etwiki-learning .ew-brand{font-size:20px;font-weight:800;letter-spacing:-.5px;text-decoration:none;color:var(--ew-text)}
+.etwiki-learning .ew-header-label{font-size:13px;color:var(--ew-muted);margin-left:auto}
+.etwiki-learning .ew-back{display:inline-flex;align-items:center;min-height:44px;padding:5px 10px;border:1px solid var(--ew-border);border-radius:20px;background:#ffffff88;color:var(--ew-accent);font-size:13px;text-decoration:none;font-weight:650}
+.etwiki-learning .ew-subjects{display:flex;gap:26px;max-width:1040px;margin:auto;padding:0 20px;overflow-x:auto}
+.etwiki-learning .ew-subjects a{display:inline-flex;align-items:center;min-height:44px;padding:8px 0;border-bottom:3px solid transparent;white-space:nowrap;color:var(--ew-muted);text-decoration:none;font-size:15px;font-weight:600}
+.etwiki-learning .ew-subjects a[aria-current]{color:var(--ew-accent);border-color:var(--ew-accent);font-weight:750}
+.etwiki-learning a:focus-visible,.etwiki-learning button:focus-visible,.etwiki-learning summary:focus-visible,.etwiki-learning [tabindex]:focus-visible{outline:3px solid var(--ew-accent);outline-offset:3px}
+/* Hub: each chapter is one actionable unit. */
+.etwiki-learning.learning-index .learning-main,.etwiki-learning.learning-index .index-wrap,.etwiki-learning.ew-index main{width:min(100% - 40px,1040px);max-width:1040px;margin-inline:auto;padding:0}
+.etwiki-learning.learning-index .page-heading,.etwiki-learning.learning-index .intro,.etwiki-learning.ew-index main>header{padding:5px 0 24px;margin:0}
+.etwiki-learning.learning-index .page-heading h1,.etwiki-learning.learning-index .intro h1,.etwiki-learning.ew-index h1{font-size:clamp(27px,4vw,34px);line-height:1.35;letter-spacing:-.8px;color:var(--ew-text);margin:0 0 5px}
+.etwiki-learning.learning-index .page-heading p,.etwiki-learning.learning-index .intro p,.etwiki-learning.ew-index header p{font-size:15px;line-height:1.7;color:var(--ew-muted);margin:5px 0}
+.etwiki-learning.learning-index .page-heading .english-label,.etwiki-learning.learning-index .intro .subtitle,.etwiki-learning.ew-index .english{font-size:14px}
+.etwiki-learning .chapter-list,.etwiki-learning.ew-index .topics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;list-style:none;margin:0;padding:0;border:0}
+.etwiki-learning .chapter-row,.etwiki-learning .chapter,.etwiki-learning.ew-index .topic{display:grid;grid-template-columns:42px minmax(0,1fr);gap:10px 13px;align-items:start;min-width:0;margin:0;padding:18px;background:var(--ew-surface);border:1px solid var(--ew-border);border-radius:14px;box-shadow:0 2px 8px #2e7d5208}
+.etwiki-learning .chapter-number,.etwiki-learning.ew-index .topic-number{display:flex;align-items:center;justify-content:center;width:40px;height:40px;flex:0 0 40px;padding:0;border:1px solid var(--ew-border-soft);border-radius:10px;background:var(--ew-tint);color:var(--ew-accent);font-size:17px;font-weight:700}
+.etwiki-learning .chapter-copy h2,.etwiki-learning .chapter-name h2,.etwiki-learning.ew-index .topic h2{font-size:18px;line-height:1.5;font-weight:700;color:var(--ew-text);margin:0;overflow-wrap:anywhere}
+.etwiki-learning .chapter-copy p,.etwiki-learning .chapter-name p,.etwiki-learning.ew-index .topic p{font-size:13px;line-height:1.6;color:var(--ew-muted);margin:2px 0 0}
+.etwiki-learning .chapter-actions,.etwiki-learning.ew-index .topic>.actions{grid-column:1/-1;display:flex;gap:9px;width:100%;margin:4px 0 0;justify-self:stretch}
+.etwiki-learning.learning-index .chapter-actions a,.etwiki-learning .action,.etwiki-learning.ew-index .study-action{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 15px;border:1px solid var(--ew-border);border-radius:9px;background:var(--ew-soft);color:var(--ew-accent);font-family:inherit;font-size:14px;font-weight:700;text-decoration:none;flex:1;min-width:0}
+.etwiki-learning.learning-index .chapter-actions a:first-child,.etwiki-learning .chapter-actions .action:first-child,.etwiki-learning.ew-index .topic>.actions .study-action:first-child{background:var(--ew-accent);border-color:var(--ew-accent);color:#fff}
+.etwiki-learning.learning-index .chapter-actions a:hover,.etwiki-learning .action:hover,.etwiki-learning.ew-index .study-action:hover{filter:brightness(.96)}
+.etwiki-learning.ew-index .topic-heading{grid-column:1/-1;display:flex;gap:13px;min-width:0}
+.etwiki-learning.ew-index .extra{grid-column:1/-1;margin:0;border-top:1px solid var(--ew-border-soft);padding-top:4px}
+.etwiki-learning.ew-index .extra summary{color:var(--ew-muted);min-height:44px;cursor:pointer}
+.etwiki-learning .ew-shortcut{width:min(100% - 40px,1040px);margin:18px auto;font-size:14px;color:var(--ew-muted)}
+.etwiki-learning .ew-shortcut a{color:var(--ew-accent);text-underline-offset:3px}
+/* Existing chapter templates: chrome only, no SVG, linguistic examples or keyword semantics. */
+.etwiki-learning:not(.learning-index):not(.ew-index) .header-wrap,.etwiki-learning:not(.learning-index):not(.ew-index) .wrap,.etwiki-learning>.prog-wrap,.etwiki-learning .mode-bar,.etwiki-learning #nav{width:min(100% - 32px,820px);margin-left:auto;margin-right:auto;min-width:0}
+.etwiki-learning .header-wrap{padding:12px 0 0}
+.etwiki-learning .header-topbar{border-color:var(--ew-border);gap:10px;flex-wrap:wrap}
+.etwiki-learning .header-title{font-family:inherit;color:var(--ew-text);font-size:clamp(26px,5vw,34px);line-height:1.35;letter-spacing:-.7px}
+.etwiki-learning .header-script{font-family:inherit;color:var(--ew-muted);font-size:16px;transform:none;font-weight:500}
+.etwiki-learning .header-sub{font-family:inherit;font-size:14px;line-height:1.75;color:var(--ew-muted);text-decoration:none}
+.etwiki-learning .header-no,.etwiki-learning .header-sticker{font-family:inherit;border:1px solid var(--ew-border);background:var(--ew-tint);color:var(--ew-accent);font-size:12px;letter-spacing:.3px;border-radius:6px}
+.etwiki-learning .header-label,.etwiki-learning .header-chapter{font-family:inherit;color:var(--ew-muted);font-size:13px}
+.etwiki-learning .title-hl{background:var(--ew-tint);color:var(--ew-text);border-radius:5px}
+.etwiki-learning .header-divider{border-top:1px solid var(--ew-border)}
+.etwiki-learning .header-tip{background:var(--ew-soft);border-color:var(--ew-border);color:var(--ew-muted);font-family:inherit;font-size:14px}
+.etwiki-learning .card,.etwiki-learning .sec,.etwiki-learning .toc,.etwiki-learning .legend{background:var(--ew-surface);border-color:var(--ew-border);box-shadow:0 2px 8px #2e7d5208;border-radius:14px}
+.etwiki-learning .toc{width:min(100% - 32px,820px)}
+.etwiki-learning .wrap .toc{width:100%}
+.etwiki-learning .sec-header{background:var(--ew-tint);border-color:var(--ew-border);min-height:52px}
+.etwiki-learning .sec-title,.etwiki-learning .toc-title{font-family:inherit;color:var(--ew-text);font-size:16px;letter-spacing:0}
+.etwiki-learning .sec-tag{background:var(--ew-surface);color:var(--ew-accent);font-family:inherit}
+.etwiki-learning .sec-arrow{color:var(--ew-muted)}
+.etwiki-learning .toc-item{font-family:inherit;background:var(--ew-soft);border-color:var(--ew-border);color:var(--ew-accent);font-size:13px;min-height:44px;display:inline-flex;align-items:center}
+.etwiki-learning .q-num,.etwiki-learning .q-cat{background:var(--ew-tint);color:var(--ew-accent);font-family:inherit;font-size:12px}
+.etwiki-learning .q-src,.etwiki-learning .lb,.etwiki-learning .prog-info{font-family:inherit;color:var(--ew-muted);font-size:12px}
+.etwiki-learning .q-text{color:var(--ew-text);font-size:17px;line-height:1.85}
+.etwiki-learning .ox-btn{border-color:var(--ew-border);background:var(--ew-soft);color:var(--ew-text);min-height:76px}
+.etwiki-learning .ox-btn:hover:not(:disabled){border-color:var(--ew-accent)}
+/* Correct/incorrect states deliberately keep a green/red distinction. */
+.etwiki-learning .ox-btn.co,.etwiki-learning .ox-btn.cx{border-color:var(--ew-accent)!important;background:var(--ew-tint)!important}
+.etwiki-learning .badge.ok{border-color:var(--ew-border);color:var(--ew-accent);background:var(--ew-tint)}
+.etwiki-learning .exp-header,.etwiki-learning .exp-answer,.etwiki-learning .exp-body{background:var(--ew-soft);border-color:var(--ew-border)}
+.etwiki-learning .exp-header span,.etwiki-learning .ans-label,.etwiki-learning .sec-label{font-family:inherit;color:var(--ew-accent);font-size:13px;letter-spacing:.2px}
+.etwiki-learning .ans-text,.etwiki-learning .exp-body>p{color:var(--ew-text);font-size:16px;line-height:1.8}
+.etwiki-learning .compare-item{background:var(--ew-surface);border-color:var(--ew-border)}
+.etwiki-learning .ci-title{font-family:inherit;color:var(--ew-text);font-size:14px}
+.etwiki-learning .compare-item p{color:var(--ew-muted);font-size:15px}
+.etwiki-learning .next-btn,.etwiki-learning .score-circle{background:var(--ew-accent);font-family:inherit;box-shadow:none}
+.etwiki-learning .mode-btn,.etwiki-learning .restart-btn,.etwiki-learning .nd{font-family:inherit;background:var(--ew-soft);border-color:var(--ew-border);color:var(--ew-accent);min-height:44px}
+.etwiki-learning .nd{min-width:44px}
+.etwiki-learning .mode-btn.active,.etwiki-learning .nd.cur{background:var(--ew-accent);border-color:var(--ew-accent);color:#fff}
+.etwiki-learning .nd.ok{background:var(--ew-tint);color:var(--ew-accent);border-color:var(--ew-accent)}
+.etwiki-learning .nd.ng{background:#fff0f0;color:#b71c1c;border-color:#c62828}
+.etwiki-learning .bar{background:var(--ew-border-soft)}
+.etwiki-learning .bar-fill{background:var(--ew-accent)}
+.etwiki-learning .learning-nav,.etwiki-learning .learning-links,.etwiki-learning .quiz-hub-nav{max-width:820px;margin:0 auto 16px;padding:0 16px;display:flex;gap:8px;flex-wrap:wrap}
+.etwiki-learning .learning-nav a,.etwiki-learning .learning-links a,.etwiki-learning .quiz-hub-nav a,.etwiki-learning .nav-btn{font-family:inherit;display:inline-flex;align-items:center;min-height:44px;padding:8px 13px;border:1px solid var(--ew-border);border-radius:9px;color:var(--ew-accent);background:var(--ew-surface);font-size:14px;text-decoration:none}
+.etwiki-learning .nav-btn.next-btn{color:#fff;background:var(--ew-accent)}
+@media(max-width:640px){.etwiki-learning .ew-brand-row{padding:10px 16px;gap:10px}.etwiki-learning .ew-brand{font-size:18px}.etwiki-learning .ew-header-label{font-size:12px}.etwiki-learning .ew-subjects{padding:0 16px;gap:24px}.etwiki-learning .ew-subjects a{font-size:14px}.etwiki-learning .chapter-list,.etwiki-learning.ew-index .topics{grid-template-columns:minmax(0,1fr)}.etwiki-learning .chapter-row,.etwiki-learning .chapter,.etwiki-learning.ew-index .topic{padding:16px}.etwiki-learning.learning-index .learning-main,.etwiki-learning.learning-index .index-wrap,.etwiki-learning.ew-index main,.etwiki-learning .ew-shortcut{width:calc(100% - 32px)}.etwiki-learning .card{padding:20px 17px}.etwiki-learning .q-text{font-size:16px}.etwiki-learning .compare,.etwiki-learning .compare.three{grid-template-columns:minmax(0,1fr)}.etwiki-learning .sec-title{font-size:16px}.etwiki-learning .header-wrap{padding-top:8px}}
+@media(prefers-reduced-motion:reduce){.etwiki-learning .card,.etwiki-learning .exp,.etwiki-learning .next-btn,.etwiki-learning .score-card{animation:none;transition:none}}
+/* Alternate phonology exercise/concept template. Semantic feedback colors untouched. */
+.etwiki-learning .hero{background:var(--ew-tint);color:var(--ew-text);padding:24px 20px;text-align:left;margin:0 0 22px;border-bottom:1px solid var(--ew-border)}
+.etwiki-learning .hero h1{font-family:inherit;font-size:clamp(26px,5vw,34px);line-height:1.35;color:var(--ew-text)}
+.etwiki-learning .hero h1 span{color:var(--ew-accent)}
+.etwiki-learning .hero-tag,.etwiki-learning .hero p{font-family:inherit;color:var(--ew-muted);font-size:14px;letter-spacing:0}
+.etwiki-learning .hero p{max-width:820px;margin:8px 0}
+.etwiki-learning .hero-badges{justify-content:flex-start}
+.etwiki-learning .hero-badges .badge{background:var(--ew-surface);color:var(--ew-accent);border:1px solid var(--ew-border);font-family:inherit}
+.etwiki-learning .study-nav{background:var(--ew-surface);border-color:var(--ew-border)}
+.etwiki-learning .study-nav a,.etwiki-learning .study-nav a.local{min-height:44px;font-family:inherit;font-size:13px;background:var(--ew-soft);color:var(--ew-accent);border-color:var(--ew-border)}
+.etwiki-learning .sec-num{background:var(--ew-accent)}
+.etwiki-learning .ex-sec-title{font-family:inherit;color:var(--ew-text)}
+
+.etwiki-learning .hero .hero-stats{justify-content:flex-start;gap:24px}
+.etwiki-learning .hero .stat-n{font-family:inherit;color:var(--ew-accent)}
+.etwiki-learning .hero .stat-l{font-family:inherit;color:var(--ew-muted);font-size:13px}

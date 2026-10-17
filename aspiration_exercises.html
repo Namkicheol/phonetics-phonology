@@ -104,8 +104,10 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 .r-btn{padding:9px 26px;background:var(--pri);color:#fff;border:none;border-radius:8px;
   font-size:14px;cursor:pointer;font-family:var(--sans)}
 </style>
+<link rel="stylesheet" href="./mint-learning.css">
 </head>
-<body>
+<body class="etwiki-learning">
+<header class="ew-header"><div class="ew-brand-row"><a class="ew-brand" href="https://etwiki.net/index.html">기출 WIKI</a><span class="ew-header-label">학습자료</span><a class="ew-back" href="https://etwiki.net/study.html">전체 자료 ↗</a></div><nav class="ew-subjects" aria-label="학습 영역"><a href="https://namkicheol.github.io/englisheducation/">영어교육론</a><a href="https://namkicheol.github.io/linguistics/">영어학</a><a href="https://namkicheol.github.io/phonetics-phonology/phonetics.html" aria-current="location">음성·음운론</a></nav></header>
 <style>
 .study-nav{position:relative;z-index:30;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:10px 12px;background:#fff;border-bottom:1px solid #dce9f0}
 .study-nav a{min-height:36px;display:inline-flex;align-items:center;justify-content:center;padding:7px 11px;border:1px solid #dce9f0;border-radius:18px;background:#f4f8fb;color:#31566b;font:600 12px/1.2 'Noto Sans KR',sans-serif;text-decoration:none;white-space:nowrap}
@@ -173,9 +175,9 @@ const DATA = [
    e:'틀렸습니다. [pʰ]와 [p]는 영어에서 같은 음소 /p/의 변이음(allophones)입니다.\n두 음이 의미를 구별하는 최소 대립쌍이 없으므로 음소가 아닌 변이음 관계입니다.\n(힌디어에서는 구별되는 음소임에 주의)'},
 
   {s:'Section A',st:'',sd:'',
-   t:'ox', q:'어말(coda) 위치의 /p/는 기식음으로 실현된다.',
+   t:'ox', q:"Strong aspiration의 기본 환경은 syllable의 coda이다.",
    a:false,
-   e:'틀렸습니다. Coda(음절말) 위치의 무성 파열음은 비기식음(unreleased 또는 일반 [p])으로 실현됩니다.\n기식음화는 강세 모음 앞 음절초(onset) 위치에서만 일어납니다.\n예: top [tʰɑp]에서 어두 /t/는 기식음, 어말 /p/는 비기식음'},
+   e:"틀렸습니다. 기본 환경은 stressed syllable의 onset입니다. AEP가 설명하는 word-final stop의 weak aspiration은 이 기본 패턴과 구분합니다. 말끝의 stop은 audible release 없이 실현되기도 합니다."},
 
   {s:'Section A',st:'',sd:'',
    t:'ox', q:'기식음화는 allophonic rule(변이음 규칙)이다.',
@@ -212,13 +214,13 @@ const DATA = [
    e:'기식음은 IPA에서 [ʰ] 기호로 표기합니다.\n예: [pʰ] (기식 양순 파열음), [tʰ] (기식 치경 파열음), [kʰ] (기식 연구개 파열음)\n[ˈ]는 강세 기호, [ː]는 장음 기호, [~]는 비음화 기호입니다.'},
 
   {s:'Section B',st:'',sd:'',
-   t:'mc', q:'어말 위치(coda)의 /p/는 어떻게 실현되는가?',
+   t:'mc', q:"어말의 /p/를 audible release 없이 발음한 경우에 해당하는 보기는?",
    o:['① 기식음 [pʰ]',
       '② 유성음 [b]',
       '③ 비기식음 [p] (또는 미파음)',
       '④ 삭제되어 나타나지 않음'],
    a:2,
-   e:'어말 위치(coda)의 /p/는 비기식음[p] 또는 미파음(unreleased [p̚])으로 실현됩니다.\n기식음화 규칙은 강세 모음 앞 음절초에서만 작동하며, coda 위치에서는 적용되지 않습니다.\ntop [tʰɑp]: 어두 /t/=[tʰ](기식), 어말 /p/=[p](비기식)'},
+   e:"③의 미파음(unreleased stop)에 해당합니다. 말끝의 stop에는 no audible release가 흔히 나타납니다. 다만 AEP는 release되는 word-final stop에 weak aspiration이 가능한 경우도 설명하므로, 모든 coda stop에 aspiration이 없다고 일반화하지 않습니다."},
 
   {s:'Section B',st:'',sd:'',
    t:'mc', q:'영어에서 기식음 [pʰ]의 음운론적 지위는?',

@@ -104,8 +104,10 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 .r-btn{padding:9px 26px;background:var(--pri);color:#fff;border:none;border-radius:8px;
   font-size:14px;cursor:pointer;font-family:var(--sans)}
 </style>
+<link rel="stylesheet" href="./mint-learning.css">
 </head>
-<body>
+<body class="etwiki-learning">
+<header class="ew-header"><div class="ew-brand-row"><a class="ew-brand" href="https://etwiki.net/index.html">기출 WIKI</a><span class="ew-header-label">학습자료</span><a class="ew-back" href="https://etwiki.net/study.html">전체 자료 ↗</a></div><nav class="ew-subjects" aria-label="학습 영역"><a href="https://namkicheol.github.io/englisheducation/">영어교육론</a><a href="https://namkicheol.github.io/linguistics/">영어학</a><a href="https://namkicheol.github.io/phonetics-phonology/phonetics.html" aria-current="location">음성·음운론</a></nav></header>
 <style>
 .study-nav{position:relative;z-index:30;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:10px 12px;background:#fff;border-bottom:1px solid #dce9f0}
 .study-nav a{min-height:36px;display:inline-flex;align-items:center;justify-content:center;padding:7px 11px;border:1px solid #dce9f0;border-radius:18px;background:#f4f8fb;color:#31566b;font:600 12px/1.2 'Noto Sans KR',sans-serif;text-decoration:none;white-space:nowrap}
@@ -175,7 +177,7 @@ const DATA = [
   {s:'Section A', st:'', sd:'', t:'ox',
    q:'photographic /ˌfoʊtəˈgræfɪk/에서 primary stress는 -graph- 음절이다.',
    a:true,
-   e:'정답: O\n\n/ˌfoʊtəˈgræfɪk/에서 ˈ 기호가 -graph- 앞에 위치하므로 primary stress는 세 번째 음절 -graph-입니다.\nYavaş 수치 표기: pho-(2) · to-(4) · graph-(1) · ic(4) → 2 4 1 4\nfirst 음절(pho-)에는 secondary stress(ˌ)가 있습니다.'},
+   e:"정답: O. /ˌfoʊtəˈgræfɪk/에서 ˈ 기호가 -graph- 앞에 있으므로 primary stress는 세 번째 음절에 있습니다. 첫 음절에는 secondary stress(ˌ)가 있습니다. AEP의 숫자표 2 4 1 4는 마지막 모음을 [ə]로 적는 원서의 전사에 해당하므로, 여기 제시한 /ɪ/ 전사에 그대로 덧붙이지 않습니다."},
 
   {s:'Section A', st:'', sd:'', t:'ox',
    q:'Secondary stress 음절도 반드시 full vowel을 갖는다.',
@@ -203,9 +205,9 @@ const DATA = [
 
   {s:'Section B', st:'', sd:'', t:'mc',
    q:'Secondary stress를 식별하는 원칙 중 틀린 것은?',
-   o:['① 연속 약화 음절은 주로 최대 2개까지다', '② Secondary stress는 일반적으로 primary stress 앞에 온다', '③ Full vowel을 가진 음절은 강세를 받는다', '④ Secondary stress는 항상 primary stress 뒤에 온다'],
+   o:['① 연속 약화 음절은 주로 최대 2개까지다', '② Secondary stress는 일반적으로 primary stress 앞에 온다', '③ 강세를 받는 음절에는 full vowel이 온다', '④ Secondary stress는 항상 primary stress 뒤에 온다'],
    a:3,
-   e:'정답: ④\n\nYavaş의 원칙:\n(a) 연속 약화 음절은 주로 최대 2개 → ①은 맞음\n(b) Full vowel이 있으면 강세 음절 → ③은 맞음\n(c) Secondary stress는 일반적으로 primary stress 앞에 온다 → ②는 맞음\n\n④는 틀린 설명입니다. Secondary는 primary 뒤가 아닌 앞에 오는 것이 일반적입니다.\n예: ˌpho·to·ˈgraph·ic — secondary(pho-)가 primary(graph-) 앞에 위치.'},
+   e:"정답: ④. Secondary stress가 항상 primary stress 뒤에 온다는 설명은 틀립니다. AEP는 secondary stress가 일반적으로 primary stress 앞에 온다고 설명합니다. 강세 음절에는 full vowel이 오지만, full vowel이 있는 모든 음절이 강세를 받는 것은 아닙니다. 예: ˌphotoˈgraphic의 첫 음절에 secondary stress가 있습니다."},
 
   {s:'Section B', st:'', sd:'', t:'mc',
    q:'photography /fəˈtɑgrəfi/의 Yavaş 수치 표기는?',
