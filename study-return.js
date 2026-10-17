@@ -48,3 +48,16 @@
   button.setAttribute('aria-label', button.textContent.replace(/^←\s*/, ''));
   button.title = button.getAttribute('aria-label');
 })();
+
+/* Independent study-disclosure component; return navigation above is unchanged. */
+(function () {
+  'use strict';
+  if (!/(?:_study|_concepts)\.html$/.test(window.location.pathname)
+      || document.getElementById('ew-study-details-script')) return;
+  var current = document.currentScript;
+  if (!current || !current.src) return;
+  var script = document.createElement('script');
+  script.id = 'ew-study-details-script';
+  script.src = new URL('study-details.js', current.src).href;
+  document.head.appendChild(script);
+})();
