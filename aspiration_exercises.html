@@ -196,13 +196,13 @@ const DATA = [
    e:'spin의 /p/는 /s/ 다음에 오기 때문에 비기식음으로 실현됩니다.\n기식음화 환경: 강세 모음 앞 음절초 위치 (단, /s/ 뒤는 제외)\nspin: /s/ → /p/ → /ɪ/: /p/는 /s/ 뒤에 오므로 기식음화 규칙이 차단됩니다.\npin [pʰɪn]: /s/ 없음 → /p/ 기식음화'},
 
   {s:'Section B',st:'',sd:'',
-   t:'mc', q:'무성 파열음의 기식음화가 일어나는 환경은?',
+   t:'mc', q:'무성 파열음 /p, t, k/에 strong aspiration이 나타나는 기본 환경은?',
    o:['① 모음 사이(intervocalic) 위치',
-      '② 어말(coda) 위치',
-      '③ 강세 모음 앞 어두(onset) 위치',
+      '② syllable의 coda 위치',
+      '③ stressed syllable의 onset 위치 (같은 onset의 /s/ 뒤는 제외)',
       '④ /s/ 뒤에 오는 모든 위치'],
    a:2,
-   e:'기식음화는 강세 모음 앞 음절초(onset) 위치에서 일어납니다.\n구체적 환경: 어두 위치 또는 강세 음절의 onset에서 무성 파열음이 기식음화됩니다.\n예: pin [pʰɪn] (어두, 강세 모음 앞), appear [əˈpʰɪr] (강세 음절 onset)'},
+   e:'Strong aspiration의 기본 환경은 stressed syllable의 onset이며, 같은 onset의 /s/ 뒤는 제외합니다. Onset은 음절의 시작 부분이므로 word-initial에 한정되지 않습니다.\n예: pin [pʰɪn], appear [əˈpʰɪr]\nRelease되는 word-final stop의 weak aspiration은 이 기본 환경과 구분합니다.'},
 
   {s:'Section B',st:'',sd:'',
    t:'mc', q:'IPA에서 기식음을 표기하는 기호는?',
@@ -217,10 +217,10 @@ const DATA = [
    t:'mc', q:"어말의 /p/를 audible release 없이 발음한 경우에 해당하는 보기는?",
    o:['① 기식음 [pʰ]',
       '② 유성음 [b]',
-      '③ 비기식음 [p] (또는 미파음)',
+      '③ unreleased stop [p̚]',
       '④ 삭제되어 나타나지 않음'],
    a:2,
-   e:"③의 미파음(unreleased stop)에 해당합니다. 말끝의 stop에는 no audible release가 흔히 나타납니다. 다만 AEP는 release되는 word-final stop에 weak aspiration이 가능한 경우도 설명하므로, 모든 coda stop에 aspiration이 없다고 일반화하지 않습니다."},
+   e:"③의 unreleased stop [p̚]에 해당합니다. Unaspirated는 aspiration이 없다는 뜻이며, audible release가 없다는 뜻과 같지 않습니다. 말끝의 stop에는 no audible release가 흔히 나타납니다. 다만 AEP는 release되는 word-final stop에 weak aspiration이 가능한 경우도 설명하므로, 모든 coda stop에 aspiration이 없다고 일반화하지 않습니다."},
 
   {s:'Section B',st:'',sd:'',
    t:'mc', q:'영어에서 기식음 [pʰ]의 음운론적 지위는?',
@@ -229,13 +229,13 @@ const DATA = [
       '③ /b/의 변이음',
       '④ 자유 변이(free variation)'],
    a:1,
-   e:'[pʰ]는 영어에서 음소 /p/의 변이음(allophone)입니다.\n기식음과 비기식음이 상보적 분포(complementary distribution)를 이루므로 변이음 관계입니다:\n- [pʰ]: 강세 모음 앞 onset\n- [p]: /s/ 뒤, coda 위치 등\n힌디어에서는 /pʰ/와 /p/가 별도 음소임에 유의'},
+   e:'[pʰ]는 영어에서 음소 /p/의 변이음(allophone)입니다.\n기식음과 비기식음이 상보적 분포(complementary distribution)를 이루므로 변이음 관계입니다:\n- [pʰ]: stressed syllable의 onset (같은 onset의 /s/ 뒤는 제외)\n- [p]: 같은 onset의 /s/ 뒤\nCoda의 /p/는 [p̚]처럼 audible release 없이 실현되거나, release될 때 weak aspiration을 보일 수 있습니다.\n힌디어에서는 /pʰ/와 /p/가 별도 음소임에 유의'},
 
   // Section C: 빈칸 채우기 (5문항)
   {s:'Section C',st:'빈칸 채우기',
    sd:'각 문항의 빈칸에 알맞은 내용을 입력하시오.',
    t:'fi',
-   q:'기식음화 규칙의 적용 환경: 무성 파열음은 ( )에서 기식음으로 실현된다.',
+   q:'Strong aspiration의 기본 환경: 같은 onset에서 /s/ 뒤에 있지 않은 /p, t, k/의 strong aspiration은 ( )에서 나타난다. 환경을 한국어로 쓰시오.',
    blanks:['강세 모음 앞 음절초'],
    labels:['환경 →'],
    e:'기식음화 규칙 환경: "강세 모음 앞 음절초(stressed syllable onset)"\npin [pʰɪn], top [tʰɑp], cool [kʰuːl]: 모두 강세 모음 앞 어두 위치에서 기식음화'},
@@ -263,7 +263,7 @@ const DATA = [
 
   {s:'Section C',st:'',sd:'',
    t:'fi',
-   q:'영어에서 기식음화는 음소 규칙이 아닌 ( ) 규칙이다.',
+   q:'영어에서 기식음화는 어떤 종류의 규칙인가? 영어로 두 단어를 쓰시오.',
    blanks:['allophonic rule'],
    labels:['규칙 지위 →'],
    e:'기식음화는 allophonic rule(변이음 규칙)입니다.\n[pʰ]와 [p]가 상보적 분포를 이루고 의미를 구별하지 않으므로 변이음 규칙입니다.\n음소 규칙이었다면 [pʰ]와 [p]의 차이로 의미가 달라지는 최소 대립쌍이 있어야 합니다.'}
