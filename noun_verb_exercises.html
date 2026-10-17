@@ -186,10 +186,10 @@ const DATA = [
 
   /* ── Section B: 객관식 ── */
   {s:'Section B', st:'객관식', sd:'가장 적절한 답을 하나 고르시오.',
-   t:'mc', q:'다음 중 동사일 때 두 번째 음절에 강세가 오지 않는 단어는?',
+   t:'mc', q:'다음 중 동사일 때 두 번째 음절에 강세가 오지 않는 단어는? 이 문항에서 protest는 /prəˈtest/를 기준으로 한다.',
    o:['① record', '② permit', '③ balance', '④ protest'],
    a:2,
-   e:'정답: ③ balance\n\nbalance는 2음절 동사이지만 penult(첫 음절)에 강세가 옵니다.\n\n비교:\n· reˈcord (v) — 2번째 강세 ✓\n· perˈmit (v) — 2번째 강세 ✓\n· ˈbalance (v) — 1번째 강세 ✗\n· proˈtest (v) — 2번째 강세 ✓'},
+   e:'정답: ③ balance\n\nbalance는 2음절 동사이지만 penult(첫 음절)에 강세가 옵니다.\n\n비교:\n· reˈcord (v) — 2번째 강세 ✓\n· perˈmit (v) — 2번째 강세 ✓\n· ˈbalance (v) — 1번째 강세 ✗\n· proˈtest (v) — 2번째 강세 ✓\n\n동사 protest에는 첫 음절에 primary stress가 오는 발음도 있습니다. 이 문항은 제시한 /prəˈtest/를 기준으로 판단합니다.'},
 
   {s:'Section B', st:'', sd:'', t:'mc',
    q:'ˈrecord의 품사는?',
@@ -246,11 +246,11 @@ const DATA = [
    e:'정답: 명사 1번째, 동사 2번째\n\n· ˈobject (n) /ˈɒbdʒɪkt/ — 1번째 음절(ob-) 강세\n· obˈject (v) /əbˈdʒekt/ — 2번째 음절(-ject) 강세\n\n예문: "This is a strange ˈobject." vs. "I obˈject to this plan."'},
 
   {s:'Section C', st:'', sd:'', t:'fi',
-   q:'protest\n명사: ___ 번째 음절 강세 / 동사: ___ 번째 음절 강세',
+   q:'protest: 제시된 명사 /ˈproʊtest/, 동사 /prəˈtest/를 기준으로 답하시오.\n명사: ___ 번째 음절 강세 / 동사: ___ 번째 음절 강세',
    blanks:['1', '2'],
    labels:['명사:', '동사:'],
    hint:'예: 첫 번째 음절 강세 → 1 입력',
-   e:'정답: 명사 1번째, 동사 2번째\n\n· ˈprotest (n) /ˈproʊtest/ — 1번째 음절(pro-) 강세\n· proˈtest (v) /prəˈtest/ — 2번째 음절(-test) 강세\n\n예문: "The ˈprotest was peaceful." vs. "They proˈtested against the law."'}
+   e:'정답: 명사 1번째, 동사 2번째\n\n· ˈprotest (n) /ˈproʊtest/ — 1번째 음절(pro-) 강세\n· proˈtest (v) /prəˈtest/ — 2번째 음절(-test) 강세\n\n예문: "The ˈprotest was peaceful." vs. "They proˈtested against the law."\n\n동사 protest의 첫 음절에 primary stress가 오는 발음도 있지만, 이 문항은 제시된 발음의 강세 위치를 묻습니다.'}
 ];
 
 const quizOrder = QuizOrder.create(DATA, {restart: reset});

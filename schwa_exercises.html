@@ -162,7 +162,7 @@ const DATA = [
    sd:'다음 설명이 맞으면 O, 틀리면 X를 선택하시오.',
    t:'ox', q:'비강세 음절에서 모음은 /ə/(schwa)로 약화될 수 있다.',
    a:true,
-   e:'정확합니다. Vowel reduction은 비강세(-stress) 음절에서 full vowel이 /ə/로 약화되는 현상입니다.\n예: about /əˈbaʊt/의 첫째 음절 a-는 비강세 → /ə/로 약화됩니다.'},
+   e:'정확합니다. /ə/로의 약화는 vowel reduction의 한 예입니다. Reduced vowel에는 [ɪ]도 있으며, 비강세 음절에서도 full vowel이 유지될 수 있습니다.\n예: about /əˈbaʊt/의 첫째 음절 a-는 비강세 → /ə/로 약화됩니다.'},
 
   {s:'Section A',st:'',sd:'',
    t:'ox', q:'강세 음절의 모음도 /ə/로 약화될 수 있다.',
@@ -182,7 +182,7 @@ const DATA = [
   {s:'Section A',st:'',sd:'',
    t:'ox', q:'/ə/(schwa)는 English의 unstressed syllable에서 널리 나타나는 reduced vowel이다.',
    a:true,
-   e:'정확합니다. /ə/(schwa)는 English의 unstressed syllable에서 나타나는 reduced vowel입니다.\nUnstressed vowel은 schwa 또는 다른 weak form으로 약화될 수 있습니다.'},
+   e:'정확합니다. /ə/(schwa)는 English의 unstressed syllable에서 나타나는 reduced vowel입니다.\nUnstressed vowel은 schwa나 reduced [ɪ]로 실현될 수 있지만 full vowel로 유지될 수도 있습니다. Weak form은 단어 전체의 발음형을 가리키므로 reduced vowel과 구분합니다.'},
 
   // Section B: 객관식 (5문항)
   {s:'Section B',st:'객관식 문제',
@@ -205,22 +205,22 @@ const DATA = [
    e:'/ə/는 비강세(-stress) 음절에서만 출현합니다.\n강세 음절(primary/secondary)은 반드시 full vowel을 갖습니다.\n이것이 stress와 vowel quality의 핵심 상관관계입니다.'},
 
   {s:'Section B',st:'',sd:'',
-   t:'mc', q:'/ə/(schwa)와 /ʌ/(wedge)의 핵심적 차이는?',
+   t:'mc', q:'AEP의 전사 관례에서 /ə/(schwa)와 /ʌ/(wedge)를 구분하는 핵심 기준은?',
    o:['① 조음 위치 (혀 위치)',
       '② 강세 여부 (stress vs no stress)',
       '③ 입술 모양 (원순 vs 비원순)',
       '④ 음절 위치 (onset vs coda)'],
    a:1,
-   e:'/ə/와 /ʌ/의 가장 중요한 차이는 강세 여부입니다:\n/ə/: 비강세 음절에서만 출현 (mid central, 약화)\n/ʌ/: 강세 음절에서만 출현 (low-mid central, full vowel)\n두 모음은 상보적 분포(complementary distribution)를 이룹니다.'},
+   e:'AEP의 전사 관례에서는 stress를 기준으로 /ə/와 /ʌ/를 구분합니다:\n/ə/: 비강세 음절에서만 출현 (mid central, 약화)\n/ʌ/: 강세 음절에서만 출현 (low-mid central, full vowel)\n이 관례에서는 두 기호의 분포가 stress에 따라 구분됩니다. 모든 방언이나 전사 체계에 같은 구분을 적용하지는 않습니다.'},
 
   {s:'Section B',st:'',sd:'',
-   t:'mc', q:'강세가 이동할 때 vowel reduction(/ə/)의 위치는?',
-   o:['① 항상 첫째 음절에 고정',
-      '② 항상 마지막 음절에 고정',
-      '③ 강세 이동에 따라 약화 위치도 함께 이동',
-      '④ 강세 이동과 무관하게 유지'],
+   t:'mc', q:'제시된 photograph /ˈfoʊtəgræf/와 photography /fəˈtɑgrəfi/의 첫 두 음절을 비교하면?',
+   o:['① 두 발음 모두 첫째 음절의 모음이 /ə/임',
+      '② 두 발음 모두 둘째 음절의 모음이 /ə/임',
+      '③ primary stress 위치가 달라지고 /ə/는 둘째 음절에서 첫째 음절로 바뀜',
+      '④ 두 발음의 첫 두 음절에서 primary stress와 /ə/의 위치가 모두 같음'],
    a:2,
-   e:'강세가 이동하면 /ə/의 위치도 연동하여 이동합니다:\nˈphotograph /ˈfoʊtəgræf/: 2째=/ə/\nphoˈtography /fəˈtɑgrəfi/: 1째=/ə/\n강세가 이동하면 새로운 비강세 음절이 생기고 그 음절의 모음이 약화됩니다.'},
+   e:'제시된 두 발음의 첫 두 음절에서는 primary stress와 /ə/의 위치가 달라집니다:\nˈphotograph /ˈfoʊtəgræf/: 2째=/ə/\nphoˈtography /fəˈtɑgrəfi/: 1째=/ə/\n이 비교를 모든 stress shift에 일반화할 수는 없습니다. 비강세 모음이 반드시 약화되는 것은 아니며, photography의 마지막 /i/처럼 full vowel이 유지될 수도 있습니다.'},
 
   {s:'Section B',st:'',sd:'',
    t:'mc', q:'"about"의 올바른 IPA 표기는?',
@@ -245,7 +245,7 @@ const DATA = [
    q:'비강세 음절의 full vowel은 /ə/로 ( ) 수 있다.',
    blanks:['약화될'],
    labels:['동사 →'],
-   e:'비강세 음절의 full vowel은 /ə/로 "약화될" 수 있습니다.\nVowel reduction(모음 약화): full vowel → /ə/\n이 현상은 비강세 음절에서만 발생합니다.'},
+   e:'비강세 음절의 full vowel은 /ə/로 "약화될" 수 있습니다.\n여기서 full vowel → /ə/는 vowel reduction의 한 예입니다. Reduced vowel에는 [ɪ]도 있으며, 모든 비강세 모음이 약화되는 것은 아닙니다.'},
 
   {s:'Section C',st:'',sd:'',
    t:'fi',
@@ -266,7 +266,7 @@ const DATA = [
    q:'Vowel reduction은 영어의 ( ) 리듬과 관련이 있다.',
    blanks:['stress-timed'],
    labels:['리듬 유형 →'],
-   e:'Vowel reduction은 영어의 "stress-timed" 리듬과 관련이 있습니다.\nStress-timed: 강세 음절이 등간격으로, 비강세 음절이 압축되어 실현됩니다.\n이 압축 과정에서 비강세 음절 모음이 /ə/로 약화됩니다.'}
+   e:'Vowel reduction은 영어의 "stress-timed" 리듬과 관련이 있습니다.\nStress-timed rhythm은 강세 사이의 간격이 대체로 비슷해지는 경향을 가리키며, 정확한 등간격을 뜻하지는 않습니다.\n비강세 음절의 짧은 지속 시간 및 vowel reduction과 관련이 있지만, 모든 비강세 모음이 자동으로 /ə/가 되는 것은 아닙니다.'}
 ];
 
 const quizOrder = QuizOrder.create(DATA, {restart: reset});

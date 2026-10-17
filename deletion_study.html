@@ -16,6 +16,9 @@ h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin-bottom:12px;letter-spa
 </style>
 
 <link rel="stylesheet" href="./mint-learning.css">
+<style>
+.data-compare{width:100%;border-collapse:collapse;font-family:inherit;font-size:.94em}.data-compare th,.data-compare td{padding:9px 11px;border:1px solid #cfe0eb;text-align:left;vertical-align:top;white-space:normal;overflow-wrap:anywhere}.data-compare caption{text-align:left;font-weight:700;padding:0 0 9px}.data-compare thead{background:#eef7fc}
+</style>
 </head>
 <body class="etwiki-learning">
 <header class="ew-header"><div class="ew-brand-row"><a class="ew-brand" href="https://etwiki.net/index.html">기출 WIKI</a><span class="ew-header-label">학습자료</span><a class="ew-back" href="https://etwiki.net/study.html">전체 자료 ↗</a></div><nav class="ew-subjects" aria-label="학습 영역"><a href="https://namkicheol.github.io/englisheducation/">영어교육론</a><a href="https://namkicheol.github.io/linguistics/">영어학</a><a href="https://namkicheol.github.io/phonetics-phonology/phonetics.html" aria-current="location">음성·음운론</a></nav></header>
@@ -43,11 +46,57 @@ h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin-bottom:12px;letter-spa
   </div>
   <div class="grid"><a class="card" href="deletion_ox.html"><h3>OX Quiz</h3><p>핵심 판별 문항을 바로 풀면서 rule environment를 확인한다.</p></a></div>
   <section class="section" id="coronal-stop"><h2>Coronal Stop Deletion</h2>
-<p><span class="kw">/t, d/</span>는 three-consonant sequence의 central position에 있거나, word-final cluster의 final member가 다음 word-initial consonant 앞에 있을 때 탈락할 수 있다.</p><div class="ex">central /t,d/ in C-t/d-C → ∅<br>best man → [bes mæn] · old boyfriend → [oʊl bɔɪfrɛnd]</div><div class="note warn">word-boundary 환경에서는 다음 consonant가 /h, y, w, r/이면 적용하지 않는다. liquid 앞 deletion은 optional이며, grammatical ending이 붙은 경우에는 deletion이 훨씬 덜 일어난다. Source: <em>Phonological Rules_가루미</em> §3 ⑥ Consonant Cluster Simplification.</div>
+<p><span class="kw">/t, d/</span>는 three-consonant sequence의 central position에 있거나, word-final cluster의 final member가 다음 word-initial consonant 앞에 있을 때 탈락할 수 있다.</p><div class="ex">C₁ /t,d/ C₂ → C₁ C₂ (조건을 충족할 때)<br>best man → [bɛs mæn] · old boyfriend → [oʊl bɔɪfrɛnd]</div><div class="note warn">이 페이지의 기본 예에서는 다음 단어가 /h, j, w, r/로 시작하면 deletion을 적용하지 않는다. /l/ 앞의 hand luggage는 /d/를 유지하거나 삭제할 수 있다. 이 제한을 모든 방언의 절대 규칙으로 외우지 말고, 문제에 제시된 발음과 조건을 먼저 확인한다. grammatical ending으로 생긴 cluster는 유지되는 경우가 많다.</div>
+<details class="note"><summary>예문을 비교하며 확인하기: cluster, optionality, no audible release</summary>
+<h3>1. 철자 대신 실제 segment를 나열한다</h3>
+<p>best man을 /bɛst mæn/으로 놓으면 단어 경계의 연속은 /s t m/이다. 삭제 대상은 가운데 /t/이고, 이를 제외하면 [bɛs mæn]이 된다. old friend에서는 /l d f/의 /d/가 대상이므로 [oʊl frɛnd]가 가능하다. 두 예 모두 다음 단어가 consonant로 시작한다는 사실만으로는 부족하다. 앞 단어 끝에 /t, d/를 포함한 cluster가 있는지도 확인해야 한다.</p>
+<div class="ex">best man: /s t # m/ → [s # m]<br>old friend: /l d # f/ → [l # f]<br>best offer: /s t # V/ → 이 consonant-cluster rule의 환경이 아님</div>
+<p>best offer의 /t/가 다른 방식으로 발음될 수 있는지와 이 deletion rule이 적용되는지는 별개의 질문이다. “환경이 아니다”는 말은 이 규칙으로 [t]를 지울 수 없다는 뜻이지, 반드시 하나의 고정된 phonetic realization만 허용된다는 뜻이 아니다.</p>
+<h3>2. 같은 모양의 cluster라도 형태와 발화 조건을 확인한다</h3>
+<p>hand luggage의 /n d l/에서는 [d]가 있는 발음과 없는 발음을 비교할 수 있다. 반면 planned trip의 /d/는 past-tense ending이다. 이처럼 grammatical ending이 만든 cluster는 기본적인 연결 발음 설명에서 유지되는 경향이 있다. 그렇다고 모든 방언에서 ending의 deletion이 금지되는 것은 아니다. AEP는 AAVE의 cluster reduction을 별도로 설명하며, morpheme boundary를 넘어 적용되는 예도 제시한다.</p>
+<p>hand luggage에서 /l/ 앞의 deletion이 가능하다고 해서 /r/ 앞에도 같은 조건을 적용할 수 있는 것은 아니다. 이 페이지의 기본 예에서는 /r/ 앞을 제외한다. 새로운 자료를 풀 때는 liquid라는 분류만으로 판단하지 말고, 다음 consonant와 제시된 발음을 확인한다.</p>
+<h3>3. [t̚]는 ∅가 아니다</h3>
+<div class="ex">sit [sɪt̚]: /t/의 closure는 있고 audible release가 없음<br>best man [bɛs mæn]: 제시된 출력에는 [t]가 없음</div>
+<p>no audible release는 stop의 release가 들리지 않는다는 뜻이다. stop 자체가 삭제되었다는 뜻은 아니다. 예를 들어 cheap date에서 첫 stop의 release가 따로 들리지 않아도 두 stop의 조음이 겹친 것일 수 있다. 청각적 인상 하나로 deletion을 판정하지 말고, 제시된 transcription과 조음 설명을 함께 읽는다. [ʔ]가 제시되었다면 glottal replacement인지도 구분해야 한다.</p>
+<div class="miniq"><b>확인 문제</b><p>best man에서 /t/가 약하게 들린다는 설명만으로 [bɛs mæn]을 확정할 수 있을까? 아니다. [t̚]처럼 유지되면서 release만 들리지 않는 경우와 segment가 없는 경우를 구별할 근거가 더 필요하다.</p></div>
+<p>원서 근거: Mehmet Yavaş, <em>Applied English Phonology</em>, 2nd ed. (2011), Ch. 3의 stop release 설명, Ch. 6 §6.5.6 및 이어지는 dialectal variations.</p>
+</details>
 </section><section class="section" id="h"><h2>H-deletion</h2>
-<p><span class="kw">h-deletion</span>은 connected speech에서 pronominal function word의 unstressed initial /h/에 나타난다. content word의 /h/에 일반화하지 않는다.</p><div class="ex">ask her → ask [ər] · help him → help [ɪm]</div><div class="note">Source: <em>Phonological Rules_가루미</em> §3 ⑪ /h/-Deletion. sentential-initial position이나 contrastive stress에서는 이 reduction을 일반화하지 않는다.</div>
+<p><span class="kw">h-deletion</span>은 connected speech에서 pronoun이나 auxiliary 같은 function word가 unstressed weak form으로 쓰일 때 그 첫 /h/에 나타난다. content word의 /h/에 일반화하지 않는다.</p><div class="ex">ask her → ask [ər] · help him → help [ɪm]</div><div class="note">문장 첫머리나 contrastive stress가 있는 경우에는 이 reduction을 그대로 적용하지 않는다. 여기서는 connected speech의 weak form을 다루며, 모든 영어 방언의 /h/ 분포를 설명하는 것은 아니다.</div>
+<details class="note"><summary>예문을 비교하며 확인하기: weak form과 /h/의 위치</summary>
+<h3>1. help에서가 아니라 him에서 삭제한다</h3>
+<p>help him을 [hɛlp hɪm]에서 [hɛlp ɪm]으로 바꾸어 보면, 사라진 것은 him의 첫 /h/다. help의 /h/는 그대로 남는다. “/h/가 두 번 나오므로 하나를 없앤다”는 분석이 아니라, unstressed pronoun him이 weak form으로 쓰인다는 분석이다.</p>
+<div class="ex">help him → [hɛlp ɪm] (him이 unstressed일 때 가능한 발음)<br>help HIM → [hɛlp hɪm] (him을 대조하여 강조)<br>help Henry → Henry의 /h/에 이 function-word rule을 적용하지 않음</div>
+<p>ask her도 같은 순서로 푼다. 먼저 her가 pronoun인지, 강세를 받는지 확인한다. rhotic 발음을 기준으로 weak form [ər]을 선택하면 [æsk ər]이 된다. non-rhotic 발음에서는 /r/의 실현을 따로 확인해야 하므로 [ər]을 모든 방언의 유일한 출력으로 제시하지 않는다.</p>
+<h3>2. “가능하다”와 “항상 그렇다”를 구분한다</h3>
+<p>AEP의 strong/weak form 목록에는 한 단어에 여러 weak form이 제시되기도 한다. 따라서 function word라는 사실만으로 /h/를 무조건 삭제하면 안 된다. 문장 안에서 이어 말하는 unstressed form을 검토하는 것인지, 문장 첫머리나 대조를 나타내는 strong form을 검토하는 것인지 먼저 확인한다.</p>
+<p>h-deletion을 적용한 뒤에는 이전에 없던 segment의 인접 관계가 생길 수 있다. 그러나 그것만으로 다른 규칙까지 자동으로 적용하지 않는다. 이 예의 목적은 /h/ 하나의 유무를 비교하는 것이므로, 추가 규칙이 주어지지 않았다면 그 변화까지만 표시한다.</p>
+<div class="miniq"><b>확인 문제</b><p>“I meant HIM, not Henry”의 HIM도 function word이므로 /h/를 지워야 할까? 아니다. HIM에 contrastive stress가 있으므로 이 페이지의 unstressed weak-form 조건을 충족하지 않는다. 또 hero, happy의 /h/가 유지된다는 설명을 별도의 word-medial /h/ 현상까지 부정하는 주장으로 확대하지 않는다.</p></div>
+<p>원서 근거: Mehmet Yavaş, <em>Applied English Phonology</em>, 2nd ed. (2011), §4.10, “Full (Strong) Forms versus Reduced (Weak) Forms of Function Words.”</p>
+</details>
 </section><section class="section" id="schwa"><h2>Schwa Deletion</h2>
-<p><span class="kw">schwa deletion</span>은 fast speech에서 나타날 수 있다. 특히 두 stressed syllable 사이에 두 stressless syllable이 있으면 어느 한 /ə/가 탈락할 수 있지만, stressless syllable 하나가 두 stressed syllable 사이에 직접 놓인 경우에는 탈락하지 않는다.</p><div class="ex">respiratory [ˈrɛspərəˌtʰɔri] → [ˈrɛsprəˌtʰɔri] or [ˈrɛspərˌtʰɔri]<br>operatic [ˌapəˈræɾɪk] → *[ˌapˈræɾɪk] (불가)</div><div class="note">Source: <em>Phonological Rules_가루미</em> §3 ① Schwa Deletion. 답안에서는 삭제되는 /ə/, 삭제 전후 형태, stress environment를 함께 쓴다.</div>
+<p><span class="kw">schwa deletion</span>은 fast speech에서 나타날 수 있다. 아래에서 다루는 발음 자료에서는 두 stressed syllable 사이에 두 stressless syllable이 있으면 어느 한 /ə/가 탈락할 수 있지만, stressless syllable 하나가 두 stressed syllable 사이에 직접 놓인 경우에는 탈락하지 않는다.</p><div class="ex">respiratory [ˈrɛspərəˌtʰɔri] → [ˈrɛsprəˌtʰɔri] or [ˈrɛspərˌtʰɔri]<br>operatic [ˌapəˈræɾɪk] → *[ˌapˈræɾɪk] (불가)</div><div class="note">답안에서는 삭제되는 /ə/, 삭제 전후 형태, stress environment를 함께 쓴다. respiratory의 두 가능한 출력은 각각 한 번의 deletion을 나타내며, 두 /ə/를 연달아 모두 삭제하라는 뜻이 아니다.</div>
+<details class="note"><summary>예문을 비교하며 확인하기: schwa의 위치, stress, 적용 순서</summary>
+<h3>1. 모든 unstressed vowel을 지우는 규칙이 아니다</h3>
+<p>camera의 [ˈkæmərə]와 [ˈkæmrə]를 비교하면 가운데 [ə] 하나가 사라진다. 앞 syllable은 stressed이고 뒤 syllable에는 또 다른 schwa가 있다. 반면 famous의 마지막 [ə]에는 뒤따르는 schwa syllable이 없다. AEP Ch. 7 Exercise 1의 자료에서는 camera와 같은 방식으로 이 [ə]를 지우지 않는다.</p>
+<div class="ex">camera: [ˈkæmərə] → [ˈkæmrə]<br>principal: [ˈprɪnsəpəl] → [ˈprɪnspəl]<br>principality: [ˌprɪnsəˈpæləti] → *[ˌprɪnsˈpæləti] (이 자료의 조건에서)</div>
+<p>principal과 principality는 철자가 비슷하지만 stress와 뒤따르는 vowel이 다르다. principal에서 삭제 가능한 [ə] 다음에는 schwa가 있고, principality의 해당 위치 다음에는 stressed vowel이 있다. 철자에서 e나 a를 지우는 문제가 아니라, 실제 발음의 schwa와 stress를 비교하는 문제다.</p>
+<h3>2. 서로 다른 두 출력을 하나의 연쇄로 읽지 않는다</h3>
+<p>respiratory의 제시형은 stressed syllable 사이에 두 stressless syllable이 있다. 첫 schwa를 삭제한 형태와 둘째 schwa를 삭제한 형태가 각각 가능하다. 첫 삭제 뒤에는 두 stressed syllable 사이에 stressless syllable 하나만 남는다. 그러므로 같은 조건을 다시 확인하지 않고 남은 schwa까지 삭제할 수는 없다.</p>
+<div class="ex">[ˈrɛspərəˌtʰɔri]<br>→ [ˈrɛsprəˌtʰɔri] 또는 [ˈrɛspərˌtʰɔri]<br>두 출력은 대안이며, 첫 출력 → 둘째 출력의 순서가 아님</div>
+<p>operatic의 [ˌɑpəˈrætɪk]에서는 처음부터 schwa syllable 하나가 두 stressed syllable 사이에 놓인다. 제시된 조건에서는 그 [ə]를 삭제하지 않는다. 여기서 [t]의 flapping 여부는 schwa deletion과 다른 문제이므로, 비교할 때 그 차이를 deletion의 근거로 삼지 않는다.</p>
+<h3>3. 2021학년도 전공 A 6번: 전사 → 조건 → 삭제 → foot</h3>
+<p>아래 IPA 기호와 강세 표시는 읽기 쉽게 통일했으며, 음가와 강세 위치는 원문을 따른다.</p><p>이 문제에서는 <strong>제시된 발음</strong>이 출발점이다. ˈ는 primary stress, ˌ는 secondary stress이며 둘 다 아래에서 S(stressed)로 센다. 표시가 없는 음절은 W(stressless)이다. <a href="https://etwiki.net/concept.html?term=foot%20structure">foot structure</a>는 S를 중심으로 음절을 묶는 방식이다. S와 W는 vowel의 이름이 아니라 <strong>stress 유무</strong>를 나타낸다.</p>
+<p>우선 전사에서 vowel nucleus를 세어 음절 순서를 잡고 stress를 표시한다. 다음으로 [ə]가 든 음절을 찾는다. (2)의 조건은 <u>stressed syllable 뒤이면서 stressless syllable 앞인 medial [ə]</u>이다. (3)은 두 S 사이의 W가 두 개일 때 그중 한 [ə]를 지울 수 있게 한다. S 사이의 W가 하나뿐이면 (4)에 따라 지우지 않는다.</p>
+<div class="ex" role="region" aria-label="2021 A6: 제시 전사의 vowel·stress 순서와 선택" tabindex="0"><table class="data-compare"><caption>2021 A6: 제시 전사의 vowel·stress 순서와 선택</caption><thead><tr><th scope="col">단어·제시 전사</th><th scope="col">음절별 vowel / stress</th><th scope="col">목표와 판정</th></tr></thead><tbody><tr><th scope="row">chocolate [ˈtʃakəlɪt]</th><td>a–ə–ɪ / S–W–W</td><td>가운데 ə: S 뒤, W 앞 → 가능</td></tr><tr><th scope="row">nationalize [ˈnæʃənəˌlaɪz]</th><td>æ–ə–ə–aɪ / S–W–W–S</td><td>두 S 사이의 ə 둘 중 하나 → 가능</td></tr><tr><th scope="row">respirate [ˈrɛspəˌreɪt]</th><td>ɛ–ə–eɪ / S–W–S</td><td>S 사이에 W 하나 → 불가</td></tr><tr><th scope="row">glorify [ˈglɔrəˌfaɪ]</th><td>ɔ–ə–aɪ / S–W–S</td><td>S 사이에 W 하나 → 불가</td></tr></tbody></table></div>
+<p><strong>답은 chocolate과 nationalize이다.</strong> chocolate의 마지막 [ɪ]도 stressless이므로 기출 조건을 만족한다. 앞서 소개한 원서 exercise의 ‘뒤에 또 다른 schwa’라는 더 좁은 조건을 여기로 가져오면 이 정답을 잘못 제외한다. /aɪ, eɪ/는 각각 하나의 diphthong이므로 두 음절로 세지 않는다.</p>
+<div class="ex" role="region" aria-label="선택 가능한 출력: stress를 옮기지 않고 다시 세기" tabindex="0"><table class="data-compare"><caption>선택 가능한 출력: stress를 옮기지 않고 다시 세기</caption><thead><tr><th scope="col">입력</th><th scope="col">가능한 출력</th><th scope="col">남는 stress pattern</th></tr></thead><tbody><tr><th scope="row">[ˈtʃakəlɪt]</th><td>[ˈtʃaklɪt]</td><td>S–W: 3음절 → 2음절</td></tr><tr><th scope="row">[ˈnæʃənəˌlaɪz]</th><td>[ˈnæʃnəˌlaɪz] 또는 [ˈnæʃənˌlaɪz]</td><td>S–W–S: 4음절 → 3음절</td></tr></tbody></table></div>
+<p>출력의 chocolate은 {SW}로 읽을 수 있다. nationalize에서는 첫 S 뒤에 W 하나가 남고 마지막 secondary-stressed syllable은 계속 S이다. 이를 간단히 {SW}{S}로 묶으면 <strong>stressed syllable 뒤에 stressless syllable 하나가 오는 SW foot</strong>이라는 선호가 보인다. 모든 foot가 반드시 두 음절이라는 뜻은 아니다. nationalize의 두 출력은 대안이며, 둘을 이어서 남은 [ə]까지 삭제하면 S 사이의 W가 사라져 주어진 조건에 어긋난다.</p>
+<p><strong>바꿔 보기 · 새 학습용 전사:</strong> 가상 단어 [ˈpætənə]와 [ˈpætəˌna]의 가운데 [ə]를 비교하자. 첫째는 S–W–W이므로 [ˈpætnə]를 허용하는 조건에 맞고, 둘째는 S–W–S이므로 같은 삭제가 막힌다. 달라진 것은 뒤 음절의 stress이다. 이 연습은 실제 영어 단어의 발음 보고가 아니라 기출 조건만 적용하는 비교이다.</p>
+<div class="miniq"><b>마지막 확인</b><p>빠르게 말한다고 반드시 삭제되는 것은 아니다. 삭제 전 형태도 가능하며, 삭제할 때도 <u>기존 stress 위치를 보존</u>한다. SW를 만들기 위해 vowel을 임의로 지우거나 stress를 옮기지 않는다. 먼저 조건을 검사하고 그 뒤 결과의 foot을 설명한다.</p></div>
+<p><a href="https://etwiki.net/index.html?id=linguistics_2021_A06">2021학년도 A 6번 원문과 답안 보기</a></p>
+<p>원서 근거: Mehmet Yavaş, <em>Applied English Phonology</em>, 2nd ed. (2011), Ch. 7 Exercise 1 및 해답. 기출 적용 범위: 2021학년도 전공 A 6번의 제시 발음과 조건. 이 조건을 모든 방언과 모든 단어의 schwa deletion에 그대로 확대하지 않는다.</p>
+</details>
 </section>
   <div class="footer">phonetics-phonology · 임용 음운론 학습 페이지</div>
 </div>
