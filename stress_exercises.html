@@ -165,24 +165,24 @@ const DATA = [
    e:'정답: O\n\nIPA에서 primary stress(ˈ)와 secondary stress(ˌ) 기호는 모두 해당 음절의 바로 앞에 표기합니다.\n예: /ˈfoʊ.tə.græf/ — ˈ가 pho- 음절 앞에 위치합니다.\n스페인어의 á처럼 음절 위에 쓰는 악센트 기호와 혼동하지 않도록 주의하세요.'},
 
   {s:'Section A', st:'', sd:'', t:'ox',
-   q:'Secondary stress 음절은 tonic accent(주요 음조 변화)를 갖는다.',
+   q:'AEP §7.4의 분석에서 secondary stress 음절은 tonic accent(주요 pitch change)를 갖는다.',
    a:false,
-   e:'정답: X\n\nTonic accent(주요 음조 변화)는 primary stress 음절에만 나타납니다.\nSecondary stress 음절은 +stress, +full vowel이지만 -tonic accent입니다.\n즉, 두드러지긴 하지만 음조 변화는 없습니다.\n\n비교:\n· Primary: +stress, +tonic accent, +full V\n· Secondary: +stress, -tonic accent, +full V\n· Unstressed: -stress, -tonic accent, +/-full V'},
+   e:'정답: X\n\nAEP §7.4의 분석에서 tonic accent(주요 pitch change)는 primary stress 음절에 나타납니다.\nSecondary stress 음절은 +stress, +full vowel이지만 -tonic accent입니다.\n즉, prominence는 있지만 tonic accent에 해당하는 주요 pitch change는 없습니다. 모든 pitch 변화가 없다는 뜻은 아닙니다.\n\n비교:\n· Primary: +stress, +tonic accent, +full V\n· Secondary: +stress, -tonic accent, +full V\n· Unstressed: -stress, -tonic accent, +/-full V'},
 
   {s:'Section A', st:'', sd:'', t:'ox',
    q:'영어는 syllable-timed 언어이므로 모든 음절이 동일한 길이로 발음된다.',
    a:false,
-   e:'정답: X\n\n영어는 stress-timed 언어입니다. 강세 음절이 대략 등간격으로 나타나고, 비강세 음절은 압축됩니다.\nSyllable-timed는 스페인어·프랑스어·한국어의 특성입니다.\n한국인 학습자의 영어 발음이 어색한 이유 중 하나가 바로 이 리듬 차이입니다.'},
+   e:'정답: X\n\nAEP는 영어를 stress-timed, 스페인어·프랑스어·한국어를 syllable-timed로 분류하여 설명합니다. 이는 리듬의 경향을 나타내는 분류입니다. 영어의 강세 음절 사이 간격은 대략 비슷해지는 경향이 있으며, 비강세 음절은 상대적으로 압축될 수 있습니다. 모든 간격이나 음절 길이가 정확히 같다는 뜻은 아닙니다.'},
 
   {s:'Section A', st:'', sd:'', t:'ox',
    q:'photographic /ˌfoʊtəˈgræfɪk/에서 primary stress는 -graph- 음절이다.',
    a:true,
-   e:"정답: O. /ˌfoʊtəˈgræfɪk/에서 ˈ 기호가 -graph- 앞에 있으므로 primary stress는 세 번째 음절에 있습니다. 첫 음절에는 secondary stress(ˌ)가 있습니다. AEP의 숫자표 2 4 1 4는 마지막 모음을 [ə]로 적는 원서의 전사에 해당하므로, 여기 제시한 /ɪ/ 전사에 그대로 덧붙이지 않습니다."},
+   e:"정답: O. /ˌfoʊtəˈgræfɪk/에서 ˈ 기호가 -graph- 앞에 있으므로 primary stress는 세 번째 음절에 있습니다. 첫 음절에는 secondary stress(ˌ)가 있습니다. AEP의 숫자표 2 4 1 4는 마지막 모음을 [ə]로 적는 원서의 전사에 해당하므로, 여기 제시한 /ɪ/ 전사만 보고 그대로 덧붙이지 않습니다. AEP §4.9에서는 unstressed /ɪ/가 full vowel일 수도, reduced vowel일 수도 있으므로 해당 분석의 구분을 확인해야 합니다."},
 
   {s:'Section A', st:'', sd:'', t:'ox',
    q:'Secondary stress 음절도 반드시 full vowel을 갖는다.',
    a:true,
-   e:'정답: O\n\n강세를 받는 음절(primary, secondary 모두)은 반드시 full vowel(전모음)을 가집니다.\n모음 약화(/ə/, schwa)는 오직 -stress 음절에서만 일어납니다.\n따라서 secondary stress 음절도 +full vowel이 보장됩니다.\n\nYavaş(2011) 요지: stressed syllable은 full vowel을 가집니다.'},
+   e:'정답: O\n\n강세를 받는 음절(primary, secondary 모두)은 반드시 full vowel을 가집니다.\nVowel reduction은 -stress 음절에서만 가능하지만, 모든 unstressed vowel이 reduced인 것은 아닙니다. Schwa /ə/는 reduced vowel의 한 예입니다.\n따라서 secondary stress 음절도 +full vowel이 보장됩니다.\n\nYavaş(2011) 요지: stressed syllable은 full vowel을 가집니다.'},
 
   /* ── Section B: 객관식 ── */
   {s:'Section B', st:'객관식', sd:'가장 적절한 답을 하나 고르시오.',
@@ -192,16 +192,16 @@ const DATA = [
    e:'정답: ② pitch\n\nFry(1955, 1979)의 실험 연구에 따르면, 영어에서 강세 지각에 가장 큰 영향을 미치는 단서는 pitch(음높이)입니다.\nLoudness, duration도 관여하지만 보조적 역할에 그칩니다.\n\nYavaş(2011) 요지: English에서는 higher pitch가 stress의 가장 influential perceptual cue입니다.'},
 
   {s:'Section B', st:'', sd:'', t:'mc',
-   q:'/ˌfoʊtəˈgræfɪk/의 Yavaş 수치 표기는?',
+   q:'AEP §7.4의 표처럼 photographic의 마지막 모음을 reduced [ə]로 적은 [ˌfoʊtəˈgræfək]의 수치 표기는?',
    o:['① 1 4 4 4', '② 4 1 4 4', '③ 2 4 1 4', '④ 4 4 1 4'],
    a:2,
-   e:'정답: ③ 2 4 1 4\n\nYavaş 수치 체계: 1=primary, 2=secondary, 3=full vowel unstressed, 4=약화(reduced)\n\n/ˌfoʊtəˈgræfɪk/ 분석:\n· pho- (ˌ = secondary) → 2\n· -to- (약화, schwa) → 4\n· -graph- (ˈ = primary) → 1\n· -ic (약화) → 4\n따라서 2 4 1 4'},
+   e:'정답: ③ 2 4 1 4\n\nYavaş 수치 체계: 1=primary, 2=secondary, 3=full vowel unstressed, 4=약화(reduced)\n\nAEP §7.4의 final-schwa 전사 [ˌfoʊtəˈgræfək] 분석:\n· pho- (ˌ = secondary) → 2\n· -to- (약화, schwa) → 4\n· -graph- (ˈ = primary) → 1\n· -ic (reduced [ə]) → 4\n따라서 2 4 1 4'},
 
   {s:'Section B', st:'', sd:'', t:'mc',
    q:'다음 중 primary stress가 세 번째 음절에 오는 단어는?',
    o:['① tomato', '② kangaroo', '③ article', '④ banana'],
    a:1,
-   e:'정답: ② kangaroo\n\n각 단어의 primary stress 위치:\n· tomato /təˈmeɪtoʊ/ → 2번째 음절\n· kangaroo /ˌkæŋgəˈruː/ → 3번째 음절 ✓\n· article /ˈɑːrtɪkl/ → 1번째 음절\n· banana /bəˈnænə/ → 2번째 음절\n\nkangaroo는 영어 variable stress의 예시로 자주 인용됩니다.'},
+   e:'정답: ② kangaroo\n\n각 단어의 primary stress 위치:\n· tomato /təˈmeɪtoʊ/ → 2번째 음절\n· kangaroo /ˌkæŋgəˈruː/ → 3번째 음절 ✓\n· article /ˈɑːrtɪkl/ → 1번째 음절\n· banana /bəˈnænə/ → 2번째 음절\n\nkangaroo는 영어에서 primary stress의 위치가 단어마다 다름을 보여 주는 예입니다.'},
 
   {s:'Section B', st:'', sd:'', t:'mc',
    q:'Secondary stress를 식별하는 원칙 중 틀린 것은?',
@@ -213,27 +213,28 @@ const DATA = [
    q:'photography /fəˈtɑgrəfi/의 Yavaş 수치 표기는?',
    o:['① 4 1 4 3', '② 2 1 4 3', '③ 4 1 4 4', '④ 1 4 4 3'],
    a:0,
-   e:'정답: ① 4 1 4 3\n\n/fəˈtɑgrəfi/ 분석:\n· pho- (약화, /fə/) → 4\n· -tog- (primary) → 1\n· -ra- (약화, /rə/) → 4\n· -phy (full vowel이나 unstressed) → 3\n따라서 4 1 4 3\n\n비교: photographic = 2 4 1 4 (secondary+primary 두 개)\nphotography = 4 1 4 3 (primary 하나뿐)'},
+   e:'정답: ① 4 1 4 3\n\n/fəˈtɑgrəfi/ 분석:\n· pho- (약화, /fə/) → 4\n· -tog- (primary) → 1\n· -ra- (약화, /rə/) → 4\n· -phy (full vowel이나 unstressed) → 3\n따라서 4 1 4 3\n\n비교: photographic = 2 4 1 4 (AEP의 final-schwa 전사 기준; secondary와 primary stress)\nphotography = 4 1 4 3 (primary 하나뿐)'},
 
   /* ── Section C: 빈칸 채우기 ── */
   {s:'Section C', st:'빈칸 채우기', sd:'괄호 안에 알맞은 답을 입력하시오.',
    t:'fi',
-   q:'강세(stress)는 ( ___ )의 두드러짐으로 정의된다.',
-   blanks:['syllable prominence'],
+   q:'강세(stress)는 ( ___ )의 두드러짐으로 정의된다. 영어 한 단어로 쓰시오.',
+   blanks:['syllable'],
    labels:['답:'],
-   e:'정답: syllable prominence\n\nYavaş(2011) 요지: stress는 syllable prominence로 정의할 수 있습니다.\n강세 = 음절의 두드러짐. 화자 측면에서는 조음 노력의 증가, 청자 측면에서는 지각적 현저성으로 경험됩니다.\n\n두드러짐의 음향적 기반: loudness, duration, pitch'},
+   e:'정답: syllable\n\nYavaş(2011) 요지: stress는 syllable prominence로 정의할 수 있습니다.\n강세 = 음절의 두드러짐. 화자 측면에서는 조음 노력의 증가, 청자 측면에서는 지각적 현저성으로 경험됩니다.\n\n두드러짐의 음향적 기반: loudness, duration, pitch'},
 
   {s:'Section C', st:'', sd:'', t:'fi',
-   q:'Secondary stressed 음절의 특성:\n+stress, ( ___ ) tonic accent, +full V',
+   q:'AEP §7.4의 분석에서 secondary stress 음절의 특성:\n+stress, ( ___ ) tonic accent, +full V',
    blanks:['-'],
    labels:['빈칸:'],
-   e:'정답: -\n\nSecondary stress 음절은 +stress이지만 -tonic accent입니다.\nTonic accent(주요 음조 변화)는 primary stress 음절에만 부여됩니다.\n\n체계 요약:\n· Primary: +stress, +tonic accent, +full V\n· Secondary: +stress, -tonic accent, +full V\n· Unstressed: -stress, -tonic accent, +/-full V'},
+   e:'정답: -\n\nSecondary stress 음절은 +stress이지만 -tonic accent입니다.\n이 분석에서 tonic accent는 primary stress 음절의 주요 pitch change를 가리킵니다. Secondary stress 음절에 모든 pitch 변화가 없다는 뜻은 아닙니다.\n\n체계 요약:\n· Primary: +stress, +tonic accent, +full V\n· Secondary: +stress, -tonic accent, +full V\n· Unstressed: -stress, -tonic accent, +/-full V'},
 
   {s:'Section C', st:'', sd:'', t:'fi',
-   q:'/ˌfoʊtəˈgræfɪk/에서 primary stress가 오는 음절은?',
+   q:'/ˌfoʊtəˈgræfɪk/에서 primary stress가 오는 음절에 해당하는 영어 철자를 쓰시오. 앞뒤 하이픈은 생략해도 됩니다.',
    blanks:['-graph-'],
+   acceptedVariants:[['graph', '-graph-']],
    labels:['음절:'],
-   e:'정답: -graph-\n\n/ˌfoʊtəˈgræfɪk/에서 ˈ 기호는 -graph- 앞에 위치합니다. 따라서 primary stress는 세 번째 음절 -graph-입니다.\n첫 음절 pho-는 ˌ로 secondary stress를 받습니다.\n수치 표기: 2 4 1 4'},
+   e:'정답: -graph-\n\n/ˌfoʊtəˈgræfɪk/에서 ˈ 기호는 -graph- 앞에 위치합니다. 따라서 primary stress는 세 번째 음절 -graph-입니다.\n첫 음절 pho-는 ˌ로 secondary stress를 받습니다.\nAEP의 수치 2 4 1 4는 마지막 모음이 reduced [ə]인 전사의 분석입니다. 여기의 /ɪ/ 전사만으로 full/reduced 여부를 결정하지 않습니다.'},
 
   {s:'Section C', st:'', sd:'', t:'fi',
    q:'영어에서 강세 지각의 핵심 단서는 ( ___ )이다.',
@@ -242,10 +243,10 @@ const DATA = [
    e:'정답: pitch\n\nFry(1955, 1979) 실험 연구: pitch(음높이)가 영어 강세 지각의 가장 중요한 단서.\n\n비교:\n· Loudness → 보조 단서\n· Duration → 보조 단서\n· Pitch → 핵심 단서 (영어)'},
 
   {s:'Section C', st:'', sd:'', t:'fi',
-   q:'Yavaş 수치 체계에서 primary stress는 ( ___ )로 표기한다.',
+   q:'AEP §7.4의 수치 체계에서 primary stress는 ( ___ )로 표기한다.',
    blanks:['1'],
    labels:['숫자:'],
-   e:'정답: 1\n\nYavaş 수치 체계:\n· 1 = primary stress (세 가지 +: +stress, +tonic accent, +full V)\n· 2 = secondary stress (+stress, -tonic accent, +full V)\n· 3 = full vowel이 있는 비강세 음절\n· 4 = 약화(reduced) 음절, schwa 포함\n\n예: photographic = 2 4 1 4'}
+   e:'정답: 1\n\nYavaş 수치 체계:\n· 1 = primary stress (세 가지 +: +stress, +tonic accent, +full V)\n· 2 = secondary stress (+stress, -tonic accent, +full V)\n· 3 = full vowel이 있는 비강세 음절\n· 4 = 약화(reduced) 음절, schwa 포함\n\n예: photographic = 2 4 1 4 (AEP §7.4의 final-schwa 전사 기준)'}
 ];
 
 const quizOrder = QuizOrder.create(DATA, {restart: reset});
@@ -360,8 +361,8 @@ function doFI(i) {
   DATA[i].blanks.forEach((ans, j) => {
     const inp = document.getElementById(`fi${i}_${j}`);
     const userVal = inp.value.trim().toLowerCase();
-    const correctVal = ans.toLowerCase();
-    const ok = userVal === correctVal;
+    const accepted = (DATA[i].acceptedVariants && DATA[i].acceptedVariants[j]) || [ans];
+    const ok = accepted.some(value => userVal === value.toLowerCase());
     if (!ok) allOk = false;
     inp.disabled = true;
     inp.classList.add(ok ? 'ok2' : 'ng2');
