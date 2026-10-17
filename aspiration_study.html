@@ -194,9 +194,9 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
     </div>
 
     <details class="study-depth"><summary>자세히 보기 · 규칙을 읽고 pin·spin·creep에 적용하기</summary><div class="depth-body">
-<p><span class="kw1">Aspiration</span>을 단순히 “숨이 세게 나온다”로 외우면 release burst와 혼동하기 쉽다. Stop의 closure가 풀리는 순간과 뒤따르는 voicing이 시작되는 순간을 나누어 보자. 영어의 aspirated stop에는 release 뒤에 voiceless airflow가 이어지는 구간이 있다. [ʰ]는 이 실현을 표시하며, 독립된 phoneme /h/를 단어에 삽입했다는 뜻이 아니다.</p>
-<h3>같은 /p/에 다른 결과가 나오는 이유</h3><ol><li><b>pin</b>: /p/는 강세 음절 onset의 첫 분절이다. 기본 환경을 충족하므로 [pʰ]로 나타난다.</li><li><b>spin</b>: /p/ 뒤에 강세모음이 있지만 onset은 /sp/다. /s/가 앞자리를 차지하므로 /p/는 unaspirated [p]로 나타난다. 모음의 강세만 확인하면 이 항목을 틀린다.</li><li><b>creep</b>: onset은 /kr/이고 /k/가 첫 분절이다. /r/이 사이에 있다는 이유로 aspiration을 막지 않는다. (C)는 아무 자음이나 끼워 넣으라는 뜻이 아니라 영어에서 허용되는 onset을 전제로 한다.</li></ol>
-<p>따라서 규칙의 <b>σ[</b>를 빼고 “/p, t, k/ → [pʰ, tʰ, kʰ] / __ V́”만 쓰면 spin 같은 자료를 잘못 포함할 수 있다. 먼저 onset 경계를 표시하고, stop의 위치와 강세를 함께 확인한다. Cluster의 narrow transcription에서는 뒤 sonorant의 devoicing도 고려할 수 있으므로, 여기의 예시는 aspiration에 초점을 둔 표기다.</p>
+<p><span class="kw1">Aspiration</span>을 단순히 “숨이 세게 나온다”로 외우면 release burst와 혼동하기 쉽다. stop의 closure가 풀리는 순간과 뒤따르는 voicing이 시작되는 순간을 구별해 보자. 영어의 aspirated stop에서는 release 뒤에 voicing 없이 공기가 흐르는 구간이 나타난다. [ʰ]는 이를 표시하며, 독립된 phoneme /h/를 단어에 삽입했다는 뜻이 아니다.</p>
+<h3>pin·spin·creep의 aspiration 조건</h3><ol><li><b>pin</b>: /p/는 강세 음절의 onset에서 첫 분절이다. 기본 조건을 만족하므로 [pʰ]로 실현된다.</li><li><b>spin</b>: /p/ 뒤에 강세 모음이 있지만 onset은 /sp/다. 같은 onset 안에서 /s/가 먼저 나오므로 /p/는 unaspirated stop [p]로 실현된다. 뒤 모음의 강세만 확인하면 aspiration을 잘못 예측하게 된다.</li><li><b>creep</b>: onset은 /kr/이고 /k/가 첫 분절이다. /k/와 모음 사이에 /r/이 있더라도 aspiration이 가능하다. 규칙의 (C)는 아무 자음이나 들어갈 수 있다는 뜻이 아니라, 영어에서 허용되는 onset 구조를 전제로 한다.</li></ol>
+<p>따라서 규칙의 <b>σ[</b>를 빼고 “/p, t, k/ → [pʰ, tʰ, kʰ] / __ V́”만 쓰면 spin 같은 자료를 잘못 포함할 수 있다. 먼저 onset의 경계를 표시하고 stop의 위치와 강세를 함께 확인한다. cluster를 narrow transcription할 때에는 뒤따르는 sonorant의 devoicing도 고려할 수 있다. 여기서는 aspiration에 초점을 맞추어 표기했다.</p>
     </div></details>
 
   </div>
@@ -257,11 +257,11 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
       </div>
     </div>
 
-    <details class="study-depth"><summary>자세히 보기 · VOT의 부호·크기와 phoneme 이름을 구분하기</summary><div class="depth-body">
-<p>VOT는 <b>voicing 시작 시각 − release 시각</b>으로 생각하면 부호를 이해하기 쉽다. Release 전에 voicing이 시작하면 negative VOT, release와 거의 동시에 시작하면 zero 부근, release 뒤에 시작하면 positive VOT다. Positive VOT라고 모두 강한 aspiration은 아니며 short lag와 long lag를 나누어 봐야 한다.</p>
-<p>예를 들어 release를 0 ms로 두고 voicing이 −40 ms, +10 ms, +70 ms에 시작한다고 가정하면 각각 voice lead, short lag, long lag의 차이를 설명할 수 있다. 이 수치는 <b>계산을 위한 가상 예시</b>이며 특정 단어·언어의 실측치가 아니다. Negative VOT는 closure 전체가 voiced였음을 자동으로 뜻하지도 않는다.</p>
-<p><b>자체 비교 예시: pool과 spool의 /p/</b>를 보자. Pool에서는 강세 onset의 첫 분절이고, spool에서는 같은 onset의 /s/ 뒤다. 따라서 두 발음에서 다른 aspiration pattern을 예상할 수 있다. 이는 규칙 적용 예시이며 두 단어의 실제 VOT를 측정한 결과가 아니다. 실제 lag 길이는 place of articulation과 뒤 모음 등 발음 조건에 따라서도 달라질 수 있으므로, 30 ms 하나로 모든 자료를 기계적으로 분류하지 않는다.</p>
-<p><span class="kw3">Phonological voicing과 실제 VOT는 일대일 대응이 아니다.</span> 영어 /b, d, ɡ/라는 phoneme 표기만 보고 closure 전체의 voicing이나 negative VOT를 단정할 수 없다. 측정 문제에서는 waveform·spectrogram의 release와 voicing onset을 직접 찾아야 한다.</p>
+    <details class="study-depth"><summary>자세히 보기 · VOT의 측정값과 phoneme의 유·무성 구별</summary><div class="depth-body">
+<p>VOT는 <b>voicing 시작 시각 − release 시각</b>으로 생각하면 부호를 이해하기 쉽다. release 전에 voicing이 시작하면 negative VOT, release와 거의 동시에 시작하면 0에 가까운 VOT, release 뒤에 시작하면 positive VOT다. positive VOT가 모두 strong aspiration을 뜻하는 것은 아니며, short lag와 long lag을 구별해야 한다.</p>
+<p>예를 들어 release 시점을 0 ms로 두고 voicing이 −40 ms, +10 ms, +70 ms에 시작한다고 가정하면 voice lead, short lag, long lag의 차이를 설명할 수 있다. 이 수치는 <b>계산을 위한 가상 예시</b>이며 특정 단어·언어의 실측치가 아니다. negative VOT라고 해서 closure 구간 전체에 voicing이 있었다는 뜻도 아니다.</p>
+<p><b>학습용 비교 예시: pool과 spool의 /p/</b>를 보자. Pool의 /p/는 강세 음절의 onset에서 첫 분절이고, spool의 /p/는 같은 onset 안의 /s/ 뒤에 있다. 따라서 두 단어의 /p/는 aspiration 여부가 다를 것으로 예상할 수 있다. 이는 규칙 적용 예시이며 두 단어의 실제 VOT를 측정한 결과가 아니다. 실제 지연 시간은 place of articulation과 뒤따르는 모음 등 발음 조건에 따라서도 달라질 수 있다. 따라서 30 ms라는 하나의 기준으로 모든 자료를 기계적으로 분류하지 않는다.</p>
+<p><span class="kw3">phonological voicing이 실제 VOT와 일대일로 대응하지는 않는다.</span> 영어 /b, d, ɡ/라는 phoneme 표기만으로 closure 구간 전체에 voicing이 있다거나 VOT가 음수라고 단정할 수 없다. 측정 문제에서는 waveform과 spectrogram에서 release 시점과 voicing 시작 시점을 직접 찾아야 한다.</p>
     </div></details>
 
   </div>
@@ -319,17 +319,17 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
       </div>
     </div>
 
-    <details class="study-depth"><summary>자세히 보기 · 2022 A-6의 판단 구조로 푸는 변형 예시</summary><div class="depth-body">
-<p><b>2022 A-6</b>는 두 단어를 고르고 aspiration rule에 <span class="kw4">foot</span>을 포함하도록 요구했다. 여기서는 그 판단 구조를 활용하되 <b>예시 단어와 설명을 새로 구성</b>했다. 아래 단어들은 원문에 실린 후보가 아니다.</p>
-<p><b>appear</b>의 /p/는 primary stress 앞, <b>politician</b>의 첫 /p/는 secondary stress를 주는 발음에서 foot을 시작한다. 두 경우를 같은 strong-position rule로 묶을 수 있다. 반면 <b>display</b>의 /p/는 강세모음 앞이어도 onset /spl/ 안의 /s/ 뒤이고, <b>paper</b>의 두 번째 /p/ 뒤에는 unstressed vowel이 온다. 강세 유무 하나만이 아니라 onset 안의 위치를 함께 확인하는 연습이다.</p>
-<div class="stage-wrap"><table><caption>기출 판단 구조를 활용한 자체 변형 예시</caption><thead><tr><th scope="col">단어·대상</th><th scope="col">판단 과정</th><th scope="col">Strong aspiration</th></tr></thead><tbody>
-<tr><td>paper의 두 번째 /p/</td><td>뒤 모음이 unstressed이며 대상 /p/가 stressed foot을 시작하지 않는다.</td><td>기본 환경 아님</td></tr>
-<tr><td>potato의 첫 /t/</td><td>Primary stress를 받는 /teɪ/ 음절의 첫 stop이다.</td><td>[tʰ]</td></tr>
-<tr><td>productivity의 첫 /p/</td><td>첫 음절에 secondary stress를 두는 발음에서 /p/가 그 foot을 시작한다. Primary stress만 찾으면 놓친다.</td><td>[pʰ]</td></tr>
-<tr><td>stable의 /t/</td><td>강세모음 앞이지만 같은 onset의 /s/ 뒤다. Foot의 첫 분절은 /t/가 아니다.</td><td>Unaspirated</td></tr>
+    <details class="study-depth"><summary>자세히 보기 · 2022 A-6 변형 예시: foot을 포함한 aspiration 규칙</summary><div class="depth-body">
+<p><b>2022 A-6</b>는 두 단어를 고르고 aspiration rule에 <span class="kw4">foot</span>을 포함하도록 요구했다. 여기서는 같은 분석 기준을 활용하되 <b>예시 단어와 설명을 새로 구성</b>했다. 아래 단어들은 원문에 실린 후보가 아니다.</p>
+<p><b>appear</b>의 /p/는 primary stress 모음 앞에서 foot을 시작한다. <b>politician</b>의 첫 /p/도 첫 음절에 secondary stress를 주는 발음에서는 foot을 시작한다. 두 경우를 strong position에서 적용되는 하나의 규칙으로 설명할 수 있다. 반면 <b>display</b>의 /p/는 강세 모음 앞에 있지만 onset /spl/ 안의 /s/ 뒤에 있고, <b>paper</b>의 두 번째 /p/ 뒤에는 unstressed vowel이 온다. 강세 유무뿐 아니라 onset 안의 위치도 함께 확인해야 한다.</p>
+<div class="stage-wrap"><table><caption>기출의 분석 기준을 적용한 변형 예시</caption><thead><tr><th scope="col">단어·대상</th><th scope="col">판단 과정</th><th scope="col">Strong aspiration</th></tr></thead><tbody>
+<tr><td>paper의 두 번째 /p/</td><td>뒤 모음에 강세가 없으며 대상 /p/가 stressed foot을 시작하지 않는다.</td><td>기본 환경 아님</td></tr>
+<tr><td>potato의 첫 /t/</td><td>primary stress를 받는 /teɪ/ 음절의 첫 stop이다.</td><td>[tʰ]</td></tr>
+<tr><td>productivity의 첫 /p/</td><td>첫 음절에 secondary stress를 두는 발음에서 /p/가 그 foot을 시작한다. primary stress만 확인해서는 안 된다.</td><td>[pʰ]</td></tr>
+<tr><td>stable의 /t/</td><td>강세 모음 앞이지만 같은 onset 안의 /s/ 뒤에 있다. Foot의 첫 분절은 /t/가 아니다.</td><td>Unaspirated</td></tr>
 </tbody></table></div>
 <p><b>변형 예시 설명:</b> Under the stated stress patterns, the target stops in potato and productivity begin stressed feet. The target stop in stable follows /s/ within the onset, while the second /p/ in paper precedes an unstressed vowel.</p>
-<p>이 설명은 학습용으로 작성한 것이며 원문이나 공식 채점 문구의 인용이 아니다. 특히 secondary stress가 필요한 예시는 <b>여기서 명시한 stress pattern</b>을 전제로 판단한다. 실제 발음에서 가능한 weak aspiration과 기출 자료의 aspirated/unaspirated 이분법도 구분한다.</p>
+<p>이 설명은 학습용으로 작성한 것이며 원문이나 공식 채점 문구의 인용이 아니다. 특히 secondary stress가 필요한 예시는 <b>여기서 명시한 stress pattern</b>을 전제로 판단한다. 실제 발음에서 나타날 수 있는 weak aspiration과 기출 자료에서 제시한 aspirated/unaspirated의 이분법도 구별해야 한다.</p>
 </div></details>
 
   </div>
@@ -380,10 +380,10 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
       </div>
     </div>
 
-    <details class="study-depth"><summary>자세히 보기 · /s/ 뒤라는 순서와 같은 onset이라는 조건</summary><div class="depth-body">
-<p><b>Stop이 onset에 포함되어 있는가</b>와 <b>stop이 onset의 첫 분절인가</b>는 다르다. Stop의 /t/는 onset /st/에 포함되어 있지만 첫 분절은 /s/다. Top에서는 /t/ 자체가 onset의 첫 분절이다. 이것이 두 단어의 차이를 설명하는 구조적 조건이다.</p>
-<p><b>stay의 /t/</b>와 <b>escape의 /k/</b>도 강세모음만 보면 aspiration을 잘못 예측하기 쉽다. 각각 같은 onset에서 /s/ 뒤에 있으므로 unaspirated로 분석한다. 이는 2022 A-6에서 확인한 /s/+stop 판단을 새 단어에 적용한 예이며, 원문 예시를 옮긴 것이 아니다.</p>
-<p><span class="kw3">/s/라는 소리가 앞에 있다는 사실만으로 모든 경계를 무시하지 않는다.</span> 단어·형태소·음절 경계가 달라지면 onset 분석부터 다시 확인해야 한다. 이 페이지의 pin/spin, top/stop, cool/school은 같은 onset 안의 cluster 비교다. /s/ 다음의 [p]가 unaspirated라고 해서 [b]로 바뀌었거나 phoneme이 /b/가 되었다고 분석하지 않는다.</p>
+    <details class="study-depth"><summary>자세히 보기 · /s/ 뒤 stop의 aspiration과 onset 경계</summary><div class="depth-body">
+<p><b>stop이 onset에 포함되어 있는가</b>와 <b>stop이 onset의 첫 분절인가</b>는 다르다. 단어 stop의 /t/는 onset /st/에 포함되지만 첫 분절은 /s/다. 반면 top에서는 /t/가 onset의 첫 분절이다. 이 구조적 차이로 두 단어의 aspiration 여부를 설명할 수 있다.</p>
+<p><b>stay의 /t/</b>와 <b>escape의 /k/</b>도 뒤 모음의 강세만 보면 aspiration을 잘못 예측하기 쉽다. 각각 같은 onset 안에서 /s/ 뒤에 있으므로 unaspirated stop으로 분석한다. 이는 2022 A-6에서 확인한 /s/+stop 판단을 새 단어에 적용한 예이며, 원문 예시를 옮긴 것이 아니다.</p>
+<p><span class="kw3">/s/가 앞에 있더라도 같은 onset 안에 있는지 확인해야 한다.</span> 단어·형태소·음절 경계가 달라지면 onset 구조부터 다시 확인해야 한다. 이 페이지의 pin/spin, top/stop, cool/school은 같은 onset 안에 /s/+stop cluster가 있는 경우와 없는 경우를 비교한 것이다. /s/ 뒤의 [p]가 unaspirated stop이라고 해서 [b]로 바뀌었거나 phoneme이 /b/가 되었다고 분석해서는 안 된다.</p>
     </div></details>
 
   </div>
@@ -442,10 +442,10 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
       </div>
     </div>
 
-    <details class="study-depth"><summary>자세히 보기 · Allophone 판단과 한국어 비교의 한계</summary><div class="depth-body">
+    <details class="study-depth"><summary>자세히 보기 · Allophone 분석과 한국어 stop의 비교</summary><div class="depth-body">
 <p><b>Pin과 spin은 minimal pair가 아니다.</b> /s/의 유무도 달라지므로 두 단어를 놓고 “aspiration만으로 의미가 달라진다”라고 할 수 없다. 여기서는 서로 다른 환경에서 같은 /p/가 [pʰ]와 [p]로 실현되는 양상을 비교한다. 영어에서 aspiration의 차이만으로 별개의 단어가 대립하지 않는다는 점이 중요하다.</p>
-<p>또한 <span class="kw1">complementary distribution</span>만 발견했다고 임의의 두 소리를 같은 phoneme으로 묶지는 않는다. Phonetic similarity와 언어 전체의 contrast·distribution을 함께 살핀다. /p/의 두 실현은 place와 manner를 공유하고 aspiration이 환경에 따라 달라지는 전형적인 allophonic 분석이다.</p>
-<p>한국어의 불·풀·뿔은 첫 stop의 phoneme 범주가 바뀌는 대조다. 하지만 <b>lenis = 항상 aspiration 없음</b>으로 외우면 실제 한국어 발음을 잘못 설명한다. 서울말 연구에서는 lenis와 aspirated의 구별에 VOT뿐 아니라 뒤 모음의 F0가 관여하며, 세대와 prosodic position에 따라 각 단서의 역할이 달라진다. 핵심은 범주 대립이 유지된다는 것이지, 모든 화자의 [p]와 [pʰ]가 똑같은 VOT 차이를 보인다는 뜻이 아니다.</p>
+<p>또한 <span class="kw1">complementary distribution</span>이 나타난다는 이유만으로 임의의 두 소리를 같은 phoneme으로 묶지는 않는다. phonetic similarity와 해당 언어 전반의 대립·분포를 함께 살펴야 한다. /p/가 두 소리로 실현되는 경우에는 place와 manner가 같고 aspiration이 환경에 따라 달라지므로, 같은 phoneme의 allophone으로 분석한다.</p>
+<p>한국어의 불·풀·뿔은 첫 stop의 phoneme 범주가 다른 예다. 다만 <b>lenis에는 항상 aspiration이 없다</b>고 외우면 실제 한국어 발음을 제대로 설명할 수 없다. 서울말 연구에서는 lenis와 aspirated의 구별에 VOT뿐 아니라 뒤 모음의 F0도 관여하며, 세대와 prosodic position에 따라 각 단서의 역할이 달라진다. 중요한 것은 phoneme 범주의 대립이 유지된다는 점이다. 모든 화자의 [p]와 [pʰ]가 동일한 VOT 차이를 보인다는 뜻은 아니다.</p>
 <p><a href="https://pubmed.ncbi.nlm.nih.gov/33091043/" target="_blank" rel="noopener noreferrer">한국어 VOT·F0 및 prosodic position 연구</a></p>
     </div></details>
 
@@ -498,11 +498,11 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
       <p><strong>2022 A-6</strong> — voiceless stop aspiration · foot-initial position · trochaic foot. disentangle [tʰ], accountability [kʰ]가 각각 foot의 첫 분절이므로 기식음화됨.</p>
     </div>
 
-    <details class="study-depth"><summary>자세히 보기 · Weak aspiration·no audible release와 전사 범위</summary><div class="depth-body">
-<p>AEP는 미국 영어에서 unstressed syllable, syllabic consonant 앞, release되는 말끝의 stop에 weak aspiration이 가능하다고 설명한다. <b>이 환경을 적용할 자체 예시</b>로 happily의 /p/, syllabic [l̩]로 발음한 buckle의 /k/, cap의 말끝 /p/를 구분해 보자. 이 단어들에서 weak aspiration이 의무적으로 실현된다는 뜻이 아니라, 무엇을 확인해야 하는지를 연습하는 예다. 특히 syllabic consonant 앞의 실제 release 방식과 말끝의 audible release 유무를 먼저 확인한다.</p>
-<p><b>Unaspirated와 unreleased도 같은 말이 아니다.</b> Unaspirated는 release 뒤 aspiration의 문제이고, no audible release는 stop의 release가 들리는지의 문제다. Word-final /t/가 [t̚]로 실현되는 경우와 release 뒤 약한 aspiration이 있는 경우를 구분해야 한다. 따라서 “coda이므로 반드시 무기식”도, “word-final이므로 반드시 [ʰ]”도 지나친 일반화다.</p>
-<p>전사 문제에서는 <b>무엇을 표시하는 전사인지</b>부터 확인한다. / /는 phoneme 수준의 표기이고 [ ]는 phonetic realization을 나타낸다. [ʰ]를 생략한 비교용 전사만 보고 “그 stop은 release가 없다”거나 “음성적으로 VOT가 정확히 0이다”라고 추론하지 않는다.</p>
-<p>마지막 확인 순서는 <b>대상 stop → onset 경계 → stress → /s/ cluster → 제시 자료의 분석 범위</b>다. 2022 A-6처럼 foot을 요구하면 이 조건들을 foot-initial이라는 한 rule로 묶고, 실제 음성 측정 문제라면 VOT의 수치와 발화 조건을 별도로 확인한다.</p>
+    <details class="study-depth"><summary>자세히 보기 · weak aspiration·no audible release와 전사의 범위</summary><div class="depth-body">
+<p>AEP는 미국 영어에서 unstressed syllable의 stop, syllabic consonant 앞의 stop, release되는 말끝의 stop에 weak aspiration이 가능하다고 설명한다. <b>이 조건을 살펴볼 학습용 예시</b>로 happily의 /p/, syllabic [l̩]로 발음한 buckle의 /k/, cap의 말끝 /p/를 비교해 보자. 이 단어들에서 weak aspiration이 반드시 나타난다는 뜻은 아니다. 실제 발음에서 어떤 조건을 확인해야 하는지 연습하기 위한 예다. 특히 syllabic consonant 앞에서 어떻게 release되는지, 단어 끝에서 audible release가 있는지를 먼저 확인한다.</p>
+<p><b>Unaspirated와 unreleased도 같은 말이 아니다.</b> Unaspirated는 release 뒤에 aspiration이 없다는 뜻이고, no audible release는 stop의 release가 들리지 않는다는 뜻이다. word-final /t/가 [t̚]로 실현되는 경우와 release 뒤에 weak aspiration이 있는 경우를 구별해야 한다. 따라서 “coda이므로 반드시 unaspirated” 또는 “word-final이므로 반드시 [ʰ]”라고 일반화해서는 안 된다.</p>
+<p>전사 문제에서는 <b>무엇을 표시하는 전사인지</b>부터 확인한다. / /는 phoneme 수준의 표기이고 [ ]는 phonetic realization을 나타낸다. 비교를 위해 [ʰ]를 생략한 전사만 보고 “그 stop은 release되지 않는다”거나 “VOT가 정확히 0이다”라고 추론해서는 안 된다.</p>
+<p>규칙을 적용할 때는 <b>대상 stop → onset 경계 → 강세 → /s/ cluster → 제시 자료의 분석 범위</b> 순서로 확인한다. 2022 A-6처럼 foot을 포함하도록 요구하면 이 조건들을 foot-initial이라는 하나의 규칙으로 표현한다. 실제 음성을 측정하는 문제에서는 VOT 수치와 발화 조건을 별도로 확인한다.</p>
     </div></details>
 
   </div>
