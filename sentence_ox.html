@@ -135,31 +135,316 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:r
 <script src="./score-popup.js?v=20261016-random1"></script>
 <script src="./quiz-order.js?v=20261016-random1"></script>
 <script>
-const SAVE_KEY='ox_phon_sentence_v1';
+const SAVE_KEY='ox_phon_sentence_v2';
 const TOTAL=15;
 let cur=0,answers=new Array(TOTAL).fill(null);
 function getScore(){return answers.filter(a=>a&&a.correct).length;}
 const Q=[
-  {src:"Content Word",cat:"강세 범주",text:"<span class='kw1'>Content word</span>(내용어: 명사, 동사, 형용사, 부사)는 일반적으로 강세를 받는다.",ans:true,correct:"정확하다. 명사, 동사, 형용사, 부사 등 <span class='kw1'>content word</span>는 lexical meaning을 가지며 일반적으로 <span class='kw2'>강세</span>를 받는다.",why:"Content word는 어휘적 의미(lexical meaning)를 지닌 단어들로, 발화의 정보 핵심을 담고 있다. 따라서 강세를 받아 청자에게 두드러지게 전달된다. 반면 function word는 문법적 기능만 하므로 일반적으로 비강세이다.",source:"<span class='kw1'>Content words</span> (N, V, Adj, Adv) generally receive stress; <span class='kw2'>function words</span> (articles, prepositions, conjunctions, pronouns) generally do not. (Yavaş 2011)",compare:[{title:"Content word (강세 ○)",desc:"명사·동사·형용사·부사 · 어휘적 의미 보유"},{title:"Function word (강세 ✗)",desc:"관사·전치사·접속사·대명사 · 문법적 기능"}]},
-  {src:"Function Word",cat:"관사 강세",text:"관사 <span class='kw1'>the, a</span>는 일반적으로 강세를 받지 않는다.",ans:true,correct:"정확하다. 관사는 <span class='kw1'>function word</span>이므로 일반적으로 비강세이다. 단, 강조 목적으로 쓰일 때는 강세를 받을 수 있다.",why:"관사(the, a/an)는 문법적 기능만 하는 function word이다. 일반 발화에서는 약화되어 /ðə/, /ə/로 실현된다. 단 'THE book'처럼 강조(contrastive) 목적으로 쓰이면 강세를 받을 수 있다.",source:"Articles (the, a) are <span class='kw1'>function words</span>: generally unstressed. Contrastive use allows stress: 'THE (not a) book.' (Yavaş 2011)",compare:[{title:"일반 사용 (비강세)",desc:"the /ðə/, a /ə/ · 약화 실현"},{title:"강조 사용 (강세 가능)",desc:"THE book (저 책이 아닌 바로 그 책)"}]},
-  {src:"Function Word",cat:"be 동사 강세",text:"동사 <span class='kw1'>be</span>는 항상 비강세다.",ans:false,correct:"틀렸다. 'be'는 일반적으로 비강세이지만, <span class='kw2'>강조(contrastive)</span> 상황에서는 강세를 받을 수 있다 — 예: 'She IS here!'",why:"Be 동사는 조동사/연결동사로서 일반적으로는 function word처럼 비강세로 실현된다. 그러나 'I know she was late, but she IS here now!'처럼 사실을 강조할 때 강세를 받는다. '항상'이라는 절대어에 주의해야 한다.",source:"'be' is typically unstressed, but can receive stress in <span class='kw2'>emphatic/contrastive contexts</span>: 'She IS here!' (emphasizing truth). (Yavaş 2011)",compare:[{title:"일반 발화 (비강세)",desc:"She is THERE. · is = 비강세"},{title:"강조 발화 (강세 가능)",desc:"She IS there! · 사실 강조"}]},
-  {src:"Focus Stress",cat:"Narrow Focus",text:"<span class='kw1'>Narrow focus</span>에서 핵강세는 <span class='kw2'>새로운 정보</span>를 가진 요소에 온다.",ans:true,correct:"정확하다. Narrow focus에서 핵강세는 화자가 전달하려는 <span class='kw2'>새 정보(new information)</span>를 담은 특정 요소에 배정된다.",why:"Narrow focus는 발화의 특정 요소만이 새 정보일 때 나타난다. 핵강세가 그 요소로 이동하여 청자에게 어디가 새 정보인지 신호한다. Broad focus(전체가 새 정보)와 대비된다.",source:"<span class='kw1'>Narrow focus</span>: nuclear stress marks the element carrying <span class='kw2'>new information</span>, contrasting with given information. (Yavaş 2011)",compare:[{title:"Broad focus",desc:"전체가 새 정보 · NSR 기본 적용"},{title:"Narrow focus",desc:"특정 요소만 새 정보 · 핵강세 이동"}]},
-  {src:"Focus Stress",cat:"Contrastive Focus",text:"'<span class='kw3'>ˈJohn</span> ate the pizza'에서 John이 강조되면 <span class='kw2'>다른 사람이 먹었다는 함의</span>와 대비된다.",ans:true,correct:"정확하다. 'ˈJohn ate the pizza'는 John에 contrastive focus — '(John이, 다른 사람이 아닌) John이 피자를 먹었다'는 함의를 가진다.",why:"Contrastive focus(대조 초점)는 narrow focus의 한 종류로, 다른 대안과 대조하여 특정 요소를 강조한다. John에 강세가 오면 '(Mary가 아닌) John이'라는 함의가 생긴다.",source:"<span class='kw1'>Contrastive focus</span>: 'ˈJohn ate the pizza' implies John (not someone else) ate it. (Yavaş 2011)",compare:[{title:"<span class='kw3'>ˈJOHN</span> ate the pizza",desc:"John에 초점 · 다른 사람과 대조"},{title:"John ate <span class='kw3'>the ˈPIZZA</span>",desc:"pizza에 초점 · 다른 음식과 대조"}]},
-  {src:"Focus Stress",cat:"Broad Focus",text:"<span class='kw1'>Broad focus</span>는 전체 발화가 새로운 정보일 때 사용된다.",ans:true,correct:"정확하다. Broad focus는 발화 전체가 새 정보일 때 나타나며, NSR에 따라 마지막 주요 요소에 핵강세가 온다.",why:"Broad focus(광범위 초점)는 'What happened?'에 대한 답변처럼 발화 전체가 새 정보인 경우다. 이때 NSR이 기본적으로 적용되어 마지막 주요 내용어에 핵강세가 온다.",source:"<span class='kw1'>Broad focus</span>: the entire utterance is new information. NSR assigns nuclear stress to the rightmost major element. (Yavaş 2011)",compare:[{title:"Broad focus 예",desc:"Q: What happened? A: John ate the PIZZA."},{title:"Narrow focus 예",desc:"Q: Who ate? A: JOHN ate the pizza."}]},
-  {src:"Function Word",cat:"전치사 강세",text:"전치사는 content word이므로 항상 강세를 받는다.",ans:false,correct:"틀렸다. 전치사는 대부분 <span class='kw1'>function word</span>로 분류되어 일반적으로 <span class='kw2'>비강세</span>다. 강조 시에만 강세를 받는다.",why:"전치사(in, on, at, to 등)는 문법적 관계를 나타내는 function word이다. 일반 발화에서는 비강세로 약화된다. 단 'Look AT me, not behind me!'처럼 강조할 때 강세를 받을 수 있다.",source:"Prepositions are <span class='kw1'>function words</span>: generally unstressed in normal speech. Stress possible in contrastive contexts. (Yavaş 2011)",compare:[{title:"일반 발화 (비강세)",desc:"He's in the ROOM. · in = 비강세"},{title:"강조 발화 (강세 가능)",desc:"He's IN the room, not outside."}]},
-  {src:"Nuclear Stress",cat:"Nuclear Stress 정의",text:"<span class='kw1'>Nuclear stress</span>는 발화에서 가장 두드러진(prominent) 강세다.",ans:true,correct:"정확하다. <span class='kw1'>Nuclear stress</span>는 하나의 억양 구(intonation phrase) 내에서 가장 두드러진 강세이며, 핵음조(nuclear tone)의 출발점이다.",why:"Nuclear stress = 발화에서 가장 현저한 강세. 이 음절에서 음조 변화(pitch movement)가 시작된다. Primary/secondary stress와 달리 nuclear stress는 문맥과 초점에 따라 이동할 수 있다.",source:"<span class='kw1'>Nuclear stress</span> is the most prominent stress in an intonation phrase, serving as the nucleus of the nuclear tone. (Yavaş 2011)",compare:[{title:"Word-level stress",desc:"단어 내 primary/secondary 강세"},{title:"<span class='kw1'>Nuclear stress</span>",desc:"발화 수준 · 가장 현저 · 문맥 의존"}]},
-  {src:"Function Word",cat:"대명사 강세",text:"대명사(<span class='kw1'>he, she, it, they</span>)는 일반적으로 강세를 받지 않는다.",ans:true,correct:"정확하다. 대명사는 <span class='kw1'>function word</span>로 분류되어 일반적으로 비강세이다. 단, 대조 강조 시 강세를 받는다.",why:"대명사는 앞서 언급된 명사구를 대체하는 문법 요소로 function word 범주에 속한다. 새 정보를 전달하지 않으므로 일반적으로 비강세이다. 'HE did it, not she!'처럼 대조할 때는 강세를 받는다.",source:"Pronouns (he, she, it, they) are <span class='kw1'>function words</span>: generally unstressed. Stressed in contrastive contexts. (Yavaş 2011)",compare:[{title:"일반 사용 (비강세)",desc:"He's HERE. · 중립 문맥에서 he는 비강세"},{title:"대조 사용 (강세 가능)",desc:"HE came, not her!"}]},
-  {src:"Focus Stress",cat:"Contrastive Stress",text:"<span class='kw1'>Contrastive stress</span>는 narrow focus의 한 종류다.",ans:true,correct:"정확하다. Contrastive stress는 narrow focus의 하위 유형으로, 특정 요소를 다른 대안과 <span class='kw2'>대조</span>하여 강조할 때 나타난다.",why:"Narrow focus의 주요 유형 중 하나가 contrastive focus이다. 대조 강세는 '다른 것이 아닌 바로 이것'을 강조하는 기능을 한다. 예: 'I said CATS, not dogs.'",source:"<span class='kw1'>Contrastive stress</span> is a type of <span class='kw2'>narrow focus</span> that highlights an element by contrasting it with an alternative. (Yavaş 2011)",compare:[{title:"Narrow focus (일반)",desc:"새 정보 요소에 핵강세 이동"},{title:"Contrastive stress",desc:"대안과 대조 · 'A, not B' 함의"}]},
-  {src:"Focus Stress",cat:"Focus 해석",text:"'She GAVE me the book'에서 GAVE에 nuclear stress가 오면 어떤 행위를 했는지 대조한다.",ans:true,correct:"정확하다. 빌려주거나 판 것이 아니라 주었다는 행위를 대조한다.",why:"GAVE에 contrastive focus가 오면 행위를, ME에 오면 수혜자를, BOOK에 오면 대상을 대조할 수 있다. 구체적인 해석은 앞뒤 문맥과 함께 판단한다.",source:"'She <span class='kw3'>GAVE</span> me the book' — nuclear stress on GAVE: focus on the action (gave, not lent or sold). (Yavaş 2011)",compare:[{title:"She <span class='kw3'>GAVE</span> me the book",desc:"행위 강조 · 팔거나 빌려준 게 아님"},{title:"She gave <span class='kw3'>ME</span> the book",desc:"수혜자 강조 · 다른 사람이 아닌 나에게"}]},
-  {src:"Content Word",cat:"의문사 강세",text:"의문사(<span class='kw4'>wh-words</span>: who, what, where)는 function word이므로 강세를 받지 않는다.",ans:false,correct:"틀렸다. 의문사(who, what, where, when, why, how)는 <span class='kw2'>content word</span>로 분류되어 강세를 받는다.",why:"의문사는 어휘적 의미(lexical meaning)를 가지는 content word이다. 'WHO took my book?'에서 who는 강세를 받아 두드러진다. Function word인 관사/접속사와 혼동하지 않도록 주의해야 한다.",source:"<span class='kw2'>Wh-words</span> (who, what, where, when, why, how) are <span class='kw1'>content words</span> and receive stress. (Yavaş 2011)",compare:[{title:"의문사 = Content word",desc:"who, what, where · 강세 ○"},{title:"관사/접속사 = Function word",desc:"the, a, and, but · 강세 ✗"}]},
-  {src:"Focus Stress",cat:"주어진 정보",text:"Given information에는 어떤 경우에도 nuclear stress가 올 수 없다.",ans:false,correct:"틀렸다. given information은 보통 deaccented되지만, 대조하거나 수정하는 focus가 주어지면 핵강세를 받을 수 있다.",why:"중립적 broad focus에서는 nuclear stress가 new information에 오고 given information은 deaccented되는 경향이 있다. 그러나 contrastive focus에서는 이미 언급된 요소도 핵강세를 받을 수 있으므로 절대 규칙으로 일반화하면 안 된다.",source:"Nuclear stress normally marks new information; contrastive focus can assign prominence to a discourse-given element. (Yavaş 2011)",compare:[{title:"중립적 broad focus",desc:"given information은 보통 deaccented"},{title:"Contrastive focus",desc:"given element도 대조를 위해 핵강세 가능"}]},
-  {src:"Nuclear Stress",cat:"억양구 단위",text:"영어 발화에서 핵강세(nuclear stress)는 하나의 억양구(intonation phrase)당 하나뿐이다.",ans:true,correct:"정확하다. 하나의 억양구(intonation phrase) 안에는 <span class='kw2'>하나의 핵강세</span>만 존재한다. 억양구가 여럿이면 각각 핵강세를 가진다.",why:"억양구는 하나의 핵강세(nuclear stress)와 함께 실현되는 운율 단위이다. 긴 발화는 여러 억양구로 나뉘어 각각 핵강세를 가질 수 있지만, 하나의 억양구 내에서는 핵강세가 단 하나다.",source:"Each <span class='kw2'>intonation phrase</span> contains exactly <span class='kw2'>one nuclear stress</span>, which serves as the nucleus of the nuclear tone. (Yavaş 2011)",compare:[{title:"억양구 1개",desc:"핵강세 1개 · 단일 운율 단위"},{title:"억양구 여럿",desc:"각 억양구마다 핵강세 1개씩"}]},
-  {src:"Function Word",cat:"접속사 강세",text:"접속사(<span class='kw1'>and, but, or, because</span>)는 일반적으로 비강세다.",ans:true,correct:"정확하다. 접속사는 <span class='kw1'>function word</span>로 일반적으로 비강세이며 약화 실현된다. 강조 목적으로만 강세를 받는다.",why:"접속사(and, but, or, because, although 등)는 절이나 어구를 연결하는 문법적 기능만 하는 function word이다. 발화에서 일반적으로 비강세로 실현되며 약화(/ən/, /bət/)된다.",source:"Conjunctions (and, but, or) are <span class='kw1'>function words</span>: generally unstressed and reduced (/ən/, /bət/). (Yavaş 2011)",compare:[{title:"일반 사용 (비강세/약화)",desc:"and /ən/, but /bət/ · 축약"},{title:"강조 사용",desc:"'AND another thing...' · 드물게 강세"}]}
+  {
+    "src": "Content Word",
+    "cat": "강세 범주",
+    "text": "Content word(명사, main verb, 형용사, 부사)는 일반적으로 문장에서 강세를 받는다.",
+    "ans": true,
+    "correct": "정확하다. Content word는 일반적으로 문장에서 강세를 받는 경향이 있다.",
+    "why": "이는 모든 content word가 매번 두드러진다는 뜻이 아니다. 이미 공유된 정보인지, 무엇을 대조하는지에 따라 실제 prominence가 달라진다. 동사 가운데 main verb와 auxiliary의 역할도 구별한다.",
+    "source": "개념 근거: Yavaş, Applied English Phonology, 2nd ed. (2011), §4.10; Carr, English Phonetics and Phonology: An Introduction, 2nd ed. (2013), §§10.1–10.2. 대화는 별도로 구성한 적용 예시다.",
+    "compare": [
+      {
+        "title": "Content word",
+        "desc": "명사·main verb·형용사·부사: 일반적인 강세 경향"
+      },
+      {
+        "title": "Function word",
+        "desc": "관사·전치사·대명사 등: 초점이 아닐 때 약화 가능"
+      }
+    ],
+    "more": "<details><summary>문맥을 바꾸어 비교하기</summary><p>“Who opened the window?”에 “MINA opened the window.”라고 답하면 window는 content word여도 nucleus가 아니다. 품사와 이 대화의 focus를 따로 확인한다.</p></details>\n"
+  },
+  {
+    "src": "Function Word",
+    "cat": "관사 강세",
+    "text": "관사 <span class='kw1'>the, a</span>는 일반적으로 강세를 받지 않는다.",
+    "ans": true,
+    "correct": "정확하다. 관사는 초점이 아닌 일반적인 발화에서 강세 없이 발음된다.",
+    "why": "AEP는 the의 weak form을 뒤에 오는 소리에 따라 [ðə] 또는 [ði]로 제시한다. 관사 자체를 대조하면 strong form과 강세가 가능하다. 관사의 기능을 문법적이라는 이유만으로 의미가 없다고 설명하지 않는다.",
+    "source": "개념 근거: Yavaş, Applied English Phonology, 2nd ed. (2011), §4.10; Carr, English Phonetics and Phonology: An Introduction, 2nd ed. (2013), §§10.1–10.2. 대화는 별도로 구성한 적용 예시다.",
+    "compare": [
+      {
+        "title": "Weak form",
+        "desc": "the book의 [ðə], the apple의 [ði]"
+      },
+      {
+        "title": "관사 자체의 대조",
+        "desc": "a인지 the인지 정정할 때 강세 가능"
+      }
+    ],
+    "more": "<details><summary>문맥을 바꾸어 비교하기</summary><p>“Did you say a book?”에 “I said THE book.”이라고 답하면 정정하는 것은 관사 선택이다. 이를 ‘저 책이 아니라 그 책’이라는 거리의 대조로 설명하면 부정확하다.</p></details>\n"
+  },
+  {
+    "src": "Function Word",
+    "cat": "be 동사 강세",
+    "text": "동사 <span class='kw1'>be</span>는 항상 비강세다.",
+    "ans": false,
+    "correct": "틀렸다. Be는 사실 여부를 정정하거나 강조할 때 강세를 받을 수 있다.",
+    "why": "“Mina is not here.”라는 말을 “She IS here.”라고 정정하면 is가 두드러진다. 일반적으로 약하게 발음된다는 경향은 언제나 비강세라는 뜻이 아니다.",
+    "source": "개념 근거: Yavaş, Applied English Phonology, 2nd ed. (2011), §4.10; Carr, English Phonetics and Phonology: An Introduction, 2nd ed. (2013), §§10.1–10.2. 대화는 별도로 구성한 적용 예시다.",
+    "compare": [
+      {
+        "title": "일반적인 답변",
+        "desc": "She is HERE."
+      },
+      {
+        "title": "부정한 내용을 정정",
+        "desc": "She IS here."
+      }
+    ],
+    "more": "<details><summary>문맥을 바꾸어 비교하기</summary><p>첫 문장은 어디에 있는지를, 둘째 문장은 여기에 있다는 사실을 두드러지게 전달할 수 있다. 대문자만 보지 말고 앞선 질문이나 주장을 함께 읽는다.</p></details>\n"
+  },
+  {
+    "src": "Focus Stress",
+    "cat": "Narrow Focus",
+    "text": "질문이 특정 요소의 정보를 요구하고 그 요소만 새 정보로 답하는 경우, narrow focus의 nucleus가 그 요소에 놓일 수 있다.",
+    "ans": true,
+    "correct": "정확하다. 질문에서 묻는 특정 요소만 새 정보로 답하는 경우 narrow focus가 가능하다.",
+    "why": "“Who opened the door?”에 “MINA opened the door.”라고 답하면 MINA가 질문에 필요한 정보를 제공한다. 다만 narrow focus를 반드시 처음 언급된 정보로 한정하지 않는다. 이미 언급한 대안을 선택하거나 정정하는 경우도 있다.",
+    "source": "Carr, English Phonetics and Phonology: An Introduction, 2nd ed. (2013), §§10.1–10.2. 대화는 별도로 구성한 적용 예시다.",
+    "compare": [
+      {
+        "title": "정보를 묻는 질문",
+        "desc": "Who opened it? → MINA opened it."
+      },
+      {
+        "title": "이미 제시된 대안",
+        "desc": "Mina or Joon? → MINA."
+      }
+    ],
+    "more": "<details><summary>문맥을 바꾸어 비교하기</summary><p>Narrow focus는 특정 요소에 focus가 한정된다는 점이 중요하다. 새 정보 제공과 대조는 구별할 수 있으며, 대조되는 이름이 이전 대화에 나왔어도 nucleus를 받을 수 있다.</p></details>\n"
+  },
+  {
+    "src": "Focus Stress",
+    "cat": "Contrastive Focus",
+    "text": "Mary가 피자를 먹었다는 말을 “JOHN ate the pizza.”라고 정정하면 JOHN은 다른 사람과 대조된다.",
+    "ans": true,
+    "correct": "정확하다. 다른 사람이 먹었다는 말을 정정하는 문맥에서는 JOHN이 대조된다.",
+    "why": "“Mary ate the pizza.”라는 말을 “JOHN ate the pizza.”라고 정정하면 사람이 대조된다. 그러나 같은 강세가 단순히 누가 먹었는지 알려 주는 답에도 쓰일 수 있다.",
+    "source": "Carr, English Phonetics and Phonology: An Introduction, 2nd ed. (2013), §§10.1–10.2. 대화는 별도로 구성한 적용 예시다.",
+    "compare": [
+      {
+        "title": "정정하는 답",
+        "desc": "Mary가 아니라 JOHN"
+      },
+      {
+        "title": "정보를 주는 답",
+        "desc": "Who ate the pizza? → JOHN"
+      }
+    ],
+    "more": "<details><summary>문맥을 바꾸어 비교하기</summary><p>Nucleus가 John에 있다는 사실만으로 누군가 먼저 틀린 말을 했다고 단정하지 않는다. 실제로 제시된 대안이 무엇인지 문맥에서 확인한다.</p></details>\n"
+  },
+  {
+    "src": "Focus Stress",
+    "cat": "Broad Focus",
+    "text": "<span class='kw1'>Broad focus</span>는 전체 발화가 새로운 정보일 때 사용된다.",
+    "ans": true,
+    "correct": "정확하다. 발화 전체를 새 소식으로 제시하는 경우 broad focus가 가능하다.",
+    "why": "“What happened?”에 “Mina bought a CAMERA.”라고 답하는 경우가 이에 해당한다. 마지막 주요 단어에 nucleus가 놓이는 기본 경향이 있지만, 모든 문장에서 마지막 content word가 반드시 nucleus를 받는 것은 아니다.",
+    "source": "Carr, English Phonetics and Phonology: An Introduction, 2nd ed. (2013), §§10.1–10.2. 대화는 별도로 구성한 적용 예시다.",
+    "compare": [
+      {
+        "title": "Broad focus",
+        "desc": "What happened? → Mina bought a CAMERA."
+      },
+      {
+        "title": "Narrow focus",
+        "desc": "What did Mina buy? → Mina bought a CAMERA."
+      }
+    ],
+    "more": "<details><summary>문맥을 바꾸어 비교하기</summary><p>두 답의 nucleus 위치는 같아도 focus의 범위는 다를 수 있다. 위치만 보고 broad/narrow를 판정하지 않는다.</p></details>\n"
+  },
+  {
+    "src": "Function Word",
+    "cat": "전치사 강세",
+    "text": "전치사는 content word이므로 항상 강세를 받는다.",
+    "ans": false,
+    "correct": "틀렸다. 전치사는 일반적으로 function word에 속하며 항상 강세를 받는 것은 아니다.",
+    "why": "“It is in the BOX.”에서 in이 초점이 아니면 약하게 말할 수 있다. “It is ON the box, not under it.”에서는 위치 관계를 대조하므로 ON이 두드러진다. 모든 전치사가 같은 weak form을 갖는 것은 아니다.",
+    "source": "개념 근거: Yavaş, Applied English Phonology, 2nd ed. (2011), §4.10; Carr, English Phonetics and Phonology: An Introduction, 2nd ed. (2013), §§10.1–10.2. 대화는 별도로 구성한 적용 예시다.",
+    "compare": [
+      {
+        "title": "초점이 아닌 전치사",
+        "desc": "in the BOX"
+      },
+      {
+        "title": "대조되는 전치사",
+        "desc": "ON the box, not under it"
+      }
+    ],
+    "more": "<details><summary>문맥을 바꾸어 비교하기</summary><p>“Who are you talking to?”의 끝에 놓인 to는 strong form이 가능하다. 이처럼 strong form의 환경은 대조에만 한정되지 않는다. Strong form과 nucleus를 자동으로 동일시하지 않는다.</p></details>\n"
+  },
+  {
+    "src": "Nuclear Stress",
+    "cat": "Nuclear Stress 정의",
+    "text": "Nuclear stress는 하나의 intonation phrase 안에서 가장 두드러진 강세다.",
+    "ans": true,
+    "correct": "정확하다. 여기서 nuclear stress는 하나의 intonation phrase 안에서 가장 두드러진 강세를 가리킨다.",
+    "why": "Nucleus에는 핵심적인 tone이 연결된다. 앞에도 강세 음절과 pitch 변화가 있을 수 있고, nucleus 뒤에도 tail이 이어질 수 있다. 따라서 모든 pitch 변화가 nucleus에서 처음 시작된다고 설명하면 부정확하다.",
+    "source": "Carr, English Phonetics and Phonology: An Introduction, 2nd ed. (2013), §10.1. 대화는 별도로 구성한 적용 예시다.",
+    "compare": [
+      {
+        "title": "Lexical stress",
+        "desc": "단어 안의 강세 관계"
+      },
+      {
+        "title": "Nucleus",
+        "desc": "Intonation phrase 안의 중심적인 두드러짐"
+      }
+    ],
+    "more": "<details><summary>문맥을 바꾸어 비교하기</summary><p>“Mina GAVE it to her.”에서는 GAVE 뒤에 it to her가 남는다. 마지막 음절이 nucleus여야 하는 것은 아니다.</p></details>\n"
+  },
+  {
+    "src": "Function Word",
+    "cat": "대명사 강세",
+    "text": "대명사(<span class='kw1'>he, she, it, they</span>)는 일반적으로 강세를 받지 않는다.",
+    "ans": true,
+    "correct": "정확하다. He, she, it, they는 초점이 아닌 경우 대체로 강세 없이 쓰인다.",
+    "why": "대명사는 문맥에서 대상을 가리키지만, 언제나 이미 언급한 명사만 대신하거나 새 정보를 전혀 전달하지 않는 것은 아니다. 누구를 가리키는지 대조하면 대명사도 nucleus를 받을 수 있다.",
+    "source": "개념 근거: Yavaş, Applied English Phonology, 2nd ed. (2011), §4.10; Carr, English Phonetics and Phonology: An Introduction, 2nd ed. (2013), §§10.1–10.2. 대화는 별도로 구성한 적용 예시다.",
+    "compare": [
+      {
+        "title": "초점이 아닌 대명사",
+        "desc": "She is HERE."
+      },
+      {
+        "title": "사람을 대조",
+        "desc": "SHE came, not he."
+      }
+    ],
+    "more": "<details><summary>문맥을 바꾸어 비교하기</summary><p>방 안의 사람을 가리키며 “HE called.”라고 말할 수 있다. 대명사가 쓰였다는 이유만으로 그 사람이 대화에서 이미 확정되었다고 가정하지 않는다.</p></details>\n"
+  },
+  {
+    "src": "Focus Stress",
+    "cat": "Contrastive Stress",
+    "text": "“I said CATS, not dogs.”에서 CATS만 대조하여 두드러지게 말하는 것은 contrastive stress를 동반한 narrow focus의 예다.",
+    "ans": true,
+    "correct": "정확하다. 이 예에서는 CATS에 focus를 한정하고 dogs와 대조한다.",
+    "why": "Contrastive stress는 특정 대안을 두드러지게 비교하는 데 쓰인다. 이와 같은 한 단어의 대조는 narrow focus의 예이지만, 모든 대조의 범위를 언제나 한 단어로 한정할 수는 없다.",
+    "source": "Carr, English Phonetics and Phonology: An Introduction, 2nd ed. (2013), §§10.1–10.2. 대화는 별도로 구성한 적용 예시다.",
+    "compare": [
+      {
+        "title": "정보 제공",
+        "desc": "What did you see? → CATS."
+      },
+      {
+        "title": "대안 정정",
+        "desc": "I said CATS, not dogs."
+      }
+    ],
+    "more": "<details><summary>문맥을 바꾸어 비교하기</summary><p>첫 답은 질문에 필요한 대상을 알려 주고, 둘째 답은 잘못 들은 단어를 정정한다. Narrow focus가 모두 정정이나 반박인 것은 아니다.</p></details>\n"
+  },
+  {
+    "src": "Focus Stress",
+    "cat": "Focus 해석",
+    "text": "“She lent you the book.”을 “She GAVE me the book.”이라고 정정하면 GAVE가 행위를 대조한다.",
+    "ans": true,
+    "correct": "정확하다. 빌려주었다는 말을 정정하는 문맥에서는 GAVE가 행위의 대조를 나타낸다.",
+    "why": "“She lent you the book.”에 “She GAVE me the book.”이라고 답하면 lent와 gave가 대조된다. 다만 nucleus가 GAVE에 있다는 사실만으로 모든 문맥에서 lent나 sold가 대안이라고 정할 수는 없다.",
+    "source": "Carr, English Phonetics and Phonology: An Introduction, 2nd ed. (2013), §§10.1–10.2. 대화는 별도로 구성한 적용 예시다.",
+    "compare": [
+      {
+        "title": "행위를 정정",
+        "desc": "She GAVE me the book."
+      },
+      {
+        "title": "받은 사람을 정정",
+        "desc": "She gave ME the book."
+      }
+    ],
+    "more": "<details><summary>문맥을 바꾸어 비교하기</summary><p>문장의 나머지가 이미 알려져 있으면 동사에 nucleus가 놓여 필요한 정보를 제공할 수도 있다. 구체적인 대안은 앞선 대화에서 확인한다.</p></details>\n"
+  },
+  {
+    "src": "Content Word",
+    "cat": "의문사 강세",
+    "text": "의문사(<span class='kw4'>wh-words</span>: who, what, where)는 function word이므로 강세를 받지 않는다.",
+    "ans": false,
+    "correct": "틀렸다. Wh-word도 문맥에 따라 강세를 받을 수 있다.",
+    "why": "Wh-word라는 이유로 강세를 금지하거나, 반대로 언제나 content word로 분류해 강세를 보장해서는 안 된다. “Who called?”에서 WHO가 두드러질 수 있고, “Where did Mina GO?”에서는 GO가 nucleus가 될 수 있다.",
+    "source": "Carr, English Phonetics and Phonology: An Introduction, 2nd ed. (2013), §§10.1–10.2. 대화는 별도로 구성한 적용 예시다.",
+    "compare": [
+      {
+        "title": "Wh-word가 두드러짐",
+        "desc": "WHO called?"
+      },
+      {
+        "title": "다른 단어가 nucleus",
+        "desc": "Where did Mina GO?"
+      }
+    ],
+    "more": "<details><summary>문맥을 바꾸어 비교하기</summary><p>“Mina called.”를 잘 듣지 못해 “WHO called?”라고 되물을 수 있다. Nucleus의 위치와 별개로, 일반적인 wh-question과 다시 묻는 wh-question은 tone도 달라질 수 있다.</p></details>\n"
+  },
+  {
+    "src": "Focus Stress",
+    "cat": "주어진 정보",
+    "text": "Given information에는 어떤 경우에도 nuclear stress가 올 수 없다.",
+    "ans": false,
+    "correct": "틀렸다. Given information도 대조하거나 정정할 때 nucleus를 받을 수 있다.",
+    "why": "공유된 정보는 초점이 아닐 때 deaccenting되는 경향이 있다. 그러나 이미 나온 단어나 의미도 다시 대조할 수 있다. Given/new 구분을 nucleus의 허용·금지를 정하는 절대 규칙으로 삼지 않는다.",
+    "source": "Carr, English Phonetics and Phonology: An Introduction, 2nd ed. (2013), §§10.1–10.2. 대화는 별도로 구성한 적용 예시다.",
+    "compare": [
+      {
+        "title": "공유된 배경",
+        "desc": "Who took the key?에서 the key"
+      },
+      {
+        "title": "공유된 대안 중 선택",
+        "desc": "Mina or Joon? → MINA."
+      }
+    ],
+    "more": "<details><summary>문맥을 바꾸어 비교하기</summary><p>“He went to Paris.”에 “He did not go to PARIS; he went to LYON.”이라고 답하면 이미 나온 Paris도 정정의 대상이 되어 두드러진다.</p></details>\n"
+  },
+  {
+    "src": "Nuclear Stress",
+    "cat": "억양구 단위",
+    "text": "여기서 사용하는 분석에서 nuclear stress는 하나의 intonation phrase당 하나다.",
+    "ans": true,
+    "correct": "정확하다. 여기서 사용하는 분석에서는 intonation phrase마다 하나의 nucleus를 둔다.",
+    "why": "한 문장도 여러 intonation phrase로 나누어 말할 수 있다. 문장 수와 nucleus 수를 일대일로 대응시키지 않는다. Nucleus가 하나라는 말은 그 구의 다른 음절에는 강세가 전혀 없다는 뜻도 아니다.",
+    "source": "Carr, English Phonetics and Phonology: An Introduction, 2nd ed. (2013), §10.1. 대화는 별도로 구성한 적용 예시다.",
+    "compare": [
+      {
+        "title": "Intonation phrase 하나",
+        "desc": "하나의 nucleus"
+      },
+      {
+        "title": "Intonation phrase 둘",
+        "desc": "각각 하나의 nucleus"
+      }
+    ],
+    "more": "<details><summary>문맥을 바꾸어 비교하기</summary><p>“When Mina ARRIVES | we will START.”를 표시된 경계로 말하면 두 nucleus가 가능하다. |는 발화에서 설정한 경계이며 문장부호만으로 항상 정해지지는 않는다.</p></details>\n"
+  },
+  {
+    "src": "Function Word",
+    "cat": "접속사 강세",
+    "text": "접속사(<span class='kw1'>and, but, or, because</span>)는 일반적으로 비강세다.",
+    "ans": true,
+    "correct": "정확하다. 접속사는 초점이 아닌 일반적인 발화에서 대체로 강세 없이 쓰인다.",
+    "why": "And와 but에는 [ən], [bət] 같은 weak form이 있다. 그러나 모든 접속사가 같은 방식으로 약화되는 것은 아니며, 무엇을 연결하거나 대조하는지에 따라 강세를 받을 수 있다.",
+    "source": "개념 근거: Yavaş, Applied English Phonology, 2nd ed. (2011), §4.10; Carr, English Phonetics and Phonology: An Introduction, 2nd ed. (2013), §§10.1–10.2. 대화는 별도로 구성한 적용 예시다.",
+    "compare": [
+      {
+        "title": "Weak form 가능",
+        "desc": "and [ən], but [bət]"
+      },
+      {
+        "title": "접속 관계를 정정",
+        "desc": "tea AND coffee, not one or the other"
+      }
+    ],
+    "more": "<details><summary>문맥을 바꾸어 비교하기</summary><p>“Tea or coffee?”에 “Tea AND coffee.”라고 답하면 하나를 고르는 대신 둘 다 원한다는 뜻으로 and를 두드러지게 말할 수 있다. Function word의 의미와 대화 기능을 확인하는 사례다.</p></details>\n"
+  }
 ];
 function renderExp(q,isCorrect){
   const three=q.compare&&q.compare.length===3;
   const cmp=q.compare?`<div class="sec-label">📊 비교 정리</div><div class="compare${three?' three':''}">${q.compare.map(c=>`<div class="compare-item"><div class="ci-title">${c.title}</div><p>${c.desc}</p></div>`).join('')}</div>`:'';
-  return `<div class="exp show"><div class="exp-header"><span>${isCorrect?'✅ 정답':'❌ 오답'} · 해설</span></div><div class="exp-answer"><div class="ans-label">핵심 정정</div><div class="ans-text">${q.correct}</div></div><div class="exp-body"><div class="sec-label">📖 상세 설명</div><p>${q.why}</p><div class="sec-label">📌 Source</div><div class="def-box"><p>${q.source}</p></div>${cmp}</div></div>`;
+  return `<div class="exp show"><div class="exp-header"><span>${isCorrect?'✅ 정답':'❌ 오답'} · 해설</span></div><div class="exp-answer"><div class="ans-label">핵심 정정</div><div class="ans-text">${q.correct}</div></div><div class="exp-body"><div class="sec-label">📖 상세 설명</div><p>${q.why}</p><div class="sec-label">📌 Source</div><div class="def-box"><p>${q.source}</p></div>${cmp}${q.more||''}</div></div>`;
 }
 function renderNav(){
   document.getElementById('nav').innerHTML=answers.map((a,i)=>{
