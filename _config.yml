@@ -1,0 +1,23 @@
+# Keep reference originals and authoring-only files out of GitHub Pages.
+# Student HTML, runtime JS/CSS, assets and blog articles remain published.
+exclude:
+  - refs
+  - docs
+  - AGENTS.md
+  - CLAUDE.md
+  - blog/PROGRESS.md
+  - scripts/test_material_corrections.js
+  - scripts/test_quiz_order.js
+  - scripts/test_quiz_order_browser.js
+  - scripts/test_quiz_study_figures.js
+  # Retain conventional Jekyll build/dependency exclusions.
+  - .sass-cache
+  - .jekyll-cache
+  - gemfiles
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle
+  - vendor/cache
+  - vendor/gems
+  - vendor/ruby
