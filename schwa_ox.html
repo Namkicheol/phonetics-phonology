@@ -135,31 +135,316 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:r
 <script src="./score-popup.js?v=20261016-random1"></script>
 <script src="./quiz-order.js?v=20261016-random1"></script>
 <script>
-const SAVE_KEY='ox_phon_schwa_v1';
+const SAVE_KEY='ox_phon_schwa_v2';
 const TOTAL=15;
 let cur=0,answers=new Array(TOTAL).fill(null);
 function getScore(){return answers.filter(a=>a&&a.correct).length;}
 const Q=[
-  {src:"Vowel Reduction",cat:"약화 조건",text:"비강세 음절의 모음은 <span class='kw1'>/ə/</span>로 약화될 수 있다.",ans:true,correct:"정확하다. 비강세(-stress) 음절에서 모음은 <span class='kw1'>/ə/(schwa)</span>로 약화될 수 있다.",why:"Vowel reduction은 비강세 음절에서 full vowel이 중립적인 /ə/로 약화되는 현상이다. 영어의 stress-timed 리듬에서 비강세 음절이 압축되어 나타나는 결과이다. 예: about /əˈbaʊt/의 첫째 음절 a-→/ə/.",source:"AEP Ch. 4 §§4.4, 4.9 (Central / reduced vowels); AEP Ch. 7 §7.4 (Secondary Stress)",compare:[{title:"+stress 음절",desc:"반드시 full vowel 유지 · 약화 불가"},{title:"-stress 음절",desc:"/ə/로 약화 가능 · 또는 full vowel 유지"}]},
-  {src:"Schwa /ə/",cat:"분포",text:"<span class='kw1'>/ə/</span>(schwa)는 English의 unstressed syllable에서 널리 나타나는 <span class='kw2'>reduced vowel</span>이다.",ans:true,correct:"정확하다. <span class='kw1'>/ə/</span>(schwa)는 English의 unstressed syllable에서 나타나는 reduced vowel이다.",why:"AIL은 schwa [ə]를 강조되지 않은 짧은 음절의 모음 표기에 사용한다. English에서 unstressed vowel은 schwa로 약화될 수 있고, Roach는 다른 weak form으로도 약화될 수 있음을 제시한다.",source:"AEP Ch. 4 §§4.4, 4.9 (Central / reduced vowels); AEP Ch. 7 §7.4 (Secondary Stress)",compare:[{title:"Unstressed syllable",desc:"schwa /ə/ 또는 다른 weak form으로 약화 가능"},{title:"Stressed syllable",desc:"schwa /ə/가 아닌 vowel로 실현"}]},
-  {src:"Schwa vs /ʌ/",cat:"환경 비교",text:"<span class='kw1'>/ə/</span>와 <span class='kw1'>/ʌ/</span>는 동일한 음성 환경에서 나타난다.",ans:false,correct:"틀렸다. <span class='kw1'>/ə/</span>는 <span class='kw2'>비강세</span> 음절에서, <span class='kw1'>/ʌ/</span>는 <span class='kw2'>강세</span> 음절에서 나타난다. 환경이 다르다.",why:"/ə/와 /ʌ/는 모두 central vowel 계열이지만 stress environment가 다르다. /ə/: -stress 음절에만 출현(mid central, 비강세). /ʌ/: +stress 음절에만 출현(low-mid central, 강세). 예: 'about'의 첫째 음절=/ə/(비강세) vs 'cut'의 모음=/ʌ/(강세).",source:"AEP Ch. 4 §§4.4, 4.9 (Central / reduced vowels); AEP Ch. 7 §7.4 (Secondary Stress)",compare:[{title:"/ə/ — 비강세 음절",desc:"about /əˈbaʊt/ · sofa /ˈsoʊfə/"},{title:"/ʌ/ — 강세 음절",desc:"cut /kʌt/ · butter /ˈbʌtər/의 첫째"}]},
-  {src:"Vowel Reduction",cat:"photograph",text:"<span class='kw3'>photograph</span> /ˈfoʊtəgræf/에서 두 번째 음절 <span class='kw2'>-to-</span>는 /ə/다.",ans:true,correct:"정확하다. /ˈfoʊ<span class='kw2'>tə</span>græf/에서 두 번째 음절 -to-의 모음은 비강세로 <span class='kw2'>/ə/</span>로 약화된다.",why:"photograph의 IPA: /ˈfoʊtəgræf/. 첫째 음절(pho-)=primary stress+full vowel /oʊ/, 둘째 음절(-to-)=비강세+/ə/(약화), 셋째 음절(-graph)=비강세+full vowel /æ/. 강세 이동 시 약화 위치도 이동한다.",source:"AEP Ch. 4 §§4.4, 4.9 (Central / reduced vowels); AEP Ch. 7 §7.4 (Secondary Stress)",compare:[{title:"ˈphotograph",desc:"/ˈfoʊ<span class='kw2'>tə</span>græf/ · 2째=/ə/"},{title:"phoˈtography",desc:"/<span class='kw2'>fə</span>ˈtɑgrəfi/ · 1째=/ə/"}]},
-  {src:"Vowel Reduction",cat:"강세 이동과 약화",text:"강세가 이동하면 모음 약화(<span class='kw1'>/ə/</span>) 위치도 이동한다.",ans:true,correct:"정확하다. 강세 위치 변화에 따라 비강세 음절이 달라지므로 /ə/ 출현 위치도 이동한다 — photo→photography 예시.",why:"photograph→photography에서 강세가 이동(-tog-으로)하면 약화 위치도 달라진다. photograph: 2째 음절=/ə/. photography: 1째 음절=/ə/. 이 연동성이 접미사 강세 규칙의 핵심 의미이다.",source:"AEP Ch. 4 §§4.4, 4.9 (Central / reduced vowels); AEP Ch. 7 §7.4 (Secondary Stress)",compare:[{title:"ˈphotograph",desc:"2째=/ə/ · 1째=full vowel /oʊ/"},{title:"phoˈtography",desc:"1째=/ə/ · 2째=full vowel /ɑ/"}]},
-  {src:"Vowel Reduction",cat:"photography",text:"<span class='kw3'>photography</span> /fəˈtɑgrəfi/에서 첫 번째 음절은 <span class='kw2'>/ə/</span>다.",ans:true,correct:"정확하다. /fəˈtɑgrəfi/에서 첫 번째 음절 pho-의 모음은 비강세로 <span class='kw2'>/ə/</span>로 약화된다.",why:"photography의 IPA: /fəˈtɑgrəfi/. 강세가 2번째 음절(-tog-)으로 이동했기 때문에 1번째 음절(pho-)이 비강세가 되어 /ə/로 약화된다. photograph에서는 pho-가 강세 음절이어서 /oʊ/였다.",source:"AEP Ch. 4 §§4.4, 4.9 (Central / reduced vowels); AEP Ch. 7 §7.4 (Secondary Stress)",compare:[{title:"ˈphotograph",desc:"pho-=/ˈoʊ/ · 강세 음절 · full vowel"},{title:"phoˈtography",desc:"pho-=<span class='kw2'>/ə/</span> · 비강세 · 약화"}]},
-  {src:"Schwa /ə/",cat:"강세 음절 약화",text:"Primary stress 음절의 모음은 <span class='kw1'>/ə/</span>로 약화될 수 있다.",ans:false,correct:"틀렸다. Primary stress(+stress) 음절은 반드시 <span class='kw2'>full vowel</span>을 유지한다. /ə/는 <span class='kw4'>-stress</span> 음절에서만 나타난다.",why:"핵심 원칙: +stress 음절 → 반드시 full vowel. /ə/는 -stress 음절의 표지이다. 따라서 primary stress와 secondary stress 음절 모두 full vowel을 갖는다. /ə/는 절대로 강세 음절에 나타나지 않는다.",source:"AEP Ch. 4 §§4.4, 4.9 (Central / reduced vowels); AEP Ch. 7 §7.4 (Secondary Stress)",compare:[{title:"+stress 음절 → full vowel",desc:"반드시 /oʊ/, /æ/, /ɑ/ 등 full vowel"},{title:"-stress 음절 → /ə/ 가능",desc:"/ə/로 약화되거나 full vowel 유지"}]},
-  {src:"Schwa /ə/",cat:"IPA 오류",text:"'about'의 IPA는 <span class='kw4'>/ˈæbaʊt/</span>이다.",ans:false,correct:"틀렸다. 'about'의 올바른 IPA는 <span class='kw2'>/əˈbaʊt/</span>이다 — 첫째 음절이 비강세여서 /ə/로 약화된다.",why:"about에서 강세는 두 번째 음절(-bout)에 있다. 따라서 첫째 음절 a-는 비강세가 되어 /ə/로 약화된다. /ˈæbaʊt/는 강세 위치가 반대이고 첫째 음절의 모음도 잘못된 표기이다.",source:"AEP Ch. 4 §§4.4, 4.9 (Central / reduced vowels); AEP Ch. 7 §7.4 (Secondary Stress)",compare:[{title:"✅ 올바른 IPA",desc:"/əˈbaʊt/ · 1째=비강세 /ə/"},{title:"❌ 잘못된 표기",desc:"/ˈæbaʊt/ · 강세 위치 및 모음 오류"}]},
-  {src:"Vowel Reduction",cat:"약화 조건",text:"Vowel reduction은 비강세 음절에서만 일어난다.",ans:true,correct:"정확하다. Vowel reduction(모음 약화)은 오직 <span class='kw2'>비강세(-stress) 음절</span>에서만 일어난다.",why:"강세 음절(primary/secondary)은 full vowel을 반드시 유지한다. 오직 비강세 음절에서만 vowel reduction이 일어날 수 있다. 이 원칙은 stress와 vowel quality의 상관관계를 설명하는 핵심이다.",source:"AEP Ch. 4 §§4.4, 4.9 (Central / reduced vowels); AEP Ch. 7 §7.4 (Secondary Stress)",compare:[{title:"강세 음절 (reduction 불가)",desc:"primary, secondary stress → full vowel"},{title:"비강세 음절 (reduction 가능)",desc:"/ə/ 또는 full vowel 유지"}]},
-  {src:"Schwa /ə/",cat:"공식 명칭",text:"<span class='kw1'>/ə/</span>의 공식 음성학적 명칭은 <span class='kw2'>schwa</span>이다.",ans:true,correct:"정확하다. mid central vowel <span class='kw1'>/ə/</span>의 공식 명칭은 <span class='kw2'>schwa</span>(슈와)다.",why:"Schwa(/ə/)는 히브리어 'shewa'에서 온 용어로, mid central reduced vowel이다. English에서 /ə/는 unstressed syllable에 나타난다.",source:"AEP Ch. 4 §§4.4, 4.9 (Central / reduced vowels); AEP Ch. 7 §7.4 (Secondary Stress)",compare:[{title:"Schwa /ə/",desc:"mid central vowel · 비강세 · 약화"},{title:"/ʌ/ (wedge)",desc:"low-mid central vowel · 강세 · full vowel"}]},
-  {src:"Vowel Reduction",cat:"economy → economic",text:"<span class='kw3'>economy → economic</span>에서 약화 위치가 변한다.",ans:true,correct:"정확하다. eˈconomy(/ɪˈkɑnəmi/)와 ecoˈnomic(/ˌiːkəˈnɑmɪk/)에서 강세 이동에 따라 약화 위치도 변한다.",why:"eˈconomy: 1째=/ɪ/(비강세), 2째=/ɑ/(강세), 3째=/ə/(비강세). ecoˈnomic: 1째=/iː/(secondary), 2째=/ə/(비강세), 3째=/ɑ/(primary). 강세가 3번째 음절로 이동하면서 2번째가 비강세→/ə/로 약화된다.",source:"AEP Ch. 4 §§4.4, 4.9 (Central / reduced vowels); AEP Ch. 7 §7.4 (Secondary Stress)",compare:[{title:"eˈconomy",desc:"/ɪˈkɑnəmi/ · 3째=/ə/"},{title:"ecoˈnomic",desc:"/ˌiːkəˈnɑmɪk/ · 2째=/ə/"}]},
-  {src:"Schwa /ə/",cat:"Secondary stress & /ə/",text:"Secondary stress 음절도 <span class='kw1'>/ə/</span>로 약화될 수 있다.",ans:false,correct:"틀렸다. Secondary stress 음절은 <span class='kw2'>+stress</span>이므로 반드시 full vowel을 유지한다. /ə/는 오직 -stress 음절에서만 나타난다.",why:"Secondary stress도 +stress 자질을 가지므로 full vowel이 필수이다. /ə/는 -stress 음절의 표지이다. 예: photographic /ˌfoʊtəˈgræfɪk/에서 첫째 음절(secondary stress)은 /oʊ/(full vowel), 둘째 음절(비강세)은 /ə/.",source:"AEP Ch. 4 §§4.4, 4.9 (Central / reduced vowels); AEP Ch. 7 §7.4 (Secondary Stress)",compare:[{title:"Secondary stress (+stress)",desc:"full vowel 필수 · /ə/ 불가"},{title:"Unstressed (-stress)",desc:"/ə/ 가능 · full vowel 유지도 가능"}]},
-  {src:"Schwa /ə/",cat:"약화 형태",text:"Vowel reduction에서 schwa <span class='kw1'>/ə/</span>는 English의 unstressed syllable에 나타나는 reduced vowel이다.",ans:true,correct:"정확하다. schwa <span class='kw1'>/ə/</span>는 English의 unstressed syllable에서 나타나는 reduced vowel이다.",why:"AEP은 unstressed syllable의 [ə]를 schwa realization으로 제시한다. 다만 모든 비강세 모음이 schwa가 되는 것은 아니며, Roach는 vowel이 schwa 또는 다른 weak form으로 약화될 수 있음을 설명한다.",source:"AEP Ch. 4 §§4.4, 4.9 (Central / reduced vowels); AEP Ch. 7 §7.4 (Secondary Stress)",compare:[{title:"Schwa /ə/",desc:"unstressed syllable의 reduced vowel"},{title:"Other weak form",desc:"unstressed syllable의 다른 약화 실현"}]},
-  {src:"Vowel Reduction",cat:"banana",text:"<span class='kw3'>banana</span>의 세 모음은 모두 <span class='kw1'>/ə/</span>다.",ans:false,correct:"틀렸다. banana /bəˈnænə/에서 두 번째 음절(-nan-)의 모음은 강세를 받아 <span class='kw2'>/æ/</span>로 실현된다. 모두 /ə/는 아니다.",why:"banana /bəˈnænə/: 1째=-ba-=/ə/(비강세), 2째=-na-=/æ/(강세, full vowel), 3째=-na=/ə/(비강세). 강세가 있는 2번째 음절은 full vowel /æ/를 유지한다. '모두 /ə/'라는 설명은 강세 음절에 /ə/ 불가 원칙에 위배된다.",source:"AEP Ch. 4 §§4.4, 4.9 (Central / reduced vowels); AEP Ch. 7 §7.4 (Secondary Stress)",compare:[{title:"1째 ba- = /ə/",desc:"비강세 · 약화"},{title:"2째 nan- = /æ/",desc:"강세 · full vowel · /ə/ 불가"}]},
-  {src:"Vowel Reduction",cat:"Stress-timed 리듬",text:"Vowel reduction은 영어의 <span class='kw1'>stress-timed</span> 리듬과 관련이 있다.",ans:true,correct:"정확하다. Vowel reduction은 영어의 <span class='kw1'>stress-timed</span> 리듬에서 비강세 음절이 압축되는 현상과 관련이 있다.",why:"Stress-timed 언어(영어)에서는 강세 음절이 대체로 일정한 간격으로 나타나고 비강세 음절이 압축된다. 이와 함께 비강세 음절 모음의 /ə/ 약화가 나타난다. AEP의 Spanish 예에서는 비강세 음절도 full vowel을 가지므로, rhythm type을 vowel reduction의 절대 규칙으로 일반화하지 않는다.",source:"AEP Ch. 4 §§4.4, 4.9 (Central / reduced vowels); AEP Ch. 7 §7.4 (Secondary Stress)",compare:[{title:"Stress-timed (영어)",desc:"비강세 음절 압축 · vowel reduction과 관련"},{title:"Syllable-timed (스페인어 예)",desc:"AEP 예: 비강세 음절도 full vowel · 리듬 분류를 절대 규칙으로 일반화하지 않음"}]}
+  {
+    "src": "Vowel Reduction",
+    "cat": "약화 조건",
+    "text": "비강세 음절의 모음은 <span class='kw1'>/ə/</span>로 약화될 수 있다.",
+    "ans": true,
+    "correct": "정확하다. Unstressed syllable에서는 /ə/로 약화될 수 있지만, full vowel을 유지할 수도 있다.",
+    "why": "Unstressed syllable은 vowel reduction이 가능한 환경이다. 가능하다는 말은 반드시 일어난다는 말과 다르다. about의 첫째 /ə/처럼 reduced vowel이 나타날 수도 있고, photography의 마지막 /i/처럼 full vowel이 나타날 수도 있다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), Ch.4 §§4.4, 4.9–4.10; Ch.7 §7.4.",
+    "compare": [
+      {
+        "title": "Unstressed + reduced",
+        "desc": "photography의 첫째 /ə/"
+      },
+      {
+        "title": "Unstressed + full",
+        "desc": "photography의 마지막 /i/"
+      }
+    ],
+    "more": "<details><summary>1. Schwa가 있으면 unstressed인가? Unstressed이면 schwa인가?</summary><p>AEP의 분석에서 [ə]가 있는 음절은 unstressed이다. 하지만 이 관계를 거꾸로 적용할 수는 없다. unstressed syllable에는 reduced vowel도, full vowel도 올 수 있다. 따라서 강세 표시가 없다는 이유만으로 모음을 모두 [ə]로 바꾸면 안 된다.</p><div class=\"ex\">photography /fəˈtɑɡrəfi/: 첫째 [ə] · 둘째 [ɑ] · 셋째 [ə] · 넷째 [i]</div><p>이 전사에서 둘째 음절에 primary stress가 있다. 첫째와 셋째 음절은 reduced vowel [ə]를 갖지만, 마지막 음절은 unstressed이면서 full vowel [i]를 갖는다. 같은 단어 안에서도 unstressed vowel이 모두 같은 종류인 것은 아니다.</p><p><strong>판단 순서:</strong> 강세 위치를 확인하고, 각 음절의 모음 기호를 읽는다. unstressed라는 정보는 reduction의 가능성을 알려 주지만, 실제 vowel quality는 전사나 발음 자료에서 확인해야 한다.</p></details>\n"
+  },
+  {
+    "src": "Schwa /ə/",
+    "cat": "분포",
+    "text": "<span class='kw1'>/ə/</span>(schwa)는 English의 unstressed syllable에서 널리 나타나는 <span class='kw2'>reduced vowel</span>이다.",
+    "ans": true,
+    "correct": "정확하다. Schwa는 영어의 unstressed syllable에 널리 나타나는 reduced vowel이다.",
+    "why": "Schwa는 영어의 unstressed syllable에서 널리 나타나는 reduced vowel이다. 다만 reduced vowel과 schwa를 항상 같은 범위로 쓰지는 않는다. AEP §4.9와 2017 A3의 지문은 reduced syllable에서 [ɪ]도 다룬다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), Ch.4 §§4.4, 4.9–4.10; Ch.7 §7.4.",
+    "compare": [
+      {
+        "title": "Schwa",
+        "desc": "[ə]: 대표적인 reduced vowel"
+      },
+      {
+        "title": "다른 reduced vowel",
+        "desc": "2017 A3의 [ɪ]도 확인"
+      }
+    ],
+    "more": "<details><summary>2. [ə], [ʌ], [ɪ]를 구별할 때 확인할 조건</summary><p>AEP §4.4는 bus의 stressed vowel을 [ʌ], sofa의 마지막 unstressed vowel을 [ə]로 적는다. 이 관례 안에서는 두 기호의 stress distribution을 구별한다. 이를 모든 방언과 모든 전사 체계에 적용되는 절대 명제로 바꾸지는 않는다. central vowel의 분류와 phoneme 분석은 교재마다 다를 수 있다.</p><p>[ɪ]도 기호만 보고 stress를 결정할 수 없다. sit의 [ɪ]는 stressed일 수 있고, selfish의 마지막 [ɪ]는 unstressed이다. reduced syllable에 [ɪ]가 나타난다고 해서 그 음절이 반드시 stressed이거나 full vowel을 가진다고 결론 내릴 수 없다.</p><p>AEP §4.9는 palato-alveolar나 velar 앞에서 [ɪ]가 나타나는 경향을 설명하면서, 두 소리가 같은 음절에 속하는지도 확인한다. topic과 topical을 비교할 때도 철자 i만 볼 것이 아니라 syllable structure와 실제 발음을 함께 살펴야 한다. 이 경향은 모든 화자에게 의무적으로 적용되는 규칙이 아니다.</p></details>\n"
+  },
+  {
+    "src": "Schwa vs /ʌ/",
+    "cat": "환경 비교",
+    "text": "AEP에서 [ə]와 [ʌ]를 구별하는 전사 관례를 따르면, 두 모음의 stress distribution은 같다.",
+    "ans": false,
+    "correct": "틀렸다. AEP의 해당 전사 관례에서는 [ə]를 unstressed, [ʌ]를 stressed syllable에 쓴다.",
+    "why": "AEP §4.4의 전사에서는 bus의 stressed vowel을 [ʌ], sofa의 마지막 unstressed vowel을 [ə]로 구별한다. 이 설명은 해당 교재의 관례에 따른 것이다. 모든 방언이나 다른 phoneme 분석까지 동일하다고 단정하지 않는다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), Ch.4 §§4.4, 4.9–4.10; Ch.7 §7.4.",
+    "compare": [
+      {
+        "title": "AEP의 [ə]",
+        "desc": "sofa의 마지막 unstressed vowel"
+      },
+      {
+        "title": "AEP의 [ʌ]",
+        "desc": "bus의 stressed vowel"
+      }
+    ],
+    "more": "<details><summary>2. [ə], [ʌ], [ɪ]를 구별할 때 확인할 조건</summary><p>AEP §4.4는 bus의 stressed vowel을 [ʌ], sofa의 마지막 unstressed vowel을 [ə]로 적는다. 이 관례 안에서는 두 기호의 stress distribution을 구별한다. 이를 모든 방언과 모든 전사 체계에 적용되는 절대 명제로 바꾸지는 않는다. central vowel의 분류와 phoneme 분석은 교재마다 다를 수 있다.</p><p>[ɪ]도 기호만 보고 stress를 결정할 수 없다. sit의 [ɪ]는 stressed일 수 있고, selfish의 마지막 [ɪ]는 unstressed이다. reduced syllable에 [ɪ]가 나타난다고 해서 그 음절이 반드시 stressed이거나 full vowel을 가진다고 결론 내릴 수 없다.</p><p>AEP §4.9는 palato-alveolar나 velar 앞에서 [ɪ]가 나타나는 경향을 설명하면서, 두 소리가 같은 음절에 속하는지도 확인한다. topic과 topical을 비교할 때도 철자 i만 볼 것이 아니라 syllable structure와 실제 발음을 함께 살펴야 한다. 이 경향은 모든 화자에게 의무적으로 적용되는 규칙이 아니다.</p></details>\n"
+  },
+  {
+    "src": "Vowel Reduction",
+    "cat": "photograph",
+    "text": "<span class='kw3'>photograph</span> /ˈfoʊtəgræf/에서 두 번째 음절 <span class='kw2'>-to-</span>는 /ə/다.",
+    "ans": true,
+    "correct": "정확하다. 제시된 photograph의 둘째 모음은 /ə/이다.",
+    "why": "문제에 제시된 /ˈfoʊtəɡræf/를 읽으면 둘째 음절의 모음은 /ə/이다. 첫째 음절에는 primary stress와 /oʊ/가 있다. 마지막 /æ/는 full vowel이며, 여기에 secondary stress를 표시하는지는 전사 체계에 따라 다를 수 있다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), Ch.4 §§4.4, 4.9–4.10; Ch.7 §7.4.",
+    "compare": [
+      {
+        "title": "photograph",
+        "desc": "둘째 /ə/"
+      },
+      {
+        "title": "photography",
+        "desc": "첫째 /ə/ · 둘째 /ɑ/"
+      }
+    ],
+    "more": "<details><summary>4. Photograph 계열: 강세 이동과 vowel reduction을 따로 확인하기</summary><div class=\"ex\">photograph /ˈfoʊtəɡræf/<br>photography /fəˈtɑɡrəfi/<br>photographic /ˌfoʊtəˈɡræfɪk/</div><p>먼저 첫째 음절을 비교하자. photograph에서는 primary stress와 /oʊ/가 있고, photography에서는 unstressed /ə/가 나타난다. photographic에서는 secondary stress를 받아 /oʊ/를 유지한다. primary stress가 없다는 사실과 stress가 전혀 없다는 사실은 다르다.</p><p>다음으로 둘째 음절을 비교하면 photograph의 /ə/가 photography에서는 primary-stressed /ɑ/에 대응한다. 이 계열에서는 강세와 vowel quality가 함께 달라진다. 그렇다고 강세가 바뀌는 모든 단어에서 모든 unstressed vowel이 [ə]가 된다고 일반화할 수는 없다.</p><p>여기서는 미국영어 계열의 예시 전사를 사용했다. photograph의 마지막 full vowel에 secondary stress를 표시하는 사전도 있으므로, 다른 전사에서 ˌ 표시가 없다는 이유만으로 분석이 같다고 단정하지 않는다. /oʊ/와 AEP의 /o/처럼 기호 선택이 다른 경우에도 교재의 전사 체계를 먼저 확인한다.</p></details>\n"
+  },
+  {
+    "src": "Vowel Reduction",
+    "cat": "강세 이동과 약화",
+    "text": "photograph → photography에서는 강세 위치와 vowel reduction의 위치가 함께 달라진다.",
+    "ans": true,
+    "correct": "정확하다. 이 단어쌍에서는 강세 위치와 vowel quality가 함께 달라진다.",
+    "why": "이 단어쌍에서는 첫째 음절의 /oʊ/와 /ə/, 둘째 음절의 /ə/와 /ɑ/가 각각 대응한다. 강세 위치만 바꾸어 표시한 것이 아니라 vowel quality도 달라진다. 다른 모든 단어쌍에서도 같은 변화가 생긴다는 뜻은 아니다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), Ch.4 §§4.4, 4.9–4.10; Ch.7 §7.4.",
+    "compare": [
+      {
+        "title": "photograph의 첫째",
+        "desc": "primary stress · /oʊ/"
+      },
+      {
+        "title": "photography의 첫째",
+        "desc": "unstressed · /ə/"
+      }
+    ],
+    "more": "<details><summary>4. Photograph 계열: 강세 이동과 vowel reduction을 따로 확인하기</summary><div class=\"ex\">photograph /ˈfoʊtəɡræf/<br>photography /fəˈtɑɡrəfi/<br>photographic /ˌfoʊtəˈɡræfɪk/</div><p>먼저 첫째 음절을 비교하자. photograph에서는 primary stress와 /oʊ/가 있고, photography에서는 unstressed /ə/가 나타난다. photographic에서는 secondary stress를 받아 /oʊ/를 유지한다. primary stress가 없다는 사실과 stress가 전혀 없다는 사실은 다르다.</p><p>다음으로 둘째 음절을 비교하면 photograph의 /ə/가 photography에서는 primary-stressed /ɑ/에 대응한다. 이 계열에서는 강세와 vowel quality가 함께 달라진다. 그렇다고 강세가 바뀌는 모든 단어에서 모든 unstressed vowel이 [ə]가 된다고 일반화할 수는 없다.</p><p>여기서는 미국영어 계열의 예시 전사를 사용했다. photograph의 마지막 full vowel에 secondary stress를 표시하는 사전도 있으므로, 다른 전사에서 ˌ 표시가 없다는 이유만으로 분석이 같다고 단정하지 않는다. /oʊ/와 AEP의 /o/처럼 기호 선택이 다른 경우에도 교재의 전사 체계를 먼저 확인한다.</p></details>\n"
+  },
+  {
+    "src": "Vowel Reduction",
+    "cat": "photography",
+    "text": "<span class='kw3'>photography</span> /fəˈtɑgrəfi/에서 첫 번째 음절은 <span class='kw2'>/ə/</span>다.",
+    "ans": true,
+    "correct": "정확하다. 제시된 photography의 첫째 모음은 /ə/이다.",
+    "why": "주어진 /fəˈtɑɡrəfi/에서는 둘째 음절이 primary-stressed이고 첫째 음절은 /ə/이다. 이 판단은 제시된 전사에 근거한다. pho라는 철자나 unstressed라는 조건만으로 모든 단어의 vowel quality를 예측할 수는 없다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), Ch.4 §§4.4, 4.9–4.10; Ch.7 §7.4.",
+    "compare": [
+      {
+        "title": "첫째 음절",
+        "desc": "unstressed · /ə/"
+      },
+      {
+        "title": "둘째 음절",
+        "desc": "primary stress · /ɑ/"
+      }
+    ],
+    "more": "<details><summary>4. Photograph 계열: 강세 이동과 vowel reduction을 따로 확인하기</summary><div class=\"ex\">photograph /ˈfoʊtəɡræf/<br>photography /fəˈtɑɡrəfi/<br>photographic /ˌfoʊtəˈɡræfɪk/</div><p>먼저 첫째 음절을 비교하자. photograph에서는 primary stress와 /oʊ/가 있고, photography에서는 unstressed /ə/가 나타난다. photographic에서는 secondary stress를 받아 /oʊ/를 유지한다. primary stress가 없다는 사실과 stress가 전혀 없다는 사실은 다르다.</p><p>다음으로 둘째 음절을 비교하면 photograph의 /ə/가 photography에서는 primary-stressed /ɑ/에 대응한다. 이 계열에서는 강세와 vowel quality가 함께 달라진다. 그렇다고 강세가 바뀌는 모든 단어에서 모든 unstressed vowel이 [ə]가 된다고 일반화할 수는 없다.</p><p>여기서는 미국영어 계열의 예시 전사를 사용했다. photograph의 마지막 full vowel에 secondary stress를 표시하는 사전도 있으므로, 다른 전사에서 ˌ 표시가 없다는 이유만으로 분석이 같다고 단정하지 않는다. /oʊ/와 AEP의 /o/처럼 기호 선택이 다른 경우에도 교재의 전사 체계를 먼저 확인한다.</p></details>\n"
+  },
+  {
+    "src": "Schwa /ə/",
+    "cat": "강세 음절 약화",
+    "text": "AEP의 stress 분석에서 primary stress를 받는 음절의 모음은 [ə]로 약화될 수 있다.",
+    "ans": false,
+    "correct": "틀렸다. AEP의 이 분석에서는 primary-stressed syllable이 full vowel을 갖는다.",
+    "why": "AEP §7.4에서는 primary-stressed syllable을 full vowel이 있는 음절로 분석한다. 따라서 이 분석을 따르면서 같은 음절에 primary stress와 reduced [ə]를 동시에 부여할 수 없다. 다른 전사 체계의 central vowel 기호와 혼동하지 않는다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), Ch.4 §§4.4, 4.9–4.10; Ch.7 §7.4.",
+    "compare": [
+      {
+        "title": "AEP의 primary stress",
+        "desc": "full vowel"
+      },
+      {
+        "title": "AEP의 unstressed syllable",
+        "desc": "full vowel 또는 reduced vowel"
+      }
+    ],
+    "more": "<details><summary>1. Schwa가 있으면 unstressed인가? Unstressed이면 schwa인가?</summary><p>AEP의 분석에서 [ə]가 있는 음절은 unstressed이다. 하지만 이 관계를 거꾸로 적용할 수는 없다. unstressed syllable에는 reduced vowel도, full vowel도 올 수 있다. 따라서 강세 표시가 없다는 이유만으로 모음을 모두 [ə]로 바꾸면 안 된다.</p><div class=\"ex\">photography /fəˈtɑɡrəfi/: 첫째 [ə] · 둘째 [ɑ] · 셋째 [ə] · 넷째 [i]</div><p>이 전사에서 둘째 음절에 primary stress가 있다. 첫째와 셋째 음절은 reduced vowel [ə]를 갖지만, 마지막 음절은 unstressed이면서 full vowel [i]를 갖는다. 같은 단어 안에서도 unstressed vowel이 모두 같은 종류인 것은 아니다.</p><p><strong>판단 순서:</strong> 강세 위치를 확인하고, 각 음절의 모음 기호를 읽는다. unstressed라는 정보는 reduction의 가능성을 알려 주지만, 실제 vowel quality는 전사나 발음 자료에서 확인해야 한다.</p></details>\n"
+  },
+  {
+    "src": "Schwa /ə/",
+    "cat": "IPA 오류",
+    "text": "'about'의 IPA는 <span class='kw4'>/ˈæbaʊt/</span>이다.",
+    "ans": false,
+    "correct": "틀렸다. about의 전사는 /əˈbaʊt/이다.",
+    "why": "about은 /əˈbaʊt/로 제시된다. /ˈæbaʊt/는 primary stress의 위치도 다르고 첫째 vowel quality도 다르다. 첫째 모음이 /ə/라는 사실은 실제 단어의 발음에서 확인하는 것이며, 철자 a가 언제나 /ə/라는 뜻은 아니다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), Ch.4 §§4.4, 4.9–4.10; Ch.7 §7.4.",
+    "compare": [
+      {
+        "title": "about /əˈbaʊt/",
+        "desc": "둘째 음절에 primary stress"
+      },
+      {
+        "title": "철자 a",
+        "desc": "다른 단어의 발음까지 결정하지 못함"
+      }
+    ],
+    "more": "<details><summary>7. Rhythm으로 설명할 수 있는 것과 없는 것</summary><p>영어를 stress-timed라고 설명할 때는 강세 사이에서 unstressed syllable이 짧아지기 쉽다는 경향에 주목한다. 실제 발화의 강세 간격이 언제나 정확히 같다는 뜻은 아니다. 모음을 짧게 발음하는 것과 vowel quality가 [ə]로 바뀌는 것도 구별해야 한다.</p><p>about의 첫째 모음은 단어를 천천히 따로 발음해도 보통 /ə/이다. 따라서 schwa를 빠르게 말하다가 우연히 생기는 소리로만 설명할 수 없다. 반대로 connected speech에서는 발화 속도, 강조, 주변 소리에 따라 reduction의 정도가 달라질 수 있다.</p><p>문제를 풀 때는 ‘영어는 stress-timed이므로’라는 말만으로 특정 모음의 발음을 확정하지 않는다. 주어진 강세, 전사, 단어와 문장 문맥을 근거로 판단한다.</p></details>\n"
+  },
+  {
+    "src": "Vowel Reduction",
+    "cat": "약화 조건",
+    "text": "AEP의 stress 분석에서 [ə]로의 vowel reduction은 unstressed syllable에서 일어난다.",
+    "ans": true,
+    "correct": "정확하다. AEP의 이 분석에서는 [ə]로 reduced된 모음이 unstressed syllable에 있다.",
+    "why": "이 문장은 AEP가 stress와 관련하여 설명하는 [ə]로의 vowel reduction에 한정된다. 이 분석에서 reduced vowel은 unstressed syllable에 나타난다. 모든 음성적 단축이나 미세한 centralization까지 같은 규칙으로 묶는 문장이 아니다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), Ch.4 §§4.4, 4.9–4.10; Ch.7 §7.4.",
+    "compare": [
+      {
+        "title": "이 문항의 범위",
+        "desc": "AEP의 [ə]로의 vowel reduction"
+      },
+      {
+        "title": "구별할 현상",
+        "desc": "duration 변화 자체와 동일하지 않음"
+      }
+    ],
+    "more": "<details><summary>1. Schwa가 있으면 unstressed인가? Unstressed이면 schwa인가?</summary><p>AEP의 분석에서 [ə]가 있는 음절은 unstressed이다. 하지만 이 관계를 거꾸로 적용할 수는 없다. unstressed syllable에는 reduced vowel도, full vowel도 올 수 있다. 따라서 강세 표시가 없다는 이유만으로 모음을 모두 [ə]로 바꾸면 안 된다.</p><div class=\"ex\">photography /fəˈtɑɡrəfi/: 첫째 [ə] · 둘째 [ɑ] · 셋째 [ə] · 넷째 [i]</div><p>이 전사에서 둘째 음절에 primary stress가 있다. 첫째와 셋째 음절은 reduced vowel [ə]를 갖지만, 마지막 음절은 unstressed이면서 full vowel [i]를 갖는다. 같은 단어 안에서도 unstressed vowel이 모두 같은 종류인 것은 아니다.</p><p><strong>판단 순서:</strong> 강세 위치를 확인하고, 각 음절의 모음 기호를 읽는다. unstressed라는 정보는 reduction의 가능성을 알려 주지만, 실제 vowel quality는 전사나 발음 자료에서 확인해야 한다.</p></details>\n"
+  },
+  {
+    "src": "Schwa /ə/",
+    "cat": "공식 명칭",
+    "text": "<span class='kw1'>/ə/</span>의 공식 음성학적 명칭은 <span class='kw2'>schwa</span>이다.",
+    "ans": true,
+    "correct": "정확하다. [ə]는 schwa라는 이름의 mid central vowel이다.",
+    "why": "Schwa는 IPA 기호 [ə]로 표시하는 mid central vowel의 이름이다. 영어의 이 단원에서는 unstressed reduced vowel로 다룬다. 기호의 음성적 설명과 특정 언어에서의 분포는 구별한다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), Ch.4 §§4.4, 4.9–4.10; Ch.7 §7.4.",
+    "compare": [
+      {
+        "title": "기호 [ə]",
+        "desc": "mid central vowel"
+      },
+      {
+        "title": "이 단원의 영어 분석",
+        "desc": "unstressed syllable의 reduced vowel"
+      }
+    ],
+    "more": "<details><summary>2. [ə], [ʌ], [ɪ]를 구별할 때 확인할 조건</summary><p>AEP §4.4는 bus의 stressed vowel을 [ʌ], sofa의 마지막 unstressed vowel을 [ə]로 적는다. 이 관례 안에서는 두 기호의 stress distribution을 구별한다. 이를 모든 방언과 모든 전사 체계에 적용되는 절대 명제로 바꾸지는 않는다. central vowel의 분류와 phoneme 분석은 교재마다 다를 수 있다.</p><p>[ɪ]도 기호만 보고 stress를 결정할 수 없다. sit의 [ɪ]는 stressed일 수 있고, selfish의 마지막 [ɪ]는 unstressed이다. reduced syllable에 [ɪ]가 나타난다고 해서 그 음절이 반드시 stressed이거나 full vowel을 가진다고 결론 내릴 수 없다.</p><p>AEP §4.9는 palato-alveolar나 velar 앞에서 [ɪ]가 나타나는 경향을 설명하면서, 두 소리가 같은 음절에 속하는지도 확인한다. topic과 topical을 비교할 때도 철자 i만 볼 것이 아니라 syllable structure와 실제 발음을 함께 살펴야 한다. 이 경향은 모든 화자에게 의무적으로 적용되는 규칙이 아니다.</p></details>\n"
+  },
+  {
+    "src": "Vowel Reduction",
+    "cat": "economy → economic",
+    "text": "<span class='kw3'>economy → economic</span>에서 약화 위치가 변한다.",
+    "ans": true,
+    "correct": "정확하다. 아래 두 전사를 비교하면 /ə/의 위치가 다르다.",
+    "why": "여기서 사용하는 미국영어 계열 전사 /ɪˈkɑnəmi/와 /ˌiːkəˈnɑmɪk/에서는 schwa가 각각 셋째와 둘째 음절에 있다. economic의 첫째 음절에는 secondary stress가 표시되어 있다. 첫째 모음에는 발음 변이가 있으므로 이 전사를 유일한 발음으로 외우지는 않는다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), Ch.4 §§4.4, 4.9–4.10; Ch.7 §7.4.",
+    "compare": [
+      {
+        "title": "economy",
+        "desc": "/ɪˈkɑnəmi/: 셋째 /ə/"
+      },
+      {
+        "title": "economic",
+        "desc": "/ˌiːkəˈnɑmɪk/: 둘째 /ə/"
+      }
+    ],
+    "more": "<details><summary>4. Photograph 계열: 강세 이동과 vowel reduction을 따로 확인하기</summary><div class=\"ex\">photograph /ˈfoʊtəɡræf/<br>photography /fəˈtɑɡrəfi/<br>photographic /ˌfoʊtəˈɡræfɪk/</div><p>먼저 첫째 음절을 비교하자. photograph에서는 primary stress와 /oʊ/가 있고, photography에서는 unstressed /ə/가 나타난다. photographic에서는 secondary stress를 받아 /oʊ/를 유지한다. primary stress가 없다는 사실과 stress가 전혀 없다는 사실은 다르다.</p><p>다음으로 둘째 음절을 비교하면 photograph의 /ə/가 photography에서는 primary-stressed /ɑ/에 대응한다. 이 계열에서는 강세와 vowel quality가 함께 달라진다. 그렇다고 강세가 바뀌는 모든 단어에서 모든 unstressed vowel이 [ə]가 된다고 일반화할 수는 없다.</p><p>여기서는 미국영어 계열의 예시 전사를 사용했다. photograph의 마지막 full vowel에 secondary stress를 표시하는 사전도 있으므로, 다른 전사에서 ˌ 표시가 없다는 이유만으로 분석이 같다고 단정하지 않는다. /oʊ/와 AEP의 /o/처럼 기호 선택이 다른 경우에도 교재의 전사 체계를 먼저 확인한다.</p></details>\n"
+  },
+  {
+    "src": "Schwa /ə/",
+    "cat": "Secondary stress & /ə/",
+    "text": "AEP의 stress 분석에서 secondary stress를 받는 음절도 [ə]로 약화될 수 있다.",
+    "ans": false,
+    "correct": "틀렸다. AEP의 이 분석에서는 secondary-stressed syllable도 full vowel을 갖는다.",
+    "why": "AEP §7.4에서 secondary stress도 +stress이며 full vowel을 갖는다. photographic /ˌfoʊtəˈɡræfɪk/의 첫째 /oʊ/가 그 예이다. Primary stress가 없다는 사실만으로 그 음절을 unstressed라고 판단하면 안 된다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), Ch.4 §§4.4, 4.9–4.10; Ch.7 §7.4.",
+    "compare": [
+      {
+        "title": "photographic의 첫째",
+        "desc": "secondary stress · /oʊ/"
+      },
+      {
+        "title": "photographic의 둘째",
+        "desc": "unstressed · /ə/"
+      }
+    ],
+    "more": "<details><summary>4. Photograph 계열: 강세 이동과 vowel reduction을 따로 확인하기</summary><div class=\"ex\">photograph /ˈfoʊtəɡræf/<br>photography /fəˈtɑɡrəfi/<br>photographic /ˌfoʊtəˈɡræfɪk/</div><p>먼저 첫째 음절을 비교하자. photograph에서는 primary stress와 /oʊ/가 있고, photography에서는 unstressed /ə/가 나타난다. photographic에서는 secondary stress를 받아 /oʊ/를 유지한다. primary stress가 없다는 사실과 stress가 전혀 없다는 사실은 다르다.</p><p>다음으로 둘째 음절을 비교하면 photograph의 /ə/가 photography에서는 primary-stressed /ɑ/에 대응한다. 이 계열에서는 강세와 vowel quality가 함께 달라진다. 그렇다고 강세가 바뀌는 모든 단어에서 모든 unstressed vowel이 [ə]가 된다고 일반화할 수는 없다.</p><p>여기서는 미국영어 계열의 예시 전사를 사용했다. photograph의 마지막 full vowel에 secondary stress를 표시하는 사전도 있으므로, 다른 전사에서 ˌ 표시가 없다는 이유만으로 분석이 같다고 단정하지 않는다. /oʊ/와 AEP의 /o/처럼 기호 선택이 다른 경우에도 교재의 전사 체계를 먼저 확인한다.</p></details>\n"
+  },
+  {
+    "src": "Schwa /ə/",
+    "cat": "약화 형태",
+    "text": "Vowel reduction에서 schwa <span class='kw1'>/ə/</span>는 English의 unstressed syllable에 나타나는 reduced vowel이다.",
+    "ans": true,
+    "correct": "정확하다. Schwa는 unstressed syllable에서 나타나는 reduced vowel이다.",
+    "why": "Schwa는 unstressed syllable의 대표적인 reduced vowel이다. 그렇지만 모든 reduced vowel이 [ə]인 것은 아니고, 모든 weak form이 schwa를 포함하는 것도 아니다. reduced vowel은 모음을, weak form은 단어 전체의 발음형을 가리킨다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), Ch.4 §§4.4, 4.9–4.10; Ch.7 §7.4.",
+    "compare": [
+      {
+        "title": "Reduced vowel",
+        "desc": "모음의 실현을 설명"
+      },
+      {
+        "title": "Weak form",
+        "desc": "단어 전체의 발음형을 설명"
+      }
+    ],
+    "more": "<details><summary>6. Weak form은 반드시 schwa를 포함하는가?</summary><p>그렇지 않다. weak form은 단어 전체의 발음형을 가리키고, schwa는 [ə]로 표기하는 모음을 가리킨다. 둘은 분석 대상이 다르다.</p><div class=\"ex\">can [kæn] → [kən]: vowel quality 변화<br>him [hɪm] → [ɪm]: /h/가 없는 weak form<br>the book의 the [ðə] · the apple의 the [ði]</div><p>[ɪm]에는 schwa가 없어도 weak form이라고 할 수 있다. the의 두 예시는 뒤따르는 소리에 따른 관례적인 구별을 보여 준다. [ði]라고 적혀 있다는 이유만으로 언제나 강조된 strong form이라고 판단해서는 안 된다. 실제 발음에는 화자와 문맥에 따른 차이도 있다.</p><p>같은 철자의 단어도 문법적 역할에 따라 다를 수 있다. I know that she left.의 that과 That book is mine.의 demonstrative that을 무조건 같은 방식으로 줄이지 않는다. 철자나 품사 하나만으로 발음을 정하는 대신, 문맥과 해당 단어의 weak-form 가능성을 확인한다.</p></details>\n"
+  },
+  {
+    "src": "Vowel Reduction",
+    "cat": "banana",
+    "text": "<span class='kw3'>banana</span>의 세 모음은 모두 <span class='kw1'>/ə/</span>다.",
+    "ans": false,
+    "correct": "틀렸다. 미국영어 발음 /bəˈnænə/의 둘째 모음은 /æ/이다.",
+    "why": "여기서 사용하는 미국영어 전사 /bəˈnænə/에서는 둘째 /æ/에 primary stress가 있고 첫째와 셋째 모음은 /ə/이다. 같은 철자 a가 세 번 나와도 세 모음의 발음은 같지 않다. 다른 방언에서는 stressed vowel의 기호가 달라질 수 있다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), Ch.4 §§4.4, 4.9–4.10; Ch.7 §7.4.",
+    "compare": [
+      {
+        "title": "banana의 첫째·셋째",
+        "desc": "/ə/"
+      },
+      {
+        "title": "banana의 둘째",
+        "desc": "primary stress · /æ/"
+      }
+    ],
+    "more": "<details><summary>7. Rhythm으로 설명할 수 있는 것과 없는 것</summary><p>영어를 stress-timed라고 설명할 때는 강세 사이에서 unstressed syllable이 짧아지기 쉽다는 경향에 주목한다. 실제 발화의 강세 간격이 언제나 정확히 같다는 뜻은 아니다. 모음을 짧게 발음하는 것과 vowel quality가 [ə]로 바뀌는 것도 구별해야 한다.</p><p>about의 첫째 모음은 단어를 천천히 따로 발음해도 보통 /ə/이다. 따라서 schwa를 빠르게 말하다가 우연히 생기는 소리로만 설명할 수 없다. 반대로 connected speech에서는 발화 속도, 강조, 주변 소리에 따라 reduction의 정도가 달라질 수 있다.</p><p>문제를 풀 때는 ‘영어는 stress-timed이므로’라는 말만으로 특정 모음의 발음을 확정하지 않는다. 주어진 강세, 전사, 단어와 문장 문맥을 근거로 판단한다.</p></details>\n"
+  },
+  {
+    "src": "Vowel Reduction",
+    "cat": "Stress-timed 리듬",
+    "text": "Vowel reduction은 영어의 <span class='kw1'>stress-timed</span> 리듬과 관련이 있다.",
+    "ans": true,
+    "correct": "정확하다. 서로 관련되지만, rhythm 분류만으로 각 모음의 발음을 결정할 수는 없다.",
+    "why": "Vowel reduction은 영어의 rhythm 및 unstressed syllable의 짧은 발음과 관련이 있다. 그러나 stress-timed라는 설명이 정확히 같은 강세 간격을 보장하거나 모든 unstressed vowel의 schwa화를 예측하지는 않는다. 단어 발음과 문장 문맥도 확인해야 한다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), Ch.1 §1.6; Ch.4 §4.9.",
+    "compare": [
+      {
+        "title": "Rhythm",
+        "desc": "발화에서의 경향을 설명"
+      },
+      {
+        "title": "개별 모음 판단",
+        "desc": "stress·전사·문맥을 함께 확인"
+      }
+    ],
+    "more": "<details><summary>7. Rhythm으로 설명할 수 있는 것과 없는 것</summary><p>영어를 stress-timed라고 설명할 때는 강세 사이에서 unstressed syllable이 짧아지기 쉽다는 경향에 주목한다. 실제 발화의 강세 간격이 언제나 정확히 같다는 뜻은 아니다. 모음을 짧게 발음하는 것과 vowel quality가 [ə]로 바뀌는 것도 구별해야 한다.</p><p>about의 첫째 모음은 단어를 천천히 따로 발음해도 보통 /ə/이다. 따라서 schwa를 빠르게 말하다가 우연히 생기는 소리로만 설명할 수 없다. 반대로 connected speech에서는 발화 속도, 강조, 주변 소리에 따라 reduction의 정도가 달라질 수 있다.</p><p>문제를 풀 때는 ‘영어는 stress-timed이므로’라는 말만으로 특정 모음의 발음을 확정하지 않는다. 주어진 강세, 전사, 단어와 문장 문맥을 근거로 판단한다.</p></details>\n"
+  }
 ];
 function renderExp(q,isCorrect){
   const three=q.compare&&q.compare.length===3;
   const cmp=q.compare?`<div class="sec-label">📊 비교 정리</div><div class="compare${three?' three':''}">${q.compare.map(c=>`<div class="compare-item"><div class="ci-title">${c.title}</div><p>${c.desc}</p></div>`).join('')}</div>`:'';
-  return `<div class="exp show"><div class="exp-header"><span>${isCorrect?'✅ 정답':'❌ 오답'} · 해설</span></div><div class="exp-answer"><div class="ans-label">핵심 정정</div><div class="ans-text">${q.correct}</div></div><div class="exp-body"><div class="sec-label">📖 상세 설명</div><p>${q.why}</p><div class="sec-label">📌 Source</div><div class="def-box"><p>${q.source}</p></div>${cmp}</div></div>`;
+  return `<div class="exp show"><div class="exp-header"><span>${isCorrect?'✅ 정답':'❌ 오답'} · 해설</span></div><div class="exp-answer"><div class="ans-label">핵심 정정</div><div class="ans-text">${q.correct}</div></div><div class="exp-body"><div class="sec-label">📖 상세 설명</div><p>${q.why}</p><div class="sec-label">📌 Source</div><div class="def-box"><p>${q.source}</p></div>${cmp}${q.more||''}</div></div>`;
 }
 function renderNav(){
   document.getElementById('nav').innerHTML=answers.map((a,i)=>{
