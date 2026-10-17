@@ -140,7 +140,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:r
 <script src="score-popup.js?v=20261016-random1"></script>
 <script src="quiz-order.js?v=20261016-random1"></script>
 <script>
-const SAVE_KEY='phono_stress_drill_p2';
+const SAVE_KEY='phono_stress_drill_p2_v2';
 const TOTAL=40;
 let cur=0,answers=new Array(TOTAL).fill(null);
 
@@ -150,42 +150,42 @@ const Q=[
 {cat:"복합어 vs 구",word:"greenhouse",syls:["green","house"],ans:0,ctx:"온실 (식물 재배 유리 건물)",
  ipa:"/ˈɡriːnhaʊs/",why:"compound (Adj+N). 특수화된 단일 개념(온실) → lexical primary stress가 첫 요소에."},
 
-{cat:"복합어 vs 구",word:"green house",syls:["green","house"],ans:1,ctx:"초록색 집 (색이 초록인 집)",
- ipa:"/ˌɡriːn ˈhaʊs/",why:"phrase (Adj+N). 색깔로 수식하는 일반 구 → primary stress가 head noun(둘째 요소)에."},
+{cat:"복합어 vs 구",word:"green house",syls:["green","house"],ans:1,ctx:"초록색 집 (색이 초록인 집); 대조 강조가 없는 broad focus",
+ ipa:"/ˌɡriːn ˈhaʊs/",why:"phrase (Adj+N). 색깔로 수식하는 일반 구 → broad focus에서는 nuclear stress가 head noun(둘째 요소)에 옵니다. 대조 강조가 있으면 다른 요소가 nuclear stress를 받을 수 있습니다."},
 
 {cat:"복합어 vs 구",word:"blackbird",syls:["black","bird"],ans:0,ctx:"특정 새 종류",
  ipa:"/ˈblækbɜːrd/",why:"compound (Adj+N). 특정 새 종류를 가리키는 특수화된 개념 → lexical primary stress가 첫 요소에."},
 
-{cat:"복합어 vs 구",word:"black bird",syls:["black","bird"],ans:1,ctx:"검은색 새 (색이 검정인 새)",
- ipa:"/ˌblæk ˈbɜːrd/",why:"phrase (Adj+N). 색깔로 수식하는 일반 구 → primary stress가 head noun(둘째 요소)에."},
+{cat:"복합어 vs 구",word:"black bird",syls:["black","bird"],ans:1,ctx:"검은색 새 (색이 검정인 새); 대조 강조가 없는 broad focus",
+ ipa:"/ˌblæk ˈbɜːrd/",why:"phrase (Adj+N). 색깔로 수식하는 일반 구 → broad focus에서는 nuclear stress가 head noun(둘째 요소)에 옵니다. 대조 강조가 있으면 다른 요소가 nuclear stress를 받을 수 있습니다."},
 
 {cat:"복합어 vs 구",word:"darkroom",syls:["dark","room"],ans:0,ctx:"암실 (사진 현상실)",
  ipa:"/ˈdɑːrkruːm/",why:"compound (Adj+N). 사진 현상용이라는 특수화된 기능 공간 → lexical primary stress가 첫 요소에."},
 
-{cat:"복합어 vs 구",word:"dark room",syls:["dark","room"],ans:1,ctx:"어두운 방 (조명이 어두운 방)",
- ipa:"/ˌdɑːrk ˈruːm/",why:"phrase (Adj+N). 상태로 수식하는 일반 구 → primary stress가 head noun(둘째 요소)에."},
+{cat:"복합어 vs 구",word:"dark room",syls:["dark","room"],ans:1,ctx:"어두운 방 (조명이 어두운 방); 대조 강조가 없는 broad focus",
+ ipa:"/ˌdɑːrk ˈruːm/",why:"phrase (Adj+N). 상태로 수식하는 일반 구 → broad focus에서는 nuclear stress가 head noun(둘째 요소)에 옵니다. 대조 강조가 있으면 다른 요소가 nuclear stress를 받을 수 있습니다."},
 
 /* ── 2음절 강세 — 첫음절 vs 둘째음절 ── */
 {cat:"2음절 강세",word:"agent",syls:["a","gent"],ans:0,ctx:"",
- ipa:"/ˈeɪdʒənt/",why:"첫음절 강세. 영어 native 2음절 N/Adj 기본 trochaic 패턴."},
+ ipa:"/ˈeɪdʒənt/",why:"첫음절 강세. 영어의 2음절 N/Adj에서 보이는 기본 trochaic 패턴입니다. 이 설명은 개별 단어의 어원을 분류하는 것이 아닙니다."},
 
 {cat:"2음절 강세",word:"country",syls:["coun","try"],ans:0,ctx:"",
- ipa:"/ˈkʌntri/",why:"첫음절 강세. 영어 native 2음절 N/Adj 기본 trochaic 패턴."},
+ ipa:"/ˈkʌntri/",why:"첫음절 강세. 영어의 2음절 N/Adj에서 보이는 기본 trochaic 패턴입니다. 이 설명은 개별 단어의 어원을 분류하는 것이 아닙니다."},
 
 {cat:"2음절 강세",word:"empire",syls:["em","pire"],ans:0,ctx:"",
- ipa:"/ˈempaɪər/",why:"첫음절 강세. 영어 native 2음절 N/Adj 기본 trochaic 패턴."},
+ ipa:"/ˈempaɪər/",why:"첫음절 강세. 영어의 2음절 N/Adj에서 보이는 기본 trochaic 패턴입니다. 이 설명은 개별 단어의 어원을 분류하는 것이 아닙니다."},
 
 {cat:"2음절 강세",word:"husband",syls:["hus","band"],ans:0,ctx:"",
- ipa:"/ˈhʌzbənd/",why:"첫음절 강세. 영어 native 2음절 N/Adj 기본 trochaic 패턴."},
+ ipa:"/ˈhʌzbənd/",why:"첫음절 강세. 영어의 2음절 N/Adj에서 보이는 기본 trochaic 패턴입니다. 이 설명은 개별 단어의 어원을 분류하는 것이 아닙니다."},
 
 {cat:"2음절 강세",word:"perfect",syls:["per","fect"],ans:0,ctx:"(Adj/N)",
  ipa:"/ˈpɜːrfɪkt/",why:"첫음절 강세. Adj/N → trochaic. (V로 쓰면 perˈfect — 둘째음절 강세)"},
 
 {cat:"2음절 강세",word:"ready",syls:["read","y"],ans:0,ctx:"",
- ipa:"/ˈredi/",why:"첫음절 강세. 영어 native 2음절 N/Adj 기본 trochaic 패턴."},
+ ipa:"/ˈredi/",why:"첫음절 강세. 영어의 2음절 N/Adj에서 보이는 기본 trochaic 패턴입니다. 이 설명은 개별 단어의 어원을 분류하는 것이 아닙니다."},
 
 {cat:"2음절 강세",word:"yellow",syls:["yel","low"],ans:0,ctx:"",
- ipa:"/ˈjeloʊ/",why:"첫음절 강세. 영어 native 2음절 N/Adj 기본 trochaic 패턴."},
+ ipa:"/ˈjeloʊ/",why:"첫음절 강세. 영어의 2음절 N/Adj에서 보이는 기본 trochaic 패턴입니다. 이 설명은 개별 단어의 어원을 분류하는 것이 아닙니다."},
 
 /* ── 2음절 강세 — ult stress ── */
 {cat:"2음절 강세",word:"appeal",syls:["ap","peal"],ans:1,ctx:"",
@@ -324,7 +324,7 @@ function renderCard(){
     </div>
     <div class="word-raw">${q.word}</div>
     ${ctxHtml}
-    <div class="drill-prompt">▼ 제1강세 음절 클릭</div>
+    <div class="drill-prompt">▼ 가장 두드러진 요소 클릭 (단어: primary stress / 구: nuclear stress)</div>
     <div class="syls">${sylsHtml}</div>
     ${feedbackHtml}
     ${expHtml}
