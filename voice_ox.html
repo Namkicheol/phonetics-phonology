@@ -109,7 +109,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:r
   </div>
   <h1 class="header-title"><span class="title-hl">음운론</span> 개념 마스터</h1>
   <div class="header-script">Phonology · Voice Assimilation</div>
-  <p class="header-sub">음운론 · 복수 -s / 과거 -ed 유성화 동화 · [s] [z] [ɪz] / [t] [d] [ɪd] · 임용고시 대비</p>
+  <p class="header-sub">음운론 · 복수 -s / 과거 -ed voice assimilation · [s] [z] [ɪz] / [t] [d] [ɪd] · 임용고시 대비</p>
   <div class="header-divider"></div>
 </div>
 <div class="prog-wrap">
@@ -140,21 +140,291 @@ const TOTAL=15;
 let cur=0,answers=new Array(TOTAL).fill(null);
 function getScore(){return answers.filter(a=>a&&a.correct).length;}
 const Q=[
-  {src:"복수 -s",cat:"/s/ 실현",text:"<span class='kw1'>cats</span>의 복수 형태소 -s는 <span class='kw2'>/s/</span>로 실현된다.",ans:true,correct:"정확하다. <span class='kw1'>cats</span>에서 -s는 <span class='kw2'>/s/</span>로 실현된다 — 어간 마지막 /t/가 무성 비치찰음이기 때문.",why:"복수 -s 실현 규칙: (1) 어간 마지막 음이 치찰음(sibilant: s, z, ʃ, ʒ, tʃ, dʒ)이면 epenthesis를 거쳐 /ɪz/; (2) 무성 비치찰음이면 /s/; (3) 유성 비치찰음/모음이면 /z/. cat의 마지막 음 /t/는 무성 비치찰음 → /s/.",source:"AEP Ch. 2 §2.5 (Morphophonology); 음운규칙 참고 노트 §4.② (Devoicing and Schwa Insertion)",compare:[{title:"무성 비치찰음 뒤 → /s/",desc:"cats /kæts/, caps /kæps/, socks /sɑks/"},{title:"유성 비치찰음/모음 뒤 → /z/",desc:"dogs /dɔgz/, cars /kɑrz/, bees /biz/"}]},
-  {src:"복수 -s",cat:"/z/ 실현",text:"<span class='kw1'>dogs</span>의 복수 형태소 -s는 <span class='kw2'>/z/</span>로 실현된다.",ans:true,correct:"정확하다. 유성 비치찰음 또는 모음 뒤에서 plural suffix는 [z]로 실현된다. Sibilant 뒤의 [ɪz]/[əz]는 별도 환경이다.",why:"Underlying /z/ 분석에서는 dogs의 /z/가 그대로 유지되고, cats에서는 [s]로 devoicing된다. 따라서 표면에서 어간과 suffix의 voicing이 일치한다는 사실과 실제로 voicing feature가 바뀌는 과정을 구분해야 한다.",source:"AEP Ch. 2 §2.5 (Morphophonology); 음운규칙 참고 노트 §4.② (Devoicing and Schwa Insertion)",compare:[{title:"유성 비치찰음 뒤 → /z/",desc:"dogs /dɔgz/, beds /bɛdz/, labs /læbz/"},{title:"무성 비치찰음 뒤 → /s/",desc:"cats /kæts/, maps /mæps/, rocks /rɑks/"}]},
-  {src:"복수 -s",cat:"/ɪz/ 실현",text:"<span class='kw1'>buses</span>의 복수 형태소 -s는 <span class='kw2'>/s/</span>로 실현된다.",ans:false,correct:"틀렸다. <span class='kw1'>buses</span>의 -s는 <span class='kw4'>/ɪz/</span>로 실현된다 — 어간 마지막 /s/가 치찰음(sibilant)이기 때문.",why:"어간이 sibilant /s, z, ʃ, ʒ, tʃ, dʒ/로 끝나면 plural suffix /z/ 앞에 모음 [ɪ] 또는 [ə]가 삽입된다. 그 결과 suffix가 [ɪz] 또는 [əz]로 실현된다. 삽입되는 것은 모음이며 suffix 전체가 아니다.",source:"AEP Ch. 2 §2.5 (Morphophonology); 음운규칙 참고 노트 §4.② (Devoicing and Schwa Insertion)",compare:[{title:"치찰음 뒤 → /ɪz/",desc:"buses, judges, churches, roses"},{title:"무성/유성 비치찰음 뒤",desc:"/s/ 또는 /z/ (epenthesis 없음)"}]},
-  {src:"과거 -ed",cat:"/t/ 실현",text:"<span class='kw1'>stopped</span>의 과거 형태소 -ed는 <span class='kw2'>/d/</span>로 실현된다.",ans:false,correct:"틀렸다. <span class='kw1'>stopped</span>의 -ed는 <span class='kw4'>/t/</span>로 실현된다 — 어간 마지막 /p/가 무성 자음이기 때문.",why:"-ed 실현 규칙: (1) 어간 마지막 음이 /t,d/면 epenthesis를 거쳐 /ɪd/; (2) 그 밖의 무성 자음이면 /t/; (3) 유성 자음/모음이면 /d/. stop의 마지막 /p/는 무성 자음 → /t/. stopped = /stɑpt/.",source:"AEP Ch. 2 §2.5 (Morphophonology); 음운규칙 참고 노트 §4.② (Devoicing and Schwa Insertion)",compare:[{title:"기타 /t/ 이외의 무성 자음 뒤 → /t/",desc:"stopped, kissed, laughed, jumped"},{title:"/d/ 이외의 유성 자음·모음 뒤 → /d/",desc:"called, loved, planned, played"}]},
-  {src:"과거 -ed",cat:"/d/ 실현",text:"<span class='kw1'>called</span>의 과거 형태소 -ed는 <span class='kw2'>/d/</span>로 실현된다.",ans:true,correct:"정확하다. <span class='kw1'>called</span>의 -ed는 <span class='kw2'>/d/</span>로 실현된다 — 어간 마지막 /l/이 유성 자음이기 때문.",why:"call의 마지막 음 /l/은 유성 자음이다. Voice assimilation에 따라 -ed가 /d/로 실현된다. called = /kɔld/. 마찬가지로: loved /lʌvd/, planned /plænd/, stayed /steɪd/.",source:"AEP Ch. 2 §2.5 (Morphophonology); 음운규칙 참고 노트 §4.② (Devoicing and Schwa Insertion)",compare:[{title:"/d/ 이외의 유성 자음 뒤 → /d/",desc:"called /kɔld/, loved /lʌvd/, used /juːzd/"},{title:"/t/ 이외의 무성 자음 뒤 → /t/",desc:"stopped /stɑpt/, missed /mɪst/"}]},
-  {src:"과거 -ed",cat:"/ɪd/ 실현",text:"<span class='kw1'>wanted</span>의 과거 형태소 -ed는 <span class='kw2'>/ɪd/</span>로 실현된다.",ans:true,correct:"정확하다. <span class='kw1'>wanted</span>의 -ed는 <span class='kw2'>/ɪd/</span>로 실현된다 — 어간 마지막 /t/ 뒤에 epenthesis가 일어나기 때문.",why:"-ed가 /t/ 또는 /d/ 뒤에 올 때, 동일하거나 유사한 자음이 연속되는 것을 방지하기 위해 /ɪ/가 삽입된다. wanted /ˈwɑntɪd/, needed /ˈniːdɪd/, started /ˈstɑrtɪd/.",source:"AEP Ch. 2 §2.5 (Morphophonology); 음운규칙 참고 노트 §4.② (Devoicing and Schwa Insertion)",compare:[{title:"/t,d/ 뒤 → /ɪd/",desc:"wanted, needed, started, added"},{title:"기타 /t/ 이외의 무성 자음 뒤 → /t/",desc:"stopped, missed, kissed, jumped"}]},
-  {src:"Voice Assimilation",cat:"규칙 명칭",text:"<span class='kw1'>/s~z/</span>와 <span class='kw1'>/t~d/</span> alternation은 Voice assimilation이며, <span class='kw2'>/ɪz/</span>와 <span class='kw2'>/ɪd/</span>에는 epenthesis가 추가된다.",ans:true,correct:"복수와 과거형의 교체를 분석할 때는 두 과정을 구별해야 한다. <span class='kw1'>Voice assimilation</span>은 /s~z/와 /t~d/ 교체를 설명하고, /ɪz/와 /ɪd/는 epenthesis가 포함된 실현이다.",why:"Voice assimilation은 형태소가 앞 분절음의 voicing에 맞는 /s/ 또는 /z/, /t/ 또는 /d/로 실현되는 과정이다. 치찰음 뒤 복수 /ɪz/와 /t,d/ 뒤 과거 /ɪd/는 각각 epenthetic /ɪ/가 더해진 별도 환경이므로, 세 변이형 전체를 하나의 voice assimilation 규칙으로 뭉뚱그리지 않는다. 방향은 progressive이다.",source:"AEP Ch. 2 §2.5 (Morphophonology); 음운규칙 참고 노트 §4.② (Devoicing and Schwa Insertion)",compare:[{title:"Voice assimilation",desc:"복수 /s~z/ · 과거 /t~d/"},{title:"Epenthesis",desc:"치찰음 뒤 /ɪz/ · /t,d/ 뒤 /ɪd/"}]},
-  {src:"복수 -s",cat:"/s/ 판별",text:"<span class='kw1'>cups</span>의 복수 형태소 -s는 <span class='kw2'>/z/</span>다.",ans:false,correct:"틀렸다. <span class='kw1'>cups</span>의 -s는 <span class='kw4'>/s/</span>다 — 어간 마지막 /p/가 무성 비치찰음이기 때문.",why:"cup의 마지막 음 /p/는 무성 양순 파열음이다. 무성 비치찰음 뒤에 오는 -s는 /s/로 실현된다. cups = /kʌps/. /z/는 유성 비치찰음 또는 모음 뒤에 실현되고, 치찰음 뒤에는 /ɪz/가 epenthesis와 함께 실현된다.",source:"AEP Ch. 2 §2.5 (Morphophonology); 음운규칙 참고 노트 §4.② (Devoicing and Schwa Insertion)",compare:[{title:"cups /kʌps/",desc:"무성 /p/ 뒤 → /s/"},{title:"labs /læbz/",desc:"유성 /b/ 뒤 → /z/"}]},
-  {src:"복수 -s",cat:"/ɪz/ 판별",text:"<span class='kw1'>judges</span>의 복수 형태소 -s는 <span class='kw2'>/ɪz/</span>다.",ans:true,correct:"정확하다. <span class='kw1'>judges</span>의 -s는 <span class='kw2'>/ɪz/</span>다 — 어간 마지막 /dʒ/가 치찰음(sibilant)이기 때문.",why:"어간이 sibilant /s, z, ʃ, ʒ, tʃ, dʒ/로 끝나면 plural suffix /z/ 앞에 모음 [ɪ] 또는 [ə]가 삽입된다. 그 결과 suffix가 [ɪz] 또는 [əz]로 실현된다. 삽입되는 것은 모음이며 suffix 전체가 아니다.",source:"AEP Ch. 2 §2.5 (Morphophonology); 음운규칙 참고 노트 §4.② (Devoicing and Schwa Insertion)",compare:[{title:"치찰음 뒤 → /ɪz/",desc:"judges /dʒʌdʒɪz/, roses /roʊzɪz/"},{title:"비치찰음 뒤",desc:"/s/ 또는 /z/ (epenthesis 없음)"}]},
-  {src:"과거 -ed",cat:"/d/ 판별",text:"<span class='kw1'>lived</span>의 과거 형태소 -ed는 <span class='kw2'>/t/</span>다.",ans:false,correct:"틀렸다. <span class='kw1'>lived</span>의 -ed는 <span class='kw4'>/d/</span>다 — 어간 마지막 /v/가 유성 자음이기 때문.",why:"live의 마지막 음 /v/는 유성 순치 마찰음이다. 유성 자음 뒤의 -ed는 /d/로 실현된다. lived = /lɪvd/. /t/는 무성 자음 뒤에만 나타난다.",source:"AEP Ch. 2 §2.5 (Morphophonology); 음운규칙 참고 노트 §4.② (Devoicing and Schwa Insertion)",compare:[{title:"lived /lɪvd/",desc:"유성 /v/ 뒤 → /d/"},{title:"stopped /stɑpt/",desc:"무성 /p/ 뒤 → /t/"}]},
-  {src:"Voice Assimilation",cat:"변이형 목록",text:"-s의 세 가지 변이형 실현: <span class='kw2'>[s], [z], [ɪz]</span>.",ans:true,correct:"정확하다. 복수 -s의 세 변이형: (1) <span class='kw1'>[s]</span> — 무성 비치찰음 뒤; (2) <span class='kw1'>[z]</span> — 유성 비치찰음/모음 뒤; (3) <span class='kw1'>[ɪz]</span> — 치찰음 뒤.",why:"-s 형태소는 음성 환경에 따라 세 가지 변이형(allomorphs)으로 실현된다. /s~z/는 voice assimilation으로, /ɪz/는 치찰음 뒤 epenthesis를 포함한 실현으로 구별한다. 세 결과는 상보적 분포(complementary distribution)를 이룬다.",source:"AEP Ch. 2 §2.5 (Morphophonology); 음운규칙 참고 노트 §4.② (Devoicing and Schwa Insertion)",compare:[{title:"[s]: cats, maps, books",desc:"무성 비치찰음 뒤"},{title:"[z]: dogs, cars / [ɪz]: buses",desc:"유성 비치찰음·모음 뒤 / 치찰음 뒤"}]},
-  {src:"Voice Assimilation",cat:"유성 자음 뒤",text:"유성 비치찰음 뒤의 복수 -s는 <span class='kw2'>/z/</span>로 실현된다.",ans:true,correct:"정확하다. 유성 비치찰음 또는 모음 뒤에서 plural suffix는 [z]로 실현된다. Sibilant 뒤의 [ɪz]/[əz]는 별도 환경이다.",why:"Underlying /z/ 분석에서는 dogs의 /z/가 그대로 유지되고, cats에서는 [s]로 devoicing된다. 따라서 표면에서 어간과 suffix의 voicing이 일치한다는 사실과 실제로 voicing feature가 바뀌는 과정을 구분해야 한다.",source:"AEP Ch. 2 §2.5 (Morphophonology); 음운규칙 참고 노트 §4.② (Devoicing and Schwa Insertion)",compare:[{title:"유성 비치찰음 뒤 → /z/",desc:"dogs, beds, labs, loves, robs"},{title:"치찰음 뒤 → /ɪz/",desc:"buses, roses, judges"}]},
-  {src:"과거 -ed",cat:"/ɪd/ 판별",text:"<span class='kw1'>needed</span>의 과거 형태소 -ed는 <span class='kw2'>/ɪd/</span>다.",ans:true,correct:"정확하다. <span class='kw1'>needed</span>의 -ed는 <span class='kw2'>/ɪd/</span>다 — 어간 마지막 /d/ 뒤에 epenthesis가 일어나기 때문.",why:"need의 마지막 음 /d/는 유성 치경 파열음이다. /d/ 뒤에는 /ɪ/가 삽입되어 /ɪd/가 된다. needed = /ˈniːdɪd/. 같은 이유로 wanted /ˈwɑntɪd/, started /ˈstɑrtɪd/ 등도 /ɪd/.",source:"AEP Ch. 2 §2.5 (Morphophonology); 음운규칙 참고 노트 §4.② (Devoicing and Schwa Insertion)",compare:[{title:"/t,d/ 뒤 → /ɪd/",desc:"needed, wanted, added, ended"},{title:"기타 /d/ 이외의 유성 자음 뒤 → /d/",desc:"called, loved, planned, used"}]},
-  {src:"Voice Assimilation",cat:"동화 방향",text:"-s/-ed 형태소 교체는 <span class='kw1'>Regressive assimilation</span> 방향이다.",ans:false,correct:"틀렸다. 복수 -s와 과거 -ed의 voice assimilation은 <span class='kw2'>Progressive(순행)</span> 방향이다 — 앞의 어간말음이 뒤에 오는 형태소에 영향을 준다.",why:"Progressive assimilation(순행 동화): conditioning sound가 먼저 오고 assimilated sound가 뒤따른다. 즉 어간 말자음의 voicing 자질이 -s/-ed에 영향을 준다. Regressive assimilation은 뒤의 conditioning sound가 앞의 sound에 영향을 주는 경우다.",source:"AEP Ch. 2 §2.5 (Morphophonology); 음운규칙 참고 노트 §4.② (Devoicing and Schwa Insertion)",compare:[{title:"Progressive assimilation",desc:"앞 환경 → 뒤 형태소 영향 (→ 방향)"},{title:"Regressive assimilation",desc:"뒤 환경 → 앞 요소 영향 (← 방향)"}]},
-  {src:"복수 -s",cat:"모음 뒤",text:"모음 뒤의 복수 -s는 <span class='kw2'>/s/</span>로 실현된다.",ans:false,correct:"틀렸다. 모음 뒤의 복수 -s는 <span class='kw4'>/z/</span>로 실현된다 — 모음은 유성음이기 때문.",why:"모음은 유성음(voiced sound)이다. 따라서 모음으로 끝나는 단어에 복수 -s가 붙으면 /z/로 실현된다. 예: bees /biːz/, cows /kaʊz/, shoes /ʃuːz/, cars /kɑrz/. Plural suffix의 [s]는 무성 비치찰음 뒤에 나타난다.",source:"AEP Ch. 2 §2.5 (Morphophonology); 음운규칙 참고 노트 §4.② (Devoicing and Schwa Insertion)",compare:[{title:"모음 뒤 → /z/",desc:"bees /biːz/, cows /kaʊz/, shoes /ʃuːz/"},{title:"무성 비치찰음 뒤 → /s/",desc:"cats /kæts/, maps /mæps/"}]}
+  {
+    "src": "복수 -s",
+    "cat": "/s/ 실현",
+    "text": "<span class='kw1'>cats</span>의 복수 형태소 -s는 <span class='kw2'>/s/</span>로 실현된다.",
+    "ans": true,
+    "correct": "정확하다. <span class='kw1'>cats</span>에서 -s는 <span class='kw2'>/s/</span>로 실현된다; 어간 마지막 /t/가 무성 비치찰음이기 때문이다.",
+    "why": "cat의 마지막 소리 /t/는 voiceless이며 sibilant가 아니다. 따라서 plural suffix /z/가 [s]로 바뀐다. sibilant /s, z, ʃ, ʒ, tʃ, dʒ/ 뒤에서는 이 판별보다 먼저 vowel epenthesis를 확인한다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), §2.5 (pp. 47–48), §3.2 (pp. 63–64).",
+    "compare": [
+      {
+        "title": "무성 비치찰음 뒤 → /s/",
+        "desc": "cats /kæts/, caps /kæps/, socks /sɑks/"
+      },
+      {
+        "title": "유성 비치찰음/모음 뒤 → /z/",
+        "desc": "dogs /dɔgz/, cars /kɑrz/, bees /biz/"
+      }
+    ]
+  },
+  {
+    "src": "복수 -s",
+    "cat": "/z/ 실현",
+    "text": "<span class='kw1'>dogs</span>의 복수 형태소 -s는 <span class='kw2'>/z/</span>로 실현된다.",
+    "ans": true,
+    "correct": "정확하다. 유성 비치찰음 또는 모음 뒤에서 plural suffix는 [z]로 실현된다. Sibilant 뒤의 [ɪz]/[əz]는 별도 환경이다.",
+    "why": "dog의 /ɡ/는 voiced obstruent이다. underlying /z/ 분석에서는 dogs의 suffix가 [z]로 유지되므로 별도의 voicing 변화가 없다. 어간과 suffix의 voicing이 일치한다는 사실과 실제 feature 변화는 구별한다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), §2.5 (pp. 47–48), §3.2 (pp. 63–64).",
+    "compare": [
+      {
+        "title": "유성 비치찰음 뒤 → /z/",
+        "desc": "dogs /dɔgz/, beds /bɛdz/, labs /læbz/"
+      },
+      {
+        "title": "무성 비치찰음 뒤 → /s/",
+        "desc": "cats /kæts/, maps /mæps/, rocks /rɑks/"
+      }
+    ]
+  },
+  {
+    "src": "복수 -s",
+    "cat": "/ɪz/ 실현",
+    "text": "<span class='kw1'>buses</span>의 복수 형태소 -s는 <span class='kw2'>/s/</span>로 실현된다.",
+    "ans": false,
+    "correct": "틀렸다. <span class='kw1'>buses</span>의 -s는 <span class='kw4'>/ɪz/</span>로 실현된다; 어간 마지막 /s/가 치찰음(sibilant)이기 때문이다.",
+    "why": "bus의 마지막 /s/는 sibilant이므로 plural /z/ 앞에 모음이 추가된다. 대표 전사 [ɪz] 외에 [əz]도 쓰인다. 삽입되는 것은 모음이며 suffix 전체가 아니다. /s/가 voiceless라는 이유만으로 suffix [s]를 고르지 않는다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), §2.5 (pp. 47–48), §3.2 (pp. 63–64).",
+    "compare": [
+      {
+        "title": "치찰음 뒤 → /ɪz/",
+        "desc": "buses, judges, churches, roses"
+      },
+      {
+        "title": "무성/유성 비치찰음 뒤",
+        "desc": "/s/ 또는 /z/ (epenthesis 없음)"
+      }
+    ]
+  },
+  {
+    "src": "과거 -ed",
+    "cat": "/t/ 실현",
+    "text": "<span class='kw1'>stopped</span>의 과거 형태소 -ed는 <span class='kw2'>/d/</span>로 실현된다.",
+    "ans": false,
+    "correct": "틀렸다. <span class='kw1'>stopped</span>의 -ed는 <span class='kw4'>/t/</span>로 실현된다; 어간 마지막 /p/가 무성 자음이기 때문이다.",
+    "why": "stop의 /p/는 voiceless이며 /t/가 아니다. 따라서 past suffix /d/가 [t]로 바뀐다. /t, d/ 뒤에서는 vowel epenthesis가 필요하므로 별도로 처리한다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), §2.5 (pp. 47–48), §3.2 (pp. 63–64).",
+    "compare": [
+      {
+        "title": "/t/ 이외의 무성 자음 뒤 → /t/",
+        "desc": "stopped, kissed, laughed, jumped"
+      },
+      {
+        "title": "/d/ 이외의 유성 자음·모음 뒤 → /d/",
+        "desc": "called, loved, planned, played"
+      }
+    ]
+  },
+  {
+    "src": "과거 -ed",
+    "cat": "/d/ 실현",
+    "text": "<span class='kw1'>called</span>의 과거 형태소 -ed는 <span class='kw2'>/d/</span>로 실현된다.",
+    "ans": true,
+    "correct": "정확하다. called의 past suffix는 [d]로 유지된다. 어간 마지막 /l/은 voiced이며 /d/가 아니다.",
+    "why": "call의 마지막 /l/은 voiced sonorant이다. underlying /d/ 분석에서는 called의 suffix가 [d]로 유지된다. lived의 /v/처럼 voiced obstruent 뒤에서도 /d/가 유지되므로 sonorant 뒤에서만 [d]가 나온다고 일반화하지 않는다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), §2.5 (pp. 47–48), §3.2 (pp. 63–64).",
+    "compare": [
+      {
+        "title": "/d/ 이외의 유성 자음 뒤 → /d/",
+        "desc": "called /kɔld/, loved /lʌvd/, used /juːzd/"
+      },
+      {
+        "title": "/t/ 이외의 무성 자음 뒤 → /t/",
+        "desc": "stopped /stɑpt/, missed /mɪst/"
+      }
+    ]
+  },
+  {
+    "src": "과거 -ed",
+    "cat": "/ɪd/ 실현",
+    "text": "<span class='kw1'>wanted</span>의 과거 형태소 -ed는 <span class='kw2'>/ɪd/</span>로 실현된다.",
+    "ans": true,
+    "correct": "정확하다. <span class='kw1'>wanted</span>의 -ed는 <span class='kw2'>/ɪd/</span>로 실현된다; 어간 마지막 /t/ 뒤에 epenthesis가 일어나기 때문이다.",
+    "why": "want의 마지막 /t/는 alveolar stop이다. past suffix 앞에 모음이 추가되어 [ɪd] 또는 [əd]가 된다. voiced /d/로 끝나는 need에도 같은 조건이 적용된다. 단순히 voiceless 여부만 보고 wanted의 suffix를 [t]로 고르면 안 된다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), §2.5 (pp. 47–48), §3.2 (pp. 63–64).",
+    "compare": [
+      {
+        "title": "/t,d/ 뒤 → /ɪd/",
+        "desc": "wanted, needed, started, added"
+      },
+      {
+        "title": "/t/ 이외의 무성 자음 뒤 → /t/",
+        "desc": "stopped, missed, kissed, jumped"
+      }
+    ]
+  },
+  {
+    "src": "Voice Assimilation",
+    "cat": "규칙 명칭",
+    "text": "regular plural -s와 regular past -ed에서 <span class='kw1'>/s~z/</span>와 <span class='kw1'>/t~d/</span> alternation은 Voice assimilation이며, <span class='kw2'>/ɪz/</span>와 <span class='kw2'>/ɪd/</span>에는 epenthesis가 추가된다.",
+    "ans": true,
+    "correct": "복수와 과거형의 교체를 분석할 때는 두 과정을 구별해야 한다. <span class='kw1'>Voice assimilation</span>은 /s~z/와 /t~d/ 교체를 설명하고, /ɪz/와 /ɪd/는 epenthesis가 포함된 실현이다.",
+    "why": "underlying /z, d/를 두는 분석에서 [s, t]는 devoicing의 결과이고 [z, d]는 해당 값이 유지된 결과이다. [ɪz, ɪd]에는 vowel epenthesis가 필요하다. suffix의 devoicing은 앞의 어간 마지막 소리가 뒤의 suffix에 영향을 주므로 progressive assimilation이다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), §2.5 (pp. 47–48), §3.2 (pp. 63–64).",
+    "compare": [
+      {
+        "title": "Voice assimilation",
+        "desc": "복수 /s~z/ · 과거 /t~d/"
+      },
+      {
+        "title": "Epenthesis",
+        "desc": "치찰음 뒤 /ɪz/ · /t,d/ 뒤 /ɪd/"
+      }
+    ]
+  },
+  {
+    "src": "복수 -s",
+    "cat": "/s/ 판별",
+    "text": "<span class='kw1'>cups</span>의 복수 형태소 -s는 <span class='kw2'>/z/</span>다.",
+    "ans": false,
+    "correct": "틀렸다. <span class='kw1'>cups</span>의 -s는 <span class='kw4'>/s/</span>다; 어간 마지막 /p/가 무성 비치찰음이기 때문이다.",
+    "why": "cup의 마지막 /p/는 voiceless bilabial stop이며 sibilant가 아니다. 따라서 plural suffix /z/가 [s]로 바뀌어 cups는 [kʌps]가 된다. labs에서는 voiced /b/ 뒤의 /z/가 유지된다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), §2.5 (pp. 47–48), §3.2 (pp. 63–64).",
+    "compare": [
+      {
+        "title": "cups /kʌps/",
+        "desc": "무성 /p/ 뒤 → /s/"
+      },
+      {
+        "title": "labs /læbz/",
+        "desc": "유성 /b/ 뒤 → /z/"
+      }
+    ]
+  },
+  {
+    "src": "복수 -s",
+    "cat": "/ɪz/ 판별",
+    "text": "<span class='kw1'>judges</span>의 복수 형태소 -s는 <span class='kw2'>/ɪz/</span>다.",
+    "ans": true,
+    "correct": "정확하다. <span class='kw1'>judges</span>의 -s는 <span class='kw2'>/ɪz/</span>다; 어간 마지막 /dʒ/가 치찰음(sibilant)이기 때문이다.",
+    "why": "judge의 마지막 /dʒ/는 voiced이면서 sibilant이다. plural을 만들 때 sibilant 조건을 먼저 적용하여 suffix 앞에 모음을 추가한다. 따라서 [ɪz] 또는 [əz]가 되며, voiced라는 이유만으로 [z]만 붙이지 않는다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), §2.5 (pp. 47–48), §3.2 (pp. 63–64).",
+    "compare": [
+      {
+        "title": "치찰음 뒤 → /ɪz/",
+        "desc": "judges /dʒʌdʒɪz/, roses /roʊzɪz/"
+      },
+      {
+        "title": "비치찰음 뒤",
+        "desc": "/s/ 또는 /z/ (epenthesis 없음)"
+      }
+    ]
+  },
+  {
+    "src": "과거 -ed",
+    "cat": "/d/ 판별",
+    "text": "<span class='kw1'>lived</span>의 과거 형태소 -ed는 <span class='kw2'>/t/</span>다.",
+    "ans": false,
+    "correct": "틀렸다. <span class='kw1'>lived</span>의 -ed는 <span class='kw4'>/d/</span>다; 어간 마지막 /v/가 유성 자음이기 때문이다.",
+    "why": "live의 마지막 /v/는 voiced fricative이며 /d/가 아니다. 따라서 past suffix는 [d]로 유지된다. /v/는 sonorant가 아니므로 이 사례도 [+voice]와 [+sonorant]를 구별해야 하는 이유를 보여 준다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), §2.5 (pp. 47–48), §3.2 (pp. 63–64).",
+    "compare": [
+      {
+        "title": "lived /lɪvd/",
+        "desc": "유성 /v/ 뒤 → /d/"
+      },
+      {
+        "title": "stopped /stɑpt/",
+        "desc": "무성 /p/ 뒤 → /t/"
+      }
+    ]
+  },
+  {
+    "src": "Voice Assimilation",
+    "cat": "변이형 목록",
+    "text": "-s의 세 가지 변이형 실현: <span class='kw2'>[s], [z], [ɪz]</span>.",
+    "ans": true,
+    "correct": "정확하다. 복수 -s의 세 변이형: (1) <span class='kw1'>[s]</span>; 무성 비치찰음 뒤; (2) <span class='kw1'>[z]</span>; 유성 비치찰음/모음 뒤; (3) <span class='kw1'>[ɪz]</span>; 치찰음 뒤.",
+    "why": "여기서는 regular plural의 syllabic allomorph를 [ɪz]로 적는다. [əz]를 사용하는 자료도 있다. 각 형태는 같은 plural morpheme의 allomorph이며, 이러한 분포만으로 영어의 /s/와 /z/가 언제나 한 phoneme의 allophones라고 판단하지 않는다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), §2.5 (pp. 47–48), §3.2 (pp. 63–64).",
+    "compare": [
+      {
+        "title": "[s]: cats, maps, books",
+        "desc": "무성 비치찰음 뒤"
+      },
+      {
+        "title": "[z]: dogs, cars / [ɪz]: buses",
+        "desc": "유성 비치찰음·모음 뒤 / 치찰음 뒤"
+      }
+    ]
+  },
+  {
+    "src": "Voice Assimilation",
+    "cat": "유성 자음 뒤",
+    "text": "유성 비치찰음 뒤의 복수 -s는 <span class='kw2'>/z/</span>로 실현된다.",
+    "ans": true,
+    "correct": "정확하다. 유성 비치찰음 또는 모음 뒤에서 plural suffix는 [z]로 실현된다. Sibilant 뒤의 [ɪz]/[əz]는 별도 환경이다.",
+    "why": "voiced non-sibilant 뒤에서는 underlying /z/가 [z]로 유지된다. 이 조건에는 /ɡ, v/ 같은 voiced obstruent와 /l, n/ 같은 sonorant가 모두 포함된다. voiced sibilant /z, dʒ/ 뒤에서는 모음이 추가되므로 별도로 처리한다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), §2.5 (pp. 47–48), §3.2 (pp. 63–64).",
+    "compare": [
+      {
+        "title": "유성 비치찰음 뒤 → /z/",
+        "desc": "dogs, beds, labs, gloves, bells"
+      },
+      {
+        "title": "치찰음 뒤 → /ɪz/",
+        "desc": "buses, roses, judges"
+      }
+    ]
+  },
+  {
+    "src": "과거 -ed",
+    "cat": "/ɪd/ 판별",
+    "text": "<span class='kw1'>needed</span>의 과거 형태소 -ed는 <span class='kw2'>/ɪd/</span>다.",
+    "ans": true,
+    "correct": "정확하다. <span class='kw1'>needed</span>의 -ed는 <span class='kw2'>/ɪd/</span>다; 어간 마지막 /d/ 뒤에 epenthesis가 일어나기 때문이다.",
+    "why": "need의 마지막 /d/는 alveolar stop이다. past suffix /d/ 앞에 모음이 추가되어 [ɪd] 또는 [əd]가 된다. /t/ 뒤의 wanted도 같은 조건에 해당한다. 따라서 이 epenthesis는 voiceless 뒤에서만 일어나는 과정이 아니다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), §2.5 (pp. 47–48), §3.2 (pp. 63–64).",
+    "compare": [
+      {
+        "title": "/t,d/ 뒤 → /ɪd/",
+        "desc": "needed, wanted, added, ended"
+      },
+      {
+        "title": "/d/ 이외의 유성 자음 뒤 → /d/",
+        "desc": "called, loved, planned, used"
+      }
+    ]
+  },
+  {
+    "src": "Voice Assimilation",
+    "cat": "동화 방향",
+    "text": "-s/-ed 형태소 교체는 <span class='kw1'>Regressive assimilation</span> 방향이다.",
+    "ans": false,
+    "correct": "틀렸다. 복수 -s와 과거 -ed의 voice assimilation은 <span class='kw2'>progressive assimilation</span> 방향이다; 앞의 어간말음이 뒤에 오는 형태소에 영향을 준다.",
+    "why": "caps와 helped에서는 어간 마지막 /p/가 먼저 나오고, devoicing되는 suffix가 뒤따른다. 따라서 방향은 progressive이다. regressive assimilation에서는 뒤의 소리가 앞의 소리에 영향을 준다. 이 방향 설명을 모든 자음 연속에 적용하지 않는다. tent처럼 한 형태소 안에서는 /nt/도 가능하다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), §2.5 (pp. 47–48), §3.2 (pp. 63–64).",
+    "compare": [
+      {
+        "title": "Progressive assimilation",
+        "desc": "앞 환경 → 뒤 형태소 영향 (→ 방향)"
+      },
+      {
+        "title": "Regressive assimilation",
+        "desc": "뒤 환경 → 앞 요소 영향 (← 방향)"
+      }
+    ]
+  },
+  {
+    "src": "복수 -s",
+    "cat": "모음 뒤",
+    "text": "모음 뒤의 복수 -s는 <span class='kw2'>/s/</span>로 실현된다.",
+    "ans": false,
+    "correct": "틀렸다. 모음으로 끝나는 어간 뒤의 regular plural suffix는 [z]로 실현된다.",
+    "why": "영어의 regular plural에서 모음으로 끝나는 어간 뒤에는 [z]가 온다. bees, cows, shoes가 그 예이다. /kɑrz/로 적은 rhotic cars에서는 /r/이 suffix 바로 앞에 있으므로 모음 바로 뒤의 예로 분류하지 않는다. 실제 발음의 부분적인 성대 진동 감소와 suffix allomorph의 선택도 구별한다.",
+    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), §2.5 (pp. 47–48), §3.2 (pp. 63–64).",
+    "compare": [
+      {
+        "title": "모음 뒤 → /z/",
+        "desc": "bees /biːz/, cows /kaʊz/, shoes /ʃuːz/"
+      },
+      {
+        "title": "무성 비치찰음 뒤 → /s/",
+        "desc": "cats /kæts/, maps /mæps/"
+      }
+    ]
+  }
 ];
 function renderExp(q,isCorrect){
   const three=q.compare&&q.compare.length===3;
