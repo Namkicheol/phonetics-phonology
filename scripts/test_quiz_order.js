@@ -129,5 +129,5 @@ for (const name of fs.readdirSync(root).filter(name => name.endsWith('.html'))) 
   assert.ok(list.every(q => items.includes(q)), `${name}: exact question objects, answers and explanation unchanged`);
   pages++; total += items.length;
 }
-assert.equal(pages, 20);
+assert.equal(pages, 21);
 console.log(`GREEN: ${pages} quiz pages / ${total} questions; shuffle, exact resume, legacy progress, reset, popup retry, storage failure, totals and load order`);

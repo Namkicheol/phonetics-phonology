@@ -16,6 +16,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Segoe UI",sans
 <style>
 .data-compare{width:100%;border-collapse:collapse;font-family:inherit;font-size:.94em}.data-compare th,.data-compare td{padding:9px 11px;border:1px solid #cfe0eb;text-align:left;vertical-align:top;white-space:normal;overflow-wrap:anywhere}.data-compare caption{text-align:left;font-weight:700;padding:0 0 9px}.data-compare thead{background:#eef7fc}
 </style>
+<style id="features-consistent-layout">
+.etwiki-learning .feature-section{padding:0;overflow:hidden}
+.etwiki-learning .section-heading{display:flex;align-items:center;gap:10px;padding:4px 16px;background:var(--ew-tint,#edf8f3);border-bottom:1px solid #c8ead8}
+.etwiki-learning .section-heading h2{margin:0;flex:1;min-width:0;font-size:18px}
+.etwiki-learning .feature-toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;border:0;background:transparent;padding:14px 0;font:inherit;font-weight:700;text-align:left;color:inherit;cursor:pointer}
+.etwiki-learning .feature-arrow{flex:none}.etwiki-learning .feature-section:not(.open) .feature-arrow{transform:rotate(-90deg)}
+.etwiki-learning .feature-body{padding:18px;font-size:16px;line-height:1.85}
+.etwiki-learning .feature-body[hidden]{display:none}
+.etwiki-learning .feature-body p+p{margin-top:12px}
+.etwiki-learning .feature-body>details{margin-top:16px;padding:14px 16px;border:1px solid #c8ead8;border-radius:8px;background:#fff}
+.etwiki-learning .feature-body summary{cursor:pointer;font-weight:700;line-height:1.7}
+.etwiki-learning .feature-body details p{margin-top:12px}
+.etwiki-learning .exam-year{display:inline-flex;align-items:center;justify-content:center;min-width:36px;min-height:36px;padding:3px 8px;border:1px solid #db8c8c;border-radius:6px;color:#b42325;background:#fff8f6;font-size:14px;font-weight:700;text-decoration:none}
+.etwiki-learning .source-note{font-size:14px;border-top:1px solid #c8ead8;margin-top:14px;padding-top:10px}
+@media(max-width:640px){.etwiki-learning .feature-body{padding:15px}.etwiki-learning .section-heading{padding:3px 14px}.etwiki-learning .section-heading h2{font-size:17px}.etwiki-learning .feature-body>details{padding:12px}.etwiki-learning .feature-body table{display:block;max-width:100%;overflow-x:auto}}
+</style>
 </head>
 <body class="etwiki-learning">
 <header class="ew-header"><div class="ew-brand-row"><a class="ew-brand" href="https://etwiki.net/index.html">기출 WIKI</a><span class="ew-header-label">학습자료</span><a class="ew-back" href="https://etwiki.net/study.html">전체 자료 ↗</a></div><nav class="ew-subjects" aria-label="학습 영역"><a href="https://namkicheol.github.io/englisheducation/">영어교육론</a><a href="https://namkicheol.github.io/linguistics/">영어학</a><a href="https://namkicheol.github.io/phonetics-phonology/phonetics.html" aria-current="location">음성·음운론</a></nav></header>
@@ -42,47 +58,51 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Segoe UI",sans
   </div>
 
   <div class="grid">
+    <a class="card" href="features_ox.html"><h3>Features OX</h3><p>12문항으로 feature 값과 natural class 판별을 확인한다. 답과 해설은 선택 후 표시된다.</p></a>
     <a class="card" href="phonetics.html"><h3>Phonetics Hub</h3><p>전체 음성음운론 단원으로 돌아간다.</p></a>
     <a class="card" href="aspiration_study.html"><h3>Aspiration</h3><p>feature가 실제 rule environment에 들어가는 예시를 함께 확인한다.</p></a>
     <a class="card" href="assimilation_study.html"><h3>Assimilation</h3><p>feature sharing과 natural class 판별을 Assimilation 단원과 연결한다.</p></a>
   </div>
 
-  <section class="section" id="distinctive-feature">
-    <h2>Distinctive Feature 판별</h2>
+  <section class="section feature-section open" id="distinctive-feature">
+<div class="section-heading"><h2><button class="feature-toggle" type="button" aria-expanded="true" aria-controls="distinctive-feature-body" onclick="toggleFeatureSection('distinctive-feature')">Distinctive Feature 판별<span aria-hidden="true" class="feature-arrow">▾</span></button></h2><a class="exam-year" href="https://etwiki.net/index.html?id=linguistics_2023_A02" title="2023학년도 전공 A02">23</a></div>
+<div class="feature-body" id="distinctive-feature-body">
     <p><span class="kw">distinctive feature</span>는 segment의 성질과 segment 사이의 대조를 나타내며, natural class를 기술하는 데 쓰인다. 답안에서는 feature name과 feature value를 함께 써야 하는지 먼저 확인한다.</p>
     <div class="ex">[+sonorant] / [−sonorant] · [+anterior] / [−anterior] · [+continuant] / [−continuant]</div>
     <div class="note">발문이 “feature value must be specified”라고 하면 <span class="kw">[−sonorant]</span>처럼 값까지 포함해야 한다.</div>
     <div class="exam"><b>기출 연결</b> · 2023 A-2: verb-forming suffix -en의 결합 조건을 [−sonorant]로 판별.</div>
     <details>
-      <summary>예제로 이해하기: feature 하나와 feature 묶음은 어떻게 다른가?</summary>
+      <summary>자세히 보기 · feature 하나와 feature 묶음은 어떻게 다른가?</summary>
       <p>/f/와 /v/를 비교해 보자. 둘 다 labiodental fricative이지만, 기본적인 binary feature 분석에서 /f/는 [−voice], /v/는 [+voice]이다. feature name인 [voice]만 적으면 무엇을 비교하는지는 알 수 있어도 어느 쪽을 가리키는지는 알 수 없다. 특정 부류를 답할 때는 필요한 값을 함께 적는다.</p>
       <p>반대로 /f, v/를 한 부류로 묶을 때 [−voice]를 쓰면 /v/가 빠진다. 둘의 공통 성질을 기술하는 데에는 두 소리를 구분하는 값이 필요하지 않다. 한 segment를 자세히 기술하는 것과 여러 segment의 공통점을 기술하는 것은 목적이 다르다.</p>
       <p>여기서 사용하는 binary feature는 +와 − 두 값을 갖는다. −가 붙었다고 그 소리에 모든 성질이 없다는 뜻은 아니다. [−voice]는 voice에 관한 값이고, [−sonorant]는 sonorant에 관한 값이다. 서로 다른 feature의 −를 같은 뜻으로 읽으면 안 된다.</p>
       <div class="note">아래 기본 설명은 Davenport와 Hannahs의 <i>Introducing Phonetics and Phonology</i>, 3판 Chapter 7의 binary feature 분석을 따른다. 특정 기출의 표를 설명할 때는 그 문제에 제시된 값을 따른다. 모든 이론이 같은 feature 목록과 값을 사용하는 것은 아니다.</div>
     </details>
     <details>
-      <summary>예제로 확인하기: 공통점이 있으면 모두 natural class인가?</summary>
+      <summary>예문 비교 · 공통점이 있으면 모두 natural class인가?</summary>
       <p>영어의 /m, n, ŋ/는 모두 nasal이다. 이 세 소리를 [+nasal]로 묶을 수 있다. 그러나 /m, n/만 고른 뒤 [+nasal]이라고 쓰면 /ŋ/도 함께 포함된다. 문제의 전체 목록에 /ŋ/가 있는데 이를 제외해야 한다면 [+nasal] 하나로는 충분하지 않다.</p>
       <p>이 binary 분석에서는 /m, n/을 [+nasal, +anterior]로 묶을 수 있다. 두 값을 동시에 만족해야 하므로 [−anterior]인 /ŋ/가 제외된다. feature 묶음은 둘 중 하나만 만족해도 된다는 뜻이 아니라, 적힌 조건을 모두 만족해야 한다는 뜻이다.</p>
       <p>natural class를 찾을 때는 대상에 속하는 소리가 모두 포함되는지 확인한 다음, 제외해야 할 소리까지 포함되지 않는지 확인한다. 이 판단은 주어진 언어의 segment 목록과 feature 체계를 기준으로 한다. 영어의 기본 consonant 목록에서 성립하는 분류를 다른 언어의 모든 소리에 그대로 적용해서는 안 된다.</p>
       <div class="ex">/m, n, ŋ/ → [+nasal]<br>/m, n/ → [+nasal, +anterior]<br>확인할 것: 필요한 소리가 빠졌는가? 다른 소리까지 포함됐는가?</div>
     </details>
-  </section>
+  </div>
+</section>
 
-  <section class="section" id="sonorant-obstruent">
-    <h2>[−sonorant]와 Obstruent</h2>
+  <section class="section feature-section" id="sonorant-obstruent">
+<div class="section-heading"><h2><button class="feature-toggle" type="button" aria-expanded="false" aria-controls="sonorant-obstruent-body" onclick="toggleFeatureSection('sonorant-obstruent')">[−sonorant]와 Obstruent<span aria-hidden="true" class="feature-arrow">▾</span></button></h2><a class="exam-year" href="https://etwiki.net/index.html?id=linguistics_2023_A02" title="2023학년도 전공 A02">23</a></div>
+<div class="feature-body" id="sonorant-obstruent-body" hidden>
     <p><span class="kw">obstruent</span>는 일반적으로 <span class="kw">[−sonorant]</span>로 묶인다. oral stop, fricative, affricate가 여기에 들어가며, natural class를 묻는 문제에서 자주 쓰인다.</p>
     <div class="two"><div class="note ok">제시된 자료에서 가능한 패턴: stem-final obstruent + -en</div><div class="note warn">차단 패턴: stem-final vowel / nasal / liquid + -en</div></div>
     <div class="exam"><b>기출 연결</b> · 2023 A-2: [−sonorant] 답안.</div>
     <details>
-      <summary>예제로 이해하기: [sonorant], [continuant], [consonantal] 구분하기</summary>
+      <summary>자세히 보기 · [sonorant], [continuant], [consonantal] 구분하기</summary>
       <p>/n/은 입안에서 혀가 공기의 통로를 막지만 코로 공기가 나간다. 따라서 이 단원의 분석에서는 [+sonorant]이면서 [−continuant]이다. [continuant]는 이때 입안의 공기 흐름을 기준으로 하므로, 코로 공기가 계속 나온다는 이유만으로 [+continuant]를 선택하지 않는다.</p>
       <p>/z/는 [+voice]이지만 [−sonorant]이다. 따라서 sonorant를 voiced의 다른 이름으로 외울 수 없다. /n/과 /z/를 모두 [+voice]로 묶더라도 둘의 [sonorant] 값은 다르다.</p>
       <p>/j/는 yes의 첫소리처럼 syllable의 nucleus가 아닌 위치에 올 수 있지만, 이 분석에서는 [−consonantal, −syllabic, +sonorant]이다. consonant처럼 쓰이는 위치와 [consonantal] 값은 별도로 판단해야 한다. 또 syllabic [n̩]은 [+syllabic]이면서 [+consonantal]이므로, [+syllabic]을 언제나 vowel과 같은 뜻으로 읽어서도 안 된다.</p>
       <p>affricate /tʃ/는 [−sonorant, −continuant]로 기술한다. fricative처럼 마찰이 들리더라도 처음에 완전한 막힘이 있기 때문이다. 이 체계에서 oral stop과 affricate를 더 구별할 때는 [delayed release]를 사용한다. /l/의 [continuant] 값에는 분석 차이가 있으며, 이 단원과 2023 A-2의 표에서는 [+continuant]로 다룬다.</p>
     </details>
     <details>
-      <summary>기출 풀이 확장: -en의 조건에서 [−sonorant]를 고르는 이유</summary>
+      <summary>기출 포인트 · -en의 조건에서 [−sonorant]를 고르는 이유</summary>
       <p><strong>표 읽기:</strong> 행은 feature, 열은 sound class이다. +는 해당 성질을 갖는 값, −는 갖지 않는 값이다. 한 칸의 +/−는 그 부류 안에 두 값이 모두 있다는 뜻이다. 여러 feature를 함께 적으면 <u>그 조건을 모두</u> 만족하는 소리만 고른다. <a href="https://etwiki.net/concept.html?term=distinctive%20feature">distinctive feature</a>와 <a href="https://etwiki.net/concept.html?term=natural%20class">natural class</a>는 각각 소리의 성질과 그 성질로 묶이는 부류를 가리킨다.</p>
       <p>2023 A-2에서는 suffix를 붙이기 전 adjective stem의 마지막 소리를 비교해야 한다. 예를 들어 toughen의 tough는 /f/로 끝나고, sicken의 sick은 /k/로 끝난다. /f/와 /k/는 [continuant] 값이 다르지만 둘 다 [−sonorant]이다.</p>
       <p>제시된 *tallen의 tall은 /l/로, *meanen의 mean은 /n/으로 끝난다. /l/과 /n/도 [continuant] 값은 다르지만 둘 다 [+sonorant]이다. 따라서 [continuant]로는 가능한 예와 불가능한 예를 나눌 수 없다. [consonantal] 역시 obstruent뿐 아니라 /l, n/에도 +이므로 필요한 구별을 하지 못한다.</p>
@@ -93,16 +113,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Segoe UI",sans
       <p><a href="https://etwiki.net/index.html?id=linguistics_2023_A02">2023학년도 A 2번 원문과 답안 보기</a></p>
       <div class="note">철자 마지막 글자나 완성된 동사의 마지막 /n/을 비교하지 않는다. suffix를 붙이기 전 stem의 발음을 확인한다. *는 여기서 문제에 제시된 unattested word를 표시한다.</div>
     </details>
-  </section>
+  </div>
+</section>
 
-  <section class="section" id="yod-dropping">
-    <h2>Yod-dropping과 anterior</h2>
+  <section class="section feature-section" id="yod-dropping">
+<div class="section-heading"><h2><button class="feature-toggle" type="button" aria-expanded="false" aria-controls="yod-dropping-body" onclick="toggleFeatureSection('yod-dropping')">Yod-dropping과 anterior<span aria-hidden="true" class="feature-arrow">▾</span></button></h2><a class="exam-year" href="https://etwiki.net/index.html?id=linguistics_2026_A06" title="2026학년도 전공 A06">26</a></div>
+<div class="feature-body" id="yod-dropping-body" hidden>
     <p><span class="kw">Yod-dropping</span>은 /j/가 특정 segment 뒤에서 사라지는 분포를 feature로 일반화하는 유형이다. 2026 A-6에서는 <span class="kw">coronal</span> 내부를 다시 <span class="kw">anterior</span> 값으로 가르는 방식이 핵심이었다.</p>
     <div class="ex">[−anterior] vs [+anterior] · /j/-dropping · cluster environment</div>
     <div class="note">답안 순서: 데이터 분포 → feature 표 대조 → [±anterior] 값 확정 → cluster 환경 일반화.</div>
     <div class="exam"><b>기출 연결</b> · 2026 A-6: coronal, anterior, Yod-dropping.</div>
     <details>
-      <summary>기출 풀이 확장: 같은 coronal 안에서 anterior 값을 비교하기</summary>
+      <summary>기출 포인트 · 같은 coronal 안에서 anterior 값을 비교하기</summary>
       <p>2026 A-6은 /j/가 이미 사라진 집단, /j/가 있기도 하고 없기도 한 집단, /j/가 유지되는 집단을 구별한다. 먼저 각 단어에서 /j/ 바로 앞에 있었던 소리를 찾아야 한다. 단어 첫소리만 보면 crew처럼 /j/ 앞에 /r/이 있었던 경우를 놓치게 된다.</p>
       <p>문제의 표에서는 /ʃ, ʒ, tʃ, dʒ/와 /r/이 [+coronal, −anterior]이다. 이 부류 뒤에서는 /j/-dropping이 완료된 것으로 제시된다. 반면 /θ, s, z, l/은 [+coronal, +anterior]이고, 이들 뒤에서는 Modern British English의 방언이나 화자에 따라 /j/의 유무가 달라지는 예가 제시된다. 두 빈칸은 각각 [−anterior], [+anterior]가 된다.</p>
 <div class="ex" role="region" aria-label="2026 A6: 필요한 두 행을 함께 읽기" tabindex="0"><table class="data-compare"><caption>2026 A6: 필요한 두 행을 함께 읽기</caption><thead><tr><th scope="col">직전 소리·실제 예</th><th scope="col">[coronal]</th><th scope="col">[anterior]</th><th scope="col">자료의 /j/</th></tr></thead><tbody><tr><th scope="row">/ʃ, tʃ, dʒ, r/: chute, chew, juice, rude</th><td>+</td><td>−</td><td>없음</td></tr><tr><th scope="row">/θ, s, z, l/: thulium, sue, resume, lewd</th><td>+</td><td>+</td><td>있거나 없음</td></tr><tr><th scope="row">/k/: cue</th><td>−</td><td>−</td><td>유지</td></tr><tr><th scope="row">/p, f, v/: pure, few, view</th><td>−</td><td>+</td><td>유지</td></tr></tbody></table></div><p><strong>풀이 순서:</strong> ① /j/ 바로 앞의 소리를 찾는다. ② 지문이 정한 <u>coronal 범위</u>에서 [anterior] 행을 비교한다. ③ 완료 집단에는 −, 변이 집단에는 +가 공통이므로 빈칸은 <strong>[−anterior], [+anterior]</strong>이다. ④ cue를 대입해 [−anterior]만으로는 너무 넓다는 것을 확인한다. 완전한 조건 [+coronal, −anterior]는 두 값의 conjunction이지만, 빈칸에는 지문에 이미 있는 coronal을 반복하지 않고 요청한 feature 하나를 쓴다.</p>
@@ -113,21 +135,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Segoe UI",sans
       <p>책과 시험의 표가 다를 때에는 차이를 확인하고 구분해서 사용한다. Davenport와 Hannahs의 Chapter 7은 /ɹ/을 [+anterior]로 분류하지만, 이 문제의 표는 /r/을 [−anterior]로 제시한다. 또 이 문제의 /j/는 coronal과 dorsal에 모두 +이다. 따라서 이 표에서 labial·coronal·dorsal을 반드시 하나만 선택하는 분류로 읽을 수 없다.</p></details>
     </details>
     <details>
-      <summary>예제로 이해하기: /l/ 하나 뒤와 consonant cluster 뒤의 차이</summary>
+      <summary>자세히 보기 · /l/ 하나 뒤와 consonant cluster 뒤의 차이</summary>
       <p>같은 문제에서 lewd처럼 /l/ 뒤의 /j/가 유지되거나 사라지는 경우와, blue처럼 consonant + /l/ 뒤에서 이미 사라진 경우를 구별한다. 후자의 자료에는 /bl, fl, gl/이 나온다. 이를 설명할 때는 /l/ 앞에도 consonant가 있다는 조건을 포함해야 한다.</p>
       <div class="ex">해당 자료의 cluster 조건: /j/ → ∅ / C l __<br>C = 자료에 나온 [−coronal] consonant; C와 /l/은 같은 onset을 이룬다.</div>
       <p>이 표기는 /j/가 C와 /l/ 사이에서 사라진다는 뜻이 아니다. 밑줄은 바뀌는 /j/의 자리이므로 C 다음의 /l/ 뒤에 온다. 또한 이 규칙을 모든 consonant cluster나 단어 경계를 넘는 연속에 적용한다는 뜻도 아니다.</p>
       <p>이 문제의 Modern British English 자료와 American English의 /j/ 분포를 섞지 않는다. Yavaş가 설명하는 American English에서는 alveolar sonorant 뒤의 /j/도 stress 조건에 따라 달라진다. 예를 들어 value의 /lj/가 가능하다는 사실은 “alveolar 뒤에서는 /j/가 항상 사라진다”는 설명이 너무 넓다는 것을 보여 준다.</p>
     </details>
-  </section>
+  </div>
+</section>
 
-  <section class="section" id="place-feature">
-    <h2>Place Feature와 Phonotactics</h2>
+  <section class="section feature-section" id="place-feature">
+<div class="section-heading"><h2><button class="feature-toggle" type="button" aria-expanded="false" aria-controls="place-feature-body" onclick="toggleFeatureSection('place-feature')">Place Feature와 Phonotactics<span aria-hidden="true" class="feature-arrow">▾</span></button></h2><a class="exam-year" href="https://etwiki.net/index.html?id=linguistics_2022_A04" title="2022학년도 전공 A04">22</a></div>
+<div class="feature-body" id="place-feature-body" hidden>
     <p><span class="kw">coronal</span>, <span class="kw">labial</span>, <span class="kw">dorsal</span> 같은 place feature는 cluster 허용 여부를 설명할 때 쓰인다. 예시의 허용/불허 목록을 natural class별로 재배열하는 것이 먼저다.</p>
     <div class="ex">alveolar stop (C1) + /l/ 차단 · cluster 허용 여부는 실제 segment class로 확인</div>
     <div class="exam"><b>기출 연결</b> · 2022 A-4: coronal C1의 /l/ cluster 제약과 허용 여부.</div>
     <details>
-      <summary>기출 풀이 확장: coronal 뒤에서는 /l/이 전부 금지되는가?</summary>
+      <summary>기출 포인트 · coronal 뒤에서는 /l/이 전부 금지되는가?</summary>
       <p>2022 A-4의 핵심은 word-initial position에서 /l/과 /r/을 모두 고를 수 있는지이다. 예를 들어 /p/ 뒤에서는 /pl/과 /pr/이 모두 가능하다. 그런데 /t/ 뒤에서는 /tr/이 가능하고 /tl/은 제시된 영어 onset 목록에서 허용되지 않는다.</p>
       <p>여기서 “coronal 뒤에는 /l/이 올 수 없다”라고만 쓰면 slide의 /sl/을 설명하지 못한다. /s/ 뒤에서는 /sl/이 가능하고 /sr/이 허용되지 않는다. /t/와 /s/는 허용하는 liquid가 서로 다르지만, 둘 다 /l/과 /r/의 대조가 그 자리에서 유지되지 않는다는 공통점이 있다.</p>
       <p>따라서 문제의 빈칸에 들어가는 coronal은 “모두 /l/을 금지한다”는 부류가 아니다. 제시된 word-initial obstruent + liquid 환경에서 /l/과 /r/의 선택이 제한되는 C1의 부류이다. 이 제한을 중간의 syllable 경계나 모든 loanword에까지 확대하지 않는다. 원문도 일부 loanword를 별도로 언급한다.</p>
@@ -139,9 +163,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Segoe UI",sans
       <p>화살표 왼쪽은 바뀌는 대상, 오른쪽은 바뀐 feature 값, slash 뒤는 환경이다. [+nasal]만 오른쪽에 썼다고 vowel의 다른 성질이 모두 사라지는 것은 아니다. 나머지 성질은 유지하고 [nasal] 값이 달라진다는 뜻이다. 이 표기는 feature rule을 읽는 연습이며, nasalization의 모든 발화 조건이나 정도를 기술한 것은 아니다.</p>
       <p>V를 무조건 [+syllabic]으로 바꾸면 syllabic consonant까지 포함될 수 있다. 또 consonant를 [+consonantal]로 바꿀 때는 /j, w/ 같은 glide가 제외된다는 점을 확인해야 한다. 익숙한 약자를 feature로 바꿀 때도 원래 의도한 대상이 그대로 남는지 점검한다.</p>
       <div class="note">스스로 확인하기: [+voice]만으로 sonorant를 고를 수 있는가? /m, n/에 [+nasal]만 적으면 무엇이 더 포함되는가? 2026 A-6에서 [−anterior] 앞의 coronal 조건을 빼면 어떤 비교 자료와 맞지 않는가?</div>
-      <p>개념 참고: Mike Davenport &amp; S. J. Hannahs, <i>Introducing Phonetics and Phonology</i>, 3rd ed. (2010), §§7.1–7.4, §8.3; Mehmet Yavaş, <i>Applied English Phonology</i>, 2nd ed. (2011), §3.5.</p>
+      <details class="source-note"><summary>원서 출처</summary><p> Mike Davenport &amp; S. J. Hannahs, <i>Introducing Phonetics and Phonology</i>, 3rd ed. (2010), §§7.1–7.4, §8.3; Mehmet Yavaş, <i>Applied English Phonology</i>, 2nd ed. (2011), §3.5.</p></details>
     </details>
-  </section>
+  </div>
+</section>
 
   <div class="footer">phonetics-phonology · distinctive features exam wiki</div>
 </div>
@@ -158,5 +183,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Segoe UI",sans
 <script src="sounds.js"></script>
 <script src="score-popup.js"></script>
 <script src="./study-return.js" data-hub-label="음성·음운론 허브"></script>
+<script>
+function toggleFeatureSection(id){const section=document.getElementById(id);if(!section)return;const body=document.getElementById(id+'-body');const button=section.querySelector('.feature-toggle');const open=body.hidden;body.hidden=!open;section.classList.toggle('open',open);button.setAttribute('aria-expanded',String(open));}
+function revealFeatureTarget(){let id;try{id=decodeURIComponent(location.hash.slice(1));}catch(_){return;}const target=document.getElementById(id);if(!target)return;const section=target.closest('.feature-section');if(section){const body=document.getElementById(section.id+'-body');if(body.hidden)toggleFeatureSection(section.id);}let node=target;while(node){if(node.tagName==='DETAILS')node.open=true;node=node.parentElement;}}
+revealFeatureTarget();window.addEventListener('hashchange',revealFeatureTarget);
+</script>
 </body>
 </html>
