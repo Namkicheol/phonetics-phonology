@@ -80,6 +80,23 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
 .flow-item{background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:8px;padding:10px 16px;font-size:13px;color:#1a1a1a;text-align:center;line-height:1.5}
 .flow-arrow{color:#2e86c1;font-size:20px;font-weight:700}
 details.assim-depth{margin-top:16px;border:1px solid #aed6f1;border-radius:10px;padding:12px 16px;background:#f4f9fe}details.assim-depth summary{cursor:pointer;font-weight:700;color:#1a5276}details.assim-depth p{margin-top:10px;line-height:1.85;overflow-wrap:anywhere}
+
+/* Chapter-scoped readability and accessible controls. */
+.etwiki-learning .sec-header{width:100%;text-align:left;border-top:0;border-left:0;border-right:0;flex-wrap:wrap;font:inherit}
+.etwiki-learning .sec-title{flex:1 1 200px;min-width:0;font-size:18px;line-height:1.55}
+.etwiki-learning .sec-tag,.etwiki-learning .sec-arrow{flex:0 0 auto}
+.etwiki-learning .sec-header:focus-visible,.etwiki-learning .toc-item:focus-visible{outline:3px solid #235d86;outline-offset:-3px}
+.etwiki-learning .sec-body{padding:20px}
+.etwiki-learning :is(.def,.note,.gi-body,.rule-text,.assim-depth p,.exam p){font-size:16px;line-height:1.9}
+.etwiki-learning .grid.col2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.etwiki-learning .grid-item{min-width:0;word-break:break-word;overflow-wrap:break-word}
+.etwiki-learning .c-title{font-size:15px;flex-wrap:wrap;line-height:1.65}
+.etwiki-learning .rule-box{overflow-x:auto}
+.etwiki-learning .exam-year{display:inline-flex;align-items:center;justify-content:center;min-width:32px;min-height:32px;color:#b42323;font-weight:700;border:1px solid #e6bcbc;border-radius:7px;padding:0 6px;text-decoration:none}
+.etwiki-learning .source-note{max-width:820px;margin:16px auto;border:1px solid #cedfd6;border-radius:10px;padding:12px 16px;font-size:15px;line-height:1.85}
+.etwiki-learning .source-note summary{cursor:pointer;font-weight:700}
+@media(max-width:580px){.etwiki-learning .grid.col2,.etwiki-learning .grid.col3{grid-template-columns:minmax(0,1fr)}.etwiki-learning .sec-header{padding:14px 16px}.etwiki-learning .sec-body{padding:16px}.etwiki-learning .def{padding:12px 15px}}
+
 </style>
 <link rel="stylesheet" href="./mint-learning.css">
 </head>
@@ -119,12 +136,12 @@ details.assim-depth{margin-top:16px;border:1px solid #aed6f1;border-radius:10px;
 <div class="toc">
   <div class="toc-title">📋 목차</div>
   <div class="toc-list">
-    <div class="toc-item" onclick="openSec('s1')">① 정의 &amp; 동기</div>
-    <div class="toc-item" onclick="openSec('s2')">② 방향 — Progressive vs Regressive</div>
-    <div class="toc-item" onclick="openSec('s3')">③ 정도 — Total vs Partial</div>
-    <div class="toc-item" onclick="openSec('s4')">④ Place Assimilation</div>
-    <div class="toc-item" onclick="openSec('s5')">⑤ Voice Assimilation</div>
-    <div class="toc-item" onclick="openSec('s6')">⑥ Manner Assimilation</div>
+    <button class="toc-item" type="button" onclick="openSec('s1')">① 정의 &amp; 동기</button>
+    <button class="toc-item" type="button" onclick="openSec('s2')">② 방향 — Progressive vs Regressive</button>
+    <button class="toc-item" type="button" onclick="openSec('s3')">③ 정도 — Total vs Partial</button>
+    <button class="toc-item" type="button" onclick="openSec('s4')">④ Place Assimilation</button>
+    <button class="toc-item" type="button" onclick="openSec('s5')">⑤ Voice Assimilation</button>
+    <button class="toc-item" type="button" onclick="openSec('s6')">⑥ Manner Assimilation</button>
   </div>
 </div>
 
@@ -138,20 +155,20 @@ details.assim-depth{margin-top:16px;border:1px solid #aed6f1;border-radius:10px;
 
 <div class="exam" style="margin-bottom:20px" id="exam-overview">
   <div class="exam-label">📝 기출분석 포인트 (Assimilation)</div>
-  <p>① <span class="kw4">Nasal assimilation</span> — velar environment와 prosodic condition을 함께 판별 · <strong>2019 A-4</strong></p>
-  <p>② <span class="kw3">Assimilation vs dissimilation</span> — il-/ir-와 -al/-ar의 [lateral] pattern을 과정별로 구분 · <strong>2020 B-3</strong></p>
+  <p>① <span class="kw4">Nasal assimilation</span> — velar environment와 prosodic condition을 함께 판별 · <a class="exam-year" href="https://etwiki.net/index.html?id=linguistics_2019_A04" title="2019 A-4">19</a></p>
+  <p>② <span class="kw3">Assimilation vs dissimilation</span> — il-/ir-와 -al/-ar의 [lateral] pattern을 과정별로 구분 · <a class="exam-year" href="https://etwiki.net/index.html?id=linguistics_2020_B03" title="2020 B-3">20</a></p>
   <p>③ <span class="kw3">iN- prefix</span> — in-/im-/iŋ- 형태 결정 규칙: 뒤 자음의 place에 동화 (regressive)</p>
 </div>
 
 <!-- ① 정의 & 동기 -->
 <div class="sec open" id="s1">
-  <div class="sec-header" onclick="toggleSec('s1')">
+  <button class="sec-header" type="button" aria-expanded="true" aria-controls="s1-body" onclick="toggleSec('s1')">
     <span class="sec-icon">🔤</span>
     <span class="sec-title">① Assimilation 정의 &amp; 동기</span>
     <span class="sec-tag">★ 기본개념</span>
     <span class="sec-arrow">▼</span>
-  </div>
-  <div class="sec-body">
+  </button>
+  <div class="sec-body" id="s1-body">
 
     <div class="concept">
       <div class="c-title">1) 정의</div>
@@ -195,20 +212,20 @@ details.assim-depth{margin-top:16px;border:1px solid #aed6f1;border-radius:10px;
       </div>
     </div>
 
-<details class="assim-depth"><summary>정의에서 적용 범위까지: 무엇이 같아지는가?</summary><p><b>분석 순서:</b> input과 output 비교 → 바뀐 target 표시 → trigger 찾기 → direction·feature·degree 각각 판정. “앞뒤 소리가 다르다”는 관찰만으로 dissimilation으로 판단하지 않는다. 그 차이가 조건에 따른 alternation인지 먼저 보아야 한다.</p><p><b>적용 예시 (학습용 재구성):</b> green bag의 /n b/가 [m b]로 실현되었다면 target은 /n/, trigger는 /b/. 뒤에서 앞을 바꾸므로 regressive, 달라진 feature는 place이다. [m]과 [b]는 manner가 다르므로 partial이다. 이 분류는 해당 발음이 관찰되었다는 조건 아래 성립한다.</p><p>phonetic coarticulation은 정도가 점진적일 수 있고, 교재의 segment 화살표는 이를 단순화한 분석일 수 있다. 반면 regular suffix의 allomorph 선택이나 기출이 지정한 obligatory pattern은 해당 문법·자료 범위에서 판단한다. 서로 다른 범위의 assimilation을 하나의 의무적 규칙으로 일반화하지 않는다.</p></details>
+<details class="assim-depth"><summary>자세히 보기 · 정의에서 적용 범위까지: 무엇이 같아지는가?</summary><p><b>분석 순서</b><br>① input과 output 비교<br>② <u>바뀐 target</u> 표시<br>③ 변화를 일으키는 <u>trigger</u> 찾기<br>④ direction·feature·degree를 각각 판정합니다.</p><p> “앞뒤 소리가 다르다”는 관찰만으로 dissimilation으로 판단하지 않는다. 그 차이가 조건에 따른 alternation인지 먼저 보아야 한다.</p><p><b>적용 예시 (학습용 재구성):</b> green bag의 /n b/가 [m b]로 실현되었다면 target은 /n/, trigger는 /b/. <u>뒤 소리가 앞 소리를 바꾸므로 regressive</u>, 달라진 feature는 <b>place</b>이다. [m]과 [b]는 manner가 다르므로 partial이다. 이 분류는 해당 발음이 관찰되었다는 조건 아래 성립한다.</p><p>phonetic coarticulation은 정도가 점진적일 수 있고, 교재의 segment 화살표는 이를 단순화한 분석일 수 있다. 반면 regular suffix의 allomorph 선택이나 기출이 지정한 obligatory pattern은 해당 문법·자료 범위에서 판단한다. 서로 다른 범위의 assimilation을 하나의 의무적 규칙으로 일반화하지 않는다.</p></details>
 
   </div>
 </div>
 
 <!-- ② 방향 -->
 <div class="sec" id="s2">
-  <div class="sec-header" onclick="toggleSec('s2')">
+  <button class="sec-header" type="button" aria-expanded="false" aria-controls="s2-body" onclick="toggleSec('s2')">
     <span class="sec-icon">↔️</span>
     <span class="sec-title">② 방향 — Progressive vs Regressive</span>
     <span class="sec-tag red">★★★ 핵심</span>
     <span class="sec-arrow">▼</span>
-  </div>
-  <div class="sec-body">
+  </button>
+  <div class="sec-body" id="s2-body">
 
     <div class="concept">
       <div class="c-title">핵심 구분</div>
@@ -261,20 +278,20 @@ details.assim-depth{margin-top:16px;border:1px solid #aed6f1;border-radius:10px;
       <p>방향은 과정 이름이 아니라 trigger와 target의 실제 배열로 판별한다.</p>
     </div>
 
-<details class="assim-depth"><summary>방향과 feature는 별개: nasal도 progressive일 수 있다</summary><p>ten girls에서 /n/ → [ŋ]이 일어났다면 뒤 /ɡ/가 trigger이므로 regressive이다. 그러나 colloquial open의 syllabic nasal [m̩] variant에서는 앞 /p/의 place가 뒤 nasal에 영향을 주므로 progressive이다. <b>Place는 regressive, voice는 progressive</b>라고 단정하면 이 사례를 설명하지 못한다.</p><p>형태소를 분석할 때도 suffix 자체와 trigger를 분리한다. packed의 regular past suffix의 underlying form을 /d/로 분석하면 앞 /k/ 때문에 [t]로 실현된다. [k]가 [t]로 바뀐 것이 아니다. Direction은 trigger가 target에 영향을 주는 방향이다.</p></details>
+<details class="assim-depth"><summary>자세히 보기 · 방향과 feature는 별개: nasal도 progressive일 수 있다</summary><p>ten girls에서 /n/ → [ŋ]이 일어났다면 뒤 /ɡ/가 trigger이므로 regressive이다. 그러나 colloquial open의 syllabic nasal [m̩] variant에서는 앞 /p/의 place가 뒤 nasal에 영향을 주므로 progressive이다. <b>Place는 regressive, voice는 progressive</b>라고 단정하면 이 사례를 설명하지 못한다.</p><p>형태소를 분석할 때도 suffix 자체와 trigger를 분리한다. packed의 regular past suffix의 underlying form을 /d/로 분석하면 앞 /k/ 때문에 [t]로 실현된다. [k]가 [t]로 바뀐 것이 아니다. Direction은 trigger가 target에 영향을 주는 방향이다.</p></details>
 
   </div>
 </div>
 
 <!-- ③ 정도 -->
 <div class="sec" id="s3">
-  <div class="sec-header" onclick="toggleSec('s3')">
+  <button class="sec-header" type="button" aria-expanded="false" aria-controls="s3-body" onclick="toggleSec('s3')">
     <span class="sec-icon">📊</span>
     <span class="sec-title">③ 정도 — Total vs Partial + 인접성</span>
     <span class="sec-tag">★ 기본개념</span>
     <span class="sec-arrow">▼</span>
-  </div>
-  <div class="sec-body">
+  </button>
+  <div class="sec-body" id="s3-body">
 
     <div class="concept">
       <div class="c-title">정도(Degree)에 따른 분류</div>
@@ -320,20 +337,20 @@ details.assim-depth{margin-top:16px;border:1px solid #aed6f1;border-radius:10px;
       </div>
     </div>
 
-<details class="assim-depth"><summary>Total·partial과 consonant length 구별</summary><p><b>학습용 비교:</b> late bus의 /t b/가 [p b]로 바뀐 경우에는 place만 같고 voicing은 다르므로 partial이다. late payment의 /t p/가 [p p]로 바뀐 경우에는 target과 trigger가 같아져 total이다. input의 voicing을 유지하는 place-assimilation 분석이다.</p><p>동일 자음 연쇄는 하나의 긴 closure로 실현될 수 있다. 그러나 <b>total assimilation은 유사성의 결과</b>이고 <b>gemination은 길이·연쇄 구조에 관한 용어</b>이므로 완전한 동의어가 아니다. 같은 자음이 처음부터 이어질 수도 있고, assimilation 뒤 degemination이 따로 적용될 수도 있다.</p><p>dog → [ɡɔɡ] 같은 child consonant harmony 예시는 떨어진 consonant 사이의 유사성을 설명한다. 이것을 성인 영어의 모든 단어에 적용하거나 단순한 조음근 발달 부족으로만 설명하지 않는다.</p></details>
+<details class="assim-depth"><summary>자세히 보기 · Total·partial과 consonant length 구별</summary><p><b>학습용 비교:</b> late bus의 /t b/가 [p b]로 바뀐 경우에는 place만 같고 voicing은 다르므로 partial이다. late payment의 /t p/가 [p p]로 바뀐 경우에는 target과 trigger가 같아져 total이다. input의 voicing을 유지하는 place-assimilation 분석이다.</p><p>동일 자음 연쇄는 하나의 긴 closure로 실현될 수 있다. 그러나 <b>total assimilation은 유사성의 결과</b>이고 <b>gemination은 길이·연쇄 구조에 관한 용어</b>이므로 완전한 동의어가 아니다. 같은 자음이 처음부터 이어질 수도 있고, assimilation 뒤 degemination이 따로 적용될 수도 있다.</p><p>dog → [ɡɔɡ] 같은 child consonant harmony 예시는 떨어진 consonant 사이의 유사성을 설명한다. 이것을 성인 영어의 모든 단어에 적용하거나 단순한 조음근 발달 부족으로만 설명하지 않는다.</p></details>
 
   </div>
 </div>
 
 <!-- ④ Place Assimilation -->
 <div class="sec" id="s4">
-  <div class="sec-header" onclick="toggleSec('s4')">
+  <button class="sec-header" type="button" aria-expanded="false" aria-controls="s4-body" onclick="toggleSec('s4')">
     <span class="sec-icon">📍</span>
     <span class="sec-title">④ Place Assimilation — 조음 위치 동화</span>
     <span class="sec-tag red">★★★ 핵심</span>
     <span class="sec-arrow">▼</span>
-  </div>
-  <div class="sec-body">
+  </button>
+  <div class="sec-body" id="s4-body">
 
     <div class="concept">
       <div class="c-title">1) 정의 &amp; 핵심 원리</div>
@@ -349,6 +366,7 @@ details.assim-depth{margin-top:16px;border:1px solid #aed6f1;border-radius:10px;
       <div class="c-title">2) Nasal Place Assimilation — /n/ 의 대표 실현</div>
       <div class="rule-box">
         <div class="rule-label">Phonological Rule</div>
+        <p class="note"><b>규칙 표기 읽기</b><br><u>/n/ → [m]</u>: 바뀌기 전 /n/과 실현된 [m]을 비교합니다.<br><u>___ {p, b, m}</u>: 빈칸은 바뀌는 소리의 자리입니다. 오른쪽의 bilabial consonant가 뒤따르는 조건을 뜻합니다.</p>
         <div class="rule-text">
           /n/ → [m] / ___ {bilabial: p, b, m}<br>
           /n/ → [ŋ] / ___ {velar: k, g}<br>
@@ -407,23 +425,23 @@ details.assim-depth{margin-top:16px;border:1px solid #aed6f1;border-radius:10px;
 
     <div class="exam">
       <div class="exam-label">📋 기출 이력</div>
-      <p><strong>2019 A-4</strong> — velar nasal assimilation의 obligatory pattern: 앞 vowel이 stressed이고 뒤 vowel이 unstressed일 때의 자료 대조.</p>
+      <p><a class="exam-year" href="https://etwiki.net/index.html?id=linguistics_2019_A04" title="2019 A-4">19</a> — velar nasal assimilation의 obligatory pattern: 앞 vowel이 stressed이고 뒤 vowel이 unstressed일 때의 자료 대조.</p>
     </div>
 
-<details class="assim-depth"><summary>2019 A-4: obligatory assimilation의 stress 조건</summary><p>먼저 <a href="https://etwiki.net/concept.html?term=place%20assimilation">place assimilation</a>은 조음 위치가 닮아가는 변화임을 확인한다. /n/은 치경 비음, [ŋ]은 연구개 비음이다. 뒤 /k, ɡ/의 연구개 위치를 취해도 비음이라는 조음 방법은 남는다. Input은 규칙 적용 전 형태, output은 적용 후 발음이다.</p><p>sy[ŋ]chrony의 첫 음절은 강세를 받고 뒤 음절은 무강세다. sy[n]chronic은 강세가 뒤의 chronic 쪽으로 옮겨 간다. 두 형태 모두 nasal 바로 뒤에 /k/가 있으므로 <u>velar라는 조건만으로는 두 열을 구별할 수 없다</u>. 앞 모음의 강세와 뒤 모음의 무강세를 함께 확인하면 왼쪽의 의무적 /n/ → [ŋ]을 설명한다. 빈칸의 답은 순서대로 <b>stressed, unstressed</b>이다. <a href="https://etwiki.net/index.html?id=linguistics_2019_A04">2019 A-4 원문·풀이</a></p><p><b>조건을 바꾼 학습용 비교:</b> 가상의 /ˈæn.kə/와 /æn.ˈkɑ/를 같은 형태소 경계 조건에서 비교하자. 첫 배열은 앞 강세·뒤 무강세를 충족하므로 이 규칙은 [ˈæŋ.kə]를 예측한다. 두 번째는 뒤가 강세이므로 이 의무적 규칙의 대상이 아니다. 그렇다고 optional postlexical [ŋ]까지 금지된다고 결론 내리지는 않는다. 실제 영어 단어나 기출 자료로 제시한 예는 아니다.</p><p><b>실제 자료 대조:</b> sy[ŋ]chrony–sy[n]chronic에서는 두 형태 모두 nasal 뒤에 velar가 있지만 stress 배치가 다르다. 지문의 obligatory assimilation 사례에서는 앞 vowel이 stressed이고 뒤 vowel이 unstressed이다. 발문은 각 빈칸에 한 단어씩, 순서대로 쓰도록 요구한다.</p><p>지문은 co[ŋ]cordance 같은 optional postlexical variant도 따로 허용한다. 따라서 “오른쪽 열에는 [ŋ]이 절대로 불가능하다” 또는 “모든 /n/→[ŋ]은 앞 vowel에 stress가 있어야 한다”는 결론은 틀리다. 이 조건은 해당 자료의 obligatory assimilation이 적용되는 조건이다.</p><p><b>형태소·phoneme 구별:</b> negative prefix의 [ɪm]/[ɪn]/[ɪŋ]은 같은 morpheme의 allomorph를 보여 준다. 이것만으로 영어 /m n ŋ/ 전체를 하나의 phoneme의 allophone으로 분류하지 않는다. 또한 [ɪŋ-]은 발음 표시이며 영어 철자에 iŋ-라는 접두사가 있다는 뜻이 아니다.</p><p>더 세밀한 transcription에서는 tenth의 dental [n̪], infant의 labiodental [ɱ]도 고려한다. 대표 표의 [m n ŋ] 외에는 다른 실현이 없다고 일반화하지 않는다.</p></details>
+<details class="assim-depth"><summary>자세히 보기 · 2019 A-4: obligatory assimilation의 stress 조건</summary><p>먼저 <a href="https://etwiki.net/concept.html?term=place%20assimilation">place assimilation</a>은 조음 위치가 닮아가는 변화임을 확인한다. /n/은 치경 비음, [ŋ]은 연구개 비음이다. 뒤 /k, ɡ/의 연구개 위치를 취해도 비음이라는 조음 방법은 남는다. Input은 규칙 적용 전 형태, output은 적용 후 발음이다.</p><p>sy[ŋ]chrony의 첫 음절은 강세를 받고 뒤 음절은 무강세다. sy[n]chronic은 강세가 뒤의 chronic 쪽으로 옮겨 간다. 두 형태 모두 nasal 바로 뒤에 /k/가 있으므로 <u>velar라는 조건만으로는 두 열을 구별할 수 없다</u>. 앞 모음의 강세와 뒤 모음의 무강세를 함께 확인하면 왼쪽의 의무적 /n/ → [ŋ]을 설명한다. 빈칸의 답은 순서대로 <b>stressed, unstressed</b>이다. <a href="https://etwiki.net/index.html?id=linguistics_2019_A04">2019 A-4 원문·풀이</a></p><p><b>조건을 바꾼 학습용 비교:</b> 가상의 /ˈæn.kə/와 /æn.ˈkɑ/를 같은 형태소 경계 조건에서 비교하자. 첫 배열은 앞 강세·뒤 무강세를 충족하므로 이 규칙은 [ˈæŋ.kə]를 예측한다. 두 번째는 뒤가 강세이므로 이 의무적 규칙의 대상이 아니다. 그렇다고 optional postlexical [ŋ]까지 금지된다고 결론 내리지는 않는다. 실제 영어 단어나 기출 자료로 제시한 예는 아니다.</p><p><b>실제 자료 대조:</b> sy[ŋ]chrony–sy[n]chronic에서는 두 형태 모두 nasal 뒤에 velar가 있지만 stress 배치가 다르다. 지문의 obligatory assimilation 사례에서는 앞 vowel이 stressed이고 뒤 vowel이 unstressed이다. 발문은 각 빈칸에 한 단어씩, 순서대로 쓰도록 요구한다.</p><p>지문은 co[ŋ]cordance 같은 optional postlexical variant도 따로 허용한다. 따라서 “오른쪽 열에는 [ŋ]이 절대로 불가능하다” 또는 “모든 /n/→[ŋ]은 앞 vowel에 stress가 있어야 한다”는 결론은 틀리다. 이 조건은 해당 자료의 obligatory assimilation이 적용되는 조건이다.</p><p><b>형태소·phoneme 구별:</b> negative prefix의 [ɪm]/[ɪn]/[ɪŋ]은 같은 morpheme의 allomorph를 보여 준다. 이것만으로 영어 /m n ŋ/ 전체를 하나의 phoneme의 allophone으로 분류하지 않는다. 또한 [ɪŋ-]은 발음 표시이며 영어 철자에 iŋ-라는 접두사가 있다는 뜻이 아니다.</p><p>더 세밀한 transcription에서는 tenth의 dental [n̪], infant의 labiodental [ɱ]도 고려한다. 대표 표의 [m n ŋ] 외에는 다른 실현이 없다고 일반화하지 않는다.</p></details>
 
   </div>
 </div>
 
 <!-- ⑤ Voice Assimilation -->
 <div class="sec" id="s5">
-  <div class="sec-header" onclick="toggleSec('s5')">
+  <button class="sec-header" type="button" aria-expanded="false" aria-controls="s5-body" onclick="toggleSec('s5')">
     <span class="sec-icon">🔊</span>
     <span class="sec-title">⑤ Voice (Laryngeal) Assimilation — 유성성 동화</span>
     <span class="sec-tag orange">★★ 적용</span>
     <span class="sec-arrow">▼</span>
-  </div>
-  <div class="sec-body">
+  </button>
+  <div class="sec-body" id="s5-body">
 
     <div class="concept">
       <div class="c-title">1) 정의</div>
@@ -505,20 +523,20 @@ details.assim-depth{margin-top:16px;border:1px solid #aed6f1;border-radius:10px;
       <p>Voice assimilation의 방향은 앞 segment가 following morpheme의 voicing에 영향을 주는 progressive pattern으로 별도 확인한다.</p>
     </div>
 
-<details class="assim-depth"><summary>Suffix allomorph, epenthesis, partial devoicing 구별</summary><p><b>학습용 derivation:</b> /læp + z/ → [læps]에서는 /z/의 voicing이 바뀐다. /leɪn + z/ → [leɪnz]에서는 [z]가 유지된다. /meɪz + z/ 같은 sibilant-final stem+suffix 구조는 vowel insertion을 먼저 고려해야 하므로 단순한 [s]/[z] 선택만으로 처리하지 않는다. 실제 단어 maze의 plural mazes가 그 구조를 보여 준다.</p><p>regular suffix 앞에 vowel이 오는 played·keys에서도 voiced allomorph가 가능하다. 반면 단일 morpheme인 tent의 [nt]는 past suffix가 아니므로 “앞 nasal이 voiced이니 [nd]여야 한다”는 추론은 성립하지 않는다. morpheme boundary가 분석의 일부다.</p><p>plural [əz]~[ɪz], past [əd]~[ɪd]의 vowel은 기술 체계·variety에 따라 다르게 적을 수 있다. vowel insertion과 voicing alternation을 분리한다. play의 partial approximant devoicing 역시 모든 sonorant를 새로운 voiceless phoneme으로 바꾼다는 뜻은 아니다.</p></details>
+<details class="assim-depth"><summary>자세히 보기 · Suffix allomorph, epenthesis, partial devoicing 구별</summary><p><b>학습용 derivation:</b> /læp + z/ → [læps]에서는 /z/의 voicing이 바뀐다. /leɪn + z/ → [leɪnz]에서는 [z]가 유지된다. /meɪz + z/ 같은 sibilant-final stem+suffix 구조는 vowel insertion을 먼저 고려해야 하므로 단순한 [s]/[z] 선택만으로 처리하지 않는다. 실제 단어 maze의 plural mazes가 그 구조를 보여 준다.</p><p>regular suffix 앞에 vowel이 오는 played·keys에서도 voiced allomorph가 가능하다. 반면 단일 morpheme인 tent의 [nt]는 past suffix가 아니므로 “앞 nasal이 voiced이니 [nd]여야 한다”는 추론은 성립하지 않는다. morpheme boundary가 분석의 일부다.</p><p>plural [əz]~[ɪz], past [əd]~[ɪd]의 vowel은 기술 체계·variety에 따라 다르게 적을 수 있다. vowel insertion과 voicing alternation을 분리한다. play의 partial approximant devoicing 역시 모든 sonorant를 새로운 voiceless phoneme으로 바꾼다는 뜻은 아니다.</p></details>
 
   </div>
 </div>
 
 <!-- ⑥ Manner Assimilation -->
 <div class="sec" id="s6">
-  <div class="sec-header" onclick="toggleSec('s6')">
+  <button class="sec-header" type="button" aria-expanded="false" aria-controls="s6-body" onclick="toggleSec('s6')">
     <span class="sec-icon">🌊</span>
     <span class="sec-title">⑥ Manner Assimilation — 조음 방법 동화</span>
     <span class="sec-tag orange">★★ 적용</span>
     <span class="sec-arrow">▼</span>
-  </div>
-  <div class="sec-body">
+  </button>
+  <div class="sec-body" id="s6-body">
 
     <div class="concept">
       <div class="c-title">1) 정의</div>
@@ -576,28 +594,23 @@ details.assim-depth{margin-top:16px;border:1px solid #aed6f1;border-radius:10px;
 
       <div class="exam" style="margin-top:14px">
         <div class="exam-label">📋 기출 이력</div>
-      <p><strong>2020 B-3</strong> — il-/ir-는 assimilation, -al/-ar는 dissimilation. 두 pattern의 [lateral] value가 같아지는지 반대가 되는지를 구분.</p>
+      <p><a class="exam-year" href="https://etwiki.net/index.html?id=linguistics_2020_B03" title="2020 B-3">20</a> — il-/ir-는 assimilation, -al/-ar는 dissimilation. 두 pattern의 [lateral] value가 같아지는지 반대가 되는지를 구분.</p>
       </div>
     </div>
 
-<details class="assim-depth"><summary>2020 B-3: 같은 /l, ɹ/ alternation, 다른 process</summary><p><a href="https://etwiki.net/concept.html?term=allomorph">Allomorph(이형태)</a>는 같은 형태소가 환경에 따라 달라진 형태다. [lateral]은 혀 양옆으로 공기가 흐르는 특성을 표시한다. 이 자료에서 /l/은 [+lateral], /ɹ/은 [−lateral]이다. 같은 부호가 되면 유사성이 커지고, 반대 부호가 되면 작아지는지 비교한다. <a href="https://etwiki.net/index.html?id=linguistics_2020_B03">2020 B-3 원문·풀이</a></p><p>실제 문항의 prefix 예시 illogical에서는 base-initial /l/과 prefix의 /l/이 [+lateral]을 공유하고, irregular에서는 /ɹ/의 [-lateral]이 일치한다. 이것이 assimilation 판정의 근거다. /in-/에서 liquid로 바꾸는 별도 분석에서는 manner 변화도 설명할 수 있지만, 발문은 [lateral]로 allomorph 분포를 일반화하도록 요구한다.</p><p>suffix 예시 solar는 sol-ar로 나누어 base-final /l/ [+lateral]과 suffix /ɹ/ [-lateral]을 비교한다. rural은 rur-al로 나누어 /ɹ/ [-lateral]과 /l/ [+lateral]을 비교한다. suffix vowel이 사이에 있어도 관련 liquid의 값이 반대이므로 dissimilation이다. 두 liquid가 곧바로 인접한다고 쓰지 않는다.</p><p>답안에서는 두 process를 <b>assimilation → dissimilation</b> 순서로 적고, 제시 자료에서 -ar는 [+lateral] base-final consonant 뒤, -al은 [-lateral] 뒤라는 분포를 서술한다. 이 자료의 일반화를 모든 -al/-ar 단어에 예외 없이 적용하지 않는다.</p><p>il-/ir-의 double spelling은 실제 발음에서 긴 [ll]/[ɹɹ]을 반드시 요구하지 않는다. 위 흐름의 동일 자음은 분석 단계이며, 통상 surface form에서는 하나의 liquid로 실현된다. nasalization·liquid assimilation·degemination은 서로 다른 단계로 표시한다.</p></details>
+<details class="assim-depth"><summary>자세히 보기 · 2020 B-3: 같은 /l, ɹ/ alternation, 다른 process</summary><p><a href="https://etwiki.net/concept.html?term=allomorph">Allomorph(이형태)</a>는 같은 형태소가 환경에 따라 달라진 형태다. [lateral]은 혀 양옆으로 공기가 흐르는 특성을 표시한다. 이 자료에서 /l/은 [+lateral], /ɹ/은 [−lateral]이다. 같은 부호가 되면 유사성이 커지고, 반대 부호가 되면 작아지는지 비교한다. <a href="https://etwiki.net/index.html?id=linguistics_2020_B03">2020 B-3 원문·풀이</a></p><p>실제 문항의 prefix 예시 illogical에서는 base-initial /l/과 prefix의 /l/이 [+lateral]을 공유하고, irregular에서는 /ɹ/의 [-lateral]이 일치한다. 이것이 assimilation 판정의 근거다. /in-/에서 liquid로 바꾸는 별도 분석에서는 manner 변화도 설명할 수 있지만, 발문은 [lateral]로 allomorph 분포를 일반화하도록 요구한다.</p><p>suffix 예시 solar는 sol-ar로 나누어 base-final /l/ [+lateral]과 suffix /ɹ/ [-lateral]을 비교한다. rural은 rur-al로 나누어 /ɹ/ [-lateral]과 /l/ [+lateral]을 비교한다. suffix vowel이 사이에 있어도 관련 liquid의 값이 반대이므로 dissimilation이다. 두 liquid가 곧바로 인접한다고 쓰지 않는다.</p><p>답안에서는 두 process를 <b>assimilation → dissimilation</b> 순서로 적고, 제시 자료에서 -ar는 [+lateral] base-final consonant 뒤, -al은 [-lateral] 뒤라는 분포를 서술한다. 이 자료의 일반화를 모든 -al/-ar 단어에 예외 없이 적용하지 않는다.</p><p>il-/ir-의 double spelling은 실제 발음에서 긴 [ll]/[ɹɹ]을 반드시 요구하지 않는다. 위 흐름의 동일 자음은 분석 단계이며, 통상 surface form에서는 하나의 liquid로 실현된다. nasalization·liquid assimilation·degemination은 서로 다른 단계로 표시한다.</p></details>
 
   </div>
 </div>
 
-<p class="note">개념 근거: Mehmet Yavaş, <i>Applied English Phonology</i>, 2nd ed. (2011), §§2.3, 2.5, 3.4–3.5, 4.2.3. 기출 분석은 2019 A-4·2020 B-3의 제시 자료 범위에 한정한다. 새 비교 예시는 학습용으로 재구성했다.</p>
+<details class="source-note"><summary>원서 출처 보기</summary><p>Mehmet Yavaş, <i>Applied English Phonology</i>, 2nd ed. (2011), §§2.3, 2.5, 3.4–3.5, 4.2.3. 기출 분석은 2019 A-4·2020 B-3의 제시 자료 범위에 한정한다. 새 비교 예시는 학습용으로 재구성했다.</p></details>
 </div><!-- /wrap -->
 
 <script>
-function toggleSec(id){
-  const s=document.getElementById(id);
-  s.classList.toggle('open');
-}
-function openSec(id){
-  const s=document.getElementById(id);
-  s.classList.add('open');
-  s.scrollIntoView({behavior:'smooth',block:'start'});
-}
+function toggleSec(id){const s=document.getElementById(id);if(!s)return;const open=s.classList.toggle('open');s.querySelector('.sec-header').setAttribute('aria-expanded',String(open));}
+function openSec(id){const s=document.getElementById(id);if(!s)return;s.classList.add('open');s.querySelector('.sec-header').setAttribute('aria-expanded','true');s.scrollIntoView({behavior:'smooth',block:'start'});}
+function revealAssimTarget(){let id;try{id=decodeURIComponent(location.hash.slice(1));}catch(_){return;}const t=document.getElementById(id);if(!t)return;let n=t;while(n){if(n.tagName==='DETAILS')n.open=true;if(n.classList&&n.classList.contains('sec')){n.classList.add('open');n.querySelector('.sec-header').setAttribute('aria-expanded','true');}n=n.parentElement;}}
+revealAssimTarget();window.addEventListener('hashchange',revealAssimTarget);
 </script>
 <script src="./study-return.js" data-hub-label="음성·음운론 허브"></script>
 </body>
