@@ -107,6 +107,20 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
 .etwiki-learning .exam-year{display:inline-block;padding:2px 7px;background:#fff4f2;border:1px solid #e6b2a9;border-radius:5px;font-size:13px}
 @media(max-width:640px){.etwiki-learning .sec-body{padding:16px}.etwiki-learning .sec-header{padding:14px}.etwiki-learning details.concept>summary{padding:13px 15px}.etwiki-learning details.concept>.def{padding:4px 15px 16px}}
 </style>
+<style>
+.etwiki-learning .stress-reading-guide{margin:18px 0;padding:18px;border:1px solid #b2d8c5;border-radius:10px;background:#fff;color:#203b31;font-size:16px;line-height:1.85}
+.etwiki-learning .stress-reading-guide h2{font-size:20px;margin:0 0 12px}.etwiki-learning .stress-reading-guide p{margin:10px 0}
+.etwiki-learning .stress-symbol-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}
+.etwiki-learning .stress-symbol-grid>div{padding:12px;background:#f4f9f6;border:1px solid #d1e3d9;border-radius:7px}
+.etwiki-learning .stress-symbol-grid strong,.etwiki-learning .stress-symbol-grid span{display:block}
+.etwiki-learning .stress-mark{font-family:Arial,sans-serif;font-size:38px;line-height:1.2;color:#ac2525;display:block}.etwiki-learning .stress-mark.secondary{color:#235d86}.etwiki-learning .stress-mark.plain{color:#33453d}
+.etwiki-learning .stress-reading-example{padding:12px 14px;margin:12px 0;border-left:3px solid #8db59f;background:#f7faf8}
+.etwiki-learning .stress-reading-guide mark{background:#fff0c2;color:inherit}.etwiki-learning .stress-reading-guide u{text-underline-offset:3px}
+.etwiki-learning .stress-syllable-row{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}.etwiki-learning .stress-syllable-row>span{flex:1 1 110px;min-width:0;padding:10px;border:1px solid #c6d9ce;border-radius:6px;background:#fff}
+.etwiki-learning .stress-syllable-row b{font-size:22px}.etwiki-learning .stress-syllable-row small{display:block;font-size:14px}
+.etwiki-learning .stress-guide-more,.etwiki-learning .stress-reading-guide .source-note{margin-top:14px;padding:12px;border:1px solid #d0e2d7;border-radius:7px}.etwiki-learning .stress-reading-guide summary{cursor:pointer;font-weight:700}
+@media(max-width:640px){.etwiki-learning .stress-reading-guide{padding:15px}.etwiki-learning .stress-symbol-grid{grid-template-columns:1fr}.etwiki-learning .stress-reading-example{padding:10px}}
+</style>
 </head>
 <body class="etwiki-learning">
 <header class="ew-header"><div class="ew-brand-row"><a class="ew-brand" href="https://etwiki.net/index.html">기출 WIKI</a><span class="ew-header-label">학습자료</span><a class="ew-back" href="https://etwiki.net/study.html">전체 자료 ↗</a></div><nav class="ew-subjects" aria-label="학습 영역"><a href="https://namkicheol.github.io/englisheducation/">영어교육론</a><a href="https://namkicheol.github.io/linguistics/">영어학</a><a href="https://namkicheol.github.io/phonetics-phonology/phonetics.html" aria-current="location">음성·음운론</a></nav></header>
@@ -175,7 +189,21 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
   <p>⑤ <span class="kw3">2025 B04</span> — Name Game에 허용되는 이름의 첫 음절 primary stress 조건</p>
 </div>
 
-<p class="note">먼저 <a data-stress-link href="./stress_concepts.html#ipa-basics">IPA 강세 기호</a>를 읽고, <a data-stress-link href="./stress_study.html#s1">음절 무게</a> → <a data-stress-link href="./stress_study.html#s6">접미사</a> → <a data-stress-link href="./stress_study.html#s7">compound</a>를 연결하세요. 문장 안의 두드러짐은 <a data-stress-link href="./sentence_study.html#nuclear">nuclear stress</a>에서 따로 비교합니다.</p>
+<div class="stress-reading-guide">
+<h2>강세 표기, 이렇게 읽어요</h2>
+<p><strong>발음 기호의 ˈ와 ˌ는 <u>바로 뒤에 오는 음절</u>을 가리킵니다.</strong> 앞 음절의 표시가 아닙니다. ‘전사’는 발음을 기호로 적은 것을 뜻합니다.</p>
+<div class="stress-symbol-grid">
+<div><b class="stress-mark">ˈ</b><strong>primary stress</strong><span>단어에서 가장 두드러지는 강세</span></div>
+<div><b class="stress-mark secondary">ˌ</b><strong>secondary stress</strong><span>primary보다 약하지만, 강세 없는 음절과 구별되는 강세</span></div>
+<div><b class="stress-mark plain">.</b><strong>음절 경계</strong><span>음절을 나누어 보여 주는 점. 강세 기호가 아닙니다.</span></div>
+</div>
+<div class="stress-reading-example"><b>surprise /səˈpraɪz/</b><p>/sə/ + <mark>ˈpraɪz</mark> → 둘째 음절 /praɪz/에 primary stress가 있습니다.</p></div>
+<div class="stress-reading-example"><b>retell /ˌriːˈtel/</b><div class="stress-syllable-row"><span><b>ˌriː</b><small>첫째 음절 · secondary</small></span><span><b>ˈtel</b><small>둘째 음절 · primary</small></span></div><p><u>둘 다 강세가 있지만, /tel/이 더 두드러집니다.</u> ˌ는 쉼표나 ‘앞 음절을 약하게 읽으라’는 표시가 아닙니다.</p></div>
+<p><b>system /ˈsɪs.təm/</b>의 점은 /sɪs/와 /təm/을 나눕니다. 첫 음절 앞의 ˈ가 강세를 표시합니다.</p>
+<details class="stress-guide-more"><summary>숫자 표기·음절 위치 용어도 구분하기</summary><p><b>Ult</b>는 마지막 음절, <b>penult</b>는 뒤에서 둘째, <b>antepenult</b>는 뒤에서 셋째 음절입니다. 단어의 앞이 아니라 <u>끝에서부터 셉니다.</u></p><p>교재의 1·2·3·4 같은 숫자는 그 자료에서 정한 강세 체계의 표시입니다. 숫자 2를 무조건 IPA ˌ와 바꾸지 말고, 표의 설명을 먼저 읽습니다. 이 단원의 AEP 분석은 stress 여부뿐 아니라 tonic accent와 full vowel 여부도 구별합니다.</p><p>강세 기호가 없다고 모음이 반드시 /ə/가 되는 것은 아닙니다. <u>강세의 위치와 모음의 종류는 따로 확인</u>합니다. 강세도 단순히 ‘크게 읽기’ 하나로 정하지 않고 길이·pitch 등 여러 단서로 드러납니다.</p></details>
+<details class="source-note"><summary>표기 근거</summary><p>Cambridge Dictionary, <a href="https://dictionary.cambridge.org/help/phonetics.html">Phonetics: Stress and syllable division</a>. 예시는 해당 안내의 UK 전사를 사용했습니다. Yavaş (2011), <cite>Applied English Phonology</cite>, 2nd ed., Chapter 7.</p></details>
+</div>
+<p class="note">기호를 읽은 뒤에는 아래의 음절 무게 → 접미사 → compound 설명을 차례로 봅니다. <a data-stress-link href="./stress_concepts.html#ipa-basics">강세 표기와 긴 단어 예문 더 보기</a></p>
 <!-- ① 음절 무게 -->
 <div class="sec open" id="s1">
   <div class="sec-header" onclick="toggleSec('s1')">
@@ -200,7 +228,7 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
     <div class="concept">
       <div class="c-title">1) 왜 음절 무게가 중요한가</div>
       <div class="def">
-        영어 stress assignment에서 <b>음절의 무게(weight)</b>는 중요한 조건이다. heavy syllable은 <b>attract stress</b>하며, light syllable은 이 규칙에서 stress를 attract하지 못한다. 특히 schwa [ə]는 <b>"무게가 없는(weightless)" 모음</b>으로 취급되어 일차 강세를 받지 못한다.<br><br>
+        이 단원의 AEP 분석에서 <b>음절의 무게(weight)</b>는 강세 위치를 설명하는 조건 중 하나입니다. <u>Heavy라고 해서 모든 음절이 primary stress를 받는 것은 아닙니다.</u> 품사·접미사와 예외도 함께 봅니다. Schwa [ə]는 이 분석에서 <b>weightless</b>로 따로 처리하며 stress를 받지 않는 것으로 설명합니다.<br><br>
         무게를 결정하는 것은 음절의 <span class="kw4">rhyme</span> 구조다. rhyme이 branching(분지)하면 heavy, non-branching이면 일반적으로 light다. 단, schwa [ə]는 non-branching 구조여도 light가 아니라 weightless 예외로 처리한다.
       </div>
     </div>
