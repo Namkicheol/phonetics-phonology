@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Distinctive Features & Natural Class — OX Quiz</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:repeating-linear-gradient(transparent,transparent 27px,#ddddd0 28px);color:#1a1a1a;min-height:100vh;padding:16px}
+.header-wrap{max-width:720px;margin:0 auto;padding:20px 8px 0}
+.header-topbar{display:flex;justify-content:space-between;align-items:center;border-top:2px solid #1a1a1a;padding-top:8px;margin-bottom:10px}
+.header-no{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;border:2px solid #1a1a1a;padding:3px 10px;border-radius:2px;letter-spacing:.5px;display:flex;align-items:center;gap:6px}
+.header-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;letter-spacing:1px}
+.header-title{font-size:clamp(30px,7vw,46px);font-weight:900;color:#1a1a1a;line-height:1.1;margin-bottom:5px;letter-spacing:-1px}
+.title-hl{background:#1a5276;color:#fff;padding:1px 6px}
+.header-script{font-family:'Caveat',cursive;font-size:21px;color:#1a5276;margin-bottom:4px;font-weight:600}
+.header-sub{font-size:13px;color:#555;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#aaa;margin-bottom:14px}
+.header-divider{border:none;border-top:2.5px solid #1a1a1a;margin-bottom:20px}
+.prog-wrap{max-width:720px;margin:0 auto 10px;padding:0 8px}
+.prog-info{display:flex;justify-content:space-between;font-size:12px;color:#1a5276;font-family:'JetBrains Mono',monospace;margin-bottom:6px}
+.bar{height:4px;background:#aed6f1;border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,#1a5276,#2980b9);border-radius:2px;transition:width .5s ease}
+.wrap{max-width:720px;margin:0 auto}
+.card{background:#fff;border:1.5px solid #aed6f1;border-radius:14px;padding:26px;animation:up .35s ease;box-shadow:0 2px 8px rgba(26,82,118,.08)}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.q-meta{display:flex;align-items:center;gap:7px;margin-bottom:14px;flex-wrap:wrap}
+.q-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:#1a5276;background:rgba(26,82,118,.1);padding:3px 10px;border-radius:8px;font-weight:700}
+.q-src{font-size:11px;color:#2e86c1;font-family:'JetBrains Mono',monospace}
+.q-cat{font-size:11px;color:#1a5276;background:rgba(41,128,185,.1);padding:3px 10px;border-radius:8px;margin-left:auto;font-weight:600}
+.kw1{background:rgba(26,82,118,.15);color:#1a3a52;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(26,82,118,.25)}
+.kw2{color:#117a8b;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border-bottom:2px solid rgba(17,122,139,.45)}
+.kw3{background:rgba(39,174,96,.13);color:#1e8449;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(39,174,96,.3)}
+.kw4{background:rgba(183,28,28,.11);color:#b71c1c;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border:1px solid rgba(183,28,28,.25)}
+.q-text{font-size:clamp(15px,2.2vw,16.5px);line-height:1.9;margin-bottom:24px;color:#1a2633}
+.ox-btns{display:flex;gap:12px}
+.ox-btn{flex:1;padding:20px 10px;border-radius:12px;border:2px solid #aed6f1;background:#f4f9fe;color:#1a2633;font-size:30px;cursor:pointer;transition:all .18s ease;display:flex;flex-direction:column;align-items:center;gap:5px}
+.lb{font-size:11px;font-family:'JetBrains Mono',monospace;color:#2e86c1;letter-spacing:1px;font-weight:600}
+.ox-btn:hover:not(:disabled){transform:translateY(-2px)}
+.o-btn:hover:not(:disabled){border-color:#1a5276;background:rgba(26,82,118,.08)}
+.x-btn:hover:not(:disabled){border-color:#c62828;background:rgba(198,40,40,.06)}
+.co,.cx{border-color:#1a5276!important;background:rgba(26,82,118,.1)!important}
+.wp{border-color:#c62828!important;background:rgba(198,40,40,.08)!important}
+.ox-btn:disabled{cursor:default}
+.badge{display:none;margin-top:14px;padding:9px 16px;border-radius:8px;font-size:14px;font-weight:700;font-family:'JetBrains Mono',monospace}
+.badge.ok{display:inline-block;background:rgba(26,82,118,.1);color:#1a5276;border:1.5px solid rgba(26,82,118,.3)}
+.badge.ng{display:inline-block;background:rgba(198,40,40,.08);color:#c62828;border:1.5px solid rgba(198,40,40,.25)}
+.exp{display:none;margin-top:18px;border-radius:12px;overflow:hidden;animation:fade .3s ease}
+.exp.show{display:block}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.exp-header{background:linear-gradient(135deg,rgba(26,82,118,.12),rgba(41,128,185,.06));border:1.5px solid rgba(26,82,118,.25);border-bottom:none;padding:11px 16px}
+.exp-header span{font-size:11px;font-family:'JetBrains Mono',monospace;color:#1a3a52;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.exp-answer{background:rgba(26,82,118,.05);border:1.5px solid rgba(26,82,118,.2);border-top:none;border-bottom:none;padding:14px 16px}
+.ans-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#2e86c1;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-weight:700}
+.ans-text{font-size:15px;color:#1a2633;line-height:1.75;font-weight:500}
+.exp-body{background:rgba(26,82,118,.03);border:1.5px solid rgba(26,82,118,.15);border-top:1px solid rgba(26,82,118,.1);padding:14px 16px}
+.sec-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#117a8b;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;margin-top:13px;font-weight:700}
+.sec-label:first-child{margin-top:0}
+.exp-body p{font-size:14px;color:#1a3a52;line-height:1.8;margin-bottom:5px}
+.def-box{background:rgba(41,128,185,.06);border-left:4px solid #2980b9;padding:10px 14px;border-radius:0 8px 8px 0;margin:8px 0}
+.def-box p{color:#1a3a52;font-size:13.5px;font-style:italic;line-height:1.75}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.compare.three{grid-template-columns:1fr 1fr 1fr}
+.compare-item{background:#f4f9fe;border:1.5px solid #aed6f1;border-radius:8px;padding:11px 14px}
+.ci-title{font-size:11px;font-family:'JetBrains Mono',monospace;color:#1a5276;font-weight:700;margin-bottom:5px}
+.compare-item p{font-size:13px;color:#2e4a5a;line-height:1.65}
+.next-btn{display:none;width:100%;margin-top:16px;padding:14px;background:linear-gradient(135deg,#1a5276,#2980b9);border:none;border-radius:10px;color:white;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:opacity .2s,transform .2s}
+.next-btn:hover{opacity:.88;transform:translateY(-1px)}
+.next-btn.show{display:block;animation:fade .3s ease}
+.score-card{display:none;text-align:center;padding:48px 24px}
+.score-card.show{display:block;animation:up .5s ease}
+.score-circle{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,#1a5276,#2980b9);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 0 40px rgba(26,82,118,.3)}
+.s-num{font-size:42px;font-weight:700;line-height:1;color:#fff}
+.s-total{font-size:14px;opacity:.85;color:#fff}
+.score-card h2{font-size:24px;margin-bottom:7px;color:#1a1a1a}
+.score-card p{color:#555;margin-bottom:24px;font-size:15px}
+.restart-btn{padding:13px 32px;background:#fff;border:2px solid #1a1a1a;border-radius:10px;color:#1a1a1a;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.restart-btn:hover{background:#f5f4ee}
+.nd{width:28px;height:28px;border-radius:6px;border:1.5px solid #aed6f1;background:#fff;font-size:10px;font-family:'JetBrains Mono',monospace;cursor:pointer;color:#2e86c1;transition:all .15s;display:inline-flex;align-items:center;justify-content:center;font-weight:600}
+.nd.cur{border-color:#1a5276;background:#1a5276;color:white}
+.nd.ok{border-color:#1a5276;background:rgba(26,82,118,.15);color:#1a3a52}
+.nd.ng{border-color:#c62828;background:rgba(198,40,40,.1);color:#c62828}
+.nd:hover:not(.cur){opacity:.7}
+#nav{display:flex;flex-wrap:wrap;gap:5px;max-width:720px;margin:0 auto 16px;padding:0 8px}
+</style>
+<link rel="stylesheet" href="./mint-learning.css">
+</head>
+<body class="etwiki-learning">
+<header class="ew-header"><div class="ew-brand-row"><a class="ew-brand" href="https://etwiki.net/index.html">기출 WIKI</a><span class="ew-header-label">학습자료</span><a class="ew-back" href="https://etwiki.net/study.html">전체 자료 ↗</a></div><nav class="ew-subjects" aria-label="학습 영역"><a href="https://namkicheol.github.io/englisheducation/">영어교육론</a><a href="https://namkicheol.github.io/linguistics/">영어학</a><a href="https://namkicheol.github.io/phonetics-phonology/phonetics.html" aria-current="location">음성·음운론</a></nav></header>
+<style>
+.study-nav{position:relative;z-index:30;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:10px 12px;background:#fff;border-bottom:1px solid #dce9f0}
+.study-nav a{min-height:36px;display:inline-flex;align-items:center;justify-content:center;padding:7px 11px;border:1px solid #dce9f0;border-radius:18px;background:#f4f8fb;color:#31566b;font:600 12px/1.2 'Noto Sans KR',sans-serif;text-decoration:none;white-space:nowrap}
+.study-nav a.local{background:#e1ecf4;border-color:#9bb9ca;color:#1a5276}
+.nd{min-width:36px;min-height:36px}
+@media(max-width:520px){.study-nav{padding:8px;gap:5px}.study-nav a{padding:6px 9px;font-size:11px}.compare,.compare.three{grid-template-columns:minmax(0,1fr)}.compare-item{min-width:0;overflow-wrap:anywhere}}
+</style>
+<nav class="study-nav" aria-label="전공영어 학습 내비게이션">
+  <a class="local" href="./phonetics.html">음성·음운론 허브</a>
+  <a class="local" href="./features_study.html">Features 개념</a>
+  <a href="https://etwiki.net/index.html">기출 WIKI</a>
+  <a href="https://namkicheol.github.io/englisheducation/">영어교육론</a>
+  <a href="https://namkicheol.github.io/linguistics/">영어학</a>
+  <a href="https://etwiki.net/keyterm-quiz.html">영교론 키텀</a>
+</nav>
+<div class="header-wrap">
+  <div class="header-topbar">
+    <span class="header-no">NO. 13 <span>—</span> Distinctive Features</span>
+    <span class="header-label">Past-Exam Notebook</span>
+  </div>
+  <h1 class="header-title"><span class="title-hl">음운론</span> 개념 마스터</h1>
+  <div class="header-script">Phonology · Distinctive Features</div>
+  <p class="header-sub">Feature 값 · natural class · 제시된 표와 자료의 적용</p>
+  <div class="header-divider"></div>
+</div>
+<div class="prog-wrap">
+  <div class="prog-info"><span id="pt">1 / 12</span><span id="ps">정답 0개</span></div>
+  <div class="bar"><div class="bar-fill" id="bf" style="width:8.33%"></div></div>
+</div>
+<div id="rb" style="display:none;max-width:720px;margin:0 auto 14px;padding:0 8px">
+  <div style="background:rgba(26,82,118,.08);border:1.5px solid rgba(26,82,118,.3);border-radius:12px;padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <span id="rb-msg" style="font-size:13px;color:#1a2633;font-family:'JetBrains Mono',monospace;line-height:1.5"></span>
+    <button onclick="freshStart()" style="padding:10px 22px;background:#c62828;border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer">처음부터</button>
+  </div>
+</div>
+<div id="nav"></div>
+<div class="wrap">
+  <div id="qa"></div>
+  <div class="score-card" id="sc">
+    <div class="score-circle"><span class="s-num" id="fs">0</span><span class="s-total">/12</span></div>
+    <h2 id="rm"></h2><p id="rs"></p>
+    <button class="restart-btn" onclick="freshStart()">🔄 처음부터</button>
+  </div>
+</div>
+<script src="./sounds.js"></script>
+<script src="./score-popup.js?v=20261016-random1"></script>
+<script src="./quiz-order.js?v=20261016-random1"></script>
+<script>
+const SAVE_KEY='ox_phon_features_v1';
+const TOTAL=12;
+let cur=0,answers=new Array(TOTAL).fill(null);
+function getScore(){return answers.filter(a=>a&&a.correct).length;}
+const Q=[
+  {
+    "src": "개념 점검",
+    "cat": "Feature 이름과 값",
+    "text": "발문에서 <u>feature value를 명시</u>하라고 하면, 답에 <b>voice</b>라는 이름만 써도 충분하다.",
+    "ans": false,
+    "correct": "값까지 써야 합니다.",
+    "why": "[voice]는 비교하는 성질의 이름입니다. [+voice]와 [−voice]는 그 성질의 서로 다른 값이므로, 발문이 값을 요구하면 + 또는 −까지 제시해야 합니다.",
+    "source": "Davenport, M., & Hannahs, S. J. (2010). Introducing Phonetics and Phonology (3rd ed.), Ch.7, pp.91–101."
+  },
+  {
+    "src": "개념 점검",
+    "cat": "대조와 공통점",
+    "text": "기본적인 binary 분석에서 /f/와 /v/는 모두 labiodental fricative이지만 <u>[voice] 값으로 구별</u>할 수 있다.",
+    "ans": true,
+    "correct": "공통된 조음 특성과 서로 다른 voice 값을 구별합니다.",
+    "why": "/f/는 [−voice], /v/는 [+voice]입니다. 두 소리를 한 부류로 묶는 공통점과 두 소리를 서로 구별하는 feature 값은 같은 질문이 아닙니다.",
+    "source": "Davenport, M., & Hannahs, S. J. (2010). Introducing Phonetics and Phonology (3rd ed.), Ch.7, pp.91–101."
+  },
+  {
+    "src": "개념 점검",
+    "cat": "Natural class",
+    "text": "영어의 기본 consonant 목록에서 /m, n, ŋ/를 <b>[+nasal]</b>로 묶을 수 있다.",
+    "ans": true,
+    "correct": "세 소리는 모두 nasal입니다.",
+    "why": "Natural class를 기술할 때는 해당 목록에서 공통 feature를 만족하는 segment들을 확인합니다. 이 부류에서는 조음 위치가 달라도 nasal이라는 공통점이 유지됩니다.",
+    "source": "Davenport, M., & Hannahs, S. J. (2010). Introducing Phonetics and Phonology (3rd ed.), Ch.7, pp.91–101."
+  },
+  {
+    "src": "개념 점검",
+    "cat": "조건의 범위",
+    "text": "목록에 /m, n, ŋ/가 모두 있다면, <b>[+nasal]</b> 하나만으로 <u>/m, n/만</u> 골라 낼 수는 없다.",
+    "ans": true,
+    "correct": "[+nasal]에는 /ŋ/도 포함됩니다.",
+    "why": "필요한 두 소리가 들어간다는 사실만 확인하면 안 됩니다. 제외해야 할 /ŋ/까지 포함되는지 살펴 추가 조건이 필요한지 판단합니다.",
+    "source": "Davenport, M., & Hannahs, S. J. (2010). Introducing Phonetics and Phonology (3rd ed.), Ch.7, pp.91–101."
+  },
+  {
+    "src": "개념 점검",
+    "cat": "Feature 묶음",
+    "text": "이 단원의 binary 분석에서 <b>[+nasal, +anterior]</b>는 두 조건을 <u>모두 만족하는</u> /m, n/을 가리킨다.",
+    "ans": true,
+    "correct": "Feature 묶음은 조건의 교집합으로 읽습니다.",
+    "why": "/ŋ/는 nasal이지만 이 분석에서 [−anterior]이므로 빠집니다. [+nasal] 또는 [+anterior] 중 하나만 만족하면 된다는 뜻이 아닙니다.",
+    "source": "Davenport, M., & Hannahs, S. J. (2010). Introducing Phonetics and Phonology (3rd ed.), Ch.7, pp.91–101."
+  },
+  {
+    "src": "개념 점검",
+    "cat": "Sonorant와 voicing",
+    "text": "/z/는 voiced이므로 자동으로 <b>[+sonorant]</b>이다.",
+    "ans": false,
+    "correct": "Voicing과 sonorant는 다른 feature입니다.",
+    "why": "/z/는 voiced fricative이며 obstruent로 분류됩니다. [+voice]라는 사실만으로 [+sonorant]를 도출할 수 없습니다.",
+    "source": "Davenport, M., & Hannahs, S. J. (2010). Introducing Phonetics and Phonology (3rd ed.), Ch.7, pp.91–101."
+  },
+  {
+    "src": "개념 점검",
+    "cat": "조음과 분류",
+    "text": "/n/은 입안의 공기 통로가 막히므로 <u>oral stop과 같은 obstruent</u>로 분류된다.",
+    "ans": false,
+    "correct": "/n/은 nasal sonorant입니다.",
+    "why": "입안에서 폐쇄가 있더라도 nasal에서는 공기가 코로 흐릅니다. 이 binary 분석에서 nasal은 [+sonorant]이며, oral stop·fricative·affricate의 obstruent 부류와 구별합니다.",
+    "source": "Davenport, M., & Hannahs, S. J. (2010). Introducing Phonetics and Phonology (3rd ed.), Ch.7, pp.91–101."
+  },
+  {
+    "src": "개념 점검",
+    "cat": "분석 체계",
+    "text": "/l/의 <b>[continuant]</b> 값을 판단할 때는 <u>문제에서 제시한 feature 체계</u>를 먼저 확인해야 한다.",
+    "ans": true,
+    "correct": "모든 자료의 feature 값이 항상 같지는 않습니다.",
+    "why": "Lateral을 어떻게 분석하는지에 따라 continuant 값이 달라질 수 있습니다. 다른 책에서 외운 값을 제시된 표에 무조건 덮어쓰지 말고, 그 문제의 정의와 값을 사용합니다.",
+    "source": "Davenport, M., & Hannahs, S. J. (2010). Introducing Phonetics and Phonology (3rd ed.), Ch.7, pp.91–101."
+  },
+  {
+    "src": "<a href=\"https://etwiki.net/index.html?id=linguistics_2026_A06\">기출 연계 · 26</a>",
+    "cat": "제시 자료 적용",
+    "text": "<b>Coronal</b>과 <b>dorsal</b>은 언제나 배타적이므로 하나의 segment에 둘 다 +가 표시될 수 없다.",
+    "ans": false,
+    "correct": "제시된 체계에 따라 두 값이 함께 +일 수 있습니다.",
+    "why": "2026학년도 전공 A 6번의 표는 /j/를 [+coronal, +dorsal]로 제시합니다. 하나의 조음 이름만 골라야 한다는 생각으로 binary feature 표를 읽으면 안 됩니다.",
+    "source": "Davenport, M., & Hannahs, S. J. (2010). Introducing Phonetics and Phonology (3rd ed.), Ch.7, pp.91–101."
+  },
+  {
+    "src": "개념 점검",
+    "cat": "Natural class 점검",
+    "text": "목표 natural class를 찾았다면, <u>대상 segment의 누락과 불필요한 segment의 포함</u>을 모두 확인해야 한다.",
+    "ans": true,
+    "correct": "포함과 제외를 함께 검사합니다.",
+    "why": "공통된 성질 하나를 발견하는 데서 멈추지 않습니다. 주어진 segment 목록에서 그 feature 묶음이 정확히 원하는 집합을 가리키는지 확인해야 합니다.",
+    "source": "Davenport, M., & Hannahs, S. J. (2010). Introducing Phonetics and Phonology (3rd ed.), Ch.7, pp.91–101."
+  },
+  {
+    "src": "<a href=\"https://etwiki.net/index.html?id=linguistics_2022_A04\">기출 연계 · 22</a>",
+    "cat": "제시 자료 적용",
+    "text": "단어 처음에서 /sl/은 가능하고 /sr/은 불가능하다는 자료는 <u>모든 coronal obstruent 뒤에서 /l/이 금지된다</u>는 주장을 뒷받침한다.",
+    "ans": false,
+    "correct": "가능한 /sl/이 그 주장에 대한 반례입니다.",
+    "why": "2022학년도 전공 A 4번은 /sl/을 허용하고 /sr/을 허용하지 않는 대조를 제시합니다. 같은 coronal 부류 안에서도 뒤따르는 liquid의 분포를 실제 자료로 구분해야 합니다.",
+    "source": "Davenport, M., & Hannahs, S. J. (2010). Introducing Phonetics and Phonology (3rd ed.), Ch.7, pp.91–101."
+  },
+  {
+    "src": "<a href=\"https://etwiki.net/index.html?id=linguistics_2026_A06\">기출 연계 · 26</a>",
+    "cat": "전사와 철자",
+    "text": "<b>/j/-dropping</b>은 영어 철자 <b>j</b>가 단어에서 삭제되는 현상을 뜻한다.",
+    "ans": false,
+    "correct": "/j/는 철자 이름이 아니라 IPA segment입니다.",
+    "why": "/j/는 yes의 첫소리 같은 palatal glide를 나타냅니다. 2026학년도 전공 A 6번도 발음에서 /j/가 유지되거나 사라지는 환경을 비교하며 철자 j의 삭제를 묻지 않습니다.",
+    "source": "Davenport, M., & Hannahs, S. J. (2010). Introducing Phonetics and Phonology (3rd ed.), Ch.7, pp.91–101."
+  }
+];
+function renderExp(q,isCorrect){
+  const three=q.compare&&q.compare.length===3;
+  const cmp=q.compare?`<div class="sec-label">📊 비교 정리</div><div class="compare${three?' three':''}">${q.compare.map(c=>`<div class="compare-item"><div class="ci-title">${c.title}</div><p>${c.desc}</p></div>`).join('')}</div>`:'';
+  return `<div class="exp show"><div class="exp-header"><span>${isCorrect?'✅ 정답':'❌ 오답'} · 해설</span></div><div class="exp-answer"><div class="ans-label">핵심 정정</div><div class="ans-text">${q.correct}</div></div><div class="exp-body"><div class="sec-label">📖 상세 설명</div><p>${q.why}</p><details class="source-note"><summary>원서 출처 보기</summary><div class="def-box"><p>${q.source}</p></div></details>${cmp}</div></div>`;
+}
+function renderNav(){
+  document.getElementById('nav').innerHTML=answers.map((a,i)=>{
+    let cls='nd';
+    if(i===cur)cls+=' cur';
+    else if(a!==null)cls+=a.correct?' ok':' ng';
+    return `<button class="${cls}" onclick="jumpTo(${i})">${i+1}</button>`;
+  }).join('');
+}
+function render(){
+  if(cur>=TOTAL){
+    document.getElementById('qa').style.display='none';
+    document.getElementById('sc').classList.add('show');
+    const s=getScore();
+    document.getElementById('fs').textContent=s;
+    const p=s/TOTAL;
+    document.getElementById('rm').textContent=p===1?'🎉 Perfect!':p>=.8?'👏 Great!':p>=.6?'😊 Good!':'💪 Keep going!';
+    document.getElementById('rs').textContent=`${TOTAL}문제 중 ${s}문제 정답 (${Math.round(p*100)}%)`;
+    quizOrder.resultLater(function(){if(cur>=TOTAL)window.showScorePopup&&window.showScorePopup(s,TOTAL);});
+    renderNav();return;
+  }
+  document.getElementById('sc').classList.remove('show');
+  document.getElementById('qa').style.display='block';
+  renderNav();
+  const q=Q[cur];
+  document.getElementById('bf').style.width=((cur+1)/TOTAL*100).toFixed(1)+'%';
+  document.getElementById('pt').textContent=`${cur+1} / ${TOTAL}`;
+  document.getElementById('ps').textContent=`정답 ${getScore()}개`;
+  const a=answers[cur];
+  if(a!==null){
+    let oBtnCls='',xBtnCls='';
+    if(a.picked===true){oBtnCls=a.correct?'co':'wp';if(!a.correct)xBtnCls='cx';}
+    else{xBtnCls=a.correct?'cx':'wp';if(!a.correct)oBtnCls='co';}
+    document.getElementById('qa').innerHTML=`<div class="card"><div class="q-meta"><span class="q-num">Q${cur+1}</span><span class="q-src">${q.src}</span><span class="q-cat">${q.cat}</span></div><div class="q-text">${q.text}</div><div class="ox-btns"><button class="ox-btn o-btn ${oBtnCls}" disabled>⭕<span class="lb">CORRECT</span></button><button class="ox-btn x-btn ${xBtnCls}" disabled>❌<span class="lb">WRONG</span></button></div><div class="badge ${a.correct?'ok':'ng'}">${a.correct?'✅ 정답!':'❌ 오답! 정답은 '+(q.ans?'O':'X')}</div><div>${renderExp(q,a.correct)}</div><button class="next-btn show" onclick="next()">${cur<TOTAL-1?'Next →':'결과 보기 →'}</button></div>`;
+  }else{
+    document.getElementById('qa').innerHTML=`<div class="card"><div class="q-meta"><span class="q-num">Q${cur+1}</span><span class="q-src">${q.src}</span><span class="q-cat">${q.cat}</span></div><div class="q-text">${q.text}</div><div class="ox-btns"><button class="ox-btn o-btn" onclick="pick(true)" id="ob">⭕<span class="lb">CORRECT</span></button><button class="ox-btn x-btn" onclick="pick(false)" id="xb">❌<span class="lb">WRONG</span></button></div><div id="bd" class="badge"></div><div id="ep"></div><button class="next-btn" id="nb" onclick="next()">${cur<TOTAL-1?'Next →':'결과 보기 →'}</button></div>`;
+  }
+}
+function pick(val){
+  const q=Q[cur];
+  document.getElementById('ob').disabled=true;
+  document.getElementById('xb').disabled=true;
+  const ok=val===q.ans;
+  answers[cur]={picked:val,correct:ok};
+  if(ok){if(typeof playOk==='function')playOk();}else{if(typeof playNg==='function')playNg();}
+  const bd=document.getElementById('bd');
+  bd.textContent=ok?'✅ 정답!':`❌ 오답! 정답은 ${q.ans?'O':'X'}`;
+  bd.className='badge '+(ok?'ok':'ng');
+  document.getElementById(val?'ob':'xb').classList.add(ok?(val?'co':'cx'):'wp');
+  if(!ok)document.getElementById(q.ans?'ob':'xb').classList.add(q.ans?'co':'cx');
+  document.getElementById('ep').innerHTML=renderExp(q,ok);
+  document.getElementById('nb').classList.add('show');
+  document.getElementById('ps').textContent=`정답 ${getScore()}개`;
+  renderNav();saveProgress();
+}
+function next(){cur++;saveProgress();render();}
+function jumpTo(i){cur=i;render();document.getElementById('qa').scrollIntoView({behavior:'smooth',block:'start'});}
+function saveProgress(){quizOrder.save({cur,answers});}
+function freshStart(){quizOrder.reset();cur=0;answers=new Array(TOTAL).fill(null);document.getElementById('rb').style.display='none';document.getElementById('sc').classList.remove('show');document.getElementById('qa').style.display='block';renderNav();render();saveProgress();}
+const quizOrder=QuizOrder.create(Q,{saveKey:SAVE_KEY,restart:freshStart});
+(function(){
+  const saved=quizOrder.progress;
+  if(saved&&saved.answers&&saved.cur>=0&&saved.cur<TOTAL){
+    cur=saved.cur;answers=saved.answers;
+    const done=answers.filter(a=>a!==null).length;
+    if(done>0){document.getElementById('rb-msg').textContent=`이어서 풀기 중 · ${done}/${TOTAL} 문제 완료 (정답 ${getScore()}개)`;document.getElementById('rb').style.display='block';}
+  }
+  renderNav();render();saveProgress();
+})();
+</script>
+<script src="./study-return.js" data-hub-label="음성·음운론 허브"></script>
+</body>
+</html>
