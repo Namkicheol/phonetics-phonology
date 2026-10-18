@@ -87,6 +87,22 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
 .study-depth p{margin:10px 0}.study-depth h3{font-size:14px;margin:16px 0 7px;color:#245f51}
 .study-depth ol{padding-left:22px}.study-depth li{margin:8px 0}
 .study-depth .stage-wrap table{min-width:520px;width:100%}
+/* Chapter-scoped readability and accessible controls. */
+.etwiki-learning .sec-header{width:100%;text-align:left;border-top:0;border-left:0;border-right:0;flex-wrap:wrap;font:inherit}
+.etwiki-learning .sec-title{flex:1 1 200px;min-width:0;font-size:18px;line-height:1.55}
+.etwiki-learning .sec-tag,.etwiki-learning .sec-arrow{flex:0 0 auto}
+.etwiki-learning .sec-header:focus-visible,.etwiki-learning .toc-item:focus-visible{outline:3px solid #235d86;outline-offset:-3px}
+.etwiki-learning .sec-body{padding:20px}
+.etwiki-learning :is(.def,.note,.gi-body,.rule-text,.depth-body p,.exam p){font-size:16px;line-height:1.9}
+.etwiki-learning .grid.col2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.etwiki-learning .grid-item{min-width:0;word-break:break-word;overflow-wrap:break-word}
+.etwiki-learning .c-title{font-size:15px;flex-wrap:wrap;line-height:1.65}
+.etwiki-learning .rule-box{overflow-x:auto}
+.etwiki-learning .exam-year{display:inline-flex;align-items:center;justify-content:center;min-width:32px;min-height:32px;color:#b42323;font-weight:700;border:1px solid #e6bcbc;border-radius:7px;padding:0 6px;text-decoration:none}
+.etwiki-learning .source-note{max-width:820px;margin:16px auto;border:1px solid #cedfd6;border-radius:10px;padding:12px 16px;font-size:15px;line-height:1.85}
+.etwiki-learning .source-note summary{cursor:pointer;font-weight:700}
+@media(max-width:580px){.etwiki-learning .grid.col2,.etwiki-learning .grid.col3{grid-template-columns:minmax(0,1fr)}.etwiki-learning .sec-header{padding:14px 16px}.etwiki-learning .sec-body{padding:16px}.etwiki-learning .def{padding:12px 15px}}
+
 </style>
 <link rel="stylesheet" href="./mint-learning.css">
 </head>
@@ -126,12 +142,12 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
 <div class="toc">
   <div class="toc-title">📋 목차</div>
   <div class="toc-list">
-    <div class="toc-item" onclick="openSec('s1')">① 정의 &amp; Rule</div>
-    <div class="toc-item" onclick="openSec('s2')">② VOT — 3원 구분</div>
-    <div class="toc-item" onclick="openSec('s3')">③ 적용 환경 — foot-initial</div>
-    <div class="toc-item" onclick="openSec('s4')">④ /s/ cluster — 억제</div>
-    <div class="toc-item" onclick="openSec('s5')">⑤ Allophone vs Phoneme</div>
-    <div class="toc-item" onclick="openSec('s6')">⑥ 약기식·함정·기출</div>
+    <button class="toc-item" type="button" onclick="openSec('s1')">① 정의 &amp; Rule</button>
+    <button class="toc-item" type="button" onclick="openSec('s2')">② VOT — 3원 구분</button>
+    <button class="toc-item" type="button" onclick="openSec('s3')">③ 적용 환경 — foot-initial</button>
+    <button class="toc-item" type="button" onclick="openSec('s4')">④ /s/ cluster — 억제</button>
+    <button class="toc-item" type="button" onclick="openSec('s5')">⑤ Allophone vs Phoneme</button>
+    <button class="toc-item" type="button" onclick="openSec('s6')">⑥ 약기식·함정·기출</button>
   </div>
 </div>
 
@@ -145,26 +161,27 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
 
 <div class="exam" style="margin-bottom:20px" id="exam-overview">
   <div class="exam-label">📝 기출분석 포인트 (Aspiration)</div>
-  <p>① <span class="kw4">voiceless stop aspiration</span> — /p, t, k/가 강세 음절 onset의 첫 분절일 때 [pʰ, tʰ, kʰ]로 실현 · <strong>2022 A-6</strong></p>
-  <p>② <span class="kw3">foot-initial position</span> — trochaic foot의 왼쪽 끝을 stop 자체가 차지하는지 확인 · <strong>2022 A-6</strong> (disentangle [tʰ], accountability [kʰ])</p>
+  <p>① <span class="kw4">voiceless stop aspiration</span> — /p, t, k/가 강세 음절 onset의 첫 분절일 때 [pʰ, tʰ, kʰ]로 실현 · <a class="exam-year" href="https://etwiki.net/index.html?id=linguistics_2022_A06" title="2022학년도 전공 A-6">22</a></p>
+  <p>② <span class="kw3"><a href="https://etwiki.net/concept.html?term=foot-initial%20position">foot-initial position</a></span> — trochaic foot의 왼쪽 끝을 stop 자체가 차지하는지 확인 · <a class="exam-year" href="https://etwiki.net/index.html?id=linguistics_2022_A06" title="2022학년도 전공 A-6">22</a> (disentangle [tʰ], accountability [kʰ])</p>
   <p>③ <span class="kw1">/s/ cluster blocking</span> — spy / sty / sky에서 aspiration 억제 (pin vs spin)</p>
   <p>④ <span class="kw1">allophone</span> — 영어에서 [pʰ]/[p]는 음소 /p/의 변이음(complementary distribution), 한국어의 stop 범주 대립은 phonemic</p>
 </div>
 
+<div class="def"><b>기호 먼저 읽기</b><br><u>[pʰ]의 작은 ʰ</u>는 /p/가 aspiration을 동반해 실현된다는 표시입니다. 별도의 phoneme /h/가 뒤에 하나 더 붙는다는 뜻이 아닙니다.<br><u>ˈ와 ˌ</u>는 각각 primary와 secondary stress가 있는 음절 앞에 놓입니다. 이 단원의 strong aspiration 조건을 볼 때는 둘 다 stressed로 봅니다.</div>
 <!-- ① 정의 & Rule -->
 <div class="sec open" id="s1">
-  <div class="sec-header" onclick="toggleSec('s1')">
+  <button class="sec-header" type="button" aria-expanded="true" aria-controls="s1-body" onclick="toggleSec('s1')">
     <span class="sec-icon">🌬️</span>
     <span class="sec-title">① Aspiration 정의 &amp; Rule</span>
     <span class="sec-tag">★ 기본개념</span>
     <span class="sec-arrow">▼</span>
-  </div>
-  <div class="sec-body">
+  </button>
+  <div class="sec-body" id="s1-body">
 
     <div class="concept" id="aspiration">
       <div class="c-title">1) 정의</div>
       <div class="def">
-        <span class="kw1">Aspiration</span>은 무성 폐쇄음 /p, t, k/가 조음 개방(release) 직후에 짧은 기식(숨 터짐)을 동반해 <b>[pʰ, tʰ, kʰ]</b>로 실현되는 현상이다.<br><br>
+        <span class="kw1"><a href="https://etwiki.net/concept.html?term=aspiration">Aspiration</a></span>은 무성 폐쇄음 /p, t, k/가 조음 개방(release) 직후에 짧은 기식(숨 터짐)을 동반해 <b>[pʰ, tʰ, kʰ]</b>로 실현되는 현상이다.<br><br>
         이 단원에서 다루는 <b>strong aspiration</b>의 기본 규칙은 voiceless stop /p, t, k/가 강세 음절 onset의 첫 분절일 때 적용된다. Stop과 강세모음 사이에는 같은 onset의 sonorant가 올 수 있다.
       </div>
       <p class="note">즉 강세 음절의 onset에 있다는 것만으로는 부족하다. 같은 onset의 /s/ 뒤에 있는 stop은 이 기본 환경에서 제외한다.</p>
@@ -204,13 +221,13 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
 
 <!-- ② VOT -->
 <div class="sec" id="s2">
-  <div class="sec-header" onclick="toggleSec('s2')">
+  <button class="sec-header" type="button" aria-expanded="false" aria-controls="s2-body" onclick="toggleSec('s2')">
     <span class="sec-icon">📈</span>
     <span class="sec-title">② VOT — 폐쇄음 3원 구분</span>
     <span class="sec-tag orange">★★ 빈출</span>
     <span class="sec-arrow">▼</span>
-  </div>
-  <div class="sec-body">
+  </button>
+  <div class="sec-body" id="s2-body">
 
     <div class="concept">
       <div class="c-title">1) Voice Onset Time</div>
@@ -269,13 +286,13 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
 
 <!-- ③ 적용 환경 -->
 <div class="sec" id="s3">
-  <div class="sec-header" onclick="toggleSec('s3')">
+  <button class="sec-header" type="button" aria-expanded="false" aria-controls="s3-body" onclick="toggleSec('s3')">
     <span class="sec-icon">📍</span>
     <span class="sec-title">③ 적용 환경 — 강세 음절 onset / foot-initial</span>
     <span class="sec-tag red">★★★ 최빈출</span>
     <span class="sec-arrow">▼</span>
-  </div>
-  <div class="sec-body">
+  </button>
+  <div class="sec-body" id="s3-body">
 
     <div class="concept" id="aspiration-environment">
       <div class="c-title">1) word-initial에 국한되지 않음</div>
@@ -315,7 +332,7 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
       </div>
       <div class="exam">
         <div class="exam-label">📋 기출 이력</div>
-        <p><strong>2022 A-6</strong> — voiceless stop aspiration이 foot-initial position에서 일어남을 분석. disentangle의 /t/, accountability의 /k/가 강세 음절 onset의 첫 분절이자 foot-initial stop이라 기식음화됨.</p>
+        <p><a class="exam-year" href="https://etwiki.net/index.html?id=linguistics_2022_A06" title="2022학년도 전공 A-6">22</a> — voiceless stop aspiration이 foot-initial position에서 일어남을 분석. disentangle의 /t/, accountability의 /k/가 강세 음절 onset의 첫 분절이자 foot-initial stop이라 기식음화됨.</p>
       </div>
     </div>
 
@@ -337,13 +354,13 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
 
 <!-- ④ /s/ cluster -->
 <div class="sec" id="s4">
-  <div class="sec-header" onclick="toggleSec('s4')">
+  <button class="sec-header" type="button" aria-expanded="false" aria-controls="s4-body" onclick="toggleSec('s4')">
     <span class="sec-icon">🚫</span>
     <span class="sec-title">④ /s/ cluster — Aspiration 억제</span>
     <span class="sec-tag red">★★★ 최빈출</span>
     <span class="sec-arrow">▼</span>
-  </div>
-  <div class="sec-body">
+  </button>
+  <div class="sec-body" id="s4-body">
 
     <div class="concept" id="aspiration-scluster">
       <div class="c-title">1) /s/ 뒤에서는 기식이 막힌다</div>
@@ -391,13 +408,13 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
 
 <!-- ⑤ Allophone vs Phoneme -->
 <div class="sec" id="s5">
-  <div class="sec-header" onclick="toggleSec('s5')">
+  <button class="sec-header" type="button" aria-expanded="false" aria-controls="s5-body" onclick="toggleSec('s5')">
     <span class="sec-icon">🔁</span>
     <span class="sec-title">⑤ Allophone vs Phoneme — 영어 vs 한국어</span>
     <span class="sec-tag orange">★★ 빈출</span>
     <span class="sec-arrow">▼</span>
-  </div>
-  <div class="sec-body">
+  </button>
+  <div class="sec-body" id="s5-body">
 
     <div class="concept" id="aspiration-allophone">
       <div class="c-title">1) 영어 — complementary distribution</div>
@@ -454,13 +471,13 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
 
 <!-- ⑥ 약기식·함정·기출 -->
 <div class="sec" id="s6">
-  <div class="sec-header" onclick="toggleSec('s6')">
+  <button class="sec-header" type="button" aria-expanded="false" aria-controls="s6-body" onclick="toggleSec('s6')">
     <span class="sec-icon">🧭</span>
     <span class="sec-title">⑥ 약기식 위치 · 함정 정리</span>
     <span class="sec-tag">★ 기본개념</span>
     <span class="sec-arrow">▼</span>
-  </div>
-  <div class="sec-body">
+  </button>
+  <div class="sec-body" id="s6-body">
 
     <div class="concept">
       <div class="c-title">1) 약기식(weak aspiration)과 비기식 환경</div>
@@ -495,7 +512,7 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
 
     <div class="exam">
       <div class="exam-label">📋 기출 이력</div>
-      <p><strong>2022 A-6</strong> — voiceless stop aspiration · foot-initial position · trochaic foot. disentangle [tʰ], accountability [kʰ]가 각각 foot의 첫 분절이므로 기식음화됨.</p>
+      <p><a class="exam-year" href="https://etwiki.net/index.html?id=linguistics_2022_A06" title="2022학년도 전공 A-6">22</a> — voiceless stop aspiration · foot-initial position · trochaic foot. disentangle [tʰ], accountability [kʰ]가 각각 foot의 첫 분절이므로 기식음화됨.</p>
     </div>
 
     <details class="study-depth"><summary>자세히 보기 · weak aspiration·no audible release와 전사의 범위</summary><div class="depth-body">
@@ -508,18 +525,14 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
   </div>
 </div>
 
+<details class="source-note"><summary>원서 출처 보기</summary><p>Mehmet Yavaş, <i>Applied English Phonology</i>, 2nd ed. (2011), Chapter 3 §3.1. Aspiration, weak aspiration 및 no audible release의 구분을 참고했습니다. Foot을 이용한 기출 적용은 본문에 표시한 2022 A-6의 제시 자료와 발문을 따릅니다.</p></details>
 </div><!-- /wrap -->
 
 <script>
-function toggleSec(id){
-  const s=document.getElementById(id);
-  s.classList.toggle('open');
-}
-function openSec(id){
-  const s=document.getElementById(id);
-  s.classList.add('open');
-  s.scrollIntoView({behavior:'smooth',block:'start'});
-}
+function toggleSec(id){const s=document.getElementById(id);if(!s)return;const open=s.classList.toggle('open');s.querySelector('.sec-header').setAttribute('aria-expanded',String(open));}
+function openSec(id){const s=document.getElementById(id);if(!s)return;s.classList.add('open');s.querySelector('.sec-header').setAttribute('aria-expanded','true');s.scrollIntoView({behavior:'smooth',block:'start'});}
+function revealAssimTarget(){let id;try{id=decodeURIComponent(location.hash.slice(1));}catch(_){return;}const t=document.getElementById(id);if(!t)return;let n=t;while(n){if(n.tagName==='DETAILS')n.open=true;if(n.classList&&n.classList.contains('sec')){n.classList.add('open');n.querySelector('.sec-header').setAttribute('aria-expanded','true');}n=n.parentElement;}}
+revealAssimTarget();window.addEventListener('hashchange',revealAssimTarget);
 </script>
 <script src="./study-return.js" data-hub-label="음성·음운론 허브"></script>
 </body>
