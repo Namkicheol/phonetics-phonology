@@ -13,6 +13,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Segoe UI",sans
 .hero .kicker{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:2px;color:#b9d7ea;text-transform:uppercase;margin-bottom:8px}
 h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin-bottom:12px;letter-spacing:-.04em}
 .hero p{color:#eaf3fa;max-width:760px;font-size:15px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:18px 0}.card{background:#fff;border:1px solid #cfe0eb;border-radius:16px;padding:18px}.card h3{color:#123d5a;font-size:17px;margin-bottom:8px}.tagrow{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.tag{font-family:"JetBrains Mono",monospace;font-size:12px;background:#eaf3fa;color:#123d5a;border:1px solid #cfe0eb;border-radius:999px;padding:4px 9px}.section{background:#fff;border:1px solid #cfe0eb;border-radius:18px;padding:24px;margin:16px 0}.section h2{font-size:22px;color:#123d5a;margin-bottom:10px}.section h2:before{content:"#";color:#4b8bb5;margin-right:8px}.note{border-left:5px solid #4b8bb5;background:#eef7fc;padding:14px 16px;border-radius:0 12px 12px 0;margin:14px 0}.warn{border-left-color:#b94a48;background:#fff3f1}.ok{border-left-color:#2f855a;background:#effaf4}.kw{font-family:"JetBrains Mono",monospace;font-weight:700;color:#0f4f76;background:#edf7ff;border-radius:5px;padding:1px 5px}.ex{font-family:"JetBrains Mono",monospace;background:#f6f8fa;border:1px solid #dde7ef;border-radius:10px;padding:12px;margin:10px 0;overflow-x:auto}.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}.miniq{border-top:1px dashed #cbd8e1;margin-top:14px;padding-top:14px}.miniq b{color:#123d5a}.footer{color:#667;text-align:center;font-size:12px;margin:30px 0}a{color:#0f6090}@media(max-width:560px){body{padding:10px}.hero{padding:30px 20px}.section{padding:18px}}
+
+/* Chapter-local reading layout; preserve existing content and anchors. */
+.etwiki-learning .section{padding:0;overflow:hidden}
+.etwiki-learning .nv-heading{padding:14px 18px;background:#edf8f3}
+.etwiki-learning .section h2{margin:0;font-size:19px}
+.etwiki-learning .section h2:before{content:none}
+.etwiki-learning .nv-toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;border:0;background:transparent;color:inherit;font:inherit;font-weight:700;text-align:left;cursor:pointer}
+.etwiki-learning .nv-toggle:focus-visible{outline:3px solid #235d86;outline-offset:4px}
+.etwiki-learning .nv-arrow{flex:0 0 auto}.etwiki-learning .section.open .nv-arrow{transform:rotate(180deg)}
+.etwiki-learning .nv-body{padding:18px 20px;font-size:16px;line-height:1.9}
+.etwiki-learning .nv-body[hidden]{display:none}
+.etwiki-learning .nv-body p+ p{margin-top:10px}
+.etwiki-learning .nv-body details{margin:14px 0;border:1px solid #d3e5dc;border-radius:10px;padding:12px 15px}
+.etwiki-learning .nv-body summary{cursor:pointer;font-weight:700;color:#235d51}
+.etwiki-learning .nv-body details p,.etwiki-learning .nv-body details ol{margin-top:10px}
+.etwiki-learning .nv-body :is(ol,ul){padding-left:22px}
+.etwiki-learning .nv-body li+li{margin-top:8px}
+.etwiki-learning .grid,.etwiki-learning .two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.etwiki-learning .grid>*,.etwiki-learning .two>*{min-width:0;overflow-wrap:break-word}
+@media(max-width:600px){.etwiki-learning .grid,.etwiki-learning .two{grid-template-columns:minmax(0,1fr)}.etwiki-learning .nv-body{padding:16px}.etwiki-learning .hero{padding:24px 18px}}
+
 </style>
 
 <link rel="stylesheet" href="./mint-learning.css">
@@ -43,8 +64,9 @@ h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin-bottom:12px;letter-spa
     <div class="tagrow"><span class="tag">N/V homograph</span><span class="tag">penult stress</span><span class="tag">final stress</span><span class="tag">vowel reduction</span></div>
   </div>
   <div class="grid"><a class="card" href="noun_verb_ox.html"><h3>OX Quiz</h3><p>핵심 문항을 풀며 stress 패턴의 적용 범위를 확인한다.</p></a><a class="card" href="noun_verb_exercises.html"><h3>Practice</h3><p>IPA와 stress 규칙을 예시에 적용하며 연습한다.</p></a></div>
-  <p class="note">먼저 <a data-stress-link href="./stress_concepts.html#ipa-basics">IPA 강세 기호</a>를 읽고, <a data-stress-link href="./stress_study.html#s1">음절 무게</a> → <a data-stress-link href="./stress_study.html#s6">접미사</a> → <a data-stress-link href="./stress_study.html#s7">compound</a>를 연결하세요. 문장 안의 두드러짐은 <a data-stress-link href="./sentence_study.html#nuclear">nuclear stress</a>에서 따로 비교합니다.</p>
-<section class="section" id="pattern"><h2>기본 패턴</h2>
+  <div class="note"><b>강세 기호 먼저 읽기</b><br><u>ˈ 바로 뒤의 음절에 primary stress가 있습니다.</u> ˈpermit은 첫째 음절, perˈmit은 둘째 음절을 강조합니다. 이 단원은 <b>같은 철자가 문장에서 noun인지 verb인지</b>를 먼저 구별합니다.</div>
+  <p class="note">더 자세히: <a data-stress-link href="./stress_concepts.html#ipa-basics">IPA 강세 기호</a>를 읽고, <a data-stress-link href="./stress_study.html#s1">음절 무게</a> → <a data-stress-link href="./stress_study.html#s6">접미사</a> → <a data-stress-link href="./stress_study.html#s7">compound</a>를 연결하세요. 문장 안의 두드러짐은 <a data-stress-link href="./sentence_study.html#nuclear">nuclear stress</a>에서 따로 비교합니다.</p>
+<section class="section open" id="pattern"><div class="nv-heading"><h2><button class="nv-toggle" type="button" aria-expanded="true" aria-controls="pattern-body" onclick="toggleNvSection('pattern')">기본 패턴<span class="nv-arrow" aria-hidden="true">▾</span></button></h2></div><div class="nv-body" id="pattern-body">
 <p><span class="kw">N/V homograph pair</span>는 noun과 verb의 철자가 같은 쌍이다. 그중 일부는 품사에 따라 stress 위치가 달라진다. 아래는 이러한 차이를 보이는 2음절어의 예다.</p><div class="two"><div class="note ok"><b>Noun</b><br>아래 noun들은 첫 음절인 penult에 primary stress가 온다.<div class="ex">ˈrecord, ˈpresent, ˈpermit</div></div><div class="note"><b>Verb</b><br>아래 verb들은 마지막 음절인 ult에 primary stress가 온다.<div class="ex">reˈcord, preˈsent, perˈmit</div></div></div>
 <details id="nv-steps"><summary>자세히 보기 · 문장 → 품사 → 강세 → 모음 순서로 풀기</summary>
 <p>다음은 <u>학습용 비교이며 기출 인용이 아닙니다</u>. A permit is required. / They permit entry. 두 문장에서 같은 철자 permit의 발음을 비교합니다.</p>
@@ -53,20 +75,21 @@ h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin-bottom:12px;letter-spa
 <p>단어 내부 강세의 일반 경향은 <a href="https://etwiki.net/concept.html?term=noun%20stress">noun stress</a> · <a href="https://etwiki.net/concept.html?term=verb%20stress">verb stress</a>에서, compound와 문장 초점의 차이는 <a data-stress-link href="./stress_study.html#s7">compound stress</a> · <a data-stress-link href="./sentence_study.html#nuclear">nuclear stress</a>에서 이어 봅니다.</p></details>
 <details><summary>비교 1 · permit은 달라지고, harvest와 delay는 유지된다</summary><p>a ˈpermit에서는 permit이 허가증을 뜻하는 noun이고, they perˈmit에서는 허용하다는 뜻의 verb다. 두 형태의 primary stress 위치를 비교하면 첫 음절과 둘째 음절로 달라진다.</p><p>반면 ˈharvest는 noun과 verb 모두 첫 음절, deˈlay는 두 품사 모두 마지막 음절에 stress가 온다. 철자가 같고 두 품사로 쓰인다는 사실만으로 stress shift를 예측할 수는 없다.</p></details>
 <details><summary>비교 2 · 품사별 통계와 개별 단어의 발음</summary><p>AEP가 인용한 Hammond의 자료에서 2음절 noun의 81.7%, adjective의 81%는 penult stress를 보인다. 그러나 2음절 verb는 ult stress 47.6%, penult stress 52.3%다. 이는 해당 표본의 비율이며 모든 영어 단어의 발음을 결정하는 규칙은 아니다.</p><p>conˈduct와 ˈvisit은 모두 verb지만 stress 위치는 다르다. AEP는 verb를 ult의 weight에서 출발해 설명하되 예외도 구분한다. 철자상의 마지막 자음 하나만 보고 두 단어를 같은 방식으로 분석해서는 안 된다.</p></details>
-</section><section class="section" id="reduction"><h2>vowel reduction</h2>
+</div></section><section class="section" id="reduction"><div class="nv-heading"><h2><button class="nv-toggle" type="button" aria-expanded="false" aria-controls="reduction-body" onclick="toggleNvSection('reduction')">vowel reduction<span class="nv-arrow" aria-hidden="true">▾</span></button></h2></div><div class="nv-body" id="reduction-body" hidden>
 <p>stress가 빠진 음절에서는 full vowel이 약화될 수 있다. 따라서 noun/verb pair는 stress 위치뿐 아니라 vowel quality도 함께 확인한다.</p><div class="ex">ˈrecord vs reˈcord · ˈobject vs obˈject</div><div class="note warn">주의: 모든 2음절 단어에 기계적으로 적용하지 말고, pair로 굳어진 항목과 실제 stress 표시를 확인한다.</div>
 <details><summary>비교 3 · stress shift와 vowel reduction을 따로 확인하기</summary><p>ˈinsult /ˈɪnsʌlt/와 inˈsult /ɪnˈsʌlt/는 primary stress 위치가 다르지만 첫 모음 /ɪ/는 유지된다. stress shift가 있다고 모든 unstressed vowel이 schwa로 바뀌는 것은 아니다.</p><p>반면 permit의 rhotic 전사 /ˈpɜrmɪt/와 /pərˈmɪt/를 비교하면 첫 음절에서 full vowel과 schwa의 차이도 나타난다. 먼저 stress mark를 확인하고, 다음으로 같은 위치의 vowel quality를 비교한다. 발음이 다른 두 형태를 비교하는 것이지 말하는 도중 한 형태를 반드시 다른 형태로 바꾼다는 뜻은 아니다.</p></details>
 <details><summary>비교 4 · dialect와 전사 관습까지 확인하기</summary><p>Oxford Learner’s Dictionaries는 noun record에 영국식 /ˈrekɔːd/와 미국식 /ˈrekərd/를 제시한다. 두 발음 모두 첫 음절에 primary stress가 있지만 둘째 음절의 vowel quality는 같지 않다. 서로 다른 dialect의 전사를 섞어 vowel reduction을 설명하지 않는다.</p><p>protest도 범위를 밝혀야 한다. Cambridge의 영국식 예는 noun /ˈprəʊtest/, verb /prəˈtest/다. Merriam-Webster에는 첫 음절에 primary stress가 오는 verb 발음도 실려 있다. 따라서 proˈtest는 가능한 verb 패턴이지만 모든 화자에게 유일한 패턴이라고 단정하지 않는다.</p><p>발음 확인: <a href="https://www.oxfordlearnersdictionaries.com/definition/english/record_1">Oxford: record</a> · <a href="https://dictionary.cambridge.org/pronunciation/english/protest">Cambridge: protest</a> · <a href="https://www.merriam-webster.com/dictionary/protest">Merriam-Webster: protest</a></p></details>
-</section><section class="section" id="exam"><h2>답안 포인트</h2>
-<ul><li>품사를 먼저 확인한다.</li><li>primary stress 위치를 표시한다.</li><li>같은 dialect의 전사에서 vowel quality도 달라지는지 확인한다. 지문이 요구하는 차이만 설명한다.</li></ul><div class="miniq"><b>Mini Check</b> permit이 verb이면 어느 쪽 stress가 자연스러운가? → <span class="kw">perˈmit</span></div>
+</div></section><section class="section" id="exam"><div class="nv-heading"><h2><button class="nv-toggle" type="button" aria-expanded="false" aria-controls="exam-body" onclick="toggleNvSection('exam')">답안 포인트<span class="nv-arrow" aria-hidden="true">▾</span></button></h2></div><div class="nv-body" id="exam-body" hidden>
+<ul><li>품사를 먼저 확인한다.</li><li>primary stress 위치를 표시한다.</li><li>같은 dialect의 전사에서 vowel quality도 달라지는지 확인한다. 지문이 요구하는 차이만 설명한다.</li></ul>
 <details><summary>비교 5 · 단어 안의 stress와 compound·phrase의 stress</summary><p>ˈpermit과 perˈmit의 비교는 단어 안에서 어느 음절에 lexical primary stress가 오는지를 묻는다. 반면 ˈteapot은 두 구성 요소로 이루어진 noun compound의 stress를 보여 준다. 둘 다 첫 음절에 stress가 나타날 수 있지만 분석 대상과 근거가 다르다.</p><p>또한 문장에서 어떤 단어가 가장 두드러지는지는 phrase의 구조와 focus에 따라 달라진다. 문장 끝에 verb가 있거나 그 verb를 강조한다는 이유만으로 ˈharvest를 harˈvest로 바꾸지 않는다. compound stress와 rhythm reversal의 자세한 조건은 해당 단원에서 따로 확인한다.</p></details>
 <details><summary>비교 6 · penult를 항상 첫 음절로 읽으면 안 되는 이유</summary><p>2음절인 permit에서는 penult가 첫 음절이다. 그러나 3음절인 aˈroma에서는 penult가 둘째 음절이다. penult는 언제나 끝에서 둘째 음절을 가리키므로, 단어 길이가 달라지면 첫 음절과 일치하지 않는다.</p><p>AEP는 3음절 이상 noun의 stress를 penult의 weight와 그보다 앞선 음절을 함께 살펴 설명한다. 따라서 이 단원의 2음절 N/V 대조를 모든 다음절어에 그대로 적용하지 않는다.</p><p>개념 근거: Mehmet Yavaş, <i>Applied English Phonology</i>, 2nd edition (2011), Chapter 7, §§7.2–7.4, 7.6–7.7. 위 비교 문장은 학습용으로 작성한 예이며 특정 기출 문항을 재현한 것이 아니다.</p></details>
-</section>
+</div></section>
   <div class="footer">phonetics-phonology · 임용 음운론 학습 페이지</div>
 </div>
 <script src="sounds.js"></script>
 <script src="score-popup.js"></script>
 <script>
+function toggleNvSection(id){const section=document.getElementById(id);if(!section)return;const body=document.getElementById(id+'-body');const open=body.hidden;body.hidden=!open;section.classList.toggle('open',open);section.querySelector('.nv-toggle').setAttribute('aria-expanded',String(open));}
 /* Local study links return to this exact note, retaining its own return context. */
 (function () {
   document.querySelectorAll('a[data-stress-link]').forEach(function (a) {
@@ -91,6 +114,7 @@ h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin-bottom:12px;letter-spa
     while (node) {
       if (node.tagName === 'DETAILS') node.open = true;
       if (node.classList && node.classList.contains('sec')) node.classList.add('open');
+      if (node.classList && node.classList.contains('section')) {var body=document.getElementById(node.id+'-body');if(body && body.hidden)toggleNvSection(node.id);}
       node = node.parentElement;
     }
   }
