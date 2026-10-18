@@ -110,3 +110,7 @@
     overflow-wrap:anywhere;
   }
 }
+
+/* Shared clickable exam-year badges: same treatment as the SLA chapter. */
+.etwiki-learning a.exam-year{display:inline-flex;align-items:center;justify-content:center;min-width:34px;min-height:32px;padding:4px 9px;border:1px solid #b71c1c;border-radius:999px;background:#fff;color:#b71c1c;font-size:13px;font-weight:900;line-height:1.25;text-decoration:none;letter-spacing:0;vertical-align:middle}
+.etwiki-learning a.exam-year:hover,.etwiki-learning a.exam-year:focus-visible{background:#fff0ef;text-decoration:underline;text-underline-offset:3px}
