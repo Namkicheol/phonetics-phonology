@@ -111,6 +111,7 @@
   var storageKey = 'etwiki.study-note-view.v1:' + here.pathname;
   var initialToken = Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
   var initialSaved = false;
+  var gestures = new WeakMap();
   function controls() { return Array.from(document.querySelectorAll('details, .sec, .section')); }
   function sectionParts(node) {
     var header = node.querySelector && node.querySelector('.sec-header, [aria-controls]');
@@ -119,6 +120,7 @@
   }
   function isOpen(node) {
     if (node.tagName === 'DETAILS') return node.open;
+    if (node.classList.contains('sec')) return node.classList.contains('open');
     var parts = sectionParts(node);
     return parts.body ? !parts.body.hidden : node.classList.contains('open');
   }
@@ -140,7 +142,7 @@
           node.classList.toggle('open', saved.open[i]);
           var parts = sectionParts(node);
           if (parts.header) parts.header.setAttribute('aria-expanded', String(saved.open[i]));
-          if (parts.body) parts.body.hidden = !saved.open[i];
+          if (parts.body && !node.classList.contains('sec')) parts.body.hidden = !saved.open[i];
         }
       }); }
       restoreControls();
@@ -172,13 +174,19 @@
     nav.appendChild(button);
     document.body.insertBefore(nav, document.body.firstChild);
   }
-  function decorate(anchor, clicked) {
+  function decorate(anchor, clicked, phase) {
     if (!anchor || anchor.hasAttribute('download') || anchor.closest('#study-note-return')) return;
     var url;
     try { url = new URL(anchor.getAttribute('href'), window.location.href); } catch (_) { return; }
     if (!isDestination(url)) return;
     if (source) {
-      var token = clicked ? Date.now().toString(36) + Math.random().toString(36).slice(2, 8) : initialToken;
+      var gesture = gestures.get(anchor);
+      var token = clicked ? (phase !== 'pointerdown' && gesture && Date.now() - gesture.time < 1500 ? gesture.token
+        : Date.now().toString(36) + Math.random().toString(36).slice(2, 8)) : initialToken;
+      if (clicked) {
+        if (phase === 'click' || phase === 'auxclick') gestures.delete(anchor);
+        else gestures.set(anchor, {token: token, time: Date.now()});
+      }
       var origin = new URL(here);
       origin.searchParams.delete(param);
       origin.searchParams.set(tokenParam, token);
@@ -193,14 +201,14 @@
     document.querySelectorAll('a[href]').forEach(function (a) { decorate(a, false); });
     document.addEventListener('click', function (event) {
       if (event.defaultPrevented) return;
-      decorate(event.target.closest && event.target.closest('a[href]'), true);
+      decorate(event.target.closest && event.target.closest('a[href]'), true, 'click');
     }, true);
     document.addEventListener('auxclick', function (event) {
-      decorate(event.target.closest && event.target.closest('a[href]'), true);
+      decorate(event.target.closest && event.target.closest('a[href]'), true, 'auxclick');
     }, true);
     ['pointerdown', 'contextmenu'].forEach(function (type) {
       document.addEventListener(type, function (event) {
-        decorate(event.target.closest && event.target.closest('a[href]'), true);
+        decorate(event.target.closest && event.target.closest('a[href]'), true, type);
       }, true);
     });
   }
