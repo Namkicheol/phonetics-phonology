@@ -55,6 +55,10 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:r
 .flow-arrow{color:#2e86c1;font-size:20px;font-weight:700}
 .stage-wrap{margin-top:12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .stage-wrap table{width:auto}
+/* Keep each verified IPA together; overflow stays inside this table. */
+.etwiki-learning #s6 .stress-bearing-table{max-width:100%;overflow-x:auto}
+.etwiki-learning #s6 .stress-bearing-table table{width:max-content;min-width:100%;table-layout:auto}
+.etwiki-learning #s6 .stress-bearing-table .stress-ipa{display:inline-block;white-space:nowrap;overflow-wrap:normal;word-break:normal}
 table{width:100%;border-collapse:collapse;font-size:13.5px}
 th{background:rgba(26,82,118,.1);color:#1a3a52;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;padding:10px 14px;border:1.5px solid #aed6f1;text-align:left;font-weight:700}
 td{padding:10px 14px;border:1.5px solid #aed6f1;color:#2a4a62;vertical-align:top;line-height:1.7}
@@ -819,17 +823,17 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
       <div class="def">
         이 suffix들은 항상 <b>heavy syllable</b>을 형성하며 <b>attract stress</b>한다. 어근이 어디에 강세가 있었든 상관없이 stress가 suffix로 이동한다.
       </div>
-      <div class="stage-wrap">
+      <div class="stage-wrap stress-bearing-table">
         <table>
           <tr><th>접미사</th><th>예</th><th>설명</th></tr>
-          <tr><td><span class="kw4">-ation</span></td><td>realize → realization<br>/ˌriəlɪˈzeɪʃən/ (AmE)</td><td>stress-bearing: 접미사 자체에 강세</td></tr>
-          <tr><td><span class="kw3">-ade</span></td><td>lemon → lemonade<br>/ˌlɛməˈneɪd/ (BrE)</td><td>diphthong → heavy</td></tr>
-          <tr><td><span class="kw3">-ee</span></td><td>absent → absentee<br>/ˌæbsənˈtiː/ (BrE)</td><td>예외: comˈmittee (접미사 자체가 강세 없음)</td></tr>
-          <tr><td><span class="kw3">-eer</span></td><td>mountain → mountaineer<br>/ˌmaʊntɪˈnɪə/ (BrE)</td><td>suffix vowel /ɪə(r)/가 heavy → stress-bearing</td></tr>
-          <tr><td><span class="kw3">-ese</span></td><td>Japan → Japanese<br>/ˌdʒæpəˈniːz/ (BrE)</td><td>long V + coda → heavy</td></tr>
-          <tr><td><span class="kw3">-ette</span></td><td>kitchen → kitchenette<br>/ˌkɪtʃɪˈnɛt/ (BrE)</td><td>closed → heavy</td></tr>
-          <tr><td><span class="kw3">-itis</span></td><td>larynx → laryngitis<br>/ˌlærɪnˈdʒaɪtɪs/ (BrE)</td><td>diphthong /aɪ/ → heavy</td></tr>
-          <tr><td><span class="kw1">-esque</span></td><td>picture → picturesque<br>/ˌpɪktʃəˈrɛsk/ (BrE)</td><td>closed → heavy</td></tr>
+          <tr><td><span class="kw4">-ation</span></td><td>realize → realization<br><span class="stress-ipa">/ˌriəlɪˈzeɪʃən/ (AmE)</span></td><td>stress-bearing: 접미사 자체에 강세</td></tr>
+          <tr><td><span class="kw3">-ade</span></td><td>lemon → lemonade<br><span class="stress-ipa">/ˌlɛməˈneɪd/ (BrE)</span></td><td>diphthong → heavy</td></tr>
+          <tr><td><span class="kw3">-ee</span></td><td>absent → absentee<br><span class="stress-ipa">/ˌæbsənˈtiː/ (BrE)</span></td><td>예외: comˈmittee (접미사 자체가 강세 없음)</td></tr>
+          <tr><td><span class="kw3">-eer</span></td><td>mountain → mountaineer<br><span class="stress-ipa">/ˌmaʊntɪˈnɪə/ (BrE)</span></td><td>suffix vowel /ɪə(r)/가 heavy → stress-bearing</td></tr>
+          <tr><td><span class="kw3">-ese</span></td><td>Japan → Japanese<br><span class="stress-ipa">/ˌdʒæpəˈniːz/ (BrE)</span></td><td>long V + coda → heavy</td></tr>
+          <tr><td><span class="kw3">-ette</span></td><td>kitchen → kitchenette<br><span class="stress-ipa">/ˌkɪtʃɪˈnɛt/ (BrE)</span></td><td>closed → heavy</td></tr>
+          <tr><td><span class="kw3">-itis</span></td><td>larynx → laryngitis<br><span class="stress-ipa">/ˌlærɪnˈdʒaɪtɪs/ (BrE)</span></td><td>diphthong /aɪ/ → heavy</td></tr>
+          <tr><td><span class="kw1">-esque</span></td><td>picture → picturesque<br><span class="stress-ipa">/ˌpɪktʃəˈrɛsk/ (BrE)</span></td><td>closed → heavy</td></tr>
         </table>
       </div>
       <p class="note">철자와 IPA를 나누어 읽으며, suffix 경계와 syllable 경계가 같다고 가정하지 않는다. BrE는 영국식, AmE는 미국식 전사다.</p>
