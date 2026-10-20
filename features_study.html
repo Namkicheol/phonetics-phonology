@@ -87,7 +87,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Segoe UI",sans
       <p>영어의 /m, n, ŋ/는 모두 nasal이다. 이 세 소리를 [+nasal]로 묶을 수 있다. 그러나 /m, n/만 고른 뒤 [+nasal]이라고 쓰면 /ŋ/도 함께 포함된다. 문제의 전체 목록에 /ŋ/가 있는데 이를 제외해야 한다면 [+nasal] 하나로는 충분하지 않다.</p>
       <p>이 binary 분석에서는 /m, n/을 [+nasal, +anterior]로 묶을 수 있다. 두 값을 동시에 만족해야 하므로 [−anterior]인 /ŋ/가 제외된다. feature 묶음은 둘 중 하나만 만족해도 된다는 뜻이 아니라, 적힌 조건을 모두 만족해야 한다는 뜻이다.</p>
       <p>natural class를 찾을 때는 대상에 속하는 소리가 모두 포함되는지 확인한 다음, 제외해야 할 소리까지 포함되지 않는지 확인한다. 이 판단은 주어진 언어의 segment 목록과 feature 체계를 기준으로 한다. 영어의 기본 consonant 목록에서 성립하는 분류를 다른 언어의 모든 소리에 그대로 적용해서는 안 된다.</p>
+      <p><strong>최소 자질 집합 확인:</strong> <u>값을 하나씩 빼도 같은 집합이 남는지</u> 검사한다. 위의 영어 consonant 목록에서 /m, n/을 고를 때 [+anterior]를 빼면 /ŋ/가 들어오고, [+nasal]을 빼면 다른 anterior consonant도 들어온다. 반면 [+voice]를 더해도 이미 고른 /m, n/은 달라지지 않으므로 이 분류에는 불필요하다. 최소 집합은 주어진 소리 목록과 자질표에 따라 판단하며, 발문이 자질 하나만 요구하면 그 조건도 지킨다.</p>
       <div class="ex">/m, n, ŋ/ → [+nasal]<br>/m, n/ → [+nasal, +anterior]<br>확인할 것: 필요한 소리가 빠졌는가? 다른 소리까지 포함됐는가?</div>
+    </details>
+    <details>
+      <summary>예문 비교 · 모음의 [−high]는 [+low]와 같은가?</summary>
+      <p>Davenport와 Hannahs의 binary 분석에서 high vowel은 [+high, −low], mid vowel은 [−high, −low], low vowel은 [−high, +low]이다. 따라서 /ɛ/와 /æ/는 모두 [−high]이지만 /ɛ/는 [−low], /æ/는 [+low]로 구별된다. <u>high가 아니라는 조건만으로 low라고 판단하지 않는다.</u></p>
+      <p>같은 원서의 [front]와 [back] 두 자질 분석에서는 central vowel [ə]를 [−front, −back]으로 표시한다. [back] 하나로만 앞뒤를 나누는 체계의 값을 이 표에 섞으면 안 된다. 모음 문제도 먼저 제시된 표를 확인하고, 높이·앞뒤·입술 모양 가운데 무엇을 묶거나 구별하는지 찾는다. IPA의 세밀한 높이 구분 전체를 [high]/[low] 두 자질만으로 표현할 수 있다고 가정하지 않는다.</p>
     </details>
   </div>
 </section>
@@ -143,6 +149,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Segoe UI",sans
       <p>같은 문제에서 lewd처럼 /l/ 뒤의 /j/가 유지되거나 사라지는 경우와, blue처럼 consonant + /l/ 뒤에서 이미 사라진 경우를 구별한다. 후자의 자료에는 /bl, fl, gl/이 나온다. 이를 설명할 때는 /l/ 앞에도 consonant가 있다는 조건을 포함해야 한다.</p>
       <div class="ex">해당 자료의 cluster 조건: /j/ → ∅ / C l __<br>C = 자료에 나온 [−coronal] consonant; C와 /l/은 같은 onset을 이룬다.</div>
       <p>이 표기는 /j/가 C와 /l/ 사이에서 사라진다는 뜻이 아니다. 밑줄은 바뀌는 /j/의 자리이므로 C 다음의 /l/ 뒤에 온다. 또한 이 규칙을 모든 consonant cluster나 단어 경계를 넘는 연속에 적용한다는 뜻도 아니다.</p>
+      <p><a href="https://etwiki.net/index.html?id=linguistics_2015_B03">15 · American English의 /j/와 stress</a>에서는 /t, d, s, z/ 같은 alveolar obstruent 뒤에서 /j/가 없지만, alveolar sonorant /n, l/ 뒤에서는 <u>/j/가 속할 syllable의 stress</u>가 추가 조건이다. Annuity·voluminous의 해당 syllable은 stressed여서 /j/가 없고, continue·voluble의 해당 syllable은 unstressed여서 /j/가 가능하다. 단어 어딘가에 stress가 있는지가 아니라 해당 syllable을 비교한다.</p>
       <p>이 문제의 Modern British English 자료와 American English의 /j/ 분포를 섞지 않는다. Yavaş가 설명하는 American English에서는 alveolar sonorant 뒤의 /j/도 stress 조건에 따라 달라진다. 예를 들어 value의 /lj/가 가능하다는 사실은 “alveolar 뒤에서는 /j/가 항상 사라진다”는 설명이 너무 넓다는 것을 보여 준다.</p>
     </details>
   </div>
@@ -166,6 +173,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Segoe UI",sans
       <div class="ex">V → [+nasal] / __ C[+nasal]<br>이 연습에서 V는 vowel이며, 뒤의 nasal consonant와 같은 syllable에 있다.</div>
       <p>화살표 왼쪽은 바뀌는 대상, 오른쪽은 바뀐 feature 값, slash 뒤는 환경이다. [+nasal]만 오른쪽에 썼다고 vowel의 다른 성질이 모두 사라지는 것은 아니다. 나머지 성질은 유지하고 [nasal] 값이 달라진다는 뜻이다. 이 표기는 feature rule을 읽는 연습이며, nasalization의 모든 발화 조건이나 정도를 기술한 것은 아니다.</p>
       <p>V를 무조건 [+syllabic]으로 바꾸면 syllabic consonant까지 포함될 수 있다. 또 consonant를 [+consonantal]로 바꿀 때는 /j, w/ 같은 glide가 제외된다는 점을 확인해야 한다. 익숙한 약자를 feature로 바꿀 때도 원래 의도한 대상이 그대로 남는지 점검한다.</p>
+      <details><summary>기출 비교 · 자질이 같아도 규칙의 환경은 따로 확인한다</summary>
+      <p><a href="https://etwiki.net/index.html?id=linguistics_2016_A05">16 · /aʊ/ 뒤 coda의 자연부류</a>는 /n, s, z, t, d, θ, tʃ/를 coronal로 묶는다. <u>같은 rhyme 안에서 /aʊ/ 뒤에 온다</u>는 위치 조건도 필요하다. 이는 주어진 영어 자료의 제약이며, 모든 coronal이 모든 모음 뒤에서 같은 분포를 갖는다는 뜻은 아니다.</p>
+      <p><a href="https://etwiki.net/index.html?id=linguistics_2019_A05">19 · tense/lax의 두 기준</a>은 조음·길이 기준과 stressed open syllable에서의 분포 기준을 구별한다. /æ/는 lax여도 언제나 짧은 것은 아니다. 따라서 <u>lax = short, tense = long</u>만으로 자질이나 weight를 판정하지 않고, 지문이 채택한 기준과 실제 rhyme을 각각 확인한다.</p>
+      </details>
       <div class="note">스스로 확인하기: [+voice]만으로 sonorant를 고를 수 있는가? /m, n/에 [+nasal]만 적으면 무엇이 더 포함되는가? 2026 A-6에서 [−anterior] 앞의 coronal 조건을 빼면 어떤 비교 자료와 맞지 않는가?</div>
       <details class="source-note"><summary>원서 출처</summary><p> Mike Davenport &amp; S. J. Hannahs, <i>Introducing Phonetics and Phonology</i>, 3rd ed. (2010), §§7.1–7.4, §8.3; Mehmet Yavaş, <i>Applied English Phonology</i>, 2nd ed. (2011), §3.5.</p></details>
     </details>
