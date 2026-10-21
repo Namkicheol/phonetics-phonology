@@ -30,6 +30,16 @@ assert.equal(questions('stress_exercises.html')[8].a, 3);
 assert.match(questions('stress_exercises.html')[8].o[2], /강세를 받는 음절에는 full vowel/);
 assert.match(read('stress_concepts.html'), /4번째 -ic의 모음이 모두 \[ə\]/);
 const hub = read('phonetics.html');
+// Count every opening tag carrying the topic class, including non-li or unclosed nodes.
+const topicOpenings = [...hub.matchAll(/<[a-z][a-z0-9:-]*\b[^>]*>/gi)].filter(([tag]) => {
+  const classAttribute = tag.match(/\sclass\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i);
+  return classAttribute && (classAttribute[1] ?? classAttribute[2] ?? classAttribute[3])
+    .split(/\s+/).includes('topic');
+});
+assert.equal(topicOpenings.length, 15,
+  'The hub must contain exactly 15 topic-class openings, with no extra or malformed topic nodes');
+assert.ok(topicOpenings.every(([tag]) => /^<li\b/i.test(tag)),
+  'Every topic-class opening must be an li element');
 const topics = [...hub.matchAll(/<li class="topic">([\s\S]*?)<\/li>/g)].map(([, body]) => ({
   number: body.match(/class="topic-number">(\d+)</)[1],
   title: body.match(/<h2>([\s\S]*?)<\/h2>/)[1],
