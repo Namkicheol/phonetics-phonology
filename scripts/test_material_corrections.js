@@ -30,7 +30,143 @@ assert.equal(questions('stress_exercises.html')[8].a, 3);
 assert.match(questions('stress_exercises.html')[8].o[2], /강세를 받는 음절에는 full vowel/);
 assert.match(read('stress_concepts.html'), /4번째 -ic의 모음이 모두 \[ə\]/);
 const hub = read('phonetics.html');
-assert.equal((hub.match(/class="topic"/g)||[]).length, 14);
+const topics = [...hub.matchAll(/<li class="topic">([\s\S]*?)<\/li>/g)].map(([, body]) => ({
+  number: body.match(/class="topic-number">(\d+)</)[1],
+  title: body.match(/<h2>([\s\S]*?)<\/h2>/)[1],
+  links: [...body.matchAll(/href="([^"]+)"/g)].map(match => match[1])
+}));
+const originalTopics = [
+  {
+    "number": "01",
+    "title": "Stress — 강세 완성",
+    "links": [
+      "stress_study.html",
+      "stress.html",
+      "stress_exercises.html",
+      "stress_practice.html",
+      "stress_practice2.html"
+    ]
+  },
+  {
+    "number": "02",
+    "title": "Noun/Verb Stress Shift",
+    "links": [
+      "noun_verb_study.html",
+      "noun_verb_ox.html",
+      "noun_verb_exercises.html"
+    ]
+  },
+  {
+    "number": "03",
+    "title": "Suffix-conditioned Stress",
+    "links": [
+      "stress_study.html#s6",
+      "suffix_ox.html"
+    ]
+  },
+  {
+    "number": "04",
+    "title": "Compound Stress vs NSR",
+    "links": [
+      "stress_study.html#s7",
+      "compound_ox.html"
+    ]
+  },
+  {
+    "number": "05",
+    "title": "Sentence Stress &amp; Focus Stress",
+    "links": [
+      "sentence_study.html",
+      "sentence_ox.html"
+    ]
+  },
+  {
+    "number": "06",
+    "title": "Assimilation 총론",
+    "links": [
+      "assimilation_study.html",
+      "assimilation_ox.html",
+      "assimilation_exercises.html"
+    ]
+  },
+  {
+    "number": "07",
+    "title": "Nasalization &amp; Epenthesis",
+    "links": [
+      "nasalization_epenthesis_study.html",
+      "nasalization_ox.html"
+    ]
+  },
+  {
+    "number": "08",
+    "title": "Voice Assimilation",
+    "links": [
+      "voice_study.html",
+      "voice_ox.html"
+    ]
+  },
+  {
+    "number": "09",
+    "title": "Flapping",
+    "links": [
+      "flapping_study.html",
+      "flapping_ox.html",
+      "flapping_exercises.html"
+    ]
+  },
+  {
+    "number": "10",
+    "title": "Aspiration",
+    "links": [
+      "aspiration_study.html",
+      "aspiration_ox.html",
+      "aspiration_exercises.html"
+    ]
+  },
+  {
+    "number": "11",
+    "title": "Vowel Reduction &amp; Schwa",
+    "links": [
+      "schwa_study.html",
+      "schwa_ox.html",
+      "schwa_exercises.html"
+    ]
+  },
+  {
+    "number": "12",
+    "title": "Deletion",
+    "links": [
+      "deletion_study.html",
+      "deletion_ox.html"
+    ]
+  },
+  {
+    "number": "13",
+    "title": "Distinctive Features",
+    "links": [
+      "features_study.html",
+      "features_ox.html"
+    ]
+  },
+  {
+    "number": "14",
+    "title": "Syllable &amp; Phonotactics",
+    "links": [
+      "syllable_study.html",
+      "syllable_ox.html"
+    ]
+  }
+];
+assert.equal(topics.length, 15, 'The hub must have exactly 15 topic cards');
+assert.deepEqual(topics.slice(0, 14), originalTopics,
+  'Preserve all original 14 topic identities, order, and study/OX/practice links');
+assert.deepEqual(topics[14], {
+  number: '15',
+  title: 'Distribution &amp; Phonemic Analysis',
+  links: ['distribution_study.html']
+}, 'Topic 15 must be the distribution study unit, without an invented quiz link');
+assert.equal(topics.filter(topic => topic.links.includes('distribution_study.html')).length, 1,
+  'The distribution entry must occur exactly once');
 assert.match(hub, /min-height:44px/);
 assert.match(hub, /:focus-visible/);
 assert.doesNotMatch(hub, /업로드 현황|완전정복|hero-stats|--[a-z]+:/);
@@ -42,4 +178,4 @@ for (const file of fs.readdirSync(root).filter(f=>f.endsWith('.html'))) {
     if (match[1].trim()) new vm.Script(match[1], {filename:file});
   }
 }
-console.log('GREEN: correction regressions, 14-topic hub links, focus/touch CSS, all inline JavaScript syntax');
+console.log('GREEN: correction regressions, 15-topic hub links (original 14 preserved + distribution), focus/touch CSS, all inline JavaScript syntax');
