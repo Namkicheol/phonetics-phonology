@@ -8,7 +8,7 @@ const root = path.resolve(__dirname, '..');
 const cases = [
   ['stress.html', 'Trochaic Foot', 'Foot Structure', 'Trochee (Trochaic)'],
   ['flapping_ox.html', 'Flapping', '규칙 형식화', 'attic and attack'],
-  ['nasalization_ox.html', 'Epenthesis', '복수 /ɪz/', 'Plural forms'],
+  ['nasalization_ox.html', 'Epenthesis', 'Plural vowel insertion', 'Plural forms'],
   ['suffix_ox.html', '-y (photography)', '강세 이동 예시', 'Two effects of suffix']
 ];
 const helper = fs.readFileSync(path.join(root, 'quiz-study-figures.js'), 'utf8');
