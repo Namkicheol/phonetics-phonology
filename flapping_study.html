@@ -44,6 +44,9 @@ h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin-bottom:12px;letter-spa
 .etwiki-learning .flap-heading h2{flex:1;min-width:0}
 .etwiki-learning .exam-year{display:inline-flex;align-items:center;justify-content:center;min-width:34px;min-height:34px;color:#b42323;font-weight:700;border:1px solid #e6bcbc;border-radius:7px;padding:0 6px;text-decoration:none;flex:0 0 auto}
 
+
+/* Group rule examples without widening the page. */
+.example-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0;border:1px solid #cfe0eb;border-radius:10px}.example-scroll:focus-visible{outline:2px solid #0f6090;outline-offset:2px}.example-compare{width:100%;min-width:420px;border-collapse:collapse;font-size:.94em}.example-compare caption{text-align:left;font-weight:700;padding:10px}.example-compare th,.example-compare td{padding:9px 11px;border:1px solid #cfe0eb;text-align:left;vertical-align:top;white-space:normal;overflow-wrap:anywhere}.example-compare thead{background:#eef7fc}.example-compare strong{color:#0f4f76}
 </style>
 
 <link rel="stylesheet" href="./mint-learning.css">
@@ -81,7 +84,7 @@ h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin-bottom:12px;letter-spa
 <p><b>먼저 말소리와 그 소리가 나타나는 규칙을 구별한다.</b> [ɾ]는 혀끝이 alveolar ridge에 짧게 한 번 닿는 tap이다. 반복 접촉하는 trill [r]이나 지속적인 closure를 가진 [d]와 같은 기호로 적지 않는다. <b>/t/가 [ɾ]로 실현</b>되었다고 해서 <u>underlying phoneme이 /d/로 바뀐 것은 아니다</u>.</p>
 <h3>1. target → 양옆 segment → stress</h3>
 <p>다음은 규칙 적용을 연습하도록 구성한 <b>변형 예시</b>이다. American English에서 flapping을 허용하는 발음을 전제하며, 전사는 이 과정에 초점을 둔다.</p>
-<div class="ex">waiting /ˈweɪtɪŋ/ → /t/: stressed /eɪ/ __ unstressed /ɪ/ → [ˈweɪɾɪŋ]<br>heading /ˈhɛdɪŋ/ → /d/: stressed /ɛ/ __ unstressed /ɪ/ → [ˈhɛɾɪŋ]<br>retire /rɪˈtaɪr/ → /t/: __ stressed /aɪ/ → 이 rule의 [ɾ] 아님</div>
+<div class="example-scroll" role="region" aria-label="Flapping · target 주변과 stress 비교" tabindex="0"><table class="example-compare"><caption>Flapping · target 주변과 stress 비교</caption><thead><tr><th scope="col">예 · input</th><th scope="col">Target 환경</th><th scope="col">결과</th></tr></thead><tbody><tr><th scope="row">wai<strong>t</strong>ing /ˈweɪtɪŋ/</th><td>/t/: stressed /eɪ/ __ unstressed /ɪ/</td><td>[ˈweɪ<strong>ɾ</strong>ɪŋ]</td></tr><tr><th scope="row">hea<strong>d</strong>ing /ˈhɛdɪŋ/</th><td>/d/: stressed /ɛ/ __ unstressed /ɪ/</td><td>[ˈhɛ<strong>ɾ</strong>ɪŋ]</td></tr><tr><th scope="row">re<strong>t</strong>ire /rɪˈtaɪr/</th><td>/t/: __ <strong>stressed /aɪ/</strong></td><td>이 rule의 [ɾ] 아님</td></tr></tbody></table></div>
 <p>첫 두 단어는 input이 /t/인지 /d/인지 달라도 같은 output [ɾ]를 허용한다. 세 번째는 모음 사이에 /t/가 있다는 조건만 충족한다. 뒤 syllable이 stressed이므로 같은 규칙을 적용할 수 없다. <b>Intervocalic이라는 사실만으로 충분하지 않다.</b></p>
 <h3>2. 앞 vowel의 stress는 필수 조건이 아니다</h3>
 <p>예를 들어 <b>ability /əˈbɪləti/</b>의 마지막 /t/를 검사한다. 단어에 primary stress가 있다는 사실과 target 바로 앞 vowel이 stressed라는 사실은 다르다. /t/ 바로 앞의 /ə/와 뒤의 /i/는 모두 unstressed이므로 [əˈbɪləɾi]가 가능하다. 단어의 주강세 위치만 보지 말고, 규칙이 적용되는 자음 바로 앞뒤의 강세도 확인한다.</p>
