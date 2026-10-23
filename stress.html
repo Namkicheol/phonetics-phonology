@@ -349,7 +349,7 @@ const Q=[
     "text": "2음절 동형이의어(명사·동사)에서 <span class='kw2'>동사</span>는 일반적으로 <span class='kw1'>첫 번째</span> 음절에 primary stress를 받는다.",
     "ans": false,
     "correct": "강세 대조가 있는 일부 2음절 쌍에서는 동사 → <span class='kw1'>두 번째</span> 음절 강세 / 명사 → 첫 번째 음절 강세. 예: ˈpermit(N) vs perˈmit(V).",
-    "why": "강세 대조가 있는 일부 2음절 N/V 쌍에서는 명사에 첫 음절, 동사에 둘째 음절 강세가 온다. 예: <span class='kw1'>ˈrecord / reˈcord</span>, <span class='kw1'>ˈconduct / conˈduct</span>, <span class='kw1'>ˈprotest / proˈtest</span>. 다만 ˈharvest와 deˈlay처럼 두 품사에서 강세 위치가 같은 단어도 있으므로, 모든 N/V 동형이의어에 적용하지 않는다.",
+    "why": "강세 대조가 있는 일부 2음절 N/V 쌍에서는 명사에 첫 음절, 동사에 둘째 음절 강세가 온다. 예: <span class='kw1'>ˈrecord / reˈcord</span>, <span class='kw1'>ˈconduct / conˈduct</span>, <span class='kw1'>ˈpermit / perˈmit</span>. 다만 ˈharvest와 deˈlay처럼 두 품사에서 강세 위치가 같은 단어도 있으므로, 모든 N/V 동형이의어에 적용하지 않는다.",
     "compare": [
       {
         "title": "<span class='kw2'>명사(N)</span>",
@@ -369,7 +369,7 @@ const Q=[
     "text": "'permit'이 명사일 때는 <span class='kw1'>/ˈpɜːrmɪt/</span>, 동사일 때는 <span class='kw2'>/pərˈmɪt/</span>으로 발음된다.",
     "ans": true,
     "correct": "<span class='kw1'>ˈpermit</span>(N) vs <span class='kw2'>perˈmit</span>(V) — 동일 철자, 품사에 따라 강세 위치 상이.",
-    "why": "Noun과 verb를 비교하는 예다. 문맥 속 품사 판단 → 강세 표기가 핵심 유형. 추가 예: <span class='kw1'>ˈinsult/inˈsult</span>, <span class='kw1'>ˈrefund/reˈfund</span>, <span class='kw1'>ˈprotest/proˈtest</span>.",
+    "why": "Noun과 verb를 비교하는 예다. 문맥 속 품사 판단 → 강세 표기가 핵심 유형. 추가 예: <span class='kw1'>ˈinsult/inˈsult</span>, <span class='kw1'>ˈrefund/reˈfund</span>, <span class='kw1'>ˈrecord/reˈcord</span>.",
     "more": "<details><summary>예제로 확인: 품사가 달라지면 stress도 반드시 달라질까?</summary><p>A ˈpermit is required에서 permit은 noun이고, They perˈmit entry에서 permit은 verb다. 이 쌍에서는 품사에 따라 primary stress 위치가 달라진다. 제시된 문장의 구조로 품사를 정한 다음 해당 발음을 고르면 된다.</p><p>그러나 delay는 noun과 verb 모두 deˈlay이고, harvest도 두 품사에서 ˈharvest다. 따라서 noun과 verb로 모두 쓰인다는 사실만으로 stress shift를 예측할 수는 없다. Present처럼 대조가 있는 쌍과 delay처럼 위치가 같은 쌍을 구분해서 익힌다.</p><p>Vowel reduction도 따로 확인한다. Stress가 달라지는 쌍에 vowel reduction이 동반될 수 있지만, 그것이 stress shift의 필수 조건은 아니다. Stress 위치와 vowel quality를 각각 기록하면 두 차이를 혼동하지 않는다.</p></details>",
     "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), Ch. 7."
   },
@@ -427,12 +427,12 @@ const Q=[
     "cat": "Sentence Stress",
     "text": "중립적인 연속 발화에서는 content word가 대체로 prominence를 받고, function word는 weak form으로 발음되는 경우가 많다.",
     "ans": true,
-    "correct": "<span class='kw1'>Content words</span>(명사·동사·형용사·부사·의문사) → 강세. <span class='kw2'>Function words</span>(관사·전치사·접속사·조동사·대명사) → 일반적으로 약화.",
-    "why": "Function words는 약화 시 종종 schwa 실현 — 예: 'to' /tə/, 'for' /fər/, 'a' /ə/. 단, 강조·문장 끝 위치·대조 맥락에서는 강세 가능.",
+    "correct": "<span class='kw1'>Content words</span>(명사·본동사·형용사·부사)는 대체로 prominence를 받는다. <span class='kw2'>Function words</span>(관사·전치사·접속사·조동사·대명사)는 흔히 weak form으로 발음된다.",
+    "why": "Function words는 약화 시 종종 schwa로 실현된다: 'to' /tə/, 'for' /fər/, 'a' /ə/. 강조·대조 맥락 등에서는 prominence를 받을 수 있다. Wh-word의 prominence도 문장과 문맥을 함께 확인한다.",
     "compare": [
       {
         "title": "<span class='kw1'>Content words</span>",
-        "desc": "N, V(main), Adj, Adv, Wh-"
+        "desc": "N, V(main), Adj, Adv"
       },
       {
         "title": "<span class='kw2'>Function words</span>",
@@ -485,18 +485,22 @@ const Q=[
     "text": "JOHN left를 대조 문맥에서 JOHN에 nuclear stress를 두고 말하면, 떠난 사람이 다른 누군가가 아니라 John임을 강조할 수 있다.",
     "ans": true,
     "correct": "Contrastive focus: <span class='kw1'>JOHN</span>에 강세 → '다른 사람(Mary 등)이 아닌 John이' 떠났다는 대조 함의.",
-    "why": "핵강세 위치 = 새 정보 또는 대조 정보의 위치. 같은 문장도 핵강세 위치에 따라 다른 전제를 만들어냄. 앞선 질문과 대조 맥락을 함께 확인한다.",
+    "why": "Nuclear stress 위치만으로 broad focus와 narrow focus를 확정하지 않는다. 앞선 질문에서 무엇이 given/new인지 확인하고, 다른 대안과 명시적으로 대조하는지도 구별한다.",
     "compare": [
       {
-        "title": "<span class='kw1'>JOHN</span> left.",
-        "desc": "누가 떠났냐? → John (대조)"
+        "title": "Who left? → <span class='kw1'>JOHN</span> left.",
+        "desc": "John이 새 정보 → subject narrow focus"
       },
       {
-        "title": "John <span class='kw1'>LEFT</span>.",
-        "desc": "John이 어찌됐냐? → 떠났다 (broad)"
+        "title": "Mary left? → No, <span class='kw1'>JOHN</span> left.",
+        "desc": "Mary가 아니라 John → contrastive focus"
+      },
+      {
+        "title": "What happened? → John <span class='kw1'>LEFT</span>.",
+        "desc": "문장 전체가 새 정보 → broad focus"
       }
     ],
-    "source": "Mehmet Yavaş, Applied English Phonology, 2nd ed. (2011), Ch. 7."
+    "source": "Philip Carr, English Phonetics and Phonology, 2nd ed. (2013), §10.2.1, pp. 239–240."
   },
   {
     "src": "Name Game — 2025 B04",
