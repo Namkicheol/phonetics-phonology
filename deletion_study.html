@@ -41,6 +41,9 @@ h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin-bottom:12px;letter-spa
 .etwiki-learning .deletion-body .data-compare{min-width:560px;width:100%;font-size:15px}
 .etwiki-learning .deletion-body .data-compare th,.etwiki-learning .deletion-body .data-compare td{overflow-wrap:normal;word-break:normal}
 .etwiki-learning .table-caption{font-weight:700;font-size:15px;line-height:1.7;margin:12px 0 6px;overflow-wrap:break-word}
+
+/* Group rule examples without widening the page. */
+.example-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0;border:1px solid #cfe0eb;border-radius:10px}.example-scroll:focus-visible{outline:2px solid #0f6090;outline-offset:2px}.example-compare{width:100%;min-width:420px;border-collapse:collapse;font-size:.94em}.example-compare caption{text-align:left;font-weight:700;padding:10px}.example-compare th,.example-compare td{padding:9px 11px;border:1px solid #cfe0eb;text-align:left;vertical-align:top;white-space:normal;overflow-wrap:anywhere}.example-compare thead{background:#eef7fc}.example-compare strong{color:#0f4f76}
 </style>
 
 <link rel="stylesheet" href="./mint-learning.css">
@@ -79,7 +82,7 @@ h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin-bottom:12px;letter-spa
 <details class="note"><summary>자세히 보기 · 예문 비교: cluster, optionality, no audible release</summary>
 <h3>1. 철자 대신 실제 segment를 나열한다</h3>
 <p>best man을 /bɛst mæn/으로 놓으면 단어 경계의 연속은 /s t m/이다. 삭제 대상은 가운데 /t/이고, 이를 제외하면 [bɛs mæn]이 된다. old friend에서는 /l d f/의 /d/가 대상이므로 [oʊl frɛnd]가 가능하다. 두 예 모두 다음 단어가 consonant로 시작한다는 사실만으로는 부족하다. 앞 단어 끝에 /t, d/를 포함한 cluster가 있는지도 확인해야 한다.</p>
-<div class="ex">best man: /s t # m/ → [s # m]<br>old friend: /l d # f/ → [l # f]<br>best offer: /s t # V/ → 이 consonant-cluster rule의 환경이 아님</div>
+<div class="example-scroll" role="region" aria-label="Coronal stop deletion · target과 환경 비교" tabindex="0"><table class="example-compare"><caption>Coronal stop deletion · target과 환경 비교</caption><thead><tr><th scope="col">예</th><th scope="col">경계의 segment</th><th scope="col">판정</th></tr></thead><tbody><tr><th scope="row">bes<strong>t</strong> man</th><td>/s <strong>t</strong> # m/ → [s # m]</td><td>가운데 /t/ deletion 가능</td></tr><tr><th scope="row">ol<strong>d</strong> friend</th><td>/l <strong>d</strong> # f/ → [l # f]</td><td>가운데 /d/ deletion 가능</td></tr><tr><th scope="row">bes<strong>t</strong> offer</th><td>/s <strong>t</strong> # V/</td><td>이 consonant-cluster rule의 환경 아님</td></tr></tbody></table></div>
 <p>best offer의 /t/가 다른 방식으로 발음될 수 있는지와 이 deletion rule이 적용되는지는 별개의 질문이다. “환경이 아니다”는 말은 이 규칙으로 [t]를 지울 수 없다는 뜻이지, 반드시 하나의 고정된 phonetic realization만 허용된다는 뜻이 아니다.</p>
 <h3>2. 같은 모양의 cluster라도 형태와 발화 조건을 확인한다</h3>
 <p>hand luggage의 /n d l/에서는 [d]가 있는 발음과 없는 발음을 비교할 수 있다. 반면 planned trip의 /d/는 past-tense ending이다. 이처럼 grammatical ending이 만든 cluster는 기본적인 연결 발음 설명에서 유지되는 경향이 있다. 그렇다고 모든 방언에서 ending의 deletion이 금지되는 것은 아니다. AEP는 AAVE의 cluster reduction을 별도로 설명하며, morpheme boundary를 넘어 적용되는 예도 제시한다.</p>

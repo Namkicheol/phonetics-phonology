@@ -92,6 +92,9 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
 .rule-text{font-size:15px;line-height:2;color:#1a2633}
 .caution{background:rgba(183,28,28,.05);border:1.5px solid rgba(183,28,28,.2);border-radius:8px;padding:12px 16px;margin-top:10px;font-size:13.5px;color:#8b0000;line-height:1.8}
 .caution-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;font-weight:700;color:#b71c1c;margin-bottom:6px}
+
+/* Group rule examples without widening the page. */
+.example-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0;border:1px solid #cfe0eb;border-radius:10px}.example-scroll:focus-visible{outline:2px solid #0f6090;outline-offset:2px}.example-compare{width:100%;min-width:420px;border-collapse:collapse;font-size:.94em}.example-compare caption{text-align:left;font-weight:700;padding:10px}.example-compare th,.example-compare td{padding:9px 11px;border:1px solid #cfe0eb;text-align:left;vertical-align:top;white-space:normal;overflow-wrap:anywhere}.example-compare thead{background:#eef7fc}.example-compare strong{color:#0f4f76}
 </style>
 <link rel="stylesheet" href="./mint-learning.css">
 
@@ -220,15 +223,11 @@ tr:nth-child(even) td{background:rgba(26,82,118,.04)}
   <div class="sec-body">
 <p class="note">Weight는 rhyme 구조의 분류입니다. 실제 stress는 품사·suffix와 예외도 함께 확인합니다.</p><div class="study-explanation-group">
 
-<details class="concept"><summary>자세히 보기 · weight를 판단하기 전에 음절 내부 읽기</summary><div class="def">
+<details class="concept"><summary>자세히 보기 · rhyme 구조 → weight → stress 비교</summary><div class="def">
 <p>음절에서 모음 중심을 nucleus, 그 뒤의 자음을 <a href="https://etwiki.net/concept.html?term=coda">coda</a>, 둘을 합친 부분을 <a href="https://etwiki.net/concept.html?term=rhyme">rhyme</a>라고 합니다. 앞쪽 자음은 onset입니다. 예를 들어 /dʒɛn/에서 onset /dʒ/, nucleus /ɛ/, coda /n/이므로 rhyme은 /ɛn/입니다. <strong>Onset의 길이는 여기서 weight를 정하는 기준이 아닙니다.</strong></p>
 <p><a href="https://etwiki.net/concept.html?term=Syllable%20Weight">Syllable Weight</a>는 큰 소리라는 뜻이 아니라 rhyme 구조의 분류입니다. 이 단원의 AEP 분석에서는 schwa가 아닌 짧은 모음 뒤에 coda가 있거나, 장모음·이중모음이 있으면 heavy입니다. <u>Schwa는 AEP에서 weightless로 따로 처리</u>합니다. 강세 위치를 알아내려면 이 분류에 품사·접미사·예외 조건을 더해야 합니다.</p>
-<p><u>조건 바꾸기 · 구조만 비교하는 학습용 예</u>: 짧은 /ɪ/를 가진 /lɪ/는 coda가 없어 light입니다. /lɪp/로 coda를 하나 더하면 heavy가 됩니다. 그러나 /plɪ/처럼 onset만 늘리면 light인 채입니다. 이 세 형식의 weight만으로 실제 영어 단어의 primary stress를 결정한 것은 아닙니다.</p>
-<p>2010 1차 Q33은 schwa 음절을 light 정의의 예외적 경우에 포함합니다. <strong>답안에는 해당 지문의 정의를 우선합니다.</strong> <a data-stress-link href="./stress_concepts.html#ipa-basics">전사와 stress mark 다시 읽기</a></p></div></details>
-
-    <details class="concept"><summary>예제로 확인: heavy와 실제 stress 위치는 같은 판단일까?</summary>
-      <div class="def"><p>먼저 aˈgenda의 penult /dʒɛn/을 보자. Nucleus /ɛ/ 뒤에 coda /n/이 있으므로 이 단원의 AEP 분석에서 heavy다. 3음절 noun의 기본 패턴을 적용하면 그 penult에 primary stress가 온다. Onset /dʒ/가 복잡해서 heavy인 것은 아니다.</p><p>반면 /ˈkæl.ən.dɚ/로 제시된 calendar는 penult에 coda /n/이 있어도 nucleus가 schwa다. AEP는 이 schwa를 weightless로 취급하므로, 일반적인 non-schwa CVC와 구분한다. /ˈkælɪndər/처럼 다른 vowel이 쓰인 전사에 이 설명을 그대로 옮겨서는 안 된다.</p><p>Heavy라는 말은 syllable 구조에 대한 분류이고, primary stress는 단어 안에서 어느 syllable이 가장 두드러지는지에 대한 표시다. Heavy syllable이 여럿이라고 모두 primary stress를 받는 것은 아니다. 품사, suffix, 예외, 제시된 발음을 함께 확인해야 한다.</p><p>2010 1차 Q33은 schwa가 있는 syllable을 light의 예외적 하위 경우로 포함해 정의한다. 따라서 그 문제를 풀 때 AEP의 weightless라는 이름을 답안에 강제로 대입하지 않는다. 정의가 다르게 제시되면 먼저 그 문제의 분류 기준을 따른다.</p></div>
-    </details>
+<div class="example-scroll" role="region" aria-label="학습용 구조 비교 · onset이 아니라 rhyme 확인" tabindex="0"><table class="example-compare"><caption>학습용 구조 비교 · onset이 아니라 rhyme 확인</caption><thead><tr><th scope="col">구조</th><th scope="col">Rhyme</th><th scope="col">AEP weight</th></tr></thead><tbody><tr><th scope="row">/lɪ/</th><td>/<strong>ɪ</strong>/</td><td>light</td></tr><tr><th scope="row">/lɪ<strong>p</strong>/</th><td>/ɪ<strong>p</strong>/</td><td>coda 추가 → heavy</td></tr><tr><th scope="row">/<strong>p</strong>lɪ/</th><td>/<strong>ɪ</strong>/</td><td>onset만 증가 → light 유지</td></tr></tbody></table></div><p>이 세 형식의 weight만으로 실제 영어 단어의 primary stress를 결정한 것은 아닙니다.</p>
+<p>2010 1차 Q33은 schwa 음절을 light 정의의 예외적 경우에 포함합니다. <strong>답안에는 해당 지문의 정의를 우선합니다.</strong> <a data-stress-link href="./stress_concepts.html#ipa-basics">전사와 stress mark 다시 읽기</a></p><h3>실제 단어 · agenda와 calendar의 penult</h3><p>먼저 aˈgenda의 penult /dʒɛn/을 보자. Nucleus /ɛ/ 뒤에 coda /n/이 있으므로 이 단원의 AEP 분석에서 heavy다. 3음절 noun의 기본 패턴을 적용하면 그 penult에 primary stress가 온다. Onset /dʒ/가 복잡해서 heavy인 것은 아니다.</p><p>반면 /ˈkæl.ən.dɚ/로 제시된 calendar는 penult에 coda /n/이 있어도 nucleus가 schwa다. AEP는 이 schwa를 weightless로 취급하므로, 일반적인 non-schwa CVC와 구분한다. /ˈkælɪndər/처럼 다른 vowel이 쓰인 전사에 이 설명을 그대로 옮겨서는 안 된다.</p></div></details>
 
     <div class="concept">
       <div class="c-title">1) 왜 음절 무게가 중요한가</div>

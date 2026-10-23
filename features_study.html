@@ -15,6 +15,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Segoe UI",sans
 /* Keep feature names intact; the existing .ex region supplies one horizontal scroll surface. */
 .etwiki-learning .feature-body .ex .data-compare{display:table;min-width:560px;max-width:none;width:100%;font-size:15px;line-height:1.7}
 .etwiki-learning .feature-body .data-compare th,.etwiki-learning .feature-body .data-compare td{overflow-wrap:normal;word-break:normal}
+
+/* Group rule examples without widening the page. */
+.example-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0;border:1px solid #cfe0eb;border-radius:10px}.example-scroll:focus-visible{outline:2px solid #0f6090;outline-offset:2px}.example-compare{width:100%;min-width:420px;border-collapse:collapse;font-size:.94em}.example-compare caption{text-align:left;font-weight:700;padding:10px}.example-compare th,.example-compare td{padding:9px 11px;border:1px solid #cfe0eb;text-align:left;vertical-align:top;white-space:normal;overflow-wrap:anywhere}.example-compare thead{background:#eef7fc}.example-compare strong{color:#0f4f76}
 </style>
 <link rel="stylesheet" href="./mint-learning.css">
 <style>
@@ -88,7 +91,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Segoe UI",sans
       <p>이 binary 분석에서는 /m, n/을 [+nasal, +anterior]로 묶을 수 있다. 두 값을 동시에 만족해야 하므로 [−anterior]인 /ŋ/가 제외된다. feature 묶음은 둘 중 하나만 만족해도 된다는 뜻이 아니라, 적힌 조건을 모두 만족해야 한다는 뜻이다.</p>
       <p>natural class를 찾을 때는 대상에 속하는 소리가 모두 포함되는지 확인한 다음, 제외해야 할 소리까지 포함되지 않는지 확인한다. 이 판단은 주어진 언어의 segment 목록과 feature 체계를 기준으로 한다. 영어의 기본 consonant 목록에서 성립하는 분류를 다른 언어의 모든 소리에 그대로 적용해서는 안 된다.</p>
       <p><strong>최소 자질 집합 확인:</strong> <u>값을 하나씩 빼도 같은 집합이 남는지</u> 검사한다. 위의 영어 consonant 목록에서 /m, n/을 고를 때 [+anterior]를 빼면 /ŋ/가 들어오고, [+nasal]을 빼면 다른 anterior consonant도 들어온다. 반면 [+voice]를 더해도 이미 고른 /m, n/은 달라지지 않으므로 이 분류에는 불필요하다. 최소 집합은 주어진 소리 목록과 자질표에 따라 판단하며, 발문이 자질 하나만 요구하면 그 조건도 지킨다.</p>
-      <div class="ex">/m, n, ŋ/ → [+nasal]<br>/m, n/ → [+nasal, +anterior]<br>확인할 것: 필요한 소리가 빠졌는가? 다른 소리까지 포함됐는가?</div>
+      <div class="example-scroll" role="region" aria-label="Natural class · 선택할 집합과 제외할 segment" tabindex="0"><table class="example-compare"><caption>Natural class · 선택할 집합과 제외할 segment</caption><thead><tr><th scope="col">선택할 집합</th><th scope="col">Feature 묶음</th><th scope="col">검사</th></tr></thead><tbody><tr><th scope="row">/<strong>m, n, ŋ</strong>/</th><td>[+nasal]</td><td>영어 nasal 세 개 포함</td></tr><tr><th scope="row">/<strong>m, n</strong>/</th><td>[+nasal, <strong>+anterior</strong>]</td><td>[−anterior] /<strong>ŋ</strong>/ 제외</td></tr></tbody></table></div><p><u>필요한 소리가 빠지거나, 제외할 소리가 더 포함되지 않는지</u> 주어진 segment 목록에서 확인한다.</p>
     </details>
     <details>
       <summary>예문 비교 · 모음의 [−high]는 [+low]와 같은가?</summary>
