@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>음성·음운 자료 판단 OX · 24문항</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:#f5f4ee;background-image:repeating-linear-gradient(transparent,transparent 27px,#ddddd0 28px);color:#1a1a1a;min-height:100vh;padding:16px}
+.header-wrap{max-width:720px;margin:0 auto;padding:20px 8px 0}
+.header-topbar{display:flex;justify-content:space-between;align-items:center;border-top:2px solid #1a1a1a;padding-top:8px;margin-bottom:10px}
+.header-no{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;border:2px solid #1a1a1a;padding:3px 10px;border-radius:2px;letter-spacing:.5px;display:flex;align-items:center;gap:6px}
+.header-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;letter-spacing:1px}
+.header-title{font-size:clamp(30px,7vw,46px);font-weight:900;color:#1a1a1a;line-height:1.1;margin-bottom:5px;letter-spacing:-1px}
+.title-hl{background:#3b3f86;color:#fff;padding:1px 6px}
+.header-script{font-family:'Caveat',cursive;font-size:21px;color:#3b3f86;margin-bottom:4px;font-weight:600}
+.header-sub{font-size:13px;color:#555;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#aaa;margin-bottom:14px}
+.header-divider{border:none;border-top:2.5px solid #1a1a1a;margin-bottom:20px}
+.prog-wrap{max-width:720px;margin:0 auto 24px;padding:0 8px}
+.prog-info{display:flex;justify-content:space-between;font-size:12px;color:#4a4d6a;font-family:'JetBrains Mono',monospace;margin-bottom:6px}
+.bar{height:4px;background:#c5c8e8;border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,#3b3f86,#7c83d9);border-radius:2px;transition:width .5s ease}
+.wrap{max-width:720px;margin:0 auto}
+.card{background:#fff;border:1.5px solid #c5c8e8;border-radius:14px;padding:26px;animation:up .35s ease;box-shadow:0 2px 8px rgba(59,63,134,.08)}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.q-meta{display:flex;align-items:center;gap:7px;margin-bottom:14px;flex-wrap:wrap}
+.q-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:#3b3f86;background:rgba(59,63,134,.1);padding:3px 10px;border-radius:8px;font-weight:700}
+.q-src{font-size:11px;color:#4a4d6a;font-family:'JetBrains Mono',monospace}
+.q-cat{font-size:11px;color:#1f7a8c;background:rgba(31,122,140,.1);padding:3px 10px;border-radius:8px;margin-left:auto;font-weight:600}
+.kw1{background:rgba(59,63,134,.18);color:#2a2e6e;padding:2px 7px;border-radius:4px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em}
+.kw2{color:#1f7a8c;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.88em;border-bottom:2px solid rgba(31,122,140,.4)}
+.q-text{font-size:clamp(15px,2.2vw,16.5px);line-height:1.9;margin-bottom:24px;color:#1a1f3a}
+.ox-btns{display:flex;gap:12px}
+.ox-btn{flex:1;padding:20px 10px;border-radius:12px;border:2px solid #c5c8e8;background:#f7f8ff;color:#1a1f3a;font-size:30px;cursor:pointer;transition:all .18s ease;display:flex;flex-direction:column;align-items:center;gap:5px}
+.lb{font-size:11px;font-family:'JetBrains Mono',monospace;color:#4a4d6a;letter-spacing:1px;font-weight:600}
+.ox-btn:hover:not(:disabled){transform:translateY(-2px)}
+.o-btn:hover:not(:disabled){border-color:#3b3f86;background:rgba(59,63,134,.08)}
+.x-btn:hover:not(:disabled){border-color:#c62828;background:rgba(198,40,40,.06)}
+.co,.cx{border-color:#3b3f86!important;background:rgba(59,63,134,.1)!important}
+.wp{border-color:#c62828!important;background:rgba(198,40,40,.08)!important}
+.ox-btn:disabled{cursor:default}
+.badge{display:none;margin-top:14px;padding:9px 16px;border-radius:8px;font-size:14px;font-weight:700;font-family:'JetBrains Mono',monospace}
+.badge.ok{display:inline-block;background:rgba(59,63,134,.1);color:#3b3f86;border:1.5px solid rgba(59,63,134,.3)}
+.badge.ng{display:inline-block;background:rgba(198,40,40,.08);color:#c62828;border:1.5px solid rgba(198,40,40,.25)}
+.exp{display:none;margin-top:18px;border-radius:12px;overflow:hidden;animation:fade .3s ease}
+.exp.show{display:block}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.exp-header{background:linear-gradient(135deg,rgba(59,63,134,.12),rgba(124,131,217,.06));border:1.5px solid rgba(59,63,134,.25);border-bottom:none;padding:11px 16px}
+.exp-header span{font-size:11px;font-family:'JetBrains Mono',monospace;color:#2a2e6e;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.exp-answer{background:rgba(59,63,134,.05);border:1.5px solid rgba(59,63,134,.2);border-top:none;border-bottom:none;padding:14px 16px}
+.ans-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#4a4d6a;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-weight:700}
+.ans-text{font-size:16px;color:#1a1f3a;line-height:1.75;font-weight:500}
+.exp-body{background:rgba(59,63,134,.03);border:1.5px solid rgba(59,63,134,.15);border-top:1px solid rgba(59,63,134,.1);padding:14px 16px}
+.sec-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:#1f7a8c;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;margin-top:13px;font-weight:700}
+.sec-label:first-child{margin-top:0}
+.exp-body p{font-size:15px;color:#2a2e6e;line-height:1.8;margin-bottom:5px}
+.def-box{background:rgba(124,131,217,.08);border-left:4px solid #7c83d9;padding:10px 14px;border-radius:0 8px 8px 0;margin:8px 0}
+.def-box p{color:#1a1f3a;font-size:14.5px;font-style:italic;line-height:1.75;font-family:'JetBrains Mono',monospace}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.compare.three{grid-template-columns:1fr 1fr 1fr}
+.compare-item{background:#f7f8ff;border:1.5px solid #c5c8e8;border-radius:8px;padding:11px 14px}
+.ci-title{font-size:11px;font-family:'JetBrains Mono',monospace;color:#2a2e6e;font-weight:700;margin-bottom:5px}
+.compare-item p{font-size:14px;color:#3b3f86;line-height:1.65}
+.next-btn{display:none;width:100%;margin-top:16px;padding:14px;background:linear-gradient(135deg,#3b3f86,#7c83d9);border:none;border-radius:10px;color:white;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:opacity .2s,transform .2s}
+.next-btn:hover{opacity:.88;transform:translateY(-1px)}
+.next-btn.show{display:block;animation:fade .3s ease}
+.score-card{display:none;text-align:center;padding:48px 24px}
+.score-card.show{display:block;animation:up .5s ease}
+.score-circle{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,#3b3f86,#7c83d9);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 0 40px rgba(59,63,134,.3)}
+.s-num{font-size:42px;font-weight:700;line-height:1;color:#fff}
+.s-total{font-size:14px;opacity:.85;color:#fff}
+.score-card h2{font-size:24px;margin-bottom:7px;color:#1a1f3a}
+.score-card p{color:#4a4d6a;margin-bottom:24px;font-size:15px}
+.restart-btn{padding:13px 32px;background:#f7f8ff;border:2px solid #3b3f86;border-radius:10px;color:#3b3f86;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.restart-btn:hover{background:rgba(59,63,134,.1)}
+.nd{width:32px;height:32px;border-radius:6px;border:1.5px solid #c5c8e8;background:#f7f8ff;font-size:11px;font-family:'JetBrains Mono',monospace;cursor:pointer;color:#4a4d6a;transition:all .15s;display:inline-flex;align-items:center;justify-content:center;font-weight:600}
+.nd.cur{border-color:#3b3f86;background:#3b3f86;color:white}
+.nd.ok{border-color:#3b3f86;background:rgba(59,63,134,.15);color:#2a2e6e}
+.nd.ng{border-color:#c62828;background:rgba(198,40,40,.1);color:#c62828}
+.nd:hover:not(.cur){opacity:.7}
+#nav{display:flex;flex-wrap:wrap;gap:5px;max-width:720px;margin:0 auto 16px;padding:0 8px}
+.mode-bar{max-width:720px;margin:0 auto 10px;padding:0 8px;display:flex;gap:8px}
+.mode-btn{flex:1;padding:8px 14px;border-radius:8px;border:1.5px solid #c5c8e8;background:#f7f8ff;color:#4a4d6a;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;cursor:pointer;transition:all .18s;letter-spacing:.5px}
+.mode-btn.active{background:#3b3f86;border-color:#3b3f86;color:#fff}
+.quiz-hub-nav{display:flex;align-items:center;gap:6px;max-width:720px;margin:0 auto 18px;padding:0 8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.quiz-hub-nav::-webkit-scrollbar{display:none}
+.quiz-hub-nav a{flex:0 0 auto;display:inline-flex;align-items:center;min-height:32px;padding:7px 11px;border:1px solid #c5c8e8;border-radius:999px;background:#fff;color:#2a2e6e;font-size:11.5px;font-weight:700;text-decoration:none;white-space:nowrap}
+.quiz-hub-nav a:hover{background:#f0f1ff;border-color:#7c83d9}
+@media(max-width:320px){.compare,.compare.three{grid-template-columns:1fr}}
+.quiz-tools{max-width:720px;margin:0 auto 16px;padding:0 8px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}.quiz-tools select{max-width:100%;min-width:0;flex:1 1 260px;padding:12px;border:1px solid #c5c8e8;border-radius:8px;font:inherit}.quiz-tools p{font-size:13px;line-height:1.7;color:#555}.quiz-tools .restart-btn{padding:10px 14px;font-size:13px}.unit-label{font-size:13px;line-height:1.7;color:#4a4d6a;margin-bottom:14px}.q-text,.exp-body,.ans-text{overflow-wrap:anywhere}.nd{width:40px;height:40px}.quiz-tools button:disabled{opacity:.5;cursor:default}button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #1f7a8c;outline-offset:3px}@media(max-width:480px){.compare,.compare.three{grid-template-columns:1fr}.card{padding:18px}.header-label{display:none}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* This bank keeps the shared best-record badge in document flow. */
+#sp-badge{position:static!important;inset:auto!important;max-width:100%;width:fit-content;margin:10px 0;overflow-wrap:anywhere;pointer-events:none}
+.quiz-return{text-align:center;margin:24px auto;max-width:720px}
+.quiz-return a{display:inline-flex;align-items:center;min-height:44px;padding:10px 16px;border:1px solid #c5c8e8;border-radius:10px;background:#fff;color:#2a2e6e;font-weight:700;text-decoration:none}
+.judgment-guide{max-width:720px;margin:12px auto 20px;padding:14px;line-height:1.8;background:#fff;border:1px solid #d1d3e6;border-radius:10px;font-size:14px}.q-context{font-size:14px;line-height:1.8;background:#f5f5fa;padding:12px;margin:16px 0;overflow-wrap:anywhere}.q-text{font-size:clamp(21px,5vw,28px);line-height:1.65;font-weight:600}.answer-focus{padding:10px;margin:12px 0;border-left:4px solid #b03a3a;background:#fff5f5;overflow-wrap:anywhere}.answer-focus.good{border-color:#218574;background:#effaf7}.compare-item p{font-size:17px;line-height:1.7}.q-meta{flex-wrap:wrap}.q-text{font-size:clamp(18px,4vw,23px);overflow-wrap:anywhere}.q-context{white-space:pre-line}.q-context,.q-text,.answer-focus{text-transform:none}.lb{font-family:inherit;letter-spacing:0}.card{min-width:0}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}</style>
+<link rel="stylesheet" href="./mint-learning.css">
+</head>
+<body class="etwiki-learning">
+<header class="ew-header"><div class="ew-brand-row"><a class="ew-brand" href="https://etwiki.net/index.html">기출 WIKI</a><span class="ew-header-label">학습자료</span><a class="ew-back" href="https://etwiki.net/study.html">전체 자료 ↗</a></div><nav class="ew-subjects" aria-label="학습 영역"><a href="https://namkicheol.github.io/englisheducation/">영어교육론</a><a href="https://namkicheol.github.io/linguistics/" aria-current="location">영어학</a><a href="https://namkicheol.github.io/phonetics-phonology/phonetics.html">음성·음운론</a></nav></header>
+<div class="header-wrap">
+  <div class="header-topbar">
+    <span class="header-no">PHONOLOGY DATA</span>
+    <span class="header-label">Practice Notebook</span>
+  </div>
+  <h1 class="header-title">음성·음운 자료 판단 · OX</h1>
+  <div class="header-script">Read the Data, Test the Analysis</div>
+  <p class="header-sub">전사·분포·stress·feature 자료 판단 · 자체 연습 24문항 (원문 기출 아님)</p>
+  <div id="score-badge-slot" aria-label="전체 문항 최고 기록"></div>
+  <div class="header-divider"></div>
+</div>
+<nav class="quiz-hub-nav" aria-label="전공영어 학습 허브">
+  <a href="./index.html">영어학 허브</a><a href="./phonetics.html">개념 학습</a><a href="https://etwiki.net/index.html">기출 WIKI</a><a href="https://namkicheol.github.io/englisheducation/">영어교육론</a><a href="https://namkicheol.github.io/phonetics-phonology/phonetics.html">음성·음운론</a><a href="https://etwiki.net/keyterm-quiz.html">영교론 키텀</a>
+</nav>
+<p class="judgment-guide">자료와 제안된 분석을 읽고 <b>O = 자료·조건에 맞음 / X = 맞지 않음</b>을 고르세요. 문장의 문법성 판정이 아닙니다. 기본 순서는 원문 기출의 분석 요구와 연결한 12문항을 먼저, 기반 보강 12문항을 뒤에 둡니다. 빈출도 순위나 기출 재현 문제가 아닙니다. 정답 뒤 target·수정 분석·근거가 나타납니다.</p>
+<div class="prog-wrap">
+  <div class="prog-info"><span id="pt">0 / 24 응답</span><span id="ps">정답 0개</span></div>
+  <div class="bar"><div class="bar-fill" id="bf" style="width:0%"></div></div>
+</div>
+<div id="rb" style="display:none;max-width:720px;margin:0 auto 14px;padding:0 8px">
+  <div style="background:rgba(59,63,134,.08);border:1.5px solid rgba(59,63,134,.3);border-radius:12px;padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <span id="rb-msg" style="font-size:13px;color:#1a1f3a;font-family:'JetBrains Mono',monospace;line-height:1.5"></span>
+    <button onclick="freshStart()" style="padding:10px 22px;background:#c62828;border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer;white-space:nowrap;flex-shrink:0">처음부터</button>
+  </div>
+</div>
+<div class="mode-bar">
+  <button class="mode-btn active" id="btn-normal" onclick="setMode('normal')">📋 기본 순서</button>
+  <button class="mode-btn" id="btn-random" onclick="setMode('random')">🔀 랜덤</button>
+</div>
+<div class="quiz-tools"><label for="unit-filter">학습 범위</label><select id="unit-filter" onchange="setUnit(this.value)"><option value="0">전체 4 SET · 24문항</option><option value="1">SET 01 · Distribution · 자료에서 대립 찾기</option><option value="2">SET 02 · Rule output · 환경과 출력</option><option value="3">SET 03 · Stress · 표시와 이동</option><option value="4">SET 04 · Feature table · 집합과 예외</option></select><button class="restart-btn" onclick="restart()">현재 범위 다시 풀기</button><button class="restart-btn" id="retry-wrong" onclick="retryWrong()" disabled>오답만 다시 풀기</button><p>범위·순서를 바꾸거나 다시 풀면 현재 회차가 새로 시작됩니다. 최고 기록은 전체 24문항 회차만 저장합니다.</p></div><nav id="nav" aria-label="문항 이동"></nav>
+<div class="wrap">
+  <div id="qa"></div>
+  <div class="score-card" id="sc">
+    <div class="score-circle"><span class="s-num" id="fs">0</span><span class="s-total" id="score-total">/24</span></div>
+    <h2 id="rm"></h2><p id="rs"></p>
+    <button class="restart-btn" onclick="restart()">🔄 다시 풀기</button>
+  </div>
+</div>
+<script src="./sounds.js"></script>
+<script src="./score-popup.js"></script>
+<script>
+const UNIT_NAMES=["Distribution · 자료에서 대립 찾기", "Rule output · 환경과 출력", "Stress · 표시와 이동", "Feature table · 집합과 예외"];
+const Q=[
+  {
+    "id": "PD01-01",
+    "unit": 1,
+    "src": "SET 01",
+    "cat": "Distribution · 자료에서 대립 찾기",
+    "text": "이 자료는 /f/와 /v/가 서로 다른 phoneme이라는 분석을 지지한다.",
+    "ans": true,
+    "context": "English 자료: fan [fæn] “선풍기”, van [væn] “승합차”. 두 단어에서 첫 segment를 비교합니다.",
+    "focus": "[f] / [v] · 같은 __æn 환경",
+    "correct": "제안한 분석이 맞습니다.",
+    "why": "나머지 segment가 같고 의미가 다릅니다. Initial [f]와 [v]의 대립을 보여 주는 minimal pair입니다.",
+    "source": "Yavaş, Applied English Phonology, §2.2–2.4. 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./distribution_study.html",
+    "compare": [
+      {
+        "title": "확인할 분석",
+        "desc": "fan–van: /f/ ≠ /v/"
+      }
+    ]
+  },
+  {
+    "id": "PD01-02",
+    "unit": 1,
+    "src": "SET 01",
+    "cat": "Distribution · 자료에서 대립 찾기",
+    "text": "이 두 단어에서 [p]와 [m]의 환경은 서로 다르므로 complementary distribution을 보인다.",
+    "ans": false,
+    "context": "English 자료: cap [kæp] “모자”, cam [kæm] “회전 운동을 바꾸는 기계 부품”. 이번 분석 대상은 마지막 [p]와 [m]입니다.",
+    "focus": "[p] / [m] · 동일한 kæ__#",
+    "correct": "제안한 분석을 고쳐야 합니다.",
+    "why": "Target은 마지막 segment입니다. 앞의 [kæ]와 뒤 word boundary가 같으므로 의미가 다른 이 쌍은 contrast를 지지합니다.",
+    "source": "Yavaş, Applied English Phonology, §2.2–2.4. 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./distribution_study.html",
+    "compare": [
+      {
+        "title": "수정한 분석",
+        "desc": "[p]와 [m]은 kæ__#에서 대립한다."
+      }
+    ]
+  },
+  {
+    "id": "PD01-03",
+    "unit": 1,
+    "src": "SET 01",
+    "cat": "Distribution · 자료에서 대립 찾기",
+    "text": "이 자료에서는 [pʰ]와 [p]를 한 phoneme의 positional allophones로 분석할 근거가 있다.",
+    "ans": true,
+    "context": "연습용 가상 언어 자료(전체 환경 분류가 제공됨): [pʰ]는 #__V́에서만, [p]는 s__V́에서만 나타납니다. 두 소리는 aspiration만 다르고, 그 차이로 뜻이 구별되지 않습니다. V́ = stressed vowel.",
+    "focus": "# / s · 서로 겹치지 않는 환경",
+    "correct": "제안한 분석이 맞습니다.",
+    "why": "제시된 전체 환경 분류가 겹치지 않고, 두 소리는 aspiration만 다릅니다. 이 제한된 자료는 complementary distribution과 phonetic similarity를 모두 충족합니다.",
+    "source": "Yavaş, Applied English Phonology, §2.2–2.4. 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./distribution_study.html",
+    "compare": [
+      {
+        "title": "확인할 분석",
+        "desc": "하나의 phoneme → 환경에 따른 [pʰ] / [p]"
+      }
+    ]
+  },
+  {
+    "id": "PD01-04",
+    "unit": 1,
+    "src": "SET 01",
+    "cat": "Distribution · 자료에서 대립 찾기",
+    "text": "이 분포만으로 hat의 [h]와 sing의 [ŋ]을 같은 phoneme의 allophones라고 결론 내려도 된다.",
+    "ans": false,
+    "context": "English 자료: [hæt] hat의 [h]는 onset, [sɪŋ] sing의 [ŋ]은 coda에 있습니다. 영어에서 [h]는 onset에, [ŋ]은 coda에 분포한다고 전제합니다.",
+    "focus": "[h] ≠ [ŋ] · distribution만으로는 부족",
+    "correct": "제안한 분석을 고쳐야 합니다.",
+    "why": "겹치지 않는 위치만 확인했습니다. 이 쌍은 place, manner, voicing이 크게 달라, 분포만으로 하나의 phoneme으로 묶는 결론은 성립하지 않습니다.",
+    "source": "Yavaş, Applied English Phonology, §2.2–2.4. 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./distribution_study.html",
+    "compare": [
+      {
+        "title": "수정한 분석",
+        "desc": "Complementary distribution 관찰 ≠ 같은 phoneme이라는 충분한 증거"
+      }
+    ]
+  },
+  {
+    "id": "PD01-05",
+    "unit": 1,
+    "src": "SET 01",
+    "cat": "Distribution · 자료에서 대립 찾기",
+    "text": "[sapa]와 [zapa]는 [s]와 [z]의 free variation을 보여 준다.",
+    "ans": false,
+    "context": "가상 언어 L의 독립된 두 단어: [sapa] = “잎”, [zapa] = “돌”. 같은 화자의 같은 발화 조건이며 첫 segment만 다릅니다.",
+    "focus": "“잎” / “돌” · 의미가 다름",
+    "correct": "제안한 분석을 고쳐야 합니다.",
+    "why": "같은 환경에서 [s]와 [z]를 바꾸면 다른 단어가 됩니다. 같은 단어의 변이가 아니라 contrast입니다.",
+    "source": "Yavaş, Applied English Phonology, §2.2–2.4. 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./distribution_study.html",
+    "compare": [
+      {
+        "title": "수정한 분석",
+        "desc": "/s/와 /z/의 contrast를 지지하는 minimal pair"
+      }
+    ]
+  },
+  {
+    "id": "PD01-06",
+    "unit": 1,
+    "src": "SET 01",
+    "cat": "Distribution · 자료에서 대립 찾기",
+    "text": "이 자료의 [s]와 [z]는 같은 단어 안에서 free variation을 보인다.",
+    "ans": true,
+    "context": "가상 언어 M에서 같은 화자가 “돌”이라는 한 단어를 같은 발화 조건에서 [sapa] 또는 [zapa]로 말합니다. 의미 차이도 환경에 따른 선택도 없다고 전제합니다.",
+    "focus": "같은 “돌” · 같은 환경",
+    "correct": "제안한 분석이 맞습니다.",
+    "why": "다른 뜻을 가진 두 단어가 아니라 이 자료에서는 형태를 바꿔도 같은 단어이며 환경 조건도 없습니다. 결론은 이 단어·이 자료에 한정합니다.",
+    "source": "Yavaş, Applied English Phonology, §2.2–2.4. 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./distribution_study.html",
+    "compare": [
+      {
+        "title": "확인할 분석",
+        "desc": "[sapa] ~ [zapa]: 제시된 단어에서 free variation"
+      }
+    ]
+  },
+  {
+    "id": "PD02-01",
+    "unit": 2,
+    "src": "SET 02",
+    "cat": "Rule output · 환경과 출력",
+    "text": "/ˈdædi/ → [ˈdæɾi]는 stressed vowel 뒤·unstressed vowel 앞 flapping으로 설명된다.",
+    "ans": true,
+    "context": "2016 B2의 American English 분석을 따릅니다. [ɾ]는 flap, ˈ는 다음 syllable의 primary stress, [l̩]은 syllabic l입니다. 다른 세부 음성 차이는 표시하지 않습니다.",
+    "focus": "ˈæ __ i · /d/ → [ɾ]",
+    "correct": "제안한 분석이 맞습니다.",
+    "why": "Target /d/는 stressed [æ]와 unstressed [i] 사이입니다. 기본 환경에 들어가며 /t/만이 아니라 /d/도 target입니다.",
+    "source": "2016 B2 원문 자료·요구 대조; Yavaş, Applied English Phonology, §3.1. 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./flapping_study.html#rule",
+    "compare": [
+      {
+        "title": "확인할 분석",
+        "desc": "daddy: /d/ → [ɾ]"
+      }
+    ],
+    "exam": {
+      "label": "2016 B02 · 관련 원문",
+      "url": "https://etwiki.net/index.html?id=linguistics_2016_B02"
+    }
+  },
+  {
+    "id": "PD02-02",
+    "unit": 2,
+    "src": "SET 02",
+    "cat": "Rule output · 환경과 출력",
+    "text": "/ˈrætl̩/ → [ˈræɾl̩]의 /t/는 두 vowel 사이에 있으므로 기본 intervocalic rule만으로 설명된다.",
+    "ans": false,
+    "context": "2016 B2의 American English 분석을 따릅니다. [ɾ]는 flap, ˈ는 다음 syllable의 primary stress, [l̩]은 syllabic l입니다. 다른 세부 음성 차이는 표시하지 않습니다. Rattle은 같은 구조를 적용한 새 연습 예입니다.",
+    "focus": "[ɾ] 뒤 [l̩] · vowel이 아님",
+    "correct": "제안한 분석을 고쳐야 합니다.",
+    "why": "뒤 nucleus는 syllabic consonant [l̩]입니다. 출력은 이 분석에서 가능하지만, “두 vowel 사이”라는 설명은 틀립니다. Stressed vowel–syllabic liquid 환경을 별도로 포함해야 합니다.",
+    "source": "2016 B2 원문 자료·요구 대조; Yavaş, Applied English Phonology, §3.1. 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./flapping_study.html#rule",
+    "compare": [
+      {
+        "title": "수정한 분석",
+        "desc": "/t/ → [ɾ] / stressed vowel __ syllabic l"
+      }
+    ],
+    "exam": {
+      "label": "2016 B02 · 관련 원문",
+      "url": "https://etwiki.net/index.html?id=linguistics_2016_B02"
+    }
+  },
+  {
+    "id": "PD02-03",
+    "unit": 2,
+    "src": "SET 02",
+    "cat": "Rule output · 환경과 출력",
+    "text": "/ˈkɑmədi/ → [ˈkɑməɾi]의 /d/ 앞 vowel에는 primary stress가 없다.",
+    "ans": true,
+    "context": "2016 B2의 American English 분석을 따릅니다. [ɾ]는 flap, ˈ는 다음 syllable의 primary stress, [l̩]은 syllabic l입니다. 다른 세부 음성 차이는 표시하지 않습니다.",
+    "focus": "ə __ i · 두 unstressed vowel",
+    "correct": "제안한 분석이 맞습니다.",
+    "why": "ˈ는 첫 syllable에 붙습니다. /d/ 바로 앞 [ə]와 뒤 [i]는 모두 unstressed이며, 기출이 요구하는 추가 환경에 해당합니다.",
+    "source": "2016 B2 원문 자료·요구 대조; Yavaş, Applied English Phonology, §3.1. 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./flapping_study.html#rule",
+    "compare": [
+      {
+        "title": "확인할 분석",
+        "desc": "comedy: unstressed vowel __ unstressed vowel"
+      }
+    ],
+    "exam": {
+      "label": "2016 B02 · 관련 원문",
+      "url": "https://etwiki.net/index.html?id=linguistics_2016_B02"
+    }
+  },
+  {
+    "id": "PD02-04",
+    "unit": 2,
+    "src": "SET 02",
+    "cat": "Rule output · 환경과 출력",
+    "text": "/ɹɪˈtaɪɹ/의 /t/를 [ɾ]로 바꾸는 것은 stressed vowel 뒤·unstressed vowel 앞이라는 기본 rule에 맞는다.",
+    "ans": false,
+    "context": "2016 B2의 American English 분석을 따릅니다. [ɾ]는 flap, ˈ는 다음 syllable의 primary stress, [l̩]은 syllabic l입니다. 다른 세부 음성 차이는 표시하지 않습니다. Retire는 기본 rule의 환경만 검사하는 새 예입니다.",
+    "focus": "ɪ __ ˈaɪ · 뒤가 stressed",
+    "correct": "제안한 분석을 고쳐야 합니다.",
+    "why": "Target 뒤 vowel이 stressed이고 앞 vowel은 unstressed입니다. 제시된 기본 rule의 방향과 반대이므로 그 rule로 [ɾ]를 도출할 수 없습니다.",
+    "source": "2016 B2 원문 자료·요구 대조; Yavaş, Applied English Phonology, §3.1. 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./flapping_study.html#rule",
+    "compare": [
+      {
+        "title": "수정한 분석",
+        "desc": "이 기본 rule: /ɹɪˈtaɪɹ/의 /t/에 적용되지 않음"
+      }
+    ],
+    "exam": {
+      "label": "2016 B02 · 관련 원문",
+      "url": "https://etwiki.net/index.html?id=linguistics_2016_B02"
+    }
+  },
+  {
+    "id": "PD02-05",
+    "unit": 2,
+    "src": "SET 02",
+    "cat": "Rule output · 환경과 출력",
+    "text": "pin의 /p/를 [pʰ], spin의 /p/를 [p]로 전사하는 대조가 적절하다.",
+    "ans": true,
+    "context": "일반적인 English의 강한 word-initial stressed onset을 비교합니다. Pin /pɪn/, spin /spɪn/에서 첫 stop의 aspiration만 표시하며 다른 세부 음성 차이는 생략합니다.",
+    "focus": "pin [pʰ] / spin [p]",
+    "correct": "제안한 분석이 맞습니다.",
+    "why": "Pin의 /p/는 stressed syllable의 처음에 있습니다. Spin에서는 같은 onset의 /s/ 바로 뒤에 있어 같은 강한 aspiration을 주지 않습니다.",
+    "source": "Davenport &amp; Hannahs, Introducing Phonetics and Phonology, §8.4.4 (pin/spin); Yavaş, Applied English Phonology, §3.1. 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./aspiration_study.html",
+    "compare": [
+      {
+        "title": "확인할 분석",
+        "desc": "pin [pʰɪn] / spin [spɪn]"
+      }
+    ]
+  },
+  {
+    "id": "PD02-06",
+    "unit": 2,
+    "src": "SET 02",
+    "cat": "Rule output · 환경과 출력",
+    "text": "spin의 /p/도 stressed vowel 앞이므로 [spʰɪn]으로 표시해야 한다.",
+    "ans": false,
+    "context": "일반적인 English의 강한 word-initial stressed onset을 비교합니다. Pin /pɪn/, spin /spɪn/에서 첫 stop의 aspiration만 표시하며 다른 세부 음성 차이는 생략합니다.",
+    "focus": "s__ · same-onset /s/ 차단",
+    "correct": "제안한 분석을 고쳐야 합니다.",
+    "why": "뒤 vowel의 stress만 보면 /s/의 영향을 놓칩니다. 이 비교에서 spin은 same-onset /s/ 뒤 unaspirated [p]로 표시합니다.",
+    "source": "Davenport &amp; Hannahs, Introducing Phonetics and Phonology, §8.4.4 (pin/spin); Yavaş, Applied English Phonology, §3.1. 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./aspiration_study.html",
+    "compare": [
+      {
+        "title": "수정한 분석",
+        "desc": "spin [spɪn]"
+      }
+    ]
+  },
+  {
+    "id": "PD02-07",
+    "unit": 2,
+    "src": "SET 02",
+    "cat": "Rule output · 환경과 출력",
+    "text": "cats의 suffix는 [s], dogs의 suffix는 [z]로 실현된다.",
+    "ans": true,
+    "context": "Regular plural suffix만 판단합니다. 제공된 singular stem은 cat /kæt/, dog /dɔɡ/, bus /bʌs/입니다. 각 stem에 plural 의미를 더합니다. 이 연습은 epenthetic vowel을 [ɪ]로 표기하며 [ə]를 쓰는 전사도 있음을 인정합니다.",
+    "focus": "/t/ 뒤 [s] · /ɡ/ 뒤 [z]",
+    "correct": "제안한 분석이 맞습니다.",
+    "why": "두 stem 끝은 sibilant가 아닙니다. /t/는 voiceless, /ɡ/는 voiced이므로 regular plural의 이 두 allomorph가 구별됩니다.",
+    "source": "Yavaş, Applied English Phonology, §3.2 (plural allomorphs). 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./voice_study.html",
+    "compare": [
+      {
+        "title": "확인할 분석",
+        "desc": "cats [kæts] / dogs [dɔɡz]"
+      }
+    ]
+  },
+  {
+    "id": "PD02-08",
+    "unit": 2,
+    "src": "SET 02",
+    "cat": "Rule output · 환경과 출력",
+    "text": "buses는 stem 끝 /s/가 voiceless이므로 vowel 없이 [bʌss]로 도출된다.",
+    "ans": false,
+    "context": "Regular plural suffix만 판단합니다. 제공된 singular stem은 cat /kæt/, dog /dɔɡ/, bus /bʌs/입니다. 각 stem에 plural 의미를 더합니다. 이 연습은 epenthetic vowel을 [ɪ]로 표기하며 [ə]를 쓰는 전사도 있음을 인정합니다.",
+    "focus": "sibilant /s/ 뒤 [ɪz]",
+    "correct": "제안한 분석을 고쳐야 합니다.",
+    "why": "Sibilant 뒤에는 vowel이 들어가는 allomorph를 먼저 선택합니다. Voiceless라는 이유만으로 [s]를 바로 붙이면 이 환경을 놓칩니다.",
+    "source": "Yavaş, Applied English Phonology, §3.2 (plural allomorphs). 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./voice_study.html",
+    "compare": [
+      {
+        "title": "수정한 분석",
+        "desc": "buses [ˈbʌsɪz]"
+      }
+    ]
+  },
+  {
+    "id": "PD03-01",
+    "unit": 3,
+    "src": "SET 03",
+    "cat": "Stress · 표시와 이동",
+    "text": "compact (2–1) + disk → compact (1–2) disk: 첫 단어의 두 stress가 서로 바뀐 분석이다.",
+    "ans": true,
+    "context": "2024 A6에서 제시한 rhythm reversal 분석을 사용합니다. 숫자는 syllable별 stress: 1=primary, 2=secondary, 0=unstressed. 표시한 것은 첫 단어 내부의 상대 prominence이며 뒤 단어가 phrase nucleus를 받습니다.",
+    "focus": "2–1 → 1–2",
+    "correct": "제안한 분석이 맞습니다.",
+    "why": "Compact에는 원래 secondary stress를 가진 첫 syllable이 있습니다. 이 문항의 rhythm reversal은 그 syllable과 뒤 primary-stressed syllable의 상대 prominence를 바꿉니다.",
+    "source": "2024 A6 원문: rhythm reversal의 적용 자료와 비적용 자료. 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./stress_study.html",
+    "compare": [
+      {
+        "title": "확인할 분석",
+        "desc": "compact: 2–1 → 1–2 (disk 앞)"
+      }
+    ],
+    "exam": {
+      "label": "2024 A06 · 관련 원문",
+      "url": "https://etwiki.net/index.html?id=linguistics_2024_A06"
+    }
+  },
+  {
+    "id": "PD03-02",
+    "unit": 3,
+    "src": "SET 03",
+    "cat": "Stress · 표시와 이동",
+    "text": "away (0–1) + game → away (1–0) game도 같은 자료에서 허용되는 rhythm reversal이다.",
+    "ans": false,
+    "context": "2024 A6에서 제시한 rhythm reversal 분석을 사용합니다. 숫자는 syllable별 stress: 1=primary, 2=secondary, 0=unstressed. 표시한 것은 첫 단어 내부의 상대 prominence이며 뒤 단어가 phrase nucleus를 받습니다.",
+    "focus": "0–1 · 바꿀 secondary stress 없음",
+    "correct": "제안한 분석을 고쳐야 합니다.",
+    "why": "원문의 away game은 비적용 예입니다. First syllable에 secondary stress가 없으므로 인접한 primary stress만으로 이동을 예측하면 안 됩니다.",
+    "source": "2024 A6 원문: rhythm reversal의 적용 자료와 비적용 자료. 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./stress_study.html",
+    "compare": [
+      {
+        "title": "수정한 분석",
+        "desc": "away: 0–1 유지 (이 원문의 분석)"
+      }
+    ],
+    "exam": {
+      "label": "2024 A06 · 관련 원문",
+      "url": "https://etwiki.net/index.html?id=linguistics_2024_A06"
+    }
+  },
+  {
+    "id": "PD03-03",
+    "unit": 3,
+    "src": "SET 03",
+    "cat": "Stress · 표시와 이동",
+    "text": "economic (2–0–1–0) + growth는 이 자료의 rhythm reversal 적용 후보가 된다.",
+    "ans": true,
+    "context": "2024 A6에서 제시한 rhythm reversal 분석을 사용합니다. 숫자는 syllable별 stress: 1=primary, 2=secondary, 0=unstressed. 표시한 것은 첫 단어 내부의 상대 prominence이며 뒤 단어가 phrase nucleus를 받습니다.",
+    "focus": "2–0–1–0 → 1–0–2–0",
+    "correct": "제안한 분석이 맞습니다.",
+    "why": "앞쪽에 secondary-stressed syllable이 있으므로 원문의 economic growth는 stress-shift가 가능한 두 답 중 하나입니다. 모든 실제 발화에서 의무 적용된다는 뜻은 아닙니다.",
+    "source": "2024 A6 원문: rhythm reversal의 적용 자료와 비적용 자료. 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./stress_study.html",
+    "compare": [
+      {
+        "title": "확인할 분석",
+        "desc": "economic: 1–0–2–0 가능 (growth 앞)"
+      }
+    ],
+    "exam": {
+      "label": "2024 A06 · 관련 원문",
+      "url": "https://etwiki.net/index.html?id=linguistics_2024_A06"
+    }
+  },
+  {
+    "id": "PD03-04",
+    "unit": 3,
+    "src": "SET 03",
+    "cat": "Stress · 표시와 이동",
+    "text": "maternal (0–1–0) + love는 앞 syllable이 있으므로 maternal (1–0–0) love로 바꿀 수 있다.",
+    "ans": false,
+    "context": "2024 A6에서 제시한 rhythm reversal 분석을 사용합니다. 숫자는 syllable별 stress: 1=primary, 2=secondary, 0=unstressed. 표시한 것은 첫 단어 내부의 상대 prominence이며 뒤 단어가 phrase nucleus를 받습니다.",
+    "focus": "앞 syllable ≠ secondary-stressed syllable",
+    "correct": "제안한 분석을 고쳐야 합니다.",
+    "why": "이 원문에서 필요한 것은 단순히 앞 syllable의 존재가 아니라 원래의 secondary stress입니다. Maternal은 해당 조건이 없어 적용 후보에서 제외됩니다.",
+    "source": "2024 A6 원문: rhythm reversal의 적용 자료와 비적용 자료. 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./stress_study.html",
+    "compare": [
+      {
+        "title": "수정한 분석",
+        "desc": "maternal: 0–1–0 유지 (이 원문의 분석)"
+      }
+    ],
+    "exam": {
+      "label": "2024 A06 · 관련 원문",
+      "url": "https://etwiki.net/index.html?id=linguistics_2024_A06"
+    }
+  },
+  {
+    "id": "PD03-05",
+    "unit": 3,
+    "src": "SET 03",
+    "cat": "Stress · 표시와 이동",
+    "text": "이 전사에서는 graphic 부분의 /ɡræ/ syllable이 primary stress를 받는다.",
+    "ans": true,
+    "context": "제공된 전사 /ˌfoʊtəˈɡræfɪk/만 읽습니다. ˌ=secondary, ˈ=primary이며 기호는 해당 syllable 바로 앞에 옵니다. 이 연습의 간단한 숫자 표기는 1=primary, 2=secondary, 0=unstressed입니다(원서의 4단계 숫자 표기와 구별).",
+    "focus": "ˈɡræ · primary",
+    "correct": "제안한 분석이 맞습니다.",
+    "why": "ˈ가 /ɡræ/ syllable 앞에 있으므로 primary stress 위치는 여기입니다. /foʊ/에는 ˌ가 표시되어 있습니다.",
+    "source": "IPA stress notation; Yavaş, Applied English Phonology, Ch.7. 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./stress_study.html",
+    "compare": [
+      {
+        "title": "확인할 분석",
+        "desc": "/foʊ/ secondary · /ɡræ/ primary"
+      }
+    ]
+  },
+  {
+    "id": "PD03-06",
+    "unit": 3,
+    "src": "SET 03",
+    "cat": "Stress · 표시와 이동",
+    "text": "이 전사의 /foʊ/ syllable은 secondary mark가 있으므로 unstressed syllable과 같은 0으로 읽는다.",
+    "ans": false,
+    "context": "제공된 전사 /ˌfoʊtəˈɡræfɪk/만 읽습니다. ˌ=secondary, ˈ=primary이며 기호는 해당 syllable 바로 앞에 옵니다. 이 연습의 간단한 숫자 표기는 1=primary, 2=secondary, 0=unstressed입니다(원서의 4단계 숫자 표기와 구별).",
+    "focus": "ˌfoʊ · secondary ≠ 0",
+    "correct": "제안한 분석을 고쳐야 합니다.",
+    "why": "Secondary stress는 unstressed와 구별됩니다. 제공된 전사에서 두 표시를 0과 1로만 합치면 원문의 정보를 잃습니다.",
+    "source": "IPA stress notation; Yavaş, Applied English Phonology, Ch.7. 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./stress_study.html",
+    "compare": [
+      {
+        "title": "수정한 분석",
+        "desc": "photographic: 2–0–1–0"
+      }
+    ]
+  },
+  {
+    "id": "PD04-01",
+    "unit": 4,
+    "src": "SET 04",
+    "cat": "Feature table · 집합과 예외",
+    "text": "자료 집합 [ʃ,tʃ,dʒ,r]은 [+coronal,−anterior]로 묶을 수 있다.",
+    "ans": true,
+    "context": "2026 A6의 feature table 체계입니다. [θ,s,l]: [+coronal,+anterior]; [ʃ,tʃ,dʒ,r]: [+coronal,−anterior]; [p,f,v,k]: [−coronal]. 아래 판단은 원문에 제시된 Modern British English 자료 범위에 한정합니다.",
+    "focus": "coronal + / anterior −",
+    "correct": "제안한 분석이 맞습니다.",
+    "why": "제시된 네 segment는 모두 두 값을 공유합니다. [θ,s,l]은 [+anterior]이므로 같은 묶음에 넣지 않습니다.",
+    "source": "2026 A6 원문: feature table (5), /j/-dropping 자료 (1)–(4). 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./features_study.html#yod-dropping",
+    "compare": [
+      {
+        "title": "확인할 분석",
+        "desc": "[ʃ,tʃ,dʒ,r] → [+coronal,−anterior]"
+      }
+    ],
+    "exam": {
+      "label": "2026 A06 · 관련 원문",
+      "url": "https://etwiki.net/index.html?id=linguistics_2026_A06"
+    }
+  },
+  {
+    "id": "PD04-02",
+    "unit": 4,
+    "src": "SET 04",
+    "cat": "Feature table · 집합과 예외",
+    "text": "[θ,s,l]과 [ʃ,tʃ,dʒ,r]을 가르는 값은 [coronal]이다.",
+    "ans": false,
+    "context": "2026 A6의 feature table 체계입니다. [θ,s,l]: [+coronal,+anterior]; [ʃ,tʃ,dʒ,r]: [+coronal,−anterior]; [p,f,v,k]: [−coronal]. 아래 판단은 원문에 제시된 Modern British English 자료 범위에 한정합니다.",
+    "focus": "두 집합 모두 [+coronal]",
+    "correct": "제안한 분석을 고쳐야 합니다.",
+    "why": "표의 두 집합은 coronal 값이 같습니다. 이 자료에서 구분하는 feature는 anterior이며 앞 집합은 +, 뒤 집합은 −입니다.",
+    "source": "2026 A6 원문: feature table (5), /j/-dropping 자료 (1)–(4). 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./features_study.html#yod-dropping",
+    "compare": [
+      {
+        "title": "수정한 분석",
+        "desc": "구분 값: [+anterior] / [−anterior]"
+      }
+    ],
+    "exam": {
+      "label": "2026 A06 · 관련 원문",
+      "url": "https://etwiki.net/index.html?id=linguistics_2026_A06"
+    }
+  },
+  {
+    "id": "PD04-03",
+    "unit": 4,
+    "src": "SET 04",
+    "cat": "Feature table · 집합과 예외",
+    "text": "blue의 /j/ 부재는 lewd의 /j/ 변이와 동일한 single-consonant /l/ 환경이므로 cluster를 고려할 필요가 없다.",
+    "ans": false,
+    "context": "2026 A6의 feature table 체계입니다. [θ,s,l]: [+coronal,+anterior]; [ʃ,tʃ,dʒ,r]: [+coronal,−anterior]; [p,f,v,k]: [−coronal]. 아래 판단은 원문에 제시된 Modern British English 자료 범위에 한정합니다. 비교 자료: lewd [ljuːd] ~ [luːd]; blue [bluː]에는 /j/가 없습니다. /j/ 앞 consonant 부분을 비교하면 lewd는 /l/, blue의 historical /j/ 앞은 /bl/입니다.",
+    "focus": "/l/ vs /bl/ · onset cluster",
+    "correct": "제안한 분석을 고쳐야 합니다.",
+    "why": "Blue의 /l/ 앞에는 같은 onset 안의 /b/가 있습니다. 원문은 consonant+/l/ cluster 뒤의 /j/ 부재를 별도 일반화하도록 요구합니다.",
+    "source": "2026 A6 원문: feature table (5), /j/-dropping 자료 (1)–(4). 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./features_study.html#yod-dropping",
+    "compare": [
+      {
+        "title": "수정한 분석",
+        "desc": "single /l/: lewd 변이 · C+l cluster: blue에서 /j/ 없음"
+      }
+    ],
+    "exam": {
+      "label": "2026 A06 · 관련 원문",
+      "url": "https://etwiki.net/index.html?id=linguistics_2026_A06"
+    }
+  },
+  {
+    "id": "PD04-04",
+    "unit": 4,
+    "src": "SET 04",
+    "cat": "Feature table · 집합과 예외",
+    "text": "sue의 변이를 few까지 확장하는 분석은 제시된 자료와 맞지 않는다.",
+    "ans": true,
+    "context": "2026 A6의 feature table 체계입니다. [θ,s,l]: [+coronal,+anterior]; [ʃ,tʃ,dʒ,r]: [+coronal,−anterior]; [p,f,v,k]: [−coronal]. 아래 판단은 원문에 제시된 Modern British English 자료 범위에 한정합니다. 원문 대조: sue [sjuː] ~ [suː]; few [fjuː]이며 /j/ 없는 [fuː]는 이 자료의 few 발음이 아닙니다.",
+    "focus": "[s] [+coronal] / [f] [−coronal]",
+    "correct": "제안한 분석이 맞습니다.",
+    "why": "Sue와 few의 직전 consonant가 같은 class가 아닙니다. 원문에서는 few가 /j/를 유지하므로 /uː/ 앞이라는 이유만으로 같은 삭제를 예측할 수 없습니다.",
+    "source": "2026 A6 원문: feature table (5), /j/-dropping 자료 (1)–(4). 판단문은 자체 제작한 적용 연습이며 원문 기출 문항이 아닙니다.",
+    "study": "./features_study.html#yod-dropping",
+    "compare": [
+      {
+        "title": "확인할 분석",
+        "desc": "sue: /j/ 변이 · few: /j/ 유지 (제시 범위)"
+      }
+    ],
+    "exam": {
+      "label": "2026 A06 · 관련 원문",
+      "url": "https://etwiki.net/index.html?id=linguistics_2026_A06"
+    }
+  }
+];
+const CORE_IDS=["PD02-01", "PD02-02", "PD02-03", "PD02-04", "PD03-01", "PD03-02", "PD03-03", "PD03-04", "PD04-01", "PD04-02", "PD04-03", "PD04-04"];
+const DEFAULT_ORDER=[...CORE_IDS.map(id=>Q.findIndex(q=>q.id===id)),...Q.map((_,i)=>i).filter(i=>!CORE_IDS.includes(Q[i].id))];
+const TOTAL=Q.length;
+const SAVE_KEY='ox_phonology_data_v1';
+let answers=Array(TOTAL).fill(null),cur=0,mode='normal',unit=0,order=[...DEFAULT_ORDER],retry=false;
+const el=id=>document.getElementById(id);
+function scopedIds(){return Q.map((_,i)=>i).filter(i=>!unit||Q[i].unit===unit);}
+function getScore(){return order.filter(i=>answers[i]!==null&&answers[i]===Q[i].ans).length;}
+function saveProgress(){try{localStorage.setItem(SAVE_KEY,JSON.stringify({v:1,answers,cur,mode,unit,order,retry}));}catch(e){}}
+function clearProgress(){try{localStorage.removeItem(SAVE_KEY);}catch(e){}}
+function start(ids,isRetry=false){
+ order=[...ids]; if(!order.length)return;
+ if(mode==='random'){for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}}else order.sort((a,b)=>DEFAULT_ORDER.indexOf(a)-DEFAULT_ORDER.indexOf(b));
+ answers=Array(TOTAL).fill(null);cur=0;retry=isRetry;el('rb').style.display='none';saveProgress();render();
+}
+function setMode(m){if(!['normal','random'].includes(m)||m===mode)return;mode=m;start(order,retry);}
+function setUnit(value){unit=Number(value);if(!Number.isInteger(unit)||unit<0||unit>UNIT_NAMES.length)unit=0;start(scopedIds());}
+function freshStart(){mode='normal';unit=0;clearProgress();start(scopedIds());}
+function restart(){start(order,retry);}
+function retryWrong(){const ids=order.filter(i=>answers[i]!==null&&answers[i]!==Q[i].ans);if(ids.length)start(ids,true);}
+function jumpTo(i){if(!Number.isInteger(i)||i<0||i>=order.length)return;cur=i;saveProgress();render();}
+function renderExp(q){const a=answers[order[cur]],ok=a===q.ans;
+ const cmp=q.compare?`<div class="sec-label">출력·분석 확인</div><div class="compare">${q.compare.map(c=>`<div class="compare-item"><div class="ci-title">${c.title}</div><p>${c.desc}</p></div>`).join('')}</div>`:'';
+ return `<div class="exp show"><div class="exp-header"><span>${ok?'✅ 정답':'❌ 오답'} · 정답 ${q.ans?'O':'X'}</span></div><div class="exp-answer"><div class="ans-text">${q.correct}</div><div class="answer-focus ${q.ans?'good':''}"><b>${q.ans?'확인할 target':'수정할 target'}</b>: ${q.focus}</div></div><div class="exp-body"><p>${q.why}</p>${cmp}<div class="sec-label">근거 · 자체 연습문항</div><p>${q.source}</p><p><a href="${q.study}">관련 개념 다시 읽기 →</a></p>${q.exam?`<p><a href="${q.exam.url}">관련 원문 기출: ${q.exam.label} ↗</a></p>`:''}</div></div>`;
+}
+function renderNav(){el('nav').innerHTML=order.map((idx,pos)=>{const a=answers[idx];return `<button class="nd ${pos===cur?'cur':a===null?'':a===Q[idx].ans?'ok':'ng'}" onclick="jumpTo(${pos})" aria-label="${Q[idx].id}${a===null?', 미응답':a===Q[idx].ans?', 정답':', 오답'}" ${pos===cur?'aria-current="step"':''}>${pos+1}</button>`;}).join('');}
+function render(){
+ el('unit-filter').value=String(unit);el('btn-normal').classList.toggle('active',mode==='normal');el('btn-random').classList.toggle('active',mode==='random');
+ const done=order.filter(i=>answers[i]!==null).length,n=order.length,score=getScore();
+ el('pt').textContent=`${retry?'오답 재도전 · ':''}${done} / ${n} 응답`;
+ el('ps').textContent=`정답 ${score}개`;el('bf').style.width=(done/n*100).toFixed(1)+'%';
+ el('retry-wrong').disabled=!order.some(i=>answers[i]!==null&&answers[i]!==Q[i].ans);
+ renderNav();
+ if(cur===n){
+  el('qa').style.display='none';el('sc').classList.add('show');el('fs').textContent=score;el('score-total').textContent='/'+n;
+  el('rm').textContent=score===n?'모두 맞혔습니다!':'해설을 확인하고 다시 도전하세요';
+  el('rs').textContent=`${retry?'오답 재도전':unit?'SET '+String(unit).padStart(2,'0'):'전체'} ${n}문제 중 ${score}문제 정답 (${Math.round(score/n*100)}%)`;return;
+ }
+ el('sc').classList.remove('show');el('qa').style.display='block';const idx=order[cur],q=Q[idx],a=answers[idx];
+ el('qa').innerHTML=`<div class="card"><div class="q-meta"><span class="q-num">${q.id}</span><span class="q-src">${cur+1} / ${n}</span><span class="q-cat">${q.cat}</span></div><p class="unit-label">${CORE_IDS.includes(q.id)?'기출 분석 요구와 연결한 연습':'기반 보강 · 이 연습의 직접 기출 이력은 주장하지 않습니다'}</p><h2 class="unit-label">${q.src} · ${UNIT_NAMES[q.unit-1]}</h2><p class="q-context"><b>자료 · 판단 범위</b>
+${q.context}</p><div class="q-text" lang="ko"><b>제안된 분석</b> · ${q.text}</div><div class="ox-btns"><button class="ox-btn o-btn ${a===true?(a===q.ans?'co':'wp'):''}" onclick="pick(true)" ${a!==null?'disabled':''}>O<span class="lb">자료·조건에 맞음</span></button><button class="ox-btn x-btn ${a===false?(a===q.ans?'cx':'wp'):''}" onclick="pick(false)" ${a!==null?'disabled':''}>X<span class="lb">자료·조건에 맞지 않음</span></button></div><div aria-live="polite">${a!==null?renderExp(q):''}</div>${a!==null?`<button class="next-btn show" onclick="next()">${done===n?'결과 보기 →':'다음 미응답 →'}</button>`:''}</div>`;
+}
+function pick(value){if(typeof value!=='boolean'||cur>=order.length||answers[order[cur]]!==null)return;answers[order[cur]]=value;saveProgress();try{if(value===Q[order[cur]].ans){if(typeof playOk==='function')playOk();}else if(typeof playNg==='function')playNg();}catch(e){}render();}
+function next(){
+ if(cur>=order.length||answers[order[cur]]===null)return;
+ const pending=order.map((_,i)=>(cur+1+i)%order.length).find(pos=>answers[order[pos]]===null);
+ if(pending!==undefined){cur=pending;saveProgress();render();return;}
+ cur=order.length;saveProgress();render();
+ // The shared best-record popup is only comparable for full-bank first attempts.
+ if(!unit&&!retry&&order.length===TOTAL&&typeof window.showScorePopup==='function'){
+  window.showScorePopup(getScore(),TOTAL,{nextText:'해설·오답 다시 보기',onNextClick:()=>{const overlay=el('sp-overlay');if(overlay)overlay.remove();}});
+  const btn=el('sp-retry');if(btn)btn.onclick=()=>{const overlay=el('sp-overlay');if(overlay)overlay.remove();restart();};
+ }
+}
+function validSaved(s){
+ return s&&s.v===1&&Number.isInteger(s.unit)&&s.unit>=0&&s.unit<=UNIT_NAMES.length&&['normal','random'].includes(s.mode)&&typeof s.retry==='boolean'&&Array.isArray(s.answers)&&s.answers.length===TOTAL&&s.answers.every(a=>a===null||typeof a==='boolean')&&Array.isArray(s.order)&&s.order.length>0&&s.order.length<=TOTAL&&new Set(s.order).size===s.order.length&&s.order.every(i=>Number.isInteger(i)&&i>=0&&i<TOTAL&&(!s.unit||Q[i].unit===s.unit))&&(s.retry||s.order.length===Q.filter(q=>!s.unit||q.unit===s.unit).length)&&Number.isInteger(s.cur)&&s.cur>=0&&s.cur<=s.order.length&&(s.cur!==s.order.length||s.order.every(i=>s.answers[i]!==null));
+}
+(function(){
+ let loaded=false;try{const s=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(validSaved(s)){({answers,cur,mode,unit,order,retry}=s);loaded=true;}}catch(e){}
+ const requested=new URLSearchParams(location.search).get('unit');
+ if(requested!==null&&/^[1-4]$/.test(requested)&&(!loaded||unit!==Number(requested))){unit=Number(requested);start(scopedIds());return;}
+ if(loaded){el('rb-msg').textContent='저장한 학습을 이어서 보여 드립니다.';el('rb').style.display='block';}render();
+})();
+
+</script>
+<nav class="quiz-return" aria-label="음성·음운론 학습 허브"><a id="back-btn" href="./phonetics.html">← 음성·음운론 허브로 돌아가기</a></nav>
+<script>
+// score-popup.js registers its badge creation before this listener.
+document.addEventListener('DOMContentLoaded',function(){
+  const badge=document.getElementById('sp-badge');
+  const slot=document.getElementById('score-badge-slot');
+  if(badge&&slot)slot.appendChild(badge);
+},{once:true});
+</script>
+</body>
+</html>
